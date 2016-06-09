@@ -1,0 +1,101 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "es6": true        // We are writing ES6 code
+    },
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "flowtype"
+    ],
+    "rules": {
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-restricted-syntax": 0,
+        "max-len": [2, 300],
+        "quotes": [
+            2,
+            "double",
+            "avoid-escape"
+        ],
+        "constructor-super": 2,
+        "comma-dangle": 0,
+        "eqeqeq": [
+            2,
+            "allow-null"
+        ],
+        "id-length": 0,
+        "indent": [
+            2,
+            4
+        ],
+        "no-eq-null": 0,
+        "one-var": [
+            2,
+            {
+                "initialized": "never"
+            }
+        ],
+        "prefer-const": 0,
+        "no-param-reassign": 0,
+        "no-this-before-super": 2,
+        "react/jsx-boolean-value": 2,
+        "react/jsx-indent": [
+            1,
+            4
+        ],
+        "react/jsx-no-duplicate-props": 2,
+        "react/sort-comp": 0,
+        "react/prop-types": [
+            2,
+            {
+                "ignore": [
+                    "children",
+                    "className",
+                    "style",
+                    "bsStyle",
+                    "bsClass",
+                    "bsSize"
+                ]
+            }
+        ],
+        "flowtype/require-parameter-type": 1,
+        "flowtype/require-return-type": [
+            1,
+            "always",
+            {
+                "annotateUndefined": "never"
+            }
+        ],
+        "flowtype/space-after-type-colon": [
+            1,
+            "always"
+        ],
+        "flowtype/type-id-match": [
+            1,
+            "^([A-Z][a-z0-9]+)+Type$"
+        ],
+        "arrow-body-style": ["error", "always"]
+    },
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": false
+        },
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.config.common.js"
+            }
+        }
+    }
+}
