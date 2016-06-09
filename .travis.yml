@@ -4,5 +4,5 @@ node_js:
   - "5" 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - bash <(curl --data "gitUrl=git%40github.com%3Arobeio%2Frobe-react-commons.git" https://doc.esdoc.org/api/create)
+  - bash <(curl --data "gitUrl=git%40github.com%3Arobeio%2Frobe-react-ui.git" https://doc.esdoc.org/api/create)
   
