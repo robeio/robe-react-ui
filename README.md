@@ -1,10 +1,10 @@
-# Robe-React-Commons
+# Robe-React-IU
 
-#### Commons library for react projects.
+#### UI library built on top of React-Bootstrap for react projects.
 
-[![Build Status](https://travis-ci.org/robeio/robe-react-commons.svg?branch=master)](https://travis-ci.org/robeio/robe-react-commons)
-[![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-commons/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-commons)
-[![codecov](https://codecov.io/gh/robeio/robe-react-commons/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-commons)
+[![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
+[![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
+[![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
 
 
 RRC = Robe-React-UI
