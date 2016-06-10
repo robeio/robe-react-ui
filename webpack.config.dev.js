@@ -7,7 +7,7 @@ const commonSettings = require("./webpack.config.common.js");
 
 commonSettings.cache = true;
 commonSettings.debug = true;
-commonSettings.devtool = "eval";
+commonSettings.devtool = "sourcemap";
 commonSettings.entry = {
     app: [commonSettings.paths.app]
 };

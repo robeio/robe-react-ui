@@ -9,7 +9,7 @@
     "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "build": "webpack --config webpack.config.build.js  --progress --profile --colors",
     "lib": "babel ./src --out-dir ./lib",
-    "start": "webpack-dev-server --config webpack.config.dev.js --colors --port 8090"
+    "start": "webpack-dev-server --config webpack.config.dev.js --colors"
   },
   "keywords": [
     "react",
