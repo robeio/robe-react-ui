@@ -36,7 +36,7 @@ commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSi
  * @type {{root: *[]}}
  */
 commonSettings.entry = {
-    "robe-react-commons": "../src/index.js"
+    "robe-react-ui": "../src/index.js"
 };
 
 /**
@@ -51,7 +51,7 @@ commonSettings.devtool = "source-map";
 commonSettings.output = {
     path: commonSettings.paths.dist,
     filename: "[name].min.js",
-    library: "RobeReactCommon",
+    library: "RobeReactUi",
     libraryTarget: "umd"
 };
 
