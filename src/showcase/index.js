@@ -1,10 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
-import BaseInput from "inputs/BaseInput";
+import Showcase from "./Showcase";
 
 const app = document.getElementById("app");
 
 
-render((
-    <BaseInput type="text" />
-), app);
+render((<Showcase />), app);
