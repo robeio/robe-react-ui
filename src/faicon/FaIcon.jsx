@@ -6,7 +6,7 @@ import "./font-awesome/4.6.1/css/font-awesome.css";
  * This component wraps font-awesome elements. Also it loads font-awesome.min.css. No need to load it somewhere else.
  * Please look at https://fortawesome.github.io/Font-Awesome/examples/
  */
-class FaIcon extends ShallowComponent {
+export default class FaIcon extends ShallowComponent {
 
     static propTypes = {
         code: React.PropTypes.string.isRequired,
@@ -27,4 +27,3 @@ class FaIcon extends ShallowComponent {
         );
     }
 }
-module.exports = FaIcon;
