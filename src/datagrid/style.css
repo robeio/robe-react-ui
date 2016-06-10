@@ -1,0 +1,72 @@
+
+.datagrid {
+    margin: 20px 1px 20px 1px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    background: white;
+}
+.datagrid-header-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.datagrid-header-col {
+    text-align: left;
+    padding-left: 6px;
+    padding-right: 0px;
+}
+
+.datagrid-body-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid whitesmoke 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+.datagrid-body-row:hover {
+    background: whitesmoke;
+}
+
+.datagrid-body-row-selected {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid whitesmoke 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background: #8bb8e8;
+    cursor: pointer;
+    color: black;
+}
+
+.datagrid-body-col {
+    text-align: left;
+    padding-left: 6px;
+    padding-right: 0;
+
+}
+
+.datagrid-pagination-row {
+    padding-left: 5px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+}
+
+.datagrid-table > tbody > tr > td {
+    border: none;
+    line-height: 1;
+}
+
+.datagrid-table {
+    margin-bottom: 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+    .datagrid > .table-responsive {
+        margin-bottom: 0 !important;
+    }
+}

@@ -1,0 +1,13 @@
+.has-error > div.quill {
+    border: 1px solid #a94442;
+}
+
+.ql-snow.ql-toolbar {
+    border: 1px solid #CCCCCC;
+}
+
+.ql-container {
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+}
