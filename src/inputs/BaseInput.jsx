@@ -1,10 +1,10 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import BInput from "react-bootstrap/lib/Input";
 import Alert from "react-bootstrap/lib/Alert";
 import is from "is-js";
 
-class Input extends BaseComponent {
+export default class BaseInput extends ShallowComponent {
     static propTypes = {
         min: React.PropTypes.array,
         max: React.PropTypes.array,
@@ -14,6 +14,8 @@ class Input extends BaseComponent {
         required: React.PropTypes.array,
         multiple: React.PropTypes.array
     };
+
+    static maxTextLengthMessage = "Input cannot be more than 1000 characters.";
 
     valid = false;
 
@@ -26,22 +28,23 @@ class Input extends BaseComponent {
         this.__propsChecker(this.props.maxCode);
         this.__propsChecker(this.props.multiple);
         this.state = {
-            "bsStyle": this.props.bsStyle ? this.props.bsStyle : undefined,
-            "validations": undefined
-        }
-    };
+            bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined,
+            validations: undefined
+        };
+    }
 
     render() {
-        var validations = this.state.validations ? this.state.validations : this.props;
-        var errors = this.__validate(validations);
+        let validations = this.state.validations ? this.state.validations : this.props;
+        let errors = this.__validate(validations);
         let value = this.props.value;
+        let input = undefined;
         if (value && value.length > 999) {
-            errors.push("1000 karakterden uzun girdi yapılamaz.");
-            value = ""
+            errors.push(BaseInput.maxTextLengthMessage);
+            value = "";
         }
-        this.valid = (errors.length == 0);
+        this.valid = (errors.length === 0);
         if (this.valid) {
-            return (
+            input = (
                 <div>
                     <BInput
                         {...this.props}
@@ -49,35 +52,38 @@ class Input extends BaseComponent {
                         style={this.props.style}
                         ref="innerInput"
                         value={value}
-                    />
-                </div>);
+                        />
+                </div>
+            );
         } else {
             let messages = [];
-            for (var i = 0; i < errors.length; i++) {
+            for (let i = 0; i < errors.length; i++) {
                 messages.push(<p key={i}>{errors[i]}</p>);
             }
 
-            return (
+            input = (
                 <div>
                     <BInput
                         {...this.props}
                         bsStyle="error"
                         ref="innerInput"
                         value={value}
-                    />
+                        />
                     <Alert className="input-alert" bsStyle="danger">{messages}</Alert>
                 </div>);
         }
-    };
 
-    focus = ()=> {
+        return input;
+    }
+
+    focus = () => {
         this.refs.innerInput.getInputDOMNode().focus();
     };
 
-    isValid = ()=> {
+    isValid = () => {
         return this.valid;
     };
-    updateValidations = (validation)=> {
+    updateValidations = (validation) => {
         var state = {};
         var validationsData = [];
         validationsData.push(this.props);
@@ -95,7 +101,7 @@ class Input extends BaseComponent {
         this.forceUpdate();
     };
 
-    __validate = (validations)=> {
+    __validate = (validations) => {
         var messages = [];
         let isNumeric = (typeof this.props.value === "number");
 
@@ -147,14 +153,13 @@ class Input extends BaseComponent {
         return messages;
     };
 
-    __propsChecker = (prop)=> {
-        if (prop && ( prop.length != 2 || !(is.string(prop[0]) || is.number(prop[0]) || is.bool(prop[0]) || is.date(prop[0])) && is.string(prop[1])))
+    __propsChecker = (prop) => {
+        if (prop && (prop.length != 2 || !(is.string(prop[0]) || is.number(prop[0]) || is.bool(prop[0]) || is.date(prop[0])) && is.string(prop[1])))
             throw "Validation property must be an array of 2 and contain value with message.";
     };
 
-    componentDidMount = ()=> {
+    componentDidMount = () => {
         if (this.props.focus)
             this.focus();
     }
 }
-module.exports = Input;

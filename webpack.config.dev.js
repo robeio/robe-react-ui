@@ -5,11 +5,13 @@ const CachePlugin = require("webpack/lib/CachePlugin");
 
 const commonSettings = require("./webpack.config.common.js");
 
+
+
 commonSettings.cache = true;
 commonSettings.debug = true;
 commonSettings.devtool = "sourcemap";
 commonSettings.entry = {
-    app: [commonSettings.paths.app]
+    app: [commonSettings.paths.app + "/showcase"]
 };
 
 commonSettings.devServer = {
