@@ -14,6 +14,9 @@ commonSettings.entry = {
     app: [commonSettings.paths.app + "/showcase"]
 };
 
+commonSettings.module.loaders.push({test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/});
+
+
 commonSettings.devServer = {
     historyApiFallback: true,
     hot: true,
@@ -29,6 +32,7 @@ commonSettings.devServer = {
     host: "0.0.0.0",
     port: 8080
 };
+
 
 commonSettings.plugins.push(new webpack.HotModuleReplacementPlugin());
 commonSettings.plugins.push(new CopyWebpackPlugin([{ from: "showcase" }]));
