@@ -62,6 +62,16 @@
     "react": "15.0.2",
     "react-addons-shallow-compare": "15.0.2",
     "react-cookie": "0.4.6",
-    "react-dom": "15.0.2"
+    "react-dom": "15.0.2",
+    "react-addons-css-transition-group": "^0.14.7",
+    "react-bootstrap": "^0.28.4",
+    "react-datepicker": "^0.25.0",
+    "react-dropzone-component": "^1.0.0",
+    "react-notifications": "^1.0.1",
+    "react-quill": "^0.4.1",
+    "react-router": "^2.4.1",
+    "react-select": "^0.9.1",
+    "react-star-rating": "^1.4.2",
+    "react-treebeard": "^1.1.1"
   }
 }
