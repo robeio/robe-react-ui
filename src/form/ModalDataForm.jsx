@@ -1,11 +1,11 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
-import DataForm from "libs/view/form/DataForm";
+import DataForm from "form/DataForm";
 import Alert from "react-bootstrap/lib/Alert";
 
-class ModalDataForm extends BaseComponent {
+class ModalDataForm extends ShallowComponent {
 
     static propTypes = {
         title: React.PropTypes.string,

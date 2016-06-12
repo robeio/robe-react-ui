@@ -1,13 +1,13 @@
 import React from "react";
 import is from "is-js";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import Col from "react-bootstrap/lib/Col";
 import "react-datepicker/dist/react-datepicker.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
-class DateInput extends BaseComponent {
+class DateInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
         onChange: React.PropTypes.func,

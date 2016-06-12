@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "libs/view/FaIcon";
-import NotificationItem from "libs/view/notification/NotificationItem";
+import FaIcon from "faicon/FaIcon";
+import NotificationItem from "notification/NotificationItem";
 import GlobalVariables from "app/GlobalVariables";
-import "libs/view/notification/style.css"
+import "notification/style.css"
 
-class Notification extends BaseComponent {
+class Notification extends ShallowComponent {
 
     constructor(props) {
         super(props);

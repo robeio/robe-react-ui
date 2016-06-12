@@ -1,9 +1,9 @@
 import React from "react";
 import is from "is-js";
-import BaseComponent from "libs/core/components/BaseComponent";
-import Input from "libs/view/form/elements/Input";
+import { ShallowComponent } from "robe-react-commons";
+import Input from "form/elements/Input";
 
-class NumericInput extends BaseComponent {
+class NumericInput extends ShallowComponent {
 
     static propTypes = {
         label: React.PropTypes.string,

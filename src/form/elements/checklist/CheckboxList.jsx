@@ -1,13 +1,11 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent, Arrays } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
-import CheckboxListItem from "libs/view/form/elements/checklist/CheckboxListItem";
-import "libs/view/form/elements/checklist/style.css";
+import CheckboxListItem from "form/elements/checklist/CheckboxListItem";
+import "form/elements/checklist/style.css";
 import is from "is-js";
-import Arrays from "robe-react-commons/lib/utils/Arrays";
 
-
-class CheckboxList extends BaseComponent {
+class CheckboxList extends ShallowComponent {
 
 
     static propTypes = {

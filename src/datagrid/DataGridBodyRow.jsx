@@ -1,20 +1,20 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent.jsx";
+import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
-import FaIcon from "libs/view/FaIcon";
+import FaIcon from "faicon/FaIcon";
 import moment from "moment";
 
 /**
  * TODO removing un used css
  */
 
-class DataTableBodyRow extends BaseComponent {
+class DataTableBodyRow extends ShallowComponent {
 
     static propTypes = {
         onClick: React.PropTypes.func
     };
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         moment.locale("tr");
         this.state = {

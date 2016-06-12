@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Treebeard from "react-treebeard/lib/components/treebeard";
 
-class Tree extends BaseComponent {
+class Tree extends ShallowComponent {
 
     style = {
         tree: {

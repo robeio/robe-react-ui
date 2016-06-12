@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 
 
-class CheckBoxTree extends BaseComponent {
+class CheckBoxTree extends ShallowComponent {
 
     static propTypes = {
         data: React.PropTypes.object,
@@ -17,26 +17,24 @@ class CheckBoxTree extends BaseComponent {
         parent: undefined
     };
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
 
         this.state = {
             checkedItems: this.props.checkedItems || [],
             selected: this.props.selected || []
         };
-    };
+    }
 
-    render() {
-
-
+    render(): string {
         let checked = false;
-        var value = this.props.data[this.props.dataValueField];
+        let value = this.props.data[this.props.dataValueField];
         if (this.state.checkedItems.indexOf(value) !== -1) {
             checked = true;
         }
 
         let isSelected = false;
-        var selected = this.props.data[this.props.dataValueField];
+        // let selected = this.props.data[this.props.dataValueField];
         if (this.state.selected.indexOf(value) !== -1) {
             isSelected = true;
         }
@@ -48,13 +46,13 @@ class CheckBoxTree extends BaseComponent {
                 type="checkbox"
                 value={value}
                 checked
-                onChange={this.__handleChange.bind(null,value)}/> :
+                onChange={this.__handleChange(value)}
+            /> :
             <input
                 type="checkbox"
                 value={value}
-                onChange={this.__handleChange.bind(null,value)}/>;
-
-
+                onChange={this.__handleChange(value)}
+            />;
         return (
             <li>
                 <label className="checkbox">
@@ -67,10 +65,7 @@ class CheckBoxTree extends BaseComponent {
             </li>
         );
     }
-
-
-    __handleChange = (value, e)=> {
-
+    __handleChange = (value: Object, e: Object) => {
         if (this.props.parent) {
             if (this.props.parent.__handleChange) {
                 this.props.parent.__handleChange(value, e);
@@ -80,49 +75,44 @@ class CheckBoxTree extends BaseComponent {
                 this.props.onChange(value, e.target.checked);
             }
         }
+    }
 
-    };
-
-    __renderChildren = ()=> {
-
+    __renderChildren = () => {
         if (this.props.data[this.props.childrenKey] && this.props.data[this.props.childrenKey].length > 0) {
-            var childrens = this.props.data[this.props.childrenKey];
+            let childrens = this.props.data[this.props.childrenKey];
             let items = [];
 
             for (let i = 0; i < childrens.length; i++) {
-                var item = childrens[i];
+                let item = childrens[i];
 
-                var value = this.props.data[this.props.dataValueField];
+                let value = this.props.data[this.props.dataValueField];
 
-                items.push(<CheckBoxTree data={this.props.data}
-                                         selected={this.props.selected}
-                                         value={this.props.value}
-                                         key={i}
-                                         data={item}
-                                         dataTextField={this.props.dataTextField}
-                                         dataValueField={this.props.dataValueField}
-                                         childrenKey={this.props.childrenKey}
-                                         parent={this}
-                                         onChange={this.__handleChange.bind(null,value)}
-                                         checkedItems={this.state.checkedItems}
+                items.push(<CheckBoxTree
+                    data={this.props.data}
+                    selected={this.props.selected} value={this.props.value}
+                    key={i}
+                    data={item}
+                    dataTextField={this.props.dataTextField}
+                    dataValueField={this.props.dataValueField}
+                    childrenKey={this.props.childrenKey}
+                    parent={this}
+                    onChange={this.__handleChange(value)}
+                    checkedItems={this.state.checkedItems}
                 />);
-
             }
             return items;
-        } else {
-            return null;
         }
-    };
-
+        return null;
+    }
     componentWillReceiveProps(nextProps) {
         this.setState({
             checkedItems: nextProps.checkedItems || [],
-            selected: nextProps.selected || [],
+            selected: nextProps.selected || []
         });
-    };
-    shouldComponentUpdate(nextProps, nextState) {
+    }
+    shouldComponentUpdate() {
         return true;
-    };
+    }
 }
 
 module.exports = CheckBoxTree;

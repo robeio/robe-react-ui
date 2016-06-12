@@ -1,10 +1,10 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import SideMenuSubItem from "libs/view/sidemenu/SideMenuSubItem";
+import { ShallowComponent } from "robe-react-commons";
+import SideMenuSubItem from "sidemenu/SideMenuSubItem";
 import Col from "react-bootstrap/lib/Col";
-import FaIcon from "libs/view/FaIcon";
+import FaIcon from "faicon/FaIcon";
 
-class SideMenuRootItem extends BaseComponent {
+class SideMenuRootItem extends ShallowComponent {
     selectedItem:undefined;
 
     constructor(props) {

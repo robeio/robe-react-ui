@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import Input from "libs/view/form/elements/Input";
+import { ShallowComponent } from "robe-react-commons";
+import Input from "form/elements/Input";
 
-class DecimalInput extends BaseComponent {
+class DecimalInput extends ShallowComponent {
 
     static propTypes = {
         label: React.PropTypes.string,

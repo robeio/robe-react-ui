@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 
-class RadioInput extends BaseComponent {
+class RadioInput extends ShallowComponent {
     static propTypes = {
         data: React.PropTypes.array,
         dataTextField: React.PropTypes.string,

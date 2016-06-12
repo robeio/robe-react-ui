@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import SideMenuItem from "libs/view/sidemenu/SideMenuItem";
+import { ShallowComponent } from "robe-react-commons";
+import SideMenuItem from "sidemenu/SideMenuItem";
 import Col from "react-bootstrap/lib/Col";
 
-class SideMenu extends BaseComponent {
+class SideMenu extends ShallowComponent {
 
     selectedItem:undefined;
     static propTypes = {

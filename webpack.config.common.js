@@ -12,7 +12,6 @@ const paths = {
     lib: path.join(__dirname, "/lib")
 };
 
-
 module.exports = {
     paths: paths, // reference path variable
     /**
@@ -77,6 +76,30 @@ module.exports = {
                         "stage-0"
                     ]
                 }
+            },
+            {
+                /**
+                 * @link https://github.com/webpack/json-loader
+                 * npm install json-loader --save-dev
+                 */
+                test: /\.json$/,
+                loader: "json-loader"
+            },
+            {
+                /**
+                 * @link https://github.com/webpack/style-loader
+                 * npm install style-loader --save-dev
+                 */
+                test: /\.s?css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
+                /**
+                 * @link https://github.com/webpack/url-loader
+                 * npm install url-loader --save-dev
+                 */
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+                loader: "url?limit=100000&name=[name].[ext]"
             }
         ]
     },

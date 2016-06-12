@@ -1,17 +1,16 @@
 import React from "react";
-import Maps from "robe-react-commons/lib/utils/Maps";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { Maps, ShallowComponent } from "robe-react-commons";
 import Form from "react-bootstrap/lib/FormGroup";
-import Input from "libs/view/form/elements/Input";
-import NumericInput from "libs/view/form/elements/NumericInput";
-import DateInput from "libs/view/form/elements/DateInput";
-import CheckInput from "libs/view/form/elements/CheckInput";
-import SelectInput from "libs/view/form/elements/SelectInput";
-import HtmlEditor from "libs/view/form/elements/htmleditor/HtmlEditor";
-import DropzoneUpload from "libs/view/upload/DropzoneUpload";
+import Input from "form/elements/Input";
+import NumericInput from "form/elements/NumericInput";
+import DateInput from "form/elements/DateInput";
+import CheckInput from "form/elements/CheckInput";
+import SelectInput from "form/elements/SelectInput";
+import HtmlEditor from "form/elements/htmleditor/HtmlEditor";
+import DropzoneUpload from "upload/DropzoneUpload";
 
 
-class DataForm extends BaseComponent {
+class DataForm extends ShallowComponent {
 
     constructor(props) {
         super(props);

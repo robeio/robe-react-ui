@@ -1,17 +1,18 @@
 {
     "extends": "airbnb",
     "env": {
-        "es6": true        // We are writing ES6 code
-    },
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "mocha": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
         "ecmaFeatures": {
+            "ecmaVersion": 6,
+            "sourceType": "module",
+            "experimentalObjectRestSpread": true,
             "jsx": true
         },
         "sourceType": "module"
@@ -21,6 +22,15 @@
         "flowtype"
     ],
     "rules": {
+        "object-shorthand": ["off", "always", { "ignoreConstructors": true }],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "no-restricted-syntax": 0,
         "max-len": [2, 300],
@@ -52,6 +62,10 @@
         "no-this-before-super": 2,
         "react/jsx-boolean-value": 2,
         "react/jsx-indent": [
+            1,
+            4
+        ],
+        "react/jsx-indent-props": [
             1,
             4
         ],

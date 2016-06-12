@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import SideMenuSubItem from "libs/view/sidemenu/SideMenuSubItem";
-import SideMenuRootItem from "libs/view/sidemenu/SideMenuRootItem";
+import { ShallowComponent } from "robe-react-commons";
+import SideMenuSubItem from "sidemenu/SideMenuSubItem";
+import SideMenuRootItem from "sidemenu/SideMenuRootItem";
 
-class SideMenuItem extends BaseComponent {
+class SideMenuItem extends ShallowComponent {
 
     constructor(props) {
         super(props);

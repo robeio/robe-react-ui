@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import CheckBoxTree from "libs/view/checkboxtreelist/CheckBoxTree";
-import "libs/view/checkboxtreelist/style.css";
+import { ShallowComponent } from "robe-react-commons";
+import CheckBoxTree from "checkboxtreelist/CheckBoxTree";
+import "checkboxtreelist/style.css";
 
-class CheckboxTreeView extends BaseComponent {
+class CheckboxTreeView extends ShallowComponent {
 
     static propTypes = {
         dataTextField: React.PropTypes.string.isRequired,

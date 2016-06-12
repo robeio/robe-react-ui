@@ -1,25 +1,25 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import Table from "react-bootstrap/lib/Table";
-import DataTableBodyRow from "libs/view/datagrid/DataGridBodyRow";
+import DataTableBodyRow from "datagrid/DataGridBodyRow";
 import Pagination from "react-bootstrap/lib/Pagination";
 import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
 import Glyphicon from "react-bootstrap/lib/Glyphicon";
 import Button from "react-bootstrap/lib/Button";
 import Input from "react-bootstrap/lib/Input";
-import ModalConfirm from "libs/view/form/ModalConfirm";
-import Filter from "libs/view/datagrid/filter/Filter";
+import ModalConfirm from "form/ModalConfirm";
+import Filter from "datagrid/filter/Filter";
 import Maps from "robe-react-commons/lib/utils/Maps";
-import "libs/view/datagrid/style.css";
+import "datagrid/style.css";
 
 /**
  * TODO removing un used css
  */
 
-class DataGrid extends BaseComponent {
+class DataGrid extends ShallowComponent {
 
     static propTypes = {
         onNewClick: React.PropTypes.func,

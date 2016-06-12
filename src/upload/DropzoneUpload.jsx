@@ -1,12 +1,11 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent, Arrays } from "robe-react-commons";
 import DropzoneComponent from "react-dropzone-component/lib/react-dropzone";
-import "libs/view/upload/filepicker.css";
-import "libs/view/upload/dropzone.min.css";
-import Arrays from "robe-react-commons/lib/utils/Arrays";
+import "upload/filepicker.css";
+import "upload/dropzone.min.css";
 
 // https://github.com/felixrieseberg/React-Dropzone-Component
-class DropzoneUpload extends BaseComponent {
+class DropzoneUpload extends ShallowComponent {
 
     static propTypes = {
         iconFiletypes: React.PropTypes.array,

@@ -1,4 +1,3 @@
-"use strict";
 /**
  * import common webpack settings
  */
@@ -25,42 +24,54 @@ commonSettings.debug = true;
  * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
  * @type {string}
  */
-commonSettings.devtool = "eval";
+commonSettings.devtool = "inline-source-map";
 
-/*
-*
-*
-*
-*/
+commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
+commonSettings.module.loaders.push({
+    test: /\.jsx?/,
+    exclude: /(__test__|node_modules|bower_components)\//,
+    loader: "isparta"
+}
+);
+
+// *optional* isparta options: istanbul behind isparta will use it
+commonSettings.isparta = {
+    embedSource: true,
+    noAutoWrap: true,
+    // these babel options will be passed only to isparta and not to babel-loader
+    babel: {
+        presets: ["es2015", "stage-0", "react"]
+    }
+};
+
 module.exports = function configure(config) {
     config.set({
         browsers: ["PhantomJS"],
         singleRun: true,
-        plugins: [
-            "karma-webpack",
-            "karma-mocha",
-            "karma-coverage",
-            "karma-phantomjs-launcher",
-            "karma-mocha-reporter",
-            "karma-bamboo-reporter"
-        ],
         frameworks: ["mocha"],
-
+        plugins: [
+            "karma-phantomjs-launcher",
+            "karma-chai",
+            "karma-mocha",
+            "karma-sourcemap-loader",
+            "karma-webpack",
+            "karma-coverage",
+            "karma-mocha-reporter"
+        ],
         files: [
-            "__test__/**/*.spec.js"
+            "__test__/index.js"
         ],
         preprocessors: {
-            "__test__/**/*.spec.js": ["webpack", "coverage"]
+            "__test__/index.js": ["webpack", "sourcemap"]
         },
-        reporters: ["mocha", "bamboo", "coverage"],
-
         webpack: commonSettings,
         webpackServer: {
             noInfo: true
         },
+        reporters: ["mocha", "coverage"],
         coverageReporter: {
-            reporters: [{ type: "lcov" }]
-        },
+            type: "html",
+            dir: "coverage/"
+        }
     });
 };
-

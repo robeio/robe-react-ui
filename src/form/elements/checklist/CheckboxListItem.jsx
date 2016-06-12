@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 
-class CheckboxListItem extends BaseComponent {
+class CheckboxListItem extends ShallowComponent {
 
     static propTypes = {
         checked: React.PropTypes.bool,

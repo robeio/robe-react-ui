@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
 
-class ModalConfirm extends BaseComponent {
+class ModalConfirm extends ShallowComponent {
 
     static propTypes = {
         onOkClick: React.PropTypes.func,

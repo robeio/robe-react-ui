@@ -1,8 +1,8 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import "libs/view/loading/style.css";
+import { ShallowComponent } from "robe-react-commons";
+import "loading/style.css";
 
-class Loading extends BaseComponent {
+class Loading extends ShallowComponent {
     static style = {
         position: "inherit",
     verticalAlign: "middle",

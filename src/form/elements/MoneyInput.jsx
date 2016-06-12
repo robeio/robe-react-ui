@@ -1,6 +1,6 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import Input from "libs/view/form/elements/Input";
+import { ShallowComponent } from "robe-react-commons";
+import Input from "form/elements/Input";
 import Numeral from "numeral";
 import Turkish from "numeral/languages/tr";
 import is from "is-js";
@@ -11,7 +11,7 @@ import is from "is-js";
 //TODO:take decimal seperator from props
 //TODO:take format from props
 //TODO:take fraction size from props
-class MoneyInput extends BaseComponent {
+class MoneyInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
         value: React.PropTypes.number.isRequired,
@@ -26,11 +26,11 @@ class MoneyInput extends BaseComponent {
 
     }
     static styleInteger = {
-        "textAlign": "end"
+        textAlign: "end"
     };
     static styleFractional = {
-        "minWidth": "50px",
-        "display": "inline"
+        minWidth: "50px",
+        display: "inline"
     };
 
     constructor(props) {
@@ -43,7 +43,7 @@ class MoneyInput extends BaseComponent {
 
 
     render() {
-        var values = this.__splitValue(this.props.value);
+        let values = this.__splitValue(this.props.value);
         return (
             <Input
                 type="text"

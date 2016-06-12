@@ -1,11 +1,10 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent, RequestUtils } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import moment from "moment";
-import RequestUtils from "libs/util/RequestUtils";
 import GlobalVariables from "app/GlobalVariables";
 
-class NotificationItem extends BaseComponent {
+class NotificationItem extends ShallowComponent {
 
     static propTypes = {
         item: React.PropTypes.object.isRequired

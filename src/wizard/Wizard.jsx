@@ -1,15 +1,15 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "libs/view/FaIcon";
-import "libs/view/wizard/style.css";
+import FaIcon from "faicon/FaIcon";
+import "wizard/style.css";
 
 
-class Wizard extends BaseComponent {
+class Wizard extends ShallowComponent {
 
     stepValidInfo = [];
     content = undefined;
@@ -20,8 +20,7 @@ class Wizard extends BaseComponent {
         this.state = {
             currentStep: 0
         }
-    };
-
+    }
     render() {
         return (
             <div>

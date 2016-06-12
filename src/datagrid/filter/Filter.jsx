@@ -1,66 +1,78 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import Input from "libs/view/form/elements/Input";
-import NumericInput from "libs/view/form/elements/NumericInput";
-import RadioInput from "libs/view/form/elements/RadioInput";
-import DateInput from "libs/view/form/elements/DateInput";
+import { ShallowComponent } from "robe-react-commons";
+import Input from "form/elements/Input";
+import NumericInput from "form/elements/NumericInput";
+import RadioInput from "form/elements/RadioInput";
+import DateInput from "form/elements/DateInput";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
-class Filter extends BaseComponent {
+
+class Filter extends ShallowComponent {
 
     static booleanData = [
-        {text: "Hepsi", value: "all"},
-        {text: "Evet", value: "true"},
-        {text: "Hayır", value: "false"}
+        { text: "Hepsi", value: "all" },
+        { text: "Evet", value: "true" },
+        { text: "Hayır", value: "false" }
     ];
 
-    constructor() {
-        super();
-        this.state = {filters: {}}
+    constructor(props: Object) {
+        super(props);
+        this.state = { filters: {} }
     }
 
     render() {
-        var filterFields = this.__renderFilters(this.props.columns, this.props.visiblePopups);
-        if (filterFields == undefined)
+        let filterFields = this.__renderFilters(this.props.columns, this.props.visiblePopups);
+        if (filterFields === undefined) {
             return (<span></span>);
-        else
-            return (<span>{filterFields}</span>);
-    };
-
+        }
+        return (<span>{filterFields}</span>);
+    }
 
     __renderFilters = (columns, visiblePopups)=> {
-        var filterFields = [];
-        var hasAtLeast1Filter = false;
-        for (var i = 0; i < columns.length; i++) {
-            var column = columns[i];
-            if (column.visible === false)
+        let filterFields = [];
+        let hasAtLeast1Filter = false;
+        for (let i = 0; i < columns.length; i++) {
+            let column = columns[i];
+            if (column.visible === false) {
                 continue;
-            var filterField = <span></span>;
+            }
+            let filterField = <span></span>;
             if (column.filter === true) {
-                var colId = "tableColumn-" + column.code;
-                var show = visiblePopups[column.code] === true;
-                filterField =
-                    <Overlay show={show} placement="top"
-                             target={this.__getColID.bind(undefined,colId)}>
+                let colId = `tableColumn-${column.code}`;
+                let show = visiblePopups[column.code] === true;
+                filterField = (
+                    <Overlay
+                        show={show}
+                        placement="top"
+                        target={this.__getColID(colId)}
+                    >
                         <Popover id={i} placement="top">
                             {this.__decideFilterField(column)}
                         </Popover>
-                    </Overlay>;
+                    </Overlay>
+                );
                 hasAtLeast1Filter = true;
             }
-            filterFields.push(<span key={column.code}
-                                  style={{verticalAlign: "bottom",     border: "0px"}}>{filterField}</span>);
+            filterFields.push(
+                <span
+                key={column.code}
+                style={{ verticalAlign: "bottom", border: "0px" }}
+                >
+                    {filterField}
+                </span>
+            );
         }
-        if (!hasAtLeast1Filter)
+        if (!hasAtLeast1Filter) {
             return undefined;
+        }
         return filterFields;
     };
 
-    __getColID = (id)=> {
+    __getColID = (id: string) => {
         return document.getElementById(id);
     };
 
-    __decideFilterField = (column)=> {
+    __decideFilterField = (column) => {
 
         switch (column.type) {
             case "bool":

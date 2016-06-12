@@ -1,12 +1,12 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Select from "react-select";
 import Col from "react-bootstrap/lib/Col";
 import "react-select/dist/react-select.css";
 
 // read more https://github.com/JedWatson/react-select
 
-class SingleValueSelectInput extends BaseComponent {
+class SingleValueSelectInput extends ShallowComponent {
 
     constructor(props) {
         super(props);

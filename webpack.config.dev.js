@@ -1,21 +1,18 @@
 const webpack = require("webpack");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+// const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
 
 
 const commonSettings = require("./webpack.config.common.js");
 
-
-
 commonSettings.cache = true;
 commonSettings.debug = true;
 commonSettings.devtool = "sourcemap";
 commonSettings.entry = {
-    app: [commonSettings.paths.app + "/showcase"]
+    app: [commonSettings.paths.app]
 };
 
-commonSettings.module.loaders.push({test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/});
-
+commonSettings.module.loaders.push({ test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ });
 
 commonSettings.devServer = {
     historyApiFallback: true,
@@ -24,7 +21,8 @@ commonSettings.devServer = {
     inline: true,
 
     // display only errors to reduce the amount of output
-    //stats: "errors-only",
+
+    // stats: "errors-only",
 
     // parse host and port from env so this is easy
     // to customize
@@ -35,7 +33,8 @@ commonSettings.devServer = {
 
 
 commonSettings.plugins.push(new webpack.HotModuleReplacementPlugin());
-commonSettings.plugins.push(new CopyWebpackPlugin([{ from: "showcase" }]));
+
+// commonSettings.plugins.push(new CopyWebpackPlugin([{ from: "showcase" }]));
 
 commonSettings.plugins.push(new CachePlugin({}));
 

@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
-import "libs/view/form/elements/style.css";
+import "form/elements/style.css";
 
-class CheckInput extends BaseComponent {
+class CheckInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
         textValue: React.PropTypes.string,

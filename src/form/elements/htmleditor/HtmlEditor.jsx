@@ -1,13 +1,13 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
+import { ShallowComponent } from "robe-react-commons";
 import ReactQuill from "react-quill";
 import Col from "react-bootstrap/lib/Col";
-import "libs/view/form/elements/htmleditor/quill.snow.css";
-import "libs/view/form/elements/htmleditor/style.css";
+import "form/elements/htmleditor/quill.snow.css";
+import "form/elements/htmleditor/style.css";
 import Alert from "react-bootstrap/lib/Alert";
 import is from "is-js";
 
-class HtmlEditor extends BaseComponent {
+class HtmlEditor extends ShallowComponent {
 
     static propTypes = {
         value: React.PropTypes.string,

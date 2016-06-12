@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from "libs/core/components/BaseComponent";
-import FaIcon from "libs/view/FaIcon";
+import { ShallowComponent } from "robe-react-commons";
+import FaIcon from "faicon/FaIcon";
 import Link from "react-router/lib/Link";
 
-class SideMenuSubItem extends BaseComponent {
+class SideMenuSubItem extends ShallowComponent {
 
     constructor(props) {
         super(props);

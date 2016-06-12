@@ -1,11 +1,11 @@
-import NProgress from "nprogress"
-import "nprogress/nprogress.css"
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 
 // read more fore configuration https://github.com/rstacruz/nprogress
 class Progress {
     constructor() {
-        NProgress.configure({showSpinner: false});
+        NProgress.configure({ showSpinner: false });
     }
 
     start = () => {
