@@ -20,6 +20,7 @@ class DateInput extends ShallowComponent {
         format: "DD/MM/YYYY"
     };
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     };

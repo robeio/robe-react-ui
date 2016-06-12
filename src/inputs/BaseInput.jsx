@@ -52,7 +52,7 @@ export default class BaseInput extends ShallowComponent {
                         style={this.props.style}
                         ref="innerInput"
                         value={value}
-                        />
+                    />
                 </div>
             );
         } else {
@@ -68,7 +68,7 @@ export default class BaseInput extends ShallowComponent {
                         bsStyle="error"
                         ref="innerInput"
                         value={value}
-                        />
+                    />
                     <Alert className="input-alert" bsStyle="danger">{messages}</Alert>
                 </div>);
         }
@@ -84,67 +84,78 @@ export default class BaseInput extends ShallowComponent {
         return this.valid;
     };
     updateValidations = (validation) => {
-        var state = {};
-        var validationsData = [];
+        let state = {};
+        let validationsData = [];
         validationsData.push(this.props);
-        var validations = validationsData[0];
+        let validations = validationsData[0];
 
-        if (validation.min)
-            validations["subMin"] = validation.min;
+        if (validation.min) {
+            validations.subMin = validation.min;
+        }
 
-        if (validation.max)
-            validations["subMax"] = validation.max;
+        if (validation.max) {
+            validations.subMax = validation.max;
+        }
 
 
-        state["validations"] = validations;
+        state.validations = validations;
         this.setState(state);
         this.forceUpdate();
     };
 
     __validate = (validations) => {
-        var messages = [];
+        let messages = [];
         let isNumeric = (typeof this.props.value === "number");
 
-        if (validations.required)
-            if ((this.props.value == undefined || String(this.props.value).length == 0) && validations.required[0])
+        if (validations.required) {
+            if ((this.props.value === undefined || String(this.props.value).length === 0) && validations.required[0]) {
                 messages.push(validations.required[1]);
+            }
+        }
         if (validations.multiple) {
             if (isNumeric) {
-                if (!Number.isInteger(this.props.value / validations.multiple[0]))
+                if (!Number.isInteger(this.props.value / validations.multiple[0])) {
                     messages.push(validations.multiple[1]);
+                }
             }
         }
         if (validations.min) {
             if (isNumeric) {
-                if (this.props.value < validations.min[0])
+                if (this.props.value < validations.min[0]) {
                     messages.push(validations.min[1]);
-            } else if (String(this.props.value).length < validations.min[0])
+                }
+            } else if (String(this.props.value).length < validations.min[0]) {
                 messages.push(validations.min[1]);
-        }
-        else if (validations.subMin) {
+            }
+        } else if (validations.subMin) {
             if (isNumeric) {
-                if (this.props.value < validations.subMin[0])
+                if (this.props.value < validations.subMin[0]) {
                     messages.push(validations.subMin[1]);
-            } else if (String(this.props.value).length < validations.subMin[0])
+                }
+            } else if (String(this.props.value).length < validations.subMin[0]) {
                 messages.push(validations.subMin[1]);
+            }
         }
         if (validations.max) {
             if (isNumeric) {
-                if (this.props.value > validations.max[0])
+                if (this.props.value > validations.max[0]) {
                     messages.push(validations.max[1]);
-            } else if (String(this.props.value).length > validations.max[0])
+                }
+            } else if (String(this.props.value).length > validations.max[0]) {
                 messages.push(validations.max[1]);
-        }
-        else if (validations.subMax) {
+            }
+        } else if (validations.subMax) {
             if (isNumeric) {
-                if (this.props.value > validations.subMax[0])
+                if (this.props.value > validations.subMax[0]) {
                     messages.push(validations.subMax[1]);
-            } else if (String(this.props.value).length > validations.subMax[0])
+                }
+            } else if (String(this.props.value).length > validations.subMax[0]) {
                 messages.push(validations.subMax[1]);
+            }
         }
         if (this.props.regex) {
             if (String(this.props.value).length > 0) {
-                var regex = new RegExp(this.props.regex[0]);
+                let regex = new RegExp(this.props.regex[0]);
                 if (!regex.test(this.props.value)) {
                     messages.push(validations.regex[1]);
                 }
@@ -154,12 +165,14 @@ export default class BaseInput extends ShallowComponent {
     };
 
     __propsChecker = (prop) => {
-        if (prop && (prop.length != 2 || !(is.string(prop[0]) || is.number(prop[0]) || is.bool(prop[0]) || is.date(prop[0])) && is.string(prop[1])))
-            throw "Validation property must be an array of 2 and contain value with message.";
+        if (prop && (prop.length !== 2 || !(is.string(prop[0]) || is.number(prop[0]) || is.bool(prop[0]) || is.date(prop[0])) && is.string(prop[1]))) {
+            throw new Error("Validation property must be an array of 2 and contain value with message.");
+        }
     };
 
     componentDidMount = () => {
-        if (this.props.focus)
+        if (this.props.focus) {
             this.focus();
+        }
     }
 }

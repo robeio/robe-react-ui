@@ -84,9 +84,9 @@ class Tree extends ShallowComponent {
     constructor() {
         super();
         this.state = {
-            "active": true
+            active: true
         };
-    };
+    }
 
     render() {
         return (<Treebeard
@@ -94,10 +94,8 @@ class Tree extends ShallowComponent {
             onToggle={this.onToggle}
             style={this.style}
         />);
-    };
-
-
-    onToggle = (node, toggled)=> {
+    }
+    onToggle = (node, toggled) => {
         if (this.state.cursor) {
             this.state.cursor.active = false;
         }
@@ -105,9 +103,9 @@ class Tree extends ShallowComponent {
         if (node.children) {
             node.toggled = toggled;
         }
-        this.setState({cursor: node});
+        this.setState({ cursor: node });
     }
 
 }
 
-module.exports = Tree;
+export default Tree;

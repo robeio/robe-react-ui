@@ -4,5 +4,4 @@ import Showcase from "./Showcase";
 
 const app = document.getElementById("app");
 
-
 render((<Showcase />), app);

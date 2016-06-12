@@ -1,8 +1,8 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "form/elements/Input";
+import Input from "inputs/BaseInput";
 
-class DecimalInput extends ShallowComponent {
+export default class DecimalInput extends ShallowComponent {
 
     static propTypes = {
         label: React.PropTypes.string,
@@ -14,9 +14,10 @@ class DecimalInput extends ShallowComponent {
         regex: [/(^[0-9]{0,13}$)|((^[0-9]{0,13})+\.[0-9]{0,2}$)/igm, "Hatalı girdiniz."]
     };
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-    };
+    }
 
     render() {
         return (<Input
@@ -26,16 +27,14 @@ class DecimalInput extends ShallowComponent {
             step="0.01"
             onChange={this.__numericFilter}
         />);
-    };
+    }
 
-    isValid = ()=> {
+    isValid = () => {
         return this.refs.innerInput.isValid();
     };
-    __numericFilter = (e)=> {
-        var value = e.target.value;
+    __numericFilter = (e) => {
+        let value = e.target.value;
         e.target.parsedValue = value ? parseFloat(value) : value;
         this.props.onChange(e);
     };
 }
-
-module.exports = DecimalInput;

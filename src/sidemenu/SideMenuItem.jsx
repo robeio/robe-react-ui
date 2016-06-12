@@ -3,12 +3,12 @@ import { ShallowComponent } from "robe-react-commons";
 import SideMenuSubItem from "sidemenu/SideMenuSubItem";
 import SideMenuRootItem from "sidemenu/SideMenuRootItem";
 
-class SideMenuItem extends ShallowComponent {
+export default class SideMenuItem extends ShallowComponent {
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     }
-
     render() {
         const menu = this.props.menu;
         if (menu.items && menu.items.length > 0) {
@@ -17,18 +17,18 @@ class SideMenuItem extends ShallowComponent {
                 router={this.props.router}
                 onSelectionChange={this.props.onSelectionChange}
                 initialSelection={this.props.initialSelection}
-            />)
-        } else {
-            return (<SideMenuSubItem
+            />
+            );
+        }
+
+        return (
+            <SideMenuSubItem
                 root={true}
                 menu={menu}
                 router={this.props.router}
                 onSelectionChange={this.props.onSelectionChange}
-                initialSelection={this.props.initialSelection}/>)
-        }
-
+                initialSelection={this.props.initialSelection}
+            />
+        );
     }
 }
-
-
-module.exports = SideMenuItem;

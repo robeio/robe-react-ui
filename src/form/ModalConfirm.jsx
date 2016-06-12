@@ -3,7 +3,7 @@ import { ShallowComponent } from "robe-react-commons";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
 
-class ModalConfirm extends ShallowComponent {
+export default class ModalConfirm extends ShallowComponent {
 
     static propTypes = {
         onOkClick: React.PropTypes.func,
@@ -12,11 +12,6 @@ class ModalConfirm extends ShallowComponent {
         message: React.PropTypes.string,
         show: React.PropTypes.bool
     };
-
-    constructor(props) {
-        super(props);
-    };
-
     render() {
         return (
             <Modal show={this.props.show}>
@@ -32,9 +27,5 @@ class ModalConfirm extends ShallowComponent {
                 </Modal.Footer>
             </Modal>
         );
-
-    };
-
+    }
 }
-
-module.exports = ModalConfirm;

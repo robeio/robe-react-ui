@@ -2,24 +2,25 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import "loading/style.css";
 
-class Loading extends ShallowComponent {
+export default class Loading extends ShallowComponent {
     static style = {
         position: "inherit",
-    verticalAlign: "middle",
-    width: "100%",
-    fontSize: "xx-large",
-    textAlign: "center",
-    paddingTop: "35%"
-        
-    }
-
+        verticalAlign: "middle",
+        width: "100%",
+        fontSize: "xx-large",
+        textAlign: "center",
+        paddingTop: "35%"
+    };
     render() {
+        let styleClass = this.props.className === undefined ? "" : this.props.className;
         return (
             <div style={Loading.style}>
                 <span
-                    className={"glyphicon glyphicon-refresh spinning "+(this.props.className==undefined?"":this.props.className)}/>
+                    className={
+                    `glyphicon glyphicon-refresh spinning ${styleClass}`
+                    }
+                />
             </div>
         );
-    };
+    }
 }
-module.exports = Loading;

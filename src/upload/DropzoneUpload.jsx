@@ -5,7 +5,8 @@ import "upload/filepicker.css";
 import "upload/dropzone.min.css";
 
 // https://github.com/felixrieseberg/React-Dropzone-Component
-class DropzoneUpload extends ShallowComponent {
+
+export default class DropzoneUpload extends ShallowComponent {
 
     static propTypes = {
         iconFiletypes: React.PropTypes.array,
@@ -28,7 +29,7 @@ class DropzoneUpload extends ShallowComponent {
     deletedFiles = [];
 
     render() {
-        var djsConfig = {
+        let djsConfig = {
             addRemoveLinks: true,
             parallelUploads: true,
             maxFilesize: 4,
@@ -42,12 +43,12 @@ class DropzoneUpload extends ShallowComponent {
             dictInvalidFileType: "Geçerli bir dosya tipi değildir."
 
         };
-        var eventHandlers = {
+        let eventHandlers = {
             init: this.__init,
             success: this.__onAdd,
             removedfile: this.__onRemove
         };
-        var componentConfig = {
+        let componentConfig = {
             iconFiletypes: this.props.iconFiletypes,
             showFiletypeIcon: this.props.showFiletypeIcon,
             postUrl: this.props.postUrl
@@ -61,8 +62,8 @@ class DropzoneUpload extends ShallowComponent {
             />);
     }
 
-    __onAdd = (file, response)=> {
-        var asset = {};
+    __onAdd = (file, response) => {
+        let asset = {};
         asset.type = file.type;
         asset.size = file.size;
         asset.name = file.name;
@@ -70,14 +71,13 @@ class DropzoneUpload extends ShallowComponent {
         asset.filePath = response.filePath;
         this.addedFiles.push(asset);
 
-        var e = {};
+        let e = {};
         e.target = {};
         e.target.event = "add";
         this.__onChange(e);
     };
-    __onRemove = (file)=> {
-
-        let findIndex = Arrays.indexOfByKey(this.addedFiles, "name", file["name"]);
+    __onRemove = (file) => {
+        let findIndex = Arrays.indexOfByKey(this.addedFiles, "name", file.name);
 
         let item = this.addedFiles[findIndex];
 
@@ -85,7 +85,7 @@ class DropzoneUpload extends ShallowComponent {
 
         this.addedFiles.splice(findIndex, 1);
 
-        var e = {};
+        let e = {};
         e.target = {};
         e.target.event = "remove";
         /**
@@ -95,23 +95,17 @@ class DropzoneUpload extends ShallowComponent {
         this.__onChange(e);
     };
 
-    __onChange = (e)=> {
-
-
+    __onChange = (e) => {
         if (this.props.onChange) {
-
             e.target.parsedValue = this.__createValidData(this.addedFiles);
             e.target.deleted = this.__createValidData(this.deletedFiles);
 
             this.props.onChange(e);
         }
+    }
 
-    };
-
-    __createValidData = (arr)=> {
-
-        var response = [];
-
+    __createValidData = (arr) => {
+        let response = [];
         for (let i = 0; i < arr.length; i++) {
             let item = arr[i];
             response.push(this.__fileToAsset(item));
@@ -120,8 +114,8 @@ class DropzoneUpload extends ShallowComponent {
         return response;
     };
 
-    __fileToAsset = (item)=> {
-        var asset = {};
+    __fileToAsset = (item) => {
+        let asset = {};
         asset.type = item.type;
         asset.oid = item.oid;
         asset.size = item.size;
@@ -130,14 +124,13 @@ class DropzoneUpload extends ShallowComponent {
 
         return asset;
     };
-    __init = (dropzone)=> {
-
+    __init = (dropzone) => {
         const files = this.props.files;
         for (let i = 0; i < files.length; i++) {
             let asset = files[i];
 
             this.addedFiles.push(asset);
-            var item = this.__fileToAsset(asset);
+            let item = this.__fileToAsset(asset);
             dropzone.options.addedfile.call(dropzone, item);
 
             /**
@@ -145,21 +138,18 @@ class DropzoneUpload extends ShallowComponent {
              */
 
             if (item.type.startsWith("image/")) {
-                dropzone.options.thumbnail.call(dropzone, item, window.backendRootPath + "assets/preview/" + item.oid);
+                dropzone.options.thumbnail.call(dropzone, item, `${window.backendRootPath}assets/preview/${item.oid}`);
             } else if (item.type.endsWith("pdf")) {
-                dropzone.options.thumbnail.call(dropzone, item, window.applicationRootPath + "images/120x120_pdf.png");
-            } else if (item.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || item.endsWith("/msword")) {
-                dropzone.options.thumbnail.call(dropzone, item, window.applicationRootPath + "images/120x120_word.png");
+                dropzone.options.thumbnail.call(dropzone, item, `${window.applicationRootPath}images/120x120_pdf.png`);
+            } else if (item.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || item.endsWith("/msword")) {
+                dropzone.options.thumbnail.call(dropzone, item, `${window.applicationRootPath}images/120x120_word.png`);
             }
 
             // dropzone.options.thumbnail.call(dropzone, asset, "https://pixabay.com/static/uploads/photo/2015/10/01/21/39/background-image-967820_960_720.jpg");
-            item.previewElement.classList.add('dz-success');
-            item.previewElement.classList.add('dz-complete');
-
+            item.previewElement.classList.add("dz-success");
+            item.previewElement.classList.add("dz-complete");
         }
-
-    };
+    }
 
 }
 
-module.exports = DropzoneUpload;

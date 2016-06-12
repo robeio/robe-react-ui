@@ -18,6 +18,7 @@ class CheckInput extends ShallowComponent {
 
     checked = this.props.value;
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     };

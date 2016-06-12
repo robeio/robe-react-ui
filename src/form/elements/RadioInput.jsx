@@ -2,7 +2,8 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 
-class RadioInput extends ShallowComponent {
+export default class RadioInput extends ShallowComponent {
+
     static propTypes = {
         data: React.PropTypes.array,
         dataTextField: React.PropTypes.string,
@@ -11,7 +12,6 @@ class RadioInput extends ShallowComponent {
         value: React.PropTypes.any,
     };
 
-
     static defaultProps = {
         disabled: false
     };
@@ -19,46 +19,43 @@ class RadioInput extends ShallowComponent {
     valid = false;
     selectedItem = undefined;
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-    };
-
+    }
 
     render() {
-
-        if (this.props.label)
+        if (this.props.label) {
             return (<Col className="form-group">
                 <label className="control-label">{this.props.label}</label>
                 {this.__createRadios(this.props.data)}
             </Col>);
+        }
+        return (<div>{this.__createRadios(this.props.data)}</div>);
+    }
 
-        else
-            return (<div>{this.__createRadios(this.props.data)}</div>);
-    };
-
-    isValid = ()=> {
+    isValid = () => {
         return this.valid;
     };
 
-    getSelected = ()=> {
+    getSelected = () => {
         return this.selectedItem;
-    };
+    }
 
-    __parse = (e)=> {
+    __parse = (e) => {
         if (this.props.onChange) {
             e.target.parsedValue = e.target.getAttribute("data");
             this.props.onChange(e);
             this.valid = true;
             this.selectedItem = e.target.getAttribute("data");
         }
-    };
+    }
 
-    __createRadios = (list)=> {
+    __createRadios = (list) => {
+        let options = [];
 
-        var options = [];
-
-        for (var i = 0; i < list.length; i++) {
-            var item = list[i];
+        for (let i = 0; i < list.length; i++) {
+            let item = list[i];
             let value = this.__getDataValueField(item);
             let icon = this.props.value === value ? " state-icon fa fa-dot-circle-o" : " state-icon fa fa-circle-o";
             if (this.props.value === value) {
@@ -66,34 +63,36 @@ class RadioInput extends ShallowComponent {
                 this.selectedItem = value;
             }
             options.push(
-                <Col className="checkbox" onClick={this.__parse.bind(this)} data={value} key={value}>
-                    <label style={{paddingLeft:"2px"}} data={value}>
-                        <span className={icon} style={{marginRight:"10px"}} data={value}/>
+                <Col
+                    className="checkbox"
+                    onClick={this.__parse.bind(this)}
+                    data={value}
+                    key={value}
+                >
+                    <label style={{ paddingLeft: "2px" }} data={value}>
+                        <span className={icon} style={{ marginRight: "10px" }} data={value} />
                         <span data={value}>{this.__getDataTextField(item)}</span></label>
-                </Col>)
+                </Col>
+            );
         }
         return options;
-    };
+    }
 
-    __getDataTextField = (item)=> {
+    __getDataTextField = (item) => {
         if (this.props.dataTextField) {
             return item[this.props.dataTextField] || item;
         }
         return item;
+    }
 
-    };
-
-    __getDataValueField = (item)=> {
+    __getDataValueField = (item) => {
         if (this.props.dataValueField) {
             return item[this.props.dataValueField] || item;
         }
         return item;
-    };
+    }
 
     // isValid = ()=> {
     //     return this.refs.innerInput.isValid();
     // };
-
 }
-
-module.exports = RadioInput;

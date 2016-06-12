@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "form/elements/Input";
+import Input from "inputs/BaseInput";
 import Numeral from "numeral";
 import Turkish from "numeral/languages/tr";
 import is from "is-js";
@@ -8,10 +8,11 @@ import is from "is-js";
 
 // Please look at http://numeraljs.com/
 
-//TODO:take decimal seperator from props
-//TODO:take format from props
-//TODO:take fraction size from props
-class MoneyInput extends ShallowComponent {
+// TODO:take decimal seperator from props
+// TODO:take format from props
+// TODO:take fraction size from props
+
+export default class MoneyInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
         value: React.PropTypes.number.isRequired,
@@ -101,7 +102,7 @@ class MoneyInput extends ShallowComponent {
         return value;
     };
 
-    __splitValue = (value)=> {
+    __splitValue = (value) => {
         let values = new String(parseFloat(Numeral().unformat(value))).split(this.props.decimalSeparator);
         values[0] = this.__parseInteger(values[0]);
         values[1] = this.__parseFraction(values[1]);
@@ -109,5 +110,3 @@ class MoneyInput extends ShallowComponent {
     }
 
 }
-
-module.exports = MoneyInput;

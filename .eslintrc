@@ -48,7 +48,8 @@
         "id-length": 0,
         "indent": [
             2,
-            4
+            4,
+            {"SwitchCase": 1}
         ],
         "no-eq-null": 0,
         "one-var": [
@@ -60,7 +61,7 @@
         "prefer-const": 0,
         "no-param-reassign": 0,
         "no-this-before-super": 2,
-        "react/jsx-boolean-value": 2,
+        "react/jsx-boolean-value": 0,
         "react/jsx-indent": [
             1,
             4

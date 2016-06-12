@@ -9,7 +9,7 @@ import FaIcon from "faicon/FaIcon";
 import "wizard/style.css";
 
 
-class Wizard extends ShallowComponent {
+export default class Wizard extends ShallowComponent {
 
     stepValidInfo = [];
     content = undefined;
@@ -19,7 +19,7 @@ class Wizard extends ShallowComponent {
         super(props);
         this.state = {
             currentStep: 0
-        }
+        };
     }
     render() {
         return (
@@ -33,86 +33,110 @@ class Wizard extends ShallowComponent {
                 {this.__renderPager()}
             </div>
         );
-    };
+    }
 
-    __renderSteps = ()=> {
-        var steps = [];
-        for (var i = 0; i < this.props.steps.length; i++) {
-            var item = this.props.steps[i];
-            var step = (
+    __renderSteps = () => {
+        let steps = [];
+        for (let i = 0; i < this.props.steps.length; i++) {
+            let item = this.props.steps[i];
+            let styleClass = (this.state.currentStep === i) ? "btn-primary" : "btn-default";
+            let step = (
                 <Col key={i} className="wizard-step">
-                    <Col componentClass="a" type="button"
-                         onClick={this.__onClickStepButton.bind(undefined,i)}
-                         className={"btn btn-circle " + (this.state.currentStep==i?"btn-primary":"btn-default")}>{i + 1}</Col>
+                    <Col
+                        componentClass="a" type="button"
+                        onClick={this.__onClickStepButton(i)}
+                        className={`btn btn-circle ${styleClass}`}
+                    >
+                        {i + 1}
+                    </Col>
                     <p>{item.title}</p>
                 </Col>);
-            steps.push(step)
+            steps.push(step);
         }
         return steps;
     };
 
-    __onClickStepButton = (index)=> {
-        if (this.state.currentStep == index)
+    __onClickStepButton = (index) => {
+        if (this.state.currentStep === index) {
             return;
+        }
         this.stepValidInfo[this.state.currentStep] = this.isValid();
 
-        var state = {};
+        let state = {};
         if (this.state.currentStep < index) {
             if (this.__areStepsValid(this.state.currentStep, index)) {
-                state["currentStep"] = index;
+                state.currentStep = index;
                 this.setState(state);
             }
         } else if (this.state.currentStep > index) {
-            state["currentStep"] = index;
+            state.currentStep = index;
             this.setState(state);
         }
     };
-    __areStepsValid = (start, end)=> {
+    __areStepsValid = (start, end) => {
         for (start; start < end; start++) {
             if (!this.stepValidInfo[start]) {
                 return false;
             }
         }
-        return true
+        return true;
     };
 
-    __renderContent = ()=> {
+    __renderContent = () => {
         this.content = this.props.steps[this.state.currentStep].component;
         return this.content;
     };
 
-    __handleNextButtonClick = ()=> {
+    __handleNextButtonClick = () => {
         this.__onClickStepButton(this.state.currentStep + 1);
     };
 
-    __handlePreviousButtonClick = ()=> {
+    __handlePreviousButtonClick = () => {
         this.__onClickStepButton(this.state.currentStep - 1);
     };
 
-    __renderPager = ()=> {
-        var nextButton = undefined;
-        if (this.state.currentStep == this.props.steps.length - 1) {
-            nextButton =
+    __renderPager = () => {
+        let nextButton = undefined;
+        if (this.state.currentStep === this.props.steps.length - 1) {
+            nextButton = (
                 <Col className="pull-right">
-                    <Button bsStyle="primary" onClick={this.props.onCompleteClick}><FaIcon
-                        size="fa-lg" code="fa-check-circle"/> Onaya Gönder</Button>
+                    <Button
+                        bsStyle="primary"
+                        onClick={this.props.onCompleteClick}
+                    >
+                        <FaIcon
+                        size="fa-lg"
+                        code="fa-check-circle"
+                        />
+                        Onaya Gönder
+                    </Button>
                 </Col>
+            );
         } else {
-            nextButton =
-                <PageItem next disabled={!this.state.valid}
-                          onClick={this.__handleNextButtonClick}>
-                    Sonraki Adım &rarr;</PageItem>
+            nextButton = (
+                <PageItem
+                    next
+                    disabled={!this.state.valid}
+                    onClick={this.__handleNextButtonClick}
+                >
+                    Sonraki Adım &rarr;
+                </PageItem>
+            );
         }
         return (
             <Pager>
-                <PageItem previous disabled={this.state.currentStep==0}
-                          onClick={this.state.currentStep==0?null:this.__handlePreviousButtonClick}>&larr;
-                    Önceki Adım</PageItem>
+                <PageItem
+                    previous
+                    disabled={this.state.currentStep === 0}
+                    onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
+                >
+                    &larr;Önceki Adım
+                </PageItem>
                 {nextButton}
             </Pager>
         );
     };
-    isValid = ()=> {
+    isValid = () => {
         let result = this.content._owner._instance.refs.step.isValid();
         if (!result.status) {
             NotificationManager.error(result.message);
@@ -122,4 +146,3 @@ class Wizard extends ShallowComponent {
         return true;
     };
 }
-module.exports = Wizard;

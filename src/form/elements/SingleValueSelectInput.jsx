@@ -6,15 +6,14 @@ import "react-select/dist/react-select.css";
 
 // read more https://github.com/JedWatson/react-select
 
-class SingleValueSelectInput extends ShallowComponent {
+export default class SingleValueSelectInput extends ShallowComponent {
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-    };
-
+    }
     render() {
-
-        let placeholder = this.props.placeholder == undefined ? "<Lütfen Seçiniz>" : this.props.placeholder;
+        let placeholder = this.props.placeholder === undefined ? "<Lütfen Seçiniz>" : this.props.placeholder;
 
         return (
             <Col className="form-group">
@@ -22,12 +21,10 @@ class SingleValueSelectInput extends ShallowComponent {
                     {...this.props}
                     multi={false}
                     noResultsText="Sonuç bulunamadı."
-                    placeholder={placeholder}/>
+                    placeholder={placeholder}
+                />
             </Col>
 
         );
-    };
+    }
 }
-
-
-module.exports = SingleValueSelectInput;

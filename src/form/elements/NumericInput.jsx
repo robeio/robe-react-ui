@@ -1,9 +1,9 @@
 import React from "react";
 import is from "is-js";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "form/elements/Input";
+import Input from "inputs/BaseInput";
 
-class NumericInput extends ShallowComponent {
+export default class NumericInput extends ShallowComponent {
 
     static propTypes = {
         label: React.PropTypes.string,
@@ -11,9 +11,10 @@ class NumericInput extends ShallowComponent {
         onChange: React.PropTypes.func
     };
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-    };
+    }
 
     render() {
         return (<Input
@@ -22,26 +23,24 @@ class NumericInput extends ShallowComponent {
             ref="innerInput"
             onChange={this.__numericFilter}
         />);
-    };
+    }
 
-    isValid = ()=> {
+    isValid = () => {
         return this.refs.innerInput.isValid();
     };
 
-    updateValidations = (validationItem)=> {
-        this.refs.innerInput.updateValidations(validationItem)
+    updateValidations = (validationItem) => {
+        this.refs.innerInput.updateValidations(validationItem);
     };
 
-    __numericFilter = (e)=> {
-        var value = e.target.value;
+    __numericFilter = (e) => {
+        let value = e.target.value;
         if (value && !is.numeric(value)) {
             e.preventDefault();
-            e.stopPropagation()
+            e.stopPropagation();
         } else {
-            e.target.parsedValue = value ? parseInt(value) : value;
+            e.target.parsedValue = value ? parseInt(value, 10) : value;
             this.props.onChange(e);
         }
     };
 }
-
-module.exports = NumericInput;

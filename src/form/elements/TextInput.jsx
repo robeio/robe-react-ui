@@ -1,14 +1,15 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "form/elements/Input";
+import Input from "inputs/BaseInput";
 
-class TextInput extends ShallowComponent {
+export default class TextInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
         value: React.PropTypes.string.isRequired,
         onChange: React.PropTypes.func
-    };
+    }
 
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     }
@@ -20,11 +21,9 @@ class TextInput extends ShallowComponent {
                 type="text"
                 ref="innerInput"
             />);
-    };
+    }
 
-    isValid = ()=> {
+    isValid = () => {
         return this.refs.innerInput.isValid();
     };
 }
-
-module.exports = TextInput;
