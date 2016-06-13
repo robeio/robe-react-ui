@@ -10,7 +10,8 @@ export default class FaIcon extends ShallowComponent {
 
     static propTypes = {
         code: React.PropTypes.string.isRequired,
-        size: React.PropTypes.string
+        size: React.PropTypes.string,
+        style: React.PropTypes.object
     };
 
     static defaultProps = {
@@ -23,7 +24,7 @@ export default class FaIcon extends ShallowComponent {
         let propsClassName = this.props.className === undefined ? "" : this.props.className;
         let className = `fa ${code} ${size} ${propsClassName}`;
         return (
-            <i className={className} />
+            <i className={className} style={this.props.style} />
         );
     }
 }

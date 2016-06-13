@@ -2,6 +2,15 @@ import React from "react";
 import ShallowComponent  from "robe-react-commons/lib/components/ShallowComponent";
 import FaIcon from "faicon/FaIcon";
 
+const Style = {
+    "icon": {
+        "marginLeft": "-5px",
+        "marginRight": "10px"
+    },
+    "selected": {},
+    "disabled": {}
+};
+
 class CheckInput extends ShallowComponent {
     static propTypes = {
         label: React.PropTypes.string,
@@ -13,22 +22,22 @@ class CheckInput extends ShallowComponent {
     static defaultProps = {
         disabled: false
     };
-    checked = this.props.value;
 
-    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     };
 
+    checked = this.props.value;
+
 
     render() {
-        let icon = this.props.value === true ? " state-icon fa fa-check-circle-o" : " state-icon fa fa-circle-o";
+        let icon = this.props.value === true ? "fa-check-circle-o" : "fa-circle-o";
         let disabled = this.props.disabled ? "checkbox disabled-check-input" : "checkbox ";
 
         return (
             <div className={disabled} onClick={this.__parse.bind(this) }>
                 <label style={{ paddingLeft: "2px" }}>
-                    <FaIcon code="icon" />
+                    <FaIcon code={icon} style={Style.icon} />
                     {this.props.label}</label>
             </div>
         );
