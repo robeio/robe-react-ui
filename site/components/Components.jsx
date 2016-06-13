@@ -7,6 +7,7 @@ import RadioInput from "inputs/RadioInput";
 import SelectInput from "inputs/SelectInput";
 import PasswordInput from "inputs/PasswordInput";
 import NumericInput from "inputs/NumericInput";
+import DecimalInput from "inputs/DecimalInput";
 
 const selectInputArray = [
     {
@@ -32,6 +33,9 @@ const components = [
                 component: <TextInput type="text" value="Default Value" />
             }
         ]
+    }, {
+        header: "Decimal Input ",
+        component: <DecimalInput label="Decimal Input"/>
     }, {
         header: "Numeric Input ",
         component: <NumericInput label="Numeric Input"/>
