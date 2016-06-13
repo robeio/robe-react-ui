@@ -1,0 +1,117 @@
+
+body {
+    background: #F6F6F6;
+    /*font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
+    color: #342E2B;
+    overflow-x: hidden;
+}
+
+.istib-black {
+    background: #342E2B;
+}
+
+.istib-blue {
+    background: #8bb8e8;
+}
+
+.istib-grey {
+    background: #c1c6c8;
+}
+
+@media screen and (min-width: 768px) {
+
+    .bg {
+        border-top: 300px solid #342E2B;
+        position: absolute;
+        top: -50px;
+        left: -70px;
+        right: -70px;
+        transform: rotate(2deg);
+        -ms-transform: rotate(2deg); /* IE 9 */
+        -webkit-transform: rotate(2deg); /* Chrome, Safari, Opera */
+        -webkit-box-shadow: 5px 5px 5px -3px rgba(128, 128, 128, 0.37);
+        -moz-box-shadow: 5px 5px 5px -3px rgba(128, 128, 128, 0.37);
+        box-shadow: 5px 5px 5px -3px rgba(128, 128, 128, 0.37);
+        z-index: -10;
+    }
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background: #FF8D02;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.notificationText {
+    font-size: 10px;
+    top: -5px;
+    position: relative;
+    left: -2px;
+}
+
+.search-detail-search {
+    height: 800px;
+}
+
+/*.table > tbody > tr > td {*/
+/*padding: 8px;*/
+/*line-height: 5;*/
+/*max-height: 5px;*/
+/*border-left: 1px inset whitesmoke;*/
+/*}*/
+
+.search-detail-image {
+    max-height: 60px;
+}
+
+.nav-pills > li > a {
+    border-radius: 0px;
+    border: 1px solid #ddd;
+    /*border-bottom: hidden;*/
+}
+
+.nav-stacked > li + li {
+    margin-top: 0px;
+    margin-left: 0;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    color: white;
+    background-color: #444;
+    border-right: hidden;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #444;
+    border-color: #333;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    /*background-color: gray;*/
+    /*border-color: lightgray;*/
+}
+
+.input-alert {
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-style: normal;
+}
+
+.form-control[disabled], fieldset[disabled] .form-control {
+    cursor: auto;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: whitesmoke;
+    opacity: 0.7;
+}
+
+.pager .disabled > a, .pager .disabled > a:focus, .pager .disabled > a:hover, .pager .disabled > span {
+    cursor: auto;
+}

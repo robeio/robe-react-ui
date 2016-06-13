@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 
-class CheckboxListItem extends ShallowComponent {
+export default class CheckboxListItem extends ShallowComponent {
 
     static propTypes = {
         checked: React.PropTypes.bool,
@@ -23,23 +23,25 @@ class CheckboxListItem extends ShallowComponent {
             checked: this.props.checked,
             selected: this.props.selected
         };
-
-    };
+    }
 
     render() {
         let className = this.state.selected ? "list-group-item list-group-item-primary active" : "list-group-item";
         let icon = this.state.checked ? " state-icon fa fa-check-circle-o" : " state-icon fa fa-circle-o";
         return (
-            <Col onClick={this.__onSelect.bind(null,this.props.value)}>
+            <Col onClick={this.__onSelect(this.props.value)}>
                 <Col componentClass="li" className={className}>
-                    <span className={icon} onClick={this.__onCheck.bind(null,this.props.value)}/>
+                    <span
+                        className={icon}
+                        onClick={this.__onCheck(this.props.value)}
+                    />
                     <label style={CheckboxListItem.style}>{this.props.label}</label>
                 </Col>
             </Col>
         );
-    };
+    }
 
-    __onCheck = (value, e)=> {
+    __onCheck = (value, e) => {
         if (this.state.selected) {
             this.setState({
                 checked: !this.state.checked
@@ -48,7 +50,7 @@ class CheckboxListItem extends ShallowComponent {
             e.stopPropagation();
         }
     };
-    __onSelect = (value, e)=> {
+    __onSelect = (value, e) => {
         this.props.onSelect(value, true, this);
         e.stopPropagation();
     };
@@ -57,7 +59,6 @@ class CheckboxListItem extends ShallowComponent {
         this.setState({
             checked: nextProps.checked
         });
-    };
+    }
 
 }
-module.exports = CheckboxListItem;

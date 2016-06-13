@@ -1,4 +1,12 @@
 const webpack = require("webpack");
+const path = require("path");
+
+/**
+ * @link ./file-changer.js
+ * file-changer plugin for using move file from anywhere to another place and placeholder some parameters.
+ * @type {ChangerPlugin|exports|module.exports}
+ */
+const Changer = require("webpack-file-changer");
 
 /**
  * import common webpack settings
@@ -47,12 +55,37 @@ commonSettings.entry = {
  */
 commonSettings.devtool = "source-map";
 
-
+/**
+ *
+ * @type {{path: (string|*), filename: string, chunkFilename: string}}
+ */
 commonSettings.output = {
-    path: commonSettings.paths.dist,
-    filename: "[name].min.js",
-    library: "RobeReactUi",
-    libraryTarget: "umd"
+    path: commonSettings.paths.docs,
+    filename: "bundle.[hash].js",
+    chunkFilename: "[id].[hash].bundle.js"
 };
+
+/**
+ path: commonSettings.paths.build,
+ filename: "bundle.[hash].js",
+ chunkFilename: "[id].[hash].bundle.js"
+ */
+commonSettings.plugins.push(new Changer({
+    move: [{
+        from: commonSettings.paths.assets,
+        to: commonSettings.paths.docs
+    }
+    ],
+    change: [{
+        file: path.join(commonSettings.output.path, "index.html"),
+        parameters: {
+            "bundle.js": "bundle.[hash].js",
+            BUILD_TIME: new Date().toString(),
+            BUILD_NO: new Date().getTime()
+        }
+    }
+    ]
+}));
+
 
 module.exports = commonSettings;
