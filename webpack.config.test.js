@@ -35,18 +35,15 @@ commonSettings.module.postLoaders.push({
 })
 */
 
-
-commonSettings.module.postLoaders.push({
-    test: /\.jsx?$/,
-    include: commonSettings.paths.app,
-    exclude: /(__test__|node_modules|bower_components)\//,
-    loader: "isparta"
-}
+commonSettings.module.loaders.push(
+    {
+        test: /\.jsx?/,
+        exclude: /(__test__|node_modules|bower_components)\//,
+        loader: "isparta"
+    }
 );
 
-
 // *optional* isparta options: istanbul behind isparta will use it
-
 commonSettings.isparta = {
     embedSource: true,
     noAutoWrap: true,
@@ -55,8 +52,6 @@ commonSettings.isparta = {
         presets: ["es2015", "stage-0", "react"]
     }
 };
-
-const isparta = require("isparta");
 
 module.exports = function configure(config) {
     config.set({
@@ -73,18 +68,19 @@ module.exports = function configure(config) {
             "karma-mocha-reporter"
         ],
         files: [
-            "__test__/**/*.spec.js",
-            "src/**/*.jsx",
-            "src/**/*.js"
+            "__test__/index.js"
         ],
         preprocessors: {
-            "src/**/*.js": ["webpack", "coverage"],
-            "src/**/*.jsx": ["webpack", "coverage"]
+            "__test__/index.js": ["webpack", "sourcemap"]
         },
         webpack: commonSettings,
         webpackServer: {
             noInfo: true
         },
         reporters: ["mocha", "coverage"],
+        coverageReporter: {
+            type: "html",
+            dir: "coverage/"
+        }
     });
 };
