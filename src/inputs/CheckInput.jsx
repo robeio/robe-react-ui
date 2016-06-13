@@ -10,6 +10,9 @@ const Style = {
     "disabled": {
         "pointerEvents": "none",
         "opacity": "0.4"
+    },
+    "label": {
+        paddingLeft: "2px"
     }
 };
 
@@ -82,7 +85,7 @@ export default class CheckInput extends ShallowComponent {
                  * (description)
                  */
                 onClick={(!isDisabled ? this.__onClick : undefined) }>
-                <label style={{ paddingLeft: "2px" }}>
+                <label style={Style.label}>
                     <FaIcon code={icon} style={Style.icon} />
                     {this.props.label}</label>
             </div>
