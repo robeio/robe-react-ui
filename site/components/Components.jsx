@@ -6,6 +6,7 @@ import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
 import SelectInput from "inputs/SelectInput";
 import PasswordInput from "inputs/PasswordInput";
+import NumericInput from "inputs/NumericInput";
 
 const selectInputArray = [
     {
@@ -31,6 +32,9 @@ const components = [
                 component: <TextInput type="text" value="Default Value" />
             }
         ]
+    }, {
+        header: "Numeric Input ",
+        component: <NumericInput label="Numeric Input"/>
     }, {
         header: "Password Input ",
         component: <PasswordInput label="Password Input"/>

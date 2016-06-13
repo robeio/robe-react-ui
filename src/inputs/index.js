@@ -4,4 +4,6 @@ export { default as CheckInput } from "inputs/CheckInput";
 export { default as RadioInput } from "inputs/RadioInput";
 export { default as SelectInput } from "inputs/SelectInput";
 export { default as PasswordInput } from "inputs/PasswordInput";
+export { default as NumericInput } from "inputs/NumericInput";
+
 
