@@ -4,8 +4,8 @@ import Form from "react-bootstrap/lib/FormGroup";
 import Input from "inputs/BaseInput";
 import NumericInput from "form/elements/NumericInput";
 import DateInput from "form/elements/DateInput";
-import CheckInput from "form/elements/CheckInput";
-import SelectInput from "form/elements/SelectInput";
+import CheckInput from "inputs/CheckInput";
+import SelectInput from "inputs/SelectInput";
 import HtmlEditor from "form/elements/htmleditor/HtmlEditor";
 import DropzoneUpload from "upload/DropzoneUpload";
 
