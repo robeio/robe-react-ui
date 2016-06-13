@@ -9,6 +9,5 @@ export { default as NumericInput } from "./NumericInput";
 export { default as PasswordInput } from "./PasswordInput";
 export { default as RadioInput } from "./RadioInput";
 export { default as SelectInput } from "./SelectInput";
-export { default as TextInput } from "./TextInput";
 export { default as SingleValueSelectInput } from "./SingleValueSelectInput";
 

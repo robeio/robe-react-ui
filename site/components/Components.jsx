@@ -1,8 +1,8 @@
 import React from "react";
+import TextInput from "inputs/TextInput";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
-import BaseInput from "inputs/BaseInput";
-import CheckInput from  "inputs/CheckInput";
+import CheckInput from "inputs/CheckInput";
 
 const components = [
     {
@@ -10,11 +10,11 @@ const components = [
         component: [
             {
                 header: "Text Input ",
-                component: <BaseInput type="text" />
+                component: <TextInput type="text" />
             },
             {
                 header: "Default Value",
-                component: <BaseInput type="text" value="Default Value" />
+                component: <TextInput type="text" value="Default Value" />
             }
         ]
     },
