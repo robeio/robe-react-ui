@@ -53,7 +53,7 @@ export default class CheckInput extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value | false
+            value: this.props.value
         }
     };
 
