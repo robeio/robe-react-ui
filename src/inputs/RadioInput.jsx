@@ -1,9 +1,23 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
+import FaIcon from "faicon/FaIcon";
+
+const Style = {
+    "icon": {
+        "marginLeft": "-5px",
+        "marginRight": "10px"
+    },
+    "disabled": {
+        "pointerEvents": "none",
+        "opacity": "0.4"
+    },
+    "label": {
+        paddingLeft: "2px"
+    }
+};
 
 /**
- * (description)
- * 
+ * An Input Component which acts as a radiobox group. 
  * @export
  * @class RadioInput
  * @extends {ShallowComponent}
@@ -11,8 +25,7 @@ import { ShallowComponent } from "robe-react-commons";
 export default class RadioInput extends ShallowComponent {
 
     /**
-     * (description)
-     * 
+     * propTypes
      * @static
      */
     static propTypes = {
@@ -24,75 +37,75 @@ export default class RadioInput extends ShallowComponent {
     };
 
     /**
-     * (description)
-     * 
+     * defaultProps
      * @static
      */
     static defaultProps = {
         disabled: false
     };
 
-    /**
-     * (description)
-     */
     valid = false;
-    /**
-     * (description)
-     */
-    selectedItem = undefined;
 
     /**
      * Creates an instance of RadioInput.
      * 
-     * @param props (description)
+     * @param props
      */
     constructor(props) {
         super(props);
+        this.state = {
+            value: this.props.value
+        }
     }
 
     /**
-     * (description)
-     * 
-     * @returns (description)
+     * render
+     * @returns 
      */
     render() {
         if (this.props.label) {
-            return (<div className="form-group">
-                <label className="control-label">{this.props.label}</label>
-                {this.__createRadios(this.props.data) }
-            </div>);
+            return (
+                <div className="form-group">
+                    <label className="control-label">{this.props.label}</label>
+                    {this.__createRadios(this.props.data) }
+                </div>);
         }
-        return (<div>{this.__createRadios(this.props.data) }</div>);
+        return (<div>{ this.__createRadios(this.props.data) }</div>);
     }
 
     /**
-     * (description)
+     * Returns validity of the input. 
+     * @return true if it is valid.
      */
     isValid = () => {
         return this.valid;
     };
 
     /**
-     * (description)
+     * Returns the current selection
      */
     getSelected = () => {
-        return this.selectedItem;
+        return this.state.value;
     }
 
     /**
-     * (description)
+     * Internal onClick event handler.
      */
-    __parse = (e) => {
+    __onClick = (e) => {
+        this.valid = true;
+        let data = e.target.getAttribute("data");
         if (this.props.onChange) {
-            e.target.parsedValue = e.target.getAttribute("data");
+            e.target.parsedValue = data
             this.props.onChange(e);
-            this.valid = true;
-            this.selectedItem = e.target.getAttribute("data");
+        } else {
+            this.setState({
+                value: data
+            });
         }
     }
 
     /**
-     * (description)
+     * Creates and element array from the option list
      */
     __createRadios = (list) => {
         let options = [];
@@ -100,21 +113,26 @@ export default class RadioInput extends ShallowComponent {
         for (let i = 0; i < list.length; i++) {
             let item = list[i];
             let value = this.__getDataValueField(item);
-            let icon = this.props.value === value ? " state-icon fa fa-dot-circle-o" : " state-icon fa fa-circle-o";
-            if (this.props.value === value) {
+            let icon = "fa-circle-o";
+            let isSelected = this.state.value === value;
+            if (isSelected) {
+                icon = "fa-dot-circle-o";
                 this.valid = true;
-                this.selectedItem = value;
+                this.setState({
+                    value: value
+                });
             }
+
             options.push(
                 <div
                     className="checkbox"
-                    onClick={this.__parse.bind(this) }
+                    onClick={this.__onClick}
                     data={value}
-                    key={value}
-                    >
-                    <label style={{ paddingLeft: "2px" }} data={value}>
-                        <span className={icon} style={{ marginRight: "10px" }} data={value} />
-                        <span data={value}>{this.__getDataTextField(item) }</span></label>
+                    key={value} >
+                    <label style={Style.label} data={value}>
+                        <FaIcon code={icon} data={value} style={Style.icon} />
+                        <span data={value}>{this.__getDataTextField(item) }</span>
+                    </label>
                 </div>
             );
         }
@@ -122,9 +140,9 @@ export default class RadioInput extends ShallowComponent {
     }
 
     /**
-     * (description)
-     * 
-     * @param item (description)
+     * Gets text of the item according to the dataTextField prop.
+     * If no dataTextField given from the parent than it will return the item itself.
+     * @param item item to get text from.
      * @returns (description)
      */
     __getDataTextField = (item) => {
@@ -135,9 +153,9 @@ export default class RadioInput extends ShallowComponent {
     }
 
     /**
-     * (description)
-     * 
-     * @param item (description)
+     * Gets value of the item according to the dataValueField prop.
+     * If no dataValueField given from the parent than it will return the item itself.
+     * @param item item to get value from.
      * @returns (description)
      */
     __getDataValueField = (item) => {
@@ -146,8 +164,4 @@ export default class RadioInput extends ShallowComponent {
         }
         return item;
     }
-
-    // isValid = ()=> {
-    //     return this.refs.innerInput.isValid();
-    // };
 }

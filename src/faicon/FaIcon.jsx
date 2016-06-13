@@ -24,7 +24,7 @@ export default class FaIcon extends ShallowComponent {
         let propsClassName = this.props.className === undefined ? "" : this.props.className;
         let className = `fa ${code} ${size} ${propsClassName}`;
         return (
-            <i className={className} style={this.props.style} />
+            <i className={className} style={this.props.style} {...this.props}/>
         );
     }
 }

@@ -34,9 +34,9 @@ const components = [
     {
         header: "Check Input ",
         component: <CheckInput label="Check Input"/>
-    },{
+    }, {
         header: "Radio Input ",
-        component: <RadioInput label="Radio Input" data={["1","2","3"]}/>
+        component: <RadioInput label="Radio Input" data={["1", "2", "3"]} value={"3"} />
     },
     {
         header: "Select Input",
@@ -48,7 +48,7 @@ const components = [
                         data={selectInputArray}
                         dataTextField="key"
                         dataValueField="value"
-                    />
+                        />
                 )
             },
             {
@@ -59,7 +59,7 @@ const components = [
                         dataTextField="key"
                         dataValueField="value"
                         optionLabel="Lütfen seçim yapınız..."
-                    />
+                        />
                 )
             }
         ]
