@@ -7,3 +7,4 @@ export { default as PasswordInput } from "inputs/PasswordInput";
 export { default as NumericInput } from "inputs/NumericInput";
 export { default as DecimalInput } from "inputs/DecimalInput";
 export { default as DateInput } from "inputs/DateInput";
+export { default as CheckboxList } from "inputs/checklist/CheckboxList";

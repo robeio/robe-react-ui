@@ -9,6 +9,7 @@ import PasswordInput from "inputs/PasswordInput";
 import NumericInput from "inputs/NumericInput";
 import DecimalInput from "inputs/DecimalInput";
 import DateInput from "inputs/DateInput";
+import { CheckboxList } from "inputs/checklist";
 
 const components = [];
 
@@ -137,6 +138,37 @@ components.push({
     ]
 });
 
+/* ******************
+ *  CheckList Input *
+ * ******************/
+
+const checkBoxListArray = [
+    {
+        key: "Turkey",
+        value: "Türkiye"
+    },
+    {
+        key: "Germany",
+        value: "Almanya"
+    },
+    {
+        key: "England",
+        value: "İngiltere"
+    }
+];
+
+components.push({
+    header: "CheckBoxList",
+    component: (
+        <CheckboxList
+            ref="servicesCheckList"
+            data={checkBoxListArray}
+            dataTextField="value"
+            dataValueField="key"
+            style={{ height: "240px" }}
+        />
+    )
+});
 
 export default class Showcase extends ShallowComponent {
 
@@ -146,8 +178,8 @@ export default class Showcase extends ShallowComponent {
             let component = components[i];
             componentArray.push(
                 <Renderer
-                header={component.header}
-                component={component.component}
+                    header={component.header}
+                    component={component.component}
                 />);
         }
         return (

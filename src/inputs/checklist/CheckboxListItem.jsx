@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Col from "react-bootstrap/lib/Col";
+import Col from "../../../node_modules/react-bootstrap/lib/Col";
 
 export default class CheckboxListItem extends ShallowComponent {
 
@@ -25,7 +25,7 @@ export default class CheckboxListItem extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): string {
         let className = this.state.selected ? "list-group-item list-group-item-primary active" : "list-group-item";
         let icon = this.state.checked ? " state-icon fa fa-check-circle-o" : " state-icon fa fa-circle-o";
         return (
@@ -33,7 +33,7 @@ export default class CheckboxListItem extends ShallowComponent {
                 <Col componentClass="li" className={className}>
                     <span
                         className={icon}
-                        onClick={this.__onCheck(this.props.value)}
+                        onClick={this.__onCheck.bind(null, this.props.value)}
                     />
                     <label style={CheckboxListItem.style}>{this.props.label}</label>
                 </Col>
@@ -52,7 +52,7 @@ export default class CheckboxListItem extends ShallowComponent {
     };
     __onSelect = (value, e) => {
         this.props.onSelect(value, true, this);
-        e.stopPropagation();
+        // e.stopPropagation();
     };
 
     componentWillReceiveProps(nextProps) {
@@ -60,5 +60,4 @@ export default class CheckboxListItem extends ShallowComponent {
             checked: nextProps.checked
         });
     }
-
 }
