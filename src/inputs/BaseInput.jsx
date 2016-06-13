@@ -33,18 +33,17 @@ export default class BaseInput extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): string {
         let validations = this.state.validations ? this.state.validations : this.props;
         let errors = this.__validate(validations);
         let value = this.props.value;
-        let input = undefined;
         if (value && value.length > 999) {
             errors.push(BaseInput.maxTextLengthMessage);
             value = "";
         }
         this.valid = (errors.length === 0);
         if (this.valid) {
-            input = (
+            return (
                 <div>
                     <BInput
                         {...this.props}
@@ -55,25 +54,24 @@ export default class BaseInput extends ShallowComponent {
                     />
                 </div>
             );
-        } else {
-            let messages = [];
-            for (let i = 0; i < errors.length; i++) {
-                messages.push(<p key={i}>{errors[i]}</p>);
-            }
-
-            input = (
-                <div>
-                    <BInput
-                        {...this.props}
-                        bsStyle="error"
-                        ref="innerInput"
-                        value={value}
-                    />
-                    <Alert className="input-alert" bsStyle="danger">{messages}</Alert>
-                </div>);
+        }
+        // else
+        let messages = [];
+        for (let i = 0; i < errors.length; i++) {
+            messages.push(<p key={i}>{errors[i]}</p>);
         }
 
-        return input;
+        return (
+            <div>
+                <BInput
+                    {...this.props}
+                    bsStyle="error"
+                    ref="innerInput"
+                    value={value}
+                />
+                <Alert className="input-alert" bsStyle="danger">{messages}</Alert>
+            </div>
+        );
     }
 
     focus = () => {
