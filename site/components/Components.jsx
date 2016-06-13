@@ -5,6 +5,7 @@ import Renderer from "./Renderer";
 import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
 import SelectInput from "inputs/SelectInput";
+import PasswordInput from "inputs/PasswordInput";
 
 const selectInputArray = [
     {
@@ -30,6 +31,9 @@ const components = [
                 component: <TextInput type="text" value="Default Value" />
             }
         ]
+    }, {
+        header: "Password Input ",
+        component: <PasswordInput label="Password Input"/>
     },
     {
         header: "Check Input ",
