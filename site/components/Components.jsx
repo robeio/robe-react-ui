@@ -3,6 +3,7 @@ import TextInput from "inputs/TextInput";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
 import CheckInput from "inputs/CheckInput";
+import RadioInput from "inputs/RadioInput";
 import SelectInput from "inputs/SelectInput";
 
 const selectInputArray = [
@@ -33,6 +34,9 @@ const components = [
     {
         header: "Check Input ",
         component: <CheckInput label="Check Input"/>
+    },{
+        header: "Radio Input ",
+        component: <RadioInput label="Radio Input" data={["1","2","3"]}/>
     },
     {
         header: "Select Input",
