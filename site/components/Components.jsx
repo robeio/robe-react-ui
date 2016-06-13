@@ -6,11 +6,21 @@ import CheckInput from  "inputs/CheckInput";
 
 const components = [
     {
-        header: "Base Input ",
-        component: <BaseInput type="text" />
-    },{
-       header: "Check Input ",
-       component: <CheckInput label="Check Input"/>
+        header: "Text Input ",
+        component: [
+            {
+                header: "Text Input ",
+                component: <BaseInput type="text" />
+            },
+            {
+                header: "Default Value",
+                component: <BaseInput type="text" value="Default Value" />
+            }
+        ]
+    },
+    {
+        header: "Check Input ",
+        component: <CheckInput label="Check Input"/>
     }
 ];
 
@@ -23,7 +33,7 @@ export default class Showcase extends ShallowComponent {
             componentArray.push(<Renderer
                 header={component.header}
                 component={component.component}
-            />);
+                />);
         }
         return (
             <div>
