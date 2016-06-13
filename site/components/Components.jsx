@@ -4,6 +4,18 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import Renderer from "./Renderer";
 import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
+import SelectInput from "inputs/SelectInput";
+
+const selectInputArray = [
+    {
+        key: "MALE",
+        value: "Bay"
+    },
+    {
+        key: "FEMALE",
+        value: "Bayan"
+    }
+];
 
 const components = [
     {
@@ -25,6 +37,32 @@ const components = [
     },{
         header: "Radio Input ",
         component: <RadioInput label="Radio Input" data={["1","2","3"]}/>
+    },
+    {
+        header: "Select Input",
+        component: [
+            {
+                header: "default props",
+                component: (
+                    <SelectInput
+                        data={selectInputArray}
+                        dataTextField="key"
+                        dataValueField="value"
+                    />
+                )
+            },
+            {
+                header: "optionalLabel",
+                component: (
+                    <SelectInput
+                        data={selectInputArray}
+                        dataTextField="key"
+                        dataValueField="value"
+                        optionLabel="Lütfen seçim yapınız..."
+                    />
+                )
+            }
+        ]
     }
 ];
 
