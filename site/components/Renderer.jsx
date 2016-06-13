@@ -10,10 +10,29 @@ export default class Renderer extends ShallowComponent {
     }
 
     render() {
+        return this.__renderComponent(this.props);
+    }
+
+    __renderComponent= (element) => {
+        let component = null;
+
+        if (Array.isArray(element.component)) {
+            component = this.__renderComponents(element.component);
+        } else{
+            component = element.component;
+        }
         return (
-            <Panel header={this.props.header}>
-                {this.props.component}
+            <Panel header={element.header}>
+                {component}
             </Panel>
         );
+    }
+    __renderComponents = (components) => {
+        let componentArray = [];
+        for (let i = 0; i < components.length; i++) {
+            let component = components[i];
+            componentArray.push(this.__renderComponent(component));
+        }
+        return componentArray;
     }
 }

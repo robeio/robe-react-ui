@@ -6,7 +6,16 @@ import Renderer from "./Renderer";
 const components = [
     {
         header: "Text Input ",
-        component: <BaseInput type="text" />
+        component: [
+            {
+                header: "Text Input ",
+                component: <BaseInput type="text" />
+            },
+            {
+                header: "Default Value",
+                component: <BaseInput type="text" value="Default Value" />
+            }
+        ]
     }
 ];
 
