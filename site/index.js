@@ -39,7 +39,6 @@ class Site extends ShallowComponent {
         );
     }
     __onSelect = (selectedKey) => {
-        console.log(selectedKey)
         switch (selectedKey) {
             case 1 :
                 this.setState({

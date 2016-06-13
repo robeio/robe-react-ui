@@ -1,12 +1,16 @@
 import React from "react";
-import BaseInput from "inputs/BaseInput";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
+import BaseInput from "inputs/BaseInput";
+import CheckInput from  "inputs/CheckInput";
 
 const components = [
     {
-        header: "Text Input ",
+        header: "Base Input ",
         component: <BaseInput type="text" />
+    },{
+       header: "Check Input ",
+       component: <CheckInput label="Check Input"/>
     }
 ];
 
