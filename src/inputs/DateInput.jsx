@@ -3,11 +3,12 @@ import is from "is-js";
 import { ShallowComponent } from "robe-react-commons";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import Col from "react-bootstrap/lib/Col";
-import "react-datepicker/dist/react-datepicker.css";
+import Col from "../../node_modules/react-bootstrap/lib/Col";
+import "../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
-class DateInput extends ShallowComponent {
+export default class DateInput extends ShallowComponent {
+
     static propTypes = {
         label: React.PropTypes.string,
         onChange: React.PropTypes.func,
@@ -23,12 +24,11 @@ class DateInput extends ShallowComponent {
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-    };
+    }
 
     render() {
-
         let selected = (is.number(this.props.value)) ? moment(this.props.value) : null;
-        var label = this.props.label == undefined ? <span></span> :
+        let label = this.props.label === undefined ? <span></span> :
             <label className="control-label">{this.props.label}</label>;
         return (
             <Col className="form-group">
@@ -47,13 +47,13 @@ class DateInput extends ShallowComponent {
                     endDate={this.props.endDate}
                     showTodayButton={"Bugün"}
                     placeholderText="Tarih seçmek için tıklayınız"
-                    dateFormat={this.props.format}/>
+                    dateFormat={this.props.format}
+                />
             </Col>);
-    };
+    }
 
-    __onChange = (selection)=> {
-
-        var e = {};
+    __onChange = (selection) => {
+        let e = {};
         e.target = {};
 
         if (selection) {
@@ -62,9 +62,8 @@ class DateInput extends ShallowComponent {
             e.target.parsedValue = null;
         }
 
-        if (this.props.onChange)
+        if (this.props.onChange) {
             this.props.onChange(e);
-
-    };
+        }
+    }
 }
-module.exports = DateInput;

@@ -3,7 +3,6 @@ import { ShallowComponent } from "robe-react-commons";
 import { Input } from "inputs";
 import NumericInput from "form/elements/NumericInput";
 import RadioInput from "form/elements/RadioInput";
-import DateInput from "form/elements/DateInput";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
 

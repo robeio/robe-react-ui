@@ -3,7 +3,7 @@ import { Maps, ShallowComponent } from "robe-react-commons";
 import Form from "react-bootstrap/lib/FormGroup";
 import Input from "inputs/BaseInput";
 import NumericInput from "form/elements/NumericInput";
-import DateInput from "form/elements/DateInput";
+import DateInput from "../inputs/DateInput";
 import CheckInput from "inputs/CheckInput";
 import SelectInput from "inputs/SelectInput";
 import HtmlEditor from "form/elements/htmleditor/HtmlEditor";
