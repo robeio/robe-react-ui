@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const util = require("./util");
 
 /**
  * @link ./file-changer.js
@@ -39,12 +40,13 @@ commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChun
  */
 commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 10000 }));
 
+util.deleteFolderSync(commonSettings.paths.docs);
 /**
  *
  * @type {{root: *[]}}
  */
 commonSettings.entry = {
-    "robe-react-ui": "../src/index.js"
+    "robe-react-ui": "../site/index.js"
 };
 
 /**
@@ -54,6 +56,8 @@ commonSettings.entry = {
  * @type {string}
  */
 commonSettings.devtool = "source-map";
+
+// commonSettings.resolve.root.push(path.join(__dirname, "/pages/docs"));
 
 /**
  *
@@ -86,6 +90,5 @@ commonSettings.plugins.push(new Changer({
     }
     ]
 }));
-
 
 module.exports = commonSettings;

@@ -1,15 +1,15 @@
 const webpack = require("webpack");
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
-
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const commonSettings = require("./webpack.config.common.js");
 
 commonSettings.cache = true;
 commonSettings.debug = true;
-commonSettings.devtool = "sourcemap";
+commonSettings.devtool = "eval";
 commonSettings.entry = {
-    app: [commonSettings.paths.app]
+    app: [commonSettings.paths.site]
 };
 
 commonSettings.module.loaders.push({ test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ });
@@ -31,12 +31,10 @@ commonSettings.devServer = {
     port: 8080
 };
 
-
 commonSettings.plugins.push(new webpack.HotModuleReplacementPlugin());
-
 // commonSettings.plugins.push(new CopyWebpackPlugin([{ from: "showcase" }]));
-
 commonSettings.plugins.push(new CachePlugin({}));
-
-
+commonSettings.plugins.push(new CopyWebpackPlugin([
+    { from: "../static" }
+]));
 module.exports = commonSettings;

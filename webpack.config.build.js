@@ -47,7 +47,6 @@ commonSettings.entry = {
  */
 commonSettings.devtool = "source-map";
 
-
 commonSettings.output = {
     path: commonSettings.paths.dist,
     filename: "[name].min.js",

@@ -11,7 +11,8 @@ const paths = {
     dist: path.join(__dirname, "/dist"), // build path in base path,
     lib: path.join(__dirname, "/lib"),
     docs: path.join(__dirname, "/docs"),
-    assets: path.join(__dirname, "/static")
+    assets: path.join(__dirname, "/static"),
+    site: path.join(__dirname, "/site")
 };
 
 module.exports = {
@@ -57,6 +58,9 @@ module.exports = {
          */
         preLoaders: [
         ],
+        postLoaders: [
+
+        ],
         /**
          * https://webpack.github.io/docs/configuration.html#loaders
          */
@@ -70,7 +74,7 @@ module.exports = {
                 loader: "babel",
                 loaders: ["react-hot", "babel"],
                 exclude: /(node_modules|bower_components|fonts)/,
-                include: [paths.app, paths.test],
+                include: [paths.app, paths.test, paths.site],
                 query: {
                     presets: [
                         "react",
