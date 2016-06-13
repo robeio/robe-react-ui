@@ -1,8 +1,8 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import { Input } from "inputs";
-import NumericInput from "form/elements/NumericInput";
-import RadioInput from "form/elements/RadioInput";
+import NumericInput from "inputs/NumericInput";
+import RadioInput from "inputs/RadioInput";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
 

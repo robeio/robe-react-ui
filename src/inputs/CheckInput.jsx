@@ -3,22 +3,21 @@ import ShallowComponent  from "robe-react-commons/lib/components/ShallowComponen
 import FaIcon from "faicon/FaIcon";
 
 const Style = {
-    "icon": {
-        "marginLeft": "-5px",
-        "marginRight": "10px"
+    icon: {
+        marginLeft: "-5px",
+        marginRight: "10px"
     },
-    "disabled": {
-        "pointerEvents": "none",
-        "opacity": "0.4"
+    disabled: {
+        pointerEvents: "none",
+        opacity: "0.4"
     },
-    "label": {
+    label: {
         paddingLeft: "2px"
     }
 };
 
 /**
  * An Input Component which acts as a checkbox.
- * 
  * @export
  * @class CheckInput
  * @extends {ShallowComponent}
