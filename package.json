@@ -48,6 +48,7 @@
     "file-loader": "0.8.5",
     "is-js": "0.1.1",
     "isparta-loader": "2.0.0",
+    "json-loader": "^0.5.4",
     "karma": "0.13.22",
     "karma-bamboo-reporter": "0.1.2",
     "karma-chai": "0.1.0",

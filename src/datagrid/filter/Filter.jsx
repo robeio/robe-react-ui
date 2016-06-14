@@ -117,7 +117,7 @@ class Filter extends ShallowComponent {
                         onChange={this.__handleChange.bind(undefined,column.code+"-min-",column.type)}/>
                     <DateInput
                         label="Bitiş"
-                        key={column.code+"-max-"}
+                        key={`${column.code}-max-`}
                         ref={column.code+"-max-"}
                         value={this.state[column.code+"-max-"]}
                         onChange={this.__handleChange.bind(undefined,column.code+"-max-",column.type)}/>
@@ -125,37 +125,39 @@ class Filter extends ShallowComponent {
         }
     };
 
-
-    __handleChange = (code, type, e)=> {
-        var state = this.state;
-        var value = e.target.parsedValue != undefined ? e.target.parsedValue : e.target.value;
-        var filter = "";
-        if (value != undefined || value != "") {
+    __handleChange = (code, type, e) => {
+        let state = this.state;
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        let filter = "";
+        if (value !== undefined || value !== "") {
             switch (type) {
                 case "bool":
-                    if (value !== "all")
-                        filter += (code + "=" + value);
+                    if (value !== "all") {
+                        filter += (`${code}=${value}`);
+                    }
                     break;
                 case "number":
-                    if (code.endsWith("-min-"))
-                        filter += (code.substring(0, code.length - 5) + ">=" + value);
-                    else if (code.endsWith("-max-"))
-                        filter += (code.substring(0, code.length - 5) + "<=" + value);
+                    if (code.endsWith("-min-")) {
+                        filter += (`${code.substring(0, code.length - 5)}>=${value}`);
+                    } else if (code.endsWith("-max-")) {
+                        filter += (`${code.substring(0, code.length - 5)}<=${value}`);
+                    }
                     break;
                 case "string":
-                    filter += (code + "~=" + value);
+                    filter += (`${code}~=${value}`);
                     break;
                 case "date":
-                    if (code.endsWith("-min-"))
-                        filter += (code.substring(0, code.length - 5) + ">=" + value);
-                    else if (code.endsWith("-max-"))
-                        filter += (code.substring(0, code.length - 5) + "<=" + value);
+                    if (code.endsWith("-min-")) {
+                        filter += (`${code.substring(0, code.length - 5)}>=${value}`);
+                    } else if (code.endsWith("-max-")) {
+                        filter += (`${code.substring(0, code.length - 5)}<=${value}`);
+                    }
                     break;
             }
         }
 
         state[code] = value;
-        state["filters"][code] = filter;
+        state.filters[code] = filter;
         this.setState(state);
         if (this.props.onChange) {
             this.props.onChange(state);

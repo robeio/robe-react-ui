@@ -12,8 +12,9 @@ import DateInput from "inputs/DateInput";
 import { CheckboxList } from "inputs/checklist";
 import SelectInputSingle from "inputs/SelectInputSingle";
 import SelectInputMulti from "inputs/SelectInputMulti";
-import { HtmlEditor } from "inputs/htmleditor";
-
+import HtmlEditor from "inputs/htmleditor/HtmlEditor";
+import DataForm from "form/DataForm";
+import DataFormValue from "../data/data-form.json";
 const components = [];
 
 /* ******************
@@ -254,6 +255,21 @@ components.push({
             value={htmlText}
             height={400}
             width={200}
+        />
+    )
+});
+
+/* ******************
+ *  DataForm *
+ * ******************/
+console.log(DataFormValue);
+
+components.push({
+    header: "Data Form",
+    component: (
+        <DataForm
+            model={DataFormValue.model.columns}
+            data={DataFormValue.data}
         />
     )
 });

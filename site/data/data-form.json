@@ -1,0 +1,51 @@
+{
+  "data":
+    {
+      "code": "34",
+      "name": "Esnaf"
+    },
+  "model":{
+    "name": "FirmTypeModel",
+    "columns": [
+      {
+        "title": "Oid",
+        "type": "string",
+        "code": "oid",
+        "tooltip": "Oid",
+        "visible":false
+      },
+      {
+        "title": "Son Güncelleme",
+        "type": "string",
+        "code": "lastUpdated",
+        "tooltip": "Son Güncelleme",
+        "visible":false
+      },
+      {
+        "title": "İşletme Kodu",
+        "type": "number",
+        "code": "code",
+        "tooltip":"code",
+        "validations": {
+          "required": [
+            true,
+            "Bu alan zorunludur."
+          ],
+          "min": [
+            1,
+            "İşletme kodu 0 olamaz veya 0 ile başlayamaz."
+          ],
+          "max": [
+            99,
+            "İşletme kodu 2 karakteri geçemez."
+          ]
+        }
+      },
+      {
+        "title": "İşletme Adı",
+        "type": "string",
+        "code": "name"
+      }
+    ]
+  }
+}

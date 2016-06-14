@@ -9,7 +9,6 @@ import SelectInput from "inputs/SelectInput";
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DropzoneUpload from "upload/DropzoneUpload";
 
-
 export default class DataForm extends ShallowComponent {
 
     constructor(props) {
@@ -41,15 +40,16 @@ export default class DataForm extends ShallowComponent {
         return true;
     };
 
+
     __createForm = (model, data) => {
         let elements = [];
         let i = 0;
         // Maps.forEach(model, (value, key) => {
-        Maps.forEach(model, (value) => {
+        Maps.forEach(model, function (value){
             if (value.visible !== false) {
                 elements.push(this.__decideElement(value, data, i++ === 0));
             }
-        });
+        }.bind(this));
         return elements;
     };
 
@@ -98,7 +98,7 @@ export default class DataForm extends ShallowComponent {
                         max={max}
                         focus={focus}
                         disabled={disabled}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -116,7 +116,7 @@ export default class DataForm extends ShallowComponent {
                         disabled={disabled}
                         focus={focus}
                         regex={regex}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -134,7 +134,7 @@ export default class DataForm extends ShallowComponent {
                         focus={focus}
                         disabled={disabled}
                         regex={regex}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -151,7 +151,7 @@ export default class DataForm extends ShallowComponent {
                         focus={focus}
                         disabled={disabled}
                         type={"password"}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -165,7 +165,7 @@ export default class DataForm extends ShallowComponent {
                         disabled={disabled}
                         ref={model.code}
                         focus={focus}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -184,7 +184,7 @@ export default class DataForm extends ShallowComponent {
                         label={model.title}
                         key={model.code}
                         ref={model.code}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                         disabled={disabled}
                         dataTextField={dataTextField}
@@ -207,7 +207,7 @@ export default class DataForm extends ShallowComponent {
                         ref={model.code}
                         focus={focus}
                         disabled={disabled}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value}
                     />
                 );
@@ -219,7 +219,7 @@ export default class DataForm extends ShallowComponent {
                         key={model.code}
                         ref={model.code}
                         disabled={disabled}
-                        onChange={this.__handleChange(model.code, model.cascade, undefined)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, undefined)}
                         value={value} required={required}
                         min={min}
                         max={max}
@@ -232,7 +232,7 @@ export default class DataForm extends ShallowComponent {
                         key={model.code}
                         postUrl={`${window.backendRootPath}assets`}
                         files={value || []}
-                        onChange={this.__handleChange(model.code, model.cascade, model.deleted)}
+                        onChange={this.__handleChange.bind(undefined, model.code, model.cascade, model.deleted)}
                     />
                 );
             }
@@ -278,7 +278,7 @@ export default class DataForm extends ShallowComponent {
             e.target.parsedValue = obj.value;
             e.target.default = true;
 
-            this.__handleChange(obj.code, obj.cascade, undefined, e);
+            this.__handleChange(undefined, obj.code, obj.cascade, undefined, e);
         }
     }
 }
