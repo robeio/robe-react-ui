@@ -10,3 +10,4 @@ export { default as DateInput } from "inputs/DateInput";
 export { default as CheckboxList } from "inputs/checklist/CheckboxList";
 export { default as SelectInputSingle } from "inputs/SelectInputSingle";
 export { default as SelectInputMulti } from "inputs/SelectInputMulti";
+export { default as HtmlEditor } from "./htmleditor";

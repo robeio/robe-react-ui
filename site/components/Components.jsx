@@ -9,9 +9,10 @@ import PasswordInput from "inputs/PasswordInput";
 import NumericInput from "inputs/NumericInput";
 import DecimalInput from "inputs/DecimalInput";
 import DateInput from "inputs/DateInput";
+import { CheckboxList } from "inputs/checklist";
 import SelectInputSingle from "inputs/SelectInputSingle";
 import SelectInputMulti from "inputs/SelectInputMulti";
-import { CheckboxList } from "inputs/checklist";
+import { HtmlEditor } from "inputs/htmleditor";
 
 const components = [];
 
@@ -235,6 +236,24 @@ components.push({
             labelKey="label"
             valueKey="value"
             style={{ height: "240px" }}
+        />
+    )
+});
+
+
+/* ******************
+ *  HtmlEditor Input *
+ * ******************/
+const htmlText = "<h1>Başlık 1 </h1><div><b>İçerikte böylece devam ediyor...</b></div>";
+components.push({
+    header: "Html Editor",
+    component: (
+        <HtmlEditor
+            disabled={false}
+            label="Giriş Yazısı"
+            value={htmlText}
+            height={400}
+            width={200}
         />
     )
 });

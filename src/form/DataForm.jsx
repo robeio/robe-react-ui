@@ -6,7 +6,7 @@ import NumericInput from "inputs/NumericInput";
 import DateInput from "inputs/DateInput";
 import CheckInput from "inputs/CheckInput";
 import SelectInput from "inputs/SelectInput";
-import HtmlEditor from "form/elements/htmleditor/HtmlEditor";
+import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DropzoneUpload from "upload/DropzoneUpload";
 
 
