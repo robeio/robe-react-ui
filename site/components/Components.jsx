@@ -9,6 +9,7 @@ import PasswordInput from "inputs/PasswordInput";
 import NumericInput from "inputs/NumericInput";
 import DecimalInput from "inputs/DecimalInput";
 import DateInput from "inputs/DateInput";
+import SelectInputSingle from "inputs/SelectInputSingle";
 import { CheckboxList } from "inputs/checklist";
 
 const components = [];
@@ -165,6 +166,41 @@ components.push({
             data={checkBoxListArray}
             dataTextField="value"
             dataValueField="key"
+            style={{ height: "240px" }}
+        />
+    )
+});
+
+
+
+/* ******************
+ *  SelectInputSingle Input *
+ * ******************/
+
+const selectInputSingleArray = [
+    {
+        value: "Turkey",
+        label: "Türkiye"
+    },
+    {
+        value: "Germany",
+        label: "Almanya"
+    },
+    {
+        value: "England",
+        label: "İngiltere"
+    }
+];
+
+components.push({
+    header: "Select Input Single",
+    component: (
+        <SelectInputSingle
+            data={selectInputArray}
+            value="Turkey"
+            placeholder="Seçiminizi yapınız"
+            labelKey="label"
+            valueKey="value"
             style={{ height: "240px" }}
         />
     )

@@ -6,7 +6,7 @@ import "react-select/dist/react-select.css";
 
 // read more https://github.com/JedWatson/react-select
 
-export default class SingleValueSelectInput extends ShallowComponent {
+export default class SelectInputSingle extends ShallowComponent {
 
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
