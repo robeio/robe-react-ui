@@ -15,7 +15,7 @@ import SelectInputMulti from "inputs/SelectInputMulti";
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DataForm from "form/DataForm";
 import ModalDataForm from "form/ModalDataForm";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import DataFormValue from "../data/data-form.json";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
@@ -276,11 +276,62 @@ components.push({
     )
 });
 
+
+/* ******************
+ *  Modal *
+ * ******************/
+
+
+class ModalExample extends ShallowComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: props.show
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <Button onClick={this.__onClick} >
+                    Open Modal
+                </Button>
+                <Modal ref="modalPanel" show={this.state.show}>
+                    <Modal.Header>
+                        <Modal.Title>Kayıt İşlemi</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button>
+                            Kaydet
+                        </Button>
+                        <Button>
+                            Vazgeç
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        );
+    }
+    __onClick = () => {
+        this.setState({
+            show: true
+        });
+    }
+}
+components.push({
+    header: "Modal Panel",
+    component: (
+        <ModalExample show={false} />
+    )
+});
+
 /* ******************
  *  ModalDataForm *
  * ******************/
 
-class ModalDataFormShower extends ShallowComponent{
+class ModalDataFormShower extends ShallowComponent {
     render() {
         return (<div>
             <Button
