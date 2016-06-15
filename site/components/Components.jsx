@@ -14,7 +14,13 @@ import SelectInputSingle from "inputs/SelectInputSingle";
 import SelectInputMulti from "inputs/SelectInputMulti";
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DataForm from "form/DataForm";
+import ModalDataForm from "form/ModalDataForm";
+import { Button } from "react-bootstrap";
 import DataFormValue from "../data/data-form.json";
+import "react-notifications/lib/notifications.css";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
+import NotificationManager from "react-notifications/lib/NotificationManager";
+
 const components = [];
 
 /* ******************
@@ -127,7 +133,6 @@ components.push({
             component:
                 <DateInput
                     label="Date"
-                    ref=""
                 />
         },
         {
@@ -135,7 +140,6 @@ components.push({
             component:
                 <DateInput
                     label="Date"
-                    ref=""
                     value={new Date().getTime()}
                 />
         }
@@ -165,7 +169,6 @@ components.push({
     header: "CheckBoxList",
     component: (
         <CheckboxList
-            ref="servicesCheckList"
             data={checkBoxListArray}
             dataTextField="value"
             dataValueField="key"
@@ -262,7 +265,6 @@ components.push({
 /* ******************
  *  DataForm *
  * ******************/
-console.log(DataFormValue);
 
 components.push({
     header: "Data Form",
@@ -273,6 +275,51 @@ components.push({
         />
     )
 });
+
+/* ******************
+ *  ModalDataForm *
+ * ******************/
+
+class ModalDataFormShower extends ShallowComponent{
+    render() {
+        return (<div>
+            <Button
+                ref="modalDataFormShowButton"
+                onClick={this.__onClick}
+            >
+                Open Dialog
+            </Button>
+            <ModalDataForm
+                ref="modalDataFormRef"
+                show={false}
+                model={DataFormValue.model.columns}
+                onCancel={this.__onCancel}
+                onSave={this.__onSave}
+            />
+        </div>
+        );
+    }
+    __onClick = () => {
+        this.refs.modalDataFormRef.setState({ showModal: true, formData: DataFormValue.data });
+    }
+
+    __onCancel = () => {
+        this.refs.modalDataFormRef.setState({ showModal: false });
+    };
+    __onSave = () => {
+        NotificationManager.info("Kaydedildi");
+        this.refs.modalDataFormRef.setState({ showModal: false });
+    }
+
+}
+
+components.push({
+    header: "Modal Data Form",
+    component: (
+        <ModalDataFormShower />
+    )
+});
+
 
 export default class Showcase extends ShallowComponent {
 
@@ -288,6 +335,7 @@ export default class Showcase extends ShallowComponent {
         }
         return (
             <div>
+                <NotificationContainer />
                 {componentArray}
             </div>
         );
