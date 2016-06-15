@@ -21,16 +21,15 @@ class CheckboxTreeView extends ShallowComponent {
             checkedItems: this.props.value || [],
             selected: this.props.selected || []
         };
-    };
+    }
 
     render() {
-
         let items = [];
 
-        var data = this.props.data;
+        let data = this.props.data;
 
         for (let i = 0; i < data.length; i++) {
-            var item = data[i];
+            let item = data[i];
             let checked = false;
             let value = this.__getDataValueField(item);
             if (this.state.checkedItems.indexOf(value) !== -1) {
@@ -55,30 +54,31 @@ class CheckboxTreeView extends ShallowComponent {
                 </ul>
             </div>
         );
-    };
+    }
 
-    __onChange = (value, status)=> {
-
+    __onChange = (value, status) => {
         if (this.props.onChange) {
             this.props.onChange(value, status);
         }
-    };
+    }
 
     __getDataTextField = (item)=> {
         if (this.props.dataTextField) {
             return item[this.props.dataTextField] || (is.object(item) ? "" : item);
         }
         return item;
-    };
+    }
+
     __getDataValueField = (item)=> {
         if (this.props.dataValueField) {
             return item[this.props.dataValueField] || (is.object(item) ? "" : item);
         }
         return item;
-    };
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         return true;
-    };
+    }
 }
 
 module.exports = CheckboxTreeView;

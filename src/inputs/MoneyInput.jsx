@@ -1,8 +1,8 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "inputs/BaseInput";
+import Input from "./BaseInput";
 import Numeral from "numeral";
-import Turkish from "numeral/languages/tr";
+import Turkish from "../../node_modules/numeral/languages/tr";
 import is from "is-js";
 
 
@@ -36,12 +36,11 @@ export default class MoneyInput extends ShallowComponent {
 
     constructor(props) {
         super(props);
-        if (this.props.decimalSeparator == ",") {
+        if (this.props.decimalSeparator === ",") {
             Numeral.language("tr", Turkish);
             Numeral.language("tr");
         }
-    };
-
+    }
 
     render() {
         let values = this.__splitValue(this.props.value);
@@ -49,61 +48,59 @@ export default class MoneyInput extends ShallowComponent {
             <Input
                 type="text"
                 label={this.props.label}
-                onChange={this.__filter.bind(undefined,false)}
+                onChange={this.__filter.bind(undefined, false)}
                 onKeyPress={this.__focus2Fraction}
-                value={ values[0] }
+                value={values[0]}
                 style={this.styleInteger}
                 ref="integerInput"
                 buttonAfter={
                     <Input
                         type="text"
-                        addonBefore={<span className="fractionSeperator">{this.props.decimalSeparator}</span> }
+                        addonBefore={<span className="fractionSeperator">{this.props.decimalSeparator}</span>}
                         style={this.styleFractional}
                         value={values[1]}
-                        onChange={this.__filter.bind(undefined,true)}
+                        onChange={this.__filter.bind(undefined, true)}
                         addonAfter={this.props.unit}
-                        ref = "fractionalInput"
+                        ref="fractionalInput"
                         className="fractionalInput"
                     />}
             />);
-    };
+    }
 
-    __focus2Fraction = (e)=> {
+    __focus2Fraction = (e) => {
         if (this.props.decimalSeparator === e.key) {
             this.refs.fractionalInput.focus();
         }
-    };
+    }
 
-    __filter = (isFraction, e)=> {
+    __filter = (isFraction, e) => {
         console.log(isFraction, e, this.props.decimalSeparator);
         try {
             if (!isFraction) {
-                var value = this.__parseInteger(e.target.value);
-                e.target.parsedValue = value + this.props.decimalSeparator + this.refs.fractionalInput.props.value;
+                e.target.parsedValue = this.__parseInteger(e.target.value);
+                e.target.parsedValue += this.props.decimalSeparator + this.refs.fractionalInput.props.value;
             } else {
-                var value = this.__parseFraction(e.target.value);
-                e.target.parsedValue = this.refs.integerInput.props.value + this.props.decimalSeparator + value;
+                e.target.parsedValue = this.__parseFraction(e.target.value);
+                e.target.parsedValue = this.refs.integerInput.props.value + this.props.decimalSeparator + e.target.parsedValue;
             }
             this.props.onChange(e);
         } catch (error) {
             e.preventDefault();
             e.stopPropagation();
         }
-    };
+    }
 
-    __parseInteger = (value)=> {
-        value = Numeral(Numeral().unformat(value)).format();
+    __parseInteger = (value) => {
+        value = new Numeral(new Numeral().unformat(value)).format();
         return value;
-    };
-    __parseFraction = (value)=> {
-        value = parseInt(parseInt(value).toPrecision(2));
-        if (!is.numeric(value))
-            value = 0;
-        return value;
-    };
+    }
+    __parseFraction = (value) => {
+        value = parseInt(parseInt(value, 10).toPrecision(2));
+        return !is.numeric(value) ? 0 : value;
+    }
 
     __splitValue = (value) => {
-        let values = new String(parseFloat(Numeral().unformat(value))).split(this.props.decimalSeparator);
+        let values = String(parseFloat(new Numeral().unformat(value))).split(this.props.decimalSeparator);
         values[0] = this.__parseInteger(values[0]);
         values[1] = this.__parseFraction(values[1]);
         return values;

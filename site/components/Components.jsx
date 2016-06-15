@@ -1,7 +1,9 @@
 import React from "react";
-import TextInput from "inputs/TextInput";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
+
+import TextInput from "inputs/TextInput";
+import MoneyInput from "inputs/MoneyInput";
 import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
 import SelectInput from "inputs/SelectInput";
@@ -37,6 +39,19 @@ components.push({
         {
             header: "Default Value",
             component: <TextInput type="text" value="Default Value" />
+        }
+    ]
+});
+/* ******************
+ * Money Input    *
+ * ******************/
+
+components.push({
+    header: "Money Input",
+    component: [
+        {
+            header: "Text Input ",
+            component: <MoneyInput type="text" />
         }
     ]
 });

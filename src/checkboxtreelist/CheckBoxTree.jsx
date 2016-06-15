@@ -1,7 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 
-
 class CheckBoxTree extends ShallowComponent {
 
     static propTypes = {

@@ -1,7 +1,6 @@
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
-
 // read more fore configuration https://github.com/rstacruz/nprogress
 class Progress {
     constructor() {
@@ -12,9 +11,9 @@ class Progress {
         NProgress.start();
     };
 
-    done = ()=> {
+    done = () => {
         NProgress.done();
     };
 }
 
-module.exports = new Progress();
+export default new Progress();

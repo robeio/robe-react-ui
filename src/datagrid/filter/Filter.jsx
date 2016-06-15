@@ -6,7 +6,7 @@ import RadioInput from "inputs/RadioInput";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
 
-class Filter extends ShallowComponent {
+export default class Filter extends ShallowComponent {
 
     static booleanData = [
         { text: "Hepsi", value: "all" },
@@ -16,7 +16,7 @@ class Filter extends ShallowComponent {
 
     constructor(props: Object) {
         super(props);
-        this.state = { filters: {} }
+        this.state = { filters: {} };
     }
 
     render() {
@@ -27,7 +27,7 @@ class Filter extends ShallowComponent {
         return (<span>{filterFields}</span>);
     }
 
-    __renderFilters = (columns, visiblePopups)=> {
+    __renderFilters = (columns, visiblePopups) => {
         let filterFields = [];
         let hasAtLeast1Filter = false;
         for (let i = 0; i < columns.length; i++) {
@@ -65,71 +65,90 @@ class Filter extends ShallowComponent {
             return undefined;
         }
         return filterFields;
-    };
+    }
 
     __getColID = (id: string) => {
         return document.getElementById(id);
-    };
+    }
 
     __decideFilterField = (column) => {
-
+        let min = null;
+        let max = null;
         switch (column.type) {
             case "bool":
-                return (<RadioInput
+                return (<Input.RadioInput
                     data={Filter.booleanData}
                     value={this.state[column.code]}
                     dataValueField="value"
                     dataTextField="text"
                     onChange={this.__handleChange.bind(undefined,column.code,column.type)}
-                />);
+                />
+                );
             case "number":
-                return (<span>
-                    <NumericInput
-                        label="Başlangıç"
-                        type="text"
-                        key={column.code+"-min-"}
-                        value={this.state[column.code+"-min-"]}
-                        ref={column.code+"-min-"}
-                        onChange={this.__handleChange.bind(undefined,column.code+"-min-",column.type)}/>
-                    <NumericInput
-                        label="Bitiş"
-                        type="text"
-                        key={column.codecolumn.code+"-max-"}
-                        value={this.state[column.codecolumn.code+"-max-"]}
-                        ref={column.codecolumn.code+"-max-"}
-                        onChange={this.__handleChange.bind(undefined,column.codecolumn.code+"-max-",column.type)}/>
+                min = `${column.codecolumn.code}-max-`;
+                max = `${column.codecolumn.code}-min-`;
+                return (
+                    <span>
+                        <Input.NumericInput
+                            label="Başlangıç"
+                            type="text"
+                            key={min}
+                            value={this.state[min]}
+                            ref={min}
+                            onChange={this.__handleChange.bind(undefined, min, column.type)}
+                        />
+                        <Input.NumericInput
+                            label="Bitiş"
+                            type="text"
+                            key={max}
+                            value={this.state[max]}
+                            ref={max}
+                            onChange={this.__handleChange.bind(undefined, max, column.type)}
+                        />
                     </span>);
+
             case "string":
-                return (<Input
-                    label="Değer"
-                    type="text"
-                    key={column.code}
-                    ref={column.code}
-                    value={this.state[column.code]}
-                    onChange={this.__handleChange.bind(undefined,column.code,column.type)}/>);
+                return (
+                    <Input.BaseInput
+                        label="Değer"
+                        type="text"
+                        key={column.code}
+                        ref={column.code}
+                        value={this.state[column.code]}
+                        onChange={this.__handleChange.bind(undefined, column.code, column.type)}
+                    />
+                );
             case "date":
-                return (<span>
-                    <DateInput
-                        label="Başlangıç"
-                        key={column.code+"-min-"}
-                        ref={column.code+"-min-"}
-                        value={this.state[column.code+"-min-"]}
-                        onChange={this.__handleChange.bind(undefined,column.code+"-min-",column.type)}/>
-                    <DateInput
-                        label="Bitiş"
-                        key={`${column.code}-max-`}
-                        ref={column.code+"-max-"}
-                        value={this.state[column.code+"-max-"]}
-                        onChange={this.__handleChange.bind(undefined,column.code+"-max-",column.type)}/>
-                    </span>);
+                min = `${column.code}-max-`;
+                max = `${column.code}-min-`;
+                return (
+                    <span>
+                        <Input.DateInput
+                            label="Başlangıç"
+                            key={min}
+                            ref={min}
+                            value={this.state[min]}
+                            onChange={this.__handleChange.bind(undefined, min, column.type)}
+                        />
+                        <Input.DateInput
+                            label="Bitiş"
+                            key={max}
+                            ref={max}
+                            value={this.state[max]}
+                            onChange={this.__handleChange.bind(undefined, max, column.type)}
+                        />
+                    </span>
+                );
+            default :
+                throw new Error("Unknown Component ! ");
         }
-    };
+    }
 
     __handleChange = (code, type, e) => {
         let state = this.state;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let filter = "";
-        if (value !== undefined || value !== "") {
+        if (value !== undefined) {
             switch (type) {
                 case "bool":
                     if (value !== "all") {
@@ -153,6 +172,8 @@ class Filter extends ShallowComponent {
                         filter += (`${code.substring(0, code.length - 5)}<=${value}`);
                     }
                     break;
+                default :
+
             }
         }
 
@@ -163,7 +184,5 @@ class Filter extends ShallowComponent {
             this.props.onChange(state);
         }
         this.forceUpdate();
-    };
+    }
 }
-
-module.exports = Filter;
