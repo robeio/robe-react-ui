@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
-import DataForm from "form/DataForm";
+import DataForm from "./DataForm";
 import Alert from "react-bootstrap/lib/Alert";
 
 export default class ModalDataForm extends ShallowComponent {
