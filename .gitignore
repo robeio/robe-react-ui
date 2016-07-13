@@ -3,11 +3,14 @@
 logs
 *.log
 npm-debug.log*
+
 # IDEA / Webstorm
 .idea
 *.iml
+
 # Visual Studio Code
 .vscode
+
 # Runtime data
 pids
 *.pid
@@ -37,3 +40,6 @@ mocha.json
 esdoc
 dist
 lib
+
+# MacOS
+.DS_Store
