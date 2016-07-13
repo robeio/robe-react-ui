@@ -3,7 +3,11 @@ const webpack = require("webpack");
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js");
+/**
+ * import common webpack settings
+ */
+const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src");
+
 
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#deduplication
@@ -36,7 +40,7 @@ commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSi
  * @type {{root: *[]}}
  */
 commonSettings.entry = {
-    "robe-react-ui": "../src/index.js"
+    "robe-react-commons": "../src/index.js"
 };
 
 /**
@@ -47,11 +51,13 @@ commonSettings.entry = {
  */
 commonSettings.devtool = "source-map";
 
+
 commonSettings.output = {
-    path: commonSettings.paths.dist,
+    path: commonSettings.paths.build,
     filename: "[name].min.js",
-    library: "RobeReactUi",
+    library: "RobeReactCommon",
     libraryTarget: "umd"
 };
+
 
 module.exports = commonSettings;
