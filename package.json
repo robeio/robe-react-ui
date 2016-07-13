@@ -86,6 +86,6 @@
     "react-select": "0.9.1",
     "react-star-rating": "1.4.2",
     "react-treebeard": "1.1.1",
-    "robe-react-commons": "1.0.10"
+    "robe-react-commons": "1.0.17"
   }
 }
