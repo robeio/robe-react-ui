@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
 [![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
+[![dependencies](https://www.versioneye.com/user/projects/578650986edb08003d108708/badge.svg)](https://www.versioneye.com/user/projects/578650986edb08003d108708?child=summary)
+
 
 
 RRC = Robe-React-UI
