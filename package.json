@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start webpack.config.test.js",
-    "docs": "webpack --config webpack.config.docs.js  --progress --profile --colors",
+    "docs": "./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "cat coverage/*/lcov.info | codecov",
     "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib",
     "start": "webpack-dev-server --config webpack.site.dev.js --colors"
