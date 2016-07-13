@@ -22,6 +22,7 @@
         "flowtype"
     ],
     "rules": {
+        "no-trailing-spaces": ["error", { "skipBlankLines": true }],
         "object-shorthand": ["off", "always", { "ignoreConstructors": true }],
         "linebreak-style": [
             "error",
@@ -63,10 +64,6 @@
         "no-this-before-super": 2,
         "react/jsx-boolean-value": 0,
         "react/jsx-indent": [
-            1,
-            4
-        ],
-        "react/jsx-indent-props": [
             1,
             4
         ],
