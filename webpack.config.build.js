@@ -6,7 +6,7 @@ const webpack = require("webpack");
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src");
+const commonSettings = require("./webpack.config.common.js")("/src", "/dist", "__test__");
 
 
 /**
@@ -40,7 +40,7 @@ commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSi
  * @type {{root: *[]}}
  */
 commonSettings.entry = {
-    "robe-react-commons": "../src/index.js"
+    "robe-react-ui": "../src/index.js"
 };
 
 /**
@@ -55,7 +55,7 @@ commonSettings.devtool = "source-map";
 commonSettings.output = {
     path: commonSettings.paths.build,
     filename: "[name].min.js",
-    library: "RobeReactCommon",
+    library: "RobeReacUI",
     libraryTarget: "umd"
 };
 
