@@ -66,11 +66,11 @@ function InitConfiguration(src, build, test, lib) {
                      * @link https://github.com/gaearon/react-hot-loader
                      * npm install react-hot-loader --save-dev
                      */
-                    test: /\.js?$|\.jsx?$/,
+                    test: /\.jsx?$/,
                     loader: "babel",
-                    loaders: ["react-hot", "babel"],
+                    loaders: ["babel", "react-hot"],
                     exclude: /(node_modules|bower_components|fonts)/,
-                    include: [paths.app, paths.test],
+                    include: paths.lib ? [paths.app, paths.lib, paths.test] : [paths.app, paths.test],
                     query: {
                         presets: [
                             "react",

@@ -8,7 +8,7 @@
     "docs": "webpack --config webpack.config.docs.js  --progress --profile --colors",
     "codecov": "cat coverage/*/lcov.info | codecov",
     "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib",
-    "start": "webpack-dev-server --config webpack.config.dev.js --colors"
+    "start": "webpack-dev-server --config webpack.site.dev.js --colors"
   },
   "docs": "./node_modules/.bin/esdoc -c esdoc.json",
   "keywords": [
@@ -49,6 +49,7 @@
     "is-js": "0.1.1",
     "isparta-loader": "2.0.0",
     "json-loader": "^0.5.4",
+    "json-server": "^0.8.16",
     "karma": "0.13.22",
     "karma-bamboo-reporter": "0.1.2",
     "karma-chai": "0.1.0",
