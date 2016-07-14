@@ -10,7 +10,7 @@ const app = document.getElementById("app");
 
 
 class Site extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             activePage: (
@@ -19,49 +19,49 @@ class Site extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">Robe React UI</a>
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav onSelect={this.__onSelect}>
-                    <NavItem eventKey={1} href="#">Components</NavItem>
-                    <NavItem eventKey={2} href="#">JsDocs</NavItem>
-                    <NavItem eventKey={3} href="#">About</NavItem>
-                </Nav>
-            </Navbar>
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="#">Robe React UI</a>
+                        </Navbar.Brand>
+                    </Navbar.Header>
+                    <Nav onSelect={this.__onSelect}>
+                        <NavItem eventKey={1} href="#">Components</NavItem>
+                        <NavItem eventKey={2} href="#">JsDocs</NavItem>
+                        <NavItem eventKey={3} href="#">About</NavItem>
+                    </Nav>
+                </Navbar>
                 {this.state.activePage}
             </div>
         );
     }
     __onSelect = (selectedKey) => {
         switch (selectedKey) {
-            case 1 :
+            case 1:
                 this.setState({
                     activePage: (
                         <Components />
                     )
                 });
                 break;
-            case 2 :
+            case 2:
                 this.setState({
                     activePage: (
                         <NotFound />
                     )
                 });
                 break;
-            case 3 :
+            case 3:
                 this.setState({
                     activePage: (
                         <NotFound />
                     )
                 });
                 break;
-            default :
+            default:
                 throw new Error("Unknown Page");
         }
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
+import ReactDOM  from "react-dom";
 
 import TextInput from "inputs/TextInput";
 import MoneyInput from "inputs/MoneyInput";
@@ -17,7 +18,7 @@ import SelectInputMulti from "inputs/SelectInputMulti";
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DataForm from "form/DataForm";
 import ModalDataForm from "form/ModalDataForm";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Grid, Col, ListGroup, ListGroupItem} from "react-bootstrap";
 import DataFormValue from "../data/data-form.json";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
@@ -33,7 +34,7 @@ components.push({
     header: "Text Input",
     component: [
         {
-            header: "Text Input ",
+            header: "TextInput",
             component: <TextInput type="text" />
         },
         {
@@ -50,7 +51,7 @@ components.push({
     header: "Money Input",
     component: [
         {
-            header: "Text Input ",
+            header: "TextInput",
             component: <MoneyInput type="text" />
         }
     ]
@@ -68,7 +69,7 @@ components.push({
  * Decimal Input    *
  * ******************/
 components.push({
-    header: "Decimal Input ",
+    header: "DecimalInput",
     component: <DecimalInput label="Decimal Input" />
 });
 
@@ -76,7 +77,7 @@ components.push({
  * Decimal Input    *
  * ******************/
 components.push({
-    header: "Numeric Input ",
+    header: "NumericInput",
     component: <NumericInput label="Numeric Input" />
 });
 
@@ -85,7 +86,7 @@ components.push({
  * Decimal Input    *
  * ******************/
 components.push({
-    header: "Password Input ",
+    header: "PasswordInput",
     component: <PasswordInput label="Password Input" />
 });
 
@@ -94,7 +95,7 @@ components.push({
  * ******************/
 
 components.push({
-    header: "Radio Input ",
+    header: "RadioInput",
     component: <RadioInput label="Radio Input" data={["1", "2", "3"]} />
 });
 
@@ -119,7 +120,7 @@ components.push({
                     data={selectInputArray}
                     dataTextField="key"
                     dataValueField="value"
-                />
+                    />
             )
         },
         {
@@ -130,7 +131,7 @@ components.push({
                     dataTextField="key"
                     dataValueField="value"
                     optionLabel="Lütfen seçim yapınız..."
-                />
+                    />
             )
         }
     ]
@@ -144,18 +145,18 @@ components.push({
     header: "Select Input",
     component: [
         {
-            header: "Date Input ",
+            header: "DateInput",
             component:
-                <DateInput
-                    label="Date"
+            <DateInput
+                label="Date"
                 />
         },
         {
-            header: "Date Input ",
+            header: "DateInput",
             component:
-                <DateInput
-                    label="Date"
-                    value={new Date().getTime()}
+            <DateInput
+                label="Date"
+                value={new Date().getTime() }
                 />
         }
     ]
@@ -188,7 +189,7 @@ components.push({
             dataTextField="value"
             dataValueField="key"
             style={{ height: "240px" }}
-        />
+            />
     )
 });
 
@@ -221,7 +222,7 @@ components.push({
             labelKey="label"
             valueKey="value"
             style={{ height: "240px" }}
-        />
+            />
     )
 });
 
@@ -255,7 +256,7 @@ components.push({
             labelKey="label"
             valueKey="value"
             style={{ height: "240px" }}
-        />
+            />
     )
 });
 
@@ -273,7 +274,7 @@ components.push({
             value={htmlText}
             height={400}
             width={200}
-        />
+            />
     )
 });
 
@@ -287,7 +288,7 @@ components.push({
         <DataForm
             model={DataFormValue.model.columns}
             data={DataFormValue.data}
-        />
+            />
     )
 });
 
@@ -352,7 +353,7 @@ class ModalDataFormShower extends ShallowComponent {
             <Button
                 ref="modalDataFormShowButton"
                 onClick={this.__onClick}
-            >
+                >
                 Open Dialog
             </Button>
             <ModalDataForm
@@ -361,7 +362,7 @@ class ModalDataFormShower extends ShallowComponent {
                 model={DataFormValue.model.columns}
                 onCancel={this.__onCancel}
                 onSave={this.__onSave}
-            />
+                />
         </div>
         );
     }
@@ -391,19 +392,29 @@ export default class Showcase extends ShallowComponent {
 
     render() {
         let componentArray = [];
+        let componentMenu = [];
         for (let i = 0; i < components.length; i++) {
             let component = components[i];
+            componentMenu.push(
+                <ListGroupItem href={"#" + component.header}>{component.header}</ListGroupItem>);
             componentArray.push(
                 <Renderer
                     header={component.header}
                     component={component.component}
-                />);
+                    />);
         }
         return (
-            <div>
+            <Grid>
                 <NotificationContainer />
-                {componentArray}
-            </div>
+                <h2>Components</h2>
+                <h5>Here you can find the samples and usages of the components.</h5>
+                <Col xs={12} sm={3}><ListGroup>{componentMenu}</ListGroup></Col>
+                <Col xs={12} sm={9} style={{ height: "80vh", overflow: "scroll" }} ref="componentView">{componentArray}</Col>
+            </Grid>
         );
+    }
+    componentDidMount() {
+        ReactDOM.findDOMNode(this).scrollTop = 0;
+        console.log("scrolling");
     }
 }

@@ -13,16 +13,17 @@ export default class Renderer extends ShallowComponent {
         return this.__renderComponent(this.props);
     }
 
-    __renderComponent= (element) => {
+    __renderComponent = (element: Object, inner: boolean) => {
         let component = null;
 
         if (Array.isArray(element.component)) {
             component = this.__renderComponents(element.component);
-        } else{
+        } else {
             component = element.component;
         }
+        let bsStyle = inner ? "" : undefined;
         return (
-            <Panel header={element.header}>
+            <Panel header={element.header} bsStyle={bsStyle} id={element.header}>
                 {component}
             </Panel>
         );
@@ -31,8 +32,9 @@ export default class Renderer extends ShallowComponent {
         let componentArray = [];
         for (let i = 0; i < components.length; i++) {
             let component = components[i];
-            componentArray.push(this.__renderComponent(component));
+            componentArray.push(this.__renderComponent(component, true));
         }
         return componentArray;
     }
+
 }
