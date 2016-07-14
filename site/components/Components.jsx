@@ -32,360 +32,358 @@ const components = [];
 
 components.push({
     header: "Text Input",
-    component: [
+    alternatives: [
         {
             header: "TextInput",
             component: <TextInput type="text" />
-        },
-        {
+        }, {
             header: "Default Value",
             component: <TextInput type="text" value="Default Value" />
-        }
-    ]
+        }]
 });
-/* ******************
- * Money Input    *
- * ******************/
+// /* ******************
+//  * Money Input    *
+//  * ******************/
 
-components.push({
-    header: "Money Input",
-    component: [
-        {
-            header: "TextInput",
-            component: <MoneyInput type="text" />
-        }
-    ]
-});
+// components.push({
+//     header: "Money Input",
+//     component: [
+//         {
+//             header: "TextInput",
+//             component: <MoneyInput type="text" />
+//         }
+//     ]
+// });
 
-/* ******************
- * Check Input    *
- * ******************/
-components.push({
-    header: "Check Input",
-    component: <CheckInput label="Check Input" />
-});
+// /* ******************
+//  * Check Input    *
+//  * ******************/
+// components.push({
+//     header: "Check Input",
+//     component: <CheckInput label="Check Input" />
+// });
 
-/* ******************
- * Decimal Input    *
- * ******************/
-components.push({
-    header: "DecimalInput",
-    component: <DecimalInput label="Decimal Input" />
-});
+// /* ******************
+//  * Decimal Input    *
+//  * ******************/
+// components.push({
+//     header: "DecimalInput",
+//     component: <DecimalInput label="Decimal Input" />
+// });
 
-/* ******************
- * Decimal Input    *
- * ******************/
-components.push({
-    header: "NumericInput",
-    component: <NumericInput label="Numeric Input" />
-});
-
-
-/* ******************
- * Decimal Input    *
- * ******************/
-components.push({
-    header: "PasswordInput",
-    component: <PasswordInput label="Password Input" />
-});
-
-/* ******************
- * Radio Input    *
- * ******************/
-
-components.push({
-    header: "RadioInput",
-    component: <RadioInput label="Radio Input" data={["1", "2", "3"]} />
-});
+// /* ******************
+//  * Decimal Input    *
+//  * ******************/
+// components.push({
+//     header: "NumericInput",
+//     component: <NumericInput label="Numeric Input" />
+// });
 
 
-/* ******************
- * Select Input    *
- * ******************/
-const selectInputArray = [
-    {
-        key: "MALE",
-        value: "Bay"
-    }
-];
+// /* ******************
+//  * Decimal Input    *
+//  * ******************/
+// components.push({
+//     header: "PasswordInput",
+//     component: <PasswordInput label="Password Input" />
+// });
 
-components.push({
-    header: "Select Input",
-    component: [
-        {
-            header: "default props",
-            component: (
-                <SelectInput
-                    data={selectInputArray}
-                    dataTextField="key"
-                    dataValueField="value"
-                    />
-            )
-        },
-        {
-            header: "optionalLabel",
-            component: (
-                <SelectInput
-                    data={selectInputArray}
-                    dataTextField="key"
-                    dataValueField="value"
-                    optionLabel="Lütfen seçim yapınız..."
-                    />
-            )
-        }
-    ]
-});
+// /* ******************
+//  * Radio Input    *
+//  * ******************/
 
-/* *************
- * Date Input
- * *************/
-
-components.push({
-    header: "Select Input",
-    component: [
-        {
-            header: "DateInput",
-            component:
-            <DateInput
-                label="Date"
-                />
-        },
-        {
-            header: "DateInput",
-            component:
-            <DateInput
-                label="Date"
-                value={new Date().getTime() }
-                />
-        }
-    ]
-});
-
-/* ******************
- *  CheckList Input *
- * ******************/
-
-const checkBoxListArray = [
-    {
-        key: "Turkey",
-        value: "Türkiye"
-    },
-    {
-        key: "Germany",
-        value: "Almanya"
-    },
-    {
-        key: "England",
-        value: "İngiltere"
-    }
-];
-
-components.push({
-    header: "CheckBoxList",
-    component: (
-        <CheckboxList
-            data={checkBoxListArray}
-            dataTextField="value"
-            dataValueField="key"
-            style={{ height: "240px" }}
-            />
-    )
-});
-
-/* ******************
- *  SelectInputSingle Input *
- * ******************/
-
-const SelectInputSingleArray = [
-    {
-        value: "Turkey",
-        label: "Türkiye"
-    },
-    {
-        value: "Germany",
-        label: "Almanya"
-    },
-    {
-        value: "England",
-        label: "İngiltere"
-    }
-];
-
-components.push({
-    header: "Select Input Single",
-    component: (
-        <SelectInputSingle
-            data={SelectInputSingleArray}
-            value="Turkey"
-            placeholder="Seçiminizi yapınız"
-            labelKey="label"
-            valueKey="value"
-            style={{ height: "240px" }}
-            />
-    )
-});
+// components.push({
+//     header: "RadioInput",
+//     component: <RadioInput label="Radio Input" data={["1", "2", "3"]} />
+// });
 
 
-/* ******************
- *  SelectInputMulti Input *
- * ******************/
+// /* ******************
+//  * Select Input    *
+//  * ******************/
+// const selectInputArray = [
+//     {
+//         key: "MALE",
+//         value: "Bay"
+//     }
+// ];
 
-const SelectInputMultiArray = [
-    {
-        value: "Turkey",
-        label: "Türkiye"
-    },
-    {
-        value: "Germany",
-        label: "Almanya"
-    },
-    {
-        value: "England",
-        label: "İngiltere"
-    }
-];
+// components.push({
+//     header: "Select Input",
+//     component: [
+//         {
+//             header: "default props",
+//             component: (
+//                 <SelectInput
+//                     data={selectInputArray}
+//                     dataTextField="key"
+//                     dataValueField="value"
+//                     />
+//             )
+//         },
+//         {
+//             header: "optionalLabel",
+//             component: (
+//                 <SelectInput
+//                     data={selectInputArray}
+//                     dataTextField="key"
+//                     dataValueField="value"
+//                     optionLabel="Lütfen seçim yapınız..."
+//                     />
+//             )
+//         }
+//     ]
+// });
 
-components.push({
-    header: "Select Input Single",
-    component: (
-        <SelectInputMulti
-            data={SelectInputMultiArray}
-            value="Turkey"
-            placeholder="Seçiminizi yapınız"
-            labelKey="label"
-            valueKey="value"
-            style={{ height: "240px" }}
-            />
-    )
-});
+// /* *************
+//  * Date Input
+//  * *************/
+
+// components.push({
+//     header: "Select Input",
+//     component: [
+//         {
+//             header: "DateInput",
+//             component:
+//             <DateInput
+//                 label="Date"
+//                 />
+//         },
+//         {
+//             header: "DateInput",
+//             component:
+//             <DateInput
+//                 label="Date"
+//                 value={new Date().getTime() }
+//                 />
+//         }
+//     ]
+// });
+
+// /* ******************
+//  *  CheckList Input *
+//  * ******************/
+
+// const checkBoxListArray = [
+//     {
+//         key: "Turkey",
+//         value: "Türkiye"
+//     },
+//     {
+//         key: "Germany",
+//         value: "Almanya"
+//     },
+//     {
+//         key: "England",
+//         value: "İngiltere"
+//     }
+// ];
+
+// components.push({
+//     header: "CheckBoxList",
+//     component: (
+//         <CheckboxList
+//             data={checkBoxListArray}
+//             dataTextField="value"
+//             dataValueField="key"
+//             style={{ height: "240px" }}
+//             />
+//     )
+// });
+
+// /* ******************
+//  *  SelectInputSingle Input *
+//  * ******************/
+
+// const SelectInputSingleArray = [
+//     {
+//         value: "Turkey",
+//         label: "Türkiye"
+//     },
+//     {
+//         value: "Germany",
+//         label: "Almanya"
+//     },
+//     {
+//         value: "England",
+//         label: "İngiltere"
+//     }
+// ];
+
+// components.push({
+//     header: "Select Input Single",
+//     component: (
+//         <SelectInputSingle
+//             data={SelectInputSingleArray}
+//             value="Turkey"
+//             placeholder="Seçiminizi yapınız"
+//             labelKey="label"
+//             valueKey="value"
+//             style={{ height: "240px" }}
+//             />
+//     )
+// });
 
 
-/* ******************
- *  HtmlEditor Input *
- * ******************/
-const htmlText = "<h1>Başlık 1 </h1><div><b>İçerikte böylece devam ediyor...</b></div>";
-components.push({
-    header: "Html Editor",
-    component: (
-        <HtmlEditor
-            disabled={false}
-            label="Giriş Yazısı"
-            value={htmlText}
-            height={400}
-            width={200}
-            />
-    )
-});
+// /* ******************
+//  *  SelectInputMulti Input *
+//  * ******************/
 
-/* ******************
- *  DataForm *
- * ******************/
+// const SelectInputMultiArray = [
+//     {
+//         value: "Turkey",
+//         label: "Türkiye"
+//     },
+//     {
+//         value: "Germany",
+//         label: "Almanya"
+//     },
+//     {
+//         value: "England",
+//         label: "İngiltere"
+//     }
+// ];
 
-components.push({
-    header: "Data Form",
-    component: (
-        <DataForm
-            model={DataFormValue.model.columns}
-            data={DataFormValue.data}
-            />
-    )
-});
-
-
-/* ******************
- *  Modal *
- * ******************/
+// components.push({
+//     header: "Select Input Single",
+//     component: (
+//         <SelectInputMulti
+//             data={SelectInputMultiArray}
+//             value="Turkey"
+//             placeholder="Seçiminizi yapınız"
+//             labelKey="label"
+//             valueKey="value"
+//             style={{ height: "240px" }}
+//             />
+//     )
+// });
 
 
-class ModalExample extends ShallowComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: props.show
-        };
-    }
+// /* ******************
+//  *  HtmlEditor Input *
+//  * ******************/
+// const htmlText = "<h1>Başlık 1 </h1><div><b>İçerikte böylece devam ediyor...</b></div>";
+// components.push({
+//     header: "Html Editor",
+//     component: (
+//         <HtmlEditor
+//             disabled={false}
+//             label="Giriş Yazısı"
+//             value={htmlText}
+//             height={400}
+//             width={200}
+//             />
+//     )
+// });
 
-    render() {
-        return (
-            <div>
-                <Button onClick={this.__onClick} >
-                    Open Modal
-                </Button>
-                <Modal ref="modalPanel" show={this.state.show}>
-                    <Modal.Header>
-                        <Modal.Title>Kayıt İşlemi</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button>
-                            Kaydet
-                        </Button>
-                        <Button>
-                            Vazgeç
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
-    }
-    __onClick = () => {
-        this.setState({
-            show: true
-        });
-    }
-}
-components.push({
-    header: "Modal Panel",
-    component: (
-        <ModalExample show={false} />
-    )
-});
+// /* ******************
+//  *  DataForm *
+//  * ******************/
 
-/* ******************
- *  ModalDataForm *
- * ******************/
+// components.push({
+//     header: "Data Form",
+//     component: (
+//         <DataForm
+//             model={DataFormValue.model.columns}
+//             data={DataFormValue.data}
+//             />
+//     )
+// });
 
-class ModalDataFormShower extends ShallowComponent {
-    render() {
-        return (<div>
-            <Button
-                ref="modalDataFormShowButton"
-                onClick={this.__onClick}
-                >
-                Open Dialog
-            </Button>
-            <ModalDataForm
-                ref="modalDataFormRef"
-                show={false}
-                model={DataFormValue.model.columns}
-                onCancel={this.__onCancel}
-                onSave={this.__onSave}
-                />
-        </div>
-        );
-    }
-    __onClick = () => {
-        this.refs.modalDataFormRef.setState({ showModal: true, formData: DataFormValue.data });
-    }
 
-    __onCancel = () => {
-        this.refs.modalDataFormRef.setState({ showModal: false });
-    };
-    __onSave = () => {
-        NotificationManager.info("Kaydedildi");
-        this.refs.modalDataFormRef.setState({ showModal: false });
-    }
+// /* ******************
+//  *  Modal *
+//  * ******************/
 
-}
 
-components.push({
-    header: "Modal Data Form",
-    component: (
-        <ModalDataFormShower />
-    )
-});
+// class ModalExample extends ShallowComponent {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             show: props.show
+//         };
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 <Button onClick={this.__onClick} >
+//                     Open Modal
+//                 </Button>
+//                 <Modal ref="modalPanel" show={this.state.show}>
+//                     <Modal.Header>
+//                         <Modal.Title>Kayıt İşlemi</Modal.Title>
+//                     </Modal.Header>
+//                     <Modal.Body>
+//                     </Modal.Body>
+//                     <Modal.Footer>
+//                         <Button>
+//                             Kaydet
+//                         </Button>
+//                         <Button>
+//                             Vazgeç
+//                         </Button>
+//                     </Modal.Footer>
+//                 </Modal>
+//             </div>
+//         );
+//     }
+//     __onClick = () => {
+//         this.setState({
+//             show: true
+//         });
+//     }
+// }
+// components.push({
+//     header: "Modal Panel",
+//     component: (
+//         <ModalExample show={false} />
+//     )
+// });
+
+// /* ******************
+//  *  ModalDataForm *
+//  * ******************/
+
+// class ModalDataFormShower extends ShallowComponent {
+//     render() {
+//         return (<div>
+//             <Button
+//                 ref="modalDataFormShowButton"
+//                 onClick={this.__onClick}
+//                 >
+//                 Open Dialog
+//             </Button>
+//             <ModalDataForm
+//                 ref="modalDataFormRef"
+//                 show={false}
+//                 model={DataFormValue.model.columns}
+//                 onCancel={this.__onCancel}
+//                 onSave={this.__onSave}
+//                 />
+//         </div>
+//         );
+//     }
+//     __onClick = () => {
+//         this.refs.modalDataFormRef.setState({ showModal: true, formData: DataFormValue.data });
+//     }
+
+//     __onCancel = () => {
+//         this.refs.modalDataFormRef.setState({ showModal: false });
+//     };
+//     __onSave = () => {
+//         NotificationManager.info("Kaydedildi");
+//         this.refs.modalDataFormRef.setState({ showModal: false });
+//     }
+
+// }
+
+// components.push({
+//     header: "Modal Data Form",
+//     component: (
+//         <ModalDataFormShower />
+//     )
+// });
 
 
 export default class Showcase extends ShallowComponent {
@@ -394,13 +392,13 @@ export default class Showcase extends ShallowComponent {
         let componentArray = [];
         let componentMenu = [];
         for (let i = 0; i < components.length; i++) {
-            let component = components[i];
+            let item = components[i];
             componentMenu.push(
-                <ListGroupItem href={"#" + component.header}>{component.header}</ListGroupItem>);
+                <ListGroupItem href={"#" + item.header}>{item.header}</ListGroupItem>);
             componentArray.push(
                 <Renderer
-                    header={component.header}
-                    component={component.component}
+                    header={item.header}
+                    alternatives={item.alternatives}
                     />);
         }
         return (
@@ -415,6 +413,5 @@ export default class Showcase extends ShallowComponent {
     }
     componentDidMount() {
         ReactDOM.findDOMNode(this).scrollTop = 0;
-        console.log("scrolling");
     }
 }

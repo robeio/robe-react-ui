@@ -1,5 +1,6 @@
 import React from "react";
-import { Panel } from "react-bootstrap";
+import { Panel, Table } from "react-bootstrap";
+import { Maps } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 
 export default class Renderer extends ShallowComponent {
@@ -10,31 +11,56 @@ export default class Renderer extends ShallowComponent {
     }
 
     render() {
-        return this.__renderComponent(this.props);
+        return (<Panel header={this.props.header} id={this.props.header}>
+            <h5>Samples</h5>
+            {this.__renderAlternatives(this.props.alternatives) }
+            <h5>Code</h5>
+            <Panel>Code Area (Will be hidden) </Panel>
+            <h5>Props</h5>
+            {this.__renderTable(this.props.alternatives[0].component) }
+            <h5>State</h5>
+            {this.__renderTable(this.props.alternatives[0].component) }
+
+        </Panel>);
     }
 
-    __renderComponent = (element: Object, inner: boolean) => {
-        let component = null;
-
-        if (Array.isArray(element.component)) {
-            component = this.__renderComponents(element.component);
-        } else {
-            component = element.component;
+    __renderAlternatives(alternatives: Array) {
+        let divs = [];
+        for (let i = 0; i < alternatives.length; i++) {
+            divs.push(alternatives[i].component);
         }
-        let bsStyle = inner ? "" : undefined;
+        return divs;
+    }
+
+    __renderTable(data: Object) {
+        let rows = [];
+        Maps.forEach(data.type, (value: any, key: string) => {
+            console.log(key, value);
+        });
+        Maps.forEach(data.type.propTypes, (value: any, key: string) => {
+            rows.push(<tr>
+                <td>{key}</td>
+                <td>-not ready-</td>
+                <td>-not ready-</td>
+                <td>{value.isRequired === undefined ? "Yes" : "No"}</td>
+            </tr>);
+        });
+
         return (
-            <Panel header={element.header} bsStyle={bsStyle} id={element.header}>
-                {component}
-            </Panel>
+            <Table responsive striped bordered condensed>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </Table>
         );
-    }
-    __renderComponents = (components) => {
-        let componentArray = [];
-        for (let i = 0; i < components.length; i++) {
-            let component = components[i];
-            componentArray.push(this.__renderComponent(component, true));
-        }
-        return componentArray;
     }
 
 }
