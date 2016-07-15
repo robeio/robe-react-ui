@@ -40,7 +40,7 @@ commonSettings.devtool = "source-map";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 commonSettings.module.loaders.push({
-        test: /\.jsx?/,
+        test: /\.jsx?$/,
         exclude: /(__test__|node_modules|bower_components)\//,
         loader: "isparta"
     }
