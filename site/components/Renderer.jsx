@@ -5,26 +5,30 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 
 export default class Renderer extends ShallowComponent {
 
+    static style = {
+        borderBottom: "1px solid lightgray",
+        marginBottom: "50px"
+    }
+
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     }
 
     render() {
-        return (<Panel header={this.props.header} id={this.props.header}>
-            <h5>Samples</h5>
-            {this.__renderAlternatives(this.props.alternatives) }
-            <h5>Code</h5>
-            <Panel>Code Area (Will be hidden) </Panel>
-            <h5>Props</h5>
-            {this.__renderTable(this.props.alternatives[0].component) }
-            <h5>State</h5>
-            {this.__renderTable(this.props.alternatives[0].component) }
-
-        </Panel>);
+        return (
+            <div style={Renderer.style}>
+                <h3 id={this.props.header}>{this.props.header}</h3>
+                <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
+                <h5>Examples</h5>
+                <Panel>{this.__renderAlternatives(this.props.alternatives) }</Panel>
+                <Panel>Code Area (Will be hidden) </Panel>
+                <h5>Props</h5>
+                {this.__renderTable(this.props.alternatives[0].component) }
+            </div >);
     }
 
-    __renderAlternatives(alternatives: Array) {
+    __renderAlternatives(alternatives: Array): Array {
         let divs = [];
         for (let i = 0; i < alternatives.length; i++) {
             divs.push(alternatives[i].component);
@@ -32,11 +36,9 @@ export default class Renderer extends ShallowComponent {
         return divs;
     }
 
-    __renderTable(data: Object) {
+    __renderTable(data: Object): Array {
         let rows = [];
-        Maps.forEach(data.type, (value: any, key: string) => {
-            console.log(key, value);
-        });
+
         Maps.forEach(data.type.propTypes, (value: any, key: string) => {
             rows.push(<tr>
                 <td>{key}</td>

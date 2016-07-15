@@ -23,24 +23,9 @@ import DataFormValue from "../data/data-form.json";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import ComponentList from "./ComponentList";
 
-const components = [];
 
-/* ******************
- * Text Input    *
- * ******************/
-
-components.push({
-    header: "Text Input",
-    alternatives: [
-        {
-            header: "TextInput",
-            component: <TextInput type="text" />
-        }, {
-            header: "Default Value",
-            component: <TextInput type="text" value="Default Value" />
-        }]
-});
 // /* ******************
 //  * Money Input    *
 //  * ******************/
@@ -388,16 +373,30 @@ components.push({
 
 export default class Showcase extends ShallowComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: "initial"
+        };
+    }
+
     render() {
         let componentArray = [];
         let componentMenu = [];
+        let components = ComponentList.getComponentList(this.state, this.__handleChange);
+
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
             componentMenu.push(
-                <ListGroupItem href={"#" + item.header}>{item.header}</ListGroupItem>);
+                <ListGroupItem href={"#" + item.header}
+                    onClick={this.__onComponenListClick}
+                    active={this.state.componentSelection === item.header}>
+                    {item.header}
+                </ListGroupItem>);
             componentArray.push(
                 <Renderer
                     header={item.header}
+                    desc={item.desc}
                     alternatives={item.alternatives}
                     />);
         }
@@ -407,10 +406,25 @@ export default class Showcase extends ShallowComponent {
                 <h2>Components</h2>
                 <h5>Here you can find the samples and usages of the components.</h5>
                 <Col xs={12} sm={3}><ListGroup>{componentMenu}</ListGroup></Col>
-                <Col xs={12} sm={9} style={{ height: "80vh", overflow: "scroll" }} ref="componentView">{componentArray}</Col>
+                <Col xs={12} sm={9} style={{ height: "80vh", overflow: "scroll" }} ref="componentView">
+                    {componentArray}
+                </Col>
             </Grid>
         );
     }
+
+    __onComponenListClick = (e: Object) => {
+        this.setState({
+            componentSelection: e.target.text
+        });
+    };
+
+    __handleChange = (code: any, e: Object) => {
+        let state = {};
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        state[code] = value;
+        this.setState(state);
+    };
     componentDidMount() {
         ReactDOM.findDOMNode(this).scrollTop = 0;
     }

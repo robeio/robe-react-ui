@@ -12,3 +12,5 @@ export { default as Progress } from "./progress";
 export { default as SideMenu } from "./sidemenu";
 export { default as Tree } from "./tree";
 export { default as DropzoneUpload } from "./upload";
+export { default as InputValidations } from "./validation";
+

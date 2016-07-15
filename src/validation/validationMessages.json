@@ -1,0 +1,7 @@
+{
+    "validation": {
+        "required": "This field is required.",
+        "minValue": "Value must be greater or equal to ${minValue}",
+        "maxValue": "Value must be less or equal to ${maxValue}"
+    }
+}

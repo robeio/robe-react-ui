@@ -9,7 +9,7 @@ const webPackConfig = require("./webpack.config.common.js")("/site", "/build", "
 
 webPackConfig.cache = true;
 webPackConfig.debug = true;
-webPackConfig.devtool = "source-map";
+webPackConfig.devtool = "eval-source-map";
 webPackConfig.entry = {
     app: [webPackConfig.paths.app]
 };
