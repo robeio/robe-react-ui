@@ -4,7 +4,6 @@ import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import FormControl from "react-bootstrap/lib/FormControl";
 import Alert from "react-bootstrap/lib/Alert";
-import is from "is-js";
 
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
@@ -23,6 +22,14 @@ export default class BaseInput extends ShallowComponent {
          * Style map for the component.
          */
         style: React.PropTypes.object,
+        /**
+         * Label for the form control.
+         */
+        label: React.PropTypes.string,
+        /**
+         * Validations for the component
+         */
+        validations: React.PropTypes.object
     };
 
     /**
@@ -36,7 +43,7 @@ export default class BaseInput extends ShallowComponent {
      */
     __valid: boolean = false;
     /**
-     * Validation map for all controls thar this component must pass.
+     * Validation map for all functions and custom messages .
      */
     __validations: Map = {};
 
@@ -65,8 +72,6 @@ export default class BaseInput extends ShallowComponent {
         }
         this.valid = (errors.length === 0);
         let alerts = undefined;
-
-
         let messages = [];
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
@@ -83,7 +88,7 @@ export default class BaseInput extends ShallowComponent {
                     bsStyle="error"
                     ref="innerInput"
                     value={value}
-                    />
+                />
                 {alerts}
             </FormGroup>
         );
@@ -103,7 +108,6 @@ export default class BaseInput extends ShallowComponent {
     isValid = (): boolean => {
         return this.valid;
     };
-
 
     /**
      * Validates the input components and returns error messages.
@@ -127,7 +131,6 @@ export default class BaseInput extends ShallowComponent {
         });
         return messages;
     };
-
 
     /**
      * Fired after component mounts. Takes validations from props.
