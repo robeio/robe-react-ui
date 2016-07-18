@@ -27,7 +27,9 @@ export default class Renderer extends ShallowComponent {
                 <h3 id={this.props.header}>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
                 <h5>Examples</h5>
-                <this.props.sample.default/>
+                <Panel>
+                    <this.props.sample.default/>
+                </Panel>
                 <Highlight className="javascript">
                     {this.props.code}
                 </Highlight>
