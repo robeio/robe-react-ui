@@ -18,10 +18,19 @@ export default class Renderer extends ShallowComponent {
     constructor(props) {
         super(props);
         this.json = this.props.json === undefined ? {} : this.props.json;
+        this.state = {
+            showCode: false
+        };
     }
 
     render() {
-        console.log(this.props.sample.default);
+
+        let highlight = undefined;
+        if (this.state.showCode) {
+            highlight = (<Highlight className="javascript">
+                {this.props.code}
+            </Highlight>);
+        };
         return (
             <div style={Renderer.style}>
                 <h3 id={this.props.header}>{this.props.header}</h3>
@@ -29,13 +38,19 @@ export default class Renderer extends ShallowComponent {
                 <h5>Examples</h5>
                 <Panel>
                     <this.props.sample.default/>
+                    <a className="pull-right" onClick={this.__toogleCode}>Show Code</a>
                 </Panel>
-                <Highlight className="javascript">
-                    {this.props.code}
-                </Highlight>
+                {highlight}
                 <h5>Props</h5>
                 {this.__renderTable(this.json.props) }
             </div >);
+    }
+
+    __toogleCode = () => {
+        console.log(this.state.showCode);
+        this.setState({
+            showCode: !this.state.showCode
+        });
     }
 
     __renderTable(data: Object): Array {
