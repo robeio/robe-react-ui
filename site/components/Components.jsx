@@ -398,6 +398,7 @@ export default class Showcase extends ShallowComponent {
                     header={item.header}
                     desc={item.desc}
                     alternatives={item.alternatives}
+                    json={item.json}
                     />);
         }
         return (

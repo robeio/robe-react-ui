@@ -14,9 +14,12 @@ export default class Renderer extends ShallowComponent {
         marginBottom: "50px"
     }
 
+    json;
+
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
+        this.json = this.props.json === undefined ? {} : this.props.json;
     }
 
     render() {
@@ -29,10 +32,10 @@ export default class Renderer extends ShallowComponent {
                     {TextInputSampleContent}
                 </Highlight>
                 <h5>Examples</h5>
-                <Panel>{this.__renderAlternatives(this.props.alternatives)}</Panel>
+                <Panel>{this.__renderAlternatives(this.json) }</Panel>
                 <Panel>Code Area (Will be hidden) </Panel>
                 <h5>Props</h5>
-                {this.__renderTable(this.props.alternatives[0].component)}
+                {this.__renderTable(this.json.props) }
             </div >);
     }
 
@@ -47,12 +50,13 @@ export default class Renderer extends ShallowComponent {
     __renderTable(data: Object): Array {
         let rows = [];
 
-        Maps.forEach(data.type.propTypes, (value: any, key: string) => {
+        Maps.forEach(data, (value: any, key: string) => {
+            let type = value.type !== undefined ? value.type.name : "";
             rows.push(<tr>
                 <td>{key}</td>
-                <td>-not ready-</td>
-                <td>-not ready-</td>
-                <td>{value.isRequired === undefined ? "Yes" : "No"}</td>
+                <td>{type}</td>
+                <td>{value.description}</td>
+                <td>{value.required ? "Yes" : "No"}</td>
             </tr>);
         });
 

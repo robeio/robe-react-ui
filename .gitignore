@@ -40,6 +40,7 @@ mocha.json
 esdoc
 dist
 lib
+docs
 
 # MacOS
 .DS_Store

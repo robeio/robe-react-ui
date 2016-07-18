@@ -10,7 +10,7 @@ export default class DecimalInput extends ShallowComponent {
         onChange: React.PropTypes.func,
         decimalSeperator: React.PropTypes.string,
         fractionalSeperator: React.PropTypes.string,
-        step: React.PropTypes.string
+        regex: React.PropTypes.array
     };
 
     static defaultProps = {

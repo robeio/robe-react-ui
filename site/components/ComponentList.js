@@ -30,6 +30,7 @@ class ComponentList {
         components.push({
             header: "TextInput",
             desc: "is the default input field to collect one line text data from form.",
+            json: require("../docs/inputs/TextInput"),
             alternatives: [
                 {
                     header: "TextInput",
@@ -50,11 +51,11 @@ class ComponentList {
                     component: <TextInput
                         label="With Validations"
                         value={state.TextFieldValidations}
-                        onChange={onChange.bind(undefined, "TextFieldValidations")}
+                        onChange={onChange.bind(undefined, "TextFieldValidations") }
                         validations={{
                             required: InputValidations.required,
                         }}
-                    />
+                        />
                 }]
         });
 
@@ -63,6 +64,8 @@ class ComponentList {
         //  * ******************/
         components.push({
             header: "Decimal Input",
+            json: require("../docs/inputs/DecimalInput"),
+
             alternatives: [{
                 header: "DecimalInput",
                 component: <DecimalInput
@@ -83,6 +86,7 @@ class ComponentList {
         //  * ******************/
         components.push({
             header: "Numeric Input",
+            json: require("../docs/inputs/NumericInput"),
             alternatives: [{
                 header: "NumericInput",
                 component: <NumericInput label="Numeric Input" />

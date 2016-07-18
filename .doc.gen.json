@@ -3,7 +3,7 @@
   "react" : {
     "sourceFolder":"src",
     "extensions": ["jsx", "js"],
-    "destinationFolder":"static/docs",
+    "destinationFolder":"site/docs",
     "exclude": ["index.js"]
   },
   "copy" : {
