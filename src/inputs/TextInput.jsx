@@ -52,14 +52,14 @@ export default class TextInput extends ShallowComponent {
                 {...this.props}
                 type="text"
                 ref="innerInput"
-            />);
+                />);
     }
 
     /**
      * Returns the validity of the value.
      * @return true - value is valid, false - invalid
      */
-    isValid = (): boolean => {
+    isValid(): boolean {
         return this.refs.innerInput.isValid();
-    };
+    }
 }

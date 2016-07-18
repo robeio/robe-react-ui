@@ -23,26 +23,27 @@ export default class Renderer extends ShallowComponent {
         };
     }
 
-    render() {
-
+    render(): Object {
         let highlight = undefined;
         if (this.state.showCode) {
             highlight = (<Highlight className="javascript">
                 {this.props.code}
             </Highlight>);
-        };
+        }
         return (
             <div style={Renderer.style}>
                 <h3 id={this.props.header}>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
-                <h5>Examples</h5>
+                <h4>Examples</h4>
                 <Panel>
-                    <this.props.sample.default/>
+                    <this.props.sample.default />
                     <a className="pull-right" onClick={this.__toogleCode}>Show Code</a>
                 </Panel>
                 {highlight}
-                <h5>Props</h5>
-                {this.__renderTable(this.json.props) }
+                <h4>Props</h4>
+                {this.__renderPropsTable(this.json.props)}
+                <h4>Methods</h4>
+                {this.__renderMethodsTable(this.json.methods)}
             </div >);
     }
 
@@ -52,7 +53,7 @@ export default class Renderer extends ShallowComponent {
         });
     }
 
-    __renderTable(data: Object): Array {
+    __renderPropsTable(data: Object): Array {
         let rows = [];
 
         Maps.forEach(data, (value: any, key: string) => {
@@ -71,8 +72,35 @@ export default class Renderer extends ShallowComponent {
                     <tr>
                         <th>Name</th>
                         <th>Type</th>
-                        <th>Default</th>
+                        <th>Description</th>
                         <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </Table>
+        );
+    }
+    __renderMethodsTable(data: Object): Array {
+        let rows = [];
+
+        for (let i = 0; i < data.length; i++) {
+            let value = data[i];
+            rows.push(<tr>
+                <td>{value.name}</td>
+                <td>{value.description}</td>
+                <td>{value.returns.type.name}</td>
+            </tr>);
+        }
+
+        return (
+            <Table responsive striped bordered condensed>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Returns</th>
                     </tr>
                 </thead>
                 <tbody>
