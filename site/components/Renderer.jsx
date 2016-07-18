@@ -47,7 +47,6 @@ export default class Renderer extends ShallowComponent {
     }
 
     __toogleCode = () => {
-        console.log(this.state.showCode);
         this.setState({
             showCode: !this.state.showCode
         });
