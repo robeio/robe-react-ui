@@ -1,8 +1,16 @@
 {
+  "hashFile": ".hash.json",
   "react" : {
     "sourceFolder":"src",
     "extensions": ["jsx", "js"],
     "destinationFolder":"static/docs",
+    "exclude": ["index.js"]
+  },
+  "copy" : {
+    "sourceFolder":"site/samples",
+    "extensions": ["jsx", "js"],
+    "destinationFolder":"site/samples",
+    "destinationExtension":"txt",
     "exclude": ["index.js"]
   }
 }

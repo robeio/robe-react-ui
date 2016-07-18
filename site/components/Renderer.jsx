@@ -2,6 +2,10 @@ import React from "react";
 import { Panel, Table } from "react-bootstrap";
 import { Maps } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import Highlight from "react-highlight";
+import TextInputSampleContent from "../samples/inputs/SampleTextInput.txt";
+import TextInputSample from "../samples/inputs/SampleTextInput";
+
 
 export default class Renderer extends ShallowComponent {
 
@@ -20,11 +24,15 @@ export default class Renderer extends ShallowComponent {
             <div style={Renderer.style}>
                 <h3 id={this.props.header}>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
+                <TextInputSample />
+                <Highlight className="javascript">
+                    {TextInputSampleContent}
+                </Highlight>
                 <h5>Examples</h5>
-                <Panel>{this.__renderAlternatives(this.props.alternatives) }</Panel>
+                <Panel>{this.__renderAlternatives(this.props.alternatives)}</Panel>
                 <Panel>Code Area (Will be hidden) </Panel>
                 <h5>Props</h5>
-                {this.__renderTable(this.props.alternatives[0].component) }
+                {this.__renderTable(this.props.alternatives[0].component)}
             </div >);
     }
 

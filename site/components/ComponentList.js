@@ -48,12 +48,13 @@ class ComponentList {
                 {
                     header: "With Validations",
                     component: <TextInput
-                        label = "With Validations"
-                        value={state["TextFieldValidations"]}
-                        onChange={onChange.bind(undefined, "TextFieldValidations") }
+                        label="With Validations"
+                        value={state.TextFieldValidations}
+                        onChange={onChange.bind(undefined, "TextFieldValidations")}
                         validations={{
                             required: InputValidations.required,
-                        }}/>
+                        }}
+                    />
                 }]
         });
 

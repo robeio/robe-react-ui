@@ -52,6 +52,7 @@ function InitConfiguration(src, build, test, lib) {
          * @link https://webpack.github.io/docs/configuration.html#module
          */
         module: {
+            noParse: [/autoit.js/],
             /**
              * @link https://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
              */
@@ -107,6 +108,14 @@ function InitConfiguration(src, build, test, lib) {
                      */
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
                     loader: "url?limit=100000&name=[name].[ext]"
+                },
+                {
+                    /**
+                     * @link https://github.com/webpack/json-loader
+                     * npm install json-loader --save-dev
+                     */
+                    test: /\.txt$/,
+                    loader: "raw-loader"
                 }
             ]
         },
