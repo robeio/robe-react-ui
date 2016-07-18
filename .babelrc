@@ -4,5 +4,12 @@
      "es2015",
      "stage-0"
   ],
- "plugins": ["doc-gen"]
+  "env": {
+      "production": {
+        "plugins": ["doc-gen"]
+      },
+      "development": {
+        "plugins":  ["doc-gen"]
+      }
+    }
 }

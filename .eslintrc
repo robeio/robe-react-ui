@@ -67,6 +67,7 @@
             1,
             4
         ],
+        "react/jsx-indent-props": [1, 4],
         "react/jsx-no-duplicate-props": 2,
         "react/sort-comp": 0,
         "react/prop-types": [

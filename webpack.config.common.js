@@ -76,8 +76,7 @@ function InitConfiguration(src, build, test, lib) {
                             "react",
                             "es2015",
                             "stage-0"
-                        ],
-                        plugins: ["doc-gen"]
+                        ]
                     }
                 },
                 {
