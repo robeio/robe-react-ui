@@ -1,0 +1,8 @@
+{
+  "react" : {
+    "sourceFolder":"src",
+    "extensions": ["jsx", "js"],
+    "destinationFolder":"static/docs",
+    "exclude": ["index.js"]
+  }
+}
