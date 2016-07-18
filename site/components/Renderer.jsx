@@ -3,8 +3,6 @@ import { Panel, Table } from "react-bootstrap";
 import { Maps } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
-import TextInputSampleContent from "../samples/inputs/SampleTextInput.txt";
-import TextInputSample from "../samples/inputs/SampleTextInput";
 
 
 export default class Renderer extends ShallowComponent {
@@ -23,28 +21,19 @@ export default class Renderer extends ShallowComponent {
     }
 
     render() {
+        console.log(this.props.sample.default);
         return (
             <div style={Renderer.style}>
                 <h3 id={this.props.header}>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
-                <TextInputSample />
-                <Highlight className="javascript">
-                    {TextInputSampleContent}
-                </Highlight>
                 <h5>Examples</h5>
-                <Panel>{this.__renderAlternatives(this.json) }</Panel>
-                <Panel>Code Area (Will be hidden) </Panel>
+                <this.props.sample.default/>
+                <Highlight className="javascript">
+                    {this.props.code}
+                </Highlight>
                 <h5>Props</h5>
                 {this.__renderTable(this.json.props) }
             </div >);
-    }
-
-    __renderAlternatives(alternatives: Array): Array {
-        let divs = [];
-        for (let i = 0; i < alternatives.length; i++) {
-            divs.push(alternatives[i].component);
-        }
-        return divs;
     }
 
     __renderTable(data: Object): Array {

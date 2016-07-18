@@ -399,7 +399,9 @@ export default class Showcase extends ShallowComponent {
                     desc={item.desc}
                     alternatives={item.alternatives}
                     json={item.json}
-                    />);
+                    sample={item.sample}
+                    code={item.code}
+                />);
         }
         return (
             <Grid>
@@ -420,12 +422,7 @@ export default class Showcase extends ShallowComponent {
         });
     };
 
-    __handleChange = (code: any, e: Object) => {
-        let state = {};
-        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
-        this.setState(state);
-    };
+
     componentDidMount() {
         ReactDOM.findDOMNode(this).scrollTop = 0;
     }

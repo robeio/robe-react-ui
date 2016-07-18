@@ -1,5 +1,4 @@
 import React from "react";
-import TextInput from "inputs/TextInput";
 import MoneyInput from "inputs/MoneyInput";
 import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
@@ -31,67 +30,43 @@ class ComponentList {
             header: "TextInput",
             desc: "is the default input field to collect one line text data from form.",
             json: require("../docs/inputs/TextInput"),
-            alternatives: [
-                {
-                    header: "TextInput",
-                    component: <TextInput
-                        label="TextInput"
-                        value={state["TextInputNormal"]}
-                        onChange={onChange.bind(undefined, "TextInputNormal") }
-                        />
-                }, {
-                    header: "With Default Value",
-                    component: <TextInput
-                        label="With Default Value"
-                        value="Default Value"
-                        />
-                },
-                {
-                    header: "With Validations",
-                    component: <TextInput
-                        label="With Validations"
-                        value={state.TextFieldValidations}
-                        onChange={onChange.bind(undefined, "TextFieldValidations") }
-                        validations={{
-                            required: InputValidations.required,
-                        }}
-                        />
-                }]
+            sample: require("../samples/inputs/TextInputSample"),
+            code: require("../samples/inputs/TextInputSample.txt")
         });
 
         // /* ******************
         //  * Decimal Input    *
         //  * ******************/
-        components.push({
-            header: "Decimal Input",
-            json: require("../docs/inputs/DecimalInput"),
+        // components.push({
+        //     header: "Decimal Input",
+        //     json: require("../docs/inputs/DecimalInput"),
 
-            alternatives: [{
-                header: "DecimalInput",
-                component: <DecimalInput
-                    label="Decimal Input"
-                    value={state[components.length]}
-                    onChange={onChange.bind(undefined, components.length) }
-                    validations={{
-                        required: InputValidations.required,
-                        minValue: this.minValue,
-                        maxValue: this.maxValue
+        //     alternatives: [{
+        //         header: "DecimalInput",
+        //         component: <DecimalInput
+        //             label="Decimal Input"
+        //             value={state[components.length]}
+        //             onChange={onChange.bind(undefined, components.length) }
+        //             validations={{
+        //                 required: InputValidations.required,
+        //                 minValue: this.minValue,
+        //                 maxValue: this.maxValue
 
-                    }}/>
-            }]
-        });
+        //             }}/>
+        //     }]
+        // });
 
-        // /* ******************
-        //  * Decimal Input    *
-        //  * ******************/
-        components.push({
-            header: "Numeric Input",
-            json: require("../docs/inputs/NumericInput"),
-            alternatives: [{
-                header: "NumericInput",
-                component: <NumericInput label="Numeric Input" />
-            }]
-        });
+        // // /* ******************
+        // //  * Decimal Input    *
+        // //  * ******************/
+        // components.push({
+        //     header: "Numeric Input",
+        //     json: require("../docs/inputs/NumericInput"),
+        //     alternatives: [{
+        //         header: "NumericInput",
+        //         component: <NumericInput label="Numeric Input" />
+        //     }]
+        // });
 
 
         return components;
