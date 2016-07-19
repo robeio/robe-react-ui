@@ -9,7 +9,7 @@ describe("BaseInput.js", () => {
         <BaseInput
             label="TextInput Label Text Example"
             value="This is some example text must be equals with TextInput value"
-            onChange={onchange = () => {
+            onChange={() => {
             }}
             type="text"
             validations={{
@@ -24,7 +24,7 @@ describe("BaseInput.js", () => {
         let componentNode = TestUtils.renderIntoDocument(component);
         chai.assert.equal(componentNode.props.label, "TextInput Label Text Example");
         chai.assert.equal(componentNode.props.value, "This is some example text must be equals with TextInput value");
-        chai.assert.equal(componentNode.props.onChange.name, "onchange");
+        chai.assert.equal(componentNode.props.onChange.name, "onChange");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
