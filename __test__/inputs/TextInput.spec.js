@@ -2,16 +2,15 @@ import chai from "chai";
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-import BaseInput from "inputs/BaseInput";
+import TextInput from "inputs/TextInput";
 
-describe("BaseInput.js", () => {
+describe("TextInput.js", () => {
     const component = (
-        <BaseInput
+        <TextInput
             label="TextInput Label Text Example"
             value="This is some example text must be equals with TextInput value"
             onChange={() => {
             }}
-            type="text"
             validations={{
                 required: (value: any) => {
                     return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -33,8 +32,7 @@ describe("BaseInput.js", () => {
         chai.assert.equal(componentNode.isValid(), true);
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
         // Must be invalid
-        let component2 = (<BaseInput
-            type="text"
+        let component2 = (<TextInput
             value=""
             validations={{
                 required: (value: any) => {
@@ -44,23 +42,6 @@ describe("BaseInput.js", () => {
         />);
 
         componentNode = TestUtils.renderIntoDocument(component2);
-        chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
-    });
-
-     it("'max limit' Control", () => {
-        // Must be invalid
-        let component2 = (<BaseInput
-            type="text"
-            value="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Na"
-            validations={{
-                required: (value: any) => {
-                    return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
-                }
-            }}
-        />);
-
-        let componentNode = TestUtils.renderIntoDocument(component2);
         chai.assert.equal(componentNode.isValid(), false);
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
     });

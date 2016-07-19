@@ -51,7 +51,7 @@ export default class TextInput extends ShallowComponent {
                 {...this.props}
                 type="text"
                 ref="innerInput"
-                />);
+            />);
     }
 
     /**
