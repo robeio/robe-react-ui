@@ -25,8 +25,6 @@
 * `placeHolder` : 
 * `noResultsText` : 
 * `valueField` : 
-* `labelField` : 
+* `textField` : 
 * `onChange` : 
 * `onClick` : 
-
-
