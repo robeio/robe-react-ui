@@ -28,33 +28,20 @@ class ComponentList {
 
         components.push({
             header: "TextInput",
-            desc: "is the default input field to collect one line text data from form.",
+            desc: "is the  input field for collecting one line text data.",
             json: require("../docs/inputs/TextInput"),
             sample: require("../samples/inputs/TextInputSample"),
             code: require("../samples/inputs/TextInputSample.txt")
         });
 
-        // /* ******************
-        //  * Decimal Input    *
-        //  * ******************/
-        // components.push({
-        //     header: "Decimal Input",
-        //     json: require("../docs/inputs/DecimalInput"),
+        components.push({
+            header: "DecimalInput",
+            desc: "is the input field for collecting decimal data.",
+            json: require("../docs/inputs/DecimalInput"),
+            sample: require("../samples/inputs/DecimalInputSample"),
+            code: require("../samples/inputs/DecimalInputSample.txt")
 
-        //     alternatives: [{
-        //         header: "DecimalInput",
-        //         component: <DecimalInput
-        //             label="Decimal Input"
-        //             value={state[components.length]}
-        //             onChange={onChange.bind(undefined, components.length) }
-        //             validations={{
-        //                 required: InputValidations.required,
-        //                 minValue: this.minValue,
-        //                 maxValue: this.maxValue
-
-        //             }}/>
-        //     }]
-        // });
+        });
 
         // // /* ******************
         // //  * Decimal Input    *

@@ -20,30 +20,33 @@ export default class Showcase extends ShallowComponent {
     }
 
     render(): Object {
-        let componentArray = [];
+        let componentDetail;
         let componentMenu = [];
         let components = ComponentList.getComponentList(this.state, this.__handleChange);
 
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
+            let active = this.state.componentSelection === item.header;
             componentMenu.push(
                 <ListGroupItem
                     href={`#${item.header}`}
                     key={`#${item.header}`}
                     onClick={this.__onComponenListClick}
-                    active={this.state.componentSelection === item.header}
-                    >
+                    active={active}
+                >
                     {item.header}
                 </ListGroupItem>);
-            componentArray.push(
-                <Renderer
-                    header={item.header}
-                    desc={item.desc}
-                    alternatives={item.alternatives}
-                    json={item.json}
-                    sample={item.sample}
-                    code={item.code}
+            if (active) {
+                componentDetail = (
+                    <Renderer
+                        header={item.header}
+                        desc={item.desc}
+                        alternatives={item.alternatives}
+                        json={item.json}
+                        sample={item.sample}
+                        code={item.code}
                     />);
+            }
         }
         return (
             <Grid>
@@ -52,7 +55,7 @@ export default class Showcase extends ShallowComponent {
                 <h5>Here you can find the samples and usages of the components.</h5>
                 <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid" }} > <ListGroup>{componentMenu}</ListGroup></Col>
                 <Col xs={12} sm={9} style={{ height: "80vh", overflow: "scroll" }} ref="componentView">
-                    {componentArray}
+                    {componentDetail}
                 </Col>
             </Grid>
         );

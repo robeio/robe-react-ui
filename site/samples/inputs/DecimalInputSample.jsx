@@ -1,10 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import TextInput from "inputs/TextInput";
+import DecimalInput from "inputs/DecimalInput";
 import InputValidations from "validation/InputValidations";
 
 
-export default class TextInputSample extends ShallowComponent {
+export default class DecimalInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,29 +14,32 @@ export default class TextInputSample extends ShallowComponent {
     render() {
         return (
             <div>
-                <TextInput
-                    label="TextInput"
-                    value={this.state.TextInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "TextInputNormal")}
-                />
-                <TextInput
+                <DecimalInput
+                    label="DecimalInput"
+                    value={this.state.DecimalInputNormal}
+                    thousandsSeparator=","
+                    decimalSeperator="."
+                    onChange={this.__handleChange.bind(undefined, "DecimalInputNormal") }
+                    />
+                <DecimalInput
                     label="With Default Value"
-                    value="Default Value"
-                />
-                <TextInput
+                    value="42.01"
+                    />
+                <DecimalInput
                     label="With Validations"
-                    value={this.state.TextFieldValidations}
-                    onChange={this.__handleChange.bind(undefined, "TextFieldValidations")}
+                    value={this.state.DecimalInputValidations}
+                    onChange={this.__handleChange.bind(undefined, "DecimalInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}
-                />
+                    />
             </div>
         );
     }
     __handleChange = (code: any, e: Object) => {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        // console.log("2",value);
         state[code] = value;
         this.setState(state);
     };

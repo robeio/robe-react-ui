@@ -2,60 +2,79 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import Input from "inputs/BaseInput";
 
+/**
+ * Decimal is a component decimal inputs.
+ *
+ * @export
+ * @class Decimal
+ * @extends {ShallowComponent}
+ */
 export default class DecimalInput extends ShallowComponent {
-
+    /**
+     * Properties of the component
+     *
+     * @static
+     */
     static propTypes = {
+        /**
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
+        /**
+         * Value of the component
+         */
         value: React.PropTypes.any.isRequired,
+        /**
+         * onChange event for the component
+         */
         onChange: React.PropTypes.func,
-        decimalSeperator: React.PropTypes.string,
-        fractionalSeperator: React.PropTypes.string,
-        regex: React.PropTypes.array
+
+        /**
+         * Decimal Seperator for integer and fraction.
+         */
+        decimalSeperator: React.PropTypes.string
     };
 
     static defaultProps = {
-        regex: [/(^[0-9]{0,13}$)|((^[0-9]{0,13})+\.[0-9]{0,2}$)/igm, "Hatalı girdiniz."],
-        decimalSeperator: ".",
-        fractionalSeperator: ",",
-        step: "0.01"
+        decimalSeperator: "."
     };
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            value: this.props.value || ""
-        };
-    }
-
     render() {
-        let value = this.props.onChange ? this.props.value : this.state.value;
         return (<Input
             {...this.props}
-            type="number"
+            type="text"
             ref="innerInput"
             step={this.props.step}
-            value = {value}
-            onChange={this.__numericFilter}
+            value={this.props.value}
+            onChange={this.props.onChange !== undefined ? this.__numericFilter : undefined}
             />);
     }
 
-    isValid = () => {
+    /**
+      * Returns the validity of the value.
+      * @return true - value is valid, false - invalid
+      */
+    isValid(): boolean {
         return this.refs.innerInput.isValid();
-    };
+    }
+
     __numericFilter = (e) => {
         let value = e.target.value;
-        value = value ? parseFloat(parseFloat(value).toFixed(2)) : value;
-        console.log(value);
-
-        e.target.parsedValue = value;
-        if (this.props.onChange) {
-            this.props.onChange(e);
+        if (this.__isFloat(value) || value === "") {
+            e.target.parsedValue = value;
+            if (this.props.onChange) {
+                this.props.onChange(e);
+            }
         } else {
-            this.setState({
-                value: value
-            })
+            e.preventDefault();
+            e.stopPropagation();
         }
-
     };
+    __isFloat = (input: string): boolean => {
+        if (input === null || input === undefined) {
+            return false;
+        }
+        let found = input.match("^[0-9]{1,6}((\\" + this.props.decimalSeperator + ")|(\\" + this.props.decimalSeperator + "\\d{1,2}))?$");
+        return found !== undefined && found !== null;
+    }
 }

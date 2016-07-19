@@ -21,7 +21,7 @@ export default class TextInput extends ShallowComponent {
          */
         label: React.PropTypes.string,
         /**
-         * Value for the component
+         * Value of the component
          */
         value: React.PropTypes.string.isRequired,
         /**

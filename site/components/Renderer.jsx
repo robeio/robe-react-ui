@@ -41,9 +41,9 @@ export default class Renderer extends ShallowComponent {
                 </Panel>
                 {highlight}
                 <h4>Props</h4>
-                {this.__renderPropsTable(this.json.props)}
+                {this.__renderPropsTable(this.json.props) }
                 <h4>Methods</h4>
-                {this.__renderMethodsTable(this.json.methods)}
+                {this.__renderMethodsTable(this.json.methods) }
             </div >);
     }
 
@@ -58,11 +58,13 @@ export default class Renderer extends ShallowComponent {
 
         Maps.forEach(data, (value: any, key: string) => {
             let type = value.type !== undefined ? value.type.name : "";
+            let defaultVal = value.defaultValue !== undefined ? value.defaultValue.value : "";
             rows.push(<tr>
                 <td>{key}</td>
                 <td>{type}</td>
-                <td>{value.description}</td>
+                <td>{defaultVal}</td>
                 <td>{value.required ? "Yes" : "No"}</td>
+                <td>{value.description}</td>
             </tr>);
         });
 
@@ -72,8 +74,9 @@ export default class Renderer extends ShallowComponent {
                     <tr>
                         <th>Name</th>
                         <th>Type</th>
-                        <th>Description</th>
+                        <th>Default</th>
                         <th>Required</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,8 +92,8 @@ export default class Renderer extends ShallowComponent {
             let value = data[i];
             rows.push(<tr>
                 <td>{value.name}</td>
-                <td>{value.description}</td>
                 <td>{value.returns.type.name}</td>
+                <td>{value.description}</td>
             </tr>);
         }
 
@@ -99,8 +102,8 @@ export default class Renderer extends ShallowComponent {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
                         <th>Returns</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
