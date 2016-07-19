@@ -22,7 +22,6 @@
 
 * `value` :
 * `disabled` :  
-* `values` : 
 * `placeHolder` : 
 * `noResultsText` : 
 * `valueField` : 
