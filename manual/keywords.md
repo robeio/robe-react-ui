@@ -20,7 +20,8 @@
 
 #### props 
 
-* `value` : 
+* `value` :
+* `disabled` :  
 * `values` : 
 * `placeHolder` : 
 * `noResultsText` : 
