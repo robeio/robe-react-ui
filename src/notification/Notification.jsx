@@ -5,7 +5,7 @@ import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "faicon/FaIcon";
 import NotificationItem from "notification/NotificationItem";
-import GlobalVariables from "app/GlobalVariables";
+import UIApplication from "../app/UIApplication";
 import "notification/style.css";
 
 export default class Notification extends ShallowComponent {
@@ -39,7 +39,7 @@ export default class Notification extends ShallowComponent {
                         <Col className="notification-footer">
                             <a
                                 style={{ padding: 0 }}
-                                href={`${GlobalVariables.get("applicationRootPath")}#/account/`}
+                                href={`${UIApplication.getBaseUrlPath()}#/account/`}
                             >
                             <Col
                                 componentClass="h7"

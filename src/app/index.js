@@ -1,1 +1,1 @@
-export { default as GlobalVariables } from "./GlobalVariables";
+export { default as UIApplication } from "./UIApplication";

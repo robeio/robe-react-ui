@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent, RequestUtils } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import moment from "moment";
-import GlobalVariables from "app/GlobalVariables";
+import UIApplication from "../app/UIApplication";
 
 export default class NotificationItem extends ShallowComponent {
 
@@ -20,7 +20,7 @@ export default class NotificationItem extends ShallowComponent {
 
         return (
             <span>
-                <a style={{ padding: "0!important" }} href={GlobalVariables.get("applicationRootPath") + this.__handlePathTo(item)} onClick={this.__onRead(item.oid)}>
+                <a style={{ padding: "0!important" }} href={UIApplication.getBaseUrlPath() + this.__handlePathTo(item)} onClick={this.__onRead(item.oid)}>
                     <Col className="notification-item">
                         <Col componentClass="h4" className="item-title" style={{ marginBottom: 0 }}>
                     <Col componentClass="p" style={{ wordWrap: "break-word" }} >{item.description}</Col>

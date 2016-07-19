@@ -92,7 +92,7 @@ export default class Renderer extends ShallowComponent {
             let value = data[i];
             rows.push(<tr>
                 <td>{value.name}</td>
-                <td>{value.returns.type.name}</td>
+                <td>{value.returns ? value.returns.type.name : ""}</td>
                 <td>{value.description}</td>
             </tr>);
         }

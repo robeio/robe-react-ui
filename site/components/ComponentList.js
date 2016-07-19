@@ -2,14 +2,12 @@ import React from "react";
 import MoneyInput from "inputs/MoneyInput";
 import CheckInput from "inputs/CheckInput";
 import RadioInput from "inputs/RadioInput";
-import SelectInput from "inputs/SelectInput";
 import PasswordInput from "inputs/PasswordInput";
 import NumericInput from "inputs/NumericInput";
 import DecimalInput from "inputs/DecimalInput";
 import DateInput from "inputs/DateInput";
 import { CheckboxList } from "inputs/checklist";
-import SelectInputSingle from "inputs/SelectInputSingle";
-import SelectInputMulti from "inputs/SelectInputMulti";
+import SelectInput from "inputs/SelectInput";
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";
 import DataForm from "form/DataForm";
 import ModalDataForm from "form/ModalDataForm";
@@ -28,7 +26,7 @@ class ComponentList {
 
         components.push({
             header: "TextInput",
-            desc: "is the  input field for collecting one line text data.",
+            desc: "is the default input field to collect one line text data from form.",
             json: require("../docs/inputs/TextInput"),
             sample: require("../samples/inputs/TextInputSample"),
             code: require("../samples/inputs/TextInputSample.txt")
@@ -40,8 +38,30 @@ class ComponentList {
             json: require("../docs/inputs/DecimalInput"),
             sample: require("../samples/inputs/DecimalInputSample"),
             code: require("../samples/inputs/DecimalInputSample.txt")
-
         });
+
+        components.push({
+            header: "SelectInput",
+            desc: "is the default input field to collect one line text data from form.",
+            json: require("../docs/inputs/SelectInput"),
+            sample: require("../samples/inputs/SelectInputSample"),
+            code: require("../samples/inputs/SelectInputSample.txt")
+        });
+
+        //     alternatives: [{
+        //         header: "DecimalInput",
+        //         component: <DecimalInput
+        //             label="Decimal Input"
+        //             value={state[components.length]}
+        //             onChange={onChange.bind(undefined, components.length) }
+        //             validations={{
+        //                 required: InputValidations.required,
+        //                 minValue: this.minValue,
+        //                 maxValue: this.maxValue
+
+        //             }}/>
+        //     }]
+        // });
 
         // // /* ******************
         // //  * Decimal Input    *
