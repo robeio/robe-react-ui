@@ -41,6 +41,8 @@ esdoc
 dist
 lib
 docs
+*.txt
+.hash.json
 
 # MacOS
 .DS_Store
