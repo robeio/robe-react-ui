@@ -18,20 +18,20 @@ export default class TextInputSample extends ShallowComponent {
                 <TextInput
                     label="TextInput"
                     value={this.state.TextInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "TextInputNormal") }
-                    />
+                    onChange={this.__handleChange.bind(undefined, "TextInputNormal")}
+                />
                 <TextInput
                     label="With Default Value"
                     value="Default Value"
-                    />
+                />
                 <TextInput
                     label="With Validations"
                     value={this.state.TextFieldValidations}
-                    onChange={this.__handleChange.bind(undefined, "TextFieldValidations") }
+                    onChange={this.__handleChange.bind(undefined, "TextFieldValidations")}
                     validations={{
                         required: InputValidations.required,
                     }}
-                    />
+                />
             </div>
         );
     }
