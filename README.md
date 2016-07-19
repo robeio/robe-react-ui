@@ -8,7 +8,7 @@
 [![dependencies](https://www.versioneye.com/user/projects/578650986edb08003d108708/badge.svg)](https://www.versioneye.com/user/projects/578650986edb08003d108708?child=summary)
 
 
-RRC = Robe-React-UI
+RRU = Robe-React-UI
 
 ##### Motivation
 
@@ -26,13 +26,15 @@ UI components built on top of [React-Bootstrap](https://react-bootstrap.github.i
 
 
 #### 1. Get the latest version
-You can start by cloning the latest version of RES.
+You can start by cloning the latest version of RRU.
 
 #### 2. Run `npm install`
 This will install both run-time project dependencies and developer tools listed
 in [package.json](./package.json) file.
 
 #### 3. How to start project in Development Mode
+
+This will start the development server and serve site application.
 
 ```shell
 $ npm start
