@@ -27,7 +27,7 @@ describe("TextInput.js", () => {
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
-    it("'valitations' Control", () => {
+    it("'validations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(component);
         chai.assert.equal(componentNode.isValid(), true);
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
