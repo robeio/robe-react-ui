@@ -29,7 +29,12 @@ export default class BaseInput extends ShallowComponent {
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object
+        validations: React.PropTypes.object,
+        
+        /**
+         * Type of the BaseInput. (text,email,password,file)
+         */
+        type: React.PropTypes.string.required
     };
 
     /**
@@ -88,7 +93,7 @@ export default class BaseInput extends ShallowComponent {
                     bsStyle="error"
                     ref="innerInput"
                     value={value}
-                />
+                    />
                 {alerts}
             </FormGroup>
         );
@@ -97,23 +102,23 @@ export default class BaseInput extends ShallowComponent {
     /**
      * Focuses to the input field.
      */
-    focus = () => {
+    focus() {
         this.refs.innerInput.getInputDOMNode().focus();
-    };
+    }
 
     /**
      * Returns validity of the component.
      * @return {boolean}
      */
-    isValid = (): boolean => {
+    isValid(): boolean {
         return this.valid;
-    };
+    }
 
     /**
      * Validates the input components and returns error messages.
      * @return { Array<string>} array of messages.
      */
-    __validate = (): Array<string> => {
+    __validate(): Array<string> {
         let messages = [];
 
         Maps.forEach(this.__validations, (validation: Function, key: string) => {
@@ -130,12 +135,12 @@ export default class BaseInput extends ShallowComponent {
             }
         });
         return messages;
-    };
+    }
 
     /**
      * Fired after component mounts. Takes validations from props.
      */
-    componentDidMount = () => {
+    componentDidMount() {
         if (this.props.focus) {
             this.focus();
         }
@@ -144,7 +149,7 @@ export default class BaseInput extends ShallowComponent {
     /**
      * Fired after component mounts. Sets focus from props.
      */
-    componentWillMount = () => {
+    componentWillMount() {
         if (this.props.validations !== undefined) {
             this.__validations = this.props.validations;
         }

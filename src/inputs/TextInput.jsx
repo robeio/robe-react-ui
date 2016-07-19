@@ -27,7 +27,6 @@ export default class TextInput extends ShallowComponent {
         /**
          * onChange event for the component
          */
-
         onChange: React.PropTypes.func
     }
 
