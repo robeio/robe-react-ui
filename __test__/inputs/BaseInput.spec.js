@@ -5,42 +5,46 @@ import TestUtils from "react-addons-test-utils";
 import BaseInput from "inputs/BaseInput";
 
 describe("BaseInput.js", () => {
-    const component = TestUtils.renderIntoDocument(
+    const component = (
         <BaseInput
             label="TextInput Label Text Example"
             value="This is some example text must be equals with TextInput value"
             onChange={onchange = () => {
-            } }
+            }}
             type="text"
             validations={{
                 required: (value: any) => {
-                    return (value === undefined || value === null || value === "") ? "Not Valid" : "Valid";
+                    return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
                 }
             }}
-            />
+        />
     );
 
     it("'props' Controls", () => {
-        chai.assert.equal(component.props.label, "TextInput Label Text Example");
-        chai.assert.equal(component.props.value, "This is some example text must be equals with TextInput value");
-        chai.assert.equal(component.props.onChange.name, "onchange");
-        chai.assert.isDefined(component.props.validations.required, "Validation prop error");
+        let componentNode = TestUtils.renderIntoDocument(component);
+        chai.assert.equal(componentNode.props.label, "TextInput Label Text Example");
+        chai.assert.equal(componentNode.props.value, "This is some example text must be equals with TextInput value");
+        chai.assert.equal(componentNode.props.onChange.name, "onchange");
+        chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
     it("'valitations' Control", () => {
-        let component2 = TestUtils.renderIntoDocument(
-            <BaseInput
-                label="TextInput Label Text Example"
-                type="text"
-                validations={{
-                    required: (value: any) => {
-                        return (value === undefined || value === null || value === "") ? "Not Valid" : "Valid";
-                    }
-                }}
-                />
-        );
-        console.log(component2);
+        let componentNode = TestUtils.renderIntoDocument(component);
+        chai.assert.equal(componentNode.isValid(), true);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
+        // Must be invalid
+        let component2 = (<BaseInput
+            type="text"
+            value=""
+            validations={{
+                required: (value: any) => {
+                    return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
+                }
+            }}
+        />);
 
-
+        componentNode = TestUtils.renderIntoDocument(component2);
+        chai.assert.equal(componentNode.isValid(), false);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
     });
 });

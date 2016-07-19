@@ -32,9 +32,14 @@ export default class BaseInput extends ShallowComponent {
         validations: React.PropTypes.object,
         
         /**
-         * Type of the BaseInput. (text,email,password,file)
+         * Type of the BaseInput. (text, email, password, file)
          */
-        type: React.PropTypes.string.required
+        type: React.PropTypes.string,
+
+         /**
+         * Component class of the BaseInput. (select, textarea)
+         */
+        componentClass: React.PropTypes.string
     };
 
     /**
