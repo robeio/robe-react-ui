@@ -7,11 +7,6 @@ import Highlight from "react-highlight";
 
 export default class Renderer extends ShallowComponent {
 
-    static style = {
-        borderBottom: "1px solid lightgray",
-        marginBottom: "50px"
-    }
-
     json;
 
     /* eslint no-useless-constructor: 0*/
@@ -31,7 +26,7 @@ export default class Renderer extends ShallowComponent {
             </Highlight>);
         }
         return (
-            <div style={Renderer.style}>
+            <div>
                 <h3 id={this.props.header}>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
                 <h4>Examples</h4>
@@ -41,9 +36,9 @@ export default class Renderer extends ShallowComponent {
                 </Panel>
                 {highlight}
                 <h4>Props</h4>
-                {this.__renderPropsTable(this.json.props) }
+                {this.__renderPropsTable(this.json.props)}
                 <h4>Methods</h4>
-                {this.__renderMethodsTable(this.json.methods) }
+                {this.__renderMethodsTable(this.json.methods)}
             </div >);
     }
 
@@ -90,6 +85,9 @@ export default class Renderer extends ShallowComponent {
 
         for (let i = 0; i < data.length; i++) {
             let value = data[i];
+            if (value.name.indexOf("__") === 0) {
+                continue;
+            }
             rows.push(<tr>
                 <td>{value.name}</td>
                 <td>{value.returns ? value.returns.type.name : ""}</td>
