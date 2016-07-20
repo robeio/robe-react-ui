@@ -35,6 +35,13 @@ class ComponentList {
             sample: require("../samples/inputs/DecimalInputSample"),
             code: require("../samples/inputs/DecimalInputSample.txt")
         });
+        components.push({
+            header: "NumericInput",
+            desc: "is the input field for collecting numeric data.",
+            json: require("../docs/inputs/NumericInput"),
+            sample: require("../samples/inputs/NumericInputSample"),
+            code: require("../samples/inputs/NumericInputSample.txt")
+        });
 
         components.push({
             header: "SelectInput",

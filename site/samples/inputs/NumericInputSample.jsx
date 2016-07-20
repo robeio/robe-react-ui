@@ -1,34 +1,36 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import DecimalInput from "inputs/DecimalInput";
+import NumericInput from "inputs/NumericInput";
 import InputValidations from "validation/InputValidations";
 
 
-export default class DecimalInputSample extends ShallowComponent {
+export default class NumericInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            NumericInputNormal: "",
+            NumericInputValidations: ""
         };
     }
 
     render() {
         return (
             <div>
-                <DecimalInput
-                    label="DecimalInput"
-                    value={this.state.DecimalInputNormal}
+                <NumericInput
+                    label="NumericInput"
+                    value={this.state.NumericInputNormal}
                     thousandsSeparator=","
                     decimalSeperator="."
-                    onChange={this.__handleChange.bind(undefined, "DecimalInputNormal") }
+                    onChange={this.__handleChange.bind(undefined, "NumericInputNormal") }
                     />
-                <DecimalInput
+                <NumericInput
                     label="With Default Value"
-                    value="42.01"
+                    value="42"
                     />
-                <DecimalInput
+                <NumericInput
                     label="With Validations"
-                    value={this.state.DecimalInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "DecimalInputValidations") }
+                    value={this.state.NumericInputValidations}
+                    onChange={this.__handleChange.bind(undefined, "NumericInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}

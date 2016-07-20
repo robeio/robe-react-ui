@@ -3,8 +3,9 @@ import { ShallowComponent } from "robe-react-commons";
 import Input from "inputs/BaseInput";
 
 /**
- * Decimal is a component decimal inputs.
- *
+ * DecimalInput is a component decimal inputs.
+ * Has support for different decimal seperators (,/.)
+ * Supports 2 digits after seperator.
  * @export
  * @class Decimal
  * @extends {ShallowComponent}
@@ -36,10 +37,11 @@ export default class DecimalInput extends ShallowComponent {
     };
 
     static defaultProps = {
-        decimalSeperator: "."
+        decimalSeperator: ".",
+        value: ""
     };
 
-    render() {
+    render(): Object {
         return (<Input
             {...this.props}
             type="text"
@@ -47,7 +49,7 @@ export default class DecimalInput extends ShallowComponent {
             step={this.props.step}
             value={this.props.value}
             onChange={this.props.onChange !== undefined ? this.__numericFilter : undefined}
-            />);
+        />);
     }
 
     /**
@@ -58,7 +60,10 @@ export default class DecimalInput extends ShallowComponent {
         return this.refs.innerInput.isValid();
     }
 
-    __numericFilter = (e) => {
+    /**
+     * Internal onchange handler for filtering numerics.
+     */
+    __numericFilter = (e: Object) => {
         let value = e.target.value;
         if (this.__isFloat(value) || value === "") {
             e.target.parsedValue = value;
