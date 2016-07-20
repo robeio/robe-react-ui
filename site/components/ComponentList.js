@@ -18,12 +18,8 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getComponentList(state: Object, onChange: Function) {
+    getComponentList(state: Object) {
         let components = [];
-        /* ******************
-         * Text Input    *
-         * ******************/
-
         components.push({
             header: "TextInput",
             desc: "is the default input field to collect one line text data from form.",
@@ -47,34 +43,6 @@ class ComponentList {
             sample: require("../samples/inputs/SelectInputSample"),
             code: require("../samples/inputs/SelectInputSample.txt")
         });
-
-        //     alternatives: [{
-        //         header: "DecimalInput",
-        //         component: <DecimalInput
-        //             label="Decimal Input"
-        //             value={state[components.length]}
-        //             onChange={onChange.bind(undefined, components.length) }
-        //             validations={{
-        //                 required: InputValidations.required,
-        //                 minValue: this.minValue,
-        //                 maxValue: this.maxValue
-
-        //             }}/>
-        //     }]
-        // });
-
-        // // /* ******************
-        // //  * Decimal Input    *
-        // //  * ******************/
-        // components.push({
-        //     header: "Numeric Input",
-        //     json: require("../docs/inputs/NumericInput"),
-        //     alternatives: [{
-        //         header: "NumericInput",
-        //         component: <NumericInput label="Numeric Input" />
-        //     }]
-        // });
-
 
         return components;
     }
