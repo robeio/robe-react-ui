@@ -32,13 +32,13 @@ export default class Renderer extends ShallowComponent {
                 <h4>Examples</h4>
                 <Panel>
                     <this.props.sample.default />
-                    <a className="pull-right" onClick={this.__toogleCode}>Show Code</a>
+                    <a className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</a>
                 </Panel>
                 {highlight}
                 <h4>Props</h4>
-                {this.__renderPropsTable(this.json.props)}
+                {this.__renderPropsTable(this.json.props) }
                 <h4>Methods</h4>
-                {this.__renderMethodsTable(this.json.methods)}
+                {this.__renderMethodsTable(this.json.methods) }
             </div >);
     }
 
