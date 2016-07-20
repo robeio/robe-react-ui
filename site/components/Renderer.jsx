@@ -1,5 +1,5 @@
 import React from "react";
-import { Panel, Table } from "react-bootstrap";
+import { Button, Panel, Table } from "react-bootstrap";
 import { Maps } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
@@ -33,12 +33,12 @@ export default class Renderer extends ShallowComponent {
                 <Panel>
                     <this.props.sample.default />
                     {highlight}
-                    <a className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</a>
+                    <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
                 </Panel>
                 <h4>Props</h4>
-                {this.__renderPropsTable(this.json.props)}
+                {this.__renderPropsTable(this.json.props) }
                 <h4>Methods</h4>
-                {this.__renderMethodsTable(this.json.methods)}
+                {this.__renderMethodsTable(this.json.methods) }
             </div >);
     }
 
