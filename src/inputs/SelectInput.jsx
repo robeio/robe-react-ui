@@ -70,27 +70,16 @@ export default class SelectInput extends ShallowComponent {
         searchable: React.PropTypes.bool
     };
 
-    /**
-     * {string} displayed when there's no value
-     * default in messages
-     */
-    placeHolder;
-    /**
-     * {string} presented message if any result not shown.
-     * default in messages
-     */
-    noResultsText;
-    /**
-     * key of given map array `items`
-     */
-    valueField;
-    /**
-     * presented text of give map array `items`
-     */
-    textField;
-    /**
-     * Holds the valid property of input component.
-     */
+    static defaultProps = {
+        placeHolder: "Please Select",
+        noResultsText: "No Result",
+        textField: "text",
+        valueField: "value",
+        multi: false,
+        disabled: false,
+        searchable: true
+    };
+
     __valid: boolean = false;
     /**
      * Validation map for all functions and custom messages .
@@ -100,16 +89,9 @@ export default class SelectInput extends ShallowComponent {
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-        this.placeHolder = !this.props.placeHolder ? info.placeHolder : this.props.placeHolder;
-        this.noResultsText = !this.props.noResultsText ? info.noResultsText : this.props.noResultsText;
-        this.textField = !this.props.textField ? "text" : this.props.textField;
-        this.valueField = !this.props.valueField ? "value" : this.props.valueField;
+
         // TODO validations must bi implemeneted
         this.validations = this.props.validations;
-        this.state = {
-            value: this.props.value,
-            items: this.props.items
-        };
     }
 
     render() {
@@ -125,22 +107,22 @@ export default class SelectInput extends ShallowComponent {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         return (
-        <FormGroup>
-            <ControlLabel> {this.props.label} </ControlLabel>
-            <Select
-                options={this.state.items}
-                valueKey={this.valueField}
-                labelKey={this.textField}
-                multi={this.props.multi}
-                noResultsText={this.noResultsText}
-                disabled={this.props.disabled}
-                placeholder={this.placeHolder}
-                searchable={this.searchable}
-                value={this.state.value}
-                onChange={this.__onChange.bind(this)}
-            />
-            {alerts}
-        </FormGroup>
+            <FormGroup>
+                <ControlLabel> {this.props.label} </ControlLabel>
+                <Select
+                    options={this.props.items}
+                    valueKey={this.props.valueField}
+                    labelKey={this.props.textField}
+                    multi={this.props.multi}
+                    noResultsText={this.props.noResultsText}
+                    disabled={this.props.disabled}
+                    placeholder={this.props.placeHolder}
+                    searchable={this.props.searchable}
+                    value={this.props.value}
+                    onChange={this.__onChange.bind(this) }
+                    />
+                {alerts}
+            </FormGroup>
         );
     }
     /**
@@ -184,8 +166,5 @@ export default class SelectInput extends ShallowComponent {
             let e = { target: { value: value } };
             this.props.onChange(e);
         }
-        this.setState({
-            value: value
-        });
     }
 }

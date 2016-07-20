@@ -3,17 +3,6 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import SelectInput from "inputs/SelectInput";
 import InputValidations from "validation/InputValidations";
 
-const data = [
-    {
-        key: "MALE",
-        value: "Male"
-    },
-    {
-        key: "FEMALE",
-        value: "Female"
-    }
-];
-
 const langs = [
     {
         key: "en",
@@ -25,13 +14,15 @@ const langs = [
     },
     {
         key: "kurdish",
-        value: "Kurd"
+        value: "Kurdish"
     }
 ];
 export default class SelectInputSample extends ShallowComponent {
 
     constructor(props) {
         super(props);
+        this.state = {
+        };
     }
 
     render() {
@@ -39,18 +30,20 @@ export default class SelectInputSample extends ShallowComponent {
             <div>
                 <SelectInput
                     label="Select Input Single"
-                    items={data}
+                    items={langs}
                     textField="value"
                     valueField="key"
+                    value={this.state.Select}
+                    onChange={this.__handleChange.bind(undefined, "Select")}
                 />
                 <SelectInput
                     label="Select Input Multi"
                     multi={true}
                     items={langs}
-                    value="MALE"
+                    value={this.state.MultiSelect}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(undefined, "TextFieldValidations")}
+                    onChange={this.__handleChange.bind(undefined, "MultiSelect")}
                     validations={{
                         required: InputValidations.required
                     }}
@@ -59,8 +52,6 @@ export default class SelectInputSample extends ShallowComponent {
         );
     }
     __handleChange = (code: any, e: Object) => {
-        console.log(code);
-        console.log(e);
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[code] = value;

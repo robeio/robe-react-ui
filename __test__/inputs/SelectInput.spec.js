@@ -44,11 +44,9 @@ describe("inputs/SelectInput", () => {
     });
 
     it("render", () => {
-        // TODO test must be implemented
-        console.log("test");
+        // TODO: test must be implemented
     });
     it("isValid", () => {
-        // TODO test must be implemented
-        console.log("test");
+        // TODO: test must be implemented
     });
 });
