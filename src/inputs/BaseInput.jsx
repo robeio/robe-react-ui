@@ -113,7 +113,7 @@ export default class BaseInput extends ShallowComponent {
                             bsStyle="error"
                             ref="innerInput"
                             value={value}
-                            />
+                        />
                         {this.props.inputGroupRight}
                     </InputGroup>
                     {alerts}
@@ -128,7 +128,7 @@ export default class BaseInput extends ShallowComponent {
                             bsStyle="error"
                             ref="innerInput"
                             value={value}
-                            />
+                        />
                     {alerts}
                 </FormGroup>
             );
