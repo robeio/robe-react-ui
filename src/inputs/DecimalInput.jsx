@@ -33,7 +33,7 @@ export default class DecimalInput extends ShallowComponent {
         /**
          * Decimal Seperator for integer and fraction.
          */
-        decimalSeperator: React.PropTypes.string
+        decimalSeparator: React.PropTypes.oneOf([".", ","])
     };
 
     static defaultProps = {

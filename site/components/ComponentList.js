@@ -42,6 +42,13 @@ class ComponentList {
             sample: require("../samples/inputs/NumericInputSample"),
             code: require("../samples/inputs/NumericInputSample.txt")
         });
+         components.push({
+            header: "MoneyInput",
+            desc: "is the input field for collecting money data.",
+            json: require("../docs/inputs/MoneyInput"),
+            sample: require("../samples/inputs/MoneyInputSample"),
+            code: require("../samples/inputs/MoneyInputSample.txt")
+        });
 
         components.push({
             header: "SelectInput",

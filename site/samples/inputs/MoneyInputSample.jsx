@@ -1,11 +1,11 @@
+
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import DecimalInput from "inputs/DecimalInput";
+import MoneyInput from "inputs/MoneyInput";
 import InputValidations from "validation/InputValidations";
 
 
-
-export default class DecimalInputSample extends ShallowComponent {
+export default class MoneyInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,20 +15,22 @@ export default class DecimalInputSample extends ShallowComponent {
     render() {
         return (
             <div>
-                <DecimalInput
-                    label="DecimalInput"
-                    value={this.state.DecimalInputNormal}
+                <MoneyInput
+                    label="MoneyInput"
+                    value={this.state.MoneyInputNormal}
+                    thousandsSeparator=","
                     decimalSeperator="."
-                    onChange={this.__handleChange.bind(undefined, "DecimalInputNormal") }
+                    onChange={this.__handleChange.bind(undefined, "MoneyInputNormal") }
                     />
-                <DecimalInput
+                <MoneyInput
                     label="With Default Value"
                     value="42.01"
+                    unit="USD"
                     />
-                <DecimalInput
+                <MoneyInput
                     label="With Validations"
-                    value={this.state.DecimalInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "DecimalInputValidations") }
+                    value={this.state.MoneyInputValidations}
+                    onChange={this.__handleChange.bind(undefined, "MoneyInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}
