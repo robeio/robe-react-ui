@@ -3,7 +3,6 @@ import { ShallowComponent } from "robe-react-commons";
 import Input from "./BaseInput";
 import Numeral from "numeral";
 import Turkish from "../../node_modules/numeral/languages/tr";
-import is from "is-js";
 import InputGroup from "react-bootstrap/lib/InputGroup";
 
 
@@ -57,7 +56,7 @@ export default class MoneyInput extends ShallowComponent {
     }
 
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         if (this.props.decimalSeparator === ",") {
             Numeral.language("tr", Turkish);
@@ -65,17 +64,26 @@ export default class MoneyInput extends ShallowComponent {
         }
     }
 
-    render() {
+    render(): Object {
         return (
             <Input
+                {...this.props}
                 type="text"
                 label={this.props.label}
                 onChange={this.props.onChange !== undefined ? this.__numericFilter : undefined}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
-                ref="integerInput"
+                ref="innerInput"
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-                />);
+            />);
+    }
+
+     /**
+      * Returns the validity of the value.
+      * @return true - value is valid, false - invalid
+      */
+    isValid(): boolean {
+        return this.refs.innerInput.isValid();
     }
 
     /**
@@ -98,6 +106,7 @@ export default class MoneyInput extends ShallowComponent {
         if (input === null || input === undefined) {
             return false;
         }
+        /* eslint-disable prefer-template */
         let found = input.match("(?=.)^(([1-9][0-9]{0,2}(" + this.props.thousandSeparator + "[0-9]{3})*)|0)?(\\" + this.props.decimalSeparator + "[0-9]{0,2})?$");
         return found !== undefined && found !== null;
     }
@@ -124,10 +133,8 @@ export default class MoneyInput extends ShallowComponent {
         indexDS = input.indexOf(this.props.decimalSeparator);
         let thCount = Math.floor((indexTH - 1) / 3);
         if (indexDS !== -1) {
-            output = output + input.substring((indexDS - 1) + thCount)
+            output = output + input.substring((indexDS - 1) + thCount);
         }
-        console.log("addTH", input, output);
-
         return output;
     }
 }
