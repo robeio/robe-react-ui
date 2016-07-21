@@ -89,14 +89,14 @@ export default class BaseInput extends ShallowComponent {
             errors.push(BaseInput.maxTextLengthMessage);
             value = "";
         }
-        this.valid = (errors.length === 0);
+        this.__valid = (errors.length === 0);
         let alerts = undefined;
         let messages = [];
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
 
-        if (!this.valid) {
+        if (!this.isValid) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
@@ -143,7 +143,7 @@ export default class BaseInput extends ShallowComponent {
      * @return {boolean}
      */
     isValid(): boolean {
-        return this.valid;
+        return this.__valid;
     }
 
     /**
