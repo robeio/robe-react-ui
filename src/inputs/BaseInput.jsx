@@ -76,6 +76,9 @@ export default class BaseInput extends ShallowComponent {
         this.state = {
             bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined,
         };
+        if (this.props.validations !== undefined) {
+            this.__validations = this.props.validations;
+        }
     }
 
     /**
@@ -96,7 +99,7 @@ export default class BaseInput extends ShallowComponent {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
 
-        if (!this.isValid) {
+        if (!this.isValid()) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
