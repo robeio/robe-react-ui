@@ -5,6 +5,7 @@ import Select from "react-select";
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import "react-select/dist/react-select.css";
+import Alert from "react-bootstrap/lib/Alert";
 
 const info = UIApplication.i18n("info");
 // read more https://github.com/JedWatson/react-select
@@ -91,11 +92,12 @@ export default class SelectInput extends ShallowComponent {
         super(props);
 
         // TODO validations must bi implemeneted
-        this.validations = this.props.validations;
+        this.__validations = this.props.validations;
     }
 
     render() {
         let errors = this.__validate();
+
         this.valid = (errors.length === 0);
         let alerts = undefined;
         let messages = [];
@@ -119,7 +121,7 @@ export default class SelectInput extends ShallowComponent {
                     placeholder={this.props.placeHolder}
                     searchable={this.props.searchable}
                     value={this.props.value}
-                    onChange={this.__onChange.bind(this) }
+                    onChange={this.__onChange.bind(this)}
                     />
                 {alerts}
             </FormGroup>
@@ -144,11 +146,11 @@ export default class SelectInput extends ShallowComponent {
             if (!Assertions.isFunction(validation)) {
                 return;
             }
-            let message = validation(this.state.value);
+            let message = validation(this.props.value);
             let messageKey = `${key}Message`;
             if (message !== undefined) {
-                if (this.validations[messageKey] !== undefined) {
-                    message = this.validations[messageKey];
+                if (this.__validations[messageKey] !== undefined) {
+                    message = this.__validations[messageKey];
                 }
                 messages = messages.concat(message);
             }
