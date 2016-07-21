@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import DecimalInput from "inputs/DecimalInput";
 
-describe("DecimalInput.js", () => {
+describe("inputs/DecimalInput.js", () => {
     const getComponent = (props) => {
         return (
             <DecimalInput

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import BaseInput from "inputs/BaseInput";
 
-describe("BaseInput.js", () => {
+describe("inputs/BaseInput.js", () => {
     const component = (
         <BaseInput
             label="TextInput Label Text Example"

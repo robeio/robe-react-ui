@@ -51,7 +51,7 @@ describe("inputs/SelectInput", () => {
                 items={items}
             />
         );
-        chai.assert.deepEqual(instance.props, expectedProps);
+        chai.assert.deepEqual(instance.props, expectedProps, "Select Input default props must be equal the expected props.");
 
         // Multi , Different key , different value test
         expectedProps = {
@@ -78,7 +78,7 @@ describe("inputs/SelectInput", () => {
             />
         );
 
-        chai.assert.deepEqual(instance.props, expectedProps);
+        chai.assert.deepEqual(instance.props, expectedProps, "Given props to SelectInput must be equal the expected props.");
     });
 
     it("render", () => {
@@ -100,7 +100,7 @@ describe("inputs/SelectInput", () => {
         let instanceDom = ReactDOM.findDOMNode(instance);
         let inputs = instanceDom.getElementsByTagName("input");
         let input = inputs[0];
-        chai.assert.equal(input.value, expected);
+        chai.assert.equal(input.value, expected, "Given value to SelectInput must be equal input value which created in DOM.");
     });
     it("isValid", () => {
         let SelectInputReact = (
@@ -117,10 +117,8 @@ describe("inputs/SelectInput", () => {
             SelectInputReact
         );
 
-        chai.assert.isTrue(instance.isValid());
+        chai.assert.isTrue(instance.isValid(), "component is not valid then isValid() method must return false.");
 
-
-        console.log("Test....");
         SelectInputReact = (
             <SelectInput
                 label="Select Input Multi"
@@ -137,6 +135,6 @@ describe("inputs/SelectInput", () => {
             SelectInputReact
         );
 
-        chai.assert.isFalse(instance.isValid());
+        chai.assert.isFalse(instance.isValid(), "component is valid then isValid() method must return true.");
     });
 });
