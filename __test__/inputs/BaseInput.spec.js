@@ -30,8 +30,8 @@ describe("inputs/BaseInput.js", () => {
 
     it("'valitations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(component);
-        chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
+        chai.assert.isOk(componentNode.isValid(), "Non-Empty string value must be valid");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");
         // Must be invalid
         let component2 = (<BaseInput
             type="text"
@@ -44,8 +44,8 @@ describe("inputs/BaseInput.js", () => {
         />);
 
         componentNode = TestUtils.renderIntoDocument(component2);
-        chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+        chai.assert.isNotOk(componentNode.isValid(), "Empty string value must be invalid");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
     });
 
      it("'max limit' Control", () => {
@@ -61,7 +61,7 @@ describe("inputs/BaseInput.js", () => {
         />);
 
         let componentNode = TestUtils.renderIntoDocument(component2);
-        chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+        chai.assert.isNotOk(componentNode.isValid(), "1000 char string value must be invalid");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "1000 char string value must render one alert");
     });
 });
