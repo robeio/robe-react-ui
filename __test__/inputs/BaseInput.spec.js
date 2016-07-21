@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import BaseInput from "inputs/BaseInput";
 
-describe("inputs/BaseInput.js", () => {
-    const getComponent = (props: Object) => {
+describe("inputs/BaseInput", () => {
+    const getComponent = (props: Object): Object => {
         return (
             <BaseInput
                 label="TextInput Label Text Example"
@@ -13,7 +13,7 @@ describe("inputs/BaseInput.js", () => {
                 onChange={props.onChange !== undefined ? props.onChange : () => { }}
                 type="text"
                 validations={{
-                    required: (value: any) => {
+                    required: (value: any):Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
                     }
                 }}

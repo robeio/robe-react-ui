@@ -2,12 +2,12 @@ import chai from "chai";
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-import DecimalInput from "inputs/DecimalInput";
+import NumericInput from "inputs/NumericInput";
 
-describe("inputs/DecimalInput", () => {
+describe("inputs/NumericInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <DecimalInput
+            <NumericInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
                 onChange={props.onChange !== undefined ? props.onChange : () => { }}
