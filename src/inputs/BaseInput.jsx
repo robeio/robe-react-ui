@@ -1,6 +1,7 @@
 import React from "react";
 import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
 import FormGroup from "react-bootstrap/lib/FormGroup";
+import InputGroup from "react-bootstrap/lib/InputGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import FormControl from "react-bootstrap/lib/FormControl";
 import Alert from "react-bootstrap/lib/Alert";
@@ -30,16 +31,25 @@ export default class BaseInput extends ShallowComponent {
          * Validations for the component
          */
         validations: React.PropTypes.object,
-        
+
         /**
          * Type of the BaseInput. (text, email, password, file)
          */
         type: React.PropTypes.string,
 
-         /**
+        /**
+        * Component class of the BaseInput. (select, textarea)
+        */
+        componentClass: React.PropTypes.string,
+
+        /**
          * Component class of the BaseInput. (select, textarea)
          */
-        componentClass: React.PropTypes.string
+        inputGroupLeft: React.PropTypes.object,
+        /**
+         * Component class of the BaseInput. (select, textarea)
+         */
+        inputGroupRight: React.PropTypes.object
     };
 
     /**
@@ -63,7 +73,6 @@ export default class BaseInput extends ShallowComponent {
      */
     constructor(props: Object) {
         super(props);
-        this.validations = this.props.validations;
         this.state = {
             bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined,
         };
@@ -80,28 +89,46 @@ export default class BaseInput extends ShallowComponent {
             errors.push(BaseInput.maxTextLengthMessage);
             value = "";
         }
-        this.valid = (errors.length === 0);
+        this.__valid = (errors.length === 0);
         let alerts = undefined;
         let messages = [];
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
 
-        if (!this.valid) {
+        if (!this.isValid) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
+        if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
+            return (
+                <FormGroup>
+                    <ControlLabel> {this.props.label} </ControlLabel>
+                    <InputGroup>
+                        {this.props.inputGroupLeft}
+                        <FormControl
+                            {...this.props}
+                            bsStyle="error"
+                            ref="innerInput"
+                            value={value}
+                            />
+                        {this.props.inputGroupRight}
+                    </InputGroup>
+                    {alerts}
+                </FormGroup>
+            );
+        }
         return (
-            <FormGroup>
-                <ControlLabel> {this.props.label} </ControlLabel>
-                <FormControl
-                    {...this.props}
-                    bsStyle="error"
-                    ref="innerInput"
-                    value={value}
-                />
-                {alerts}
-            </FormGroup>
-        );
+                <FormGroup>
+                    <ControlLabel> {this.props.label} </ControlLabel>
+                        <FormControl
+                            {...this.props}
+                            bsStyle="error"
+                            ref="innerInput"
+                            value={value}
+                            />
+                    {alerts}
+                </FormGroup>
+            );
     }
 
     /**
@@ -116,7 +143,7 @@ export default class BaseInput extends ShallowComponent {
      * @return {boolean}
      */
     isValid(): boolean {
-        return this.valid;
+        return this.__valid;
     }
 
     /**
@@ -133,8 +160,8 @@ export default class BaseInput extends ShallowComponent {
             let message = validation(this.props.value);
             let messageKey = `${key}Message`;
             if (message !== undefined) {
-                if (this.validations[messageKey] !== undefined) {
-                    message = this.validations[messageKey];
+                if (this.__validations[messageKey] !== undefined) {
+                    message = this.__validations[messageKey];
                 }
                 messages = messages.concat(message);
             }
