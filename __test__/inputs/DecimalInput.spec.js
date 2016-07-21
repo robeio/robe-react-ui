@@ -4,19 +4,19 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import DecimalInput from "inputs/DecimalInput";
 
-describe("inputs/DecimalInput.js", () => {
-    const getComponent = (props) => {
+describe("inputs/DecimalInput", () => {
+    const getComponent = (props: Object) => {
         return (
             <DecimalInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
                 onChange={props.onChange !== undefined ? props.onChange : () => { } }
                 validations={{
-                    required: (value: any) => {
+                    required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
                     }
                 }}
-                />
+            />
         );
     };
 
@@ -39,7 +39,7 @@ describe("inputs/DecimalInput.js", () => {
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
     });
 
-    it("'__numericFilter", (done) => {
+    it("'__numericFilter", (done: Function) => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: () => { chai.assert.isOk(true); } }));
         let e = {
             target: {
@@ -52,6 +52,7 @@ describe("inputs/DecimalInput.js", () => {
             stopPropagation: () => {
             }
         };
+        /* eslint-disable no-underscore-dangle */
         componentNode.__numericFilter(e);
         e.target.value = "12.2";
         e.preventDefault = () => {
@@ -60,22 +61,12 @@ describe("inputs/DecimalInput.js", () => {
         };
         componentNode.__numericFilter(e);
 
-        let component3 = (
-            <DecimalInput
-                label="DecimalInput Label Text Example"
-                value="This is some example text must be equals with DecimalInput value"
-                onChange={() => {
-                    chai.assert.isOk(false);
-                    done("Input value '12q2' failed");
-                } }
-                validations={{
-                    required: (value: any) => {
-                        return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
-                    }
-                }}
-                />
-        );
-        componentNode = TestUtils.renderIntoDocument(component3);
+        componentNode = TestUtils.renderIntoDocument(getComponent({
+            onChange: () => {
+                chai.assert.isOk(false);
+                done("Input value '12q2' failed");
+            }
+        }));
         e.target.value = "12q2";
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
