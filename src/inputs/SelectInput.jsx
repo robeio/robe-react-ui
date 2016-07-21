@@ -90,22 +90,19 @@ export default class SelectInput extends ShallowComponent {
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-
-        // TODO validations must bi implemeneted
-        this.__validations = this.props.validations;
     }
 
     render() {
         let errors = this.__validate();
 
-        this.valid = (errors.length === 0);
+        this.__valid = (errors.length === 0);
         let alerts = undefined;
         let messages = [];
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
 
-        if (!this.valid) {
+        if (!this.__valid) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         return (
@@ -132,7 +129,7 @@ export default class SelectInput extends ShallowComponent {
      * @return {boolean}
      */
     isValid(): boolean {
-        return this.valid;
+        return this.__valid;
     }
 
     /**
@@ -167,6 +164,24 @@ export default class SelectInput extends ShallowComponent {
         if (this.props.onChange) {
             let e = { target: { value: value } };
             this.props.onChange(e);
+        }
+    }
+
+    /**
+     * Fired after component mounts. Takes validations from props.
+     */
+    componentDidMount() {
+        if (this.props.focus) {
+            this.focus();
+        }
+    }
+
+    /**
+     * Fired after component mounts. Sets focus from props.
+     */
+    componentWillMount() {
+        if (this.props.validations !== undefined) {
+            this.__validations = this.props.validations;
         }
     }
 }
