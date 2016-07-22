@@ -4,10 +4,9 @@ import ValidationComponent from "validation/ValidationComponent";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import FormGroup from "react-bootstrap/lib/FormGroup";
-import InputGroup from "react-bootstrap/lib/InputGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
-import FormControl from "react-bootstrap/lib/FormControl";
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
+import "./DateInput.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
 export default class DateInput extends ValidationComponent {
@@ -33,7 +32,7 @@ export default class DateInput extends ValidationComponent {
                 {label}
                 <DatePicker
                     ref="input"
-                    className="form-control"
+                    className="form-control form-control-error"
                     selected={selected}
                     disabled={this.props.disabled}
                     onChange={this.__onChange}
