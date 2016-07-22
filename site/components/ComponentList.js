@@ -89,6 +89,14 @@ class ComponentList {
             code: require("../samples/inputs/DateInputSample.txt")
         });
 
+         components.push({
+            header: "HtmlEditor",
+            desc: "is the input field for collecting html (rich text) data.",
+            json: require("../docs/inputs/htmleditor/HtmlEditor"),
+            sample: require("../samples/inputs/HtmlEditorSample"),
+            code: require("../samples/inputs/HtmlEditorSample.txt")
+        });
+
 
 
         return components;
