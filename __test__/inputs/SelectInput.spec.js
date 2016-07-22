@@ -33,8 +33,9 @@ describe("inputs/SelectInput", () => {
         ];
 
         let expectedProps = {
-            label: "Select Input Multi",
+            label: "Select Input Single",
             items: items,
+            delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
             textField: "text",
@@ -47,7 +48,7 @@ describe("inputs/SelectInput", () => {
 
         let instance = TestUtils.renderIntoDocument(
             <SelectInput
-                label="Select Input Multi"
+                label="Select Input Single"
                 items={items}
             />
         );
@@ -61,11 +62,12 @@ describe("inputs/SelectInput", () => {
             value: "en,tr",
             textField: "value",
             valueField: "key",
+            delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
             disabled: false,
             searchable: true
-        };
+        }
 
         instance = TestUtils.renderIntoDocument(
             <SelectInput
@@ -78,6 +80,7 @@ describe("inputs/SelectInput", () => {
             />
         );
 
+        console.log(instance.props);
         chai.assert.deepEqual(instance.props, expectedProps, "Given props to SelectInput must be equal the expected props.");
     });
 

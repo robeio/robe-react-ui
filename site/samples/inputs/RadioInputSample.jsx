@@ -29,7 +29,7 @@ export default class RadioInputSample extends ShallowComponent {
         return (
             <div>
                 <RadioInput
-                    label="CheckInput Multi"
+                    label="RadioInput Multi"
                     items={langs}
                     value="en"
                     textField="value"

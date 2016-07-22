@@ -22,9 +22,9 @@ export default class FaIcon extends ShallowComponent {
         let code = this.props.code;
         let size = this.props.size;
         let propsClassName = this.props.className === undefined ? "" : this.props.className;
-        let className = `fa ${code} ${size} ${propsClassName}`;
+        let className = `fa fa-fw ${code} ${size} ${propsClassName}`;
         return (
-            <i className={className} style={this.props.style} {...this.props}/>
+            <i className={className} style={this.props.style} {...this.props} aria-hidden="true" />
         );
     }
 }

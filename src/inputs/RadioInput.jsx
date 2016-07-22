@@ -1,15 +1,15 @@
 import React from "react";
 import { Assertions } from "robe-react-commons";
-import ValidationComponent from "../base/ValidationComponent";
+import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 
 
 /**
- * An Input Component which acts as a checkbox.
+ * An Input Component which acts as a radio input.
  * @export
  * @class CheckInput
- * @extends {ShallowComponent}
+ * @extends {ValidationComponent}
  */
 export default class RadioInput extends ValidationComponent {
     /**
@@ -26,35 +26,31 @@ export default class RadioInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * map array of options to render.
-         */
-        items: React.PropTypes.array,
-        /**
-         * map  of options to render.
+         * Item will be rendered as checkbox input.
          */
         item: React.PropTypes.object,
         /**
-         * selected value or values
+         * Checked value or values
          */
-        value: React.PropTypes.any,
+        value: React.PropTypes.string,
         /**
-         * key of given map array `items`
+         * Key of map item which is defined in given array `items`
          */
         valueField: React.PropTypes.any,
         /**
-         * presented text of give map array `items`
+         * label of map item which is defined in given array `items`
          */
         textField: React.PropTypes.string,
         /**
-         * callback function when selected values changed
+         * Is a callback function when selection `item` or `items` changed.
          */
         onChange: React.PropTypes.func,
         /**
-         * Validations for the component
+         * Validations functions to validate value
          */
         validations: React.PropTypes.object,
         /**
-         * disabled
+         * Disable input
          */
         disabled: React.PropTypes.bool
     };
@@ -128,8 +124,8 @@ export default class RadioInput extends ValidationComponent {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._value === value;
-        let icon = isChecked ? " state-icon fa fa-check-circle-o" : " state-icon fa fa-circle-o";
-        let disabled = isChecked ? "checkbox disabled-check-input" : "checkbox ";
+        let icon = isChecked ? " fa-dot-circle-o" : " fa-circle-o";
+        let disabled = isChecked ? "disabled-check-input" : "";
         let input = isChecked ? (
             <input
                 type="hidden"
@@ -138,12 +134,12 @@ export default class RadioInput extends ValidationComponent {
             />
         ) : null;
         return (
-            <div value={value} className={disabled} onClick={this.__onClick.bind(this, value)}>
+            <div value={value} className={`radio ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
-                    <span className={icon} style={{ marginRight: "10px" }} />
-                    {text}</label>
+                    <FaIcon code={`${icon} state-icon`} size={"10px"} />
+                </label> {text}
                 {input}
             </div>
         );

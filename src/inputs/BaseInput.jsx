@@ -1,5 +1,5 @@
 import React from "react";
-import ValidationComponent from "../base/ValidationComponent";
+import ValidationComponent from "../validation/ValidationComponent";
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import InputGroup from "react-bootstrap/lib/InputGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";

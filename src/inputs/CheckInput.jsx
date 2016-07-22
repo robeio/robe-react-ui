@@ -1,15 +1,15 @@
 import React from "react";
 import { Assertions } from "robe-react-commons";
-import ValidationComponent from "../base/ValidationComponent";
+import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 
 
 /**
- * An Input Component which acts as a checkbox.
+ * CheckInput is an input element to provide checked given item or items.
  * @export
  * @class CheckInput
- * @extends {ShallowComponent}
+ * @extends {ValidationComponent}
  */
 export default class CheckInput extends ValidationComponent {
     /**
@@ -26,39 +26,39 @@ export default class CheckInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * map array of options to render.
+         * Array of items. All items will be rendered as separate checkbox input.
          */
         items: React.PropTypes.array,
         /**
-         * map  of options to render.
+         * Item will be rendered as checkbox input.
          */
         item: React.PropTypes.object,
         /**
-         * selected value or values
+         * Checked value or values
          */
-        value: React.PropTypes.any,
+        value: React.PropTypes.string,
         /**
-         * selected value or values
+         * Delimiter is a separator to separate checked values as string in `value` props
          */
         delimiter: React.PropTypes.string,
         /**
-         * key of given map array `items`
+         * Key of map item which is defined in given array `items`
          */
         valueField: React.PropTypes.any,
         /**
-         * presented text of give map array `items`
+         * label of map item which is defined in given array `items`
          */
         textField: React.PropTypes.string,
         /**
-         * callback function when selected values changed
+         * Is a callback function when selection `item` or `items` changed.
          */
         onChange: React.PropTypes.func,
         /**
-         * Validations for the component
+         * Validations functions to validate value
          */
         validations: React.PropTypes.object,
         /**
-         * disabled
+         * disabled input
          */
         disabled: React.PropTypes.bool
     };
@@ -136,8 +136,8 @@ export default class CheckInput extends ValidationComponent {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;
-        let icon = isChecked ? " state-icon fa fa-check-square-o" : " state-icon fa fa-square-o";
-        let disabled = isChecked ? "checkbox disabled-check-input" : "checkbox ";
+        let icon = isChecked ? " fa-check-square-o" : " fa-square-o";
+        let disabled = isChecked ? "disabled-check-input" : "";
         let input = isChecked ? (
             <input
                 type="hidden"
@@ -146,12 +146,12 @@ export default class CheckInput extends ValidationComponent {
             />
         ) : null;
         return (
-            <div value={value} className={disabled} onClick={this.__onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
-                    <span className={icon} style={{ marginRight: "10px" }} />
-                {text}</label>
+                    <FaIcon code={`${icon} state-icon`} size={"10px"} />
+                </label> {text}
                 {input}
             </div>
         );
@@ -178,9 +178,9 @@ export default class CheckInput extends ValidationComponent {
         return [];
     }
 
-    __join(values: Array) {
+    __join(values: Array, delimiter: string) {
         if (values && values.length > 0) {
-            return this._value.join(this.props.delimiter);
+            return this._values.join(delimiter);
         }
         return "";
     }
@@ -195,7 +195,7 @@ export default class CheckInput extends ValidationComponent {
         } else {
             this._values.push(value);
         }
-        this._value = this._values.length > 1 ? this._values.join(this.props.delimiter) : value;
+        this._value = this.__join(this._values, this.props.delimiter);
         if (this.props.onChange) {
             let e = { target: { value: this._value } };
             this.props.onChange(e);
