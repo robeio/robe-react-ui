@@ -37,7 +37,7 @@ export default class RadioInputSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     onChange={this.__handleChange.bind(undefined, "RadioInputSingle")}
-                />,
+                />
                 <RadioInput
                     label="RadioInput Group"
                     items={langs}

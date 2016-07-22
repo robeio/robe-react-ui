@@ -37,7 +37,7 @@ export default class CheckInputSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     onChange={this.__handleChange.bind(undefined, "CheckInputSingle")}
-                />,
+                />
                 <CheckInput
                     label="CheckInput Group"
                     items={langs}

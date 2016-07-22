@@ -1,13 +1,16 @@
 import React from "react";
 import is from "is-js";
-import { ShallowComponent } from "robe-react-commons";
+import ValidationComponent from "validation/ValidationComponent";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import Col from "../../node_modules/react-bootstrap/lib/Col";
+import FormGroup from "react-bootstrap/lib/FormGroup";
+import InputGroup from "react-bootstrap/lib/InputGroup";
+import ControlLabel from "react-bootstrap/lib/ControlLabel";
+import FormControl from "react-bootstrap/lib/FormControl";
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
-export default class DateInput extends ShallowComponent {
+export default class DateInput extends ValidationComponent {
 
     static propTypes = {
         label: React.PropTypes.string,
@@ -21,17 +24,12 @@ export default class DateInput extends ShallowComponent {
         format: "DD/MM/YYYY"
     };
 
-    /* eslint no-useless-constructor: 0*/
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let selected = (is.number(this.props.value)) ? moment(this.props.value) : null;
         let label = this.props.label === undefined ? <span></span> :
-            <label className="control-label">{this.props.label}</label>;
+            <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
         return (
-            <Col className="form-group">
+            <FormGroup >
                 {label}
                 <DatePicker
                     ref="input"
@@ -46,10 +44,10 @@ export default class DateInput extends ShallowComponent {
                     startDate={this.props.startDate}
                     endDate={this.props.endDate}
                     showTodayButton={"Bugün"}
-                    placeholderText="Tarih seçmek için tıklayınız"
                     dateFormat={this.props.format}
-                />
-            </Col>);
+                    />
+                { super.validationResult() }
+            </FormGroup>);
     }
 
     __onChange = (selection) => {

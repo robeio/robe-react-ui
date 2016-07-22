@@ -81,6 +81,14 @@ class ComponentList {
             code: require("../samples/inputs/RadioInputSample.txt")
         });
 
+        components.push({
+            header: "DateInput",
+            desc: "is the input field for collecting date data.",
+            json: require("../docs/inputs/DateInput"),
+            sample: require("../samples/inputs/DateInputSample"),
+            code: require("../samples/inputs/DateInputSample.txt")
+        });
+
 
 
         return components;
