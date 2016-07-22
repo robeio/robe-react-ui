@@ -1,11 +1,9 @@
 import React from "react";
-import { Maps, Assertions } from "robe-react-commons";
 import ValidationComponent from "../base/ValidationComponent";
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import InputGroup from "react-bootstrap/lib/InputGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import FormControl from "react-bootstrap/lib/FormControl";
-import Alert from "react-bootstrap/lib/Alert";
 import InputValidations from "../validation/InputValidations";
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
@@ -90,7 +88,7 @@ export default class BaseInput extends ValidationComponent {
                         />
                         {this.props.inputGroupRight}
                     </InputGroup>
-                    {super.render()}
+                    {super.validationResult()}
                 </FormGroup>
             );
         }
@@ -103,7 +101,7 @@ export default class BaseInput extends ValidationComponent {
                             ref="innerInput"
                             value={this.props.value}
                         />
-                    {super.render()}
+                    {super.validationResult()}
                 </FormGroup>
             );
     }

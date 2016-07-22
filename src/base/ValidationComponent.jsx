@@ -2,6 +2,9 @@ import React from "react";
 import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
 import { Alert } from "react-bootstrap";
 
+/**
+ * BaseComponent for React Components which will use Validations
+ */
 export default class ValidationComponent extends ShallowComponent {
     static propTypes = {
         /**
@@ -38,11 +41,8 @@ export default class ValidationComponent extends ShallowComponent {
             this._validations = this.props.validations;
         }
     }
-    /**
-     * Renders the component
-     * @returns {Object}
-     */
-    render(): Object {
+
+    validationResult(): Object {
         let alerts = undefined;
         let errors = this.__validate();
         this.__valid = (errors.length === 0);
@@ -55,7 +55,6 @@ export default class ValidationComponent extends ShallowComponent {
         }
         return alerts;
     }
-
     /**
      * Returns validity of the component.
      * @return {boolean}

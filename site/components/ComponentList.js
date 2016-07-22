@@ -52,11 +52,29 @@ class ComponentList {
 
         components.push({
             header: "SelectInput",
-            desc: "is the default input field to collect one line text data from form.",
+            desc: "is the input fields to provide selection items from given array items",
             json: require("../docs/inputs/SelectInput"),
             sample: require("../samples/inputs/SelectInputSample"),
             code: require("../samples/inputs/SelectInputSample.txt")
         });
+
+        components.push({
+            header: "CheckInput",
+            desc: "is the input fields to provide check given item",
+            json: require("../docs/inputs/CheckInput"),
+            sample: require("../samples/inputs/CheckInputSample"),
+            code: require("../samples/inputs/CheckInputSample.txt")
+        });
+
+        components.push({
+            header: "RadioInput",
+            desc: "is the input fields to provide check given item",
+            json: require("../docs/inputs/RadioInput"),
+            sample: require("../samples/inputs/RadioInputSample"),
+            code: require("../samples/inputs/RadioInputSample.txt")
+        });
+
+
 
         return components;
     }

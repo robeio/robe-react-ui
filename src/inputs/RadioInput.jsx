@@ -1,39 +1,62 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
-import FaIcon from "faicon/FaIcon";
+import { Assertions } from "robe-react-commons";
+import ValidationComponent from "../base/ValidationComponent";
+import FaIcon from "../faicon/FaIcon";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 
-const Style = {
-    "icon": {
-        "marginLeft": "-5px",
-        "marginRight": "10px"
-    },
-    "disabled": {
-        "pointerEvents": "none",
-        "opacity": "0.4"
-    },
-    "label": {
-        paddingLeft: "2px"
-    }
-};
 
 /**
- * An Input Component which acts as a radiobox group. 
+ * An Input Component which acts as a checkbox.
  * @export
- * @class RadioInput
+ * @class CheckInput
  * @extends {ShallowComponent}
  */
-export default class RadioInput extends ShallowComponent {
-
+export default class RadioInput extends ValidationComponent {
     /**
      * propTypes
      * @static
      */
     static propTypes = {
-        data: React.PropTypes.array,
-        dataTextField: React.PropTypes.string,
-        dataValueField: React.PropTypes.string,
+        /**
+         * Style map for the component.
+         */
+        style: React.PropTypes.object,
+        /**
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
+        /**
+         * map array of options to render.
+         */
+        items: React.PropTypes.array,
+        /**
+         * map  of options to render.
+         */
+        item: React.PropTypes.object,
+        /**
+         * selected value or values
+         */
         value: React.PropTypes.any,
+        /**
+         * key of given map array `items`
+         */
+        valueField: React.PropTypes.any,
+        /**
+         * presented text of give map array `items`
+         */
+        textField: React.PropTypes.string,
+        /**
+         * callback function when selected values changed
+         */
+        onChange: React.PropTypes.func,
+        /**
+         * Validations for the component
+         */
+        validations: React.PropTypes.object,
+        /**
+         * disabled
+         */
+        disabled: React.PropTypes.bool
     };
 
     /**
@@ -41,127 +64,114 @@ export default class RadioInput extends ShallowComponent {
      * @static
      */
     static defaultProps = {
+        placeHolder: "Please Select",
+        noResultsText: "No Result",
+        textField: "text",
+        valueField: "value",
         disabled: false
     };
 
-    valid = false;
-
-    /**
-     * Creates an instance of RadioInput.
-     * 
-     * @param props
-     */
+    _value;
+    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-        this.state = {
-            value: this.props.value
+        if (this.props.value) {
+            this._value = this.props.value;
         }
     }
 
     /**
+     *
      * render
-     * @returns 
-     */
-    render() {
-        if (this.props.label) {
-            return (
-                <div className="form-group">
-                    <label className="control-label">{this.props.label}</label>
-                    {this.__createRadios(this.props.data) }
-                </div>);
-        }
-        return (<div>{ this.__createRadios(this.props.data) }</div>);
+     * @returns {string}
+     **/
+    render(): Object {
+        return (
+            <FormGroup>
+                <ControlLabel> {this.props.label} </ControlLabel>
+                {
+                    this.props.items ?
+                        this.__createRadioBoxes(this.props.items) :
+                        this.__createRadioBox(this.props.item)
+                }
+                {super.validationResult()}
+            </FormGroup>
+        );
     }
 
     /**
-     * Returns validity of the input. 
-     * @return true if it is valid.
+     *
+     * @param items
+     * @returns {Array}
+     * @private
      */
-    isValid = () => {
-        return this.valid;
+    __createRadioBoxes(items: Array<Map>): Array {
+        let components = null;
+        if (Assertions.isArray(items)) {
+            components = [];
+            for (let i = 0; i < items.length; i++) {
+                components.push(this.__createRadioBox(items[i]));
+            }
+        } else {
+            components = this.__createRadioBox(items);
+        }
+        return components;
+    }
+
+    /**
+     *
+     * @param item
+     * @returns {Object}
+     * @private
+     */
+    __createRadioBox(item: Map): Object {
+        let value = item[this.props.valueField];
+        let text = item[this.props.textField];
+        let isChecked = this._value === value;
+        let icon = isChecked ? " state-icon fa fa-check-circle-o" : " state-icon fa fa-circle-o";
+        let disabled = isChecked ? "checkbox disabled-check-input" : "checkbox ";
+        let input = isChecked ? (
+            <input
+                type="hidden"
+                value={value}
+                disabled={!isChecked}
+            />
+        ) : null;
+        return (
+            <div value={value} className={disabled} onClick={this.__onClick.bind(this, value)}>
+                <label
+                    style={{ paddingLeft: "2px" }}
+                >
+                    <span className={icon} style={{ marginRight: "10px" }} />
+                    {text}</label>
+                {input}
+            </div>
+        );
+    }
+
+    /**
+     * Returns whether it is selected or not.
+     * @returns true if selected.
+     */
+    isChecked = (key: string) => {
+        let isValueNotEmpty = this._value && this._value.length > 0
+        return isValueNotEmpty && (typeof key === "undefined" ?
+        key !== this._value : true);
     };
 
-    /**
-     * Returns the current selection
-     */
-    getSelected = () => {
-        return this.state.value;
+    getValue() {
+        return this._value;
     }
 
     /**
-     * Internal onClick event handler.
+     * Internal onClick event. It is triggered every time.
+     * @param e event
      */
-    __onClick = (e) => {
-        this.valid = true;
-        let data = e.target.getAttribute("data");
+    __onClick(value) {
+        this._value = value;
         if (this.props.onChange) {
-            e.target.parsedValue = data
+            let e = { target: { value: this._value } };
             this.props.onChange(e);
-        } else {
-            this.setState({
-                value: data
-            });
         }
-    }
-
-    /**
-     * Creates and element array from the option list
-     */
-    __createRadios = (list) => {
-        let options = [];
-
-        for (let i = 0; i < list.length; i++) {
-            let item = list[i];
-            let value = this.__getDataValueField(item);
-            let icon = "fa-circle-o";
-            let isSelected = this.state.value === value;
-            if (isSelected) {
-                icon = "fa-dot-circle-o";
-                this.valid = true;
-                this.setState({
-                    value: value
-                });
-            }
-
-            options.push(
-                <div
-                    className="checkbox"
-                    onClick={this.__onClick}
-                    data={value}
-                    key={value} >
-                    <label style={Style.label} data={value}>
-                        <FaIcon code={icon} data={value} style={Style.icon} />
-                        <span data={value}>{this.__getDataTextField(item) }</span>
-                    </label>
-                </div>
-            );
-        }
-        return options;
-    }
-
-    /**
-     * Gets text of the item according to the dataTextField prop.
-     * If no dataTextField given from the parent than it will return the item itself.
-     * @param item item to get text from.
-     * @returns (description)
-     */
-    __getDataTextField = (item) => {
-        if (this.props.dataTextField) {
-            return item[this.props.dataTextField] || item;
-        }
-        return item;
-    }
-
-    /**
-     * Gets value of the item according to the dataValueField prop.
-     * If no dataValueField given from the parent than it will return the item itself.
-     * @param item item to get value from.
-     * @returns (description)
-     */
-    __getDataValueField = (item) => {
-        if (this.props.dataValueField) {
-            return item[this.props.dataValueField] || item;
-        }
-        return item;
     }
 }

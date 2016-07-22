@@ -1,15 +1,9 @@
 import React from "react";
-import { Maps, Assertions } from "robe-react-commons";
 import ValidationComponent from "../base/ValidationComponent";
-import UIApplication from "../app/UIApplication";
 import Select from "react-select";
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import "react-select/dist/react-select.css";
-import Alert from "react-bootstrap/lib/Alert";
-
-const info = UIApplication.i18n("info");
-// read more https://github.com/JedWatson/react-select
 
 /**
  * Provide selection in map array data with single or multi choices
@@ -38,6 +32,10 @@ export default class SelectInput extends ValidationComponent {
          * selected value or values
          */
         value: React.PropTypes.any,
+        /**
+         * selected value or values
+         */
+        delimiter: React.PropTypes.string,
         /**
          * key of given map array `items`
          */
@@ -73,6 +71,7 @@ export default class SelectInput extends ValidationComponent {
     };
 
     static defaultProps = {
+        delimiter: ",",
         placeHolder: "Please Select",
         noResultsText: "No Result",
         textField: "text",
@@ -103,7 +102,7 @@ export default class SelectInput extends ValidationComponent {
                     value={this.props.value}
                     onChange={this.__onChange.bind(this)}
                 />
-                {super.render()}
+                {super.validationResult()}
             </FormGroup>
         );
     }
