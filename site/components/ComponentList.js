@@ -27,6 +27,13 @@ class ComponentList {
             sample: require("../samples/inputs/TextInputSample"),
             code: require("../samples/inputs/TextInputSample.txt")
         });
+        components.push({
+            header: "PasswordInput",
+            desc: "is the default input field to collect password data from form.",
+            json: require("../docs/inputs/PasswordInput"),
+            sample: require("../samples/inputs/PasswordInputSample"),
+            code: require("../samples/inputs/PasswordInputSample.txt")
+        });
 
         components.push({
             header: "DecimalInput",
@@ -42,7 +49,7 @@ class ComponentList {
             sample: require("../samples/inputs/NumericInputSample"),
             code: require("../samples/inputs/NumericInputSample.txt")
         });
-         components.push({
+        components.push({
             header: "MoneyInput",
             desc: "is the input field for collecting money data.",
             json: require("../docs/inputs/MoneyInput"),

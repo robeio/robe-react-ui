@@ -1,11 +1,11 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import TextInput from "inputs/TextInput";
+import PasswordInput from "inputs/PasswordInput";
 import InputValidations from "validation/InputValidations";
 
 
-export default class TextInputSample extends ShallowComponent {
-    constructor(props) {
+export default class PasswordInputSample extends ShallowComponent {
+    constructor(props: Object) {
         super(props);
         this.state = {
         };
@@ -14,19 +14,19 @@ export default class TextInputSample extends ShallowComponent {
     render() {
         return (
             <div>
-                <TextInput
-                    label="TextInput"
-                    value={this.state.TextInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "TextInputNormal")}
+                <PasswordInput
+                    label="PasswordInput"
+                    value={this.state.PasswordInputNormal}
+                    onChange={this.__handleChange.bind(undefined, "PasswordInputNormal")}
                 />
-                <TextInput
+                <PasswordInput
                     label="With Default Value"
                     value="Default Value"
                 />
-                <TextInput
+                <PasswordInput
                     label="With Validations"
-                    value={this.state.TextInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "TextInputValidations")}
+                    value={this.state.PasswordInputValidations}
+                    onChange={this.__handleChange.bind(undefined, "PasswordInputValidations")}
                     validations={{
                         required: InputValidations.required,
                     }}
