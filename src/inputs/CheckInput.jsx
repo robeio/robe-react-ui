@@ -69,8 +69,6 @@ export default class CheckInput extends ValidationComponent {
      */
     static defaultProps = {
         delimiter: ",",
-        placeHolder: "Please Select",
-        noResultsText: "No Result",
         textField: "text",
         valueField: "value",
         disabled: false
@@ -138,22 +136,19 @@ export default class CheckInput extends ValidationComponent {
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;
         let icon = isChecked ? " fa-check-square-o" : " fa-square-o";
-        let disabled = isChecked ? "disabled-check-input" : "";
-        let input = isChecked ? (
-            <input
-                type="hidden"
-                value={value}
-                disabled={!isChecked}
-            />
-        ) : null;
+        let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabledStyle}`} onClick={this.props.disabled ? null : this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"10px"} />
                 </label> {text}
-                {input}
+                <input
+                    type="hidden"
+                    value={value}
+                    disabled={this.props.disabled}
+                />
             </div>
         );
     }
