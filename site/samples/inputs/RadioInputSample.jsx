@@ -22,6 +22,8 @@ export default class RadioInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            RadioInputSingle: "en",
+            RadioInputGroup: "tr"
         };
     }
 
@@ -29,12 +31,20 @@ export default class RadioInputSample extends ShallowComponent {
         return (
             <div>
                 <RadioInput
-                    label="RadioInput Multi"
-                    items={langs}
-                    value="en"
+                    label="RadioInput Single"
+                    items={langs[0]}
+                    value={this.state.RadioInputSingle}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(undefined, "RadioInput")}
+                    onChange={this.__handleChange.bind(undefined, "RadioInputSingle")}
+                />,
+                <RadioInput
+                    label="RadioInput Group"
+                    items={langs}
+                    value={this.state.RadioInputGroup}
+                    textField="value"
+                    valueField="key"
+                    onChange={this.__handleChange.bind(undefined, "RadioInputGroup")}
                 />
             </div>
         );

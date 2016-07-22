@@ -52,6 +52,15 @@ $ npm run-script build
  
 #####  How to run Unit Tests.
 
+* Single Test Run with coverage for production.
+
 ```shell
 $ npm test              # Run unit tests with Mocha
+```
+
+* Multi Test Run without coverage for development. 
+
+
+```shell
+$ npm run testd         # Run unit tests with Mocha
 ```
