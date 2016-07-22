@@ -88,9 +88,6 @@ class ComponentList {
             sample: require("../samples/inputs/DateInputSample"),
             code: require("../samples/inputs/DateInputSample.txt")
         });
-
-
-
         return components;
     }
 

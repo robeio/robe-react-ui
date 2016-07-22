@@ -78,7 +78,8 @@ export default class CheckInput extends ValidationComponent {
 
     _values = [];
 
-    _value;
+    _value: string;
+
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
@@ -108,7 +109,7 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     *
+     * create checkbox items from given items.
      * @param items
      * @returns {Array}
      * @private
@@ -127,7 +128,7 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     *
+     * create a checkbox from given item.
      * @param item
      * @returns {Object}
      * @private
@@ -158,35 +159,57 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     * Returns whether it is selected or not.
-     * @returns true if selected.
+     * This method has two difference calls.
+     * 1 - call without parameter returns true if at least one of the values is checked.
+     * 2 - call with key parameter returns true if the given key is in checked list.
+     * @param {string} key
+     * @returns {boolean}
      */
-    isChecked = (key: string) => {
-        return typeof key === "undefined" ?
+    isChecked = (key: string): boolean => {
+        return typeof key !== "undefined" ?
         this._values.indexOf(key) !== -1 :
         this._values.length > 0;
     };
 
-    getValue() {
+    /**
+     * returns checked values as string
+     * @returns {string}
+     */
+    getValue(): string {
         return this._value;
     }
 
-    __split(value: string) {
+    /**
+     * Splits given string by delimiter and return result as Array.
+     * @param value
+     * @returns {Array}
+     * @private
+     */
+    __split(value: string): Array {
         if (value && value.length > 0) {
             return this._value.split(this.props.delimiter);
         }
         return [];
     }
 
-    __join(values: Array, delimiter: string) {
+    /**
+     * Joins given Array by delimiter and return result as string.
+     * @param values
+     * @param delimiter
+     * @returns {string}
+     * @private
+     */
+    __join(values: Array, delimiter: string): string {
         if (values && values.length > 0) {
             return this._values.join(delimiter);
         }
         return "";
     }
+
     /**
-     * Internal onClick event. It is triggered every time.
-     * @param e event
+     * Internal onClick event. It is triggered if any Checkbox item is clicked.
+     * @param value
+     * @private
      */
     __onClick(value) {
         let ind = this._values.indexOf(value);
