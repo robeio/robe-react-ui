@@ -4,50 +4,54 @@ import Input from "inputs/BaseInput";
 
 /**
  * An input element for passwords.
- * Password wrapper for BaseInput. 
+ * Password wrapper for BaseInput
  * @export
  * @class PasswordInput
  * @extends {ShallowComponent}
  */
 export default class PasswordInput extends ShallowComponent {
     /**
-     * propTypes
-     * @static
-     */
+    * Properties of the component
+    *
+    * @static
+    */
     static propTypes = {
+        /**
+        * Label for the form control.
+        */
         label: React.PropTypes.string,
-        value: React.PropTypes.string.isRequired,
+        /**
+         * Value of the component
+         */
+        value: React.PropTypes.any.isRequired,
+        /**
+         * onChange event for the component
+         */
         onChange: React.PropTypes.func
     };
 
-    /**
-     * Creates an instance of PasswordInput.
-     * 
-     * @param props (description)
-     */
-    constructor(props) {
-        super(props);
-    }
+    static defaultProps = {
+        value: ""
+    };
 
     /**
      * render
-     * 
      * @returns
      */
-    render() {
+    render(): Object {
         return (
             <Input
                 {...this.props}
                 type="password"
                 ref="innerInput"
-                />);
+            />);
     }
 
     /**
      * Returns validity of the component.
      * @return true if it is valid.
      */
-    isValid = () => {
+    isValid(): boolean {
         return this.refs.innerInput.isValid();
-    };
+    }
 }
