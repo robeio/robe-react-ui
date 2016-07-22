@@ -31,7 +31,7 @@ webPackConfig.devServer = {
     // to customize
     // host: process.env.HOST,
     host: "0.0.0.0",
-    port: process.env.PORT || 8080
+    // port: process.env.PORT || 8080
 };
 
 
