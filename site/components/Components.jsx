@@ -54,7 +54,7 @@ export default class Showcase extends ShallowComponent {
                 <h2>Components</h2>
                 <h5>Here you can find the samples and usages of the components.</h5>
                 <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid" }} > <ListGroup>{componentMenu}</ListGroup></Col>
-                <Col xs={12} sm={9} ref="componentView">
+                <Col xs={12} sm={9} üref="componentView">
                     {componentDetail}
                 </Col>
             </Grid>
