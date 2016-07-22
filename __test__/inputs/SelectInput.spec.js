@@ -80,7 +80,6 @@ describe("inputs/SelectInput", () => {
             />
         );
 
-        console.log(instance.props);
         chai.assert.deepEqual(instance.props, expectedProps, "Given props to SelectInput must be equal the expected props.");
     });
 
