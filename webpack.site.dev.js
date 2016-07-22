@@ -17,7 +17,7 @@ webPackConfig.entry = {
 // webPackConfig.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
 
-console.log("PORT:", process.env.PORT);
+console.log("PORT:", process.env);
 webPackConfig.devServer = {
     historyApiFallback: true,
     hot: true,
@@ -31,7 +31,7 @@ webPackConfig.devServer = {
     // to customize
     // host: process.env.HOST,
     host: "0.0.0.0",
-    port: 1234
+    port: process.env.PORT || 8080
 };
 
 
