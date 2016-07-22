@@ -30,7 +30,8 @@ describe("inputs/BaseInput", () => {
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
-    it("'valitations' Control", () => {
+    it("'validations' Control", () => {
+        console.log("'validations' Control started...");
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.isOk(componentNode.isValid(), "Non-Empty string value must be valid");
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");
@@ -39,6 +40,7 @@ describe("inputs/BaseInput", () => {
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string value must be invalid");
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
+        console.log("'validations' Control finished...");
     });
 
     it("'max limit' Control", () => {

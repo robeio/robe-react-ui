@@ -1,5 +1,6 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { Maps, Assertions } from "robe-react-commons";
+import ValidationComponent from "../base/ValidationComponent";
 import UIApplication from "../app/UIApplication";
 import Select from "react-select";
 import FormGroup from "react-bootstrap/lib/FormGroup";
@@ -14,7 +15,7 @@ const info = UIApplication.i18n("info");
  * Provide selection in map array data with single or multi choices
  * You can enable multi-value selection by setting multi={true}
  */
-export default class SelectInput extends ShallowComponent {
+export default class SelectInput extends ValidationComponent {
 
     static propTypes = {
         /**
@@ -81,30 +82,12 @@ export default class SelectInput extends ShallowComponent {
         searchable: true
     };
 
-    __valid: boolean = false;
-    /**
-     * Validation map for all functions and custom messages .
-     */
-    __validations: Map = {};
-
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
     }
 
     render() {
-        let errors = this.__validate();
-
-        this.__valid = (errors.length === 0);
-        let alerts = undefined;
-        let messages = [];
-        for (let i = 0; i < errors.length; i++) {
-            messages.push(<p key={i}>{errors[i]}</p>);
-        }
-
-        if (!this.__valid) {
-            alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
-        }
         return (
             <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
@@ -119,40 +102,10 @@ export default class SelectInput extends ShallowComponent {
                     searchable={this.props.searchable}
                     value={this.props.value}
                     onChange={this.__onChange.bind(this)}
-                    />
-                {alerts}
+                />
+                {super.render()}
             </FormGroup>
         );
-    }
-    /**
-     * Returns validity of the component.
-     * @return {boolean}
-     */
-    isValid(): boolean {
-        return this.__valid;
-    }
-
-    /**
-     * Validates the input components and returns error messages.
-     * @return { Array<string>} array of messages.
-     */
-    __validate(): Array<string> {
-        let messages = [];
-
-        Maps.forEach(this.__validations, (validation: Function, key: string) => {
-            if (!Assertions.isFunction(validation)) {
-                return;
-            }
-            let message = validation(this.props.value);
-            let messageKey = `${key}Message`;
-            if (message !== undefined) {
-                if (this.__validations[messageKey] !== undefined) {
-                    message = this.__validations[messageKey];
-                }
-                messages = messages.concat(message);
-            }
-        });
-        return messages;
     }
 
     /**
@@ -167,21 +120,4 @@ export default class SelectInput extends ShallowComponent {
         }
     }
 
-    /**
-     * Fired after component mounts. Takes validations from props.
-     */
-    componentDidMount() {
-        if (this.props.focus) {
-            this.focus();
-        }
-    }
-
-    /**
-     * Fired after component mounts. Sets focus from props.
-     */
-    componentWillMount() {
-        if (this.props.validations !== undefined) {
-            this.__validations = this.props.validations;
-        }
-    }
 }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test karma start webpack.config.test.js",
-    "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
+    "testd": "NODE_ENV=testd karma start webpack.config.test.dev.js",
+    "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.jsonn",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
     "build": "NODE_ENV=production webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.site.dev.js --colors"
@@ -35,6 +36,7 @@
     "codecov.io": "0.1.6",
     "copy-webpack-plugin": "3.0.1",
     "css-loader": "0.23.1",
+    "es6-template-strings": "^2.0.0",
     "esdoc": "0.4.7",
     "esdoc-es7-plugin": "0.0.3",
     "eslint": "3.0.1",
@@ -68,6 +70,7 @@
     "webpack-file-changer": "1.0.0"
   },
   "dependencies": {
+    "es6-template-strings": "^2.0.0",
     "is-js": "0.1.1",
     "nprogress": "0.2.0",
     "numeral": "1.5.3",

@@ -1,6 +1,6 @@
 import { Application } from "robe-react-commons";
 import validationMessages from "./validationMessages.json";
-
+const template = require('es6-template-strings');
 
 class InputValidations {
     constructor() {
@@ -8,27 +8,49 @@ class InputValidations {
     }
     required = (value: any) => {
         let message = Application.i18n("validation").required;
-        let evalMessage = `\`${message}\``;
-
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "") ?
-            eval(evalMessage) : undefined;
+            template(message, {
+                value: value
+            }) : undefined;
     }
     minValue = (minValue: number, value: number) => {
         let message = Application.i18n("validation").minValue;
-        let evalMessage = `\`${message}\``;
-
-        /* eslint-disable no-eval */
+         /* eslint-disable no-eval */
         return (value === undefined || value === null || value < minValue) ?
-            eval(evalMessage) : undefined;
+            template(message, {
+                minValue: minValue,
+                value: value
+            }) : undefined;
     }
     maxValue = (maxValue: number, value: number) => {
         let message = Application.i18n("validation").maxValue;
-        let evalMessage = `\`${message}\``;
 
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value > maxValue) ?
-            eval(evalMessage) : undefined;
+            template(message, {
+                minValue: maxValue,
+                value: value
+            }) : undefined;
+    }
+    minLength = (min: number, value: string) => {
+        let message = Application.i18n("validation").minLength;
+        let valueLength = (value === undefined || value === null) ? 0 : value.length;
+        /* eslint-disable no-eval */
+        return (valueLength < min) ?
+            template(message, {
+                min: min
+            }) : undefined;
+    }
+    maxLength = (max: number, value: string) => {
+        let message = Application.i18n("validation").maxLength;
+        let valueLength = (value === undefined || value === null) ? 0 : value.length;
+        /* eslint-disable no-eval */
+        let result = (valueLength > max) ?
+            template(message, {
+                max: max
+            }) : undefined;
+        return result;
     }
 
 }
