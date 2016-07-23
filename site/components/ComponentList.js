@@ -88,6 +88,14 @@ class ComponentList {
             sample: require("../samples/inputs/DateInputSample"),
             code: require("../samples/inputs/DateInputSample.txt")
         });
+
+        components.push({
+            header: "CheckBoxList",
+            desc: "",
+            json: require("../docs/inputs/CheckBox"),
+            sample: require("../samples/inputs/CheckBoxSample"),
+            code: require("../samples/inputs/CheckBoxSample.txt")
+        });
         return components;
     }
 
