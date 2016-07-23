@@ -1,6 +1,6 @@
 import { Application } from "robe-react-commons";
 import validationMessages from "./validationMessages.json";
-const template = require('es6-template-strings');
+import template from "es6-template-strings";
 
 class InputValidations {
     constructor() {
@@ -14,9 +14,19 @@ class InputValidations {
                 value: value
             }) : undefined;
     }
+
+    htmlRequired = (value: any) => {
+        let message = Application.i18n("validation").required;
+        console.log(value);
+        /* eslint-disable no-eval */
+        return (value === undefined || value === null || value === "" || String(value) === "<div><br></div>") ?
+            template(message, {
+                value: value
+            }) : undefined;
+    }
     minValue = (minValue: number, value: number) => {
         let message = Application.i18n("validation").minValue;
-         /* eslint-disable no-eval */
+        /* eslint-disable no-eval */
         return (value === undefined || value === null || value < minValue) ?
             template(message, {
                 minValue: minValue,

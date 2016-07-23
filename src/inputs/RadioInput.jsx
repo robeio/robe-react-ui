@@ -6,9 +6,9 @@ import { FormGroup, ControlLabel } from "react-bootstrap";
 
 
 /**
- * RadioInput is an input element to provide selected given item.
+ * An Input Component which acts as a radio input.
  * @export
- * @class RadioInput
+ * @class CheckInput
  * @extends {ValidationComponent}
  */
 export default class RadioInput extends ValidationComponent {
@@ -25,10 +25,6 @@ export default class RadioInput extends ValidationComponent {
          * Label for the form control.
          */
         label: React.PropTypes.string,
-        /**
-         * Array of items. All items will be rendered as separate checkbox input.
-         */
-        items: React.PropTypes.array,
         /**
          * Item will be rendered as checkbox input.
          */
@@ -64,6 +60,8 @@ export default class RadioInput extends ValidationComponent {
      * @static
      */
     static defaultProps = {
+        placeHolder: "Please Select",
+        noResultsText: "No Result",
         textField: "text",
         valueField: "value",
         disabled: false
@@ -98,7 +96,7 @@ export default class RadioInput extends ValidationComponent {
     }
 
     /**
-     * returns radio inputs from given items.
+     *
      * @param items
      * @returns {Array}
      * @private
@@ -117,7 +115,7 @@ export default class RadioInput extends ValidationComponent {
     }
 
     /**
-     * return a radio input from given item.
+     *
      * @param item
      * @returns {Object}
      * @private
@@ -127,50 +125,43 @@ export default class RadioInput extends ValidationComponent {
         let text = item[this.props.textField];
         let isChecked = this._value === value;
         let icon = isChecked ? " fa-dot-circle-o" : " fa-circle-o";
-        let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
+        let disabled = isChecked ? "disabled-check-input" : "";
+        let input = isChecked ? (
+            <input
+                type="hidden"
+                value={value}
+                disabled={!isChecked}
+            />
+        ) : null;
         return (
-            <div value={value} className={`radio ${disabledStyle}`} onClick={this.props.disabled ? null : this.__onClick.bind(this, value)}>
+            <div value={value} className={`radio ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"10px"} />
                 </label> {text}
-                <input
-                    type="hidden"
-                    value={value}
-                    disabled={this.props.disabled}
-                />
+                {input}
             </div>
         );
     }
 
     /**
-     * This method has two difference calls.
-     * 1 - call without parameter returns true if at least one of the values is checked or not.
-     * 2 - call with key parameter returns true if the given key is checked or not.
-     * @param {string} key
-     * @returns {boolean}
+     * Returns whether it is selected or not.
+     * @returns true if selected.
      */
     isChecked = (key: string) => {
-        let isExist = (Assertions.isNotUndefined(this._value) && this._value !== null) ? this._value.length > 0 : false;
-        if (Assertions.isNotUndefined(key)) {
-            return isExist && key === this._value;
-        }
-        return isExist;
+        let isValueNotEmpty = this._value && this._value.length > 0
+        return isValueNotEmpty && (typeof key === "undefined" ?
+        key !== this._value : true);
     };
 
-    /**
-     * returns checked values as string
-     * @returns {string}
-     */
-    getValue(): string {
+    getValue() {
         return this._value;
     }
 
     /**
-     * Internal onClick event. It is triggered if any Radio Input item is clicked.
-     * @param value
-     * @private
+     * Internal onClick event. It is triggered every time.
+     * @param e event
      */
     __onClick(value) {
         this._value = value;

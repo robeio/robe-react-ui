@@ -69,6 +69,8 @@ export default class CheckInput extends ValidationComponent {
      */
     static defaultProps = {
         delimiter: ",",
+        placeHolder: "Please Select",
+        noResultsText: "No Result",
         textField: "text",
         valueField: "value",
         disabled: false
@@ -76,8 +78,7 @@ export default class CheckInput extends ValidationComponent {
 
     _values = [];
 
-    _value: string;
-
+    _value;
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
@@ -107,7 +108,7 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     * create checkbox items from given items.
+     *
      * @param items
      * @returns {Array}
      * @private
@@ -126,7 +127,7 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     * create a checkbox from given item.
+     *
      * @param item
      * @returns {Object}
      * @private
@@ -136,75 +137,56 @@ export default class CheckInput extends ValidationComponent {
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;
         let icon = isChecked ? " fa-check-square-o" : " fa-square-o";
-        let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
+        let disabled = isChecked ? "disabled-check-input" : "";
+        let input = isChecked ? (
+            <input
+                type="hidden"
+                value={value}
+                disabled={!isChecked}
+            />
+        ) : null;
         return (
-            <div value={value} className={`checkbox ${disabledStyle}`} onClick={this.props.disabled ? null : this.__onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"10px"} />
                 </label> {text}
-                <input
-                    type="hidden"
-                    value={value}
-                    disabled={this.props.disabled}
-                />
+                {input}
             </div>
         );
     }
 
     /**
-     * This method has two difference calls.
-     * 1 - call without parameter returns true if at least one of the values is checked.
-     * 2 - call with key parameter returns true if the given key is in checked list.
-     * @param {string} key
-     * @returns {boolean}
+     * Returns whether it is selected or not.
+     * @returns true if selected.
      */
-    isChecked = (key: string): boolean => {
-        return typeof key !== "undefined" ?
+    isChecked = (key: string) => {
+        return typeof key === "undefined" ?
         this._values.indexOf(key) !== -1 :
         this._values.length > 0;
     };
 
-    /**
-     * returns checked values as string
-     * @returns {string}
-     */
-    getValue(): string {
+    getValue() {
         return this._value;
     }
 
-    /**
-     * Splits given string by delimiter and return result as Array.
-     * @param value
-     * @returns {Array}
-     * @private
-     */
-    __split(value: string): Array {
+    __split(value: string) {
         if (value && value.length > 0) {
             return this._value.split(this.props.delimiter);
         }
         return [];
     }
 
-    /**
-     * Joins given Array by delimiter and return result as string.
-     * @param values
-     * @param delimiter
-     * @returns {string}
-     * @private
-     */
-    __join(values: Array, delimiter: string): string {
+    __join(values: Array, delimiter: string) {
         if (values && values.length > 0) {
             return this._values.join(delimiter);
         }
         return "";
     }
-
     /**
-     * Internal onClick event. It is triggered if any Checkbox item is clicked.
-     * @param value
-     * @private
+     * Internal onClick event. It is triggered every time.
+     * @param e event
      */
     __onClick(value) {
         let ind = this._values.indexOf(value);

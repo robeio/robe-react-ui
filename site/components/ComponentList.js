@@ -90,6 +90,16 @@ class ComponentList {
         });
 
         components.push({
+            header: "HtmlEditor",
+            desc: "is the input field for collecting html (rich text) data.",
+            json: require("../docs/inputs/htmleditor/HtmlEditor"),
+            sample: require("../samples/inputs/HtmlEditorSample"),
+            code: require("../samples/inputs/HtmlEditorSample.txt")
+        });
+
+
+
+        components.push({
             header: "CheckBoxList",
             desc: "",
             json: require("../docs/inputs/CheckBox"),
