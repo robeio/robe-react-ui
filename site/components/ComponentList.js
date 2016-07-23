@@ -1,16 +1,3 @@
-import React from "react";
-import MoneyInput from "inputs/MoneyInput";
-import CheckInput from "inputs/CheckInput";
-import RadioInput from "inputs/RadioInput";
-import PasswordInput from "inputs/PasswordInput";
-import NumericInput from "inputs/NumericInput";
-import DecimalInput from "inputs/DecimalInput";
-import DateInput from "inputs/DateInput";
-import { CheckboxList } from "inputs/checklist";
-import SelectInput from "inputs/SelectInput";
-import HtmlEditor from "inputs/htmleditor/HtmlEditor";
-import DataForm from "form/DataForm";
-import ModalDataForm from "form/ModalDataForm";
 import InputValidations from "validation/InputValidations";
 
 class ComponentList {
@@ -100,11 +87,19 @@ class ComponentList {
 
 
         components.push({
-            header: "CheckBoxList",
+            header: "CheckBox",
             desc: "",
             json: require("../docs/inputs/CheckBox"),
             sample: require("../samples/inputs/CheckBoxSample"),
             code: require("../samples/inputs/CheckBoxSample.txt")
+        });
+
+        components.push({
+            header: "FaIcon",
+            desc: "",
+            json: require("../docs/faicon/FaIcon"),
+            sample: require("../samples/faicon/FaIconSample"),
+            code: require("../samples/faicon/FaIconSample.txt")
         });
         return components;
     }

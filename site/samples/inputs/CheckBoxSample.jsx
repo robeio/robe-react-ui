@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckBox from "inputs/CheckBox";
-import CheckBoxList from "inputs/checklist/CheckboxList";
 import InputValidations from "validation/InputValidations";
 
 const langs = [
