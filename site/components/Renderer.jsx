@@ -7,12 +7,44 @@ import Highlight from "react-highlight";
 
 export default class Renderer extends ShallowComponent {
 
-    json;
+    /**
+     * Properties of the component
+     *
+     * @static
+     */
+    static propTypes = {
+        /**
+         * Component name
+         */
+        header: React.PropTypes.string,
+        /**
+         * Component description
+         */
+        desc: React.PropTypes.string,
+        /**
+         *
+         */
+        alternatives: React.PropTypes.object,
+        /**
+         * Component Props Json
+         */
+        json: React.PropTypes.object,
+        /**
+         * Component Sample Code Object
+         */
+        sample: React.PropTypes.object,
+        /**
+         * Component Sample Code string
+         */
+        code: React.PropTypes.string
+    };
 
+    static defaultProps = {
+        json: {}
+    };
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-        this.json = this.props.json === undefined ? {} : this.props.json;
         this.state = {
             showCode: false
         };
@@ -36,9 +68,9 @@ export default class Renderer extends ShallowComponent {
                     <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
                 </Panel>
                 <h4>Props</h4>
-                {this.__renderPropsTable(this.json.props) }
+                {this.__renderPropsTable(this.props.json.props)}
                 <h4>Methods</h4>
-                {this.__renderMethodsTable(this.json.methods) }
+                {this.__renderMethodsTable(this.props.json.methods)}
             </div >);
     }
 
@@ -110,5 +142,4 @@ export default class Renderer extends ShallowComponent {
             </Table>
         );
     }
-
 }
