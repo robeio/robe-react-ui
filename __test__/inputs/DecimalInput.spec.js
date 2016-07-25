@@ -10,7 +10,7 @@ describe("inputs/DecimalInput", () => {
             <DecimalInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
-                handleChange={props.onChange !== undefined ? props.onChange : () => { }}
+                handleChange={props.handleChange !== undefined ? props.handleChange : () => { }}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;

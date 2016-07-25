@@ -21,8 +21,8 @@ export default class NumericInputSample extends ShallowComponent {
                     value={this.state.NumericInputNormal}
                     thousandsSeparator=","
                     decimalSeperator="."
-                    onChange={this.__handleChange.bind(undefined, "NumericInputNormal") }
-                    />
+                    handleChange={this.__handleChange.bind(undefined, "NumericInputNormal") }
+                />
                 <NumericInput
                     label="With Default Value"
                     value="42"
@@ -30,7 +30,7 @@ export default class NumericInputSample extends ShallowComponent {
                 <NumericInput
                     label="With Validations"
                     value={this.state.NumericInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "NumericInputValidations") }
+                    handleChange={this.__handleChange.bind(undefined, "NumericInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}
