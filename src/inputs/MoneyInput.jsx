@@ -21,8 +21,8 @@ export default class MoneyInput extends ShallowComponent {
      */
     static propTypes = {
         /**
-        * Label for the form control.
-        */
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
         /**
          * Value of the component
@@ -32,10 +32,6 @@ export default class MoneyInput extends ShallowComponent {
          * onChange event for the component
          */
         onChange: React.PropTypes.func,
-        /**
-         * handleChange event for the component
-         */
-        handleChange: React.PropTypes.func,
         /**
          * Unit for the currency. Will be displayed right side of the input.
          */
@@ -50,15 +46,34 @@ export default class MoneyInput extends ShallowComponent {
          * Thousand Separator for integer and fraction.
          */
         thousandSeparator: React.PropTypes.oneOf([".", ","])
+        ,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
         decimalSeparator: ".",
         thousandSeparator: ",",
         unit: "TL",
-        value: ""
-    }
-
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
+    };
 
     constructor(props: Object) {
         super(props);
@@ -69,13 +84,12 @@ export default class MoneyInput extends ShallowComponent {
     }
 
     render(): Object {
-        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.__numericFilter.bind(this);
         return (
             <Input
                 {...this.props}
                 type="text"
                 label={this.props.label}
-                onChange={onChange}
+                onChange={this.numericFilter.bind(this)}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref="innerInput"
@@ -83,10 +97,10 @@ export default class MoneyInput extends ShallowComponent {
             />);
     }
 
-     /**
-      * Returns the validity of the value.
-      * @return true - value is valid, false - invalid
-      */
+    /**
+     * Returns the validity of the value.
+     * @return true - value is valid, false - invalid
+     */
     isValid(): boolean {
         return this.refs.innerInput.isValid();
     }
@@ -98,10 +112,10 @@ export default class MoneyInput extends ShallowComponent {
         let value = e.target.value;
         value = this.__addThousandSeparator(value);
         let result = this.__isFloat(value) || value === "";
-        if (result && this.props.handleChange) {
+        if (result && this.props.onChange) {
             let parsedVal = parseInt(value, 10);
             e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();

@@ -39,7 +39,9 @@ describe("inputs/CheckInput", () => {
             delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
-            disabled: false
+            disabled: false,
+            readOnly: false,
+            hidden: false
         };
 
         let newComponent = Generator.getComponent(defaultProps, CheckInput);
@@ -58,14 +60,16 @@ describe("inputs/CheckInput", () => {
 
         expectedProps = {
             label: "CheckInput Group",
+            items: langs,
             value: "en,tr",
             textField: "value",
             valueField: "key",
-            items: langs,
             delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
-            disabled: false
+            disabled: false,
+            readOnly: false,
+            hidden: false
         };
 
         newComponent = Generator.getComponent(defaultProps, CheckInput);

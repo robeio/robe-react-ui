@@ -10,7 +10,7 @@ describe("inputs/PasswordInput", () => {
             <PasswordInput
                 label="PasswordInput Label Text Example"
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with PasswordInput value"}
-                handleChange={props.handleChange !== undefined ? props.handleChange : () => { }}
+                onChange={props.onChange !== undefined ? props.onChange : () => { }}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -24,7 +24,7 @@ describe("inputs/PasswordInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "PasswordInput Label Text Example");
         chai.assert.equal(componentNode.props.value, "This is some example text must be equals with PasswordInput value");
-        chai.assert.equal(componentNode.props.handleChange.name, "");
+        chai.assert.equal(componentNode.props.onChange.name, "");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 

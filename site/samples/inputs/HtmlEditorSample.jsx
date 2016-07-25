@@ -17,7 +17,7 @@ export default class HtmlEditorSample extends ShallowComponent {
                 <HtmlEditor
                     label="HtmlEditor"
                     value={this.state.HtmlEditorNormal}
-                    handleChange={this.__handleChange.bind(undefined, "HtmlEditorNormal")}
+                    onChange={this.__handleChange.bind(undefined, "HtmlEditorNormal")}
                 />
                 <HtmlEditor
                     label="With Default Value"
@@ -26,7 +26,7 @@ export default class HtmlEditorSample extends ShallowComponent {
                 <HtmlEditor
                     label="With Validations"
                     value={this.state.HtmlEditorValidations}
-                    handleChange={this.__handleChange.bind(undefined, "HtmlEditorValidations")}
+                    onChange={this.__handleChange.bind(undefined, "HtmlEditorValidations")}
                     validations={{
                         required: InputValidations.htmlRequired,
                     }}

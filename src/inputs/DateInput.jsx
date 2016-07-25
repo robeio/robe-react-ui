@@ -12,15 +12,45 @@ import "./DateInput.css";
 export default class DateInput extends ValidationComponent {
 
     static propTypes = {
+        /**
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
-        handleChange: React.PropTypes.func,
+        /**
+         * Value of the component
+         */
+        value: React.PropTypes.string.isRequired,
+        /**
+         * onChangeEvent event for the component
+         */
+        onChange: React.PropTypes.func,
+        /**
+         * Date Format
+         */
+        format: React.PropTypes.string,
+        /**
+         * Disable input
+         */
         disabled: React.PropTypes.bool,
-        format: React.PropTypes.string
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
-
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
-        format: "DD/MM/YYYY"
+        format: "DD/MM/YYYY",
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     render() {
@@ -28,7 +58,7 @@ export default class DateInput extends ValidationComponent {
         let label = this.props.label === undefined ? <span></span> :
             <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
         return (
-            <FormGroup >
+            <FormGroup hidden={this.props.hidden} >
                 {label}
                 <DatePicker
                     ref="input"
@@ -44,7 +74,7 @@ export default class DateInput extends ValidationComponent {
                     endDate={this.props.endDate}
                     showTodayButton={"Bugün"}
                     dateFormat={this.props.format}
-                    />
+                />
                 { super.validationResult() }
             </FormGroup>);
     }
@@ -62,8 +92,8 @@ export default class DateInput extends ValidationComponent {
             e.target.parsedValue = null;
         }
         let result = true;
-        if (this.props.handleChange) {
-            result = this.props.handleChange(e);
+        if (this.props.onChange) {
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();

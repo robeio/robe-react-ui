@@ -10,7 +10,7 @@ describe("inputs/MoneyInput", () => {
             <MoneyInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "12,345.6"}
-                handleChange={props.handleChange !== undefined ? props.handleChange : () => { }}
+                onChange={props.onChange !== undefined ? props.onChange : () => { }}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -24,7 +24,7 @@ describe("inputs/MoneyInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "Label");
         chai.assert.equal(componentNode.props.value, "12,345.6");
-        chai.assert.equal(componentNode.props.handleChange.name, "");
+        chai.assert.equal(componentNode.props.onChange.name, "");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
@@ -40,7 +40,7 @@ describe("inputs/MoneyInput", () => {
     });
 
     it("'__numericFilter", (done: Function) => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ handleChange: () => { return true; } }));
+        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: () => { return true; } }));
         let e = {
             target: {
                 value: "12,123.1"
@@ -75,7 +75,7 @@ describe("inputs/MoneyInput", () => {
         };
         componentNode.__numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
-            handleChange: () => {
+            onChange: () => {
                 chai.assert.isOk(false);
                 done("Input value '12q2' failed");
             }
@@ -86,7 +86,7 @@ describe("inputs/MoneyInput", () => {
         };
         componentNode.__numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
-            handleChange: () => {
+            onChange: () => {
                 chai.assert.isOk(false);
                 done("Input value '12,12.1' failed");
             }

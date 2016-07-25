@@ -50,21 +50,29 @@ export default class CheckList extends ValidationComponent {
          */
         textField: React.PropTypes.string,
         /**
-         * handleChange callback function when selection `item` or `items` changed.
+         * onChange callback function when selection `item` or `items` changed.
          */
-        handleChange: React.PropTypes.func,
+        onChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
         validations: React.PropTypes.object,
         /**
-         * disabled input
+         * horizantal or vertical list
+         */
+        direction: React.PropTypes.bool,
+        /**
+         * Disable input
          */
         disabled: React.PropTypes.bool,
         /**
-         * horizantal or vertical list
+         * it specifies that an input field is read-only
          */
-        direction: React.PropTypes.bool
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
     /**
@@ -75,14 +83,12 @@ export default class CheckList extends ValidationComponent {
         delimiter: ",",
         textField: "text",
         valueField: "value",
+        direction: false,
         disabled: false,
-        direction: false
+        readOnly: false,
+        hidden: false
     };
 
-    /**
-     * @type {Array}
-     * @private
-     */
     _values = [];
 
     _value: string;
@@ -106,14 +112,14 @@ export default class CheckList extends ValidationComponent {
         givenStyle.padding = "0";
         let flex = this.props.direction ? "flex" : "";
         return (
-            <FormGroup>
+            <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
-                    <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
-                        {
-                            this.__createCheckList(this.props.items)
-                        }
-                        {super.validationResult()}
-                    </ListGroup>
+                <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
+                    {
+                        this.__createCheckList(this.props.items)
+                    }
+                    {super.validationResult()}
+                </ListGroup>
             </FormGroup>
         );
     }
@@ -149,7 +155,7 @@ export default class CheckList extends ValidationComponent {
         let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
 
         return (
-            <ListGroupItem style={{outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={this.props.disabled ? null : this.onClick.bind(this, value)}>
+            <ListGroupItem style={{outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={this.props.disabled ? null : this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px"}}
                 >
@@ -215,7 +221,7 @@ export default class CheckList extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    onClick(value: string) {
+    __onClick(value: string) {
         let ind = this._values.indexOf(value);
         if (ind !== -1) {
             delete this._values[ind];
@@ -224,14 +230,13 @@ export default class CheckList extends ValidationComponent {
         }
         let parsedValue = this.__join(this._values, this.props.delimiter);
         let result = true;
-        if (this.props.handleChange) {
+        if (this.props.onChange) {
             let e = { target: { parsedValue } };
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (result) {
             this._value = parsedValue;
         }
         return result;
     }
-
 }

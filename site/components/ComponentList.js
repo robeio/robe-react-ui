@@ -131,6 +131,7 @@ class ComponentList {
             code: require("../samples/notification/NotificationSample.txt"),
         });
 
+
         return components;
     }
 
@@ -138,4 +139,3 @@ class ComponentList {
 }
 
 export default new ComponentList();
-

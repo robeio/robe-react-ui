@@ -50,18 +50,27 @@ export default class CheckInput extends ValidationComponent {
          */
         textField: React.PropTypes.string,
         /**
-         * handleChange callback function when selection `item` or `items` changed.
+         * onChange callback function when selection `item` or `items` changed.
          */
-        handleChange: React.PropTypes.func,
+        onChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
         validations: React.PropTypes.object,
         /**
-         * disabled input
+         * Disable input
          */
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
+
 
     /**
      * defaultProps
@@ -73,13 +82,11 @@ export default class CheckInput extends ValidationComponent {
         noResultsText: "No Result",
         textField: "text",
         valueField: "value",
-        disabled: false
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
-    /**
-     * @type {Array}
-     * @private
-     */
     _values = [];
 
     _value;
@@ -99,7 +106,7 @@ export default class CheckInput extends ValidationComponent {
      **/
     render(): Object {
         return (
-            <FormGroup>
+            <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
                     this.props.items ?
@@ -150,7 +157,7 @@ export default class CheckInput extends ValidationComponent {
             />
         ) : null;
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={this.onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
@@ -192,7 +199,7 @@ export default class CheckInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    onClick(value: string) {
+    __onClick(value: string) {
         let ind = this._values.indexOf(value);
         if (ind !== -1) {
             delete this._values[ind];
@@ -201,9 +208,9 @@ export default class CheckInput extends ValidationComponent {
         }
         let parsedValue = this.__join(this._values, this.props.delimiter);
         let result = true;
-        if (this.props.handleChange) {
+        if (this.props.onChange) {
             let e = { target: { parsedValue } };
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (result) {
             this._value = parsedValue;

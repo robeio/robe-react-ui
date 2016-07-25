@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "faicon/FaIcon";
-import NotificationItem from "notification/NotificationItem";
-import UIApplication from "../app/UIApplication";
-import "notification/Notification.css";
+import FaIcon from "../faicon/FaIcon";
+import NotificationItem from "./NotificationItem";
+import "./Notification.css";
 /**
- * 
- * 
+ *
+ *
  * @export
  * @class Notification
  * @extends {ShallowComponent}
@@ -18,7 +17,7 @@ export default class Notification extends ShallowComponent {
 
     /**
      * PropTypes of the component.
-     * 
+     *
      * @static
      */
     static propTypes = {
@@ -32,7 +31,7 @@ export default class Notification extends ShallowComponent {
          */
         notificationDetailLabel: React.PropTypes.string,
         /**
-         * Link for the notification details. 
+         * Link for the notification details.
          * Footer link will be rendered according to this property.
          */
         title: React.PropTypes.string,
@@ -64,9 +63,9 @@ export default class Notification extends ShallowComponent {
                     </Col>
                     <li id="notify" className="divider" />
                     <Col className="notifications-wrapper">
-                        {this.__renderNotificationItems() }
+                        {this.__renderNotificationItems()}
                     </Col>
-                    {this.__renderFooter() }
+                    {this.__renderFooter()}
                 </Col>
             </Col>);
     }
@@ -74,23 +73,26 @@ export default class Notification extends ShallowComponent {
     __renderFooter(): Object {
         if (this.props.notificationDetailPath === undefined) {
             return undefined;
-        } else {
-            return (
-                <div>
-                    <li id="notify" componentClass="li" className="divider" />
-                    <div className="notification-footer">
-                        <a style={{ padding: 0 }}
-                            href={this.props.notificationDetailPath}>
-                            <i className="menu-title pull-right"
-                                onClick={this.__closeNotifyAfterClick}>
-                                {this.props.notificationDetailLabel}
-                                <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
-                            </i>
-                        </a>
-                    </div>
-                </div>
-            );
         }
+        return (
+            <div>
+                <li id="notify" componentClass="li" className="divider" />
+                <div className="notification-footer">
+                    <a
+                        style={{ padding: 0 }}
+                        href={this.props.notificationDetailPath}
+                    >
+                        <i
+                            className="menu-title pull-right"
+                            onClick={this.__closeNotifyAfterClick}
+                        >
+                            {this.props.notificationDetailLabel}
+                            <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
+                        </i>
+                    </a>
+                </div>
+            </div>
+        );
     }
 
     __renderNotificationItems = () => {
@@ -105,9 +107,11 @@ export default class Notification extends ShallowComponent {
 
             return (notifications);
         }
-        return (<Col>
-            <span style={{ padding: "10px" }}>You don't have any notification.</span>
-        </Col>);
+        return (
+            <Col>
+                <span style={{ padding: "10px" }}>You don't have any notification.</span>
+            </Col>
+        );
     }
 
 
@@ -157,3 +161,4 @@ export default class Notification extends ShallowComponent {
         });
     }
 }
+

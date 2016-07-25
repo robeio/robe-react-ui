@@ -61,7 +61,7 @@ export default class CheckListSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     style={{ height: "150px" }}
-                    handleChange={this.__handleChange.bind(undefined, "CheckListSingle")}
+                    onChange={this.__handleChange.bind(undefined, "CheckListSingle")}
                 />
                 <CheckList
                     label="CheckList Group"
@@ -70,7 +70,7 @@ export default class CheckListSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     style={{ height: "150px" }}
-                    handleChange={this.__handleChange.bind(undefined, "CheckListGroup")}
+                    onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
                 <CheckList
                     label="CheckList Group"
@@ -80,7 +80,7 @@ export default class CheckListSample extends ShallowComponent {
                     valueField="key"
                     direction={true}
                     style={{ width: "150px" }}
-                    handleChange={this.__handleChange.bind(undefined, "CheckListGroup")}
+                    onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
             </div>
         );

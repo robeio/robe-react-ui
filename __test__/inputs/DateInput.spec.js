@@ -10,7 +10,7 @@ describe("inputs/DateInput", () => {
             <DateInput
                 label="DateInput Label Text Example"
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with DateInput value"}
-                handleChange={props.handleChange !== undefined ? props.handleChange : () => { } }
+                onChange={props.onChange !== undefined ? props.onChange : () => { } }
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -25,7 +25,7 @@ describe("inputs/DateInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({ value: value }));
         chai.assert.equal(componentNode.props.label, "DateInput Label Text Example");
         chai.assert.equal(componentNode.props.value, value);
-        chai.assert.equal(componentNode.props.handleChange.name, "");
+        chai.assert.equal(componentNode.props.onChange.name, "");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 

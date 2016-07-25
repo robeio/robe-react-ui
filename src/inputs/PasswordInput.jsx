@@ -11,27 +11,46 @@ import Input from "inputs/BaseInput";
  */
 export default class PasswordInput extends ShallowComponent {
     /**
-    * Properties of the component
-    *
-    * @static
-    */
+     * Properties of the component
+     *
+     * @static
+     */
     static propTypes = {
         /**
-        * Label for the form control.
-        */
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
         /**
          * Value of the component
          */
         value: React.PropTypes.any.isRequired,
         /**
-         * handleChange event for the component
+         * onChange event for the component
          */
-        handleChange: React.PropTypes.func,
+        onChange: React.PropTypes.func,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
-        value: ""
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     /**
@@ -55,14 +74,13 @@ export default class PasswordInput extends ShallowComponent {
     isValid(): boolean {
         return this.refs.innerInput.isValid();
     }
-
     /**
      * Internal onchange handler.
      */
     __onChange(e: Object) {
         let result = true;
-        if (this.props.handleChange) {
-            result = this.props.handleChange(e);
+        if (this.props.onChange) {
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();

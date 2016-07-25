@@ -18,7 +18,7 @@ export default class DateInputSample extends ShallowComponent {
                 <DateInput
                     label="DateInput"
                     value={this.state.DateInputNormal}
-                    handleChange={this.__handleChange.bind(undefined, "DateInputNormal") }
+                    onChange={this.__handleChange.bind(undefined, "DateInputNormal") }
                     />
                 <DateInput
                     label="With Default Value"
@@ -27,7 +27,7 @@ export default class DateInputSample extends ShallowComponent {
                 <DateInput
                     label="With Validations"
                     value={this.state.DateInputValidations}
-                    handleChange={this.__handleChange.bind(undefined, "DateInputValidations") }
+                    onChange={this.__handleChange.bind(undefined, "DateInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}

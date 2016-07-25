@@ -44,7 +44,7 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Is a callback function when selection `item` or `items` changed.
          */
-        handleChange: React.PropTypes.func,
+        onChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
@@ -52,7 +52,15 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
     /**
@@ -64,14 +72,12 @@ export default class RadioInput extends ValidationComponent {
         noResultsText: "No Result",
         textField: "text",
         valueField: "value",
-        disabled: false
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
-    /**
-     * Radio Value
-     */
     _value;
-
     constructor(props) {
         super(props);
         if (this.props.value) {
@@ -155,7 +161,7 @@ export default class RadioInput extends ValidationComponent {
     isChecked = (key: string) => {
         let isValueNotEmpty = this._value && this._value.length > 0
         return isValueNotEmpty && (typeof key === "undefined" ?
-        key !== this._value : true);
+            key !== this._value : true);
     };
 
     getValue() {
@@ -168,9 +174,9 @@ export default class RadioInput extends ValidationComponent {
      */
     __onClick(value) {
         let result = true;
-        if (this.props.handleChange) {
+        if (this.props.onChange) {
             let e = { target: { value: value } };
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (result) {
             this._value = value;

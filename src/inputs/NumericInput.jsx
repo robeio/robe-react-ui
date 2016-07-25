@@ -19,8 +19,8 @@ export default class NumericInput extends ShallowComponent {
      */
     static propTypes = {
         /**
-        * Label for the form control.
-        */
+         * Label for the form control.
+         */
         label: React.PropTypes.string,
         /**
          * Value of the component
@@ -29,11 +29,30 @@ export default class NumericInput extends ShallowComponent {
         /**
          * onChange event for the component
          */
-        handleChange: React.PropTypes.func
+        onChange: React.PropTypes.func,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
-        value: ""
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     render(): Object {
@@ -62,10 +81,10 @@ export default class NumericInput extends ShallowComponent {
         let value = e.target.value;
         if (value && !is.numeric(value)) {
             result = false;
-        } else if (this.props.handleChange) {
+        } else if (this.props.onChange) {
             let parsedVal = parseInt(value, 10);
             e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();

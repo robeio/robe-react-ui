@@ -38,12 +38,10 @@ export default class BaseInput extends ValidationComponent {
          * Type of the BaseInput. (text, email, password, file)
          */
         type: React.PropTypes.string,
-
         /**
-        * Component class of the BaseInput. (select, textarea)
-        */
+         * Component class of the BaseInput. (select, textarea)
+         */
         componentClass: React.PropTypes.string,
-
         /**
          * Component class of the BaseInput. (select, textarea)
          */
@@ -51,7 +49,29 @@ export default class BaseInput extends ValidationComponent {
         /**
          * Component class of the BaseInput. (select, textarea)
          */
-        inputGroupRight: React.PropTypes.object
+        inputGroupRight: React.PropTypes.object,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
+    };
+
+    /**
+     * defaultProps
+     * @static
+     */
+    static defaultProps = {
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     /**
@@ -69,7 +89,6 @@ export default class BaseInput extends ValidationComponent {
             bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined
         };
     }
-    
     /**
      * Renders the component
      * @returns {Object}
@@ -77,7 +96,7 @@ export default class BaseInput extends ValidationComponent {
     render(): Object {
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             return (
-                <FormGroup>
+                <FormGroup hidden={this.props.hidden}>
                     <ControlLabel> {this.props.label} </ControlLabel>
                     <InputGroup>
                         {this.props.inputGroupLeft}
@@ -94,17 +113,17 @@ export default class BaseInput extends ValidationComponent {
             );
         }
         return (
-                <FormGroup>
-                    <ControlLabel> {this.props.label} </ControlLabel>
-                        <FormControl
-                            {...this.props}
-                            bsStyle="error"
-                            ref="innerInput"
-                            value={this.props.value}
-                        />
-                    {super.validationResult()}
-                </FormGroup>
-            );
+            <FormGroup hidden={this.props.hidden}>
+                <ControlLabel> {this.props.label} </ControlLabel>
+                <FormControl
+                    {...this.props}
+                    bsStyle="error"
+                    ref="innerInput"
+                    value={this.props.value}
+                />
+                {super.validationResult()}
+            </FormGroup>
+        );
     }
 
     /**

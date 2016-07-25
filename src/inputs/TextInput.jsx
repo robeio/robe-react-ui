@@ -25,9 +25,9 @@ export default class TextInput extends ShallowComponent {
          */
         value: React.PropTypes.string.isRequired,
         /**
-         * handleChangeEvent event for the component
+         * onChangeEvent event for the component
          */
-        handleChange: React.PropTypes.func,
+        onChange: React.PropTypes.func,
         /**
          * Disable input
          */
@@ -51,7 +51,6 @@ export default class TextInput extends ShallowComponent {
         readOnly: false,
         hidden: false
     };
-
     /* eslint no-useless-constructor: 0*/
     /**
      * Creates an instance of TextInput.
@@ -90,8 +89,8 @@ export default class TextInput extends ShallowComponent {
      */
     __onChange(e: Object) {
         let result = true;
-        if (this.props.handleChange) {
-            result = this.props.handleChange(e);
+        if (this.props.onChange) {
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();

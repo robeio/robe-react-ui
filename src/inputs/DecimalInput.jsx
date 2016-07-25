@@ -30,36 +30,50 @@ export default class DecimalInput extends ShallowComponent {
          */
         onChange: React.PropTypes.func,
         /**
-         * handleChange event for the component
-         */
-        handleChange: React.PropTypes.func,
-        /**
          * Decimal Seperator for integer and fraction.
          */
-        decimalSeparator: React.PropTypes.oneOf([".", ","])
+        decimalSeparator: React.PropTypes.oneOf([".", ","]),
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
         decimalSeperator: ".",
-        value: ""
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     render(): Object {
-        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.__numericFilter.bind(this);
         return (<Input
             {...this.props}
             type="text"
             ref="innerInput"
             step={this.props.step}
             value={this.props.value}
-            onChange={onChange}
+            onChange={this.__numericFilter.bind(this)}
         />);
     }
 
     /**
-      * Returns the validity of the value.
-      * @return true - value is valid, false - invalid
-      */
+     * Returns the validity of the value.
+     * @return true - value is valid, false - invalid
+     */
     isValid(): boolean {
         return this.refs.innerInput.isValid();
     }
