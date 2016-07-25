@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "../faicon/FaIcon";
-import NotificationItem from "./NotificationItem";
-import "./Notification.css";
+import FaIcon from "faicon/FaIcon";
+import NotificationItem from "notification/NotificationItem";
+import "notification/Notification.css";
 /**
- *
- *
+ * Notification is a view component for representing all notifications via a clickable icon and count label.
+ * Also a popup will show the details of the notifications.
  * @export
  * @class Notification
  * @extends {ShallowComponent}
@@ -41,6 +41,8 @@ export default class Notification extends ShallowComponent {
         title: "Notifications",
         notificationDetailLabel: "See all"
     };
+
+
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -48,6 +50,8 @@ export default class Notification extends ShallowComponent {
             data: this.props.data
         };
     }
+
+
     render(): Object {
         let open = this.state.open ? "dropdown open" : "dropdown";
         let notificationButtonClass = this.state.open ? "fa-caret-down" : "fa-bell";
@@ -57,16 +61,12 @@ export default class Notification extends ShallowComponent {
                 <Button bsStyle="primary" id="notify" className="btn-header-button btn-header" role="button" onClick={this.__onNotificationOpenClick}>
                     <FaIcon code={notificationButtonClass} size="fa-lg" /> {this.state.data.length}
                 </Button>
-                <Col id="notify" componentClass="ul" className="dropdown-menu notifications" role="menu">
-                    <Col className="notification-heading">
-                        <span className="menu-title">{this.props.title}</span>
-                    </Col>
+                <ul id="notify" className="dropdown-menu notifications" role="menu">
+                    <span className="menu-title">{this.props.title}</span>
                     <li id="notify" className="divider" />
-                    <Col className="notifications-wrapper">
-                        {this.__renderNotificationItems()}
-                    </Col>
+                    {this.__renderNotificationItems()}
                     {this.__renderFooter()}
-                </Col>
+                </ul>
             </Col>);
     }
 
@@ -78,14 +78,9 @@ export default class Notification extends ShallowComponent {
             <div>
                 <li id="notify" componentClass="li" className="divider" />
                 <div className="notification-footer">
-                    <a
-                        style={{ padding: 0 }}
-                        href={this.props.notificationDetailPath}
-                    >
-                        <i
-                            className="menu-title pull-right"
-                            onClick={this.__closeNotifyAfterClick}
-                        >
+                    <a href={this.props.notificationDetailPath}>
+                        <i className="menu-title pull-right"
+                            onClick={this.__closeNotifyAfterClick}>
                             {this.props.notificationDetailLabel}
                             <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
                         </i>
@@ -95,23 +90,28 @@ export default class Notification extends ShallowComponent {
         );
     }
 
-    __renderNotificationItems = () => {
+    __renderNotificationItems(): Object {
         if (this.state.data.length > 0) {
             let notifications = [];
             let items = this.state.data;
 
             for (let i = 0; i < items.length; i++) {
                 let item = items[i];
-                notifications.push(<Col key={i} onClick={this.__closeNotifyAfterClick}><NotificationItem refresh={this.__refresh} key={i} item={item} /></Col>);
+                notifications.push(
+                    <NotificationItem
+                        refresh={this.__refresh}
+                        key={i}
+                        item={item}
+                        onRead={this.props.onRead}
+                    />
+                );
             }
-
-            return (notifications);
+            return (<Col className="notifications-wrapper">{notifications}</Col>);
         }
         return (
             <Col>
                 <span style={{ padding: "10px" }}>You don't have any notification.</span>
-            </Col>
-        );
+            </Col>);
     }
 
 
@@ -133,14 +133,6 @@ export default class Notification extends ShallowComponent {
             });
         }
     }
-
-    // __closeNotifyAfterClick = (e) => {
-    __closeNotifyAfterClick = () => {
-        this.setState({
-            open: false
-        });
-    }
-
     __refresh = () => {
         if (this.props.refresh) {
             this.props.refresh();
@@ -155,10 +147,9 @@ export default class Notification extends ShallowComponent {
         document.removeEventListener("click", this.__handleClick, false);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Object) {
         this.setState({
             data: nextProps.data || []
         });
     }
 }
-
