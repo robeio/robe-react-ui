@@ -84,9 +84,9 @@ export default class DecimalInput extends ShallowComponent {
     __numericFilter(e: Object) {
         let value = e.target.value;
         let result = this.__isFloat(value) || value === "";
-        if (result && this.props.handleChange) {
+        if (result && this.props.onChange) {
             e.target.parsedValue = value;
-            result = this.props.handleChange(e);
+            result = this.props.onChange(e);
         }
         if (!result) {
             e.preventDefault();
