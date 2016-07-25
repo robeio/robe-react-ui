@@ -44,7 +44,7 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Is a callback function when selection `item` or `items` changed.
          */
-        onChange: React.PropTypes.func,
+        handleChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
@@ -68,7 +68,6 @@ export default class RadioInput extends ValidationComponent {
     };
 
     _value;
-    /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
         if (this.props.value) {
@@ -164,10 +163,14 @@ export default class RadioInput extends ValidationComponent {
      * @param e event
      */
     __onClick(value) {
-        this._value = value;
-        if (this.props.onChange) {
-            let e = { target: { value: this._value } };
-            this.props.onChange(e);
+        let result = true;
+        if (this.props.handleChange) {
+            let e = { target: { value: value } };
+            result = this.props.handleChange(e);
         }
+        if (result) {
+            this._value = value;
+        }
+        return result;
     }
 }

@@ -20,7 +20,7 @@ export default class MoneyInputSample extends ShallowComponent {
                     value={this.state.MoneyInputNormal}
                     thousandsSeparator=","
                     decimalSeperator="."
-                    onChange={this.__handleChange.bind(undefined, "MoneyInputNormal") }
+                    handleChange={this.__handleChange.bind(undefined, "MoneyInputNormal") }
                     />
                 <MoneyInput
                     label="With Default Value"
@@ -30,7 +30,7 @@ export default class MoneyInputSample extends ShallowComponent {
                 <MoneyInput
                     label="With Validations"
                     value={this.state.MoneyInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "MoneyInputValidations") }
+                    handleChange={this.__handleChange.bind(undefined, "MoneyInputValidations") }
                     validations={{
                         required: InputValidations.required,
                     }}

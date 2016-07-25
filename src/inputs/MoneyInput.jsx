@@ -33,6 +33,10 @@ export default class MoneyInput extends ShallowComponent {
          */
         onChange: React.PropTypes.func,
         /**
+         * handleChange event for the component
+         */
+        handleChange: React.PropTypes.func,
+        /**
          * Unit for the currency. Will be displayed right side of the input.
          */
         unit: React.PropTypes.oneOf(["TL", "EUR", "USD"]),
@@ -65,12 +69,13 @@ export default class MoneyInput extends ShallowComponent {
     }
 
     render(): Object {
+        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.numericFilter.bind(this);
         return (
             <Input
                 {...this.props}
                 type="text"
                 label={this.props.label}
-                onChange={this.props.onChange !== undefined ? this.__numericFilter : undefined}
+                onChange={onChange}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref="innerInput"
@@ -87,21 +92,24 @@ export default class MoneyInput extends ShallowComponent {
     }
 
     /**
-        * Internal onchange handler for filtering numerics.
-        */
-    __numericFilter = (e: Object) => {
+     * Internal onchange handler for filtering numerics.
+     */
+    numericFilter(e: Object) {
         let value = e.target.value;
         value = this.__addThousandSeparator(value);
-        if (this.__isFloat(value) || value === "") {
-            e.target.parsedValue = value;
-            if (this.props.onChange) {
-                this.props.onChange(e);
-            }
-        } else {
+        let result = this.__isFloat(value) || value === "";
+        if (result && this.props.handleChange) {
+            let parsedVal = parseInt(value, 10);
+            e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
+            result = this.props.handleChange(e);
+        }
+        if (!result) {
             e.preventDefault();
             e.stopPropagation();
         }
-    };
+        return result;
+    }
+
     __isFloat = (input: string): boolean => {
         if (input === null || input === undefined) {
             return false;
