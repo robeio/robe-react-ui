@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import CheckBox from "inputs/CheckBox";
+import CheckList from "inputs/CheckList";
 import InputValidations from "validation/InputValidations";
 
 const langs = [
@@ -42,44 +42,45 @@ const langs = [
     }
 ];
 
-export default class CheckBoxSample extends ShallowComponent {
+export default class CheckListSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            CheckBoxSingle: "en",
-            CheckBoxGroup: "en,tr"
+            CheckListSingle: "en",
+            CheckListGroup: "en,tr"
         };
     }
 
     render() {
         return (
             <div>
-                <CheckBox
-                    label="CheckBox Single"
+                <CheckList
+                    label="CheckList Single"
                     items={langs[0]}
-                    value={this.state.CheckBoxSingle}
+                    value={this.state.CheckListSingle}
                     textField="value"
                     valueField="key"
                     style={{ height: "150px" }}
-                    onChange={this.__handleChange.bind(undefined, "CheckBoxSingle")}
+                    handleChange={this.__handleChange.bind(undefined, "CheckListSingle")}
                 />
-                <CheckBox
-                    label="CheckInput Group"
+                <CheckList
+                    label="CheckList Group"
                     items={langs}
-                    value={this.state.CheckBoxGroup}
+                    value={this.state.CheckListGroup}
                     textField="value"
                     valueField="key"
                     style={{ height: "150px" }}
-                    onChange={this.__handleChange.bind(undefined, "CheckBoxGroup")}
+                    handleChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
-                <CheckBox
-                    label="CheckInput Group"
+                <CheckList
+                    label="CheckList Group"
                     items={langs}
-                    value={this.state.CheckBoxGroup}
+                    value={this.state.CheckListGroup}
                     textField="value"
                     valueField="key"
                     direction={true}
-                    onChange={this.__handleChange.bind(undefined, "CheckBoxGroup")}
+                    style={{ width: "150px" }}
+                    handleChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
             </div>
         );
