@@ -114,6 +114,15 @@ class ComponentList {
                     { name: "configure", description: "Configure the indicator" }]
             }
         });
+
+        components.push({
+            header: "DataForm",
+            desc: "",
+            json: require("../docs/form/DataForm"),
+            sample: require("../samples/form/DataFormSample"),
+            code: require("../samples/form/DataFormSample.txt")
+        });
+
         return components;
     }
 

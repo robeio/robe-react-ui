@@ -29,10 +29,28 @@ export default class TextInput extends ShallowComponent {
          */
         handleChange: React.PropTypes.func,
         /**
-         *
+         * Disable input
          */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
+    static defaultProps = {
+        disabled: false,
+        readOnly: false,
+        hidden: false
+    };
     /* eslint no-useless-constructor: 0*/
     /**
      * Creates an instance of TextInput.

@@ -29,11 +29,30 @@ export default class NumericInput extends ShallowComponent {
         /**
          * onChange event for the component
          */
-        handleChange: React.PropTypes.func
+        handleChange: React.PropTypes.func,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
-        value: ""
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
     };
 
     render(): Object {

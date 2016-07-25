@@ -50,15 +50,34 @@ export default class MoneyInput extends ShallowComponent {
          * Thousand Separator for integer and fraction.
          */
         thousandSeparator: React.PropTypes.oneOf([".", ","])
+        ,
+        /**
+         * Disable input
+         */
+        disabled: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is read-only
+         */
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
         decimalSeparator: ".",
         thousandSeparator: ",",
         unit: "TL",
-        value: ""
-    }
-
+        value: "",
+        disabled: false,
+        readOnly: false,
+        hidden: false
+    };
 
     constructor(props: Object) {
         super(props);

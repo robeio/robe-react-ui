@@ -58,13 +58,21 @@ export default class CheckList extends ValidationComponent {
          */
         validations: React.PropTypes.object,
         /**
-         * disabled input
+         * horizantal or vertical list
+         */
+        direction: React.PropTypes.bool,
+        /**
+         * Disable input
          */
         disabled: React.PropTypes.bool,
         /**
-         * horizantal or vertical list
+         * it specifies that an input field is read-only
          */
-        direction: React.PropTypes.bool
+        readOnly: React.PropTypes.bool,
+        /**
+         * it specifies that an input field is hidden or visible
+         */
+        hidden: React.PropTypes.bool
     };
 
     /**
@@ -75,8 +83,10 @@ export default class CheckList extends ValidationComponent {
         delimiter: ",",
         textField: "text",
         valueField: "value",
+        direction: false,
         disabled: false,
-        direction: false
+        readOnly: false,
+        hidden: false
     };
 
     _values = [];
@@ -102,7 +112,7 @@ export default class CheckList extends ValidationComponent {
         givenStyle.padding = "0";
         let flex = this.props.direction ? "flex" : "";
         return (
-            <FormGroup>
+            <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                     <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
                         {
