@@ -26,13 +26,17 @@ export default class HtmlEditor extends ValidationComponent {
          */
         value: React.PropTypes.string,
         /**
+         * handleChange event for the component
+         */
+        handleChange: React.PropTypes.func,
+        /**
          * Validations for the component
          */
         validations: React.PropTypes.object,
         /**
          * Height of the component.
          */
-        height: React.PropTypes.number,
+        height: React.PropTypes.number
     };
 
     static defaultProps = {
@@ -40,7 +44,6 @@ export default class HtmlEditor extends ValidationComponent {
     };
 
     render(): Object {
-        console.log(JSON.stringify(HtmlEditor.defaultColors));
         return (
             <Col className="form-group">
                 <Col componentClass="label" className="control-label"><span>{this.props.label}</span></Col>
@@ -68,8 +71,8 @@ export default class HtmlEditor extends ValidationComponent {
         e.target = {};
         e.target.parsedValue = value;
 
-        if (this.props.onChange) {
-            this.props.onChange(e);
+        if (this.props.handleChange) {
+            this.props.handleChange(e);
         }
     };
 }
