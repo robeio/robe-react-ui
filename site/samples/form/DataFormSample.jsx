@@ -98,7 +98,7 @@ const config = {
         items
     },
     radio: {
-       items
+        items
     },
     checkList: {
         items
