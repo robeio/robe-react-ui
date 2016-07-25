@@ -27,7 +27,10 @@ export default class TextInput extends ShallowComponent {
         /**
          * handleChangeEvent event for the component
          */
-        handleChange: React.PropTypes.func
+        handleChange: React.PropTypes.func,
+        /**
+         *
+         */
     };
 
     /* eslint no-useless-constructor: 0*/

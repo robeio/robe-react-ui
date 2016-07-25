@@ -87,11 +87,11 @@ class ComponentList {
 
 
         components.push({
-            header: "CheckBox",
+            header: "CheckList",
             desc: "",
-            json: require("../docs/inputs/CheckBox"),
-            sample: require("../samples/inputs/CheckBoxSample"),
-            code: require("../samples/inputs/CheckBoxSample.txt")
+            json: require("../docs/inputs/CheckList"),
+            sample: require("../samples/inputs/CheckListSample"),
+            code: require("../samples/inputs/CheckListSample.txt")
         });
 
         components.push({

@@ -79,7 +79,7 @@ describe("inputs/CheckList", () => {
 
         let defaultProps = {
             label: "CheckList Single",
-            item: langs[0],
+            items: langs,
             value: expectedValue,
             textField: "value",
             valueField: "key"
