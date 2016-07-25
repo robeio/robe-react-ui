@@ -41,12 +41,10 @@ describe("inputs/SelectInput", () => {
             textField: "text",
             valueField: "value",
             multi: false,
-            searchable: true,
-            format: "DD/MM/YYYY",
             disabled: false,
-            readOnly: false,
-            hidden: false
+            searchable: true
         };
+
 
         let instance = TestUtils.renderIntoDocument(
             <SelectInput
@@ -67,12 +65,9 @@ describe("inputs/SelectInput", () => {
             delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
-            searchable: true,
-            format: "DD/MM/YYYY",
             disabled: false,
-            readOnly: false,
-            hidden: false
-        };
+            searchable: true
+        }
 
         instance = TestUtils.renderIntoDocument(
             <SelectInput

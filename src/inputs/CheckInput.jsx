@@ -58,19 +58,10 @@ export default class CheckInput extends ValidationComponent {
          */
         validations: React.PropTypes.object,
         /**
-         * Disable input
+         * disabled input
          */
-        disabled: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
+        disabled: React.PropTypes.bool
     };
-
 
     /**
      * defaultProps
@@ -82,9 +73,7 @@ export default class CheckInput extends ValidationComponent {
         noResultsText: "No Result",
         textField: "text",
         valueField: "value",
-        disabled: false,
-        readOnly: false,
-        hidden: false
+        disabled: false
     };
 
     /**
@@ -110,7 +99,7 @@ export default class CheckInput extends ValidationComponent {
      **/
     render(): Object {
         return (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
                     this.props.items ?

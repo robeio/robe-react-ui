@@ -6,56 +6,91 @@ import Button from "react-bootstrap/lib/Button";
 import FaIcon from "faicon/FaIcon";
 import NotificationItem from "notification/NotificationItem";
 import UIApplication from "../app/UIApplication";
-import "notification/style.css";
-
+import "notification/Notification.css";
+/**
+ * 
+ * 
+ * @export
+ * @class Notification
+ * @extends {ShallowComponent}
+ */
 export default class Notification extends ShallowComponent {
 
-    constructor(props) {
+    /**
+     * PropTypes of the component.
+     * 
+     * @static
+     */
+    static propTypes = {
+        /**
+         * Link for the notification details.
+         * Footer link will be rendered according to this property.
+         */
+        notificationDetailPath: React.PropTypes.string,
+        /**
+         * Text for the notification details link.
+         */
+        notificationDetailLabel: React.PropTypes.string,
+        /**
+         * Link for the notification details. 
+         * Footer link will be rendered according to this property.
+         */
+        title: React.PropTypes.string,
+    };
+
+    static defaultProps = {
+        title: "Notifications",
+        notificationDetailLabel: "See all"
+    };
+    constructor(props: Object) {
         super(props);
         this.state = {
-            notifyOpen: false,
+            open: true,
             data: this.props.data
         };
     }
-    render() {
-        let notifyOpen = this.state.notifyOpen ? "dropdown open" : "dropdown";
-        let notificationButtonClass = this.state.notifyOpen ? "fa-caret-down" : "fa-bell";
-
+    render(): Object {
+        let open = this.state.open ? "dropdown open" : "dropdown";
+        let notificationButtonClass = this.state.open ? "fa-caret-down" : "fa-bell";
+        open = open + (this.props.className ? ` ${this.props.className}` : "");
         return (
-                <Col className={notifyOpen} aria-expanded={true}>
-                    <Button bsStyle="primary" id="notify" className="btn-header-button btn-header" role="button" onClick={this.__onNotificationOpenClick}>
-                        <FaIcon code={notificationButtonClass} size="fa-lg" /> {this.state.data.length}
-                    </Button>
-                    <Col id="notify" componentClass="ul" className="dropdown-menu notifications" role="menu">
-                        <Col className="notification-heading">
-                            <Col componentClass="h4" className="menu-title">Bildirimler
-                            </Col>
-                        </Col>
-                        <Col id="notify" componentClass="li" className="divider" />
-                        <Col className="notifications-wrapper">
-                            {this.__renderNotificationItems()}
-                        </Col>
-                        <Col id="notify" componentClass="li" className="divider" />
-                        <Col className="notification-footer">
-                            <a
-                                style={{ padding: 0 }}
-                                href={`${UIApplication.getBaseUrlPath()}#/account/`}
-                            >
-                            <Col
-                                componentClass="h7"
-                                className="menu-title"
-                                onClick={this.__closeNotifyAfterClick}
-                            >
-                                Tüm Bildirimler
-                                <Col
-                                    componentClass="i"
-                                    className="glyphicon glyphicon-circle-arrow-right"
-                                />
-                            </Col>
-                            </a>
-                        </Col>
+            <Col className={open} aria-expanded={true}>
+                <Button bsStyle="primary" id="notify" className="btn-header-button btn-header" role="button" onClick={this.__onNotificationOpenClick}>
+                    <FaIcon code={notificationButtonClass} size="fa-lg" /> {this.state.data.length}
+                </Button>
+                <Col id="notify" componentClass="ul" className="dropdown-menu notifications" role="menu">
+                    <Col className="notification-heading">
+                        <span className="menu-title">{this.props.title}</span>
                     </Col>
+                    <li id="notify" className="divider" />
+                    <Col className="notifications-wrapper">
+                        {this.__renderNotificationItems() }
+                    </Col>
+                    {this.__renderFooter() }
+                </Col>
             </Col>);
+    }
+
+    __renderFooter(): Object {
+        if (this.props.notificationDetailPath === undefined) {
+            return undefined;
+        } else {
+            return (
+                <div>
+                    <li id="notify" componentClass="li" className="divider" />
+                    <div className="notification-footer">
+                        <a style={{ padding: 0 }}
+                            href={this.props.notificationDetailPath}>
+                            <i className="menu-title pull-right"
+                                onClick={this.__closeNotifyAfterClick}>
+                                {this.props.notificationDetailLabel}
+                                <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            );
+        }
     }
 
     __renderNotificationItems = () => {
@@ -71,16 +106,14 @@ export default class Notification extends ShallowComponent {
             return (notifications);
         }
         return (<Col>
-            <Col componentClass="label" style={{ padding: "10px" }}>
-                Henüz bir bildiriminiz bulunmamaktadır.
-            </Col>
+            <span style={{ padding: "10px" }}>You don't have any notification.</span>
         </Col>);
     }
 
 
     __onNotificationOpenClick = (ev) => {
         this.setState({
-            notifyOpen: !this.state.notifyOpen
+            open: !this.state.open
         });
         ev.preventDefault();
     }
@@ -90,9 +123,9 @@ export default class Notification extends ShallowComponent {
             return;
         }
 
-        if (this.state.notifyOpen) {
+        if (this.state.open) {
             this.setState({
-                notifyOpen: false
+                open: false
             });
         }
     }
@@ -100,7 +133,7 @@ export default class Notification extends ShallowComponent {
     // __closeNotifyAfterClick = (e) => {
     __closeNotifyAfterClick = () => {
         this.setState({
-            notifyOpen: false
+            open: false
         });
     }
 

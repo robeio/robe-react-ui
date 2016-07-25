@@ -36,31 +36,12 @@ export default class DecimalInput extends ShallowComponent {
         /**
          * Decimal Seperator for integer and fraction.
          */
-        decimalSeparator: React.PropTypes.oneOf([".", ","]),
-        /**
-         * Disable input
-         */
-        disabled: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
+        decimalSeparator: React.PropTypes.oneOf([".", ","])
     };
 
-    /**
-     * defaultProps
-     * @static
-     */
     static defaultProps = {
         decimalSeperator: ".",
-        value: "",
-        disabled: false,
-        readOnly: false,
-        hidden: false
+        value: ""
     };
 
     render(): Object {

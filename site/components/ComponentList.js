@@ -123,6 +123,13 @@ class ComponentList {
             code: require("../samples/form/DataFormSample.txt")
         });
 
+        components.push({
+            header: "Notification",
+            desc: " is an notification component with total count and popup list.",
+            json: require("../docs/notification/Notification.json"),
+            sample: require("../samples/notification/NotificationSample"),
+            code: require("../samples/notification/NotificationSample.txt"),
+        });
 
         return components;
     }

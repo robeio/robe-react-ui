@@ -38,10 +38,8 @@ describe("inputs/CheckList", () => {
             textField: "value",
             valueField: "key",
             delimiter: ",",
-            direction: false,
             disabled: false,
-            readOnly: false,
-            hidden: false
+            direction: false
         };
 
         let newComponent = Generator.getComponent(defaultProps, CheckList);
@@ -65,10 +63,8 @@ describe("inputs/CheckList", () => {
             valueField: "key",
             items: langs,
             delimiter: ",",
-            direction: false,
             disabled: false,
-            readOnly: false,
-            hidden: false
+            direction: false
         };
 
         newComponent = Generator.getComponent(defaultProps, CheckList);

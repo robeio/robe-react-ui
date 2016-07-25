@@ -52,15 +52,7 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
+        disabled: React.PropTypes.bool
     };
 
     /**
@@ -72,9 +64,7 @@ export default class RadioInput extends ValidationComponent {
         noResultsText: "No Result",
         textField: "text",
         valueField: "value",
-        disabled: false,
-        readOnly: false,
-        hidden: false
+        disabled: false
     };
 
     /**

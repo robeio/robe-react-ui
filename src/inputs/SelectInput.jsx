@@ -61,21 +61,13 @@ export default class SelectInput extends ValidationComponent {
          */
         noResultsText: React.PropTypes.string,
         /**
-         *  whether to enable searching feature or not
-         */
-        searchable: React.PropTypes.bool,
-        /**
-         * Disable input
+         * disabled
          */
         disabled: React.PropTypes.bool,
         /**
-         * it specifies that an input field is read-only
+         *  whether to enable searching feature or not
          */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
+        searchable: React.PropTypes.bool
     };
 
     /**
@@ -89,11 +81,8 @@ export default class SelectInput extends ValidationComponent {
         textField: "text",
         valueField: "value",
         multi: false,
-        searchable: true,
-        format: "DD/MM/YYYY",
         disabled: false,
-        readOnly: false,
-        hidden: false
+        searchable: true
     };
 
     /* eslint no-useless-constructor: 0*/
@@ -103,7 +92,7 @@ export default class SelectInput extends ValidationComponent {
 
     render() {
         return (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 <Select
                     options={this.props.items}

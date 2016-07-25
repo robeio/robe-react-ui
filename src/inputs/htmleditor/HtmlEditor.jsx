@@ -36,35 +36,16 @@ export default class HtmlEditor extends ValidationComponent {
         /**
          * Height of the component.
          */
-        height: React.PropTypes.number,
-        /**
-         * Disable input
-         */
-        disabled: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
+        height: React.PropTypes.number
     };
 
-    /**
-     * defaultProps
-     * @static
-     */
     static defaultProps = {
-        height: 100,
-        disabled: false,
-        readOnly: false,
-        hidden: false
+        height: 100
     };
 
     render(): Object {
         return (
-            <Col className="form-group" hidden={this.props.hidden}>
+            <Col className="form-group">
                 <Col componentClass="label" className="control-label"><span>{this.props.label}</span></Col>
                 <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
                     <ReactQuill.Toolbar

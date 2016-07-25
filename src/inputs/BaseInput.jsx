@@ -38,10 +38,12 @@ export default class BaseInput extends ValidationComponent {
          * Type of the BaseInput. (text, email, password, file)
          */
         type: React.PropTypes.string,
+
         /**
         * Component class of the BaseInput. (select, textarea)
         */
         componentClass: React.PropTypes.string,
+
         /**
          * Component class of the BaseInput. (select, textarea)
          */
@@ -49,29 +51,7 @@ export default class BaseInput extends ValidationComponent {
         /**
          * Component class of the BaseInput. (select, textarea)
          */
-        inputGroupRight: React.PropTypes.object,
-        /**
-         * Disable input
-         */
-        disabled: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
-         * it specifies that an input field is hidden or visible
-         */
-        hidden: React.PropTypes.bool
-    };
-
-    /**
-     * defaultProps
-     * @static
-     */
-    static defaultProps = {
-        disabled: false,
-        readOnly: false,
-        hidden: false
+        inputGroupRight: React.PropTypes.object
     };
 
     /**
@@ -97,24 +77,24 @@ export default class BaseInput extends ValidationComponent {
     render(): Object {
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             return (
-                    <FormGroup hidden={this.props.hidden}>
-                        <ControlLabel> {this.props.label} </ControlLabel>
-                        <InputGroup>
-                            {this.props.inputGroupLeft}
-                            <FormControl
-                                {...this.props}
-                                bsStyle="error"
-                                ref="innerInput"
-                                value={this.props.value}
-                            />
-                            {this.props.inputGroupRight}
-                        </InputGroup>
-                        {super.validationResult()}
-                    </FormGroup>
+                <FormGroup>
+                    <ControlLabel> {this.props.label} </ControlLabel>
+                    <InputGroup>
+                        {this.props.inputGroupLeft}
+                        <FormControl
+                            {...this.props}
+                            bsStyle="error"
+                            ref="innerInput"
+                            value={this.props.value}
+                        />
+                        {this.props.inputGroupRight}
+                    </InputGroup>
+                    {super.validationResult()}
+                </FormGroup>
             );
         }
         return (
-                <FormGroup hidden={this.props.hidden}>
+                <FormGroup>
                     <ControlLabel> {this.props.label} </ControlLabel>
                         <FormControl
                             {...this.props}

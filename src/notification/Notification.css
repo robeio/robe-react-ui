@@ -34,7 +34,7 @@
 }
 
 .menu-title {
-    color: #8C7AB7;
+    color: #337ab7;
     font-size: 1.5rem;
     margin-top: 10px;
     display: inline-block;
@@ -91,8 +91,7 @@
 
 #notify.divider {
     display: block!important;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    border-bottom: 1px solid lightgray;
 }
 
 .dropdown-menu .divider {
