@@ -7,8 +7,8 @@ import FaIcon from "faicon/FaIcon";
 import NotificationItem from "notification/NotificationItem";
 import "notification/Notification.css";
 /**
- * 
- * 
+ * Notification is a view component for representing all notifications via a clickable icon and count label.
+ * Also a popup will show the details of the notifications.
  * @export
  * @class Notification
  * @extends {ShallowComponent}
@@ -17,7 +17,7 @@ export default class Notification extends ShallowComponent {
 
     /**
      * PropTypes of the component.
-     * 
+     *
      * @static
      */
     static propTypes = {
@@ -31,7 +31,7 @@ export default class Notification extends ShallowComponent {
          */
         notificationDetailLabel: React.PropTypes.string,
         /**
-         * Link for the notification details. 
+         * Link for the notification details.
          * Footer link will be rendered according to this property.
          */
         title: React.PropTypes.string,
@@ -41,6 +41,8 @@ export default class Notification extends ShallowComponent {
         title: "Notifications",
         notificationDetailLabel: "See all"
     };
+
+
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -48,6 +50,8 @@ export default class Notification extends ShallowComponent {
             data: this.props.data
         };
     }
+
+
     render(): Object {
         let open = this.state.open ? "dropdown open" : "dropdown";
         let notificationButtonClass = this.state.open ? "fa-caret-down" : "fa-bell";
@@ -143,7 +147,7 @@ export default class Notification extends ShallowComponent {
         document.removeEventListener("click", this.__handleClick, false);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Object) {
         this.setState({
             data: nextProps.data || []
         });

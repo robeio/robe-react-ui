@@ -15,12 +15,11 @@ export default class NotificationSample extends ShallowComponent {
     constructor(props: Object){
         super(props);
         this.state = {
-            data:[
-
+            data: [
             ]
-        }
+        };
     }
-    render():Object {
+    render(): Object {
         return (
             <div>
             <div style={NotificationSample.style}>

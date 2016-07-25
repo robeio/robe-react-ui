@@ -1,8 +1,7 @@
 import React from "react";
-import { ShallowComponent, RequestUtils } from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import moment from "moment";
-import UIApplication from "../app/UIApplication";
 
 export default class NotificationItem extends ShallowComponent {
 
@@ -15,7 +14,7 @@ export default class NotificationItem extends ShallowComponent {
         super(props);
     }
 
-    render() {
+    render(): Object {
         let item = this.props.item;
 
         return (
