@@ -30,10 +30,6 @@ export default class CheckList extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
-         * Item will be rendered as checkbox input.
-         */
-        item: React.PropTypes.object,
-        /**
          * Checked value or values
          */
         value: React.PropTypes.any,
@@ -110,9 +106,7 @@ export default class CheckList extends ValidationComponent {
                 <ControlLabel> {this.props.label} </ControlLabel>
                     <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
                         {
-                            this.props.items ?
-                                this.__createCheckListes(this.props.items) :
-                                this.__createCheckList(this.props.item)
+                            this.__createCheckList(this.props.items)
                         }
                         {super.validationResult()}
                     </ListGroup>
@@ -126,15 +120,12 @@ export default class CheckList extends ValidationComponent {
      * @returns {Array}
      * @private
      */
-    __createCheckListes(items: Array<Map>): Array {
-        let components = null;
-        if (Assertions.isArray(items)) {
-            components = [];
+    __createCheckList(items: Array<Map>): Array {
+        let components = [];
+        if (items) {
             for (let i = 0; i < items.length; i++) {
-                components.push(this.__createCheckList(items[i]));
+                components.push(this.__createCheckListItem(items[i]));
             }
-        } else {
-            components = this.__createCheckList(items);
         }
         return components;
     }
@@ -145,7 +136,7 @@ export default class CheckList extends ValidationComponent {
      * @returns {Object}
      * @private
      */
-    __createCheckList(item: Map): Object {
+    __createCheckListItem(item: Map): Object {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;

@@ -39,8 +39,8 @@ describe("inputs/MoneyInput", () => {
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
     });
 
-    it("'__numericFilter", (done: Function) => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ handleChange: () => { chai.assert.isOk(true); } }));
+    it("'numericFilter", (done: Function) => {
+        let componentNode = TestUtils.renderIntoDocument(getComponent({ handleChange: () => { return true; } }));
         let e = {
             target: {
                 value: "12,123.1"
@@ -53,27 +53,27 @@ describe("inputs/MoneyInput", () => {
             }
         };
         /* eslint-disable no-underscore-dangle */
-        componentNode.__numericFilter(e);
+        componentNode.numericFilter(e);
         e.target.value = "12.2";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12.2' failed");
             done("Input value '12.2' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.numericFilter(e);
 
         e.target.value = "12,12.1";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12,12.1' failed");
             done("Input value '12,12.1' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.numericFilter(e);
 
         e.target.value = "12,12.";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12,12.' failed");
             done("Input value '12,12.' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
             handleChange: () => {
                 chai.assert.isOk(false);
@@ -84,7 +84,7 @@ describe("inputs/MoneyInput", () => {
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
             handleChange: () => {
                 chai.assert.isOk(false);
