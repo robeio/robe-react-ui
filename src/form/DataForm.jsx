@@ -95,7 +95,7 @@ export default class DataForm extends ShallowComponent {
         console.log(field);
         console.log(props);
         props = Maps.mergeDeep(field, props);
-        props.handleChange = this.handleChange.bind(this, code);
+        props.onChange = this.onChange.bind(this, code);
         this.__fieldProps[code] = props;
         if (!this.state[code]) {
             this.state[code] = null;
@@ -174,7 +174,7 @@ export default class DataForm extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    handleChange(code: any, e: Object): boolean {
+    onChange(code: any, e: Object): boolean {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let state = {};
         state[code] = value;

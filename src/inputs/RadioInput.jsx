@@ -77,12 +77,8 @@ export default class RadioInput extends ValidationComponent {
         hidden: false
     };
 
-    _value;
     constructor(props) {
         super(props);
-        if (this.props.value) {
-            this._value = this.props.value;
-        }
     }
 
     /**
@@ -91,6 +87,7 @@ export default class RadioInput extends ValidationComponent {
      * @returns {string}
      **/
     render(): Object {
+        this._value = this.props.value;
         return (
             <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
@@ -143,7 +140,7 @@ export default class RadioInput extends ValidationComponent {
             />
         ) : null;
         return (
-            <div value={value} className={`radio ${disabled}`} onClick={this.__onClick.bind(this, value)}>
+            <div className={`radio ${disabled}`} onClick={this.__onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
@@ -177,9 +174,6 @@ export default class RadioInput extends ValidationComponent {
         if (this.props.onChange) {
             let e = { target: { value: value } };
             result = this.props.onChange(e);
-        }
-        if (result) {
-            this._value = value;
         }
         return result;
     }

@@ -55,15 +55,6 @@ export default class CheckListSample extends ShallowComponent {
         return (
             <div>
                 <CheckList
-                    label="CheckList Single"
-                    items={langs[0]}
-                    value={this.state.CheckListSingle}
-                    textField="value"
-                    valueField="key"
-                    style={{ height: "150px" }}
-                    onChange={this.__handleChange.bind(undefined, "CheckListSingle")}
-                />
-                <CheckList
                     label="CheckList Group"
                     items={langs}
                     value={this.state.CheckListGroup}
