@@ -3,15 +3,15 @@ import { Assertions } from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 import { FormGroup, ControlLabel, ListGroup, ListGroupItem } from "react-bootstrap";
-import CheckBoxStyle from "./CheckBox.css";
+import "./CheckList.css";
 
 /**
- * CheckBox is an input element to provide checked given item or items.
+ * CheckList is an input element to provide checked given item or items.
  * @export
- * @class CheckBox
+ * @class CheckList
  * @extends {ValidationComponent}
  */
-export default class CheckBoxList extends ValidationComponent {
+export default class CheckList extends ValidationComponent {
     /**
      * propTypes
      * @static
@@ -54,9 +54,9 @@ export default class CheckBoxList extends ValidationComponent {
          */
         textField: React.PropTypes.string,
         /**
-         * Is a callback function when selection `item` or `items` changed.
+         * handleChange callback function when selection `item` or `items` changed.
          */
-        onChange: React.PropTypes.func,
+        handleChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
@@ -111,8 +111,8 @@ export default class CheckBoxList extends ValidationComponent {
                     <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
                         {
                             this.props.items ?
-                                this.__createCheckBoxes(this.props.items) :
-                                this.__createCheckBox(this.props.item)
+                                this.__createCheckListes(this.props.items) :
+                                this.__createCheckList(this.props.item)
                         }
                         {super.validationResult()}
                     </ListGroup>
@@ -126,15 +126,15 @@ export default class CheckBoxList extends ValidationComponent {
      * @returns {Array}
      * @private
      */
-    __createCheckBoxes(items: Array<Map>): Array {
+    __createCheckListes(items: Array<Map>): Array {
         let components = null;
         if (Assertions.isArray(items)) {
             components = [];
             for (let i = 0; i < items.length; i++) {
-                components.push(this.__createCheckBox(items[i]));
+                components.push(this.__createCheckList(items[i]));
             }
         } else {
-            components = this.__createCheckBox(items);
+            components = this.__createCheckList(items);
         }
         return components;
     }
@@ -145,7 +145,7 @@ export default class CheckBoxList extends ValidationComponent {
      * @returns {Object}
      * @private
      */
-    __createCheckBox(item: Map): Object {
+    __createCheckList(item: Map): Object {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;
@@ -154,7 +154,7 @@ export default class CheckBoxList extends ValidationComponent {
         let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
 
         return (
-            <ListGroupItem style={{outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={this.props.disabled ? null : this.__onClick.bind(this, value)}>
+            <ListGroupItem style={{outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={this.props.disabled ? null : this.onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px"}}
                 >
@@ -217,21 +217,26 @@ export default class CheckBoxList extends ValidationComponent {
     }
 
     /**
-     * Internal onClick event. It is triggered if any Checkbox item is clicked.
-     * @param value
-     * @private
+     * Internal onClick event. It is triggered every time.
+     * @param e event
      */
-    __onClick(value) {
+    onClick(value: string) {
         let ind = this._values.indexOf(value);
         if (ind !== -1) {
             delete this._values[ind];
         } else {
             this._values.push(value);
         }
-        this._value = this.__join(this._values, this.props.delimiter);
-        if (this.props.onChange) {
-            let e = { target: { value: this._value } };
-            this.props.onChange(e);
+        let parsedValue = this.__join(this._values, this.props.delimiter);
+        let result = true;
+        if (this.props.handleChange) {
+            let e = { target: { parsedValue } };
+            result = this.props.handleChange(e);
         }
+        if (result) {
+            this._value = parsedValue;
+        }
+        return result;
     }
+
 }
