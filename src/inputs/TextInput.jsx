@@ -25,10 +25,10 @@ export default class TextInput extends ShallowComponent {
          */
         value: React.PropTypes.string.isRequired,
         /**
-         * onChange event for the component
+         * handleChangeEvent event for the component
          */
-        onChange: React.PropTypes.func
-    }
+        handleChange: React.PropTypes.func
+    };
 
     /* eslint no-useless-constructor: 0*/
     /**
@@ -49,6 +49,7 @@ export default class TextInput extends ShallowComponent {
         return (
             <Input
                 {...this.props}
+                onChange={this.__onChange.bind(this)}
                 type="text"
                 ref="innerInput"
             />);
@@ -60,5 +61,20 @@ export default class TextInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs.innerInput.isValid();
+    }
+
+    /**
+     * Internal onchange handler.
+     */
+    __onChange(e: Object) {
+        let result = true;
+        if (this.props.handleChange) {
+            result = this.props.handleChange(e);
+        }
+        if (!result) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        return result;
     }
 }

@@ -10,7 +10,7 @@ describe("inputs/PasswordInput", () => {
             <PasswordInput
                 label="PasswordInput Label Text Example"
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with PasswordInput value"}
-                onChange={props.onChange !== undefined ? props.onChange : () => { }}
+                handleChange={props.onChange !== undefined ? props.onChange : () => { }}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;

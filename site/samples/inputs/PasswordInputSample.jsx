@@ -17,7 +17,7 @@ export default class PasswordInputSample extends ShallowComponent {
                 <PasswordInput
                     label="PasswordInput"
                     value={this.state.PasswordInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "PasswordInputNormal")}
+                    handleChange={this.__handleChange.bind(undefined, "PasswordInputNormal")}
                 />
                 <PasswordInput
                     label="With Default Value"
@@ -26,7 +26,7 @@ export default class PasswordInputSample extends ShallowComponent {
                 <PasswordInput
                     label="With Validations"
                     value={this.state.PasswordInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "PasswordInputValidations")}
+                    handleChange={this.__handleChange.bind(undefined, "PasswordInputValidations")}
                     validations={{
                         required: InputValidations.required,
                     }}
