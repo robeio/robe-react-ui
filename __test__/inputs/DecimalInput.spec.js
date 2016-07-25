@@ -39,7 +39,7 @@ describe("inputs/DecimalInput", () => {
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
     });
 
-    it("'numericFilter", (done: Function) => {
+    it("'__numericFilter", (done: Function) => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({ handleChange: () => { return true; } }));
         let e = {
             target: {
@@ -53,13 +53,13 @@ describe("inputs/DecimalInput", () => {
             }
         };
         /* eslint-disable no-underscore-dangle */
-        componentNode.numericFilter(e);
+        componentNode.__numericFilter(e);
         e.target.value = "12.2";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12.2' failed");
             done("Input value '12.2' failed");
         };
-        componentNode.numericFilter(e);
+        componentNode.__numericFilter(e);
 
         componentNode = TestUtils.renderIntoDocument(getComponent({
             handleChange: () => {
@@ -71,7 +71,7 @@ describe("inputs/DecimalInput", () => {
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
-        componentNode.numericFilter(e);
+        componentNode.__numericFilter(e);
         done();
     });
 });

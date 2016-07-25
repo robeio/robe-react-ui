@@ -93,6 +93,11 @@ class ComponentGenerator {
             throw new Error("Component Finder already exist ! ");
         }
     }
+
+    /**
+     *
+     * @param componentFinderName
+     */
     deleteComponentFinderByName(componentFinderName) {
         let index = this._componentFinderNames.indexOf(componentFinderName);
         if (index !== -1) {

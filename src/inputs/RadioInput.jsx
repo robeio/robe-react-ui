@@ -77,7 +77,11 @@ export default class RadioInput extends ValidationComponent {
         hidden: false
     };
 
+    /**
+     * Radio Value
+     */
     _value;
+
     constructor(props) {
         super(props);
         if (this.props.value) {

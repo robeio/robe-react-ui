@@ -89,6 +89,10 @@ export default class CheckList extends ValidationComponent {
         hidden: false
     };
 
+    /**
+     * @type {Array}
+     * @private
+     */
     _values = [];
 
     _value: string;

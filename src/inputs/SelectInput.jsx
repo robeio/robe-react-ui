@@ -78,6 +78,10 @@ export default class SelectInput extends ValidationComponent {
         hidden: React.PropTypes.bool
     };
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
         delimiter: ",",
         placeHolder: "Please Select",

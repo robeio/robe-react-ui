@@ -51,6 +51,7 @@ export default class TextInput extends ShallowComponent {
         readOnly: false,
         hidden: false
     };
+
     /* eslint no-useless-constructor: 0*/
     /**
      * Creates an instance of TextInput.

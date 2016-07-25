@@ -87,6 +87,10 @@ export default class CheckInput extends ValidationComponent {
         hidden: false
     };
 
+    /**
+     * @type {Array}
+     * @private
+     */
     _values = [];
 
     _value;

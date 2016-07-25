@@ -89,6 +89,7 @@ export default class BaseInput extends ValidationComponent {
             bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined
         };
     }
+    
     /**
      * Renders the component
      * @returns {Object}

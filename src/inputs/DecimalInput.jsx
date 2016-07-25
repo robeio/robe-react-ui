@@ -64,7 +64,7 @@ export default class DecimalInput extends ShallowComponent {
     };
 
     render(): Object {
-        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.numericFilter.bind(this);
+        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.__numericFilter.bind(this);
         return (<Input
             {...this.props}
             type="text"
@@ -86,7 +86,7 @@ export default class DecimalInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    numericFilter(e: Object) {
+    __numericFilter(e: Object) {
         let value = e.target.value;
         let result = this.__isFloat(value) || value === "";
         if (result && this.props.handleChange) {

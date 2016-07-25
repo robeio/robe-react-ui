@@ -74,6 +74,7 @@ export default class PasswordInput extends ShallowComponent {
     isValid(): boolean {
         return this.refs.innerInput.isValid();
     }
+
     /**
      * Internal onchange handler.
      */
