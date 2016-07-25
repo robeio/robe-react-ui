@@ -7,6 +7,7 @@ import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import ComponentList from "./ComponentList";
+import Progress from "progress/Progress";
 
 
 
@@ -33,7 +34,7 @@ export default class Showcase extends ShallowComponent {
                     key={`#${item.header}`}
                     onClick={this.__onComponenListClick}
                     active={active}
-                >
+                    >
                     {item.header}
                 </ListGroupItem>);
             if (active) {
@@ -45,7 +46,7 @@ export default class Showcase extends ShallowComponent {
                         json={item.json}
                         sample={item.sample}
                         code={item.code}
-                    />);
+                        />);
             }
         }
         return (
@@ -65,10 +66,6 @@ export default class Showcase extends ShallowComponent {
         this.setState({
             componentSelection: e.target.text
         });
+        Progress.start();
     };
-
-
-    componentDidMount() {
-        ReactDOM.findDOMNode(this).scrollTop = 0;
-    }
 }
