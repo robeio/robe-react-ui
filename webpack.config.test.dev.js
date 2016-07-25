@@ -44,7 +44,7 @@ commonSettings.devtool = "inline-source-map";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
-ConfigUtils.createJsonServer(3000, commonSettings.paths.root + "/testdb.json");
+ConfigUtils.createJsonServer(3001, commonSettings.paths.root + "/testdb.json");
 
 module.exports = function configure(config) {
     config.set({
