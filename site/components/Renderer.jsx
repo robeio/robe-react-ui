@@ -3,6 +3,7 @@ import { Button, Panel, Table } from "react-bootstrap";
 import { Maps } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
+import Progress from "progress/Progress";
 
 
 export default class Renderer extends ShallowComponent {
@@ -59,7 +60,7 @@ export default class Renderer extends ShallowComponent {
         }
         return (
             <div>
-                <h3 id={this.props.header}>{this.props.header}</h3>
+                <h3>{this.props.header}</h3>
                 <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
                 <h4>Examples</h4>
                 <Panel>
@@ -67,9 +68,9 @@ export default class Renderer extends ShallowComponent {
                     {highlight}
                     <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
                 </Panel>
-                <h4>Props</h4>
+                <h4>{this.props.json.props ? "Props" : ""}</h4>
                 {this.__renderPropsTable(this.props.json.props)}
-                <h4>Methods</h4>
+                <h4>{this.props.json.methods ? "Methods" : ""}</h4>
                 {this.__renderMethodsTable(this.props.json.methods)}
             </div >);
     }
@@ -81,6 +82,10 @@ export default class Renderer extends ShallowComponent {
     }
 
     __renderPropsTable(data: Object): Array {
+        if (data === undefined) {
+            return undefined;
+        }
+
         let rows = [];
 
         Maps.forEach(data, (value: any, key: string) => {
@@ -113,6 +118,9 @@ export default class Renderer extends ShallowComponent {
         );
     }
     __renderMethodsTable(data: Object): Array {
+        if (data === undefined) {
+            return undefined;
+        }
         let rows = [];
 
         for (let i = 0; i < data.length; i++) {
@@ -141,5 +149,8 @@ export default class Renderer extends ShallowComponent {
                 </tbody>
             </Table>
         );
+    }
+    componentDidUpdate() {
+        Progress.done();
     }
 }

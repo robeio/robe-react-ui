@@ -96,10 +96,23 @@ class ComponentList {
 
         components.push({
             header: "FaIcon",
-            desc: "",
+            desc: "is a wrapper component for font-awesome icons",
             json: require("../docs/faicon/FaIcon"),
             sample: require("../samples/faicon/FaIconSample"),
             code: require("../samples/faicon/FaIconSample.txt")
+        });
+
+        components.push({
+            header: "Progress",
+            desc: " is an indicator component for the heavy ajax loaded sites.",
+            sample: require("../samples/progress/ProgressSample"),
+            code: require("../samples/progress/ProgressSample.txt"),
+            json: {
+                methods: [
+                    { name: "start", description: "Starts the progress indicator on top of the page" },
+                    { name: "done", description: "Completes the progress indicator on top of the page" },
+                    { name: "configure", description: "Configure the indicator" }]
+            }
         });
         return components;
     }
