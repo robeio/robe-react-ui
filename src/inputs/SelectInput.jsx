@@ -113,10 +113,12 @@ export default class SelectInput extends ValidationComponent {
      * @private
      */
     __onChange(value: any) {
-        if (this.props.onChange) {
+        let result = true;
+        if (this.props.handleChange) {
             let e = { target: { value: value } };
-            this.props.onChange(e);
+            result = this.props.handleChange(e);
         }
+        return result;
     }
 
 }

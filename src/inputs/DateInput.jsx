@@ -13,9 +13,9 @@ export default class DateInput extends ValidationComponent {
 
     static propTypes = {
         label: React.PropTypes.string,
-        onChange: React.PropTypes.func,
+        handleChange: React.PropTypes.func,
         disabled: React.PropTypes.bool,
-        format: React.PropTypes.string,
+        format: React.PropTypes.string
     };
 
 
@@ -35,7 +35,7 @@ export default class DateInput extends ValidationComponent {
                     className="form-control form-control-error"
                     selected={selected}
                     disabled={this.props.disabled}
-                    onChange={this.__onChange}
+                    onChange={this.__onChange.bind(this)}
                     showYearDropdown
                     isClearable={!this.props.disabled}
                     minDate={this.props.minDate}
@@ -49,7 +49,10 @@ export default class DateInput extends ValidationComponent {
             </FormGroup>);
     }
 
-    __onChange = (selection) => {
+    /**
+     * Internal onchange handler.
+     */
+    __onChange(selection: Object) {
         let e = {};
         e.target = {};
 
@@ -58,9 +61,14 @@ export default class DateInput extends ValidationComponent {
         } else {
             e.target.parsedValue = null;
         }
-
-        if (this.props.onChange) {
-            this.props.onChange(e);
+        let result = true;
+        if (this.props.handleChange) {
+            result = this.props.handleChange(e);
         }
+        if (!result) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        return result;
     }
 }

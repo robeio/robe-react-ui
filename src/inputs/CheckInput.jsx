@@ -50,9 +50,9 @@ export default class CheckInput extends ValidationComponent {
          */
         textField: React.PropTypes.string,
         /**
-         * Is a callback function when selection `item` or `items` changed.
+         * handleChange callback function when selection `item` or `items` changed.
          */
-        onChange: React.PropTypes.func,
+        handleChange: React.PropTypes.func,
         /**
          * Validations functions to validate value
          */
@@ -99,8 +99,8 @@ export default class CheckInput extends ValidationComponent {
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
                     this.props.items ?
-                        this.__createCheckBoxes(this.props.items) :
-                        this.__createCheckBox(this.props.item)
+                        this.__createCheckInputs(this.props.items) :
+                        this.__createCheckInput(this.props.item)
                 }
                 {super.validationResult()}
             </FormGroup>
@@ -113,15 +113,15 @@ export default class CheckInput extends ValidationComponent {
      * @returns {Array}
      * @private
      */
-    __createCheckBoxes(items: Array<Map>): Array {
+    __createCheckInputs(items: Array<Map>): Array {
         let components = null;
         if (Assertions.isArray(items)) {
             components = [];
             for (let i = 0; i < items.length; i++) {
-                components.push(this.__createCheckBox(items[i]));
+                components.push(this.__createCheckInput(items[i]));
             }
         } else {
-            components = this.__createCheckBox(items);
+            components = this.__createCheckInput(items);
         }
         return components;
     }
@@ -132,7 +132,7 @@ export default class CheckInput extends ValidationComponent {
      * @returns {Object}
      * @private
      */
-    __createCheckBox(item: Map): Object {
+    __createCheckInput(item: Map): Object {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._values.indexOf(value) !== -1;
@@ -146,7 +146,7 @@ export default class CheckInput extends ValidationComponent {
             />
         ) : null;
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={this.onClick.bind(this, value)}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
@@ -188,17 +188,22 @@ export default class CheckInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    __onClick(value) {
+    onClick(value: string) {
         let ind = this._values.indexOf(value);
         if (ind !== -1) {
             delete this._values[ind];
         } else {
             this._values.push(value);
         }
-        this._value = this.__join(this._values, this.props.delimiter);
-        if (this.props.onChange) {
-            let e = { target: { value: this._value } };
-            this.props.onChange(e);
+        let parsedValue = this.__join(this._values, this.props.delimiter);
+        let result = true;
+        if (this.props.handleChange) {
+            let e = { target: { parsedValue } };
+            result = this.props.handleChange(e);
         }
+        if (result) {
+            this._value = parsedValue;
+        }
+        return result;
     }
 }

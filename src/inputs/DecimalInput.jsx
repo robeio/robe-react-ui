@@ -29,7 +29,10 @@ export default class DecimalInput extends ShallowComponent {
          * onChange event for the component
          */
         onChange: React.PropTypes.func,
-
+        /**
+         * handleChange event for the component
+         */
+        handleChange: React.PropTypes.func,
         /**
          * Decimal Seperator for integer and fraction.
          */
@@ -42,13 +45,14 @@ export default class DecimalInput extends ShallowComponent {
     };
 
     render(): Object {
+        let onChange = this.props.onChange ? this.props.onChange.bind(this) : this.numericFilter.bind(this);
         return (<Input
             {...this.props}
             type="text"
             ref="innerInput"
             step={this.props.step}
             value={this.props.value}
-            onChange={this.props.onChange !== undefined ? this.__numericFilter : undefined}
+            onChange={onChange}
         />);
     }
 
@@ -63,18 +67,20 @@ export default class DecimalInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter = (e: Object) => {
+    numericFilter(e: Object) {
         let value = e.target.value;
-        if (this.__isFloat(value) || value === "") {
+        let result = this.__isFloat(value) || value === "";
+        if (result && this.props.handleChange) {
             e.target.parsedValue = value;
-            if (this.props.onChange) {
-                this.props.onChange(e);
-            }
-        } else {
+            result = this.props.handleChange(e);
+        }
+        if (!result) {
             e.preventDefault();
             e.stopPropagation();
         }
-    };
+        return result;
+    }
+
     __isFloat = (input: string): boolean => {
         if (input === null || input === undefined) {
             return false;

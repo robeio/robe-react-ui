@@ -25,9 +25,9 @@ export default class PasswordInput extends ShallowComponent {
          */
         value: React.PropTypes.any.isRequired,
         /**
-         * onChange event for the component
+         * handleChange event for the component
          */
-        onChange: React.PropTypes.func
+        handleChange: React.PropTypes.func,
     };
 
     static defaultProps = {
@@ -42,6 +42,7 @@ export default class PasswordInput extends ShallowComponent {
         return (
             <Input
                 {...this.props}
+                onChange={this.__onChange.bind(this)}
                 type="password"
                 ref="innerInput"
             />);
@@ -53,5 +54,19 @@ export default class PasswordInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs.innerInput.isValid();
+    }
+    /**
+     * Internal onchange handler.
+     */
+    __onChange(e: Object) {
+        let result = true;
+        if (this.props.handleChange) {
+            result = this.props.handleChange(e);
+        }
+        if (!result) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        return result;
     }
 }

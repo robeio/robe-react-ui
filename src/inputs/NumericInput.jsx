@@ -1,7 +1,7 @@
 import React from "react";
 import is from "is-js";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "inputs/BaseInput";
+import Input from "./BaseInput";
 
 /**
  * NumericInput is a wrapper element for BaseInput.
@@ -29,7 +29,7 @@ export default class NumericInput extends ShallowComponent {
         /**
          * onChange event for the component
          */
-        onChange: React.PropTypes.func
+        handleChange: React.PropTypes.func
     };
 
     static defaultProps = {
@@ -42,7 +42,7 @@ export default class NumericInput extends ShallowComponent {
             value={this.props.value}
             type="text"
             ref="innerInput"
-            onChange={this.__numericFilter}
+            onChange={this.numericFilter.bind(this)}
         />);
     }
 
@@ -57,17 +57,20 @@ export default class NumericInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter = (e: Object) => {
+    numericFilter(e: Object) {
+        let result = true;
         let value = e.target.value;
         if (value && !is.numeric(value)) {
+            result = false;
+        } else if (this.props.handleChange) {
+            let parsedVal = parseInt(value, 10);
+            e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
+            result = this.props.handleChange(e);
+        }
+        if (!result) {
             e.preventDefault();
             e.stopPropagation();
-        } else {
-            if (this.props.onChange) {
-                let parsedVal = parseInt(value, 10);
-                e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
-                this.props.onChange(e);
-            }
         }
-    };
+        return result;
+    }
 }

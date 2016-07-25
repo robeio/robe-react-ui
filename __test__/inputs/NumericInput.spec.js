@@ -10,7 +10,7 @@ describe("inputs/NumericInput", () => {
             <NumericInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
-                onChange={props.onChange !== undefined ? props.onChange : () => { }}
+                handleChange={props.handleChange !== undefined ? props.handleChange : () => { }}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -24,7 +24,7 @@ describe("inputs/NumericInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "Label");
         chai.assert.equal(componentNode.props.value, "42");
-        chai.assert.equal(componentNode.props.onChange.name, "");
+        chai.assert.equal(componentNode.props.handleChange.name, "");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
@@ -40,7 +40,7 @@ describe("inputs/NumericInput", () => {
     });
 
     it("'__numericFilter", (done: Function) => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: () => { chai.assert.isOk(true); } }));
+        let componentNode = TestUtils.renderIntoDocument(getComponent({ handleChange: () => { chai.assert.isOk(true); } }));
         let e = {
             target: {
                 value: "12"
@@ -62,7 +62,7 @@ describe("inputs/NumericInput", () => {
         componentNode.__numericFilter(e);
 
         componentNode = TestUtils.renderIntoDocument(getComponent({
-            onChange: () => {
+            handleChange: () => {
                 chai.assert.isOk(false);
                 done("Input value '12q2' failed");
             }
