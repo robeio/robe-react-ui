@@ -20,7 +20,7 @@ export default class NotificationItem extends ShallowComponent {
 
         return (
             <span>
-                <a style={{ padding: "0!important" }} href={UIApplication.getBaseUrlPath() + this.__handlePathTo(item)} onClick={this.__onRead(item.oid)}>
+                <a style={{ padding: "0!important" }} onClick={this.__onRead}>
                     <Col className="notification-item">
                         <Col componentClass="h4" className="item-title" style={{ marginBottom: 0 }}>
                     <Col componentClass="p" style={{ wordWrap: "break-word" }} >{item.description}</Col>
@@ -31,45 +31,8 @@ export default class NotificationItem extends ShallowComponent {
             </span>
         );
     }
-
-    __handlePathTo = (item) => {
-        if (item.notifyTo === "ADMIN") {
-            return "#/account";
-        }
-        if (item.notifyType === "APPROVED") {
-            return this.__handleClassToPath(item.parentClass);
-        }
-        return `#/account/notifications?id=${item.oid}`;
-    };
-
-    __handleClassToPath = (clazz) => {
-        switch (clazz) {
-            case "com.mebitech.hermes.hibernate.entity.Address":
-                return "#/account/information/addresses";
-            case "com.mebitech.hermes.hibernate.entity.Contact":
-                return "#/account/information/contact-informations";
-            case "com.mebitech.hermes.hibernate.entity.BankInformation":
-                return "#/account/information/bank-informations";
-            case "com.mebitech.hermes.hibernate.entity.PostAd":
-                return "#/account/postads";
-            case "com.mebitech.hermes.hibernate.entity.Order":
-                return "#/account/orders/incoming-order";
-            case "com.mebitech.hermes.hibernate.entity.MerchantComment":
-                return "#";
-            default :
-                return clazz;
-        }
-    }
-
-    __onRead = (oid) => {
-        let item = {};
-        item.oid = oid;
-        //          RequestUtils.makeRequest(`commons/notifications/${oid}`, "PUT", item, (response) => {
-        RequestUtils.makeRequest(`commons/notifications/${oid}`, "PUT", item, () => {
-            if (this.props.refresh) {
-                this.props.refresh();
-            }
-        });
+    __onRead = () => {
+        this.props.onRead(this.props.item.oid);
     };
 
 }
