@@ -46,6 +46,11 @@ const fields = [
         type: "check"
     },
     {
+        label: "Radio Input",
+        code: "radio",
+        type: "radio"
+    },
+    {
         label: "CheckList Input",
         code: "checkList",
         type: "checkList",
@@ -82,12 +87,17 @@ const config = {
     },
     decimal: {},
     date: {},
-    password: {},
+    password: {
+
+    },
     money: {},
     select: {
         items
     },
     check: {
+        items
+    },
+    radio: {
         items
     },
     checkList: {
@@ -99,6 +109,7 @@ const config = {
 const item = {
     select: "en",
     check: "en,tr",
+    radio: "en",
     checkList: "en,tr"
 };
 
@@ -119,4 +130,5 @@ export default class DataFormSample extends ShallowComponent {
             </div>
         );
     }
+
 }

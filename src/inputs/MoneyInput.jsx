@@ -89,7 +89,7 @@ export default class MoneyInput extends ShallowComponent {
                 {...this.props}
                 type="text"
                 label={this.props.label}
-                onChange={this.numericFilter.bind(this)}
+                onChange={this.__numericFilter.bind(this)}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref="innerInput"
@@ -110,11 +110,10 @@ export default class MoneyInput extends ShallowComponent {
      */
     __numericFilter(e: Object) {
         let value = e.target.value;
-        value = this.__addThousandSeparator(value);
-        let result = this.__isFloat(value) || value === "";
+        let parsedValue = this.__addThousandSeparator(value);
+        let result = this.__isFloat(parsedValue) || parsedValue === "";
         if (result && this.props.onChange) {
-            let parsedVal = parseInt(value, 10);
-            e.target.parsedValue = isNaN(parsedVal) ? undefined : parsedVal;
+            e.target.parsedValue = isNaN(value) ? undefined : parsedValue;
             result = this.props.onChange(e);
         }
         if (!result) {
