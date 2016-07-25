@@ -6,7 +6,7 @@ import Button from "react-bootstrap/lib/Button";
 import FaIcon from "faicon/FaIcon";
 import NotificationItem from "notification/NotificationItem";
 import UIApplication from "../app/UIApplication";
-import "notification/style.css";
+import "notification/Notification.css";
 
 export default class Notification extends ShallowComponent {
 
