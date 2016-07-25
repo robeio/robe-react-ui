@@ -89,7 +89,7 @@ export default class MoneyInput extends ShallowComponent {
                 {...this.props}
                 type="text"
                 label={this.props.label}
-                onChange={this.numericFilter.bind(this)}
+                onChange={this.__numericFilter.bind(this)}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref="innerInput"
