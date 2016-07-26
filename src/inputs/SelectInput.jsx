@@ -25,17 +25,9 @@ export default class SelectInput extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
-         * multi select value
-         */
-        multi: React.PropTypes.bool,
-        /**
          * selected value or values
          */
         value: React.PropTypes.any,
-        /**
-         * selected value or values
-         */
-        delimiter: React.PropTypes.string,
         /**
          * key of given map array `items`
          */
@@ -56,6 +48,10 @@ export default class SelectInput extends ValidationComponent {
          * Validations for the component
          */
         validations: React.PropTypes.object,
+        /**
+         * Check List is single or multi
+         */
+        multi: React.PropTypes.bool,
         /**
          * presented message if any result not shown.
          */
@@ -79,7 +75,6 @@ export default class SelectInput extends ValidationComponent {
     };
 
     static defaultProps = {
-        delimiter: ",",
         placeHolder: "Please Select",
         noResultsText: "No Result",
         textField: "text",
@@ -92,9 +87,17 @@ export default class SelectInput extends ValidationComponent {
         hidden: false
     };
 
+    __delimiter = ",";
+    _value;
+    _onChange;
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
+        this._value = this.props.value;
+        if (!this._value) {
+            this._value = this.props.multi ? [] : "";
+        }
+        this._onChange = (this.props.multi ? this.__onChangeMulti : this.__onChangeSingle).bind(this);
     }
 
     render() {
@@ -111,7 +114,8 @@ export default class SelectInput extends ValidationComponent {
                     placeholder={this.props.placeHolder}
                     searchable={this.props.searchable}
                     value={this.props.value}
-                    onChange={this.__onChange.bind(this)}
+                    onChange={this._onChange}
+                    delimiter={this.__delimiter}
                 />
                 {super.validationResult()}
             </FormGroup>
@@ -119,17 +123,79 @@ export default class SelectInput extends ValidationComponent {
     }
 
     /**
-     * callback when changed message
+     * This method has two difference calls.
+     * 1 - call without parameter returns true if at least one of the values is checked.
+     * 2 - call with key parameter returns true if the given key is in checked list.
+     * @param {string} value
+     * @returns {boolean}
+     */
+    isChecked = (value: string): boolean => {
+        if (typeof value !== "undefined") {
+            return this.props.multi ?
+            this._value.indexOf(value) !== -1 : this._value === value;
+        }
+        return !(!this._value) && (this.props.multi ? this._value.length > 0 : this._value !== "");
+    };
+
+    /**
+     * returns checked values as string
+     * @returns {string}
+     */
+    getValue(): string {
+        return this._value;
+    }
+
+    /**
+     * Internal onClick event for Single CheckList. It is triggered every time.
+     * @param e event
+     */
+    __onChangeSingle(value: string) {
+        if (this._value === value) {
+            value = "";
+        }
+        let result = this.__callOnChange(value, this._value);
+        if (result) {
+            this._value = value;
+        }
+        return result;
+    }
+    /**
+     * Splits given string by delimiter and return result as Array.
      * @param value
+     * @returns {Array}
      * @private
      */
-    __onChange(value: any) {
-        let result = true;
-        if (this.props.onChange) {
-            let e = { target: { value: value } };
-            result = this.props.onChange(e);
+    __split(value: string): Array {
+        if (value && value.length > 0) {
+            return value.split(this.__delimiter);
+        }
+        return [];
+    }
+    /**
+     * Internal onClick event for multi CheckList. It is triggered every time.
+     * @param e event
+     */
+    __onChangeMulti(value: string) {
+        let newValue = this.__split(value);
+        let result = this.__callOnChange(newValue, this._value);
+        if (result) {
+            this._value = newValue;
         }
         return result;
     }
 
+    __callOnChange(value, oldValue) {
+        let result = true;
+        if (this.props.onChange) {
+            let e = {
+                target: {
+                    value: value,
+                    oldValue: oldValue,
+                    parsedValue: value
+                }
+            };
+            result = this.props.onChange(e);
+        }
+        return result;
+    }
 }

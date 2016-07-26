@@ -34,8 +34,7 @@ describe("inputs/SelectInput", () => {
 
         let expectedProps = {
             label: "Select Input Single",
-            items: items,
-            delimiter: ",",
+            items,
             placeHolder: "Please Select",
             noResultsText: "No Result",
             textField: "text",
@@ -46,7 +45,7 @@ describe("inputs/SelectInput", () => {
             disabled: false,
             readOnly: false,
             hidden: false
-        };
+        }
 
         let instance = TestUtils.renderIntoDocument(
             <SelectInput
@@ -64,7 +63,6 @@ describe("inputs/SelectInput", () => {
             value: "en,tr",
             textField: "value",
             valueField: "key",
-            delimiter: ",",
             placeHolder: "Please Select",
             noResultsText: "No Result",
             searchable: true,

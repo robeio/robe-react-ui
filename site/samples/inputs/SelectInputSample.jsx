@@ -22,6 +22,7 @@ export default class SelectInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            MultiSelect: ["en","tr"]
         };
     }
 
@@ -51,6 +52,7 @@ export default class SelectInputSample extends ShallowComponent {
             </div>
         );
     }
+
     __handleChange = (code: any, e: Object) => {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
