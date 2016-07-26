@@ -45,7 +45,6 @@ describe("inputs/CheckList", () => {
 
         let newComponent = Generator.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
-        console.log(instance.props);
         chai.assert.deepEqual(instance.props, expectedProps);
 
 
@@ -64,15 +63,16 @@ describe("inputs/CheckList", () => {
             value: ["en", "tr"],
             textField: "value",
             valueField: "key",
+            multi: true,
+            direction: false,
             disabled: false,
             readOnly: false,
-            hidden: false,
-            multi: true
-        };
+            hidden: false
+        }
+
         newComponent = Generator.getComponent(defaultProps, CheckList);
 
         instance = TestUtils.renderIntoDocument(newComponent);
-
         chai.assert.deepEqual(instance.props, expectedProps);
     });
 
@@ -118,7 +118,7 @@ describe("inputs/CheckList", () => {
     it("isChecked", () => {
         let defaultProps = {
             label: "CheckList Single",
-            item: langs[0],
+            items: langs,
             value: "en",
             textField: "value",
             valueField: "key"
@@ -134,14 +134,15 @@ describe("inputs/CheckList", () => {
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.isFalse(instance.isChecked(), "Given value of CheckList Single Component unchecked. Thats why isChecked must be false.");
 
-        let expectedValue = "en,tr";
+        let expectedValue = ["en", "tr"];
 
         defaultProps = {
             label: "CheckList Group",
             items: langs,
             value: expectedValue,
             textField: "value",
-            valueField: "key"
+            valueField: "key",
+            multi: true
         };
 
         newComponent = Generator.getComponent(defaultProps, CheckList);

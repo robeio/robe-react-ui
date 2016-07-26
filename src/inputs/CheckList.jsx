@@ -174,16 +174,15 @@ export default class CheckList extends ValidationComponent {
      * This method has two difference calls.
      * 1 - call without parameter returns true if at least one of the values is checked.
      * 2 - call with key parameter returns true if the given key is in checked list.
-     * @param {string} key
+     * @param {string} value
      * @returns {boolean}
      */
-    isChecked = (key: string): boolean => {
-        if (typeof key !== "undefined") {
+    isChecked = (value: string): boolean => {
+        if (typeof value !== "undefined") {
             return this.props.multi ?
-                this._value.indexOf(key) !== -1 : this._value === key;
+                this._value.indexOf(value) !== -1 : this._value === value;
         }
-        return this._value && (this.props.multi ?
-            this._value.length > 0 : this._value !== "");
+        return !(!this._value) && (this.props.multi ? this._value.length > 0 : this._value !== "");
     };
 
     /**
