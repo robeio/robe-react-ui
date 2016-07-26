@@ -81,5 +81,6 @@ export default class CheckListSample extends ShallowComponent {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[code] = value;
         this.setState(state);
+        return true;
     };
 }

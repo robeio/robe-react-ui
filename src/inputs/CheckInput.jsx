@@ -30,17 +30,9 @@ export default class CheckInput extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
-         * Item will be rendered as checkbox input.
-         */
-        item: React.PropTypes.object,
-        /**
          * Checked value or values
          */
-        value: React.PropTypes.string,
-        /**
-         * Delimiter is a separator to separate checked values as string in `value` props
-         */
-        delimiter: React.PropTypes.string,
+        value: React.PropTypes.array,
         /**
          * Key of map item which is defined in given array `items`
          */
@@ -57,6 +49,10 @@ export default class CheckInput extends ValidationComponent {
          * Validations functions to validate value
          */
         validations: React.PropTypes.object,
+        /**
+         * Check List is single or multi
+         */
+        multi: React.PropTypes.bool,
         /**
          * Disable input
          */
@@ -77,25 +73,22 @@ export default class CheckInput extends ValidationComponent {
      * @static
      */
     static defaultProps = {
-        delimiter: ",",
-        placeHolder: "Please Select",
-        noResultsText: "No Result",
         textField: "text",
         valueField: "value",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        multi: false
     };
 
-    _values = [];
-
     _value;
+
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-        if (this.props.value) {
-            this._value = this.props.value;
-            this._values = this.__split(this._value);
+        this._value = this.props.value;
+        if (!this._value) {
+            this._value = this.props.multi ? [] : "";
         }
     }
 
@@ -125,20 +118,17 @@ export default class CheckInput extends ValidationComponent {
      * @private
      */
     __createCheckInputs(items: Array<Map>): Array {
-        let components = null;
-        if (Assertions.isArray(items)) {
-            components = [];
+        let components = [];
+        if (items) {
             for (let i = 0; i < items.length; i++) {
                 components.push(this.__createCheckInput(items[i]));
             }
-        } else {
-            components = this.__createCheckInput(items);
         }
         return components;
     }
 
     /**
-     *
+     * create a CheckInput from given item.
      * @param item
      * @returns {Object}
      * @private
@@ -146,7 +136,7 @@ export default class CheckInput extends ValidationComponent {
     __createCheckInput(item: Map): Object {
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
-        let isChecked = this._values.indexOf(value) !== -1;
+        let isChecked = this.isChecked(value);
         let icon = isChecked ? " fa-check-square-o" : " fa-square-o";
         let disabled = isChecked ? "disabled-check-input" : "";
         let input = isChecked ? (
@@ -156,8 +146,13 @@ export default class CheckInput extends ValidationComponent {
                 disabled={!isChecked}
             />
         ) : null;
+        let onClick = null;
+        if (!this.props.disabled) {
+            onClick = (this.props.multi ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
+        }
+
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={this.__onClick.bind(this, value)}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={onClick}>
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
@@ -169,51 +164,71 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     * Returns whether it is selected or not.
-     * @returns true if selected.
+     * This method has two difference calls.
+     * 1 - call without parameter returns true if at least one of the values is checked.
+     * 2 - call with key parameter returns true if the given key is in checked list.
+     * @param {string} key
+     * @returns {boolean}
      */
-    isChecked = (key: string) => {
-        return typeof key === "undefined" ?
-        this._values.indexOf(key) !== -1 :
-        this._values.length > 0;
+    isChecked = (key: string): boolean => {
+        if (typeof key !== "undefined") {
+            return this.props.multi ?
+            this._value.indexOf(key) !== -1 : this._value === key;
+        }
+        return this._value && (this.props.multi ?
+            this._value.length > 0 : this._value !== "");
     };
 
-    getValue() {
+    /**
+     * returns checked values as string
+     * @returns {string}
+     */
+    getValue(): string {
         return this._value;
     }
-
-    __split(value: string) {
-        if (value && value.length > 0) {
-            return this._value.split(this.props.delimiter);
-        }
-        return [];
-    }
-
-    __join(values: Array, delimiter: string) {
-        if (values && values.length > 0) {
-            return this._values.join(delimiter);
-        }
-        return "";
-    }
     /**
-     * Internal onClick event. It is triggered every time.
+     * Internal onClick event for Single CheckList. It is triggered every time.
      * @param e event
      */
-    __onClick(value: string) {
-        let ind = this._values.indexOf(value);
-        if (ind !== -1) {
-            delete this._values[ind];
-        } else {
-            this._values.push(value);
+    __onClickSingle(value: string) {
+        if (this._value === value) {
+            value = "";
         }
-        let parsedValue = this.__join(this._values, this.props.delimiter);
+        let result = this.__callOnChange(value, this._value);
+        if (result) {
+            this._value = value;
+        }
+        return result;
+    }
+    /**
+     * Internal onClick event for multi CheckList. It is triggered every time.
+     * @param e event
+     */
+    __onClickMulti(value: string) {
+        let willChangeValue = this._value.slice(0);
+        let ind = willChangeValue.indexOf(value);
+        if (ind !== -1) {
+            willChangeValue.splice(ind, 1);
+        } else {
+            ind = willChangeValue.push(value) - 1;
+        }
+        let result = this.__callOnChange(willChangeValue, this._value);
+        if (result) {
+            this._value = willChangeValue;
+        }
+        return result;
+    }
+    __callOnChange(value, oldValue) {
         let result = true;
         if (this.props.onChange) {
-            let e = { target: { parsedValue } };
+            let e = {
+                target: {
+                    value: value,
+                    oldValue: oldValue,
+                    parsedValue: value
+                }
+            };
             result = this.props.onChange(e);
-        }
-        if (result) {
-            this._value = parsedValue;
         }
         return result;
     }

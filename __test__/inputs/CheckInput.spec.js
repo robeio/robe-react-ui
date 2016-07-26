@@ -24,7 +24,7 @@ describe("inputs/CheckInput", () => {
     it("props", () => {
         let defaultProps = {
             label: "CheckInput Single",
-            item: langs[0],
+            items: langs,
             value: "en",
             textField: "value",
             valueField: "key"
@@ -32,16 +32,14 @@ describe("inputs/CheckInput", () => {
 
         let expectedProps = {
             label: "CheckInput Single",
-            item: langs[0],
+            items: langs,
             value: "en",
             textField: "value",
             valueField: "key",
-            delimiter: ",",
-            placeHolder: "Please Select",
-            noResultsText: "No Result",
             disabled: false,
             readOnly: false,
-            hidden: false
+            hidden: false,
+            multi: false
         };
 
         let newComponent = Generator.getComponent(defaultProps, CheckInput);
@@ -53,23 +51,22 @@ describe("inputs/CheckInput", () => {
         defaultProps = {
             label: "CheckInput Group",
             items: langs,
-            value: "en,tr",
+            value: ["en", "tr"],
             textField: "value",
-            valueField: "key"
+            valueField: "key",
+            multi: true
         };
 
         expectedProps = {
             label: "CheckInput Group",
             items: langs,
-            value: "en,tr",
+            value: ["en", "tr"],
             textField: "value",
             valueField: "key",
-            delimiter: ",",
-            placeHolder: "Please Select",
-            noResultsText: "No Result",
             disabled: false,
             readOnly: false,
-            hidden: false
+            hidden: false,
+            multi: true
         };
 
         newComponent = Generator.getComponent(defaultProps, CheckInput);

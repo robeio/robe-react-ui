@@ -6,7 +6,6 @@ import Generator from "../test-utils/Generator";
 import TestUtils from "react-addons-test-utils";
 
 describe("inputs/CheckList", () => {
-
     const langs = [
         {
             key: "en",
@@ -25,7 +24,7 @@ describe("inputs/CheckList", () => {
     it("props", () => {
         let defaultProps = {
             label: "CheckList Single",
-            item: langs[0],
+            items: langs,
             value: "en",
             textField: "value",
             valueField: "key"
@@ -33,44 +32,43 @@ describe("inputs/CheckList", () => {
 
         let expectedProps = {
             label: "CheckList Single",
-            item: langs[0],
+            items: langs,
             value: "en",
             textField: "value",
             valueField: "key",
-            delimiter: ",",
             direction: false,
             disabled: false,
             readOnly: false,
-            hidden: false
+            hidden: false,
+            multi: false
         };
 
         let newComponent = Generator.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
-
+        console.log(instance.props);
         chai.assert.deepEqual(instance.props, expectedProps);
 
 
         defaultProps = {
             label: "CheckList Group",
             items: langs,
-            value: "en,tr",
+            value: ["en", "tr"],
             textField: "value",
-            valueField: "key"
+            valueField: "key",
+            multi: true
         };
 
         expectedProps = {
             label: "CheckList Group",
-            value: "en,tr",
+            items: langs,
+            value: ["en", "tr"],
             textField: "value",
             valueField: "key",
-            items: langs,
-            delimiter: ",",
-            direction: false,
             disabled: false,
             readOnly: false,
-            hidden: false
+            hidden: false,
+            multi: true
         };
-
         newComponent = Generator.getComponent(defaultProps, CheckList);
 
         instance = TestUtils.renderIntoDocument(newComponent);
@@ -129,12 +127,12 @@ describe("inputs/CheckList", () => {
         let newComponent = Generator.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
 
-        chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Single Component checked. That's why isChecked must be true.");
+        chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Single Component checked. Thats why isChecked must be true.");
 
         delete defaultProps.value;
         newComponent = Generator.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
-        chai.assert.isFalse(instance.isChecked(), "Given value of CheckList Single Component unchecked. That's why isChecked must be false.");
+        chai.assert.isFalse(instance.isChecked(), "Given value of CheckList Single Component unchecked. Thats why isChecked must be false.");
 
         let expectedValue = "en,tr";
 
@@ -148,10 +146,10 @@ describe("inputs/CheckList", () => {
 
         newComponent = Generator.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
-        chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Multi Component checked more than zero. That's why isChecked must be true.");
-        chai.assert.isTrue(instance.isChecked(langs[0].key), "Given value[0] of CheckList Multi Component checked. That's why isChecked must be true.");
-        chai.assert.isTrue(instance.isChecked(langs[1].key), "Given value[1] of CheckList Multi Component checked. That's why isChecked must be true.");
-        chai.assert.isFalse(instance.isChecked(langs[2].key), "Given value[2] of CheckList Multi Component unchecked. That's why isChecked must be false.");
+        chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Multi Component checked more than zero. Thats why isChecked must be true.");
+        chai.assert.isTrue(instance.isChecked(langs[0].key), "Given value[0] of CheckList Multi Component checked. Thats why isChecked must be true.");
+        chai.assert.isTrue(instance.isChecked(langs[1].key), "Given value[1] of CheckList Multi Component checked. Thats why isChecked must be true.");
+        chai.assert.isFalse(instance.isChecked(langs[2].key), "Given value[2] of CheckList Multi Component unchecked. Thats why isChecked must be false.");
 
         delete defaultProps.value;
 

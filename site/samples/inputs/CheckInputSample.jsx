@@ -23,7 +23,7 @@ export default class CheckInputSample extends ShallowComponent {
         super(props);
         this.state = {
             CheckInputSingle: "en",
-            CheckInputGroup: "en,tr"
+            CheckInputGroup: ["en", "tr"]
         };
     }
 
@@ -32,7 +32,7 @@ export default class CheckInputSample extends ShallowComponent {
             <div>
                 <CheckInput
                     label="CheckInput Single"
-                    items={langs[0]}
+                    items={langs}
                     value={this.state.CheckInputSingle}
                     textField="value"
                     valueField="key"
@@ -42,6 +42,7 @@ export default class CheckInputSample extends ShallowComponent {
                     label="CheckInput Group"
                     items={langs}
                     value={this.state.CheckInputGroup}
+                    multi={true}
                     textField="value"
                     valueField="key"
                     onChange={this.__handleChange.bind(undefined, "CheckInputGroup")}
@@ -54,5 +55,6 @@ export default class CheckInputSample extends ShallowComponent {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[code] = value;
         this.setState(state);
+        return true;
     };
 }

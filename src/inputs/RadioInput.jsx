@@ -26,9 +26,9 @@ export default class RadioInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * Item will be rendered as checkbox input.
+         * Items will be rendered as radio input.
          */
-        item: React.PropTypes.object,
+        items: React.PropTypes.object,
         /**
          * Checked value or values
          */
@@ -92,9 +92,7 @@ export default class RadioInput extends ValidationComponent {
             <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
-                    this.props.items ?
-                        this.__createRadioBoxes(this.props.items) :
-                        this.__createRadioBox(this.props.item)
+                   this.__createRadioBoxes(this.props.items)
                 }
                 {super.validationResult()}
             </FormGroup>
