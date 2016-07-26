@@ -1,7 +1,8 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
-import { Form, Panel } from "react-bootstrap";
+import { ShallowComponent, Maps } from "robe-react-commons";
+import { Form } from "react-bootstrap";
 import ComponentManager from "../app/ComponentManager";
+import InputValidations from "../validation/InputValidations";
 
 export default class DataForm extends ShallowComponent {
 
@@ -15,10 +16,6 @@ export default class DataForm extends ShallowComponent {
          */
         style: React.PropTypes.object,
         /**
-         * Label for the form control.
-         */
-        label: React.PropTypes.string,
-        /**
          * Hold data in a map
          */
         item: React.PropTypes.object,
@@ -27,9 +24,9 @@ export default class DataForm extends ShallowComponent {
          */
         fields: React.PropTypes.array.isRequired,
         /**
-         * Holds Component props and component if need.
+         * Holds extra props of components if need.
          */
-        components: React.PropTypes.object.isRequired,
+        props: React.PropTypes.object,
         /**
          * Form is collapsible or not
          */
@@ -37,12 +34,7 @@ export default class DataForm extends ShallowComponent {
         /**
          * Form is defaultExpanded or not
          */
-        defaultExpanded: React.PropTypes.bool,
-        /**
-         * On Generator
-         */
-        onItemRenderer: React.PropTypes.func
-
+        defaultExpanded: React.PropTypes.bool
     };
 
     /**
@@ -50,7 +42,6 @@ export default class DataForm extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        item: {},
         label: null,
         collapsible: false,
         defaultExpanded: true
@@ -61,124 +52,208 @@ export default class DataForm extends ShallowComponent {
      * @type {{}}
      * @private
      */
-    __fieldProps = {};
+
+    /**
+     *
+     * @type {{}}
+     * @private
+     */
+    __item = {};
+    /**
+     *
+     * @type {boolean}
+     * @private
+     */
+    __isNew = true;
+    /**
+     *
+     * @type {{}}
+     * @private
+     */
+    __props = {};
 
     constructor(props) {
         super(props);
-        this.state = props.item;
-        this.init(this.props.fields, this.props.config);
+        if (props.item) {
+            this.__isNew = false;
+            this.__item = props.item;
+        }
+        this.state = {};
+        this.__init(this.props.fields, this.props.props);
     }
 
-    init(fields, config) {
-        let items = [];
+    __init(fields, config) {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
-                throw new Error("Column code must define ! ");
+                throw new Error("Field code must define ! ");
             }
             let props;
             if (config) {
                 props = config[field.code];
             }
 
-            if (!props) {
-                props = {};
-            }
-            this.initComponent(field, props);
+            this.__initComponent(field, props);
         }
-        return items;
     }
 
-    initComponent(field, props) {
+    __initComponent(field, props) {
         let code = field.code;
-        console.log(code);
-        console.log(field);
-        console.log(props);
-        props = Maps.mergeDeep(field, props);
+
+        props = props ? Maps.mergeDeep(field, props) : field;
         props.onChange = this.onChange.bind(this, code);
-        this.__fieldProps[code] = props;
-        if (!this.state[code]) {
-            this.state[code] = null;
+
+        this.state[code] = this.__filterUndefined(this.state[code]);
+        if (this.__isNew) {
+            if (props.items) {
+                this.state[`$$_items_${code}`] = props.items;
+            }
+            if (props.assets) {
+                this.state[`$$_assets_${code}`] = props.assets;
+            }
+            this.__item[code] = this.__filterUndefined(props.value);
+        } else {
+            this.__item[code] = this.__filterUndefined(this.__item);
         }
+        this.__props[code] = props;
+        this.state[code] = this.__filterUndefined(this.__item[code]);
+        this.__setValidations(field);
     }
 
-    render() {
+    render(): Object {
         let form = (
             <Form>
                 {this.__createForm(this.props.fields, this.props.components)}
             </Form>
         );
-        if (this.props.label) {
-            return (
-                <Panel collapsible={this.props.collapsible} defaultExpanded={this.props.defaultExpanded} header={this.props.label}>
-                    {form}
-                </Panel>
-            );
-        }
         return form;
     }
 
     /**
+     * Set default string validations
+     * @param field
+     * @private
+     */
+    __setValidations(field: Map) {
+        let props = this.__props[field.code];
+        if (!props.validations) {
+            props.validations = {};
+        }
+        for (let key in InputValidations) {
+            if (InputValidations.hasOwnProperty(key)) {
+                if (!props.validations[key] && field[key]) {
+                    let type = typeof field[key];
+                    if (type !== "Function") {
+                        props.validations[key] = type === "boolean" ? InputValidations[key] : InputValidations[key].bind(null, field[key]);
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Creates components which will render in Form Data by own fields and field props
      * @param {Array<Map>} fields
      * @param {Object} components
      * @returns {Array}
      * @private
      */
-    __createForm = (fields: Array<Map>, components: Object): Array => {
+    __createForm = (fields: Array<Map>): Array => {
         let items = [];
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
                 throw new Error("Column code must define ! ");
             }
-            let component;
-            if (components) {
-                component = components[field.code];
-            }
-            items.push(this.__createElement(field, component));
+            items.push(this.__createElement(field));
         }
         return items;
     }
 
-    /* eslint react/prop-types: 0*/
     /**
-     *
+     * Creates component which will render in Form Data by fields and field props
      * @param {Map} field
      * @param {Object} config
      * @returns {Object}
      * @private
      */
-    __createElement = (field: Map, props: Object): Object => {
+    __createElement = (field: Map): Object => {
         let code = field.code;
-        props = this.__fieldProps[code];
-
-        let Component = this.onItemRenderer(field, props);
-
-        return <Component {...props} value={this.state[code]} />;
-    }
-
-    onItemRenderer(field, config) {
-        let component = null;
-        if (this.props.onItemRenderer) {
-            component = this.props.onItemRenderer(field, config);
-        }
-        if (!component) {
-            component = ComponentManager.findComponentByType(field.type);
-        }
-        return component;
+        let props = this.__props[code];
+        let Component = ComponentManager.findComponentByType(field.type);
+        return <Component ref={`${code}Ref`} {...props} value={this.state[code]} />;
     }
 
     /**
+     * Checks validations of all components in form data
+     * @returns {boolean}
+     */
+    isValid = (): boolean => {
+        for (let key in this.refs) {
+            if (this.refs.hasOwnProperty(key)) {
+                let child = this.refs[key];
+                if (child.isValid) {
+                    if (!child.isValid()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    };
+
+    /**
      *
+     * Called when any component changed.
      * @param code
      * @param e
      * @returns {boolean}
      */
     onChange(code: any, e: Object): boolean {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        this.__item[code] = value;
         let state = {};
-        state[code] = value;
+        state[code] = this.__item[code];
+        let props = this.__props[code];
+        if (props) {
+            if (props.items) {
+                state[`$$_items_${code}`] = props.items;
+            }
+            if (props.assets) {
+                state[`$$_assets_${code}`] = props.assets;
+            }
+        }
         this.setState(state);
         return true;
+    }
+
+    /**
+     * Checks validation of data and return valid data. If data is not valid then return false
+     * @returns {boolean}
+     */
+    submit(): any {
+        let valid = this.isValid();
+        return valid ? this.getItem() : false;
+    }
+    /**
+     * return current data
+     * @returns {boolean}
+     */
+    getItem = (): Map => {
+        return this.__item;
+    }
+
+    /**
+     * sets initial data if value is empty or null
+     * @param value
+     * @returns {*}
+     * @private
+     */
+    __filterUndefined = (value: any): any => {
+        if (value === 0) {
+            return 0;
+        } else if (!value) {
+            return "";
+        }
+        return value;
     }
 }

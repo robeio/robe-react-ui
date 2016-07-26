@@ -7,58 +7,83 @@ import Alert from "react-bootstrap/lib/Alert";
 
 export default class ModalDataForm extends ShallowComponent {
 
+    /**
+     * propTypes
+     * @static
+     */
     static propTypes = {
-        title: React.PropTypes.string,
-        model: React.PropTypes.array,
-        resources: React.PropTypes.object,
+        /**
+         * Style map for the component.
+         */
+        style: React.PropTypes.object,
+        /**
+         * Header for the form control.
+         */
+        header: React.PropTypes.string,
+        /**
+         * Hold data in a map
+         */
+        item: React.PropTypes.object,
+        /**
+         * Holds field properties like `code`, `label`, `type`, `visible`, `editable`, `readable`, `label`
+         */
+        fields: React.PropTypes.array.isRequired,
+        /**
+         * Holds Component props and component if need.
+         */
+        show: React.PropTypes.boolean,
+        props: React.PropTypes.object,
+        onSubmit: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func,
         cancelButtonText: React.PropTypes.string,
         submitButtonText: React.PropTypes.string,
-        titleText: React.PropTypes.string,
         showCancelButton: React.PropTypes.bool,
         showSaveButton: React.PropTypes.bool
-    };
+    }
 
+    /**
+     * defaultProps
+     * @static
+     */
     static defaultProps = {
-        titleText: "Detay",
+        show: false,
+        header: "Detay",
         invalidText: ["Lütfen zorunlu alanların eksiksiz doldurulduğundan emin olunuz."],
         cancelButtonText: "İptal",
         submitButtonText: "Kaydet",
         showCancelButton: true,
-        showSaveButton: true
+        showSaveButton: true,
+
     };
 
     doNotSubmit = false;
 
-
     constructor(props) {
         super(props);
-        this.state = {
-            valid: true,
-            show: this.props.show,
-            invalidText: this.props.invalidText
-        };
+        this.componentWillReceiveProps(props);
     }
     render() {
         return (
-            <Modal show={this.state.showModal}>
+            <Modal show={this.state.show}>
                 <Modal.Header>
-                    <Modal.Title>{this.props.titleText}</Modal.Title>
+                    <Modal.Title>{this.props.header}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <DataForm
                         ref="dataform"
-                        model={this.props.model}
-                        resources={this.props.resources}
-                        data={this.state.formData}
-                        onSubmit={this.__onSubmit}
+                        fields={this.props.fields}
+                        props={this.props.props}
+                        item={this.props.item}
+                        onSubmit={this.__submitForm}
                     />
                     {this.__renderWarning()}
                 </Modal.Body>
-                    {this.__renderFooterButtons()}
+                {this.__renderFooterButtons()}
             </Modal>
         );
     }
+
+
     __renderFooterButtons = () => {
         let showCancelButton = ((this.props.showCancelButton) ?
             <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button> : null);
@@ -95,17 +120,15 @@ export default class ModalDataForm extends ShallowComponent {
         }
         this.doNotSubmit = true;
 
-        let valid = this.refs.dataform.isValid();
-        if (!valid) {
+        let item = this.refs.dataform.submit();
+        if (item && this.props.onSubmit) {
+            this.props.onSubmit(item, this.__onComplete);
+        } else {
             this.setState({
                 valid: false,
                 invalidText: this.props.invalidText
             });
-            return;
-        }
-
-        if (this.props.onSave && valid === true) {
-            this.props.onSave(this.state.formData, this.refs.dataform.state, this.__onComplete);
+            this.doNotSubmit = false;
         }
     };
 
@@ -116,18 +139,29 @@ export default class ModalDataForm extends ShallowComponent {
 
         if (message === true) { // that me no error that is ok
             this.setState({
-                showModal: false
+                show: false
             });
         } else {
             if (!Array.isArray(message)) {
                 message = [message];
             }
-
             this.setState({
                 valid: false,
                 invalidText: message
             });
         }
+    }
+
+    /**
+     *
+     * @param nextProps
+     */
+    componentWillReceiveProps(nextProps) {
+        this.state = {
+            valid: true,
+            show: nextProps.show,
+            invalidText: nextProps.invalidText
+        };
     }
 
 }

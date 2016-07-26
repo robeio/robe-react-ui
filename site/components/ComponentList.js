@@ -128,9 +128,16 @@ class ComponentList {
             desc: " is an notification component with total count and popup list.",
             json: require("../docs/notification/Notification.json"),
             sample: require("../samples/notification/NotificationSample"),
-            code: require("../samples/notification/NotificationSample.txt"),
+            code: require("../samples/notification/NotificationSample.txt")
         });
 
+        components.push({
+            header: "ModalDataForm",
+            desc: " is an ModalDataForm component submit editing data.",
+            json: require("../docs/form/ModalDataForm.json"),
+            sample: require("../samples/form/ModalDataFormSample"),
+            code: require("../samples/form/ModalDataFormSample.txt")
+        });
 
         return components;
     }

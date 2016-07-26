@@ -1,0 +1,148 @@
+[
+  {
+    "label": "String Input",
+    "code": "username",
+    "type": "string",
+    "required": true,
+    "minLength": 3
+  },
+  {
+    "label": "Password Input",
+    "code": "password",
+    "type": "password",
+    "required": true,
+    "minLength": 3
+  },
+  {
+    "label": "Number Input",
+    "code": "age",
+    "type": "number",
+    "required": true,
+    "minValue": 5
+  },
+  {
+    "label": "Decimal Input",
+    "code": "rate",
+    "type": "decimal",
+    "required": true,
+    "minValue": 5
+  },
+  {
+    "label": "Money Input",
+    "code": "price",
+    "type": "money",
+    "required": true,
+    "minValue": 5
+  },
+  {
+    "label": "Date Input",
+    "code": "birthDay",
+    "type": "date",
+    "required": true,
+    "minValue": 5
+  },
+  {
+    "label": "Radio Input",
+    "code": "gender",
+    "type": "radio",
+    "required": true,
+    "value": "",
+    "items": [
+      {
+        "value": "MALE",
+        "text": "Bay"
+      },
+      {
+        "value": "FEMALE",
+        "text": "Bayan"
+      }
+    ]
+  },
+  {
+    "label": "CheckInput Input",
+    "code": "lang",
+    "type": "check",
+    "required": true,
+    "value": ["en", "tr"],
+    "multi": true,
+    "items": [
+      {
+        "value": "tr",
+        "text": "Turkish"
+      },
+      {
+        "value": "en",
+        "text": "English"
+      },
+      {
+        "value": "kurdish",
+        "text": "Kurdish"
+      }
+    ]
+  },
+  {
+    "label": "CheckList",
+    "code": "city",
+    "type": "checkList",
+    "required": true,
+    "value": "34",
+    "items": [
+      {
+        "value": "34",
+        "text": "Istanbul"
+      },
+      {
+        "value": "21",
+        "text": "Diyarbakır"
+      },
+      {
+        "value": "06",
+        "text": "Ankara"
+      }
+    ]
+  },
+  {
+    "label": "CheckList",
+    "code": "ilce",
+    "type": "checkList",
+    "required": true,
+    "direction": true,
+    "multi": true,
+    "value": ["21", "34"],
+    "items": [
+      {
+        "value": "34",
+        "text": "Istanbul"
+      },
+      {
+        "value": "21",
+        "text": "Diyarbakır"
+      },
+      {
+        "value": "06",
+        "text": "Ankara"
+      }
+    ]
+  },
+  {
+    "label": "SelectInput",
+    "code": "il",
+    "type": "select",
+    "required": true,
+    "value": "21",
+    "items": [
+      {
+        "value": "34",
+        "text": "Istanbul"
+      },
+      {
+        "value": "21",
+        "text": "Diyarbakır"
+      },
+      {
+        "value": "06",
+        "text": "Ankara"
+      }
+    ]
+  }
+]
