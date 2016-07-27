@@ -17,7 +17,6 @@ webPackConfig.entry = {
 // webPackConfig.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
 
-console.log("PORT:", process.env.PORT);
 webPackConfig.devServer = {
     historyApiFallback: true,
     hot: true,
@@ -45,6 +44,6 @@ webPackConfig.plugins.push(new CopyWebpackPlugin([
 webPackConfig.plugins.push(new CachePlugin({}));
 
 
-ConfigUtils.createJsonServer(3000, "data/db.json");
+ConfigUtils.createJsonServer(3000, "data/db.json", "/files", "temp");
 
 module.exports = webPackConfig;

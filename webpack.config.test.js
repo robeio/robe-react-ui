@@ -56,7 +56,7 @@ commonSettings.isparta = {
     }
 };
 
-ConfigUtils.createJsonServer(3000, commonSettings.paths.root + "/testdb.json");
+ConfigUtils.createJsonServer(3000, commonSettings.paths.root + "/testdb.json", "/files", "temp");
 module.exports = function configure(config) {
     config.set({
         captureTimeout: 3000,

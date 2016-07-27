@@ -139,6 +139,14 @@ class ComponentList {
             code: require("../samples/form/ModalDataFormSample.txt")
         });
 
+        components.push({
+            header: "DropZoneUpload",
+            desc: " is an File Upload Component",
+            json: require("../docs/upload/DropZoneUpload.json"),
+            sample: require("../samples/upload/DropZoneUploadSample"),
+            code: require("../samples/upload/DropZoneUploadSample.txt")
+        });
+
         return components;
     }
 
