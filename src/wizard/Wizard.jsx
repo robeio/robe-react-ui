@@ -50,6 +50,13 @@ export default class Wizard extends ShallowComponent {
             currentStep: this.props.currentStep,
             valid: true
         };
+        this.__renderSteps = this.__renderSteps.bind(this);
+        this.__onClickStepButton = this.__onClickStepButton.bind(this);
+        this.__areStepsValid = this.__areStepsValid.bind(this);
+        this.__renderContent = this.__renderContent.bind(this);
+        this.__handleNextButtonClick = this.__handleNextButtonClick.bind(this);
+        this.__handlePreviousButtonClick = this.__handlePreviousButtonClick.bind(this);
+        this.__renderPager = this.__renderPager.bind(this);
     }
 
     render(): Object {
@@ -66,7 +73,7 @@ export default class Wizard extends ShallowComponent {
         );
     }
 
-    __renderSteps = (): Array => {
+    __renderSteps(): Array {
         let steps = [];
         for (let i = 0; i < this.props.steps.length; i++) {
             let item = this.props.steps[i];
@@ -83,9 +90,9 @@ export default class Wizard extends ShallowComponent {
             steps.push(step);
         }
         return steps;
-    };
+    }
 
-    __onClickStepButton = (index: number) => {
+    __onClickStepButton(index: number) {
         if (this.state.currentStep === index) {
             return;
         }
@@ -101,30 +108,31 @@ export default class Wizard extends ShallowComponent {
             state.currentStep = index;
             this.setState(state);
         }
-    };
-    __areStepsValid = (start: number, end: number): boolean => {
+    }
+
+    __areStepsValid(start: number, end: number): boolean {
         for (start; start < end; start++) {
             if (!this.__stepValidInfo[start]) {
                 return false;
             }
         }
         return true;
-    };
+    }
 
-    __renderContent = (): Object => {
+    __renderContent(): Object {
         this.__content = this.props.steps[this.state.currentStep].component;
         return this.__content;
-    };
+    }
 
-    __handleNextButtonClick = () => {
+    __handleNextButtonClick () {
         this.__onClickStepButton(this.state.currentStep + 1);
-    };
+    }
 
-    __handlePreviousButtonClick = () => {
+    __handlePreviousButtonClick () {
         this.__onClickStepButton(this.state.currentStep - 1);
-    };
+    }
 
-    __renderPager = (): Object => {
+    __renderPager(): Object {
         let nextButton = undefined;
         if (this.state.currentStep === this.props.steps.length - 1) {
             nextButton = (
@@ -147,7 +155,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
-                    {this.props.nextButtonText} &rarr;
+                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" size={"10px"} />
                 </PageItem>
             );
         }
@@ -158,14 +166,14 @@ export default class Wizard extends ShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
-                    &larr;{this.props.preButtonText}
+                    <FaIcon code="fa-arrow-left" size={"10px"} />{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
             </Pager>
         );
-    };
-    
-    isValid = (): boolean => {
+    }
+
+    isValid(): boolean {
         if (this.__content === undefined) {
             return false;
         }
