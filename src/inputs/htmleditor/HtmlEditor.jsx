@@ -1,5 +1,5 @@
 import React from "react";
-import ValidationComponent from "validation/ValidationComponent";
+import ValidationComponent from "../../validation/ValidationComponent";
 import ReactQuill from "react-quill";
 import Col from "react-bootstrap/lib/Col";
 import "./quill.snow.css";
@@ -61,6 +61,15 @@ export default class HtmlEditor extends ValidationComponent {
         readOnly: false,
         hidden: false
     };
+    /**
+     * Creates an instance of TextInput.
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
+        super(props);
+        this.__onChange = this.__onChange.bind(this);
+    }
 
     render(): Object {
         return (

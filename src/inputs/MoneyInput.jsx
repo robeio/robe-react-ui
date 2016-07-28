@@ -4,14 +4,7 @@ import Input from "./BaseInput";
 import Numeral from "numeral";
 import Turkish from "../../node_modules/numeral/languages/tr";
 import InputGroup from "react-bootstrap/lib/InputGroup";
-
-
-
 // Please look at http://numeraljs.com/
-
-// TODO:take decimal seperator from props
-// TODO:take format from props
-// TODO:take fraction size from props
 
 export default class MoneyInput extends ShallowComponent {
     /**
@@ -45,8 +38,7 @@ export default class MoneyInput extends ShallowComponent {
         /**
          * Thousand Separator for integer and fraction.
          */
-        thousandSeparator: React.PropTypes.oneOf([".", ","])
-        ,
+        thousandSeparator: React.PropTypes.oneOf([".", ","]),
         /**
          * Disable input
          */

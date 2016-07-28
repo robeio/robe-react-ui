@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "inputs/BaseInput";
+import Input from "./BaseInput";
 
 /**
  * An input element for passwords.
@@ -54,6 +54,15 @@ export default class PasswordInput extends ShallowComponent {
     };
 
     /**
+     * Creates an instance of PasswordInput.
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
+        super(props);
+        this.__onChange = this.__onChange.bind(this);
+    }
+    /**
      * render
      * @returns
      */
@@ -61,7 +70,7 @@ export default class PasswordInput extends ShallowComponent {
         return (
             <Input
                 {...this.props}
-                onChange={this.__onChange.bind(this)}
+                onChange={this.__onChange}
                 type="password"
                 ref="innerInput"
             />);
@@ -77,7 +86,7 @@ export default class PasswordInput extends ShallowComponent {
     /**
      * Internal onchange handler.
      */
-    __onChange(e: Object) {
+    __onChange(e: Object): boolean {
         let result = true;
         if (this.props.onChange) {
             result = this.props.onChange(e);

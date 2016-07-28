@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "inputs/BaseInput";
+import Input from "./BaseInput";
 
 /**
  * TextInput is a component for default one lined text inputs.
@@ -51,14 +51,15 @@ export default class TextInput extends ShallowComponent {
         readOnly: false,
         hidden: false
     };
-    /* eslint no-useless-constructor: 0*/
+
     /**
      * Creates an instance of TextInput.
      *
-     * @param {any} props
+     * @param {Object} props
      */
     constructor(props: Object) {
         super(props);
+        this.__onChange = this.__onChange.bind(this);
     }
 
     /**
@@ -70,7 +71,7 @@ export default class TextInput extends ShallowComponent {
         return (
             <Input
                 {...this.props}
-                onChange={this.__onChange.bind(this)}
+                onChange={this.__onChange}
                 type="text"
                 ref="innerInput"
             />);

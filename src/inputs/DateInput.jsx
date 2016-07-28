@@ -1,6 +1,6 @@
 import React from "react";
 import is from "is-js";
-import ValidationComponent from "validation/ValidationComponent";
+import ValidationComponent from "../validation/ValidationComponent";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import FormGroup from "react-bootstrap/lib/FormGroup";
@@ -52,6 +52,15 @@ export default class DateInput extends ValidationComponent {
         readOnly: false,
         hidden: false
     };
+    /**
+     * Creates an instance of PasswordInput.
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
+        super(props);
+        this.__onChange = this.__onChange.bind(this);
+    }
 
     render() {
         let selected = (is.number(this.props.value)) ? moment(this.props.value) : null;
@@ -65,7 +74,7 @@ export default class DateInput extends ValidationComponent {
                     className="form-control form-control-error"
                     selected={selected}
                     disabled={this.props.disabled}
-                    onChange={this.__onChange.bind(this)}
+                    onChange={this.__onChange}
                     showYearDropdown
                     isClearable={!this.props.disabled}
                     minDate={this.props.minDate}
@@ -75,7 +84,7 @@ export default class DateInput extends ValidationComponent {
                     showTodayButton={"Bugün"}
                     dateFormat={this.props.format}
                 />
-                { super.validationResult() }
+                {super.validationResult()}
             </FormGroup>);
     }
 
