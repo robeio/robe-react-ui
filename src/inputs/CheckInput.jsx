@@ -35,7 +35,10 @@ export default class CheckInput extends ValidationComponent {
         /**
          * Checked value or values
          */
-        value: React.PropTypes.array,
+        value: React.PropTypes.oneOfType([
+            React.PropTypes.bool,
+            React.PropTypes.array
+        ]),
         /**
          * Key of map item which is defined in given array `items`
          */
@@ -221,8 +224,8 @@ export default class CheckInput extends ValidationComponent {
 
     /**
      *
-     * @param {boolean|Array} value
-     * @param {boolean|Array} value
+     * @param {any} value
+     * @param {any} value
      * @returns {boolean}
      * @private
      */

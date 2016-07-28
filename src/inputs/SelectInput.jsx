@@ -25,9 +25,12 @@ export default class SelectInput extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
-         * selected value or values
+         * Selected value or values
          */
-        value: React.PropTypes.any,
+        value: React.PropTypes.oneOfType([
+            React.PropTypes.bool,
+            React.PropTypes.array
+        ]),
         /**
          * key of given map array `items`
          */
@@ -191,8 +194,8 @@ export default class SelectInput extends ValidationComponent {
     }
 
     /**
-     * @param {string|Array} value
-     * @param {string|Array} oldValue
+     * @param {any} value
+     * @param {any} oldValue
      * @returns {boolean}
      * @private
      */
