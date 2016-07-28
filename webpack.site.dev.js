@@ -35,11 +35,14 @@ webPackConfig.devServer = {
 
 
 webPackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+/* Use production parameter for hiding warnings which are coming from React library.
 webPackConfig.plugins.push(new webpack.DefinePlugin({
     "process.env": {
         NODE_ENV: JSON.stringify("production")
     }
 }));
+*/
 
 webPackConfig.plugins.push(new CopyWebpackPlugin([
     {
