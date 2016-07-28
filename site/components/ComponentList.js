@@ -147,6 +147,14 @@ class ComponentList {
             code: require("../samples/upload/DropZoneUploadSample.txt")
         });
 
+        components.push({
+            header: "Wizard",
+            desc: " is a multipage wizard component",
+            json: require("../docs/wizard/Wizard.json"),
+            sample: require("../samples/wizard/WizardSample"),
+            code: require("../samples/wizard/WizardSample.txt")
+        });
+
         return components;
     }
 

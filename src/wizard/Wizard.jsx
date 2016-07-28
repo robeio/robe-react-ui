@@ -6,22 +6,53 @@ import PageItem from "react-bootstrap/lib/PageItem";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "faicon/FaIcon";
-import "wizard/style.css";
+import "./wizard.css";
 
 
 export default class Wizard extends ShallowComponent {
+     /**
+     * PropTypes of the component.
+     *
+     * @static
+     */
+    static propTypes = {
+        /**
+         * Current page index to render.
+         */
+        currentStep: React.PropTypes.number,
+        /**
+         * Text for the next button.
+         */
+        nextButtonText: React.PropTypes.string,
+        /**
+         * Text for the previous button.
+         */
+        preButtonText: React.PropTypes.string,
+        /**
+         * Text for the complete button.
+         */
+        completeButtonText: React.PropTypes.string
+    };
 
-    stepValidInfo = [];
-    content = undefined;
+    static defaultProps = {
+        currentStep: 0,
+        nextButtonText: "Next",
+        preButtonText: "Previous",
+        completeButtonText: "Finish"
+    };
+    __stepValidInfo = [];
+    __content = undefined;
 
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
-            currentStep: 0
+            currentStep: this.props.currentStep,
+            valid: true
         };
     }
-    render() {
+
+    render(): Object {
         return (
             <div>
                 <Col className="wizard">
@@ -35,20 +66,18 @@ export default class Wizard extends ShallowComponent {
         );
     }
 
-    __renderSteps = () => {
+    __renderSteps = (): Array => {
         let steps = [];
         for (let i = 0; i < this.props.steps.length; i++) {
             let item = this.props.steps[i];
             let styleClass = (this.state.currentStep === i) ? "btn-primary" : "btn-default";
             let step = (
                 <Col key={i} className="wizard-step">
-                    <Col
-                        componentClass="a" type="button"
-                        onClick={this.__onClickStepButton(i)}
-                        className={`btn btn-circle ${styleClass}`}
-                    >
+                    <a
+                        onClick={() => { this.__onClickStepButton(i); }}
+                        className={`btn btn-circle ${styleClass}`}>
                         {i + 1}
-                    </Col>
+                    </a>
                     <p>{item.title}</p>
                 </Col>);
             steps.push(step);
@@ -56,11 +85,11 @@ export default class Wizard extends ShallowComponent {
         return steps;
     };
 
-    __onClickStepButton = (index) => {
+    __onClickStepButton = (index: number) => {
         if (this.state.currentStep === index) {
             return;
         }
-        this.stepValidInfo[this.state.currentStep] = this.isValid();
+        this.__stepValidInfo[this.state.currentStep] = this.isValid();
 
         let state = {};
         if (this.state.currentStep < index) {
@@ -73,18 +102,18 @@ export default class Wizard extends ShallowComponent {
             this.setState(state);
         }
     };
-    __areStepsValid = (start, end) => {
+    __areStepsValid = (start: number, end: number): boolean => {
         for (start; start < end; start++) {
-            if (!this.stepValidInfo[start]) {
+            if (!this.__stepValidInfo[start]) {
                 return false;
             }
         }
         return true;
     };
 
-    __renderContent = () => {
-        this.content = this.props.steps[this.state.currentStep].component;
-        return this.content;
+    __renderContent = (): Object => {
+        this.__content = this.props.steps[this.state.currentStep].component;
+        return this.__content;
     };
 
     __handleNextButtonClick = () => {
@@ -95,7 +124,7 @@ export default class Wizard extends ShallowComponent {
         this.__onClickStepButton(this.state.currentStep - 1);
     };
 
-    __renderPager = () => {
+    __renderPager = (): Object => {
         let nextButton = undefined;
         if (this.state.currentStep === this.props.steps.length - 1) {
             nextButton = (
@@ -104,11 +133,10 @@ export default class Wizard extends ShallowComponent {
                         bsStyle="primary"
                         onClick={this.props.onCompleteClick}
                     >
-                        <FaIcon
-                        size="fa-lg"
+                    <FaIcon
                         code="fa-check-circle"
-                        />
-                        Onaya Gönder
+                    />
+                    {this.props.completeButtonText}
                     </Button>
                 </Col>
             );
@@ -119,7 +147,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
-                    Sonraki Adım &rarr;
+                    {this.props.nextButtonText} &rarr;
                 </PageItem>
             );
         }
@@ -130,19 +158,22 @@ export default class Wizard extends ShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
-                    &larr;Önceki Adım
+                    &larr;{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
             </Pager>
         );
     };
-    isValid = () => {
-        let result = this.content._owner._instance.refs.step.isValid();
-        if (!result.status) {
+    
+    isValid = (): boolean => {
+        if (this.__content === undefined) {
+            return false;
+        }
+        let result = this.__content._owner._instance.refs.step.isValid();
+        if (!result) {
             NotificationManager.error(result.message);
             return false;
         }
-
         return true;
     };
 }
