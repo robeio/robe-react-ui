@@ -1,5 +1,4 @@
 import React from "react";
-import { Assertions } from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 import { FormGroup, ControlLabel } from "react-bootstrap";
@@ -30,6 +29,10 @@ export default class CheckInput extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
+         * Item will be rendered checkbox input single.
+         */
+        item: React.PropTypes.object,
+        /**
          * Checked value or values
          */
         value: React.PropTypes.array,
@@ -49,10 +52,6 @@ export default class CheckInput extends ValidationComponent {
          * Validations functions to validate value
          */
         validations: React.PropTypes.object,
-        /**
-         * Check List is single or multi
-         */
-        multi: React.PropTypes.bool,
         /**
          * Disable input
          */
@@ -77,18 +76,18 @@ export default class CheckInput extends ValidationComponent {
         valueField: "value",
         disabled: false,
         readOnly: false,
-        hidden: false,
-        multi: false
+        hidden: false
     };
 
     _value;
-
+    _hasMultiItem;
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
+        this._hasMultiItem = !(!this.props.items);
         this._value = this.props.value;
         if (!this._value) {
-            this._value = this.props.multi ? [] : "";
+            this._value = this._hasMultiItem ? [] : false;
         }
     }
 
@@ -102,7 +101,7 @@ export default class CheckInput extends ValidationComponent {
             <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
-                    this.props.items ?
+                    this._hasMultiItem ?
                         this.__createCheckInputs(this.props.items) :
                         this.__createCheckInput(this.props.item)
                 }
@@ -112,7 +111,7 @@ export default class CheckInput extends ValidationComponent {
     }
 
     /**
-     *
+     * create Check Input items from given items.
      * @param items
      * @returns {Array}
      * @private
@@ -129,7 +128,7 @@ export default class CheckInput extends ValidationComponent {
 
     /**
      * create a CheckInput from given item.
-     * @param item
+     * @param {Map} item
      * @returns {Object}
      * @private
      */
@@ -148,7 +147,7 @@ export default class CheckInput extends ValidationComponent {
         ) : null;
         let onClick = null;
         if (!this.props.disabled) {
-            onClick = (this.props.multi ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
+            onClick = (this._hasMultiItem ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
         }
 
         return (
@@ -172,10 +171,10 @@ export default class CheckInput extends ValidationComponent {
      */
     isChecked = (value: string): boolean => {
         if (typeof value !== "undefined") {
-            return this.props.multi ?
-            this._value.indexOf(value) !== -1 : this._value === value;
+            return this._hasMultiItem ?
+            this._value.indexOf(value) !== -1 : this._value;
         }
-        return !(!this._value) && (this.props.multi ? this._value.length > 0 : this._value !== "");
+        return this._hasMultiItem ? this._value.length > 0 : this._value;
     };
 
     /**
@@ -189,10 +188,8 @@ export default class CheckInput extends ValidationComponent {
      * Internal onClick event for Single CheckList. It is triggered every time.
      * @param e event
      */
-    __onClickSingle(value: string) {
-        if (this._value === value) {
-            value = "";
-        }
+    __onClickSingle() {
+        let value = !this._value;
         let result = this.__callOnChange(value, this._value);
         if (result) {
             this._value = value;

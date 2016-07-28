@@ -29,6 +29,10 @@ export default class CheckList extends ValidationComponent {
          */
         items: React.PropTypes.array,
         /**
+         * Item will be rendered checkbox input single.
+         */
+        item: React.PropTypes.object,
+        /**
          * Checked value or values
          */
         value: React.PropTypes.array,
@@ -53,10 +57,6 @@ export default class CheckList extends ValidationComponent {
          */
         validations: React.PropTypes.object,
         /**
-         * Check List is single or multi
-         */
-        multi: React.PropTypes.bool,
-        /**
          * Disable input
          */
         disabled: React.PropTypes.bool,
@@ -67,11 +67,13 @@ export default class CheckList extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,/**
+        hidden: React.PropTypes.bool,
+        /**
          * horizantal or vertical list
          */
-        direction: React.PropTypes.bool
+        horizontal: React.PropTypes.bool
     };
+
 
     /**
      * defaultProps
@@ -80,22 +82,22 @@ export default class CheckList extends ValidationComponent {
     static defaultProps = {
         textField: "text",
         valueField: "value",
-        direction: false,
+        horizontal: false,
         disabled: false,
         readOnly: false,
-        hidden: false,
-        multi: false
+        hidden: false
     };
 
     _value;
-
+    _hasMultiItem;
     /* eslint no-useless-constructor: 0*/
     constructor(props) {
         super(props);
-
+        this._hasMultiItem = !(!this.props.items) || !this.item;
+        this._hasMultiItem = this._hasMultiItem & !(typeof this._value === "boolean");
         this._value = this.props.value;
         if (!this._value) {
-            this._value = this.props.multi ? [] : "";
+            this._value = this._hasMultiItem ? [] : false;
         }
     }
 
@@ -107,13 +109,15 @@ export default class CheckList extends ValidationComponent {
     render(): Object {
         let givenStyle = this.props.style ? this.props.style : {};
         givenStyle.padding = "0";
-        let flex = this.props.direction ? "flex" : "";
+        let flex = this.props.horizontal ? "flex" : "";
         return (
             <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 <ListGroup className={`checkbox-scroll ${flex}`} style={givenStyle}>
                     {
-                        this.__createCheckList(this.props.items)
+                        this._hasMultiItem ?
+                            this.__createCheckList(this.props.items) :
+                            this.__createCheckListItem(this.props.item)
                     }
                     {super.validationResult()}
                 </ListGroup>
@@ -122,7 +126,7 @@ export default class CheckList extends ValidationComponent {
     }
 
     /**
-     * create checkbox items from given items.
+     * create Check List items from given items.
      * @param items
      * @returns {Array}
      * @private
@@ -139,7 +143,7 @@ export default class CheckList extends ValidationComponent {
 
     /**
      * create a CheckList from given item.
-     * @param item
+     * @param {Map} item
      * @returns {Object}
      * @private
      */
@@ -152,7 +156,7 @@ export default class CheckList extends ValidationComponent {
         let disabledStyle = this.props.disabled ? "disabled-check-input" : "";
         let onClick = null;
         if (!this.props.disabled) {
-            onClick = (this.props.multi ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
+            onClick = (this._hasMultiItem ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
         }
 
         return (
@@ -170,6 +174,7 @@ export default class CheckList extends ValidationComponent {
             </ListGroupItem>
         );
     }
+
     /**
      * This method has two difference calls.
      * 1 - call without parameter returns true if at least one of the values is checked.
@@ -179,10 +184,10 @@ export default class CheckList extends ValidationComponent {
      */
     isChecked = (value: string): boolean => {
         if (typeof value !== "undefined") {
-            return this.props.multi ?
-                this._value.indexOf(value) !== -1 : this._value === value;
+            return this._hasMultiItem ?
+            this._value.indexOf(value) !== -1 : this._value;
         }
-        return !(!this._value) && (this.props.multi ? this._value.length > 0 : this._value !== "");
+        return this._hasMultiItem ? this._value.length > 0 : this._value;
     };
 
     /**
@@ -197,10 +202,8 @@ export default class CheckList extends ValidationComponent {
      * Internal onClick event for Single CheckList. It is triggered every time.
      * @param e event
      */
-    __onClickSingle(value: string) {
-        if (this._value === value) {
-            value = "";
-        }
+    __onClickSingle() {
+        let value = !this._value;
         let result = this.__callOnChange(value, this._value);
         if (result) {
             this._value = value;

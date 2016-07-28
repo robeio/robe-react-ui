@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckList from "inputs/CheckList";
-import InputValidations from "validation/InputValidations";
 
 const langs = [
     {
@@ -46,8 +45,8 @@ export default class CheckListSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            CheckListSingle: "en",
-            CheckListGroup: "en,tr"
+            CheckListSingle: true,
+            CheckListGroup: ["en","tr"]
         };
     }
 
@@ -56,11 +55,20 @@ export default class CheckListSample extends ShallowComponent {
             <div>
                 <CheckList
                     label="CheckList Group"
+                    item={langs[0]}
+                    value={this.state.CheckListSingle}
+                    textField="value"
+                    valueField="key"
+                    style={{ height: "150px" }}
+                    onChange={this.__handleChange.bind(undefined, "CheckListSingle")}
+                />
+                <CheckList
+                    label="CheckList Group"
                     items={langs}
                     value={this.state.CheckListGroup}
                     textField="value"
                     valueField="key"
-                    style={{ height: "150px" }}
+                    style={{ width: "150px" }}
                     onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
                 <CheckList
@@ -69,8 +77,7 @@ export default class CheckListSample extends ShallowComponent {
                     value={this.state.CheckListGroup}
                     textField="value"
                     valueField="key"
-                    direction={true}
-                    style={{ width: "150px" }}
+                    horizontal={true}
                     onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
                 />
             </div>

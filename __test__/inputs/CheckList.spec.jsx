@@ -24,27 +24,27 @@ describe("inputs/CheckList", () => {
     it("props", () => {
         let defaultProps = {
             label: "CheckList Single",
-            items: langs,
-            value: "en",
+            item: langs[0],
+            value: true,
             textField: "value",
             valueField: "key"
         };
 
         let expectedProps = {
             label: "CheckList Single",
-            items: langs,
-            value: "en",
+            item: langs[0],
+            value: true,
             textField: "value",
             valueField: "key",
-            direction: false,
+            horizontal: false,
             disabled: false,
             readOnly: false,
-            hidden: false,
-            multi: false
+            hidden: false
         };
 
         let newComponent = Generator.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
+
         chai.assert.deepEqual(instance.props, expectedProps);
 
 
@@ -53,8 +53,7 @@ describe("inputs/CheckList", () => {
             items: langs,
             value: ["en", "tr"],
             textField: "value",
-            valueField: "key",
-            multi: true
+            valueField: "key"
         };
 
         expectedProps = {
@@ -63,12 +62,11 @@ describe("inputs/CheckList", () => {
             value: ["en", "tr"],
             textField: "value",
             valueField: "key",
-            multi: true,
-            direction: false,
+            horizontal: false,
             disabled: false,
             readOnly: false,
             hidden: false
-        }
+        };
 
         newComponent = Generator.getComponent(defaultProps, CheckList);
 

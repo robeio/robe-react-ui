@@ -24,26 +24,25 @@ describe("inputs/CheckInput", () => {
     it("props", () => {
         let defaultProps = {
             label: "CheckInput Single",
-            items: langs,
-            value: "en",
+            item: langs[0],
+            value: true,
             textField: "value",
             valueField: "key"
         };
 
         let expectedProps = {
             label: "CheckInput Single",
-            items: langs,
-            value: "en",
+            item: langs[0],
+            value: true,
             textField: "value",
             valueField: "key",
             disabled: false,
             readOnly: false,
-            hidden: false,
-            multi: false
+            hidden: false
         };
-
         let newComponent = Generator.getComponent(defaultProps, CheckInput);
         let instance = TestUtils.renderIntoDocument(newComponent);
+
 
         chai.assert.deepEqual(instance.props, expectedProps);
 
@@ -53,8 +52,7 @@ describe("inputs/CheckInput", () => {
             items: langs,
             value: ["en", "tr"],
             textField: "value",
-            valueField: "key",
-            multi: true
+            valueField: "key"
         };
 
         expectedProps = {
@@ -65,8 +63,7 @@ describe("inputs/CheckInput", () => {
             valueField: "key",
             disabled: false,
             readOnly: false,
-            hidden: false,
-            multi: true
+            hidden: false
         };
 
         newComponent = Generator.getComponent(defaultProps, CheckInput);

@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckInput from "inputs/CheckInput";
-import InputValidations from "validation/InputValidations";
 
 const langs = [
     {
@@ -22,7 +21,7 @@ export default class CheckInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            CheckInputSingle: "en",
+            CheckInputSingle: false,
             CheckInputGroup: ["en", "tr"]
         };
     }
@@ -32,7 +31,7 @@ export default class CheckInputSample extends ShallowComponent {
             <div>
                 <CheckInput
                     label="CheckInput Single"
-                    items={langs}
+                    item={langs[0]}
                     value={this.state.CheckInputSingle}
                     textField="value"
                     valueField="key"
