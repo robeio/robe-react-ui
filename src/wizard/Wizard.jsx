@@ -5,8 +5,8 @@ import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "faicon/FaIcon";
-import "./wizard.css";
+import FaIcon from "../faicon/FaIcon";
+import "./Wizard.css";
 
 
 export default class Wizard extends ShallowComponent {
