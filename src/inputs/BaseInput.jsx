@@ -94,10 +94,13 @@ export default class BaseInput extends ValidationComponent {
      * @returns {Object}
      */
     render(): Object {
+        let label = (this.props.label === undefined) ? undefined : (
+            <ControlLabel> {this.props.label} </ControlLabel>
+        );
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             return (
                 <FormGroup hidden={this.props.hidden}>
-                    <ControlLabel> {this.props.label} </ControlLabel>
+                    {label}
                     <InputGroup>
                         {this.props.inputGroupLeft}
                         <FormControl
@@ -114,7 +117,7 @@ export default class BaseInput extends ValidationComponent {
         }
         return (
             <FormGroup hidden={this.props.hidden}>
-                <ControlLabel> {this.props.label} </ControlLabel>
+                {label}
                 <FormControl
                     {...this.props}
                     bsStyle="error"

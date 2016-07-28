@@ -11,5 +11,13 @@
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     margin-bottom: 15px;
+}
 
+.checkboxtree {
+    list-style-type: none;
+}
+.checkboxtree ul li{
+    margin-left: -20px;
+    margin-top: -8px;
+    margin-bottom: -8px;
 }
