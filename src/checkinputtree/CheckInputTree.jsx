@@ -70,12 +70,12 @@ class CheckInputTree extends ShallowComponent {
                 textField={this.props.textField}
                 valueField={this.props.valueField}
                 onChange={this._handleChange}
-                />);
+            />);
         let itemComp = (
             <li className="checkboxtree">
                 {input}
                 <ul>
-                    {this.__renderChildren(itemData) }
+                    {this.__renderChildren(itemData)}
                 </ul>
             </li>
         );
@@ -88,8 +88,8 @@ class CheckInputTree extends ShallowComponent {
             }
         } else {
             if (this.props.onChange) {
+                this.props.onChange(e);
             }
-            this.props.onChange(e);
         }
         return true;
     }
