@@ -103,9 +103,12 @@ export default class CheckInput extends ValidationComponent {
      * @returns {string}
      **/
     render(): Object {
+        let label = (this.props.label === undefined) ? undefined : (
+            <ControlLabel> {this.props.label} </ControlLabel>
+        );
         return (
             <FormGroup hidden={this.props.hidden}>
-                <ControlLabel> {this.props.label} </ControlLabel>
+                {label}
                 {
                     this._hasMultiItem ?
                         this.__createCheckInputs(this.props.items) :
@@ -178,7 +181,7 @@ export default class CheckInput extends ValidationComponent {
     isChecked = (value: string): boolean => {
         if (typeof value !== "undefined") {
             return this._hasMultiItem ?
-            this._value.indexOf(value) !== -1 : this._value;
+                this._value.indexOf(value) !== -1 : this._value;
         }
         return this._hasMultiItem ? this._value.length > 0 : this._value;
     };

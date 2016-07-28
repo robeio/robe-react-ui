@@ -155,6 +155,13 @@ class ComponentList {
             code: require("../samples/wizard/WizardSample.txt")
         });
 
+        components.push({
+            header: "CheckInputTree",
+            desc: " is a tree which holds CheckInput's",
+            json: require("../docs/checkinputtree/CheckInputTree.json"),
+            sample: require("../samples/checkinputtree/CheckInputTreeSample"),
+            code: require("../samples/checkinputtree/CheckInputTreeSample.txt")
+        });
         return components;
     }
 
