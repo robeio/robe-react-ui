@@ -75,8 +75,13 @@ export default class MoneyInput extends ShallowComponent {
         hidden: false
     };
 
+    /**
+     *
+     * @param {Object} props
+     */
     constructor(props: Object) {
         super(props);
+        this.__numericFilter = this.__numericFilter.bind(this);
         if (this.props.decimalSeparator === ",") {
             Numeral.language("tr", Turkish);
             Numeral.language("tr");
@@ -89,7 +94,7 @@ export default class MoneyInput extends ShallowComponent {
                 {...this.props}
                 type="text"
                 label={this.props.label}
-                onChange={this.__numericFilter.bind(this)}
+                onChange={this.__numericFilter}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref="innerInput"

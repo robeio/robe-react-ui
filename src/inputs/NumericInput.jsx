@@ -55,13 +55,22 @@ export default class NumericInput extends ShallowComponent {
         hidden: false
     };
 
+    /**
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
+        super(props);
+        this.__numericFilter = this.__numericFilter.bind(this);
+    }
+
     render(): Object {
         return (<Input
             {...this.props}
             value={this.props.value}
             type="text"
             ref="innerInput"
-            onChange={this.__numericFilter.bind(this)}
+            onChange={this.__numericFilter}
         />);
     }
 

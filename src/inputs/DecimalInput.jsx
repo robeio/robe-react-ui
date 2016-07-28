@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Input from "inputs/BaseInput";
+import Input from "./BaseInput";
 
 /**
  * DecimalInput is a component decimal inputs.
@@ -59,6 +59,15 @@ export default class DecimalInput extends ShallowComponent {
         hidden: false
     };
 
+    /**
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
+        super(props);
+        this.__numericFilter = this.__numericFilter.bind(this);
+    }
+
     render(): Object {
         return (<Input
             {...this.props}
@@ -66,7 +75,7 @@ export default class DecimalInput extends ShallowComponent {
             ref="innerInput"
             step={this.props.step}
             value={this.props.value}
-            onChange={this.__numericFilter.bind(this)}
+            onChange={this.__numericFilter}
         />);
     }
 
