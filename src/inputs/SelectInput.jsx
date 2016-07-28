@@ -90,8 +90,12 @@ export default class SelectInput extends ValidationComponent {
     __delimiter = ",";
     _value;
     _onChange;
-    /* eslint no-useless-constructor: 0*/
-    constructor(props) {
+
+    /**
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
         super(props);
         this._value = this.props.value;
         if (!this._value) {
@@ -100,7 +104,7 @@ export default class SelectInput extends ValidationComponent {
         this._onChange = (this.props.multi ? this.__onChangeMulti : this.__onChangeSingle).bind(this);
     }
 
-    render() {
+    render(): Object {
         return (
             <FormGroup hidden={this.props.hidden}>
                 <ControlLabel> {this.props.label} </ControlLabel>
@@ -146,10 +150,11 @@ export default class SelectInput extends ValidationComponent {
     }
 
     /**
-     * Internal onClick event for Single CheckList. It is triggered every time.
-     * @param e event
+     * Internal onClick event for Single Select Input. It is triggered every time.
+     * @param {string} value
+     * @return {boolean}
      */
-    __onChangeSingle(value: string) {
+    __onChangeSingle(value: string): boolean {
         if (this._value === value) {
             value = "";
         }
@@ -172,10 +177,11 @@ export default class SelectInput extends ValidationComponent {
         return [];
     }
     /**
-     * Internal onClick event for multi CheckList. It is triggered every time.
-     * @param e event
+     * Internal onClick event for multi Select Input. It is triggered every time.
+     * @param {string} value
+     * @return {boolean}
      */
-    __onChangeMulti(value: string) {
+    __onChangeMulti(value: string): boolean {
         let newValue = this.__split(value);
         let result = this.__callOnChange(newValue, this._value);
         if (result) {
@@ -184,7 +190,13 @@ export default class SelectInput extends ValidationComponent {
         return result;
     }
 
-    __callOnChange(value, oldValue) {
+    /**
+     * @param {string|Array} value
+     * @param {string|Array} oldValue
+     * @returns {boolean}
+     * @private
+     */
+    __callOnChange(value: any, oldValue: any): boolean {
         let result = true;
         if (this.props.onChange) {
             let e = {

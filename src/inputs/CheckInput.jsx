@@ -81,8 +81,11 @@ export default class CheckInput extends ValidationComponent {
 
     _value;
     _hasMultiItem;
-    /* eslint no-useless-constructor: 0*/
-    constructor(props) {
+    /**
+     *
+     * @param {Object} props
+     */
+    constructor(props: Object) {
         super(props);
         this._hasMultiItem = !(!this.props.items);
         this._value = this.props.value;
@@ -185,8 +188,8 @@ export default class CheckInput extends ValidationComponent {
         return this._value;
     }
     /**
-     * Internal onClick event for Single CheckList. It is triggered every time.
-     * @param e event
+     * Internal onClick event for Single CheckInput. It is triggered every time.
+     * @return {boolean}
      */
     __onClickSingle() {
         let value = !this._value;
@@ -197,10 +200,11 @@ export default class CheckInput extends ValidationComponent {
         return result;
     }
     /**
-     * Internal onClick event for multi CheckList. It is triggered every time.
-     * @param e event
+     * Internal onClick event for Single CheckInput. It is triggered every time.
+     * @param {string} value
+     * @return {boolean}
      */
-    __onClickMulti(value: string) {
+    __onClickMulti(value: string): boolean {
         let willChangeValue = this._value.slice(0);
         let ind = willChangeValue.indexOf(value);
         if (ind !== -1) {
@@ -214,7 +218,15 @@ export default class CheckInput extends ValidationComponent {
         }
         return result;
     }
-    __callOnChange(value, oldValue) {
+
+    /**
+     *
+     * @param {boolean|Array} value
+     * @param {boolean|Array} value
+     * @returns {boolean}
+     * @private
+     */
+    __callOnChange(value: any, oldValue: any): boolean {
         let result = true;
         if (this.props.onChange) {
             let e = {
