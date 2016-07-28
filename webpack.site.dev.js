@@ -35,6 +35,12 @@ webPackConfig.devServer = {
 
 
 webPackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+webPackConfig.plugins.push(new webpack.DefinePlugin({
+    "process.env": {
+        NODE_ENV: JSON.stringify("production")
+    }
+}));
+
 webPackConfig.plugins.push(new CopyWebpackPlugin([
     {
         from: "../static"
