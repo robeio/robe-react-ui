@@ -36,7 +36,7 @@
     "codecov.io": "0.1.6",
     "copy-webpack-plugin": "3.0.1",
     "css-loader": "0.23.1",
-    "es6-template-strings": "^2.0.0",
+    "escape-string-regexp": "^1.0.5",
     "esdoc": "0.4.7",
     "esdoc-es7-plugin": "0.0.3",
     "eslint": "3.0.1",
@@ -70,8 +70,11 @@
     "webpack-dev-server": "1.14.1",
     "webpack-file-changer": "1.0.0"
   },
+  "peerDependencies": {
+    "es6-template-strings": "^2.0.0"
+  },
   "dependencies": {
-    "es6-template-strings": "^2.0.0",
+    "dropzone": "^4.3.0",
     "is-js": "0.1.1",
     "nprogress": "0.2.0",
     "numeral": "1.5.3",
@@ -82,6 +85,7 @@
     "react-cookie": "0.4.7",
     "react-datepicker": "0.28.1",
     "react-dom": "15.2.1",
+    "react-dropzone": "^3.5.3",
     "react-dropzone-component": "1.0.4",
     "react-highlight": "^0.8.0",
     "react-notifications": "1.2.0",
@@ -90,6 +94,7 @@
     "react-select": "0.9.1",
     "react-star-rating": "1.4.2",
     "react-treebeard": "1.1.2",
-    "robe-react-commons": "1.0.22"
+    "robe-react-commons": "1.0.22",
+    "superagent": "^2.1.0"
   }
 }
