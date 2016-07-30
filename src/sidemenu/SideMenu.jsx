@@ -24,9 +24,9 @@ export default class SideMenu extends ShallowComponent {
          */
         selectedItem: React.PropTypes.string,
         /**
-         * Items of the menu.
+         * Items of the menu. Must be a valid json map with a root element.
          */
-        items: React.PropTypes.array.isRequired,
+        items: React.PropTypes.object.isRequired,
         /**
          * Change event of the sidemenu.
          * It is triggered if the selected sub-item changes, not collapsed menu.
@@ -55,7 +55,7 @@ export default class SideMenu extends ShallowComponent {
 
     __renderMenuItems(): Object {
         let itemComps = [];
-        let children = this.props.items[0].items;
+        let children = this.props.items.items;
 
         for (let i = 0; i < children.length; i++) {
             let child = children[i];
