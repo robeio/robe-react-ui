@@ -1,65 +1,89 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import SideMenuItem from "sidemenu/SideMenuItem";
-import Col from "react-bootstrap/lib/Col";
+import SideMenuSubItem from "./SideMenuSubItem";
+import SideMenuItem from "./SideMenuItem";
+import "./SideMenu.css";
 
+/**
+ * SideMenu is a collapsable accordion component.
+ * Currently it supports 2 level of items.
+ * @export
+ * @class SideMenu
+ * @extends {ShallowComponent}
+ */
 export default class SideMenu extends ShallowComponent {
 
-    selectedItem:undefined;
+    /**
+     * Properties of the component
+     *
+     * @static
+     */
     static propTypes = {
-        initialSelection: React.PropTypes.string,
-        menu: React.PropTypes.array,
-        router: React.PropTypes.object
+        /**
+         * Path of the selected item
+         */
+        selectedItem: React.PropTypes.string,
+        /**
+         * Items of the menu.
+         */
+        items: React.PropTypes.array.isRequired,
+        /**
+         * Change event of the sidemenu.
+         * It is triggered if the selected sub-item changes, not collapsed menu.
+         */
+        onChange: React.PropTypes.func
     };
 
     static defaultProps = {
-        initialSelection: ""
+        selectedItem: ""
     };
-    /* eslint no-useless-constructor: 0*/
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
+    /**
+     * Holds the selected child of the menu
+     *
+     * @type {Object}
+     */
+    __selectedItem: undefined;
+
+    render(): Object {
         return (
-            <Col className="nav-side-menu">
-                <Col className="menu-list">
-                    <Col componentClass="ul" className="menu-content collapse out">
-                        {this.__generateMenu()}
-                    </Col>
-                </Col>
-            </Col>
+            <ul className="SideMenu-menu-content">
+                {this.__renderMenuItems()}
+            </ul>
         );
     }
 
-    __generateMenu = () => {
-        let menusArr = [];
-        let menus = this.props.menu[0].items;
+    __renderMenuItems(): Object {
+        let itemComps = [];
+        let children = this.props.items[0].items;
 
-        for (let i = 0; i < menus.length; i++) {
-            let menu = menus[i];
-            menusArr.push(
-                <SideMenuItem
-                    key={menu.path}
-                    menu={menu}
-                    router={this.props.router}
-                    onSelectionChange={this.__onSelectionChange}
-                    initialSelection={this.props.initialSelection}
+        for (let i = 0; i < children.length; i++) {
+            let child = children[i];
+            if (child.items && child.items.length > 0) {
+                itemComps.push(<SideMenuItem
+                    item={child}
+                    onChange={this.__onChange}
+                    selectedItem={this.props.selectedItem}
                 />);
-        }
-        return menusArr;
-    };
-
-    __onSelectionChange = (item) => {
-        if (this.selectedItem && this.selectedItem !== item) {
-            this.selectedItem.setState({
-                active: false
-            });
-            if (this.selectedItem.__onSelectionChange) {
-                this.selectedItem.__onSelectionChange(undefined);
+            } else {
+                itemComps.push(<SideMenuSubItem
+                    item={child}
+                    onChange={this.__onChange}
+                    selectedItem={this.props.selectedItem}
+                />);
             }
         }
-        this.selectedItem = item;
+        return itemComps;
+    }
+
+    __onChange = (e: Object, menuItem: Object, subMenuItem: Object) => {
+        if (subMenuItem === undefined && this.__selectedItem && this.__selectedItem !== menuItem) {
+            this.__selectedItem.setState({
+                active: false
+            });
+            this.__selectedItem.clearSelection();
+        }
+        this.__selectedItem = menuItem;
     };
 
 }

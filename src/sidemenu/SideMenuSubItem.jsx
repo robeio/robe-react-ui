@@ -1,53 +1,53 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import FaIcon from "faicon/FaIcon";
-import Link from "react-router/lib/Link";
+import FaIcon from "../faicon/FaIcon";
 
+/**
+ * SideMenuSubItem is the 12nd level component for the sidemenu. It acts like a leaf menu item.
+ * @export
+ * @class SideMenuSubItem
+ * @extends {ShallowComponent}
+ */
 export default class SideMenuSubItem extends ShallowComponent {
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             active: false
         };
     }
 
-    render() {
-        const menu = this.props.menu;
-        const root = this.props.root;
+    render(): Object {
+        const item = this.props.item;
 
-        let size = root ? "fa-lg" : "fa-sm";
-        let isActive = this.state.active ? "active" : "";
-
-        if (!this.state.active && this.props.selectedPath === menu.path) {
-            this.__onClick();
-        }
+        let size = "fa-sm";
+        let className = this.state.active ? "SideMenu-subitem-active" : "SideMenu-subitem";
         return (
-            <li className={isActive} style={{ display: "inline-block" }}>
-                <Link
-                    to={window.applicationRootPath + menu.module}
+            <li style={{ display: "block" }}className={className}>
+                <div
+                    to={item.path}
                     style={{ display: "block" }}
                     onClick={this.__onClick}
                 >
-                    <FaIcon code={menu.icon} size={size} />
-                    {menu.text}
-                </Link>
+                    <FaIcon code={item.icon} size={size} />
+                    {item.text}
+                </div>
             </li>
         );
     }
-    __onClick = (e, initial) => {
+    __onClick = (e: Object) => {
         if (this.state.active) {
             return;
         }
         this.setState({
             active: true
         });
-        this.props.onSelectionChange(this, initial);
+        this.props.onChange(e, this);
     }
 
     componentDidMount() {
-        if (!this.state.active && this.props.menu.path.endsWith(this.props.initialSelection)) {
-            this.__onClick(null, true);
+        if (!this.state.active && this.props.item.path.endsWith(this.props.selectedItem)) {
+            this.__onClick(null);
         }
     }
 }

@@ -162,6 +162,14 @@ class ComponentList {
             sample: require("../samples/checkinputtree/CheckInputTreeSample"),
             code: require("../samples/checkinputtree/CheckInputTreeSample.txt")
         });
+
+        components.push({
+            header: "SideMenu",
+            desc: " is a menu component which will be placed at the righten side of viewport",
+            json: require("../docs/sidemenu/SideMenu.json"),
+            sample: require("../samples/sidemenu/SideMenuSample"),
+            code: require("../samples/sidemenu/SideMenuSample.txt")
+        });
         return components;
     }
 
