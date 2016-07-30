@@ -84,6 +84,8 @@ export default class SideMenu extends ShallowComponent {
             this.__selectedItem.clearSelection();
         }
         this.__selectedItem = menuItem;
+        if (this.props.onChange && subMenuItem !== undefined) {
+            this.props.onChange(subMenuItem.props.item);
+        }
     };
-
 }

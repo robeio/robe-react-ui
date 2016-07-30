@@ -17,28 +17,25 @@ export default class SideMenuSample extends ShallowComponent {
 
     render(): Object {
         return (
-            <div className="SideMenu-wrapper">
-                <SideMenu
-                    items={MenuData}
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    ref="checkinput"
-                    selectedItem="app/modules/Parameters"
-                />
+            <div>
+                <div className="SideMenu-wrapper">
+                    <SideMenu
+                        items={MenuData}
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        ref="checkinput"
+                        selectedItem="app/modules/Parameters"
+                    />
+                </div>
+                <span>Selected Item: {this.state.selectedItem}</span>
             </div>
         );
     }
 
-    handleChange = (e) => {
-        let value = this.state.value;
-        let index = Arrays.indexOf(value, e.target.value);
-        if (index === -1) {
-            value.push(e.target.value[0]);
-        } else {
-            Arrays.remove(value, e.target.value);
-        }
+    handleChange = (item: Object) => {
+        console.log(item);
         this.setState({
-            value: value
+            selectedItem: item.text
         });
     };
 
