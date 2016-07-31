@@ -76,6 +76,8 @@ class ComponentGenerator {
             case "editor":
             case "HtmlEditor":
                 return Input.HtmlEditor;
+            case "file":
+                return Input.FileUploadInput;
             default :
                 throw new Error(`Unknown ${componentType} type !`);
         }

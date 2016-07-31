@@ -140,11 +140,11 @@ class ComponentList {
         });
 
         components.push({
-            header: "DropZoneUpload",
+            header: "FileUploadInput",
             desc: " is an File Upload Component",
-            json: require("../docs/upload/DropZoneUpload.json"),
-            sample: require("../samples/upload/DropZoneUploadSample"),
-            code: require("../samples/upload/DropZoneUploadSample.txt")
+            json: require("../docs/upload/FileUploadInput.json"),
+            sample: require("../samples/upload/FileUploadInputSample"),
+            code: require("../samples/upload/FileUploadInputSample.txt")
         });
 
         components.push({

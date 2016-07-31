@@ -188,14 +188,10 @@ export default class DataForm extends ShallowComponent {
      * @returns {boolean}
      */
     isValid = (): boolean => {
-        for (let key in this.refs) {
-            if (this.refs.hasOwnProperty(key)) {
-                let child = this.refs[key];
-                if (child.isValid) {
-                    if (!child.isValid()) {
-                        return false;
-                    }
-                }
+        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap("isValid", this.refs, "function");
+        for (let i = 0; i < hasIsValidObjects.length; i++) {
+            if (!(hasIsValidObjects[i].isValid())) {
+                return false;
             }
         }
         return true;
@@ -234,6 +230,7 @@ export default class DataForm extends ShallowComponent {
         let valid = this.isValid();
         return valid ? this.getItem() : false;
     }
+
     /**
      * return current data
      * @returns {boolean}

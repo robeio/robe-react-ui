@@ -24,10 +24,10 @@ export default class ModalDataFormSample extends ShallowComponent {
                     header="Modal Data Form"
                     show={this.state.show}
                     onSubmit={this.__onSubmit}
-                    onCancel={this.openOrClose}
+                    onCancel={this.toggle}
                     fields={fields}
                 />
-                <Button onClick={this.openOrClose}>Show Modal</Button>
+                <Button onClick={this.toggle}>Show Modal</Button>
             </div>
         );
     }
@@ -37,7 +37,7 @@ export default class ModalDataFormSample extends ShallowComponent {
         handlerComplete(true);
     }
 
-    openOrClose = () => {
+    toggle = () => {
         this.setState({
             show: !this.state.show
         });

@@ -1,1 +1,1 @@
-export { default as DropZoneUpload } from "./DropZoneUpload";
+export { default as FileUploadInput } from "./FileUploadInput";

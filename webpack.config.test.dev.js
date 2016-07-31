@@ -1,3 +1,4 @@
+process.env.NODE_ENV = "testd";
 const path = require("path");
 function getUserHome() {
     return process.env.HOME || process.env.USERPROFILE;
