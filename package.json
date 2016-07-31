@@ -3,6 +3,9 @@
   "version": "1.0.10",
   "description": "Robe React UI Components",
   "main": "index.js",
+  "engines": {
+    "npm":">=3.0.0"
+  },
   "scripts": {
     "test": "karma start webpack.config.test.js",
     "testd": "karma start webpack.config.test.dev.js",
@@ -28,7 +31,7 @@
     "babel-core": "6.10.4",
     "babel-eslint": "6.1.2",
     "babel-loader": "6.2.4",
-    "babel-plugin-doc-gen": "0.0.17",
+    "babel-plugin-doc-gen": "0.0.18",
     "babel-preset-es2015": "6.9.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0-1",
@@ -86,8 +89,6 @@
     "react-cookie": "0.4.7",
     "react-datepicker": "0.28.1",
     "react-dom": "15.2.1",
-    "react-dropzone": "^3.5.3",
-    "react-dropzone-component": "1.0.4",
     "react-highlight": "^0.8.0",
     "react-notifications": "1.2.0",
     "react-quill": "0.4.1",
