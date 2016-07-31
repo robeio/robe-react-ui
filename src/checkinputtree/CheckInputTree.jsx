@@ -70,6 +70,7 @@ class CheckInputTree extends ShallowComponent {
                 textField={this.props.textField}
                 valueField={this.props.valueField}
                 onChange={this._handleChange}
+                ref="innerInput"
             />);
         let itemComp = (
             <li className="checkboxtree">
@@ -91,6 +92,9 @@ class CheckInputTree extends ShallowComponent {
                 this.props.onChange(e);
             }
         }
+        let isOwner = e.target.value[0] === this.props.items[this.props.valueField];
+        // TODO varsa kontrolü yap.
+        console.log(e.target.value[0], this.props.items[this.props.valueField], isOwner);
         return true;
     }
 
