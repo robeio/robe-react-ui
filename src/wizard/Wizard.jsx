@@ -82,7 +82,8 @@ export default class Wizard extends ShallowComponent {
                 <Col key={i} className="wizard-step">
                     <a
                         onClick={() => { this.__onClickStepButton(i); }}
-                        className={`btn btn-circle ${styleClass}`}>
+                        className={`btn btn-circle ${styleClass}`}
+                    >
                         {i + 1}
                     </a>
                     <p>{item.title}</p>
@@ -124,11 +125,11 @@ export default class Wizard extends ShallowComponent {
         return this.__content;
     }
 
-    __handleNextButtonClick () {
+    __handleNextButtonClick() {
         this.__onClickStepButton(this.state.currentStep + 1);
     }
 
-    __handlePreviousButtonClick () {
+    __handlePreviousButtonClick() {
         this.__onClickStepButton(this.state.currentStep - 1);
     }
 
@@ -177,11 +178,12 @@ export default class Wizard extends ShallowComponent {
         if (this.__content === undefined) {
             return false;
         }
-        let result = this.__content._owner._instance.refs.step.isValid();
+        
+        let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
         if (!result) {
             NotificationManager.error(result.message);
             return false;
         }
         return true;
-    };
+    }
 }
