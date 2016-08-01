@@ -3,13 +3,5 @@
      "react",
      "es2015",
      "stage-0"
-  ],
-  "env": {
-      "production": {
-        "plugins": ["doc-gen"]
-      },
-      "development": {
-        "plugins":  ["doc-gen"]
-      }
-    }
+  ]
 }

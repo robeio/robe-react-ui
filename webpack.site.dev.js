@@ -1,12 +1,19 @@
-process.env.NODE_ENV = "development";
-const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
 const ConfigUtils = require("./ConfigUtil");
 
 
-const webPackConfig = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src");
+const babelOptions = {
+    presets: [
+        "react",
+        "es2015",
+        "stage-0"
+    ],
+    plugins: ["doc-gen"]
+};
+
+const webPackConfig = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src", babelOptions);
 
 webPackConfig.cache = true;
 webPackConfig.debug = true;
@@ -38,12 +45,12 @@ webPackConfig.devServer = {
 webPackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 /* Use production parameter for hiding warnings which are coming from React library. */
-webPackConfig.plugins.push(new webpack.DefinePlugin({
+/* webPackConfig.plugins.push(new webpack.DefinePlugin({
     "process.env": {
         NODE_ENV: JSON.stringify("production")
     }
 }));
-
+*/
 
 webPackConfig.plugins.push(new CopyWebpackPlugin([
     {
