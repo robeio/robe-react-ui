@@ -1,12 +1,15 @@
-process.env.NODE_ENV = "testd";
-const path = require("path");
-function getUserHome() {
-    return process.env.HOME || process.env.USERPROFILE;
+const babelOptions = {
+    presets: [
+        "react",
+        "es2015",
+        "stage-0"
+    ],
+    plugins: ["doc-gen"]
 }
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src");
+const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src", babelOptions);
 
 /**
  * Json Server

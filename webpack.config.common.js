@@ -1,6 +1,6 @@
 const path = require("path");
 
-function InitConfiguration(src, build, test, lib) {
+function InitConfiguration(src, build, test, lib, babelOptions) {
     /**
      *
      * @type {{root: (string|*), node_modules: (string|*)}}
@@ -14,6 +14,15 @@ function InitConfiguration(src, build, test, lib) {
         node_modules: path.join(__dirname, "/node_modules")
     };
 
+    if(!babelOptions) {
+        babelOptions = {
+            presets: [
+                "react",
+                "es2015",
+                "stage-0"
+            ]
+        }
+    }
     const conf = {
         paths: paths, // reference path variable
         /**
@@ -72,13 +81,7 @@ function InitConfiguration(src, build, test, lib) {
                     loaders: ["babel", "react-hot"],
                     exclude: /(node_modules|bower_components|fonts)/,
                     include: paths.lib ? [paths.app, paths.lib, paths.test] : [paths.app, paths.test],
-                    query: {
-                        presets: [
-                            "react",
-                            "es2015",
-                            "stage-0"
-                        ]
-                    }
+                    query: babelOptions
                 },
                 {
                     /**
