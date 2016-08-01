@@ -40,7 +40,7 @@ This will start the development server and serve site application.
 $ npm start
 ```
   
-Open Browser and enter `http:/localhost:8080` (default) 
+Open Browser and enter `http://localhost:8080` (default) 
 
 ### How to Build for Production
 
