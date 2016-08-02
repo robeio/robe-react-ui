@@ -46,3 +46,6 @@ docs
 
 # MacOS
 .DS_Store
+
+# Site building directory
+sitebuild

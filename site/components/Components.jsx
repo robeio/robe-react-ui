@@ -1,11 +1,9 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
-import ReactDOM  from "react-dom";
-import { Grid, Col, ListGroup, ListGroupItem} from "react-bootstrap";
+import { Grid, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
-import NotificationManager from "react-notifications/lib/NotificationManager";
 import ComponentList from "./ComponentList";
 import Progress from "progress/Progress";
 
@@ -16,7 +14,7 @@ export default class Showcase extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            componentSelection: window.location.hash.substring(1)
+            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/TextInput" : window.location.hash.substring(1)
         };
     }
 
@@ -27,14 +25,14 @@ export default class Showcase extends ShallowComponent {
 
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
-            let active = this.state.componentSelection === item.header;
+            let active = this.state.componentSelection === `Components/${item.header}`;
             componentMenu.push(
                 <ListGroupItem
-                    href={`#${item.header}`}
+                    href={`#Components/${item.header}`}
                     key={`#${item.header}`}
                     onClick={this.__onComponenListClick}
                     active={active}
-                    >
+                >
                     {item.header}
                 </ListGroupItem>);
             if (active) {
@@ -46,7 +44,7 @@ export default class Showcase extends ShallowComponent {
                         json={item.json}
                         sample={item.sample}
                         code={item.code}
-                        />);
+                    />);
             }
         }
         return (
@@ -64,7 +62,7 @@ export default class Showcase extends ShallowComponent {
 
     __onComponenListClick = (e: Object) => {
         this.setState({
-            componentSelection: e.target.text
+            componentSelection: `Components/${e.target.text}`
         });
         Progress.start();
     };
