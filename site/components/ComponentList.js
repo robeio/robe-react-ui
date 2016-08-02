@@ -165,21 +165,20 @@ class ComponentList {
             code: require("../samples/datagrid/DataGridSample.txt")
         });
 
-        // components.push({
-        //     header: "DataForm",
-        //     desc: "",
-        //     json: require("../docs/form/DataForm"),
-        //     sample: require("../samples/form/DataFormSample"),
-        //     code: require("../samples/form/DataFormSample.txt")
-        // });
-
-        // components.push({
-        //     header: "ModalDataForm",
-        //     desc: " is an ModalDataForm component submit editing data.",
-        //     json: require("../docs/form/ModalDataForm.json"),
-        //     sample: require("../samples/form/ModalDataFormSample"),
-        //     code: require("../samples/form/ModalDataFormSample.txt")
-        // });
+        components.push({
+            header: "DataForm",
+            desc: "",
+            json: require("../docs/form/DataForm"),
+            sample: require("../samples/form/DataFormSample"),
+            code: require("../samples/form/DataFormSample.txt")
+        });
+        components.push({
+            header: "ModalDataForm",
+            desc: " is an ModalDataForm component submit editing data.",
+            json: require("../docs/form/ModalDataForm.json"),
+            sample: require("../samples/form/ModalDataFormSample"),
+            code: require("../samples/form/ModalDataFormSample.txt")
+        });
         return components;
     }
 
