@@ -90,9 +90,9 @@ export default class DataGrid extends StoreShallowComponent {
         editButton: true,
         deleteButton: true,
         searchable: true,
-        newButtonText: "Yeni Ekle",
-        editButtonText: "Düzenle",
-        deleteButtonText: "Sil"
+        newButtonText: "New",
+        editButtonText: "Edit",
+        deleteButtonText: "Delete"
     };
 
     activePage = 1;
