@@ -4,7 +4,7 @@ const escapeRegexp = require("escape-string-regexp");
 const bodyParser = require("body-parser");
 const url = require("url");
 const fs = require("fs");
-
+const path = require("path");
 /* eslint-disable prefer-template */
 function guid() {
     function s4() {
@@ -54,7 +54,10 @@ module.exports = (app, requestPath, tempFolder) => {
                     break;
             }
              */
-            cb(null, guid());
+            const id = guid();
+            file.filename = id;
+            fs.writeFileSync(path.normalize(tempFolder + "/" + id + ".json"), JSON.stringify(file), "utf8");
+            cb(null, id);
         }
     });
     const upload = multer({ storage: storage });
@@ -73,19 +76,20 @@ module.exports = (app, requestPath, tempFolder) => {
      */
 
     app.put(new RegExp(escapeRegexp(requestPath) + ".*"), upload.array("files"), (req, res, next) => {
+
         res.status(200).send(req.files); // You can send any response to the user here
     });
 
     const jsonParser = bodyParser.json({ type: "application/json" });
     app.post(new RegExp(escapeRegexp(requestPath) + ".*"), jsonParser, (request, response, next) => {
-
         const filesKeys = request.body;
         var files = [];
         for (var i = 0; i < filesKeys.length; i++) {
-            var file = getInformation(tempFolder + "/" + filesKeys[i]);
-            var stats = fs.statSync(file.path);
-            file.size = stats.size;
-            files.push(file);
+            var file = fs.readFileSync(path.normalize(tempFolder + "/" + filesKeys[i] + ".json"), "utf8");
+            // var file = getInformation(tempFolder + "/" + filesKeys[i] + ".json");
+            // var stats = fs.statSync(file.path);
+            // file.size = stats.size;
+            files.push(JSON.parse(file));
         }
         /**
         var ind = request.query._filter.indexOf("=");

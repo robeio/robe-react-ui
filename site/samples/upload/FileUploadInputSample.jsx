@@ -4,8 +4,8 @@ import FileUploadInput from "upload/FileUploadInput";
 import { Panel, Button } from "react-bootstrap";
 
 
-const files = [
-    "3ae7baac-4e1c-6b63-4c07-b28d5b80821f"
+const items = [
+    "0ad7a59a-4727-6a51-e861-7cedbbc46896"
 ]
 
 const dataId = "3ae7baac-4e1c-6b63-4c07-b28d5b80821f";
@@ -29,21 +29,26 @@ const request = {
 };
 
 export default class FileUploadInputSample extends ShallowComponent {
+
+
+    __onSubmitNew;
+    constructor(props) {
+        super(props);
+        this.__onSubmitNew = this.onSubmit.bind(this, "fileUpload");
+    }
     render() {
-        let onSubmitNew = this.onSubmit.bind(this, "fileUpload");
         return (
             <div>
-                <Panel header="FileUploadInput New">
                 <FileUploadInput
                     ref="dropZoneUploadNew"
+                    name="files"
                     id={dataId}
-                    display="list"
+                    display="thumbnail"
                     request={request}
-                    files={files}
+                    items={items}
                     onChange={this.onChange}
                 />
-                </Panel>
-                <Button onClick={onSubmitNew}>Gönder</Button>
+                <Button onClick={this.__onSubmitNew}>Gönder</Button>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React from "react";
-import { ShallowComponent, Maps } from "robe-react-commons";
-import { Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
-
+import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { Panel, Row, Col ,Glyphicon } from "react-bootstrap";
+import "./StackLayout.css";
 const style = {
     minHeight: 200
 };
@@ -14,11 +14,19 @@ export default class StackLayout extends ShallowComponent {
      * @static
      */
     static propTypes: Map = {
-        display: React.PropTypes.string,
+        /**
+         * Presentation mode.
+         */
+        display: React.PropTypes.oneOf(["list", "thumbnail"]),
         style: React.PropTypes.object,
-        items: React.PropTypes.array,
-        col: React.PropTypes.object,
-        onItemRender: React.PropTypes.func
+        items: React.PropTypes.oneOfType(
+            React.PropTypes.array,
+            React.PropTypes.object
+        ),
+        onItemRender: React.PropTypes.func,
+        toolbar: React.PropTypes.object,
+        toolbarPosition: React.PropTypes.oneOf(["bottom", "top", "left", "right"]),
+        onSelected: React.PropTypes.func
     };
 
     /**
@@ -26,17 +34,16 @@ export default class StackLayout extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        diplay: "list",
+        buttonToolbar: null,
+        toolbarPosition: "bottom",
+        display: "list",
         style: {},
-        items: [],
-        col: {
-            lg: 3,
-            md: 4,
-            xs: 6,
-        }
+        items: []
     };
 
     _style;
+
+    _selectedList;
 
     constructor(props) {
         super(props);
@@ -46,45 +53,98 @@ export default class StackLayout extends ShallowComponent {
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
         this.onDrop = this.onDrop.bind(this);
-        this.componentWillReceiveProps(props);
-    }
-
-    componentWillReceiveProps(props) {
+        this.onClickDisplayList = this.onClickDisplay.bind(this, "list");
+        this.onClickDisplayThumbnail = this.onClickDisplay.bind(this, "thumbnail");
+        this._selectedList = [];
         this.state = {
             display: props.display,
-            items: props.items
+            items: props.items,
+            selectedList: this._selectedList
         };
         this._style = Maps.mergeDeep(props.style, style);
     }
 
     render() {
-        let component;
-        switch (this.state.display) {
-            case "thumbnail":
-                component = this.thumbnail(this.state.items);
-                break;
-            default:
-                component = this.list(this.state.items);
-        }
-        return (
-           <div
-               onClick={this.onClick}
-               onDragStart={this.onDragStart}
-               onDragEnter={this.onDragEnter}
-               onDragOver={this.onDragOver}
-               onDragLeave={this.onDragLeave}
-               onDrop={this.onDrop}
-               style={this._style}
-           >
-               {component}
-           </div>
+        let component = this.list(this.state.items);
+        let panel = (
+            <Panel
+                ref="parent"
+                header={this.panelToolbar()}
+            >
+                <div
+                    onClick={this.onClick}
+                    onDragStart={this.onDragStart}
+                    onDragEnter={this.onDragEnter}
+                    onDragOver={this.onDragOver}
+                    onDragLeave={this.onDragLeave}
+                    onDrop={this.onDrop}
+                    style={this._style}
+                >
+                {component}
+                </div>
+            </Panel>
         );
+
+        if (!this.props.toolbar) {
+            return panel;
+        }
+        switch (this.props.toolbarPosition) {
+            case "top":
+                return (
+                    <div>
+                        {this.props.toolbar}
+                        {panel}
+                    </div>
+                );
+            case "left":
+                return (
+                    <div className="container-fluid">
+                    <div className="row">
+                        <div className="col">{this.props.toolbar}</div>
+                        <div className="col">{panel}</div>
+                    </div>
+                </div>
+                );
+            case "right":
+                return (
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col">{panel}</div>
+                            <div className="col">{this.props.toolbar}</div>
+                        </div>
+                    </div>
+                );
+            default:
+                return (
+                   <div>
+                       {panel}
+                       {this.props.toolbar}
+                   </div>
+                );
+        }
     }
 
-    thumbnail(items: Array) {
+    panelToolbar() {
+        let listClassName = `btn btn-default ${this.state.display === "list" ? "active" : ""}`;
+        let thumbnailClassName = `btn btn-default ${this.state.display === "thumbnail" ? "active" : ""}`;
+        return [
+            <div className="btn-group pull-right">
+                <button type="button" className={listClassName} onClick={this.onClickDisplayList}>
+                    <Glyphicon glyph="list" />
+                </button>
+                <button type="button" className={thumbnailClassName} onClick={this.onClickDisplayThumbnail}>
+                    <Glyphicon glyph="th-large" />
+                </button>
+            </div>,
+            <div className="clearfix"></div>
+        ];
+    }
+    list(items: Array) {
         let components = [];
-        for (let i = 0; i < items.length; i++) {
-            components.push(this.thumbnailItem(items[i]));
+        for (let key in items) {
+            if (items.hasOwnProperty(key)) {
+                components.push(this.listItem(items[key]));
+            }
         }
         return (
             <Row>
@@ -93,32 +153,26 @@ export default class StackLayout extends ShallowComponent {
         );
     }
 
-    thumbnailItem(item: Map) {
-        return (
-            <Col {...this.props.col}>
-                {this.props.onItemRender(this.state.display, item)}
-            </Col>
-        );
-    }
-
-    list(items: Array) {
-        let components = [];
-        for (let i = 0; i < items.length; i++) {
-            components.push(this.listItem(items[i]));
-        }
-        return (
-            <ListGroup responsive>
-                {components}
-            </ListGroup>
-        );
-    }
-
     listItem(item: Map) {
-        return (
-            <ListGroupItem header={item.header}>
-                {this.props.onItemRender(this.state.display, item)}
-            </ListGroupItem>
-        );
+        let checked = this.state.selectedList.indexOf(item.filename) !== -1 ? "checked" : "";
+        let itemClick = this.onItemClick.bind(this, item);
+        let className = null;
+        switch (this.state.display) {
+            case "thumbnail":
+                className = `row stacklayout thumbnail no-float ${checked}`;
+                return (
+                   <div className={className} onClick={itemClick}>
+                       {this.props.onItemRender(item, this.state.display)}
+                   </div>
+               )
+            default:
+                className = `stacklayout no-float ${checked}`;
+                return (
+                    <Col md={12} className={className} onClick={itemClick} >
+                        {this.props.onItemRender(item, this.state.display)}
+                    </Col>
+                );
+        }
     }
 
 
@@ -188,12 +242,35 @@ export default class StackLayout extends ShallowComponent {
         }
         return result;
     }
+    /* eslint-disable no-underscore-dangle */
+    onItemClick(item, e) {
+        this._selectedList = this._selectedList.slice(0);
+        let index = this._selectedList.indexOf(item.filename);
+        if (index === -1) {
+            this._selectedList.push(item.filename);
+        } else {
+            this._selectedList.splice(index, 1);
+        }
+        this.setState({
+            selectedList: this._selectedList
+        });
+        return true;
+    }
+
+    onClickDisplay(display) {
+        this.setState({
+            display
+        });
+    }
     /**
      * Called when a element is clicked
      * @param e
      * @returns {boolean}
      */
     onClick(e) {
+        if (Assertions.isArray(e._dispatchInstances)) {
+            return false;
+        }
         let result = false;
         if (this.props.onClick) {
             result = this.props.onClick.call(this, e);

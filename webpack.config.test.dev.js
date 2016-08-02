@@ -5,7 +5,7 @@ const babelOptions = {
         "stage-0"
     ],
     plugins: ["doc-gen"]
-}
+};
 /**
  * import common webpack settings
  */
