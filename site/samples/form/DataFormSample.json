@@ -144,5 +144,15 @@
         "text": "Ankara"
       }
     ]
+  },
+  {
+    "label": "Dosya Seçimi",
+    "code": "files",
+    "type": "file",
+    "name": "files",
+    "display": "thumbnail",
+    "request": {
+      "url": "http://localhost:3000/files"
+    }
   }
 ]

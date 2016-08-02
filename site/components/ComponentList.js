@@ -128,9 +128,9 @@ class ComponentList {
         components.push({
             header: "FileUploadInput",
             desc: " is an File Upload Component",
-            json: require("../docs/upload/FileUploadInput.json"),
-            sample: require("../samples/upload/FileUploadInputSample"),
-            code: require("../samples/upload/FileUploadInputSample.txt")
+            json: require("../docs/inputs/upload/FileUploadInput.json"),
+            sample: require("../samples/inputs/FileUploadInputSample"),
+            code: require("../samples/inputs/FileUploadInputSample.txt")
         });
 
         components.push({

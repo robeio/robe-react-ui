@@ -1,10 +1,9 @@
 import React from "react";
 import { ShallowComponent, Assertions, Generator } from "robe-react-commons";
-import StackLayout from "../layouts/StackLayout";
-import { Table, Thumbnail, Panel, ButtonGroup, Button, Glyphicon } from "react-bootstrap";
-import FaIcon from "../faicon/FaIcon";
-import FileManager from "../util/FileManager";
-import "./filepicker.css";
+import StackLayout from "../../layouts/StackLayout";
+import { Table, Panel, ButtonGroup, Button, Glyphicon } from "react-bootstrap";
+import FileManager from "../../util/FileManager";
+import "./FileUploadInput.css";
 // https://github.com/felixrieseberg/React-Dropzone-Component
 
 const supportMultiple = (typeof document !== "undefined" && document && document.createElement) ?
@@ -162,8 +161,7 @@ export default class FileUploadInput extends ShallowComponent {
         return true;
     }
 
-    browse(e) {
-        console.log(e);
+    browse() {
         if (!this.props.disableClick) {
             this.open();
         }
@@ -231,8 +229,8 @@ export default class FileUploadInput extends ShallowComponent {
     deleteItem(item: Map) {
         // if is uploaded yet then delete it from server.
         if (this.__uploadedFiles.indexOf(item.filename) !== -1) {
-            this.__fileManager.delete(item, (deletedFile: Object) => {
-               this.onDelete(item);
+            this.__fileManager.delete(item, () => {
+                this.onDelete(item);
             }, (error) => {
                 error.key = item.filename;
                 this.onError(error);
@@ -240,6 +238,7 @@ export default class FileUploadInput extends ShallowComponent {
             return true;
         }
         this.onDelete(item);
+        return true;
     }
 
     /**
@@ -340,8 +339,11 @@ export default class FileUploadInput extends ShallowComponent {
             >
                 <tbody>
                     <tr>
+                        <td>
+                            <Glyphicon glyph="file" />
+                        </td>
                         <td>{item.originalname}</td>
-                        <td>{item.path}</td>
+                        <td>{item.mime}</td>
                         <td>{item.size}</td>
                     </tr>
                 </tbody>
@@ -426,7 +428,7 @@ export default class FileUploadInput extends ShallowComponent {
                     oldValue: oldValue,
                     value: newValue
                 }
-            }
+            };
             this.props.onChange(e);
         }
     }
