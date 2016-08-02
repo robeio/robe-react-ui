@@ -167,7 +167,7 @@ class ComponentList {
 
         components.push({
             header: "DataForm",
-            desc: "",
+            desc: "is  an DataForm to create or edit data",
             json: require("../docs/form/DataForm"),
             sample: require("../samples/form/DataFormSample"),
             code: require("../samples/form/DataFormSample.txt")
