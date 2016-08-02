@@ -170,6 +170,14 @@ class ComponentList {
             sample: require("../samples/sidemenu/SideMenuSample"),
             code: require("../samples/sidemenu/SideMenuSample.txt")
         });
+
+        components.push({
+            header: "DataGrid",
+            desc: " is a smart grid",
+            json: require("../docs/datagrid/DataGrid.json"),
+            sample: require("../samples/datagrid/DataGridSample"),
+            code: require("../samples/datagrid/DataGridSample.txt")
+        });
         return components;
     }
 

@@ -1,0 +1,24 @@
+{
+  "name": "DataGridModel",
+  "columns": [
+    {
+      "title": "Oid",
+      "type": "string",
+      "code": "oid",
+      "tooltip": "Oid",
+      "visible": false
+    },
+    {
+      "title": "Name",
+      "type": "string",
+      "code": "name",
+      "tooltip": "Name"
+    },
+    {
+      "title": "Surname",
+      "type": "string",
+      "code": "surname",
+      "tooltip": "Surname"
+    }
+  ]
+}

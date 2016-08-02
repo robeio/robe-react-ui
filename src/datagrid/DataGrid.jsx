@@ -1,52 +1,96 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import StoreShallowComponent from "robe-react-commons/lib/components/StoreShallowComponent";
+import Store from "robe-react-commons/lib/stores/Store";
 import is from "is-js";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import Table from "react-bootstrap/lib/Table";
-import DataTableBodyRow from "datagrid/DataGridBodyRow";
+import DataTableBodyRow from "./DataGridBodyRow";
 import Pagination from "react-bootstrap/lib/Pagination";
 import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
 import Glyphicon from "react-bootstrap/lib/Glyphicon";
 import Button from "react-bootstrap/lib/Button";
 import Input from "react-bootstrap/lib/Input";
-import ModalConfirm from "form/ModalConfirm";
-import Filter from "datagrid/filter/Filter";
+import ModalConfirm from "../form/ModalConfirm.jsx";
+import Filter from "./filter/Filter.jsx";
 import Maps from "robe-react-commons/lib/utils/Maps";
-import "datagrid/style.css";
+import "./style.css";
 
 /**
  * TODO removing un used css
  */
-
-class DataGrid extends ShallowComponent {
-
-    static propTypes = {
+export default class DataGrid extends StoreShallowComponent {
+    /**
+     * Properties of the component
+     *
+     * @static
+     */
+    static propTypes:Map = {
+        /**
+         * Callback for new button click
+         */
         onNewClick: React.PropTypes.func,
+        /**
+         * Callback for edit button click
+         */
         onEditClick: React.PropTypes.func,
+        /**
+         * Callback for delete button click
+         */
         onDeleteClick: React.PropTypes.func,
+        /**
+         * Callback for row selection
+         */
         onSelection: React.PropTypes.func,
+        /**
+         * Enable pageable for DataGrid
+         */
         pageable: React.PropTypes.bool,
+        /**
+         * Page size of DataGrid
+         */
         pageSize: React.PropTypes.number,
+        /**
+         * Make DataGrid as readonly
+         */
         editable: React.PropTypes.bool,
-        addButton: React.PropTypes.bool,
+        /**
+         * Show/hide new button.
+         */
+        newButton: React.PropTypes.bool,
+        /**
+         * Show/hide edit button.
+         */
         editButton: React.PropTypes.bool,
+        /**
+         * Show/hide edit button.
+         */
         deleteButton: React.PropTypes.bool,
+        /**
+         * enable/disable searchable
+         */
         searchable: React.PropTypes.bool,
-        disableAddButton: React.PropTypes.bool,
-        addButtonText: React.PropTypes.string,
+        /**
+         * new button text
+         */
+        newButtonText: React.PropTypes.string,
+        /**
+         * edit button text
+         */
         editButtonText: React.PropTypes.string,
+        /**
+         * delete button text
+         */
         deleteButtonText: React.PropTypes.string
     };
 
     static defaultProps = {
         editable: true,
-        addButton: true,
+        newButton: true,
         editButton: true,
         deleteButton: true,
         searchable: true,
-        disableAddButton: false,
-        addButtonText: "Yeni Ekle",
+        newButtonText: "Yeni Ekle",
         editButtonText: "Düzenle",
         deleteButtonText: "Sil"
     };
@@ -58,26 +102,25 @@ class DataGrid extends ShallowComponent {
 
     uniqueRef = new Date().getTime();
 
-
-    constructor(props) {
+    constructor(props:Object) {
         super(props);
 
         this.state = {
             rows: [],
+            totalCount: 0,
             hasSelection: false,
             modalDeleteConfirm: false,
             visiblePopups: {}
         };
-
         this.activePage = 1;
 
-        var columns = this.props.columns;
-        if (!columns)
-            return;
-    };
+        let columns = this.props.columns;
+        if (!columns) {
+            console.warn("columns not found.");
+        }
+    }
 
-    render() {
-
+    render():Object {
         return (
             <Col className="datagrid">
                 <Row>
@@ -89,10 +132,11 @@ class DataGrid extends ShallowComponent {
                     </Col>
                 </Row>
 
-                <Filter columns={this.props.columns}
-                        visiblePopups={this.state.visiblePopups}
-                        onChange={this.__onFilterChanged}
-                ></Filter>
+                <Filter
+                    columns={this.props.columns}
+                    visiblePopups={this.state.visiblePopups}
+                    onChange={this.__onFilterChanged}
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                     <tr>
@@ -107,93 +151,101 @@ class DataGrid extends ShallowComponent {
                 {this.__renderModalConfirm()}
 
             </Col>
-        )
-    };
+        );
+    }
 
-    __renderSearchInput = ()=> {
+    getSelectedRows() {
+        let selections = [];
+        if (this.selection) {
+            selections.push(this.selection.props.data);
+        }
+        return selections;
+    }
 
+    __renderSearchInput = () => {
         if (this.props.searchable) {
-
             return (
                 <Input
-                    addonBefore={<i className="fa fa-search"/>}
+                    addonBefore={<i className="fa fa-search" />}
                     type="text"
                     placeholder="Arama"
                     onChange={this.__onSearchChanged}
-                    ref="input"/>
+                    ref="input"
+                />
             );
-        } else {
+        }
+        return null;
+    };
+
+    __renderActionButtons = () => {
+        if (!this.props.editable || this.props.hidden) {
             return null;
         }
 
-    };
-    __renderActionButtons = ()=> {
-        if (!this.props.editable || this.props.hidden)
-            return null;
-
-        let addButton = (this.props.addButton && this.props.onNewClick) ?
-            <Button disabled={this.props.disableAddButton} onClick={this.props.onNewClick}><Glyphicon glyph="plus"/><Col
-                componentClass="span" className="hidden-xs"> {this.props.addButtonText}</Col></Button> : null;
+        let newButton = (this.props.newButton && this.props.onNewClick) ?
+            <Button onClick={this.props.onNewClick}><Glyphicon glyph="plus" />
+                <Col componentClass="span" className="hidden-xs"> {this.props.newButtonText}</Col></Button> : null;
         let editButton = (this.props.editButton && this.props.onEditClick) ?
-            <Button disabled={!this.state.hasSelection} onClick={this.props.onEditClick}><Glyphicon glyph="pencil"/><Col
-                componentClass="span" className="hidden-xs"> {this.props.editButtonText}</Col></Button> : null;
+            <Button disabled={!this.state.hasSelection} onClick={this.props.onEditClick}><Glyphicon glyph="pencil" />
+                <Col componentClass="span" className="hidden-xs">{this.props.editButtonText}</Col></Button> : null;
         let deleteButton = (this.props.deleteButton && this.props.onDeleteClick) ?
-            <Button disabled={!this.state.hasSelection} onClick={this.__showDeleteConfirm}><Glyphicon
-                glyph="trash"/><Col componentClass="span"
-                                    className="hidden-xs"> {this.props.deleteButtonText}</Col></Button> : null;
+            <Button disabled={!this.state.hasSelection} onClick={this.__showDeleteConfirm}>
+                <Glyphicon glyph="trash" />
+                <Col componentClass="span" className="hidden-xs">{this.props.deleteButtonText}</Col></Button> : null;
         return (
             <ButtonGroup className="pull-right">
-                {addButton}
+                {newButton}
                 {editButton}
                 {deleteButton}
             </ButtonGroup>
         );
     };
-    __onDeleteConfirm = ()=> {
-        this.props.onDeleteClick(this.__readData);
+    __onDeleteConfirm = () => {
+        this.props.onDeleteClick();
         this.__hideDeleteConfirm();
 
         this.setState({
             hasSelection: false
-        })
-
+        });
     };
-    __showDeleteConfirm = ()=> {
+    __showDeleteConfirm = () => {
         this.setState({
             modalDeleteConfirm: true
         });
     };
 
-    __hideDeleteConfirm = ()=> {
+    __hideDeleteConfirm = () => {
         this.setState({
             modalDeleteConfirm: false
         });
     };
-    __renderModalConfirm = ()=> {
-        return (<ModalConfirm header="Silmek istediğinizden emin misiniz ?"
-                              message="Seçili kayıt silinecektir.Bu işlem geri alınamaz."
-                              onOkClick={this.__onDeleteConfirm} onCancelClick={this.__hideDeleteConfirm}
-                              show={this.state.modalDeleteConfirm}/>);
+    __renderModalConfirm = () => {
+        return (
+            <ModalConfirm
+                header="Silmek istediğinizden emin misiniz ?"
+                message="Seçili kayıt silinecektir.Bu işlem geri alınamaz."
+                onOkClick={this.__onDeleteConfirm} onCancelClick={this.__hideDeleteConfirm}
+                show={this.state.modalDeleteConfirm}
+            />);
     };
 
-    __renderPagination = ()=> {
-
+    __renderPagination = () => {
         if (!this.props.pageable) {
             return null;
         }
 
         let items = this.__calculatePaginationItems();
-        let _start = (this.props.pageSize * (this.activePage - 1));
-        let _end = _start + this.props.pageSize;
-        let _total = this.props.store.getTotalCount();
+        let start = (this.props.pageSize * (this.activePage - 1));
+        let end = start + this.props.pageSize;
+        let total = this.state.totalCount;
 
-        if (_end > _total) {
-            _end = _total;
+        if (end > total) {
+            end = total;
         }
         let pagination;
-        if (_total != 0) {
-            pagination = (<span><p className="hidden-xs">{_total} tanesinden görüntülenen {_start + 1}-{_end}</p><p
-                className="visible-xs">{_total} / {_start + 1}-{_end}</p></span>);
+        if (total !== 0) {
+            pagination = (<span><p className="hidden-xs">{`${total} tanesinden görüntülenen ${start + 1}-${end}`}</p>
+                <p className="visible-xs">{total} / {start + 1}-{end}</p></span>);
         } else {
             pagination = <p>Görüntülenecek Veri Bulunmamaktadır.</p>;
         }
@@ -213,7 +265,8 @@ class DataGrid extends ShallowComponent {
                             activePage={this.activePage}
                             onSelect={this.__handlePaginationSelect}
                             items={items}
-                            maxButtons={5}/>
+                            maxButtons={5}
+                        />
                         <Pagination
                             className="visible-xs pull-right"
                             prev
@@ -223,34 +276,31 @@ class DataGrid extends ShallowComponent {
                             activePage={this.activePage}
                             onSelect={this.__handlePaginationSelect}
                             items={items}
-                            maxButtons={1}/>
+                            maxButtons={1}
+                        />
                     </Col>
                 </Row>
             </Col>);
-
-
     };
 
-    __calculatePaginationItems = ()=> {
-        return Math.ceil(this.props.store.getTotalCount() / this.props.pageSize);
+    __calculatePaginationItems = () => {
+        return Math.ceil(this.state.totalCount / this.props.pageSize);
     };
-    __handlePaginationSelect = (event, selectedEvent)=> {
+    __handlePaginationSelect = (event, selectedEvent) => {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
     };
 
     __generateHeader = (columns) => {
-        var trArr = [];
+        let trArr = [];
         for (let i = 0; i < columns.length; i++) {
             const column = columns[i];
-            if (column.type === "upload")
+            if (column.type === "upload") {
                 continue;
-
-            if (column.visible != false) {
-                var filterBtn = column.filter === true ?
-                    <i id={"tableColumn-"+column.code} className="fa fa-filter pull-right" aria-hidden="true"
-                       onClick={this.__openFilterPopups.bind(undefined,column.code)}></i> :
-                    <span></span>;
+            }
+            let onClick = this.__openFilterPopups.bind(undefined, column.code);
+            if (column.visible !== false) {
+                let filterBtn = column.filter === true ? <i id={`tableColumn-" +${column.code}`} className="fa fa-filter pull-right" aria-hidden="true" onClick={onClick}/> : null;
                 trArr.push(<th key={column.code}>
                     {column.title}
                     {filterBtn}
@@ -261,19 +311,18 @@ class DataGrid extends ShallowComponent {
         return (trArr);
     };
 
-    __openFilterPopups = (code)=> {
-        var isVisible = this.state.visiblePopups[code];
-        var shows = {};
+    __openFilterPopups = (code) => {
+        let isVisible = this.state.visiblePopups[code];
+        let shows = {};
         shows[code] = !isVisible;
         this.setState({
             visiblePopups: shows
         });
-
     };
 
-    __onFilterChanged = (filterState)=> {
-        var filters = [];
-        Maps.forEach(filterState.filters, function (a, b) {
+    __onFilterChanged = (filterState) => {
+        let filters = [];
+        Maps.forEach(filterState.filters, (a) => {
             filters.push(a);
         });
         this.__filters = filters.join(",");
@@ -281,43 +330,39 @@ class DataGrid extends ShallowComponent {
     };
 
     __generateRows = (columns, rows) => {
-        if (!rows)
-            return;
-        var rowsArr = [];
-        var size = rows.length != undefined ? rows.length : rows.size();
-        for (var i = 0; i < size; i++) {
-            var row = rows[i];
+        if (!rows) {
+            return null;
+        }
+
+        let rowsArr = [];
+        let size = rows.length !== undefined ? rows.length : rows.size();
+        for (let i = 0; i < size; i++) {
+            let row = rows[i];
             if (!is.object(row)) {
                 console.warn("Undefined data row at:", i, row);
                 continue;
             }
 
-            rowsArr.push(<DataTableBodyRow key={row.oid} resources={this.props.resources}
-                                           columns={columns}
-                                           data={row}
-                                           onSelection={this.__onSelection}/>);
-
+            rowsArr.push(
+                <DataTableBodyRow
+                    key={row.oid} resources={this.props.resources}
+                    columns={columns}
+                    data={row}
+                    onSelection={this.__onSelection}
+                />);
         }
         return rowsArr;
     };
 
-    getSelectedRows = ()=> {
-        var selections = [];
-        if (this.selection) {
-            selections.push(this.selection.props.data)
-        }
-        return selections;
-    };
-
-    __onSearchChanged = (event)=> {
+    __onSearchChanged = (event) => {
         this.__q = event.target.value;
         this.activePage = 1;
         this.__readData();
     };
 
-    __onSelection = (selection)=> {
+    __onSelection = (selection) => {
         if (this.selection) {
-            if (this.selection.props == selection.props) {
+            if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
                     this.props.onEditClick();
                 }
@@ -336,29 +381,35 @@ class DataGrid extends ShallowComponent {
             hasSelection: true
         });
 
-        if (this.props.onSelection)
+        if (this.props.onSelection) {
             this.props.onSelection(this.selection.props.data);
+        }
     };
 
-    __readData = ()=> {
-        // this.selection = undefined;
+    __readData = () => {
         if (this.props.pageable) {
-            let _start = (this.props.pageSize * (this.activePage - 1));
-            this.props.store.read(_start, this.props.pageSize, this.__q, this.__filters);
+            let start = (this.props.pageSize * (this.activePage - 1));
+            this.props.stores[0].read(
+                (response) => {
+                    this.setState({
+                        rows: response.data,
+                        totalCount: response.data.length
+                    });
+                }, undefined, start, this.props.pageSize, this.__q, this.__filters);
         } else {
             this.props.store.read(undefined, undefined, this.__q, this.__filters);
         }
 
     };
-    componentDidMount = () => {
-        this.props.store.register(this.uniqueRef, this, "rows");
-        this.__readData();
-        this.props.store.triggerChange(this, "rows");
-    };
-    componentWillUnmount = ()=> {
-        this.props.store.unRegister(this.uniqueRef, "rows");
-    };
+
+    /**
+     * Do not implement
+     * @param store
+     */
+    triggerChange(store:Store) {
+        this.setState({
+            rows: store.getResult().data,
+            totalCount: store.getResult().data.length
+        });
+    }
 }
-
-
-module.exports = DataGrid;

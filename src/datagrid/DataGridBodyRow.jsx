@@ -1,49 +1,44 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
-import FaIcon from "faicon/FaIcon";
+import FaIcon from "../faicon/FaIcon";
 import moment from "moment";
 
-/**
- * TODO removing un used css
- */
-
-class DataTableBodyRow extends ShallowComponent {
+export default class DataTableBodyRow extends ShallowComponent {
 
     static propTypes = {
         onClick: React.PropTypes.func
     };
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         moment.locale("tr");
         this.state = {
             selected: false
         };
-    };
+    }
 
-    render() {
+    render(): Object {
         return this.__generateRow(this.props.columns, this.props.data);
-    };
+    }
 
-    __generateRow = (columns, row) => {
-
-        if (!row)
-            return;
-        if (!is.object(row)) {
-            console.warn("Undefined data row at:", i, row);
-            return;
+    __generateRow = (columns: Array<Map>, row: Object) => {
+        if (!row) {
+            return null;
         }
-        var rowColumns = [];
-        for (var j = 0; j < columns.length; j++) {
-            var column = columns[j];
-            if (column.visible != false) {
 
-                var value = row[column.code];
-                //rowColumns
+        if (!is.object(row)) {
+            console.warn("Undefined data row at:", row);
+            return null;
+        }
+        let rowColumns = [];
+        for (let j = 0; j < columns.length; j++) {
+            let column = columns[j];
+            if (column.visible !== false) {
+                let value = row[column.code];
                 if (column.type === "bool") {
-                    value = value ? <FaIcon size={""} code="fa-check-square-o"/> :
-                        <FaIcon size={""} code="fa-square-o"/>;
+                    value = value ? <FaIcon size={""} code="fa-check-square-o" /> :
+                        <FaIcon size={""} code="fa-square-o" />;
                 } else if (column.type === "password") {
                     value = "******";
                 } else if (column.type === "date") {
@@ -51,19 +46,16 @@ class DataTableBodyRow extends ShallowComponent {
                         let format = column.format ? column.format : "DD/MM/YYYY";
                         value = moment(value).format(format);
                     }
-
                 } else if (column.type === "list") {
-
-                    var dataTextField = column.dataTextField || "name";
-                    var dataValueField = column.dataValueField || "oid";
+                    let dataTextField = column.dataTextField || "name";
+                    let dataValueField = column.dataValueField || "oid";
 
                     if (is.object(this.props.resources)) {
-                        var data = this.props.resources[column.code];
-
+                        let data = this.props.resources[column.code];
                         if (data) {
                             for (let i = 0; i < data.length; i++) {
-                                let item = data [i];
-                                if (item[dataValueField] == value) {
+                                let item = data[i];
+                                if (item[dataValueField] === value) {
                                     value = item[dataTextField];
                                     break;
                                 }
@@ -75,30 +67,26 @@ class DataTableBodyRow extends ShallowComponent {
                 }
                 rowColumns.push(<td key={column.code}>{value}</td>);
             }
-
         }
-        var rowClassName = "datagrid-body-row";
+        let rowClassName = "datagrid-body-row";
         if (this.state.selected) {
-            rowClassName = rowClassName + "-selected";
+            rowClassName = `${rowClassName}-selected`;
         }
-
-
         return (
-            <tr className={rowClassName}
-                onClick={this.__onClick}>
+            <tr className={rowClassName} onClick={this.__onClick}>
                 {rowColumns}
-            </tr>);
-
+            </tr>
+        );
     }
         ;
-    __onClick = (e)=> {
-        if (this.props.onSelection)
+    __onClick = () => {
+        if (this.props.onSelection) {
             this.props.onSelection(this);
-        if (this.props.onClick)
+        }
+
+        if (this.props.onClick) {
             this.props.onClick(this.props.data);
+        }
     };
 
 }
-
-
-module.exports = DataTableBodyRow;

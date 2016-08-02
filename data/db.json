@@ -1,3 +1,19 @@
 {
-
+  "users": [
+    {
+      "name": "Hasan",
+      "surname": "Mumin",
+      "email": "hasanmuminn@gmail.com"
+    },
+    {
+      "name": "Seray",
+      "surname": "Uzgur",
+      "email": "serayuzgur@gmail.com"
+    },
+    {
+      "name": "Kamil",
+      "surname": "Büküm",
+      "email": "kamilbukum@gmail.com"
+    }
+  ]
 }
