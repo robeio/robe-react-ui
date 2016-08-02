@@ -1,6 +1,6 @@
 # Robe-React-IU
 
-#### UI library built on top of React-Bootstrap for react projects.
+#### UI library built on top of React-Bootstrap
 
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
 [![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
@@ -12,7 +12,7 @@ RRU = Robe-React-UI
 
 ##### Motivation
 
-UI components built on top of [React-Bootstrap](https://react-bootstrap.github.io/) for robe react projects 
+UI components built on top of [React-Bootstrap](https://react-bootstrap.github.io/).
 
 ##### What's inside
 * [Webpack](https://webpack.github.io/) for all development (server,hotload etc.) and build (package, optimize, etc.) needs.

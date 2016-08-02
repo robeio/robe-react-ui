@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { Components } from "./components";
 import Welcome from "./Welcome";
+import JSDocs from "./JSDocs";
 import { NotFound } from "./error";
 import "./style.css";
 import Progress from "progress/Progress";
@@ -35,7 +36,7 @@ class Site extends ShallowComponent {
                     </Navbar.Header>
                     <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
                         <NavItem eventKey="Components" >Components</NavItem>
-                        <NavItem eventKey="JsDocs" >JsDocs</NavItem>
+                        <NavItem eventKey="JSDocs" >JSDocs</NavItem>
                         <NavItem eventKey="About" >About</NavItem>
                     </Nav>
                 </Navbar>
@@ -57,9 +58,9 @@ class Site extends ShallowComponent {
                 return (
                     <Components />
                 );
-            case "JsDocs":
+            case "JSDocs":
                 return (
-                    <NotFound />
+                    <JSDocs />
                 );
             case "About":
                 return (
