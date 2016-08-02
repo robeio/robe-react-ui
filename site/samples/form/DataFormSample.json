@@ -144,11 +144,5 @@
         "text": "Ankara"
       }
     ]
-  },
-  {
-    "label": "File",
-    "code": "file",
-    "type": "file",
-    "required": true
   }
 ]
