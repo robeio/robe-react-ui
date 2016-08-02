@@ -1,9 +1,7 @@
-/* CSS used here will be applied after bootstrap.css */
-.thumbnail {
-    display: inline-block;
-    width: 200px;
-    height: 100px;
-    margin: 1em;
+.thumbnail{
+    overflow: hidden;
+    text-align:center;
+    margin: 5px;
 }
 
 .stacklayout{
@@ -14,8 +12,6 @@
     opacity: 0.8;
     zoom: 1;
     cursor: pointer;
-    padding: 1px;
-    border: 1px solid #999;
 }
 
 .stacklayout.checked{
@@ -31,7 +27,6 @@
 /* centered columns styles */
 .row-centered {
     text-align:center;
-    overflow: hidden;
 }
 .col-centered {
     /* reset the text-align */
@@ -39,3 +34,8 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}

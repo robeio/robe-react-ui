@@ -22,6 +22,7 @@ export default class FileUploadInput extends ShallowComponent {
         /**
          * Presentation mode.
          */
+        label: React.PropTypes.string,
         display: React.PropTypes.oneOf(["list", "thumbnail"]),
         /**
          * Mutliple file load.
@@ -86,7 +87,9 @@ export default class FileUploadInput extends ShallowComponent {
         this.browse = this.browse.bind(this);
         this.upload = this.upload.bind(this);
         this.cancelUpload = this.cancelUpload.bind(this);
-        this.delete = this.delete.bind(this);
+        // delete operation
+        this.deleteItem = this.deleteItem.bind(this);
+        this.onDelete = this.onDelete.bind(this);
         // init component
         this.init();
     }
@@ -102,12 +105,10 @@ export default class FileUploadInput extends ShallowComponent {
         };
         this.__files = {};
         this.__uploadedFiles = [];
-
         if (this.__items.length > 0) {
             this.__fileManager.load(this.__items, this.onInitSuccess, this.onError);
         }
     }
-
     /**
      *  Load File : {
 	 *      destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/temp",
@@ -122,20 +123,12 @@ export default class FileUploadInput extends ShallowComponent {
      * @param {Array} files
      */
     onInitSuccess(files) {
-        if (!files || files.length !== this.__items.length) {
-            this.onError({
-                message: "Tüm dosyalar yüklenemedi !"
-            });
-            return false;
-        }
-
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            if (this.__items[i] !== file.filename) {
+            if (!file.filename || this.__items.indexOf(file.filename) === -1) {
                 this.onError({
-                    message: `Istenen dosya ${this.__items[i]}  kimliği ile gönderilen dosya ${file.filename} kimliği uyumsuz ! `
+                    message: `Gelen ${file.path} dosyasında filename kimliği bulunamadı ! `
                 });
-                return false;
             }
             this.__files[file.filename] = file;
         }
@@ -143,6 +136,7 @@ export default class FileUploadInput extends ShallowComponent {
         this.setState({
             items: this.__items
         });
+
         return true;
     }
 
@@ -230,33 +224,32 @@ export default class FileUploadInput extends ShallowComponent {
 
     }
 
-    delete(deleteItems: Array) {
-        let willDeletedFiles = [];
-        for (let i = 0; i < deleteItems.length; i++) {
-            // if file is exist in uploaded files then can deleted.
-            if (this.__uploadedFiles.indexOf(deleteItems[i]) !== -1) {
-                willDeletedFiles.push(this.__files[deleteItems[i]]);
-            }
+    deleteItem(item) {
+        // if is uploaded yet then delete it from server.
+        if (this.__uploadedFiles.indexOf(item.filename) !== -1) {
+            this.__fileManager.delete(item, (deletedFile: Object) => {
+               this.onDelete(item);
+            }, (error) => {
+                error.key = item.filename;
+                this.onError(error);
+            });
+            return true;
         }
-        if (willDeletedFiles.length > 0) {
-            this.__items = this.__items.slice(0);
-            this.__fileManager.delete(willDeletedFiles, (deletedFiles: Array) => {
-                for (let i = 0; i < deletedFiles.length; i++) {
-                    let deletedFile = deletedFiles[i];
-                    let deletedFileId = typeof deletedFile === "string" ? deletedFile : deletedFile.filename;
-                    willDeletedFiles.splice(willDeletedFiles.indexOf(deletedFileId), 1);
-                    this.__items.splice(this.__items.indexOf(deletedFileId));
-                    delete this.__files[deletedFileId];
-                }
-                let state = {
-                    items: this.__items
-                };
-                if (willDeletedFiles.length > 0) { // some files didn't deleted !
-                    state.error = "Some files didn't deleted";
-                }
-                this.setState(state);
-            }, this.onError);
-        }
+        this.onDelete(item);
+    }
+
+    onDelete(item) {
+        // clone items
+        let items = this.__items.slice(0);
+
+        // find item by filename
+        let index = items.indexOf(item.filename);
+        // delete item
+        items.splice(index, 1);
+        delete this.__files[item.filename];
+        this.setState({
+            items
+        });
     }
 
     render() {
@@ -265,16 +258,16 @@ export default class FileUploadInput extends ShallowComponent {
                 <StackLayout
                     ref="layout"
                     display={this.props.display}
+                    label={this.props.label}
                     items={this.__files}
                     onItemRender={this.onItemRender}
-                    onClick={this.browse}
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}
                     onDragOver={this.onDragOver}
                     onDragLeave={this.onDragLeave}
                     onDrop={this.onDrop}
                     toolbar={this.createButtons()}
-                    toolbarPosition="top"
+                    toolbarPosition="bottom"
                 />
             </Panel>
         );
@@ -294,19 +287,37 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     thumbnail(item: Map) {
-        return (
-            <div className="row-centered">
-                <FaIcon code="fa-file" size="fa-5x" />
-                <div className="col-centered" >{item.originalname}</div>
+        let onItemDelete = this.deleteItem.bind(this, item);
+        return [
+            <span className="gi-5x">
+                <Glyphicon glyph="file" />
+            </span>,
+            <h5>{item.originalname}</h5>,
+            <p>{item.description}</p>,
+            <div style={{
+                margin: 5
+            }}>
+                <Button bsSize="xsmall" onClick={onItemDelete} >
+                    <Glyphicon glyph="remove" />
+                </Button>
+                <Button bsSize="xsmall">
+                    <Glyphicon glyph="upload" />
+                </Button>
+                <Button bsSize="xsmall">
+                    <Glyphicon glyph="zoom-in" />
+                </Button>
             </div>
-        );
+        ];
     }
 
     gridList(item: Map) {
         return (
-            <Table width="100%" style={{
-                display: "inline-block"
-            }}>
+            <Table
+                width="100%"
+                style={{
+                    display: "inline-block"
+                }}
+            >
                 <tbody>
                     <tr>
                         <td>{item.originalname}</td>
@@ -330,36 +341,15 @@ export default class FileUploadInput extends ShallowComponent {
             inputAttributes.name = this.props.name;
         }
 
-        return (
-            <ButtonGroup>
-                <Button
-                    className="btn-default fileinput-remove fileinput-remove-button"
-                    onClick={this.delete}
-                >
-                    <Glyphicon glyph="minus" /> Cancel
-                </Button>
-                <Button
-                    className="btn-default fileinput-cancel fileinput-cancel-button"
-                    onClick={this.cancelUpload}
-                >
-                    <Glyphicon glyph="remove" /> Cancel
-                </Button>
-                <Button
-                    className="btn-default fileinput-upload fileinput-upload-button"
-                    onClick={this.upload}
-                >
-                    <Glyphicon glyph="cloud-upload" /> Upload
-                </Button>
-                <Button
-                    className="btn-default fileinput-upload fileinput-upload-button"
-                    onClick={this.browse}
-                >
-                    <Glyphicon glyph="search" /> Browse
 
+        return (
+            <ButtonGroup className="pull-right">
+                <Button className="btn-file" bsSize="large" onClick={this.browse}>
+                    <Glyphicon glyph="folder-open" />&nbsp; <span className="hidden-xs">Browse …</span>
+                    <input
+                        {...inputAttributes}
+                    />
                 </Button>
-                <input
-                    {...inputAttributes}
-                />
             </ButtonGroup>
         );
     }

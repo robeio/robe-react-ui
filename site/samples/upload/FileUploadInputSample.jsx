@@ -44,6 +44,7 @@ export default class FileUploadInputSample extends ShallowComponent {
                     name="files"
                     id={dataId}
                     display="thumbnail"
+                    label="Dosya Seçimi"
                     request={request}
                     items={items}
                     onChange={this.onChange}

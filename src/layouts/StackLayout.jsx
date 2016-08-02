@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
-import { Panel, Row, Col ,Glyphicon } from "react-bootstrap";
+import { Panel, Row, Col , Thumbnail, Glyphicon } from "react-bootstrap";
 import "./StackLayout.css";
 const style = {
     minHeight: 200
@@ -26,7 +26,8 @@ export default class StackLayout extends ShallowComponent {
         onItemRender: React.PropTypes.func,
         toolbar: React.PropTypes.object,
         toolbarPosition: React.PropTypes.oneOf(["bottom", "top", "left", "right"]),
-        onSelected: React.PropTypes.func
+        onSelected: React.PropTypes.func,
+        itemStyle: React.PropTypes.object
     };
 
     /**
@@ -68,10 +69,10 @@ export default class StackLayout extends ShallowComponent {
         let component = this.list(this.state.items);
         let panel = (
             <Panel
-                ref="parent"
                 header={this.panelToolbar()}
             >
                 <div
+                    className="file-input"
                     onClick={this.onClick}
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}
@@ -80,7 +81,7 @@ export default class StackLayout extends ShallowComponent {
                     onDrop={this.onDrop}
                     style={this._style}
                 >
-                {component}
+                    {component}
                 </div>
             </Panel>
         );
@@ -128,6 +129,7 @@ export default class StackLayout extends ShallowComponent {
         let listClassName = `btn btn-default ${this.state.display === "list" ? "active" : ""}`;
         let thumbnailClassName = `btn btn-default ${this.state.display === "thumbnail" ? "active" : ""}`;
         return [
+            this.props.label,
             <div className="btn-group pull-right">
                 <button type="button" className={listClassName} onClick={this.onClickDisplayList}>
                     <Glyphicon glyph="list" />
@@ -159,12 +161,12 @@ export default class StackLayout extends ShallowComponent {
         let className = null;
         switch (this.state.display) {
             case "thumbnail":
-                className = `row stacklayout thumbnail no-float ${checked}`;
+                className = `thumbnail ${checked}`;
                 return (
-                   <div className={className} onClick={itemClick}>
-                       {this.props.onItemRender(item, this.state.display)}
-                   </div>
-               )
+                    <Col xs={6} md={4} className={className} style={this.props.itemStyle}>
+                        {this.props.onItemRender(item, this.state.display)}
+                     </Col>
+               );
             default:
                 className = `stacklayout no-float ${checked}`;
                 return (

@@ -29,14 +29,16 @@ export default class FileManager {
         this.__info = new AjaxRequest(this.__request.info);
         this.__preview = new AjaxRequest(this.__request.preview);
         this.__delete = new AjaxRequest(this.__request.delete);
+        this.upload = this.upload.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
+        this.load = this.load.bind(this);
+        this.loadFile = this.loadFile.bind(this);
+        this.preview = this.preview.bind(this);
+        this.previewFile = this.previewFile.bind(this);
+        this.delete = this.delete.bind(this);
+        this.deleteFile = this.deleteFile.bind(this);
     }
 
-    /**
-     * @param {string} name
-     * @param {Array} files
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
     upload(name: string, files: Array, onSuccess: Function, onError: Function) {
         let formData = new FormData();
         let appendFile = (value) => {
@@ -51,29 +53,73 @@ export default class FileManager {
         uploadProps = Maps.mergeDeep(uploadProps, this.__request.upload);
         jajax.ajax(uploadProps);
     }
+
     /**
+     * upload file
+     * @param {string} name
      * @param {Array} files
      * @param {Function} onSuccess
      * @param {Function} onError
      */
-    load(files, onSuccess, onError) {
-        this.__info.call(files, undefined, onSuccess, FileManager.createOnError(onError));
+    uploadFile(file: Object, onSuccess: Function, onError: Function) {
+        let formData = new FormData();
+        formData.append(name, file);
+
+        let uploadProps = {
+            data: formData,
+            success: onSuccess,
+            error: FileManager.createOnError(onError)
+        };
+        uploadProps = Maps.mergeDeep(uploadProps, this.__request.upload);
+        jajax.ajax(uploadProps);
+    }
+    /**
+     * @param {Array} filenames
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    load(filenames, onSuccess: Function, onError: Function) {
+        this.__info.call(filenames, undefined, onSuccess, FileManager.createOnError(onError));
+    }
+    /**
+     * @param {string} filename
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    loadFile(filename, onSuccess: Function, onError: Function) {
+        this.__info.call([filename], undefined, onSuccess, FileManager.createOnError(onError));
     }
     /**
      * @param {Array} files
      * @param {Function} onSuccess
      * @param {Function} onError
      */
-    preview(files, onSuccess, onError) {
+    preview(files, onSuccess: Function, onError: Function) {
         this.__preview.call(files, undefined, onSuccess, FileManager.createOnError(onError));
     }
     /**
+     * @param {Object} file
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    previewFile(file, onSuccess: Function, onError: Function) {
+        this.__preview.call(file, undefined, onSuccess, FileManager.createOnError(onError));
+    }
+    /**
      * @param {Array} files
      * @param {Function} onSuccess
      * @param {Function} onError
      */
-    delete(files, onSuccess, onError) {
+    delete(files, onSuccess: Function, onError: Function) {
         this.__delete.call(files, undefined, onSuccess, FileManager.createOnError(onError));
+    }
+    /**
+     * @param {Object} file
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    deleteFile(file, onSuccess: Function, onError: Function) {
+        this.__delete.call(file, undefined, onSuccess, FileManager.createOnError(onError));
     }
 
     /**

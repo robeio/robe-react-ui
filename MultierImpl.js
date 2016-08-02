@@ -81,27 +81,17 @@ module.exports = (app, requestPath, tempFolder) => {
     });
 
     const jsonParser = bodyParser.json({ type: "application/json" });
-    app.post(new RegExp(escapeRegexp(requestPath) + ".*"), jsonParser, (request, response, next) => {
-        const filesKeys = request.body;
-        var files = [];
-        for (var i = 0; i < filesKeys.length; i++) {
-            var file = fs.readFileSync(path.normalize(tempFolder + "/" + filesKeys[i] + ".json"), "utf8");
-            // var file = getInformation(tempFolder + "/" + filesKeys[i] + ".json");
-            // var stats = fs.statSync(file.path);
-            // file.size = stats.size;
-            files.push(JSON.parse(file));
-        }
-        /**
-        var ind = request.query._filter.indexOf("=");
-        var key = request.query._filter.substring(ind + 1);
-        var file = getInformation(tempFolder + "/" + key);
-        file.key = key;
-        var stats = fs.statSync(file.path);
-        file.size = stats.size;
 
-        response.status(200).json(file); // You can send any response to the user here
-         **/
-        response.status(200).send(files);
+    const loadFile = (key) => {
+        var file = fs.readFileSync(path.normalize(tempFolder + "/" + key + ".json"), "utf8");
+        return JSON.parse(file);
+    }
+    app.post(new RegExp(escapeRegexp(requestPath) + ".*"), jsonParser, (request, response, next) => {
+        var data = [];
+        for (var i = 0; i < request.body.length; i++) {
+            data.push(loadFile(request.body[i]));
+        }
+        response.status(200).send(data);
     });
 
     app.delete(new RegExp(escapeRegexp(requestPath) + ".*"), (request, res, next) => {
