@@ -78,7 +78,6 @@
   },
   "dependencies": {
     "jajax": "git+https://github.com/kbukum/jajax.git",
-    "dropzone": "^4.3.0",
     "is-js": "0.1.1",
     "nprogress": "0.2.0",
     "numeral": "1.5.3",
