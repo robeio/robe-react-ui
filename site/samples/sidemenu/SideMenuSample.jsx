@@ -32,7 +32,6 @@ export default class SideMenuSample extends ShallowComponent {
     }
 
     handleChange = (item: Object) => {
-        console.log(item);
         this.setState({
             selectedItem: item.text
         });
