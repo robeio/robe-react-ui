@@ -18,25 +18,40 @@ export default class FileUploadInput extends ShallowComponent {
      * @static
      */
     static propTypes: Map = {
-        name: React.PropTypes.string.isRequired,
         /**
-         * Presentation mode.
-         */
-        label: React.PropTypes.string,
-        display: React.PropTypes.oneOf(["list", "thumbnail"]),
-        /**
-         * Mutliple file load.
-         */
-        multiple: React.PropTypes.bool,
-        /**
-         * Files Id Array List if `Multiple Mode` using (multiple = true)
-         */
-        items: React.PropTypes.arrayOf(React.PropTypes.string),
-        /**
-         * Object Id will use on if files related with any entity
+         * Entity Id will use with relation entity id
          */
         objectId: React.PropTypes.any,
+        /**
+         * It is field name of uploaded file
+         */
+        name: React.PropTypes.string.isRequired,
+        /**
+         * Label for the form control.
+         */
+        label: React.PropTypes.string,
+        /**
+         * File Id List or File Name
+         */
+        value: React.PropTypes.arrayOf(React.PropTypes.string),
+        /**
+         * onChangeEvent event for the component
+         */
         onChange: React.PropTypes.func,
+        /**
+         * Presentation Mode
+         */
+        display: React.PropTypes.oneOf(["list", "thumbnail"]),
+        /**
+         *
+         * TODO will implement
+         * Max Uploaded file
+         */
+        maxFileSize: React.PropTypes.bool,
+        /**
+         * TODO will implement
+         * auto upload is false then file will upload when clicking the upload button.
+         */
         autoUpload: React.PropTypes.bool,
         request: React.PropTypes.object
     };
@@ -60,23 +75,37 @@ export default class FileUploadInput extends ShallowComponent {
     __fileManager;
 
     // current items
-    __items = [];
+    __value = [];
     /**
+     * Example File : {
+	 *      destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/temp",
+	 *      encoding: "7bit",
+	 *      fieldname: "files",
+	 *      filename: "e10fd61b-9f84-dd9f-e034-cb507a0e7df3",
+	 *      mimetype: "application/x-x509-ca-cert",
+	 *      originalname: "examplefile.png",
+	 *      path: "/Users/kamilbukum/DEV/robe/robe-react-ui/temp/e10fd61b-9f84-dd9f-e034-cb507a0e7df3",
+	 *      size: 2067
+     * }
      * current files
      */
     __files = {};
 
     __uploadedFiles = [];
-    __inProgress = [];
 
     constructor(props) {
         super(props);
 
+        this.onChange = this.onChange.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.onDragStart = this.onDragStart.bind(this);
+        // TODO must change background of div as draging.
         this.onDragEnter = this.onDragEnter.bind(this);
+        // TODO must change background of div as undraging.
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
-        this.onDrop = this.onDrop.bind(this);
+
+        // layout item renderer method.
         this.onItemRender = this.onItemRender.bind(this);
 
         // init methods
@@ -84,7 +113,10 @@ export default class FileUploadInput extends ShallowComponent {
         // upload methods
         this.onUploadSucess = this.onUploadSucess.bind(this);
         this.onError = this.onError.bind(this);
+
+        // actions
         this.browse = this.browse.bind(this);
+
         this.upload = this.upload.bind(this);
         this.cancelUpload = this.cancelUpload.bind(this);
         // delete operation
@@ -98,34 +130,24 @@ export default class FileUploadInput extends ShallowComponent {
      *
      */
     init() {
-        this.__items = this.props.items ? this.props.items : [];
+        this.__value = this.props.value ? this.props.value : [];
         this.__fileManager = new FileManager(this.props);
         this.state = {
-            items: []
+            value: []
         };
         this.__files = {};
         this.__uploadedFiles = [];
-        if (this.__items.length > 0) {
-            this.__fileManager.load(this.__items, this.onInitSuccess, this.onError);
+        if (this.__value.length > 0) {
+            this.__fileManager.load(this.__value, this.onInitSuccess, this.onError);
         }
     }
     /**
-     *  Load File : {
-	 *      destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/temp",
-	 *      encoding: "7bit",
-	 *      fieldname: "files",
-	 *      filename: "e10fd61b-9f84-dd9f-e034-cb507a0e7df3",
-	 *      mimetype: "application/x-x509-ca-cert",
-	 *      originalname: "hamburgsud.com.crt",
-	 *      path: "/Users/kamilbukum/DEV/robe/robe-react-ui/temp/e10fd61b-9f84-dd9f-e034-cb507a0e7df3",
-	 *      size: 2067
-     *  }
      * @param {Array} files
      */
     onInitSuccess(files) {
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            if (!file.filename || this.__items.indexOf(file.filename) === -1) {
+            if (!file.filename || this.__value.indexOf(file.filename) === -1) {
                 this.onError({
                     message: `Gelen ${file.path} dosyasında filename kimliği bulunamadı ! `
                 });
@@ -134,9 +156,9 @@ export default class FileUploadInput extends ShallowComponent {
         }
 
         this.setState({
-            items: this.__items
+            items: this.__value
         });
-
+        this.onChange("load", this.__value);
         return true;
     }
 
@@ -153,34 +175,8 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
-     *  File = {
-     *       lastModified: 1468913662000,
-     *       lastModifiedDate: "Tue Jul 19 2016 10:34:22 GMT+0300 (EEST)",
-     *       name: "hamburgsud.com.crt",
-     *       size: 2067,
-     *       type: "application/x-x509-ca-cert",
-     *       webkitRelativePath: "",
-     *   }
-     * @param e
+     * @param {Array} files
      * @returns {boolean}
-     */
-    onDrop(e) {
-        const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-
-        if (!droppedFiles || droppedFiles.length === 0) {
-            this.onError({
-                message: "File couldn't droppped. You must select valid file."
-            });
-            return false;
-        }
-        for (let i = 0; i < droppedFiles.length; i++) {
-            droppedFiles[i].filename = Generator.guid();
-        }
-        this.upload(droppedFiles);
-        return true;
-    }
-
-    /**
      */
     upload(files: Array) {
         this.__fileManager.upload(this.props.name, files, this.onUploadSucess, this.onError);
@@ -188,7 +184,8 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
-     * @param uploadedFiles
+     * @param {Array} uploadedFiles
+     * @return {boolean}
      */
     onUploadSucess(files: Array) {
         if (!files || !Assertions.isArray(files) || files.length === 0) {
@@ -197,11 +194,11 @@ export default class FileUploadInput extends ShallowComponent {
             });
             return false;
         }
-
-        this.__items = this.__items.slice(0);
+        let oldValue = this.__value;
+        this.__value = oldValue.slice(0);
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            if (this.__items.indexOf(file.filename) !== -1) {
+            if (this.__value.indexOf(file.filename) !== -1) {
                 this.onError({
                     message: "File Name Exist ! "
                 });
@@ -211,8 +208,9 @@ export default class FileUploadInput extends ShallowComponent {
             this.__uploadedFiles.push(file.filename);
         }
         this.setState({
-            items: this.__items
+            items: this.__value
         });
+        this.onChange("upload", this.__value, oldValue);
         return true;
     }
 
@@ -220,11 +218,17 @@ export default class FileUploadInput extends ShallowComponent {
         console.log(error);
     }
 
+    // TODO if any file uploading then cancelUpload must be enabled.
     cancelUpload() {
 
     }
 
-    deleteItem(item) {
+    /**
+     *
+     * @param {Map} item
+     * @returns {boolean}
+     */
+    deleteItem(item: Map) {
         // if is uploaded yet then delete it from server.
         if (this.__uploadedFiles.indexOf(item.filename) !== -1) {
             this.__fileManager.delete(item, (deletedFile: Object) => {
@@ -238,9 +242,13 @@ export default class FileUploadInput extends ShallowComponent {
         this.onDelete(item);
     }
 
-    onDelete(item) {
+    /**
+     * @param {Map} item
+     */
+    onDelete(item: Map) {
         // clone items
-        let items = this.__items.slice(0);
+        let oldValue = this.__value;
+        let items = oldValue.slice(0);
 
         // find item by filename
         let index = items.indexOf(item.filename);
@@ -250,6 +258,7 @@ export default class FileUploadInput extends ShallowComponent {
         this.setState({
             items
         });
+        this.onChange("delete", item, oldValue);
     }
 
     render() {
@@ -273,8 +282,8 @@ export default class FileUploadInput extends ShallowComponent {
         );
     }
     /**
-     * @param item
-     * @param display
+     * @param {Map} item
+     * @param {string} display
      * @returns {Object}
      */
     onItemRender(item: Map, display) {
@@ -282,10 +291,15 @@ export default class FileUploadInput extends ShallowComponent {
             case "thumbnail":
                 return this.thumbnail(item);
             default:
-                return this.gridList(item);
+                return this.list(item);
         }
     }
 
+    /**
+     *
+     * @param {Map} item
+     * @returns {Array<Object>}
+     */
     thumbnail(item: Map) {
         let onItemDelete = this.deleteItem.bind(this, item);
         return [
@@ -294,9 +308,11 @@ export default class FileUploadInput extends ShallowComponent {
             </span>,
             <h5>{item.originalname}</h5>,
             <p>{item.description}</p>,
-            <div style={{
-                margin: 5
-            }}>
+            <div
+                style={{
+                    margin: 5
+                }}
+            >
                 <Button bsSize="xsmall" onClick={onItemDelete} >
                     <Glyphicon glyph="remove" />
                 </Button>
@@ -310,7 +326,11 @@ export default class FileUploadInput extends ShallowComponent {
         ];
     }
 
-    gridList(item: Map) {
+    /**
+     * @param item
+     * @returns {Object}
+     */
+    list(item: Map) {
         return (
             <Table
                 width="100%"
@@ -354,6 +374,34 @@ export default class FileUploadInput extends ShallowComponent {
         );
     }
 
+    /**
+     * File = {
+     *       lastModified: 1468913662000,
+     *       lastModifiedDate: "Tue Jul 19 2016 10:34:22 GMT+0300 (EEST)",
+     *       name: "hamburgsud.com.crt",
+     *       size: 2067,
+     *       type: "application/x-x509-ca-cert",
+     *       webkitRelativePath: "",
+     *   }
+     * @param {Object} e
+     * @returns {boolean}
+     */
+    onDrop(e) {
+        const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+
+        if (!droppedFiles || droppedFiles.length === 0) {
+            this.onError({
+                message: "File couldn't droppped. You must select valid file."
+            });
+            return false;
+        }
+        for (let i = 0; i < droppedFiles.length; i++) {
+            droppedFiles[i].filename = Generator.guid();
+        }
+        this.upload(droppedFiles);
+        return true;
+    }
+
     onDragStart() {
         return false;
     }
@@ -370,6 +418,18 @@ export default class FileUploadInput extends ShallowComponent {
         return false;
     }
 
+    onChange(event, newValue, oldValue) {
+        if (this.props.onChange) {
+            let e = {
+                target: {
+                    event: event,
+                    oldValue: oldValue,
+                    value: newValue
+                }
+            }
+            this.props.onChange(e);
+        }
+    }
     /**
      * Decides ant update is necessary for re-rendering.
      * Compares old props and state objects with the newer ones without going deep.

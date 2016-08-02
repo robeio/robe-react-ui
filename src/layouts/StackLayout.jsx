@@ -15,19 +15,66 @@ export default class StackLayout extends ShallowComponent {
      */
     static propTypes: Map = {
         /**
-         * Presentation mode.
+         * Presentation mode list or thumbnail.
          */
         display: React.PropTypes.oneOf(["list", "thumbnail"]),
+        /**
+         * Header of Layout
+         */
+        label: React.PropTypes.string,
+        /**
+         * Layout Container style
+         */
         style: React.PropTypes.object,
         items: React.PropTypes.oneOfType(
             React.PropTypes.array,
             React.PropTypes.object
         ),
-        onItemRender: React.PropTypes.func,
+        /**
+         * item container style
+         */
+        itemStyle: React.PropTypes.object,
+        /**
+         * Add Toolbar to layout . Default position is bottom
+         */
         toolbar: React.PropTypes.object,
+        /**
+         * toolbar position
+         */
         toolbarPosition: React.PropTypes.oneOf(["bottom", "top", "left", "right"]),
-        onSelected: React.PropTypes.func,
-        itemStyle: React.PropTypes.object
+        /**
+         * render item by class which is using this layout.
+         */
+        onItemRender: React.PropTypes.func,
+        /**
+         * if layout container clicked then triggered.
+         */
+        onClick: React.PropTypes.func,
+        /**
+         * if any item selection changed.
+         */
+        onItemSelectionChanged: React.PropTypes.func,
+        /**
+         * when a draggable element is dropped in the layout container element.
+         */
+        onDrop: React.PropTypes.func,
+        /**
+         * when a draggable element is moved out of the layout container element.
+         */
+        onDragLeave: React.PropTypes.func,
+        /**
+         * when an element is being dragged over the layout container element.
+         */
+        onDragOver: React.PropTypes.func,
+        /**
+         * when a draggable element enters the layout container element.
+         */
+        onDragEnter: React.PropTypes.func,
+        /**
+         * when the user starts to drag the layout container element.
+         */
+        onDragStart: React.PropTypes.func
+
     };
 
     /**
@@ -245,7 +292,12 @@ export default class StackLayout extends ShallowComponent {
         return result;
     }
     /* eslint-disable no-underscore-dangle */
-    onItemClick(item, e) {
+    /**
+     * @param item
+     * @param e
+     * @returns {boolean}
+     */
+    onItemClick(item) {
         this._selectedList = this._selectedList.slice(0);
         let index = this._selectedList.indexOf(item.filename);
         if (index === -1) {
@@ -256,6 +308,9 @@ export default class StackLayout extends ShallowComponent {
         this.setState({
             selectedList: this._selectedList
         });
+        if (this.props.onItemSelectionChanged) {
+            this.props.onItemSelectionChanged(item, this._selectedList);
+        }
         return true;
     }
 

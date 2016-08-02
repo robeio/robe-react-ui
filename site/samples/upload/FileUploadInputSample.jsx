@@ -46,7 +46,7 @@ export default class FileUploadInputSample extends ShallowComponent {
                     display="thumbnail"
                     label="Dosya Seçimi"
                     request={request}
-                    items={items}
+                    value={items}
                     onChange={this.onChange}
                 />
                 <Button onClick={this.__onSubmitNew}>Gönder</Button>
