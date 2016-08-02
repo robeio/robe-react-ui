@@ -5,8 +5,9 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getComponentList(state: Object) {
+    getComponentList(): Array {
         let components = [];
+        /* eslint-disable global-require */
         components.push({
             header: "TextInput",
             desc: "is the default input field to collect one line text data from form.",
@@ -116,14 +117,6 @@ class ComponentList {
         });
 
         components.push({
-            header: "DataForm",
-            desc: "",
-            json: require("../docs/form/DataForm"),
-            sample: require("../samples/form/DataFormSample"),
-            code: require("../samples/form/DataFormSample.txt")
-        });
-
-        components.push({
             header: "Notification",
             desc: " is an notification component with total count and popup list.",
             json: require("../docs/notification/Notification.json"),
@@ -131,13 +124,6 @@ class ComponentList {
             code: require("../samples/notification/NotificationSample.txt")
         });
 
-        components.push({
-            header: "ModalDataForm",
-            desc: " is an ModalDataForm component submit editing data.",
-            json: require("../docs/form/ModalDataForm.json"),
-            sample: require("../samples/form/ModalDataFormSample"),
-            code: require("../samples/form/ModalDataFormSample.txt")
-        });
 
         components.push({
             header: "FileUploadInput",
@@ -170,6 +156,30 @@ class ComponentList {
             sample: require("../samples/sidemenu/SideMenuSample"),
             code: require("../samples/sidemenu/SideMenuSample.txt")
         });
+
+        components.push({
+            header: "DataGrid",
+            desc: " is a smart grid",
+            json: require("../docs/datagrid/DataGrid.json"),
+            sample: require("../samples/datagrid/DataGridSample"),
+            code: require("../samples/datagrid/DataGridSample.txt")
+        });
+
+        // components.push({
+        //     header: "DataForm",
+        //     desc: "",
+        //     json: require("../docs/form/DataForm"),
+        //     sample: require("../samples/form/DataFormSample"),
+        //     code: require("../samples/form/DataFormSample.txt")
+        // });
+
+        // components.push({
+        //     header: "ModalDataForm",
+        //     desc: " is an ModalDataForm component submit editing data.",
+        //     json: require("../docs/form/ModalDataForm.json"),
+        //     sample: require("../samples/form/ModalDataFormSample"),
+        //     code: require("../samples/form/ModalDataFormSample.txt")
+        // });
         return components;
     }
 

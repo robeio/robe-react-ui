@@ -16,7 +16,7 @@ describe("inputs/CheckList", () => {
             value: "Turkish"
         },
         {
-            key: "kurdish",
+            key: "kr",
             value: "Kurdish"
         }
     ];

@@ -13,7 +13,7 @@ const langs = [
         value: "Turkish"
     },
     {
-        key: "kurdish",
+        key: "kr",
         value: "Kurdish"
     }
 ];

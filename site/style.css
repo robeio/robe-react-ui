@@ -1,0 +1,38 @@
+html {
+    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-family: proxima-nova,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    color: #484848;
+    line-height: 1.28;
+}
+
+.banner{
+    background: #333;
+    color: white;
+    padding-top:40px;
+    padding-bottom:40px;
+    padding-left:20px;
+    padding-right:20px;
+    margin-bottom: 20px
+}
+ .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+.navbar-header img{
+    float: left!important;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    height: 34px;
+}
+.navbar-header a{
+    color:white !important;
+}
+
+@media (min-width: 768px){
+    .navbar {
+        border-radius: 0px;
+    }
+}

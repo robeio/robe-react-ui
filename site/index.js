@@ -2,7 +2,12 @@ import React from "react";
 import { render } from "react-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { Components } from "./components";
+import Welcome from "./Welcome";
+import JSDocs from "./JSDocs";
 import { NotFound } from "./error";
+import "./style.css";
+import Progress from "progress/Progress";
+
 
 import { ShallowComponent } from "robe-react-commons";
 
@@ -12,58 +17,63 @@ const app = document.getElementById("app");
 class Site extends ShallowComponent {
     constructor(props: Object) {
         super(props);
+        let path = window.location.hash.substring(1).split("/")[0];
         this.state = {
-            activePage: (
-                <Components />
-            )
+            activeKey: path
         };
     }
 
     render(): Object {
+        let activePage = this.__getActivePage(this.state.activeKey);
         return (
             <div>
-                <Navbar>
+                <Navbar inverse>
                     <Navbar.Header>
+                        <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
-                            <a href="#">Robe React UI</a>
+                            <a href="#" onClick={this.__onSelect} >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
-                    <Nav onSelect={this.__onSelect}>
-                        <NavItem eventKey={1} href="#">Components</NavItem>
-                        <NavItem eventKey={2} href="#">JsDocs</NavItem>
-                        <NavItem eventKey={3} href="#">About</NavItem>
+                    <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
+                        <NavItem eventKey="Components" >Components</NavItem>
+                        <NavItem eventKey="JSDocs" >JSDocs</NavItem>
+                        <NavItem eventKey="About" >About</NavItem>
                     </Nav>
                 </Navbar>
-                {this.state.activePage}
+                {activePage}
             </div>
         );
     }
-    __onSelect = (selectedKey) => {
-        switch (selectedKey) {
-            case 1:
-                this.setState({
-                    activePage: (
-                        <Components />
-                    )
-                });
-                break;
-            case 2:
-                this.setState({
-                    activePage: (
-                        <NotFound />
-                    )
-                });
-                break;
-            case 3:
-                this.setState({
-                    activePage: (
-                        <NotFound />
-                    )
-                });
-                break;
+
+    __onSelect = (key) => {
+        Progress.start();
+        window.location.hash = `#${key}`;
+        this.setState({
+            activeKey: key
+        });
+    };
+    __getActivePage = (path: string) => {
+        switch (path) {
+            case "Components":
+                return (
+                    <Components />
+                );
+            case "JSDocs":
+                return (
+                    <JSDocs />
+                );
+            case "About":
+                return (
+                    <NotFound />
+                );
             default:
-                throw new Error("Unknown Page");
+                return (
+                    <Welcome />
+                );
         }
+    }
+    componentDidUpdate() {
+        Progress.done();
     }
 }
 
