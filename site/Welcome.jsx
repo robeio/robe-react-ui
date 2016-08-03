@@ -19,23 +19,25 @@ export default class Welcome extends ShallowComponent {
                         <Jumbotron>
                             <h2>Welcome</h2>
                             <p>This is the documentation page for <code>robe-react-ui</code>.
-                                This page includes component showcase, JSDocs and general information about the project.</p>
+                                You can find <b>Components</b> with <b>sample codes</b>, <b>JSDocs</b> and general information about the project.</p>
                         </Jumbotron>
                     </Row >
                     <Row className="well" >
                                 <Col sm={4}>
                                     <h4>DataGrid with Model support</h4>
-                                    Models with dynamic validation support, makes it very easy to develop screens for CRUD operations.
-                                    
+                                    Models with dynamic validation support, makes it very easy to develop screens for CRUD operations and more.
+                                    Filters, sorting, form generation from models and more.
                                 </Col>
                                 <Col sm={4}>
                                     <h4>Standardized usage</h4>
-                                    for all wrapped Components.
+                                    It is important to provide a complete and easy to learn component set.
+                                    Harmonic usage of different components wrapped together with a single naming and one way of usage.
                                     
                                 </Col>
                                 <Col sm={4}>
                                     <h4>Ready for complex needs</h4>
-                                    Complex task will be easier to execute with samples from real applications. 
+                                    We develop real-life projects with this library, so we add components and samples continuously.
+                                    Complex task will be easier to execute with samples from real applications.
                                 </Col>
                             </Row>
                     <Row>

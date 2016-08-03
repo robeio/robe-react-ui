@@ -44,3 +44,9 @@ manual
 .travis.yml
 esdoc.json
 src
+site
+.doc.gen.json
+.eslintignore
+.hash.json
+.travis.yml
+Pro
