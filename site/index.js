@@ -28,6 +28,13 @@ class Site extends ShallowComponent {
         return (
             <div>
                 <Navbar inverse>
+                 <a href="https://github.com/robeio/robe-react-ui">
+                        <img
+                            style={{ position: "absolute", top: "0px", right: "0px", border: "0px" }}
+                            alt="Fork me on GitHub"
+                            src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+                        />
+                </a>
                     <Navbar.Header>
                         <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
