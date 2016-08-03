@@ -119,6 +119,7 @@ export default class DataGrid extends StoreShallowComponent {
     selection:undefined;
     __q = undefined;
     __filters = undefined;
+    pageSize = 20;
 
     constructor(props:Object) {
         super(props);
@@ -128,7 +129,7 @@ export default class DataGrid extends StoreShallowComponent {
             totalCount: 0,
             hasSelection: false,
             modalDeleteConfirm: false,
-            visiblePopups: {}
+            visiblePopups: {},
         };
         this.activePage = 1;
 
@@ -278,40 +279,92 @@ export default class DataGrid extends StoreShallowComponent {
         } else {
             pagination = <p>{config.emptyText}</p>;
         }
+
         return (
             <Col className="datagrid-pagination-row">
                 <Row>
-                    <Col xs={6} className="pagination-pager">{pagination}</Col>
-                    <Col xs={6}>
-                        <Pagination
-                            className="pull-right hidden-xs"
-                            prev
-                            next
-                            first
-                            last
-                            ellipsis
-                            boundaryLinks
-                            activePage={this.activePage}
-                            onSelect={this.__handlePaginationSelect}
-                            items={items}
-                            maxButtons={5}
-                        />
-                        <Pagination
-                            className="visible-xs pull-right"
-                            prev
-                            next
-                            ellipsis={false}
-                            boundaryLinks
-                            activePage={this.activePage}
-                            onSelect={this.__handlePaginationSelect}
-                            items={items}
-                            maxButtons={1}
-                        />
+                    <Col xs={4} className="datagrid-table-pagination-buttons">
+
+                        <ButtonGroup style={{color:"#337ab7"}} className="pull-left hidden-xs"
+                                     bsSize="small">
+                            <Button bsSize="small" onClick={this.__readData}><FaIcon code="fa-refresh"/></Button>
+                            <Button disabled>Limit:</Button>
+                            <Button active={this.pageSize === 20} onClick={this.__pageSizeChange}
+                                    value="20">20</Button>
+                            <Button active={this.pageSize === 50} onClick={this.__pageSizeChange}
+                                    value="50">50</Button>
+                            <Button active={this.pageSize === 100} onClick={this.__pageSizeChange}
+                                    value="100">100</Button>
+                        </ButtonGroup>
+                    </Col>
+                    <Col xs={4} className="datagrid-table-pagination-buttons text-center">
+                        {pagination}
+                    </Col>
+                    <Col xs={4} className="datagrid-table-pagination-buttons">
+                        <Pagination style={{margin:"0"}}
+                                    className="pull-right hidden-xs"
+                                    prev
+                                    next
+                                    first
+                                    last
+                                    ellipsis
+                                    boundaryLinks
+                                    activePage={this.activePage}
+                                    onSelect={this.__handlePaginationSelect}
+                                    items={items}
+                                    maxButtons={5}/>
+                        <Pagination style={{margin:"0"}}
+                                    className="visible-xs pull-right"
+                                    prev
+                                    next
+                                    ellipsis={false}
+                                    boundaryLinks
+                                    activePage={this.activePage}
+                                    onSelect={this.__handlePaginationSelect}
+                                    items={items}
+                                    maxButtons={1}/>
                     </Col>
                 </Row>
             </Col>);
+        // return (
+        //     <Col className="datagrid-pagination-row">
+        //         <Row>
+        //             <Col xs={6} className="pagination-pager">{pagination}</Col>
+        //             <Col xs={6}>
+        //                 <Pagination
+        //                     className="pull-right hidden-xs"
+        //                     prev
+        //                     next
+        //                     first
+        //                     last
+        //                     ellipsis
+        //                     boundaryLinks
+        //                     activePage={this.activePage}
+        //                     onSelect={this.__handlePaginationSelect}
+        //                     items={items}
+        //                     maxButtons={5}
+        //                 />
+        //                 <Pagination
+        //                     className="visible-xs pull-right"
+        //                     prev
+        //                     next
+        //                     ellipsis={false}
+        //                     boundaryLinks
+        //                     activePage={this.activePage}
+        //                     onSelect={this.__handlePaginationSelect}
+        //                     items={items}
+        //                     maxButtons={1}
+        //                 />
+        //             </Col>
+        //         </Row>
+        //     </Col>);
     };
 
+
+    __pageSizeChange = (e)=> {
+        this.pageSize = parseInt(e.target.value);
+        this.__readData();
+    };
     __handlePaginationSelect = (event, selectedEvent) => {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
@@ -414,15 +467,14 @@ export default class DataGrid extends StoreShallowComponent {
 
     __readData = () => {
         if (this.props.pageable) {
-            let config = this.__getPaginationConfig();
-            let start = (config.pageSize * (this.activePage - 1));
+            let start = (this.pageSize * (this.activePage - 1));
             this.props.stores[0].read(
                 (response) => {
                     this.setState({
                         rows: response.data,
                         totalCount: response.data.length
                     });
-                }, undefined, start, config.pageSize, this.__q, this.__filters);
+                }, undefined, start, this.pageSize, this.__q, this.__filters);
         } else {
             this.props.store.read(undefined, undefined, this.__q, this.__filters);
         }
@@ -430,7 +482,7 @@ export default class DataGrid extends StoreShallowComponent {
 
     __getPaginationConfig = () => {
         let config = {
-            pageSize: 20,
+            pageSize: this.pageSize,
             emptyText: "No data to display.",
             displayText: "Showing {start}-{end} from {total} data items"
         };
@@ -488,6 +540,13 @@ export default class DataGrid extends StoreShallowComponent {
         });
 
         return config;
+    };
+
+    componentDidMount = () => {
+        for (let i = 0; i < this.stores.length; i++) {
+            this.stores[i].register(this);
+        }
+        this.pageSize = this.props.pagination.pageSize;
     };
 
     /**
