@@ -11,10 +11,11 @@ import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
 import Glyphicon from "react-bootstrap/lib/Glyphicon";
 import Button from "react-bootstrap/lib/Button";
 import Input from "react-bootstrap/lib/Input";
-import ModalConfirm from "../form/ModalConfirm.jsx";
+import ModalConfirm from "../form/ModalConfirm";
 import Filter from "./filter/Filter.jsx";
 import Maps from "robe-react-commons/lib/utils/Maps";
 import "./style.css";
+import FaIcon from "../faicon/FaIcon";
 
 /**
  * TODO removing un used css
@@ -47,60 +48,71 @@ export default class DataGrid extends StoreShallowComponent {
          */
         pageable: React.PropTypes.bool,
         /**
-         * Page size of DataGrid
-         */
-        pageSize: React.PropTypes.number,
-        /**
          * Make DataGrid as readonly
          */
         editable: React.PropTypes.bool,
-        /**
-         * Show/hide new button.
-         */
-        newButton: React.PropTypes.bool,
-        /**
-         * Show/hide edit button.
-         */
-        editButton: React.PropTypes.bool,
-        /**
-         * Show/hide edit button.
-         */
-        deleteButton: React.PropTypes.bool,
         /**
          * enable/disable searchable
          */
         searchable: React.PropTypes.bool,
         /**
-         * new button text
+         * toolbar for create,edit,delete and custom buttons
          */
-        newButtonText: React.PropTypes.string,
+        toolbar: React.PropTypes.any,
         /**
-         * edit button text
+         * ModalConfirm configuration
          */
-        editButtonText: React.PropTypes.string,
+        modalConfirm: React.PropTypes.shape({
+            header: React.PropTypes.string,
+            message: React.PropTypes.string,
+            okButtonText: React.PropTypes.string,
+            cancelButtonText: React.PropTypes.string,
+        }),
         /**
-         * delete button text
+         * pagination configuration
          */
-        deleteButtonText: React.PropTypes.string
+        pagination: React.PropTypes.shape({
+            pageSize: React.PropTypes.number,
+            emptyText: React.PropTypes.string,
+        }),
     };
 
     static defaultProps = {
         editable: true,
-        newButton: true,
-        editButton: true,
-        deleteButton: true,
         searchable: true,
-        newButtonText: "New",
-        editButtonText: "Edit",
-        deleteButtonText: "Delete"
+        toolbar: {
+            create: {
+                visible: false,
+                text: "New",
+                icon: "fa-plus"
+            },
+            edit: {
+                visible: false,
+                text: "Edit",
+                icon: "fa-pencil"
+            },
+            delete: {
+                visible: false,
+                text: "Delete",
+                icon: "fa-trash"
+            }
+        },
+        modalConfirm: {
+            header: "Are you sure you want to delete?",
+            message: "The selected entry will be deleted.You can not be undone.",
+            okButtonText: "Yes",
+            cancelButtonText: "No"
+        },
+        pagination: {
+            pageSize: 20,
+            emptyText: "No data to display."
+        },
     };
 
     activePage = 1;
     selection:undefined;
     __q = undefined;
     __filters = undefined;
-
-    uniqueRef = new Date().getTime();
 
     constructor(props:Object) {
         super(props);
@@ -128,8 +140,9 @@ export default class DataGrid extends StoreShallowComponent {
                         {this.__renderSearchInput()}
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        {this.__renderActionButtons()}
+                        {this.__renderToolbar()}
                     </Col>
+
                 </Row>
 
                 <Filter
@@ -154,13 +167,39 @@ export default class DataGrid extends StoreShallowComponent {
         );
     }
 
-    getSelectedRows() {
+    /**
+     * Selected rows
+     * @returns {Array}
+     */
+    getSelectedRows():Object<Array> {
         let selections = [];
         if (this.selection) {
             selections.push(this.selection.props.data);
         }
         return selections;
     }
+
+    __renderToolbar = () => {
+        if (!this.props.editable) {
+            return null;
+        }
+
+        let config = this.__getToolbarConfig();
+        let actions = [];
+        Maps.forEach(config, (item) => {
+            if (item.visible) {
+                let action = <Button disabled={item.disabled} onClick={item.onClick}><FaIcon code={item.icon} size={"fa-lg"}/><Col componentClass="span" className="hidden-xs"> {item.text}</Col></Button>;
+                actions.push(action);
+            }
+        });
+
+
+        return (
+            <ButtonGroup className="pull-right">
+                {actions}
+            </ButtonGroup>
+        );
+    };
 
     __renderSearchInput = () => {
         if (this.props.searchable) {
@@ -177,29 +216,6 @@ export default class DataGrid extends StoreShallowComponent {
         return null;
     };
 
-    __renderActionButtons = () => {
-        if (!this.props.editable || this.props.hidden) {
-            return null;
-        }
-
-        let newButton = (this.props.newButton && this.props.onNewClick) ?
-            <Button onClick={this.props.onNewClick}><Glyphicon glyph="plus" />
-                <Col componentClass="span" className="hidden-xs"> {this.props.newButtonText}</Col></Button> : null;
-        let editButton = (this.props.editButton && this.props.onEditClick) ?
-            <Button disabled={!this.state.hasSelection} onClick={this.props.onEditClick}><Glyphicon glyph="pencil" />
-                <Col componentClass="span" className="hidden-xs">{this.props.editButtonText}</Col></Button> : null;
-        let deleteButton = (this.props.deleteButton && this.props.onDeleteClick) ?
-            <Button disabled={!this.state.hasSelection} onClick={this.__showDeleteConfirm}>
-                <Glyphicon glyph="trash" />
-                <Col componentClass="span" className="hidden-xs">{this.props.deleteButtonText}</Col></Button> : null;
-        return (
-            <ButtonGroup className="pull-right">
-                {newButton}
-                {editButton}
-                {deleteButton}
-            </ButtonGroup>
-        );
-    };
     __onDeleteConfirm = () => {
         this.props.onDeleteClick();
         this.__hideDeleteConfirm();
@@ -220,11 +236,12 @@ export default class DataGrid extends StoreShallowComponent {
         });
     };
     __renderModalConfirm = () => {
+        let config = this.__getModalConfirmConfig();
         return (
             <ModalConfirm
-                header="Silmek istediğinizden emin misiniz ?"
-                message="Seçili kayıt silinecektir.Bu işlem geri alınamaz."
-                onOkClick={this.__onDeleteConfirm} onCancelClick={this.__hideDeleteConfirm}
+                {...config}
+                onOkClick={this.__onDeleteConfirm}
+                onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
             />);
     };
@@ -233,10 +250,11 @@ export default class DataGrid extends StoreShallowComponent {
         if (!this.props.pageable) {
             return null;
         }
+        let config = this.__getPaginationConfig();
+        let items = Math.ceil(this.state.totalCount / config.pageSize);
 
-        let items = this.__calculatePaginationItems();
-        let start = (this.props.pageSize * (this.activePage - 1));
-        let end = start + this.props.pageSize;
+        let start = (config.pageSize * (this.activePage - 1));
+        let end = start + config.pageSize;
         let total = this.state.totalCount;
 
         if (end > total) {
@@ -247,7 +265,7 @@ export default class DataGrid extends StoreShallowComponent {
             pagination = (<span><p className="hidden-xs">{`${total} tanesinden görüntülenen ${start + 1}-${end}`}</p>
                 <p className="visible-xs">{total} / {start + 1}-{end}</p></span>);
         } else {
-            pagination = <p>Görüntülenecek Veri Bulunmamaktadır.</p>;
+            pagination = <p>{config.emptyText}</p>;
         }
         return (
             <Col className="datagrid-pagination-row">
@@ -283,9 +301,6 @@ export default class DataGrid extends StoreShallowComponent {
             </Col>);
     };
 
-    __calculatePaginationItems = () => {
-        return Math.ceil(this.state.totalCount / this.props.pageSize);
-    };
     __handlePaginationSelect = (event, selectedEvent) => {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
@@ -388,18 +403,79 @@ export default class DataGrid extends StoreShallowComponent {
 
     __readData = () => {
         if (this.props.pageable) {
-            let start = (this.props.pageSize * (this.activePage - 1));
+            let config = this.__getPaginationConfig();
+            let start = (config.pageSize * (this.activePage - 1));
             this.props.stores[0].read(
                 (response) => {
                     this.setState({
                         rows: response.data,
                         totalCount: response.data.length
                     });
-                }, undefined, start, this.props.pageSize, this.__q, this.__filters);
+                }, undefined, start, config.pageSize, this.__q, this.__filters);
         } else {
             this.props.store.read(undefined, undefined, this.__q, this.__filters);
         }
+    };
 
+    __getPaginationConfig = () => {
+        let config = {
+            pageSize: 20,
+            emptyText: "No data to display."
+        };
+        config = Maps.merge(this.props.pagination, config);
+        return config;
+    };
+    __getModalConfirmConfig = () => {
+        let config = {
+            header: "Are you sure you want to delete?",
+            message: "The selected entry will be deleted.You can not be undone.",
+            okButtonText: "Yes",
+            cancelButtonText: "No"
+        };
+        config = Maps.merge(this.props.modalConfirm, config);
+        return config;
+    };
+    __getToolbarConfig = () => {
+        let config = {
+            create: {
+                visible: false,
+                text: "New",
+                icon: "fa-plus",
+                onClick: this.props.onNewClick
+            },
+            edit: {
+                visible: false,
+                text: "Edit",
+                icon: "fa-pencil",
+                onClick: this.props.onEditClick,
+                disabled: !this.state.hasSelection
+            },
+            delete: {
+                visible: false,
+                text: "Delete",
+                icon: "fa-trash",
+                onClick: this.__showDeleteConfirm,
+                disabled: !this.state.hasSelection
+            }
+        };
+
+        Maps.forEach(this.props.toolbar, (item) => {
+            if (typeof item === "string" || item instanceof String) {
+                if (!(config[item] === undefined)) {
+                    config[item].visible = true;
+                } else {
+                    console.warn("command not found please use create,update,delete or use your custom command");
+                }
+            } else if (typeof item === "object" || item instanceof Object) {
+                if (config[item.name] === undefined) {
+                    config[item.name] = {};
+                }
+                config[item.name].visible = true;
+                Maps.merge(item, config[item.name]);
+            }
+        });
+
+        return config;
     };
 
     /**

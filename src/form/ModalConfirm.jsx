@@ -10,8 +10,17 @@ export default class ModalConfirm extends ShallowComponent {
         onCancelClick: React.PropTypes.func,
         header: React.PropTypes.string,
         message: React.PropTypes.string,
-        show: React.PropTypes.bool
+        show: React.PropTypes.bool,
+        okButtonText: React.PropTypes.string,
+        cancelButtonText: React.PropTypes.string,
     };
+
+
+    static defaultProps = {
+        okButtonText: "Yes",
+        cancelButtonText: "No",
+    };
+
     render() {
         return (
             <Modal show={this.props.show}>
@@ -22,8 +31,8 @@ export default class ModalConfirm extends ShallowComponent {
                     {this.props.message}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.onCancelClick}>İptal</Button>
-                    <Button bsStyle="danger" onClick={this.props.onOkClick}>Evet</Button>
+                    <Button onClick={this.props.onCancelClick}>{this.props.cancelButtonText}</Button>
+                    <Button bsStyle="danger" onClick={this.props.onOkClick}>{this.props.okButtonText}</Button>
                 </Modal.Footer>
             </Modal>
         );
