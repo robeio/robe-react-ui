@@ -1,3 +1,4 @@
+process.env.NODE_ENV = "production";
 const webpack = require("webpack");
 
 /**
@@ -18,17 +19,17 @@ commonSettings.plugins.push(new webpack.optimize.DedupePlugin());
  * @link https://github.com/webpack/docs/wiki/optimization#deduplication
  * @type DedupePlugin
  */
-commonSettings.plugins.push(new webpack.optimize.UglifyJsPlugin());
+// commonSettings.plugins.push(new webpack.optimize.UglifyJsPlugin());
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#minimize
  * @type OccurenceOrderPlugin
  */
-commonSettings.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+// commonSettings.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
 /**
  * https://github.com/webpack/docs/wiki/optimization#chunks
  * @type LimitChunkCountPlugin
  */
-commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }));
+// commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }));
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#chunks
  * @type MinChunkSizePlugin

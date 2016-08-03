@@ -1,12 +1,9 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import FileUploadInput from "upload/FileUploadInput";
-import { Panel, Button } from "react-bootstrap";
+import FileUploadInput from "inputs/upload/FileUploadInput";
+import { Button } from "react-bootstrap";
 
 
-const items = [
-    "0ad7a59a-4727-6a51-e861-7cedbbc46896"
-]
 
 const dataId = "3ae7baac-4e1c-6b63-4c07-b28d5b80821f";
 
@@ -44,8 +41,8 @@ export default class FileUploadInputSample extends ShallowComponent {
                     name="files"
                     id={dataId}
                     display="thumbnail"
+                    label="Dosya Seçimi"
                     request={request}
-                    items={items}
                     onChange={this.onChange}
                 />
                 <Button onClick={this.__onSubmitNew}>Gönder</Button>

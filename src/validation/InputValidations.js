@@ -17,7 +17,6 @@ class InputValidations {
 
     htmlRequired = (value: any) => {
         let message = Application.i18n("validation").required;
-        console.log(value);
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || String(value) === "<div><br></div>") ?
             template(message, {

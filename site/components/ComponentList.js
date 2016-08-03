@@ -128,9 +128,9 @@ class ComponentList {
         components.push({
             header: "FileUploadInput",
             desc: " is an File Upload Component",
-            json: require("../docs/upload/FileUploadInput.json"),
-            sample: require("../samples/upload/FileUploadInputSample"),
-            code: require("../samples/upload/FileUploadInputSample.txt")
+            json: require("../docs/inputs/upload/FileUploadInput.json"),
+            sample: require("../samples/inputs/FileUploadInputSample"),
+            code: require("../samples/inputs/FileUploadInputSample.txt")
         });
 
         components.push({
@@ -165,21 +165,20 @@ class ComponentList {
             code: require("../samples/datagrid/DataGridSample.txt")
         });
 
-        // components.push({
-        //     header: "DataForm",
-        //     desc: "",
-        //     json: require("../docs/form/DataForm"),
-        //     sample: require("../samples/form/DataFormSample"),
-        //     code: require("../samples/form/DataFormSample.txt")
-        // });
-
-        // components.push({
-        //     header: "ModalDataForm",
-        //     desc: " is an ModalDataForm component submit editing data.",
-        //     json: require("../docs/form/ModalDataForm.json"),
-        //     sample: require("../samples/form/ModalDataFormSample"),
-        //     code: require("../samples/form/ModalDataFormSample.txt")
-        // });
+        components.push({
+            header: "DataForm",
+            desc: "is  an DataForm to create or edit data",
+            json: require("../docs/form/DataForm"),
+            sample: require("../samples/form/DataFormSample"),
+            code: require("../samples/form/DataFormSample.txt")
+        });
+        components.push({
+            header: "ModalDataForm",
+            desc: " is an ModalDataForm component submit editing data.",
+            json: require("../docs/form/ModalDataForm.json"),
+            sample: require("../samples/form/ModalDataFormSample"),
+            code: require("../samples/form/ModalDataFormSample.txt")
+        });
         return components;
     }
 
