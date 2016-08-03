@@ -146,9 +146,13 @@
     ]
   },
   {
-    "label": "File",
-    "code": "file",
+    "label": "Dosya Seçimi",
+    "code": "files",
     "type": "file",
-    "required": true
+    "name": "files",
+    "display": "thumbnail",
+    "request": {
+      "url": "http://localhost:3000/files"
+    }
   }
 ]

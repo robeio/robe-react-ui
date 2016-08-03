@@ -12,16 +12,23 @@ export default class FaIconSample extends ShallowComponent {
         return (
             <div>
                 <div>
-                    <span>fa-check-square-o state-icon</span>
+                    <span>FaIcon -> fa-check-square-o state-icon</span>
                     <div>
-                        <FaIcon code={"fa-check-square-o state-icon"} size={"10px"} />
+                        <FaIcon code={"fa-check-square-o state-icon"} />
                     </div>
                 </div>
                 <hr />
                 <div>
-                    <span>FaIcon -> fa-square-o state-icon</span>
+                    <span>FaIcon -> fa-check-square-o state-icon with custom style -> color red</span>
                     <div>
-                        <FaIcon code={"fa-square-o state-icon"} size={"10px"} />
+                        <FaIcon code={"fa-check-square-o state-icon"} style={{ "color": "red" }} />
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <span>FaIcon fa-square-o state-icon size->fa-2x</span>
+                    <div>
+                        <FaIcon code={"fa-square-o state-icon"} size={"fa-2x"} />
                     </div>
                 </div>
                 <hr />

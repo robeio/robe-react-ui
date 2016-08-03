@@ -15,23 +15,23 @@ export default class FaIcon extends ShallowComponent {
          */
         code: React.PropTypes.string.isRequired,
         /**
-         * Size code of the icon
-         * More information : http://fontawesome.io/
+         * Size code of the icon .Use the fa-lg (33% increase), fa-2x, fa-3x, fa-4x, or fa-5x classes.
+         * More information : http://fontawesome.io/examples/#larger
          */
-        size: React.PropTypes.string,
+        size: React.PropTypes.oneOf(["fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x"]),
         /**
          * applies custom style to the icon.
          */
         style: React.PropTypes.object,
         /**
          * Specifies to use fa-fw class or not for fixed icon width and height.
-         * More information : http://fontawesome.io/
+         * More information : http://fontawesome.io/examples/#fixed-width
          */
         fixed: React.PropTypes.bool
     };
 
     static defaultProps = {
-        size: "",
+        size: "fa-lg",
         fixed: true
     };
 
