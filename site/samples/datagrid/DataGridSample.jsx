@@ -35,7 +35,7 @@ export default class DataGridSample extends ShallowComponent {
 
             <span>
             <DataGrid
-                toolbar={["create", "edit", "delete"]}
+                toolbar={["create", "edit", { name: "custom", text: "Custom", icon: "fa-university" }]}
                 columns={this.state.columns}
                 stores={[this.state.store]}
                 ref="table"

@@ -8,7 +8,6 @@ import Table from "react-bootstrap/lib/Table";
 import DataTableBodyRow from "./DataGridBodyRow";
 import Pagination from "react-bootstrap/lib/Pagination";
 import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
-import Glyphicon from "react-bootstrap/lib/Glyphicon";
 import Button from "react-bootstrap/lib/Button";
 import Input from "react-bootstrap/lib/Input";
 import ModalConfirm from "../form/ModalConfirm";
@@ -58,7 +57,12 @@ export default class DataGrid extends StoreShallowComponent {
         /**
          * toolbar for create,edit,delete and custom buttons
          */
-        toolbar: React.PropTypes.any,
+        toolbar: React.PropTypes.arrayOf(
+            React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.object
+            ])
+        ),
         /**
          * ModalConfirm configuration
          */
@@ -74,6 +78,7 @@ export default class DataGrid extends StoreShallowComponent {
         pagination: React.PropTypes.shape({
             pageSize: React.PropTypes.number,
             emptyText: React.PropTypes.string,
+            displayText: React.PropTypes.string,
         }),
     };
 
@@ -105,8 +110,9 @@ export default class DataGrid extends StoreShallowComponent {
         },
         pagination: {
             pageSize: 20,
-            emptyText: "No data to display."
-        },
+            emptyText: "No data to display.",
+            displayText: "Showing {start}-{end} from {total} data items"
+        }
     };
 
     activePage = 1;
@@ -262,7 +268,12 @@ export default class DataGrid extends StoreShallowComponent {
         }
         let pagination;
         if (total !== 0) {
-            pagination = (<span><p className="hidden-xs">{`${total} tanesinden görüntülenen ${start + 1}-${end}`}</p>
+            let displayText = config.displayText;
+            displayText = displayText.replace(/\{start\}/g, (start + 1));
+            displayText = displayText.replace(/\{end\}/g, end);
+            displayText = displayText.replace(/\{total\}/g, total);
+
+            pagination = (<span><p className="hidden-xs">{displayText}</p>
                 <p className="visible-xs">{total} / {start + 1}-{end}</p></span>);
         } else {
             pagination = <p>{config.emptyText}</p>;
@@ -420,7 +431,8 @@ export default class DataGrid extends StoreShallowComponent {
     __getPaginationConfig = () => {
         let config = {
             pageSize: 20,
-            emptyText: "No data to display."
+            emptyText: "No data to display.",
+            displayText: "Showing {start}-{end} from {total} data items"
         };
         config = Maps.merge(this.props.pagination, config);
         return config;
