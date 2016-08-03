@@ -4,6 +4,7 @@ import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
 import Store from "robe-react-commons/lib/stores/Store";
 import RemoteEndPoint from "robe-react-commons/lib/endpoint/RemoteEndPoint";
+import ModalDataForm from "form/ModalDataForm";
 
 
 export default class DataGridSample extends ShallowComponent {
@@ -23,13 +24,18 @@ export default class DataGridSample extends ShallowComponent {
 
         this.state = {
             columns: DataGridModel.columns,
-            store: store
+            store: store,
+            showModal: false,
+            item: {}
         };
     }
 
     render():Object {
         return (
+
+            <span>
             <DataGrid
+                toolbar={["create", "edit", "delete"]}
                 columns={this.state.columns}
                 stores={[this.state.store]}
                 ref="table"
@@ -38,19 +44,49 @@ export default class DataGridSample extends ShallowComponent {
                 onDeleteClick={this.__remove}
                 exportButton={true}
                 pageable={true}
-                pageSize={10}
+                editable={true}
+                pagination={{ emptyText: "No data." }}
+                modalConfirm={{ header: "Please do not delete me." }}
             />
+            <ModalDataForm
+                ref="detailModal"
+                header="Modal Data Form"
+                show={this.state.showModal}
+                onSubmit={this.__onSave}
+                onCancel={this.__onCancel}
+                item={this.state.item}
+                fields={this.state.columns} />
+            </span>
         );
     }
 
     __add = () => {
-    };
-    __edit = ()=> {
-    };
-    __remove = ()=> {
+        let empty = {};
+        this.__showModal(empty);
     };
 
-    __onCancel = ()=> {
-        this.setState({showModal: false});
+    __edit = () => {
+        let selectedRows = this.refs.table.getSelectedRows();
+        if (!selectedRows || !selectedRows[0]) {
+            return;
+        }
+        this.__showModal(selectedRows[0]);
+    };
+
+    __onCancel = () => {
+        this.setState({ showModal: false });
+    };
+
+    __onSave = (oldData, newData, callback) => {
+        console.log("saving ", newData);
+    };
+
+    __remove = () => {
+        let selectedRows = this.refs.table.getSelectedRows();
+        console.log("removing ", selectedRows[0]);
+    };
+
+    __showModal = (newItem) => {
+        this.setState({ showModal: true, item: newItem });
     };
 }
