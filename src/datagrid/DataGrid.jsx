@@ -381,7 +381,7 @@ export default class DataGrid extends StoreShallowComponent {
             if (column.visible !== false) {
                 let filterBtn = column.filter === true ? <i id={`tableColumn-" +${column.code}`} className="fa fa-filter pull-right" aria-hidden="true" onClick={onClick}/> : null;
                 trArr.push(<th key={column.code}>
-                    {column.title}
+                    {column.label}
                     {filterBtn}
                 </th>);
             }
