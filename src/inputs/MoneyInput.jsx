@@ -91,7 +91,7 @@ export default class MoneyInput extends ShallowComponent {
                 value={this.props.value}
                 ref="innerInput"
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-            />);
+                />);
     }
 
     /**
@@ -106,12 +106,15 @@ export default class MoneyInput extends ShallowComponent {
      * Internal onchange handler for filtering numerics.
      */
     __numericFilter(e: Object) {
+        console.log("num", e.target.value);
         let value = e.target.value;
-        let parsedValue = this.__addThousandSeparator(value);
-        let result = this.__isFloat(parsedValue) || parsedValue === "";
+        value = this.__addThousandSeparator(value);
+        let result = this.__isFloat(value) || value === "";
         if (result && this.props.onChange) {
-            e.target.parsedValue = isNaN(value) ? undefined : parsedValue;
-            result = this.props.onChange(e);
+            e.target.parsedValue = value;
+            if (this.props.onChange) {
+                result = this.props.onChange(e);
+            }
         }
         if (!result) {
             e.preventDefault();
@@ -148,10 +151,9 @@ export default class MoneyInput extends ShallowComponent {
             indexTH++;
         }
         output = output.reverse().join("");
-        indexDS = input.indexOf(this.props.decimalSeparator);
-        let thCount = Math.floor((indexTH - 1) / 3);
-        if (indexDS !== -1) {
-            output = output + input.substring((indexDS - 1) + thCount);
+        let fraction = input.split(".")[1];
+        if (fraction !== undefined) {
+            output = output + this.props.decimalSeparator + fraction;
         }
         return output;
     }

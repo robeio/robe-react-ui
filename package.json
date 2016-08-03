@@ -9,7 +9,7 @@
   "scripts": {
     "test": "karma start webpack.config.test.js",
     "testd": "karma start webpack.config.test.dev.js",
-    "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.jsonn",
+    "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
     "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib",
     "site": "webpack --config webpack.config.site.js  --progress --profile --colors",
