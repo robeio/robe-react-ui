@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Robe React UI Components",
   "main": "index.js",
   "engines": {
@@ -11,7 +11,7 @@
     "testd": "karma start webpack.config.test.dev.js",
     "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
-    "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib",
+    "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib  --copy-files",
     "site": "webpack --config webpack.config.site.js  --progress --profile --colors",
     "start": "webpack-dev-server --config webpack.site.dev.js --colors"
   },
