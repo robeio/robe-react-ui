@@ -2,14 +2,9 @@ import React from "react";
 import StoreShallowComponent from "robe-react-commons/lib/components/StoreShallowComponent";
 import Store from "robe-react-commons/lib/stores/Store";
 import is from "is-js";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
-import Table from "react-bootstrap/lib/Table";
 import DataTableBodyRow from "./DataGridBodyRow";
-import Pagination from "react-bootstrap/lib/Pagination";
-import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
 import Button from "react-bootstrap/lib/Button";
-import Input from "react-bootstrap/lib/Input";
+import { Row, Col, Table, Pagination, FormControl , InputGroup, ButtonGroup,  } from "react-bootstrap";
 import ModalConfirm from "../form/ModalConfirm";
 import Filter from "./filter/Filter.jsx";
 import Maps from "robe-react-commons/lib/utils/Maps";
@@ -211,13 +206,16 @@ export default class DataGrid extends StoreShallowComponent {
     __renderSearchInput = () => {
         if (this.props.searchable) {
             return (
-                <Input
-                    addonBefore={<i className="fa fa-search" />}
-                    type="text"
-                    placeholder="Arama"
-                    onChange={this.__onSearchChanged}
-                    ref="input"
-                />
+                <InputGroup>
+                    <FormControl
+                        type="text"
+                        addonBefore={<i className="fa fa-search" />}
+                        type="text"
+                        placeholder="Arama"
+                        onChange={this.__onSearchChanged}
+                        ref="input"
+                    />
+                </InputGroup>
             );
         }
         return null;
