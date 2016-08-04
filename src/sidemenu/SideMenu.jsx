@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import SideMenuSubItem from "./SideMenuSubItem";
 import SideMenuItem from "./SideMenuItem";
 import "./SideMenu.css";
@@ -11,7 +11,7 @@ import "./SideMenu.css";
  * @class SideMenu
  * @extends {ShallowComponent}
  */
-export default class SideMenu extends ShallowComponent {
+export default class SideMenu extends BinderShallowComponent {
 
     /**
      * Properties of the component
@@ -76,7 +76,7 @@ export default class SideMenu extends ShallowComponent {
         return itemComps;
     }
 
-    __onChange = (e: Object, menuItem: Object, subMenuItem: Object) => {
+    __onChange(e: Object, menuItem: Object, subMenuItem: Object) {
         if (subMenuItem === undefined && this.__selectedItem && this.__selectedItem !== menuItem) {
             this.__selectedItem.setState({
                 active: false

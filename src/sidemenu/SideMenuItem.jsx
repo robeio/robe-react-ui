@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import SideMenuSubItem from "./SideMenuSubItem";
 import FaIcon from "../faicon/FaIcon";
 /**
@@ -9,7 +9,7 @@ import FaIcon from "../faicon/FaIcon";
  * @class SideMenuItem
  * @extends {ShallowComponent}
  */
-export default class SideMenuItem extends ShallowComponent {
+export default class SideMenuItem extends BinderShallowComponent {
 
     /**
      * Holds the selected child of the menu
@@ -56,7 +56,7 @@ export default class SideMenuItem extends ShallowComponent {
     }
 
 
-    __onClick = (e: Object) => {
+    __onClick(e: Object) {
         if (!this.state.active) {
             this.setState({
                 active: true
@@ -64,9 +64,9 @@ export default class SideMenuItem extends ShallowComponent {
         }
 
         this.props.onChange(e, this);
-    };
+    }
 
-    __onChange = (e: Object, subMenuItem: Object) => {
+    __onChange(e: Object, subMenuItem: Object) {
         this.clearSelection();
         this.__selectedItem = subMenuItem;
         if (!this.state.active) {
@@ -75,20 +75,20 @@ export default class SideMenuItem extends ShallowComponent {
             });
         }
         this.props.onChange(e, this, subMenuItem);
-    };
+    }
 
     /**
      * Clears the selection of the sublist.
      * Deactivites the selected SideMenuSubItem
      */
-    clearSelection = () => {
+    clearSelection() {
         if (this.__selectedItem) {
             this.__selectedItem.setState({
                 active: false
             });
         }
         this.__selectedItem = undefined;
-    };
+    }
 
     componentDidMount() {
         if (!this.state.active && this.props.selectedItem === this.props.item.path) {

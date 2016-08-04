@@ -52,15 +52,6 @@ export default class DateInput extends ValidationComponent {
         readOnly: false,
         hidden: false
     };
-    /**
-     * Creates an instance of PasswordInput.
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__onChange = this.__onChange.bind(this);
-    }
 
     render() {
         let selected = (is.number(this.props.value)) ? moment(this.props.value) : null;

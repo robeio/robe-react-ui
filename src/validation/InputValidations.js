@@ -9,12 +9,11 @@ class InputValidations {
     required = (value: any) => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */
-        return (value === undefined || value === null || value === "") ?
+        return (value === undefined || value === null || value === "" || value.length === 0) ?
             template(message, {
                 value: value
             }) : undefined;
     }
-
     htmlRequired = (value: any) => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */

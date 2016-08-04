@@ -1,6 +1,8 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckInput from "inputs/CheckInput";
+import InputValidations from "validation/InputValidations";
+
 
 const langs = [
     {
@@ -35,7 +37,7 @@ export default class CheckInputSample extends ShallowComponent {
                     value={this.state.CheckInputSingle}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(undefined, "CheckInputSingle")}
+                    onChange={this.__handleChange.bind(this, "CheckInputSingle")}
                 />
                 <CheckInput
                     label="CheckInput Group"
@@ -43,7 +45,10 @@ export default class CheckInputSample extends ShallowComponent {
                     value={this.state.CheckInputGroup}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(undefined, "CheckInputGroup")}
+                    onChange={this.__handleChange.bind(this, "CheckInputGroup")}
+                    validations={{
+                        required: InputValidations.required,
+                    }}
                 />
             </div>
         );

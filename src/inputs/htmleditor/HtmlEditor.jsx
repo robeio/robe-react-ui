@@ -61,15 +61,7 @@ export default class HtmlEditor extends ValidationComponent {
         readOnly: false,
         hidden: false
     };
-    /**
-     * Creates an instance of TextInput.
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__onChange = this.__onChange.bind(this);
-    }
+
 
     render(): Object {
         return (
@@ -94,13 +86,13 @@ export default class HtmlEditor extends ValidationComponent {
         );
     }
 
-    __onChange = (value: string) => {
+    __onChange(value: string) {
         const e = {};
         e.target = {};
         e.target.parsedValue = value;
 
-        if (this.props.handleChange) {
-            this.props.handleChange(e);
+        if (this.props.onChange) {
+            this.props.onChange(e);
         }
-    };
+    }
 }

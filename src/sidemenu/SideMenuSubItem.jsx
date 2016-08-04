@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import FaIcon from "../faicon/FaIcon";
 
 /**
@@ -8,7 +8,7 @@ import FaIcon from "../faicon/FaIcon";
  * @class SideMenuSubItem
  * @extends {ShallowComponent}
  */
-export default class SideMenuSubItem extends ShallowComponent {
+export default class SideMenuSubItem extends BinderShallowComponent {
 
     constructor(props: Object) {
         super(props);
@@ -35,7 +35,7 @@ export default class SideMenuSubItem extends ShallowComponent {
             </li>
         );
     }
-    __onClick = (e: Object) => {
+    __onClick(e: Object) {
         if (this.state.active) {
             return;
         }
