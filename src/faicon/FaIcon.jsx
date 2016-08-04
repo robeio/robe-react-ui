@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {ShallowComponent} from "robe-react-commons";
 import "./font-awesome/4.6.1/css/font-awesome.min.css";
 
 /**
@@ -15,10 +15,10 @@ export default class FaIcon extends ShallowComponent {
          */
         code: React.PropTypes.string.isRequired,
         /**
-         * Size code of the icon .Use the fa-lg (33% increase), fa-2x, fa-3x, fa-4x, or fa-5x classes.
+         * Size code of the icon. Use fa-sm, fa-lg (33% increase), fa-2x, fa-3x, fa-4x, or fa-5x classes.
          * More information : http://fontawesome.io/examples/#larger
          */
-        size: React.PropTypes.oneOf(["fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x"]),
+        size: React.PropTypes.oneOf(["fa-sm", "fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x"]),
         /**
          * applies custom style to the icon.
          */

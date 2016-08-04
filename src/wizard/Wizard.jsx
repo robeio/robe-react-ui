@@ -149,7 +149,7 @@ export default class Wizard extends BinderShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
-                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" size={"10px"} />
+                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right"/>
                 </PageItem>
             );
         }
@@ -160,7 +160,7 @@ export default class Wizard extends BinderShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
-                    <FaIcon code="fa-arrow-left" size={"10px"} />{this.props.preButtonText}
+                    <FaIcon code="fa-arrow-left"/>{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
             </Pager>
