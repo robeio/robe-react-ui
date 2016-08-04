@@ -1,7 +1,7 @@
 import React from "react";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
-import { FormGroup, ControlLabel, ListGroup, ListGroupItem } from "react-bootstrap";
+import {FormGroup, ControlLabel, ListGroup, ListGroupItem} from "react-bootstrap";
 import "./CheckList.css";
 
 /**
@@ -170,7 +170,7 @@ export default class CheckList extends ValidationComponent {
                 <label
                     style={{ paddingLeft: "2px" }}
                     >
-                    <FaIcon code={`${icon} state-icon`} size={"10px"} />
+                    <FaIcon code={`${icon} state-icon`}/>
                 </label> {text}
                 <input
                     type="hidden"
