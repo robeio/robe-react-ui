@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Robe React UI Components",
   "main": "index.js",
   "engines": {
@@ -96,7 +96,7 @@
     "react-select": "0.9.1",
     "react-star-rating": "1.4.2",
     "react-treebeard": "1.1.2",
-    "robe-react-commons": "1.0.30",
+    "robe-react-commons": "1.0.31",
     "superagent": "^2.1.0"
   }
 }
