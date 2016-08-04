@@ -2,20 +2,20 @@
   "name": "DataGridModel",
   "columns": [
     {
-      "title": "Oid",
+      "label": "Oid",
       "type": "string",
       "code": "oid",
       "tooltip": "Oid",
       "visible": false
     },
     {
-      "title": "Name",
+      "label": "Name",
       "type": "string",
       "code": "name",
       "tooltip": "Name"
     },
     {
-      "title": "Surname",
+      "label": "Surname",
       "type": "string",
       "code": "surname",
       "tooltip": "Surname"

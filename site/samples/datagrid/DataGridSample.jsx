@@ -35,7 +35,7 @@ export default class DataGridSample extends ShallowComponent {
 
             <span>
             <DataGrid
-                toolbar={["create", "edit", "delete"]}
+                toolbar={["create", "edit", { name: "custom", text: "Custom", icon: "fa-university" }]}
                 columns={this.state.columns}
                 stores={[this.state.store]}
                 ref="table"
@@ -45,7 +45,7 @@ export default class DataGridSample extends ShallowComponent {
                 exportButton={true}
                 pageable={true}
                 editable={true}
-                pagination={{ emptyText: "No data." }}
+                pagination={{ emptyText: "No data." , pageSize: 50}}
                 modalConfirm={{ header: "Please do not delete me." }}
             />
             <ModalDataForm
