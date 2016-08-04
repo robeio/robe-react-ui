@@ -45,7 +45,7 @@ export default class DataGridSample extends ShallowComponent {
                 exportButton={true}
                 pageable={true}
                 editable={true}
-                pagination={{ emptyText: "No data." , pageSize: 50}}
+                pagination={{ emptyText: "No data.", pageSize: 50 }}
                 modalConfirm={{ header: "Please do not delete me." }}
             />
             <ModalDataForm
@@ -55,7 +55,8 @@ export default class DataGridSample extends ShallowComponent {
                 onSubmit={this.__onSave}
                 onCancel={this.__onCancel}
                 item={this.state.item}
-                fields={this.state.columns} />
+                fields={this.state.columns}
+            />
             </span>
         );
     }
@@ -77,8 +78,10 @@ export default class DataGridSample extends ShallowComponent {
         this.setState({ showModal: false });
     };
 
-    __onSave = (oldData, newData, callback) => {
+    __onSave = (newData, callback) => {
         console.log("saving ", newData);
+        callback(true);
+        this.state.store.create(newData);
     };
 
     __remove = () => {
