@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {ShallowComponent} from "robe-react-commons";
 import is from "is-js";
 import FaIcon from "../faicon/FaIcon";
 import moment from "moment";
@@ -37,8 +37,8 @@ export default class DataTableBodyRow extends ShallowComponent {
             if (column.visible !== false) {
                 let value = row[column.code];
                 if (column.type === "bool") {
-                    value = value ? <FaIcon size={""} code="fa-check-square-o" /> :
-                        <FaIcon size={""} code="fa-square-o" />;
+                    value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o"/> :
+                        <FaIcon size={"fa-lg"} code="fa-square-o"/>;
                 } else if (column.type === "password") {
                     value = "******";
                 } else if (column.type === "date") {

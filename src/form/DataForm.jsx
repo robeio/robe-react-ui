@@ -1,6 +1,6 @@
 import React from "react";
-import { ShallowComponent, Maps } from "robe-react-commons";
-import { Form } from "react-bootstrap";
+import {ShallowComponent, Maps} from "robe-react-commons";
+import {Form} from "react-bootstrap";
 import ComponentManager from "../app/ComponentManager";
 import InputValidations from "../validation/InputValidations";
 
@@ -113,7 +113,7 @@ export default class DataForm extends ShallowComponent {
             }
             this.__item[code] = this.__filterUndefined(props.value);
         } else {
-            this.__item[code] = this.__filterUndefined(this.__item);
+            this.__item[code] = this.__filterUndefined(this.__item[code]);
         }
         this.__props[code] = props;
         this.state[code] = this.__filterUndefined(this.__item[code]);
@@ -177,9 +177,14 @@ export default class DataForm extends ShallowComponent {
      * @private
      */
     __createElement = (field: Map): Object => {
+        if (field.visible === false) {
+            return null;
+        }
+
         let code = field.code;
         let props = this.__props[code];
         let Component = ComponentManager.findComponentByType(field.type);
+
         return <Component ref={`${code}Ref`} {...props} value={this.state[code]} />;
     }
 
