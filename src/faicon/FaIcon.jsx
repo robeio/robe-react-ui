@@ -31,7 +31,7 @@ export default class FaIcon extends ShallowComponent {
     };
 
     static defaultProps = {
-        size: "fa-lg",
+        size: "fa-sm",
         fixed: true
     };
 

@@ -164,7 +164,7 @@ export default class CheckInput extends ValidationComponent {
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
-                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"}/>
+                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"}/>
                 </label> {text}
                 {input}
             </div>

@@ -170,7 +170,7 @@ export default class CheckList extends ValidationComponent {
                 <label
                     style={{ paddingLeft: "2px" }}
                     >
-                    <FaIcon code={`${icon} state-icon`}/>
+                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"}/>
                 </label> {text}
                 <input
                     type="hidden"
