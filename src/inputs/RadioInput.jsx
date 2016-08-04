@@ -1,8 +1,8 @@
 import React from "react";
-import { Assertions } from "robe-react-commons";
+import {Assertions} from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
-import { FormGroup, ControlLabel } from "react-bootstrap";
+import {FormGroup, ControlLabel} from "react-bootstrap";
 
 
 /**
@@ -142,7 +142,7 @@ export default class RadioInput extends ValidationComponent {
                 <label
                     style={{ paddingLeft: "2px" }}
                 >
-                    <FaIcon code={`${icon} state-icon`} size={"10px"} />
+                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"}/>
                 </label> {text}
                 {input}
             </div>

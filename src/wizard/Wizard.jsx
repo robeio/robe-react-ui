@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {ShallowComponent} from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
@@ -156,7 +156,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
-                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" size={"10px"} />
+                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" size={"fa-lg"}/>
                 </PageItem>
             );
         }
@@ -167,7 +167,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
-                    <FaIcon code="fa-arrow-left" size={"10px"} />{this.props.preButtonText}
+                    <FaIcon code="fa-arrow-left" size={"fa-lg"}/>{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
             </Pager>
