@@ -125,8 +125,8 @@ export default class CheckList extends ValidationComponent {
                             this.__createCheckList(this.props.items) :
                             this.__createCheckListItem(this.props.item)
                     }
-                    {super.validationResult()}
                 </ListGroup>
+                {super.validationResult() }
             </FormGroup>
         );
     }
@@ -169,14 +169,14 @@ export default class CheckList extends ValidationComponent {
             <ListGroupItem style={{ outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={onClick}>
                 <label
                     style={{ paddingLeft: "2px" }}
-                >
+                    >
                     <FaIcon code={`${icon} state-icon`} size={"10px"} />
                 </label> {text}
                 <input
                     type="hidden"
                     value={value}
                     disabled={this.props.disabled}
-                />
+                    />
             </ListGroupItem>
         );
     }
@@ -191,7 +191,7 @@ export default class CheckList extends ValidationComponent {
     isChecked = (value: string): boolean => {
         if (typeof value !== "undefined") {
             return this._hasMultiItem ?
-            this._value.indexOf(value) !== -1 : this._value;
+                this._value.indexOf(value) !== -1 : this._value;
         }
         return this._hasMultiItem ? this._value.length > 0 : this._value;
     };

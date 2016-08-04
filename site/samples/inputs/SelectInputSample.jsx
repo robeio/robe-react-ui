@@ -35,7 +35,7 @@ export default class SelectInputSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     value={this.state.Select}
-                    onChange={this.__handleChange.bind(undefined, "Select")}
+                    onChange={this.__handleChange.bind(this, "Select")}
                 />
                 <SelectInput
                     label="Select Input Multi"
@@ -44,7 +44,7 @@ export default class SelectInputSample extends ShallowComponent {
                     value={this.state.MultiSelect}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(undefined, "MultiSelect")}
+                    onChange={this.__handleChange.bind(this, "MultiSelect")}
                     validations={{
                         required: InputValidations.required
                     }}

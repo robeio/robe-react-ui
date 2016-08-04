@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
@@ -9,7 +9,7 @@ import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
 
-export default class Wizard extends ShallowComponent {
+export default class Wizard extends BinderShallowComponent {
      /**
      * PropTypes of the component.
      *
@@ -50,13 +50,6 @@ export default class Wizard extends ShallowComponent {
             currentStep: this.props.currentStep,
             valid: true
         };
-        this.__renderSteps = this.__renderSteps.bind(this);
-        this.__onClickStepButton = this.__onClickStepButton.bind(this);
-        this.__areStepsValid = this.__areStepsValid.bind(this);
-        this.__renderContent = this.__renderContent.bind(this);
-        this.__handleNextButtonClick = this.__handleNextButtonClick.bind(this);
-        this.__handlePreviousButtonClick = this.__handlePreviousButtonClick.bind(this);
-        this.__renderPager = this.__renderPager.bind(this);
     }
 
     render(): Object {

@@ -1,11 +1,11 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { BinderShallowComponent, Maps, Assertions } from "robe-react-commons";
 import { Alert } from "react-bootstrap";
 
 /**
  * BaseComponent for React Components which will use Validations
  */
-export default class ValidationComponent extends ShallowComponent {
+export default class ValidationComponent extends BinderShallowComponent {
     static propTypes = {
         /**
          * Value of the component

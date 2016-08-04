@@ -1,11 +1,11 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import CheckInput from "inputs/CheckInput";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
 
 import "checkinputtree/CheckInputTree.css";
 
-class CheckInputTree extends ShallowComponent {
+class CheckInputTree extends BinderShallowComponent {
 
     /**
      * PropTypes of the component.
@@ -69,7 +69,7 @@ class CheckInputTree extends ShallowComponent {
                 value={checked}
                 textField={this.props.textField}
                 valueField={this.props.valueField}
-                onChange={this._handleChange}
+                onChange={this.__onChange}
                 ref="innerInput"
             />);
         let itemComp = (
@@ -82,10 +82,10 @@ class CheckInputTree extends ShallowComponent {
         );
         return itemComp;
     }
-    _handleChange = (e: Object) => {
+    __onChange = (e: Object): boolean => {
         if (this.props.parent) {
-            if (this.props.parent._handleChange) {
-                this.props.parent._handleChange(e);
+            if (this.props.parent.__onChange) {
+                this.props.parent.__onChange(e);
             }
         } else {
             if (this.props.onChange) {
@@ -93,8 +93,6 @@ class CheckInputTree extends ShallowComponent {
             }
         }
         let isOwner = e.target.value[0] === this.props.items[this.props.valueField];
-        // TODO varsa kontrolü yap.
-        console.log(e.target.value[0], this.props.items[this.props.valueField], isOwner);
         return true;
     }
 

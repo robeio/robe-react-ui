@@ -1,6 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckList from "inputs/CheckList";
+import InputValidations from "validation/InputValidations";
 
 const langs = [
     {
@@ -46,7 +47,7 @@ export default class CheckListSample extends ShallowComponent {
         super(props);
         this.state = {
             CheckListSingle: true,
-            CheckListGroup: ["en","tr"]
+            CheckListGroup: ["en", "tr"]
         };
     }
 
@@ -55,22 +56,13 @@ export default class CheckListSample extends ShallowComponent {
             <div>
                 <CheckList
                     label="CheckList Group"
-                    item={langs[0]}
-                    value={this.state.CheckListSingle}
-                    textField="value"
-                    valueField="key"
-                    style={{ height: "150px" }}
-                    onChange={this.__handleChange.bind(undefined, "CheckListSingle")}
-                />
-                <CheckList
-                    label="CheckList Group"
                     items={langs}
                     value={this.state.CheckListGroup}
                     textField="value"
                     valueField="key"
                     style={{ width: "150px" }}
-                    onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
-                />
+                    onChange={this.__handleChange.bind(this, "CheckListGroup") }
+                    />
                 <CheckList
                     label="CheckList Group"
                     items={langs}
@@ -78,7 +70,10 @@ export default class CheckListSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     horizontal={true}
-                    onChange={this.__handleChange.bind(undefined, "CheckListGroup")}
+                    onChange={this.__handleChange.bind(this, "CheckListGroup") }
+                    validations={{
+                        required: InputValidations.required
+                    }}
                 />
             </div>
         );

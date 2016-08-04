@@ -77,10 +77,6 @@ export default class RadioInput extends ValidationComponent {
         hidden: false
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     /**
      *
      * render

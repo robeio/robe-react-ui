@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -7,9 +7,9 @@ import Input from "./BaseInput";
  *
  * @export
  * @class TextInput
- * @extends {ShallowComponent}
+ * @extends {BinderShallowComponent}
  */
-export default class TextInput extends ShallowComponent {
+export default class TextInput extends BinderShallowComponent {
     /**
      * Properties of the component
      *
@@ -53,16 +53,6 @@ export default class TextInput extends ShallowComponent {
     };
 
     /**
-     * Creates an instance of TextInput.
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__onChange = this.__onChange.bind(this);
-    }
-
-    /**
      * Renders the component.
      *
      * @returns
@@ -88,7 +78,7 @@ export default class TextInput extends ShallowComponent {
     /**
      * Internal onchange handler.
      */
-    __onChange(e: Object) {
+    __onChange(e: Object): boolean {
         let result = true;
         if (this.props.onChange) {
             result = this.props.onChange(e);

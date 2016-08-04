@@ -1,12 +1,9 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
-import Numeral from "numeral";
-import Turkish from "../../node_modules/numeral/languages/tr";
 import InputGroup from "react-bootstrap/lib/InputGroup";
-// Please look at http://numeraljs.com/
 
-export default class MoneyInput extends ShallowComponent {
+export default class MoneyInput extends BinderShallowComponent {
     /**
      * Properties of the component
      *
@@ -67,18 +64,6 @@ export default class MoneyInput extends ShallowComponent {
         hidden: false
     };
 
-    /**
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__numericFilter = this.__numericFilter.bind(this);
-        if (this.props.decimalSeparator === ",") {
-            Numeral.language("tr", Turkish);
-            Numeral.language("tr");
-        }
-    }
 
     render(): Object {
         return (
@@ -91,7 +76,7 @@ export default class MoneyInput extends ShallowComponent {
                 value={this.props.value}
                 ref="innerInput"
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-                />);
+            />);
     }
 
     /**
@@ -105,8 +90,7 @@ export default class MoneyInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object) {
-        console.log("num", e.target.value);
+    __numericFilter(e: Object): boolean {
         let value = e.target.value;
         value = this.__addThousandSeparator(value);
         let result = this.__isFloat(value) || value === "";

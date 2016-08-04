@@ -1,6 +1,6 @@
 import React from "react";
 import is from "is-js";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -10,7 +10,7 @@ import Input from "./BaseInput";
  * @class NumericInput
  * @extends {ShallowComponent}
  */
-export default class NumericInput extends ShallowComponent {
+export default class NumericInput extends BinderShallowComponent {
 
     /**
      * Properties of the component
@@ -55,15 +55,6 @@ export default class NumericInput extends ShallowComponent {
         hidden: false
     };
 
-    /**
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__numericFilter = this.__numericFilter.bind(this);
-    }
-
     render(): Object {
         return (<Input
             {...this.props}
@@ -85,7 +76,7 @@ export default class NumericInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object) {
+    __numericFilter(e: Object): boolean {
         let result = true;
         let value = e.target.value;
         if (value && !is.numeric(value)) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -7,9 +7,9 @@ import Input from "./BaseInput";
  * Password wrapper for BaseInput
  * @export
  * @class PasswordInput
- * @extends {ShallowComponent}
+ * @extends {BinderShallowComponent}
  */
-export default class PasswordInput extends ShallowComponent {
+export default class PasswordInput extends BinderShallowComponent {
     /**
      * Properties of the component
      *
@@ -53,15 +53,6 @@ export default class PasswordInput extends ShallowComponent {
         hidden: false
     };
 
-    /**
-     * Creates an instance of PasswordInput.
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__onChange = this.__onChange.bind(this);
-    }
     /**
      * render
      * @returns

@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -10,7 +10,7 @@ import Input from "./BaseInput";
  * @class Decimal
  * @extends {ShallowComponent}
  */
-export default class DecimalInput extends ShallowComponent {
+export default class DecimalInput extends BinderShallowComponent {
     /**
      * Properties of the component
      *
@@ -59,15 +59,6 @@ export default class DecimalInput extends ShallowComponent {
         hidden: false
     };
 
-    /**
-     *
-     * @param {Object} props
-     */
-    constructor(props: Object) {
-        super(props);
-        this.__numericFilter = this.__numericFilter.bind(this);
-    }
-
     render(): Object {
         return (<Input
             {...this.props}
@@ -90,7 +81,7 @@ export default class DecimalInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object) {
+    __numericFilter(e: Object): boolean {
         let value = e.target.value;
         let result = this.__isFloat(value) || value === "";
         if (result && this.props.onChange) {
