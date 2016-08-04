@@ -77,8 +77,9 @@
     "webpack-file-changer": "^1.0.0"
   },
   "dependencies": {
-    "jajax": "git+https://github.com/kbukum/jajax.git",
+    "es6-template-strings": "^2.0.0",
     "is-js": "0.1.1",
+    "jajax": "git+https://github.com/kbukum/jajax.git",
     "nprogress": "0.2.0",
     "numeral": "1.5.3",
     "react": "15.2.1",
