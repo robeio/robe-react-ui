@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import "loading/style.css";
+import "./style.css";
 
 export default class Loading extends ShallowComponent {
     static style = {
