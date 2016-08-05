@@ -10,7 +10,7 @@ export default class SideMenuSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            value: []
+
         };
     }
 
@@ -20,7 +20,6 @@ export default class SideMenuSample extends ShallowComponent {
                 <div className="SideMenu-wrapper">
                     <SideMenu
                         items={MenuData}
-                        value={this.state.value}
                         onChange={this.handleChange}
                         ref="checkinput"
                         selectedItem="app/modules/Parameters"
