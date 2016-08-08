@@ -1,6 +1,6 @@
 import { AjaxRequest, Maps } from "robe-react-commons";
+import jajax from "robe-ajax";
 import HttpError from "robe-react-commons/lib/connections/HttpError";
-import jajax from "jajax";
 
 export default class FileManager {
     /**
