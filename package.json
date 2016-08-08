@@ -55,7 +55,7 @@
     "file-loader": "0.9.0",
     "isparta-loader": "2.0.0",
     "json-loader": "^0.5.4",
-    "json-server": "^0.8.16",
+    "json-server": "0.8.8",
     "karma": "1.1.1",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "1.0.1",
@@ -96,7 +96,6 @@
     "react-select": "0.9.1",
     "react-star-rating": "1.4.2",
     "react-treebeard": "1.1.2",
-    "robe-react-commons": "1.0.32",
-    "superagent": "^2.1.0"
+    "robe-react-commons": "1.0.32"
   }
 }

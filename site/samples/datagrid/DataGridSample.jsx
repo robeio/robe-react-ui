@@ -19,6 +19,7 @@ export default class DataGridSample extends ShallowComponent {
             endPoint: new RemoteEndPoint({
                 url: "http://localhost:3000/users"
             }),
+            idField: "id",
             autoLoad: true
         });
 
@@ -82,6 +83,7 @@ export default class DataGridSample extends ShallowComponent {
         console.log("saving ", newData);
         callback(true);
         this.state.store.create(newData);
+        // this.refs.table.__readData();
     };
 
     __remove = () => {
