@@ -1,10 +1,8 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
-import { Input } from "inputs";
-import NumericInput from "inputs/NumericInput";
-import RadioInput from "inputs/RadioInput";
+import {ShallowComponent} from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
+import {Input} from "../../inputs";
 
 export default class Filter extends ShallowComponent {
 
