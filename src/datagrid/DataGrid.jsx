@@ -1,13 +1,12 @@
 import React from "react";
+import is from "is-js";
+import { Row, Col, Table, Pagination, FormControl, InputGroup, ButtonGroup, Button } from "react-bootstrap";
 import StoreShallowComponent from "robe-react-commons/lib/components/StoreShallowComponent";
 import Store from "robe-react-commons/lib/stores/Store";
-import is from "is-js";
+import Maps from "robe-react-commons/lib/utils/Maps";
 import DataTableBodyRow from "./DataGridBodyRow";
-import Button from "react-bootstrap/lib/Button";
-import {Row, Col, Table, Pagination, FormControl, InputGroup, ButtonGroup} from "react-bootstrap";
 import ModalConfirm from "../form/ModalConfirm";
 import Filter from "./filter/Filter.jsx";
-import Maps from "robe-react-commons/lib/utils/Maps";
 import "./style.css";
 import FaIcon from "../faicon/FaIcon";
 

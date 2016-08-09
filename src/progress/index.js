@@ -1,1 +1,1 @@
-export { default as Progress } from "./Progress";
+export { Progress as default } from "./Progress";

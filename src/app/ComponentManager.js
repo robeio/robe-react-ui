@@ -1,4 +1,4 @@
-import Assertions from "../../node_modules/robe-react-commons/lib/utils/Assertions";
+import Assertions from "robe-react-commons/lib/utils/Assertions";
 import * as Input from "../inputs";
 
 /**

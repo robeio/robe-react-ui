@@ -1,1 +1,1 @@
-export { default as CategoryTreeList } from "./CategoryTreeList";
+export { CategoryTreeList as default } from "./CategoryTreeList";

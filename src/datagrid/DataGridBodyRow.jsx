@@ -1,8 +1,8 @@
 import React from "react";
-import {ShallowComponent} from "robe-react-commons";
+import moment from "moment";
+import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import FaIcon from "../faicon/FaIcon";
-import moment from "moment";
 
 export default class DataTableBodyRow extends ShallowComponent {
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
-import { Panel, Row, Col , Thumbnail, Glyphicon } from "react-bootstrap";
+import { Panel, Row, Col, Glyphicon } from "react-bootstrap";
 import "./StackLayout.css";
+
 const style = {
     minHeight: 200
 };
