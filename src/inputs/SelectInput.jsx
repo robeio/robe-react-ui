@@ -1,10 +1,9 @@
 import React from "react";
-import ValidationComponent from "../validation/ValidationComponent";
 import Select from "react-select";
-import FormGroup from "react-bootstrap/lib/FormGroup";
-import ControlLabel from "react-bootstrap/lib/ControlLabel";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 import "react-select/dist/react-select.css";
 
+import ValidationComponent from "../validation/ValidationComponent";
 /**
  * Provide selection in map array data with single or multi choices
  * You can enable multi-value selection by setting multi={true}

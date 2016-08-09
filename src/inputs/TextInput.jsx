@@ -52,6 +52,7 @@ export default class TextInput extends BinderShallowComponent {
         hidden: false
     };
 
+    static refName = "innerInput";
     /**
      * Renders the component.
      *
@@ -63,7 +64,7 @@ export default class TextInput extends BinderShallowComponent {
                 {...this.props}
                 onChange={this.__onChange}
                 type="text"
-                ref="innerInput"
+                ref={TextInput.refName}
             />);
     }
 
@@ -72,7 +73,7 @@ export default class TextInput extends BinderShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs.innerInput.isValid();
+        return this.refs[TextInput.refName].isValid();
     }
 
     /**

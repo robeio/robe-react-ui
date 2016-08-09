@@ -1,11 +1,10 @@
 import React from "react";
 import chai from "chai";
+import TestUtils from "react-addons-test-utils";
 import CheckInput from "inputs/CheckInput";
 import Generator from "../test-utils/Generator";
-import TestUtils from "react-addons-test-utils";
 
 describe("inputs/CheckInput", () => {
-
     const langs = [
         {
             key: "en",

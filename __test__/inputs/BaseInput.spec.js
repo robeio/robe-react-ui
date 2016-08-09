@@ -21,7 +21,6 @@ describe("inputs/BaseInput", () => {
         );
     };
 
-
     it("'props' Controls", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "TextInput Label Text Example");

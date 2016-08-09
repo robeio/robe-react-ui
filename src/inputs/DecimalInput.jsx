@@ -59,11 +59,13 @@ export default class DecimalInput extends BinderShallowComponent {
         hidden: false
     };
 
+    static refName = "innerInput";
+
     render(): Object {
         return (<Input
             {...this.props}
             type="text"
-            ref="innerInput"
+            ref={DecimalInput.refName}
             step={this.props.step}
             value={this.props.value}
             onChange={this.__numericFilter}
@@ -75,7 +77,7 @@ export default class DecimalInput extends BinderShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs.innerInput.isValid();
+        return this.refs[DecimalInput.refName].isValid();
     }
 
     /**
@@ -99,7 +101,7 @@ export default class DecimalInput extends BinderShallowComponent {
         if (input === null || input === undefined) {
             return false;
         }
-        let found = input.match("^[0-9]{1,6}((\\" + this.props.decimalSeperator + ")|(\\" + this.props.decimalSeperator + "\\d{1,2}))?$");
+        let found = input.match(`^[0-9]{1,6}((\\${this.props.decimalSeperator})|(\\${this.props.decimalSeperator}\\d{1,2}))?$`);
         return found !== undefined && found !== null;
     }
 }

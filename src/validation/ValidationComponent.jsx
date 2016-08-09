@@ -43,7 +43,7 @@ export default class ValidationComponent extends BinderShallowComponent {
     }
 
     validationResult(): Object {
-        let alerts = undefined;
+        let alerts;
         let errors = this.__validate();
         this.__valid = (errors.length === 0);
         let messages = [];
@@ -102,7 +102,7 @@ export default class ValidationComponent extends BinderShallowComponent {
             if (this._validations[`${key}_args`]) {
                 let inputValues = this._validations[`${key}_args`];
                 inputValues.push(this.props.value);
-                message = validation.apply(null, inputValues);
+                message = validation.apply(this.props, inputValues);
             } else {
                 message = validation(this.props.value);
             }

@@ -1,7 +1,7 @@
 import React from "react";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
-import {FormGroup, ControlLabel} from "react-bootstrap";
 
 
 /**
@@ -162,9 +162,10 @@ export default class CheckInput extends ValidationComponent {
         return (
             <div value={value} className={`checkbox ${disabled}`} onClick={onClick}>
                 <label
+                    htmlFor
                     style={{ paddingLeft: "2px" }}
                 >
-                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"}/>
+                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"} />
                 </label> {text}
                 {input}
             </div>
@@ -197,7 +198,7 @@ export default class CheckInput extends ValidationComponent {
      * Internal onClick event for Single CheckInput. It is triggered every time.
      * @return {boolean}
      */
-    __onClickSingle() {
+    __onClickSingle(): boolean {
         let value = !this._value;
         let result = this.__callOnChange(value, this._value);
         if (result) {

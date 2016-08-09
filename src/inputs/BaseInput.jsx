@@ -1,9 +1,6 @@
 import React from "react";
+import { FormGroup, InputGroup, ControlLabel, FormControl } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
-import FormGroup from "react-bootstrap/lib/FormGroup";
-import InputGroup from "react-bootstrap/lib/InputGroup";
-import ControlLabel from "react-bootstrap/lib/ControlLabel";
-import FormControl from "react-bootstrap/lib/FormControl";
 import InputValidations from "../validation/InputValidations";
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
@@ -74,6 +71,8 @@ export default class BaseInput extends ValidationComponent {
         hidden: false
     };
 
+    static refName = "innerInput";
+
     /**
      * Max length.
      * @static
@@ -106,7 +105,7 @@ export default class BaseInput extends ValidationComponent {
                         <FormControl
                             {...this.props}
                             bsStyle="error"
-                            ref="innerInput"
+                            ref={BaseInput.refName}
                             value={this.props.value}
                         />
                         {this.props.inputGroupRight}
@@ -121,7 +120,7 @@ export default class BaseInput extends ValidationComponent {
                 <FormControl
                     {...this.props}
                     bsStyle="error"
-                    ref="innerInput"
+                    ref={BaseInput.refName}
                     value={this.props.value}
                 />
                 {super.validationResult()}

@@ -1,5 +1,5 @@
 import React from "react";
-import {ShallowComponent} from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 import "./font-awesome/4.6.1/css/font-awesome.min.css";
 
 /**

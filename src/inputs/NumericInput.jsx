@@ -55,12 +55,14 @@ export default class NumericInput extends BinderShallowComponent {
         hidden: false
     };
 
+    static refName="innerInput";
+
     render(): Object {
         return (<Input
             {...this.props}
             value={this.props.value}
             type="text"
-            ref="innerInput"
+            ref={NumericInput.refName}
             onChange={this.__numericFilter}
         />);
     }
@@ -70,7 +72,7 @@ export default class NumericInput extends BinderShallowComponent {
      * @return true if it is valid.
      */
     isValid(): boolean {
-        return this.refs.innerInput.isValid();
+        return this.refs[NumericInput.refName].isValid();
     }
 
     /**

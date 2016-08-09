@@ -1,7 +1,7 @@
 import React from "react";
+import InputGroup from "react-bootstrap/lib/InputGroup";
 import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
 import Input from "./BaseInput";
-import InputGroup from "react-bootstrap/lib/InputGroup";
 
 export default class MoneyInput extends BinderShallowComponent {
     /**
@@ -64,6 +64,7 @@ export default class MoneyInput extends BinderShallowComponent {
         hidden: false
     };
 
+    static refName="innerInput";
 
     render(): Object {
         return (
@@ -74,7 +75,7 @@ export default class MoneyInput extends BinderShallowComponent {
                 onChange={this.__numericFilter}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
-                ref="innerInput"
+                ref={MoneyInput.refName}
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
             />);
     }
@@ -84,7 +85,7 @@ export default class MoneyInput extends BinderShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs.innerInput.isValid();
+        return this.refs[MoneyInput.refName].isValid();
     }
 
     /**
@@ -123,6 +124,7 @@ export default class MoneyInput extends BinderShallowComponent {
         indexDS--;
         let output = [];
         let indexTH = 1;
+        /* eslint-disable no-continue */
         for (let i = indexDS; i > -1; i--) {
             let char = input.charAt(i);
             if (char === this.props.thousandSeparator) {
