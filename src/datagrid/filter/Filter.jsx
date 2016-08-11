@@ -1,11 +1,33 @@
 import React from "react";
-import {ShallowComponent} from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
-import {Input} from "../../inputs";
+import { Input } from "../../inputs";
 
 export default class Filter extends ShallowComponent {
 
+    /**
+     * Properties of the component
+     *
+     * @static
+     */
+    static propTypes: Map = {
+        /**
+         * Fields Configurations to show style on view.
+         */
+        fields: React.PropTypes.array
+    }
+
+    /**
+     * static props
+     * @type {object}
+     */
+    static defaultProps = {
+        /**
+         * Fields Configurations to show style on view.
+         */
+        fields: []
+    }
     static booleanData = [
         { text: "Hepsi", value: "all" },
         { text: "Evet", value: "true" },
@@ -18,22 +40,30 @@ export default class Filter extends ShallowComponent {
     }
 
     render() {
-        let filterFields = this.__renderFilters(this.props.columns, this.props.visiblePopups);
+        let filterFields = this.__renderFilters(this.props.fields, this.props.visiblePopups);
         if (filterFields === undefined) {
-            return (<span></span>);
+            return <span />;
         }
         return (<span>{filterFields}</span>);
     }
 
-    __renderFilters = (columns, visiblePopups) => {
+    /**
+     *
+     * @param {Array} fields
+     * @param visiblePopups
+     * @returns {*}
+     * @private
+     */
+    __renderFilters(fields: Array, visiblePopups): Array{
         let filterFields = [];
         let hasAtLeast1Filter = false;
-        for (let i = 0; i < columns.length; i++) {
-            let column = columns[i];
+        for (let i = 0; i < fields.length; i++) {
+            let column = fields[i];
+            /* eslint-disable no-continue */
             if (column.visible === false) {
                 continue;
             }
-            let filterField = <span></span>;
+            let filterField = <span />;
             if (column.filter === true) {
                 let colId = `tableColumn-${column.code}`;
                 let show = visiblePopups[column.code] === true;
@@ -72,19 +102,24 @@ export default class Filter extends ShallowComponent {
     __decideFilterField = (column) => {
         let min = null;
         let max = null;
+        let onChange;
+        let maxOnChange;
         switch (column.type) {
             case "bool":
+                onChange = this.__handleChange.bind(undefined,column.code,column.type);
                 return (<Input.RadioInput
                     data={Filter.booleanData}
                     value={this.state[column.code]}
                     dataValueField="value"
                     dataTextField="text"
-                    onChange={this.__handleChange.bind(undefined,column.code,column.type)}
+                    onChange={onChange}
                 />
                 );
             case "number":
                 min = `${column.codecolumn.code}-max-`;
                 max = `${column.codecolumn.code}-min-`;
+                onChange = this.__handleChange.bind(undefined, min, column.type);
+                maxOnChange = this.__handleChange.bind(undefined, max, column.type);
                 return (
                     <span>
                         <Input.NumericInput
@@ -93,7 +128,7 @@ export default class Filter extends ShallowComponent {
                             key={min}
                             value={this.state[min]}
                             ref={min}
-                            onChange={this.__handleChange.bind(undefined, min, column.type)}
+                            onChange={onChange}
                         />
                         <Input.NumericInput
                             label="Bitiş"
@@ -101,11 +136,12 @@ export default class Filter extends ShallowComponent {
                             key={max}
                             value={this.state[max]}
                             ref={max}
-                            onChange={this.__handleChange.bind(undefined, max, column.type)}
+                            onChange={maxOnChange}
                         />
                     </span>);
 
             case "string":
+                onChange = this.__handleChange.bind(undefined, column.code, column.type);
                 return (
                     <Input.BaseInput
                         label="Değer"
@@ -113,12 +149,14 @@ export default class Filter extends ShallowComponent {
                         key={column.code}
                         ref={column.code}
                         value={this.state[column.code]}
-                        onChange={this.__handleChange.bind(undefined, column.code, column.type)}
+                        onChange={onChange}
                     />
                 );
             case "date":
                 min = `${column.code}-max-`;
                 max = `${column.code}-min-`;
+                onChange = this.__handleChange.bind(undefined, min, column.type);
+                maxOnChange = this.__handleChange.bind(undefined, max, column.type);
                 return (
                     <span>
                         <Input.DateInput
@@ -126,14 +164,14 @@ export default class Filter extends ShallowComponent {
                             key={min}
                             ref={min}
                             value={this.state[min]}
-                            onChange={this.__handleChange.bind(undefined, min, column.type)}
+                            onChange={onChange}
                         />
                         <Input.DateInput
                             label="Bitiş"
                             key={max}
                             ref={max}
                             value={this.state[max]}
-                            onChange={this.__handleChange.bind(undefined, max, column.type)}
+                            onChange={maxOnChange}
                         />
                     </span>
                 );

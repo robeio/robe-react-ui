@@ -1,17 +1,20 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {
+    ShallowComponent,
+    Store,
+    RemoteEndPoint,
+    Assertions
+} from "robe-react-commons";
+import ModalDataForm from "form/ModalDataForm";
 import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
-import Store from "robe-react-commons/lib/stores/Store";
-import RemoteEndPoint from "robe-react-commons/lib/endpoint/RemoteEndPoint";
-import ModalDataForm from "form/ModalDataForm";
-
-
 export default class DataGridSample extends ShallowComponent {
     /**
      *
      * @param props
      */
+    static idField = "id";
+
     constructor(props:Object) {
         super(props);
 
@@ -19,27 +22,29 @@ export default class DataGridSample extends ShallowComponent {
             endPoint: new RemoteEndPoint({
                 url: "http://localhost:3000/users"
             }),
-            idField: "id",
+            idField: DataGridSample.idField,
             autoLoad: true
         });
 
         this.state = {
-            columns: DataGridModel.columns,
+            fields: DataGridModel.fields,
             store: store,
             showModal: false,
             item: {}
         };
     }
 
+    static tableRef = "table";
+
     render():Object {
         return (
 
             <span>
             <DataGrid
+                fields={this.state.fields}
+                store={this.state.store}
+                ref={DataGridSample.tableRef}
                 toolbar={["create", "edit", { name: "custom", text: "Custom", icon: "fa-university" }]}
-                columns={this.state.columns}
-                stores={[this.state.store]}
-                ref="table"
                 onNewClick={this.__add}
                 onEditClick={this.__edit}
                 onDeleteClick={this.__remove}
@@ -50,13 +55,12 @@ export default class DataGridSample extends ShallowComponent {
                 modalConfirm={{ header: "Please do not delete me." }}
             />
             <ModalDataForm
-                ref="detailModal"
                 header="Modal Data Form"
                 show={this.state.showModal}
                 onSubmit={this.__onSave}
                 onCancel={this.__onCancel}
                 item={this.state.item}
-                fields={this.state.columns}
+                fields={this.state.fields}
             />
             </span>
         );
@@ -68,7 +72,7 @@ export default class DataGridSample extends ShallowComponent {
     };
 
     __edit = () => {
-        let selectedRows = this.refs.table.getSelectedRows();
+        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
         if (!selectedRows || !selectedRows[0]) {
             return;
         }
@@ -80,14 +84,24 @@ export default class DataGridSample extends ShallowComponent {
     };
 
     __onSave = (newData, callback) => {
-        console.log("saving ", newData);
-        callback(true);
-        this.state.store.create(newData);
-        // this.refs.table.__readData();
+        let id = newData[DataGridSample.idField];
+        if (Assertions.isNotEmpty(id)) {
+            this.state.store.update(this.state.item, newData);
+        } else {
+            this.state.store.create(newData);
+        }
+        if (newData) {
+            callback(true);
+            this.setState({
+                showModal: true
+            });
+        }
+
+        // this.refs[DataGridSample.tableRef].__readData();
     };
 
     __remove = () => {
-        let selectedRows = this.refs.table.getSelectedRows();
+        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
         console.log("removing ", selectedRows[0]);
     };
 

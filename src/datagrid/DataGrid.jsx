@@ -1,9 +1,20 @@
 import React from "react";
 import is from "is-js";
-import {Row, Col, Table, Pagination, FormControl, InputGroup, ButtonGroup, Button} from "react-bootstrap";
-import StoreShallowComponent from "robe-react-commons/lib/components/StoreShallowComponent";
-import Store from "robe-react-commons/lib/stores/Store";
-import Maps from "robe-react-commons/lib/utils/Maps";
+import {
+    Store,
+    StoreShallowComponent,
+    Maps
+} from "robe-react-commons";
+import {
+    Row,
+    Col,
+    Table,
+    Pagination,
+    FormControl,
+    InputGroup,
+    ButtonGroup,
+    Button
+} from "react-bootstrap";
 import DataTableBodyRow from "./DataGridBodyRow";
 import ModalConfirm from "../form/ModalConfirm";
 import Filter from "./filter/Filter";
@@ -21,6 +32,23 @@ export default class DataGrid extends StoreShallowComponent {
      */
     static propTypes: Map = {
         /**
+         * Fields Configurations to show style on view.
+         */
+        fields: React.PropTypes.array,
+        /**
+         * set one store
+         */
+        store: React.PropTypes.object,
+        /**
+         * toolbar for create,edit,delete and custom buttons
+         */
+        toolbar: React.PropTypes.arrayOf(
+            React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.object
+            ])
+        ),
+        /**
          * Callback for new button click
          */
         onNewClick: React.PropTypes.func,
@@ -33,6 +61,31 @@ export default class DataGrid extends StoreShallowComponent {
          */
         onDeleteClick: React.PropTypes.func,
         /**
+         * show export data flag
+         */
+        exportButton: React.PropTypes.bool,
+        /**
+         * Make DataGrid as readonly
+         */
+        editable: React.PropTypes.bool,
+        /**
+         * pagination configuration
+         */
+        pagination: React.PropTypes.shape({
+            pageSize: React.PropTypes.number,
+            emptyText: React.PropTypes.string,
+            displayText: React.PropTypes.string
+        }),
+        /**
+         * ModalConfirm configuration
+         */
+        modalConfirm: React.PropTypes.shape({
+            header: React.PropTypes.string,
+            message: React.PropTypes.string,
+            okButtonText: React.PropTypes.string,
+            cancelButtonText: React.PropTypes.string
+        }),
+        /**
          * Callback for row selection
          */
         onSelection: React.PropTypes.func,
@@ -41,41 +94,15 @@ export default class DataGrid extends StoreShallowComponent {
          */
         pageable: React.PropTypes.bool,
         /**
-         * Make DataGrid as readonly
-         */
-        editable: React.PropTypes.bool,
-        /**
          * enable/disable searchable
          */
-        searchable: React.PropTypes.bool,
-        /**
-         * toolbar for create,edit,delete and custom buttons
-         */
-        toolbar: React.PropTypes.arrayOf(
-            React.PropTypes.oneOfType([
-                React.PropTypes.string,
-                React.PropTypes.object
-            ])
-        ),
-        /**
-         * ModalConfirm configuration
-         */
-        modalConfirm: React.PropTypes.shape({
-            header: React.PropTypes.string,
-            message: React.PropTypes.string,
-            okButtonText: React.PropTypes.string,
-            cancelButtonText: React.PropTypes.string,
-        }),
-        /**
-         * pagination configuration
-         */
-        pagination: React.PropTypes.shape({
-            pageSize: React.PropTypes.number,
-            emptyText: React.PropTypes.string,
-            displayText: React.PropTypes.string,
-        }),
+        searchable: React.PropTypes.bool
     };
 
+    /**
+     * static props
+     * @type {object}
+     */
     static defaultProps = {
         editable: true,
         searchable: true,
@@ -116,7 +143,9 @@ export default class DataGrid extends StoreShallowComponent {
     pageSize = 20;
 
     constructor(props: Object) {
-        super(props);
+        super({
+            stores: [props.store]
+        });
 
         this.state = {
             rows: [],
@@ -124,12 +153,14 @@ export default class DataGrid extends StoreShallowComponent {
             hasSelection: false,
             modalDeleteConfirm: false,
             visiblePopups: {},
+            counter: 0
         };
+
         this.activePage = 1;
 
-        let columns = this.props.columns;
-        if (!columns) {
-            console.warn("columns not found.");
+        let fields = this.props.fields;
+        if (!fields) {
+            console.warn("fields not found.");
         }
     }
 
@@ -145,25 +176,23 @@ export default class DataGrid extends StoreShallowComponent {
                     </Col>
 
                 </Row>
-
                 <Filter
-                    columns={this.props.columns}
+                    fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
                 />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                     <tr>
-                        {this.__generateHeader(this.props.columns)}
+                        {this.__generateHeader(this.props.fields)}
                     </tr>
                     </thead>
                     <tbody>
-                    {this.__generateRows(this.props.columns, this.state.rows)}
+                    {this.__generateRows(this.props.fields, this.state.rows)}
                     </tbody>
                 </Table>
                 {this.__renderPagination()}
                 {this.__renderModalConfirm()}
-
             </Col>
         );
     }
@@ -180,7 +209,11 @@ export default class DataGrid extends StoreShallowComponent {
         return selections;
     }
 
-    __renderToolbar = () => {
+    /**
+     * @returns {Object}
+     * @private
+     */
+    __renderToolbar = (): Object => {
         if (!this.props.editable) {
             return null;
         }
@@ -202,7 +235,11 @@ export default class DataGrid extends StoreShallowComponent {
         );
     };
 
-    __renderSearchInput = () => {
+    /**
+     * @returns {Object}
+     * @private
+     */
+    __renderSearchInput = (): Object => {
         if (this.props.searchable) {
             return (
                 <InputGroup>
@@ -219,6 +256,9 @@ export default class DataGrid extends StoreShallowComponent {
         return null;
     };
 
+    /**
+     * @private
+     */
     __onDeleteConfirm = () => {
         this.props.onDeleteClick();
         this.__hideDeleteConfirm();
@@ -227,17 +267,26 @@ export default class DataGrid extends StoreShallowComponent {
             hasSelection: false
         });
     };
+    /**
+     * @private
+     */
     __showDeleteConfirm = () => {
         this.setState({
             modalDeleteConfirm: true
         });
     };
 
+    /**
+     * @private
+     */
     __hideDeleteConfirm = () => {
         this.setState({
             modalDeleteConfirm: false
         });
     };
+    /**
+     * @private
+     */
     __renderModalConfirm = () => {
         let config = this.__getModalConfirmConfig();
         return (
@@ -249,7 +298,11 @@ export default class DataGrid extends StoreShallowComponent {
             />);
     };
 
-    __renderPagination = () => {
+    /**
+     * @returns {Object}
+     * @private
+     */
+    __renderPagination = (): Object => {
         if (!this.props.pageable) {
             return null;
         }
@@ -329,29 +382,53 @@ export default class DataGrid extends StoreShallowComponent {
     };
 
 
+    /**
+     * @private
+     */
     __pageSizeChange = (e) => {
         this.pageSize = parseInt(e.target.value, 10);
         this.__readData();
     };
+
+    /**
+     * @private
+     */
     __handlePaginationSelect = (event, selectedEvent) => {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
     };
 
-    __generateHeader = (columns) => {
+    /**
+     * @param {Array<Object>} fields
+     * @returns {Array<Object>}
+     * @private
+     */
+    __generateHeader = (fields: Array<Object>): Array<Object> => {
         let trArr = [];
-        for (let i = 0; i < columns.length; i++) {
-            const column = columns[i];
+        for (let i = 0; i < fields.length; i++) {
+            const column = fields[i];
             if (column.type === "upload") {
                 continue;
             }
             let onClick = this.__openFilterPopups.bind(undefined, column.code);
             if (column.visible !== false) {
-                let filterBtn = column.filter === true ? <i id={`tableColumn-" +${column.code}`} className="fa fa-filter pull-right" aria-hidden="true" onClick={onClick}/> : null;
-                trArr.push(<th key={column.code}>
-                    {column.label}
-                    {filterBtn}
-                </th>);
+                let filterBtn = column.filter === true ? (
+                    <i
+                        id={`tableColumn-" +${column.code}`}
+                        className="fa fa-filter pull-right"
+                        aria-hidden="true"
+                        onClick={onClick}
+                    />
+                ) : null;
+
+                trArr.push(
+                    <th
+                        key={column.code}
+                    >
+                        {column.label}
+                        {filterBtn}
+                    </th>
+                );
             }
         }
 
@@ -376,7 +453,7 @@ export default class DataGrid extends StoreShallowComponent {
         this.__readData();
     };
 
-    __generateRows = (columns, rows) => {
+    __generateRows = (fields, rows) => {
         if (!rows) {
             return null;
         }
@@ -393,7 +470,7 @@ export default class DataGrid extends StoreShallowComponent {
             rowsArr.push(
                 <DataTableBodyRow
                     key={row.oid} resources={this.props.resources}
-                    columns={columns}
+                    fields={fields}
                     data={row}
                     onSelection={this.__onSelection}
                 />);
@@ -436,7 +513,7 @@ export default class DataGrid extends StoreShallowComponent {
     __readData = () => {
         if (this.props.pageable) {
             let start = (this.pageSize * (this.activePage - 1));
-            this.props.stores[0].read(
+            this.props.store.read(
                 (response) => {
                     this.setState({
                         rows: response.data,
@@ -510,12 +587,10 @@ export default class DataGrid extends StoreShallowComponent {
         return config;
     };
 
-    componentDidMount = () => {
-        for (let i = 0; i < this.stores.length; i++) {
-            this.stores[i].register(this);
-        }
+    componentDidMount() {
+        super.componentDidMount();
         this.pageSize = this.props.pagination.pageSize;
-    };
+    }
 
     /**
      * Do not implement
@@ -524,7 +599,8 @@ export default class DataGrid extends StoreShallowComponent {
     triggerChange(store: Store) {
         this.setState({
             rows: store.getResult().data,
-            totalCount: store.getResult().data.length
+            totalCount: store.getResult().data.length,
+            counter: this.state.counter + 1
         });
     }
 }
