@@ -2,7 +2,7 @@ import React from "react";
 import is from "is-js";
 import {
     Store,
-    StoreShallowComponent,
+    BinderStoreShallowComponent,
     Maps
 } from "robe-react-commons";
 import {
@@ -24,7 +24,7 @@ import FaIcon from "../faicon/FaIcon";
 /**
  * TODO removing un used css
  */
-export default class DataGrid extends StoreShallowComponent {
+export default class DataGrid extends BinderStoreShallowComponent {
     /**
      * Properties of the component
      *
@@ -35,6 +35,10 @@ export default class DataGrid extends StoreShallowComponent {
          * Fields Configurations to show style on view.
          */
         fields: React.PropTypes.array,
+        /**
+         * Holds extra props of components if need.
+         */
+        propsOfFields: React.PropTypes.object,
         /**
          * set one store
          */
@@ -213,7 +217,7 @@ export default class DataGrid extends StoreShallowComponent {
      * @returns {Object}
      * @private
      */
-    __renderToolbar = (): Object => {
+    __renderToolbar(): Object {
         if (!this.props.editable) {
             return null;
         }
@@ -233,13 +237,13 @@ export default class DataGrid extends StoreShallowComponent {
                 {actions}
             </ButtonGroup>
         );
-    };
+    }
 
     /**
      * @returns {Object}
      * @private
      */
-    __renderSearchInput = (): Object => {
+    __renderSearchInput(): Object {
         if (this.props.searchable) {
             return (
                 <InputGroup>
@@ -248,46 +252,46 @@ export default class DataGrid extends StoreShallowComponent {
                         addonBefore={<i className="fa fa-search" />}
                         placeholder="Arama"
                         onChange={this.__onSearchChanged}
-                        ref="input"
                     />
                 </InputGroup>
             );
         }
         return null;
-    };
+    }
 
     /**
      * @private
      */
-    __onDeleteConfirm = () => {
+    __onDeleteConfirm() {
         this.props.onDeleteClick();
         this.__hideDeleteConfirm();
 
         this.setState({
             hasSelection: false
         });
-    };
+    }
     /**
      * @private
      */
-    __showDeleteConfirm = () => {
+    __showDeleteConfirm() {
         this.setState({
             modalDeleteConfirm: true
         });
-    };
+    }
 
     /**
      * @private
      */
-    __hideDeleteConfirm = () => {
+    __hideDeleteConfirm() {
         this.setState({
             modalDeleteConfirm: false
         });
-    };
+    }
+
     /**
      * @private
      */
-    __renderModalConfirm = () => {
+    __renderModalConfirm() {
         let config = this.__getModalConfirmConfig();
         return (
             <ModalConfirm
@@ -296,13 +300,13 @@ export default class DataGrid extends StoreShallowComponent {
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
             />);
-    };
+    }
 
     /**
      * @returns {Object}
      * @private
      */
-    __renderPagination = (): Object => {
+    __renderPagination(): Object {
         if (!this.props.pageable) {
             return null;
         }
@@ -334,16 +338,12 @@ export default class DataGrid extends StoreShallowComponent {
                 <Row>
                     <Col xs={4} className="datagrid-table-pagination-buttons">
 
-                        <ButtonGroup
-                            style={{ color: "#337ab7" }} className="pull-left hidden-xs" bsSize="small">
-                            <Button bsSize="small" onClick={this.__readData}><FaIcon code="fa-refresh"/></Button>
+                        <ButtonGroup style={{ color: "#337ab7" }} className="pull-left hidden-xs" bsSize="small">
+                            <Button bsSize="small" onClick={this.__readData}><FaIcon code="fa-refresh" /></Button>
                             <Button disabled>Limit:</Button>
-                            <Button active={this.pageSize === 20} onClick={this.__pageSizeChange}
-                                    value="20">20</Button>
-                            <Button active={this.pageSize === 50} onClick={this.__pageSizeChange}
-                                    value="50">50</Button>
-                            <Button active={this.pageSize === 100} onClick={this.__pageSizeChange}
-                                    value="100">100</Button>
+                            <Button active={this.pageSize === 20} onClick={this.__pageSizeChange} value="20">20</Button>
+                            <Button active={this.pageSize === 50} onClick={this.__pageSizeChange} value="50">50</Button>
+                            <Button active={this.pageSize === 100} onClick={this.__pageSizeChange} value="100">100</Button>
                         </ButtonGroup>
                     </Col>
                     <Col xs={4} className="datagrid-table-pagination-buttons text-center">
@@ -385,15 +385,15 @@ export default class DataGrid extends StoreShallowComponent {
     /**
      * @private
      */
-    __pageSizeChange = (e) => {
+    __pageSizeChange(e) {
         this.pageSize = parseInt(e.target.value, 10);
         this.__readData();
-    };
+    }
 
     /**
      * @private
      */
-    __handlePaginationSelect = (event, selectedEvent) => {
+    __handlePaginationSelect(event, selectedEvent) {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
     };
@@ -403,7 +403,7 @@ export default class DataGrid extends StoreShallowComponent {
      * @returns {Array<Object>}
      * @private
      */
-    __generateHeader = (fields: Array<Object>): Array<Object> => {
+    __generateHeader(fields: Array<Object>): Array<Object> {
         let trArr = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
@@ -433,9 +433,9 @@ export default class DataGrid extends StoreShallowComponent {
         }
 
         return (trArr);
-    };
+    }
 
-    __openFilterPopups = (code) => {
+    __openFilterPopups(code) {
         let isVisible = this.state.visiblePopups[code];
         let shows = {};
         shows[code] = !isVisible;
@@ -444,16 +444,16 @@ export default class DataGrid extends StoreShallowComponent {
         });
     };
 
-    __onFilterChanged = (filterState) => {
+    __onFilterChanged(filterState) {
         let filters = [];
         Maps.forEach(filterState.filters, (a) => {
             filters.push(a);
         });
         this.__filters = filters.join(",");
         this.__readData();
-    };
+    }
 
-    __generateRows = (fields, rows) => {
+    __generateRows(fields, rows) {
         if (!rows) {
             return null;
         }
@@ -476,15 +476,15 @@ export default class DataGrid extends StoreShallowComponent {
                 />);
         }
         return rowsArr;
-    };
+    }
 
     __onSearchChanged = (event) => {
         this.__q = event.target.value;
         this.activePage = 1;
         this.__readData();
-    };
+    }
 
-    __onSelection = (selection) => {
+    __onSelection(selection) {
         if (this.selection !== undefined) {
             if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
@@ -508,9 +508,9 @@ export default class DataGrid extends StoreShallowComponent {
         if (this.props.onSelection) {
             this.props.onSelection(this.selection.props.data);
         }
-    };
+    }
 
-    __readData = () => {
+    __readData() {
         if (this.props.pageable) {
             let start = (this.pageSize * (this.activePage - 1));
             this.props.store.read(
@@ -525,7 +525,7 @@ export default class DataGrid extends StoreShallowComponent {
         }
     };
 
-    __getPaginationConfig = () => {
+    __getPaginationConfig() {
         let config = {
             pageSize: this.pageSize,
             emptyText: "No data to display.",
@@ -533,8 +533,9 @@ export default class DataGrid extends StoreShallowComponent {
         };
         config = Maps.merge(this.props.pagination, config);
         return config;
-    };
-    __getModalConfirmConfig = () => {
+    }
+
+    __getModalConfirmConfig() {
         let config = {
             header: "Are you sure you want to delete?",
             message: "The selected entry will be deleted.You can not be undone.",
@@ -543,8 +544,9 @@ export default class DataGrid extends StoreShallowComponent {
         };
         config = Maps.merge(this.props.modalConfirm, config);
         return config;
-    };
-    __getToolbarConfig = () => {
+    }
+
+    __getToolbarConfig() {
         let config = {
             create: {
                 visible: false,
@@ -585,7 +587,7 @@ export default class DataGrid extends StoreShallowComponent {
         });
 
         return config;
-    };
+    }
 
     componentDidMount() {
         super.componentDidMount();

@@ -15,7 +15,7 @@ const commonSettings = require("./webpack.config.common.js")("/site", "/build", 
  * Json Server
  * @type {config|exports|module.exports}
  */
-const ConfigUtils = require("./ConfigUtil");
+const JsonServer = require("./config/JsonServer");
 
 /**
  * @link https://webpack.github.io/docs/configuration.html#cache
@@ -48,7 +48,8 @@ commonSettings.devtool = "inline-source-map";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
-ConfigUtils.createJsonServer(3001, commonSettings.paths.root + "/testdb.json", "/files", "temp");
+const server = new JsonServer(3001);
+server.route("testdb.json").upload("/files", "temp").start();
 
 module.exports = function configure(config) {
     config.set({

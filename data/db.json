@@ -1,21 +1,21 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Hasan",
       "surname": "Mumin",
       "email": "hasanmuminn@gmail.com"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Seray",
-      "surname": "Uzgur",
+      "surname": "Uzgu",
       "email": "serayuzgur@gmail.com"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Kamil",
-      "surname": "Büküm",
+      "surname": "Bükü",
       "email": "kamilbukum@gmail.com"
     }
   ]

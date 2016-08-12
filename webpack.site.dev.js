@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
-const ConfigUtils = require("./ConfigUtil");
+const JsonServer = require("./config/JsonServer");
 
 
 const babelOptions = {
@@ -61,6 +61,7 @@ webPackConfig.plugins.push(new CopyWebpackPlugin([
 webPackConfig.plugins.push(new CachePlugin({}));
 
 
-ConfigUtils.createJsonServer(3000, "data/db.json", "/files", "temp");
+const server = new JsonServer(3000);
+server.route("data/db.json").upload("/files", "temp").start();
 
 module.exports = webPackConfig;

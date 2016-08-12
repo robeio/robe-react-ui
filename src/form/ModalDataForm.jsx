@@ -44,7 +44,7 @@ export default class ModalDataForm extends ShallowComponent {
         submitButtonText: React.PropTypes.string,
         showCancelButton: React.PropTypes.bool,
         showSaveButton: React.PropTypes.bool
-    }
+    };
 
     /**
      * defaultProps
@@ -64,6 +64,7 @@ export default class ModalDataForm extends ShallowComponent {
     doNotSubmit = false;
 
     static dataFormRef = "dataform";
+
     constructor(props) {
         super(props);
         this.componentWillReceiveProps(props);

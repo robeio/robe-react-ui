@@ -14,14 +14,14 @@ function InitConfiguration(src, build, test, lib, babelOptions) {
         node_modules: path.join(__dirname, "/node_modules")
     };
 
-    if(!babelOptions) {
+    if (!babelOptions) {
         babelOptions = {
             presets: [
                 "react",
                 "es2015",
                 "stage-0"
             ]
-        }
+        };
     }
     const conf = {
         paths: paths, // reference path variable
