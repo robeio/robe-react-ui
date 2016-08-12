@@ -1,9 +1,11 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import Modal from "react-bootstrap/lib/Modal";
-import Button from "react-bootstrap/lib/Button";
+import {
+    Modal,
+    Button,
+    Alert
+} from "react-bootstrap";
 import DataForm from "./DataForm";
-import Alert from "react-bootstrap/lib/Alert";
 
 export default class ModalDataForm extends ShallowComponent {
 
@@ -29,10 +31,13 @@ export default class ModalDataForm extends ShallowComponent {
          */
         fields: React.PropTypes.array.isRequired,
         /**
+         * Holds extra props of components if need.
+         */
+        propsOfFields: React.PropTypes.object,
+        /**
          * Holds Component props and component if need.
          */
         show: React.PropTypes.boolean,
-        props: React.PropTypes.object,
         onSubmit: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func,
         cancelButtonText: React.PropTypes.string,
@@ -58,6 +63,7 @@ export default class ModalDataForm extends ShallowComponent {
 
     doNotSubmit = false;
 
+    static dataFormRef = "dataform";
     constructor(props) {
         super(props);
         this.componentWillReceiveProps(props);
@@ -70,9 +76,9 @@ export default class ModalDataForm extends ShallowComponent {
                 </Modal.Header>
                 <Modal.Body>
                     <DataForm
-                        ref="dataform"
+                        ref={ModalDataForm.dataFormRef}
                         fields={this.props.fields}
-                        props={this.props.props}
+                        props={this.props.propsOfFields}
                         item={this.props.item}
                         onSubmit={this.__submitForm}
                     />
@@ -120,7 +126,7 @@ export default class ModalDataForm extends ShallowComponent {
         }
         this.doNotSubmit = true;
 
-        let item = this.refs.dataform.submit();
+        let item = this.refs[ModalDataForm.dataFormRef].submit();
         if (item && this.props.onSubmit) {
             this.props.onSubmit(item, this.__onComplete);
         } else {

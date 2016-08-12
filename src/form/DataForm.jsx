@@ -26,7 +26,7 @@ export default class DataForm extends ShallowComponent {
         /**
          * Holds extra props of components if need.
          */
-        props: React.PropTypes.object,
+        propsOfFields: React.PropTypes.object,
         /**
          * Form is collapsible or not
          */
@@ -79,7 +79,7 @@ export default class DataForm extends ShallowComponent {
             this.__item = props.item;
         }
         this.state = {};
-        this.__init(this.props.fields, this.props.props);
+        this.__init(this.props.fields, this.props.propsOfFields);
     }
 
     __init(fields, config) {

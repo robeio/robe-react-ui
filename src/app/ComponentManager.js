@@ -64,6 +64,7 @@ class ComponentGenerator {
             case "radio":
             case "RadioInput":
                 return Input.RadioInput;
+            case "list":
             case "select":
             case "SelectInput":
                 return Input.SelectInput;
