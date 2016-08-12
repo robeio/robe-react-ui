@@ -13,23 +13,27 @@ function fixPath(absolutePath) {
 }
 function Server(port) {
     this.__port = port;
-    this.__server = jsonServer.create();
-    this.__server.use(jsonServer.defaults());
+    const server = jsonServer.create();
+    server.use(jsonServer.defaults());
+    const routes = [];
 
     this.route = (routePath) => {
-        this.__server.use(jsonServer.router(fixPath(routePath)));
+        routes.push(jsonServer.router(fixPath(routePath)));
         return this;
     };
 
     this.upload = (requestPath, tempFolder) => {
         tempFolder = fixPath(tempFolder);
-        multerImpl(this.__server, requestPath, tempFolder);
+        multerImpl(server, requestPath, tempFolder);
         return this;
     }
 
     this.start = () => {
+        for (var key in routes) {
+            server.use(routes[key]);
+        }
         /* eslint-disable prefer-template */
-        this.__server.listen(this.__port, () => {
+        server.listen(this.__port, () => {
             console.log("Server is running on " + this.__port + " port");
         });
     };

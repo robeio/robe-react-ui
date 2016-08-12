@@ -98,7 +98,6 @@ module.exports = (app, requestPath, tempFolder) => {
         var body = "";
         request.on("data", (data) => {
             body += data;
-
             // Too much POST data, kill the connection!
             // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
             if (body.length > 1e6) {
@@ -107,7 +106,11 @@ module.exports = (app, requestPath, tempFolder) => {
         });
 
         request.on("end", () => {
-            res.status(200).send(JSON.parse(body));
+            const file = JSON.parse(body);
+                var filePath = path.normalize(file.path);
+                fs.unlinkSync(filePath);
+                fs.unlinkSync(filePath + ".json");
+            res.status(200).send(file);
             // use post['blah'], etc.
         });
        // You can send any response to the user here
