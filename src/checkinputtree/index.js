@@ -1,1 +1,1 @@
-export { CheckInputTree as default } from "./CheckInputTree";
+export { default, default as CheckInputTree } from "./CheckInputTree";
