@@ -1,1 +1,2 @@
-export { default as InputValidations } from "./InputValidations";
+export { InputValidations as default } from "./InputValidations";
+export { default as ValidationComponent } from "./ValidationComponent";

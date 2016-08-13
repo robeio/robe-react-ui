@@ -337,7 +337,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
             <Col className="datagrid-pagination-row">
                 <Row>
                     <Col xs={4} className="datagrid-table-pagination-buttons">
-
                         <ButtonGroup style={{ color: "#337ab7" }} className="pull-left hidden-xs" bsSize="small">
                             <Button bsSize="small" onClick={this.__readData}><FaIcon code="fa-refresh" /></Button>
                             <Button disabled>Limit:</Button>
@@ -396,7 +395,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
     __handlePaginationSelect(event, selectedEvent) {
         this.activePage = selectedEvent.eventKey;
         this.__readData();
-    };
+    }
 
     /**
      * @param {Array<Object>} fields
@@ -442,7 +441,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
         this.setState({
             visiblePopups: shows
         });
-    };
+    }
 
     __onFilterChanged(filterState) {
         let filters = [];
@@ -590,8 +589,8 @@ export default class DataGrid extends BinderStoreShallowComponent {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         this.pageSize = this.props.pagination.pageSize;
+        super.componentDidMount();
     }
 
     /**

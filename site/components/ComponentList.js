@@ -124,6 +124,26 @@ class ComponentList {
             code: require("../samples/notification/NotificationSample.txt")
         });
 
+        /**
+         Toast.info(message, title, timeOut, callback);
+         Toast.success(message, title, timeOut, callback);
+         Toast.warning(message, title, timeOut, callback);
+         Toast.error(message, title, timeOut, callback);
+         */
+        components.push({
+            header: "Toast",
+            desc: " is an Toast Message Sample component.",
+            json: {
+                methods: [
+                    { name: "info", description: "Toast.info(message, title, timeOut, callback)" },
+                    { name: "success", description: "Toast.success(message, title, timeOut, callback)" },
+                    { name: "warning", description: "Toast.warning(message, title, timeOut, callback)" },
+                    { name: "error", description: "Toast.error(message, title, timeOut, callback)" }
+                ]
+            },
+            sample: require("../samples/toast/ToastSample"),
+            code: require("../samples/toast/ToastSample.txt")
+        });
 
         components.push({
             header: "FileUploadInput",
