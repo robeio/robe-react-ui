@@ -23,7 +23,7 @@ export default class SideMenuSubItem extends BinderShallowComponent {
         let size = "fa-sm";
         let className = this.state.active ? "SideMenu-subitem-active" : "SideMenu-subitem";
         return (
-            <li style={{ display: "block" }}className={className}>
+            <li style={{ display: "block" }} className={className}>
                 <div
                     to={item.path}
                     style={{ display: "block" }}
