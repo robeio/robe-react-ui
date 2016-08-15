@@ -1,4 +1,3 @@
-
 const webpack = require("webpack");
 const FileChanger = require("webpack-file-changer");
 const path = require("path");

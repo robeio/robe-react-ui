@@ -1,11 +1,10 @@
 import React from "react";
 import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
-import CheckInput from "inputs/CheckInput";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
+import CheckInput from "../inputs/CheckInput";
+import "./CheckInputTree.css";
 
-import "checkinputtree/CheckInputTree.css";
-
-class CheckInputTree extends BinderShallowComponent {
+export default class CheckInputTree extends BinderShallowComponent {
 
     /**
      * PropTypes of the component.
@@ -118,5 +117,3 @@ class CheckInputTree extends BinderShallowComponent {
         return true;
     }
 }
-
-module.exports = CheckInputTree;

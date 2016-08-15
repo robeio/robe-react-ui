@@ -1,12 +1,12 @@
 import { Application } from "robe-react-commons";
-import validationMessages from "./validationMessages.json";
 import template from "es6-template-strings";
+import validationMessages from "./validationMessages.json";
 
 class InputValidations {
     constructor() {
         Application.loadI18n(validationMessages);
     }
-    required = (value: any) => {
+    required = (value: any): string => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || value.length === 0) ?
@@ -14,7 +14,7 @@ class InputValidations {
                 value: value
             }) : undefined;
     }
-    htmlRequired = (value: any) => {
+    htmlRequired = (value: any): string => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || String(value) === "<div><br></div>") ?
@@ -22,7 +22,7 @@ class InputValidations {
                 value: value
             }) : undefined;
     }
-    minValue = (minValue: number, value: number) => {
+    minValue = (minValue: number, value: number): string => {
         let message = Application.i18n("validation").minValue;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value < minValue) ?
@@ -31,7 +31,7 @@ class InputValidations {
                 value: value
             }) : undefined;
     }
-    maxValue = (maxValue: number, value: number) => {
+    maxValue = (maxValue: number, value: number): string => {
         let message = Application.i18n("validation").maxValue;
 
         /* eslint-disable no-eval */
@@ -41,7 +41,7 @@ class InputValidations {
                 value: value
             }) : undefined;
     }
-    minLength = (min: number, value: string) => {
+    minLength = (min: number, value: string): string => {
         let message = Application.i18n("validation").minLength;
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */
@@ -50,7 +50,7 @@ class InputValidations {
                 min: min
             }) : undefined;
     }
-    maxLength = (max: number, value: string) => {
+    maxLength = (max: number, value: string): string => {
         let message = Application.i18n("validation").maxLength;
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */

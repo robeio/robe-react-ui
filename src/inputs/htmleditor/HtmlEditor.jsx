@@ -1,7 +1,7 @@
 import React from "react";
-import ValidationComponent from "../../validation/ValidationComponent";
 import ReactQuill from "react-quill";
 import Col from "react-bootstrap/lib/Col";
+import ValidationComponent from "../../validation/ValidationComponent";
 import "./quill.snow.css";
 import "./HtmlEditor.css";
 import HtmlEditorItems from "./HtmlEditorItems.json";
@@ -62,6 +62,9 @@ export default class HtmlEditor extends ValidationComponent {
         hidden: false
     };
 
+    static refName = "editor";
+    static toolbarRefName = "toolbar";
+
 
     render(): Object {
         return (
@@ -70,12 +73,12 @@ export default class HtmlEditor extends ValidationComponent {
                 <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
                     <ReactQuill.Toolbar
                         key="toolbar"
-                        ref="toolbar"
+                        ref={HtmlEditor.toolbarRefName}
                         items={HtmlEditorItems}
                     />
                     <Col
                         key="editor"
-                        ref="editor"
+                        ref={HtmlEditor.refName}
                         style={{ height: this.props.height }}
                         className="quill-contents"
                     />

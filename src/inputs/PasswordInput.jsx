@@ -42,6 +42,7 @@ export default class PasswordInput extends BinderShallowComponent {
         hidden: React.PropTypes.bool
     };
 
+    static refName="innerInput";
     /**
      * defaultProps
      * @static
@@ -63,7 +64,7 @@ export default class PasswordInput extends BinderShallowComponent {
                 {...this.props}
                 onChange={this.__onChange}
                 type="password"
-                ref="innerInput"
+                ref={PasswordInput.refName}
             />);
     }
 
@@ -72,7 +73,7 @@ export default class PasswordInput extends BinderShallowComponent {
      * @return true if it is valid.
      */
     isValid(): boolean {
-        return this.refs.innerInput.isValid();
+        return this.refs[PasswordInput.refName].isValid();
     }
     /**
      * Internal onchange handler.

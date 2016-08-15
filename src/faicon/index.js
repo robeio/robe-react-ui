@@ -1,1 +1,1 @@
-export { default as FaIcon } from "./FaIcon";
+export { default, default as FaIcon } from "./FaIcon";

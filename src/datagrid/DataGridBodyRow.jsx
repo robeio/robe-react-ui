@@ -1,11 +1,14 @@
 import React from "react";
-import {ShallowComponent} from "robe-react-commons";
+import moment from "moment";
+import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import FaIcon from "../faicon/FaIcon";
-import moment from "moment";
 
 export default class DataTableBodyRow extends ShallowComponent {
 
+    /**
+     * @type {func}
+     */
     static propTypes = {
         onClick: React.PropTypes.func
     };
@@ -19,10 +22,10 @@ export default class DataTableBodyRow extends ShallowComponent {
     }
 
     render(): Object {
-        return this.__generateRow(this.props.columns, this.props.data);
+        return this.__generateRow(this.props.fields, this.props.data);
     }
 
-    __generateRow = (columns: Array<Map>, row: Object) => {
+    __generateRow(fields: Array<Map>, row: Object): Object {
         if (!row) {
             return null;
         }
@@ -32,8 +35,8 @@ export default class DataTableBodyRow extends ShallowComponent {
             return null;
         }
         let rowColumns = [];
-        for (let j = 0; j < columns.length; j++) {
-            let column = columns[j];
+        for (let j = 0; j < fields.length; j++) {
+            let column = fields[j];
             if (column.visible !== false) {
                 let value = row[column.code];
                 if (column.type === "bool") {

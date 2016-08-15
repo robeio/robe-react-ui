@@ -1,6 +1,6 @@
 {
   "name": "DataGridModel",
-  "columns": [
+  "fields": [
     {
       "label": "id",
       "type": "string",

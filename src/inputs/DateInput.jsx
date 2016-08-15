@@ -1,11 +1,10 @@
 import React from "react";
 import is from "is-js";
-import ValidationComponent from "../validation/ValidationComponent";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import FormGroup from "react-bootstrap/lib/FormGroup";
-import ControlLabel from "react-bootstrap/lib/ControlLabel";
-import "../../node_modules/react-datepicker/dist/react-datepicker.css";
+import ValidationComponent from "../validation/ValidationComponent";
 import "./DateInput.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
@@ -53,15 +52,17 @@ export default class DateInput extends ValidationComponent {
         hidden: false
     };
 
-    render() {
+    static refName="innerInput";
+
+    render(): Object {
         let selected = (is.number(this.props.value)) ? moment(this.props.value) : null;
-        let label = this.props.label === undefined ? <span></span> :
+        let label = this.props.label === undefined ? <span /> :
             <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
         return (
             <FormGroup hidden={this.props.hidden} >
                 {label}
                 <DatePicker
-                    ref="input"
+                    ref={DateInput.refName}
                     className="form-control form-control-error"
                     selected={selected}
                     disabled={this.props.disabled}
@@ -82,7 +83,7 @@ export default class DateInput extends ValidationComponent {
     /**
      * Internal onchange handler.
      */
-    __onChange(selection: Object) {
+    __onChange(selection: Object): boolean {
         let e = {};
         e.target = {};
 

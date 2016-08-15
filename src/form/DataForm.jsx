@@ -1,6 +1,11 @@
 import React from "react";
-import {ShallowComponent, Maps} from "robe-react-commons";
-import {Form} from "react-bootstrap";
+import {
+    ShallowComponent,
+    Maps
+} from "robe-react-commons";
+import {
+    Form
+} from "react-bootstrap";
 import ComponentManager from "../app/ComponentManager";
 import InputValidations from "../validation/InputValidations";
 
@@ -26,7 +31,7 @@ export default class DataForm extends ShallowComponent {
         /**
          * Holds extra props of components if need.
          */
-        props: React.PropTypes.object,
+        propsOfFields: React.PropTypes.object,
         /**
          * Form is collapsible or not
          */
@@ -79,7 +84,7 @@ export default class DataForm extends ShallowComponent {
             this.__item = props.item;
         }
         this.state = {};
-        this.__init(this.props.fields, this.props.props);
+        this.__init(this.props.fields, this.props.propsOfFields);
     }
 
     __init(fields, config) {
@@ -108,13 +113,11 @@ export default class DataForm extends ShallowComponent {
             if (props.items) {
                 this.state[`$$_items_${code}`] = props.items;
             }
-            if (props.assets) {
-                this.state[`$$_assets_${code}`] = props.assets;
-            }
             this.__item[code] = this.__filterUndefined(props.value);
         } else {
             this.__item[code] = this.__filterUndefined(this.__item[code]);
         }
+
         this.__props[code] = props;
         this.state[code] = this.__filterUndefined(this.__item[code]);
         this.__setValidations(field);
@@ -203,7 +206,6 @@ export default class DataForm extends ShallowComponent {
     };
 
     /**
-     *
      * Called when any component changed.
      * @param code
      * @param e
@@ -218,9 +220,6 @@ export default class DataForm extends ShallowComponent {
         if (props) {
             if (props.items) {
                 state[`$$_items_${code}`] = props.items;
-            }
-            if (props.assets) {
-                state[`$$_assets_${code}`] = props.assets;
             }
         }
         this.setState(state);

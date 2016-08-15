@@ -1,7 +1,7 @@
 import React from "react";
+import { FormGroup, ControlLabel, ListGroup, ListGroupItem } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
-import {FormGroup, ControlLabel, ListGroup, ListGroupItem} from "react-bootstrap";
 import "./CheckList.css";
 
 /**
@@ -168,15 +168,16 @@ export default class CheckList extends ValidationComponent {
         return (
             <ListGroupItem style={{ outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={onClick}>
                 <label
+                    htmlFor
                     style={{ paddingLeft: "2px" }}
-                    >
-                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"}/>
+                >
+                    <FaIcon code={`${icon} state-icon`} size={"fa-sm"} />
                 </label> {text}
                 <input
                     type="hidden"
                     value={value}
                     disabled={this.props.disabled}
-                    />
+                />
             </ListGroupItem>
         );
     }

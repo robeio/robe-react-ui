@@ -1,4 +1,4 @@
-import Assertions from "../../node_modules/robe-react-commons/lib/utils/Assertions";
+import Assertions from "robe-react-commons/lib/utils/Assertions";
 import * as Input from "../inputs";
 
 /**
@@ -64,6 +64,7 @@ class ComponentGenerator {
             case "radio":
             case "RadioInput":
                 return Input.RadioInput;
+            case "list":
             case "select":
             case "SelectInput":
                 return Input.SelectInput;

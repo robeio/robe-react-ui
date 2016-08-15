@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
-import FaIcon from "faicon/FaIcon";
-import NotificationItem from "notification/NotificationItem";
-import "notification/Notification.css";
+import FaIcon from "../faicon/FaIcon";
+import NotificationItem from "./NotificationItem";
+import "./Notification.css";
 /**
  * Notification is a view component for representing all notifications via a clickable icon and count label.
  * Also a popup will show the details of the notifications.
