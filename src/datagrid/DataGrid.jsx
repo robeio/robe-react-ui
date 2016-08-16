@@ -5,25 +5,22 @@ import {
     BinderStoreShallowComponent,
     Maps
 } from "robe-react-commons";
+
 import {
     Row,
     Col,
-    Table,
-    Pagination,
-    FormControl,
-    InputGroup,
-    ButtonGroup,
-    Button
+    Table
 } from "react-bootstrap";
+
 import DataTableBodyRow from "./DataGridBodyRow";
 import ModalConfirm from "../form/ModalConfirm";
 import Filter from "./filter/Filter";
+import SearchField from "./toolbar/SearchField";
+import ActionButtons from "./toolbar/ActionButtons";
+import Pagination from "./Pagination";
 import "./style.css";
-import FaIcon from "../faicon/FaIcon";
 
-/**
- * TODO removing un used css
- */
+
 export default class DataGrid extends BinderStoreShallowComponent {
     /**
      * Properties of the component
@@ -73,14 +70,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
          */
         editable: React.PropTypes.bool,
         /**
-         * pagination configuration
-         */
-        pagination: React.PropTypes.shape({
-            pageSize: React.PropTypes.number,
-            emptyText: React.PropTypes.string,
-            displayText: React.PropTypes.string
-        }),
-        /**
          * ModalConfirm configuration
          */
         modalConfirm: React.PropTypes.shape({
@@ -100,7 +89,17 @@ export default class DataGrid extends BinderStoreShallowComponent {
         /**
          * enable/disable searchable
          */
-        searchable: React.PropTypes.bool
+        searchable: React.PropTypes.bool,
+
+        /**
+         * show/hide refresh button
+         */
+        refreshable: React.PropTypes.bool,
+
+        /**
+         * show/hide Page size buttons
+         */
+        pageSizeButtons: React.PropTypes.array
     };
 
     /**
@@ -110,6 +109,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
     static defaultProps = {
         editable: true,
         searchable: true,
+        refreshable: false,
         toolbar: {
             create: {
                 visible: false,
@@ -132,11 +132,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
             message: "The selected entry will be deleted.You can not be undone.",
             okButtonText: "Yes",
             cancelButtonText: "No"
-        },
-        pagination: {
-            pageSize: 20,
-            emptyText: "No data to display.",
-            displayText: "Showing {start}-{end} from {total} data items"
         }
     };
 
@@ -169,14 +164,15 @@ export default class DataGrid extends BinderStoreShallowComponent {
     }
 
     render(): Object {
+        console.log("table",this.pageSize);
         return (
             <Col className="datagrid">
                 <Row>
                     <Col xs={5} sm={5} lg={4}>
-                        {this.__renderSearchInput()}
+                        <SearchField onChange={this.__onSearchChanged} value={this.state.filter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        {this.__renderToolbar()}
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
                     </Col>
 
                 </Row>
@@ -184,19 +180,30 @@ export default class DataGrid extends BinderStoreShallowComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                />
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
-                    <tr>
-                        {this.__generateHeader(this.props.fields)}
-                    </tr>
+                        <tr>
+                            {this.__generateHeader(this.props.fields) }
+                        </tr>
                     </thead>
                     <tbody>
-                    {this.__generateRows(this.props.fields, this.state.rows)}
+                        {this.__generateRows(this.props.fields, this.state.rows) }
                     </tbody>
                 </Table>
-                {this.__renderPagination()}
-                {this.__renderModalConfirm()}
+                <Pagination
+                    {...this.props.pagination}
+                    activePage={this.activePage}
+                    visible={this.props.pageable}
+                    pageSizeButtons={this.props.pageSizeButtons}
+                    pageSize={this.pageSize}
+                    onChange={this.__handlePaginationSelect}
+                    onPageSizeChange={this.__pageSizeChange}
+                    refreshable={this.props.onRefresh}
+                    onRefresh={this.__readData}
+                    totalCount={this.state.totalCount}
+                />
+                {this.__renderModalConfirm() }
             </Col>
         );
     }
@@ -205,7 +212,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
      * Selected rows
      * @returns {Array}
      */
-    getSelectedRows(): Object<Array> {
+    getSelectedRows(): Object {
         let selections = [];
         if (this.selection) {
             selections.push(this.selection.props.data);
@@ -213,51 +220,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
         return selections;
     }
 
-    /**
-     * @returns {Object}
-     * @private
-     */
-    __renderToolbar(): Object {
-        if (!this.props.editable) {
-            return null;
-        }
-
-        let config = this.__getToolbarConfig();
-        let actions = [];
-        Maps.forEach(config, (item) => {
-            if (item.visible) {
-                let action = <Button disabled={item.disabled} onClick={item.onClick}><FaIcon code={item.icon} size={"fa-lg"}/><Col componentClass="span" className="hidden-xs"> {item.text}</Col></Button>;
-                actions.push(action);
-            }
-        });
-
-
-        return (
-            <ButtonGroup className="pull-right">
-                {actions}
-            </ButtonGroup>
-        );
-    }
-
-    /**
-     * @returns {Object}
-     * @private
-     */
-    __renderSearchInput(): Object {
-        if (this.props.searchable) {
-            return (
-                <InputGroup>
-                    <FormControl
-                        type="text"
-                        addonBefore={<i className="fa fa-search" />}
-                        placeholder="Arama"
-                        onChange={this.__onSearchChanged}
-                    />
-                </InputGroup>
-            );
-        }
-        return null;
-    }
 
     /**
      * @private
@@ -299,87 +261,8 @@ export default class DataGrid extends BinderStoreShallowComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
-
-    /**
-     * @returns {Object}
-     * @private
-     */
-    __renderPagination(): Object {
-        if (!this.props.pageable) {
-            return null;
-        }
-        let config = this.__getPaginationConfig();
-        let items = Math.ceil(this.state.totalCount / config.pageSize);
-
-        let start = (config.pageSize * (this.activePage - 1));
-        let end = start + config.pageSize;
-        let total = this.state.totalCount;
-
-        if (end > total) {
-            end = total;
-        }
-        let pagination;
-        if (total !== 0) {
-            let displayText = config.displayText;
-            displayText = displayText.replace(/\{start\}/g, (start + 1));
-            displayText = displayText.replace(/\{end\}/g, end);
-            displayText = displayText.replace(/\{total\}/g, total);
-
-            pagination = (<span><p className="hidden-xs">{displayText}</p>
-                <p className="visible-xs">{total} / {start + 1}-{end}</p></span>);
-        } else {
-            pagination = <p>{config.emptyText}</p>;
-        }
-
-        return (
-            <Col className="datagrid-pagination-row">
-                <Row>
-                    <Col xs={4} className="datagrid-table-pagination-buttons">
-                        <ButtonGroup style={{ color: "#337ab7" }} className="pull-left hidden-xs" bsSize="small">
-                            <Button bsSize="small" onClick={this.__readData}><FaIcon code="fa-refresh" /></Button>
-                            <Button disabled>Limit:</Button>
-                            <Button active={this.pageSize === 20} onClick={this.__pageSizeChange} value="20">20</Button>
-                            <Button active={this.pageSize === 50} onClick={this.__pageSizeChange} value="50">50</Button>
-                            <Button active={this.pageSize === 100} onClick={this.__pageSizeChange} value="100">100</Button>
-                        </ButtonGroup>
-                    </Col>
-                    <Col xs={4} className="datagrid-table-pagination-buttons text-center">
-                        {pagination}
-                    </Col>
-                    <Col xs={4} className="datagrid-table-pagination-buttons">
-                        <Pagination
-                            style={{ margin: "0" }}
-                            className="pull-right hidden-xs"
-                            prev
-                            next
-                            first
-                            last
-                            ellipsis
-                            boundaryLinks
-                            activePage={this.activePage}
-                            onSelect={this.__handlePaginationSelect}
-                            items={items}
-                            maxButtons={5}
-                        />
-                        <Pagination
-                            style={{ margin: "0" }}
-                            className="visible-xs pull-right"
-                            prev
-                            next
-                            ellipsis={false}
-                            boundaryLinks
-                            activePage={this.activePage}
-                            onSelect={this.__handlePaginationSelect}
-                            items={items}
-                            maxButtons={1}
-                        />
-                    </Col>
-                </Row>
-            </Col>);
-    };
-
 
     /**
      * @private
@@ -392,8 +275,8 @@ export default class DataGrid extends BinderStoreShallowComponent {
     /**
      * @private
      */
-    __handlePaginationSelect(event, selectedEvent) {
-        this.activePage = selectedEvent.eventKey;
+    __handlePaginationSelect(event) {
+        this.activePage = event;
         this.__readData();
     }
 
@@ -417,13 +300,11 @@ export default class DataGrid extends BinderStoreShallowComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                    />
+                        />
                 ) : null;
 
                 trArr.push(
-                    <th
-                        key={column.code}
-                    >
+                    <th key={column.code} >
                         {column.label}
                         {filterBtn}
                     </th>
@@ -463,16 +344,15 @@ export default class DataGrid extends BinderStoreShallowComponent {
             let row = rows[i];
             if (!is.object(row)) {
                 console.warn("Undefined data row at:", i, row);
-                continue;
+            } else {
+                rowsArr.push(
+                    <DataTableBodyRow
+                        key={row.oid} resources={this.props.resources}
+                        fields={fields}
+                        data={row}
+                        onSelection={this.__onSelection}
+                        />);
             }
-
-            rowsArr.push(
-                <DataTableBodyRow
-                    key={row.oid} resources={this.props.resources}
-                    fields={fields}
-                    data={row}
-                    onSelection={this.__onSelection}
-                />);
         }
         return rowsArr;
     }
@@ -510,38 +390,23 @@ export default class DataGrid extends BinderStoreShallowComponent {
     }
 
     __readData() {
+        console.log("readdata");
         if (this.props.pageable) {
             let start = (this.pageSize * (this.activePage - 1));
             this.props.store.read(
                 (response) => {
                     this.setState({
                         rows: response.data,
-                        totalCount: response.data.length
+                        totalCount: response.totalCount
                     });
                 }, undefined, start, this.pageSize, this.__q, this.__filters);
         } else {
             this.props.store.read(undefined, undefined, this.__q, this.__filters);
         }
-    };
-
-    __getPaginationConfig() {
-        let config = {
-            pageSize: this.pageSize,
-            emptyText: "No data to display.",
-            displayText: "Showing {start}-{end} from {total} data items"
-        };
-        config = Maps.merge(this.props.pagination, config);
-        return config;
     }
 
     __getModalConfirmConfig() {
-        let config = {
-            header: "Are you sure you want to delete?",
-            message: "The selected entry will be deleted.You can not be undone.",
-            okButtonText: "Yes",
-            cancelButtonText: "No"
-        };
-        config = Maps.merge(this.props.modalConfirm, config);
+        let config = Maps.merge(this.props.modalConfirm, DataGrid.defaultProps.modalConfirm);
         return config;
     }
 
@@ -569,14 +434,14 @@ export default class DataGrid extends BinderStoreShallowComponent {
             }
         };
 
-        Maps.forEach(this.props.toolbar, (item) => {
-            if (typeof item === "string" || item instanceof String) {
+        Maps.forEach(this.props.toolbar, (item: Object) => {
+            if (is.string(item)) {
                 if (!(config[item] === undefined)) {
                     config[item].visible = true;
                 } else {
                     console.warn("command not found please use create,update,delete or use your custom command");
                 }
-            } else if (typeof item === "object" || item instanceof Object) {
+            } else if (is.hash(item)) {
                 if (config[item.name] === undefined) {
                     config[item.name] = {};
                 }
@@ -588,10 +453,13 @@ export default class DataGrid extends BinderStoreShallowComponent {
         return config;
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.pageSize = this.props.pagination.pageSize;
-        super.componentDidMount();
     }
+    componentDidMount(){
+        this.__readData();
+    }
+
 
     /**
      * Do not implement
@@ -600,8 +468,8 @@ export default class DataGrid extends BinderStoreShallowComponent {
     triggerChange(store: Store) {
         this.setState({
             rows: store.getResult().data,
-            totalCount: store.getResult().data.length,
-            counter: this.state.counter + 1
+            totalCount: store.getResult().totalCount
         });
+        this.forceUpdate();
     }
 }

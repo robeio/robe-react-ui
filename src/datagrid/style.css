@@ -52,6 +52,7 @@
 
 .datagrid-pagination-row {
     padding-left: 5px;
+    padding-top: 5px;
     border: 1px solid #ddd;
     font-size: 12px;
 }

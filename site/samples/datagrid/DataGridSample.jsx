@@ -18,7 +18,14 @@ export default class DataGridSample extends ShallowComponent {
     constructor(props:Object) {
         super(props);
 
-        let store = new Store({
+        let store1 = new Store({
+            endPoint: new RemoteEndPoint({
+                url: "http://localhost:3000/users"
+            }),
+            idField: DataGridSample.idField,
+            autoLoad: true
+        });
+          let store2 = new Store({
             endPoint: new RemoteEndPoint({
                 url: "http://localhost:3000/users"
             }),
@@ -28,7 +35,8 @@ export default class DataGridSample extends ShallowComponent {
 
         this.state = {
             fields: DataGridModel.fields,
-            store: store,
+            store1: store1,
+            store2: store2,
             showModal: false,
             item: {}
         };
@@ -42,9 +50,9 @@ export default class DataGridSample extends ShallowComponent {
             <span>
             <DataGrid
                 fields={this.state.fields}
-                store={this.state.store}
+                store={this.state.store1}
                 ref={DataGridSample.tableRef}
-                toolbar={["create", "edit", { name: "custom", text: "Custom", icon: "fa-university" }]}
+                toolbar={["create", "edit","delete"]}
                 onNewClick={this.__add}
                 onEditClick={this.__edit}
                 onDeleteClick={this.__remove}
@@ -53,6 +61,21 @@ export default class DataGridSample extends ShallowComponent {
                 editable={true}
                 pagination={{ emptyText: "No data.", pageSize: 50 }}
                 modalConfirm={{ header: "Please do not delete me." }}
+            />
+            <DataGrid
+                fields={this.state.fields}
+                store={this.state.store2}
+                ref={DataGridSample.tableRef}
+                toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
+                onNewClick={this.__add}
+                onEditClick={this.__edit}
+                onDeleteClick={this.__remove}
+                exportButton={true}
+                pageable={true}
+                editable={true}
+                pagination={{ pageSize: 3 }}
+                modalConfirm={{ header: "Please do not delete me." }}
+                pageSizeButtons={["1", "2", "3"]}
             />
             <ModalDataForm
                 header="Modal Data Form"
