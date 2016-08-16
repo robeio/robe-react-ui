@@ -164,7 +164,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
     }
 
     render(): Object {
-        console.log("table",this.pageSize);
         return (
             <Col className="datagrid">
                 <Row>
@@ -172,7 +171,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.filter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
                     </Col>
 
                 </Row>
@@ -180,7 +179,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    />
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -261,7 +260,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
@@ -300,7 +299,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                        />
+                    />
                 ) : null;
 
                 trArr.push(
@@ -351,7 +350,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
                         fields={fields}
                         data={row}
                         onSelection={this.__onSelection}
-                        />);
+                    />);
             }
         }
         return rowsArr;
@@ -390,7 +389,6 @@ export default class DataGrid extends BinderStoreShallowComponent {
     }
 
     __readData() {
-        console.log("readdata");
         if (this.props.pageable) {
             let start = (this.pageSize * (this.activePage - 1));
             this.props.store.read(
@@ -456,7 +454,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
     componentWillMount() {
         this.pageSize = this.props.pagination.pageSize;
     }
-    componentDidMount(){
+    componentDidMount() {
         this.__readData();
     }
 

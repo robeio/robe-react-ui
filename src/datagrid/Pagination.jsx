@@ -40,7 +40,6 @@ export default class Pagination extends BinderShallowComponent {
     * @returns {Object}
     */
     render(): Object {
-
         if (!this.props.visible) {
             return <span />;
         }
@@ -53,7 +52,6 @@ export default class Pagination extends BinderShallowComponent {
         if (end > total) {
             end = total;
         }
-        console.log("pagination", this.props.totalCount ,items);
         let paginationText;
         if (total !== 0) {
             let text = this.props.displayText.replace(/\{start\}/g, (start + 1)).replace(/\{end\}/g, end).replace(/\{total\}/g, total);
