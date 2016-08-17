@@ -64,7 +64,7 @@ export default class Pagination extends BinderShallowComponent {
         for (let i = 0; i < this.props.pageSizeButtons.length; i++) {
             let value = this.props.pageSizeButtons[i];
             pageSizeButtons.push(
-                <Button active={this.props.pageSize === parseInt(value, 10)} onClick={this.props.onPageSizeChange} value={value}>
+                <Button key={i} active={this.props.pageSize === parseInt(value, 10)} onClick={this.props.onPageSizeChange} value={value}>
                     {value}
                 </Button>);
         }

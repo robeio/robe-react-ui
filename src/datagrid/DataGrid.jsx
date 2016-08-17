@@ -43,12 +43,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
         /**
          * toolbar for create,edit,delete and custom buttons
          */
-        toolbar: React.PropTypes.arrayOf(
-            React.PropTypes.oneOfType([
-                React.PropTypes.string,
-                React.PropTypes.object
-            ])
-        ),
+        toolbar: React.PropTypes.array,
         /**
          * Callback for new button click
          */
@@ -346,7 +341,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
             } else {
                 rowsArr.push(
                     <DataTableBodyRow
-                        key={row.oid} resources={this.props.resources}
+                        key={i} resources={this.props.resources}
                         fields={fields}
                         data={row}
                         onSelection={this.__onSelection}
