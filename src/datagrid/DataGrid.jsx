@@ -455,6 +455,7 @@ export default class DataGrid extends BinderStoreShallowComponent {
         this.pageSize = this.props.pagination.pageSize;
     }
     componentDidMount() {
+        super.componentDidMount();
         this.__readData();
     }
 

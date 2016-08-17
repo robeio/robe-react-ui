@@ -1,19 +1,23 @@
 import React from "react";
 import moment from "moment";
-import { ShallowComponent } from "robe-react-commons";
+import { BinderShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import FaIcon from "../faicon/FaIcon";
 
-export default class DataTableBodyRow extends ShallowComponent {
+export default class DataTableBodyRow extends BinderShallowComponent {
 
     /**
      * @type {func}
      */
     static propTypes = {
-        onClick: React.PropTypes.func
+        onClick: React.PropTypes.func,
+        resources: React.PropTypes.object,
+        fields: React.PropTypes.array,
+        data: React.PropTypes.object,
+        onSelection: React.PropTypes.func
     };
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         moment.locale("tr");
         this.state = {
@@ -40,8 +44,8 @@ export default class DataTableBodyRow extends ShallowComponent {
             if (column.visible !== false) {
                 let value = row[column.code];
                 if (column.type === "bool") {
-                    value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o"/> :
-                        <FaIcon size={"fa-lg"} code="fa-square-o"/>;
+                    value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o" /> :
+                        <FaIcon size={"fa-lg"} code="fa-square-o" />;
                 } else if (column.type === "password") {
                     value = "******";
                 } else if (column.type === "date") {
@@ -81,8 +85,7 @@ export default class DataTableBodyRow extends ShallowComponent {
             </tr>
         );
     }
-        ;
-    __onClick = () => {
+    __onClick() {
         if (this.props.onSelection) {
             this.props.onSelection(this);
         }
@@ -90,6 +93,11 @@ export default class DataTableBodyRow extends ShallowComponent {
         if (this.props.onClick) {
             this.props.onClick(this.props.data);
         }
-    };
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        //TODO: find a nice way to decide.
+        return true;
+    }
 
 }

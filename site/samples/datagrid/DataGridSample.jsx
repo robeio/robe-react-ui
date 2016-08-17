@@ -65,7 +65,6 @@ export default class DataGridSample extends ShallowComponent {
             <DataGrid
                 fields={this.state.fields}
                 store={this.state.store2}
-                ref={DataGridSample.tableRef}
                 toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
                 onNewClick={this.__add}
                 onEditClick={this.__edit}
@@ -109,9 +108,9 @@ export default class DataGridSample extends ShallowComponent {
     __onSave = (newData, callback) => {
         let id = newData[DataGridSample.idField];
         if (Assertions.isNotEmpty(id)) {
-            this.state.store.update(this.state.item, newData);
+            this.state.store1.update(this.state.item, newData);
         } else {
-            this.state.store.create(newData);
+            this.state.store1.create(newData);
         }
         if (newData) {
             callback(true);
