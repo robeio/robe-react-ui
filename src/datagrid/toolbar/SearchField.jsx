@@ -7,6 +7,14 @@ import FaIcon from "../../faicon/FaIcon";
 export default class SearchField extends ShallowComponent {
 
 
+    static propTypes: Map = {
+        filter: React.PropTypes.string
+
+    };
+    static defaultProps = {
+        filter:""
+    };
+
     render(): Object {
         if (this.props.visible) {
             return (

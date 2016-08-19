@@ -25,7 +25,7 @@ export default class ActionButtons extends ShallowComponent {
             let actions = [];
             Maps.forEach(this.props.items, (item: Object) => {
                 if (item.visible) {
-                    let action = <Button bsSize="small" disabled={item.disabled} onClick={item.onClick}><FaIcon code={item.icon} size={"fa-lg"} /><span className="hidden-xs"> {item.text}</span></Button>;
+                    let action = <Button key={item.text} bsSize="small" disabled={item.disabled} onClick={item.onClick}><FaIcon code={item.icon} size={"fa-lg"} /><span className="hidden-xs"> {item.text}</span></Button>;
                     actions.push(action);
                 }
             });

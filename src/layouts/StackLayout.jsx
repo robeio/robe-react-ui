@@ -27,9 +27,9 @@ export default class StackLayout extends ShallowComponent {
          * Layout Container style
          */
         style: React.PropTypes.object,
-        items: React.PropTypes.oneOfType(
+        items: React.PropTypes.oneOfType([
             React.PropTypes.array,
-            React.PropTypes.object
+            React.PropTypes.object]
         ),
         /**
          * item container style

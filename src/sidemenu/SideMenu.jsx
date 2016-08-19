@@ -60,13 +60,13 @@ export default class SideMenu extends ShallowComponent {
         for (let i = 0; i < children.length; i++) {
             let child = children[i];
             if (child.items && child.items.length > 0) {
-                itemComps.push(<SideMenuItem
+                itemComps.push(<SideMenuItem key={i}
                     item={child}
                     onChange={this.__onChange}
                     selectedItem={this.props.selectedItem}
                 />);
             } else {
-                itemComps.push(<SideMenuSubItem
+                itemComps.push(<SideMenuSubItem key={i}
                     item={child}
                     onChange={this.__onChange}
                     selectedItem={this.props.selectedItem}
