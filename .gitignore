@@ -40,7 +40,7 @@ mocha.json
 esdoc
 dist
 lib
-docs
+site/docs
 *.txt
 .hash.json
 
