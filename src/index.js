@@ -1,5 +1,4 @@
 export { default as Wizard } from "./wizard";
-export { default as CategoryTreeList } from "./categorytreelist";
 export { default as CheckBoxTree } from "./checkinputtree";
 export { default as DataGrid } from "./datagrid";
 export { default as Faicon } from "./faicon";
