@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment";
-import { BinderShallowComponent } from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import FaIcon from "../faicon/FaIcon";
 
-export default class DataTableBodyRow extends BinderShallowComponent {
+export default class DataTableBodyRow extends ShallowComponent {
 
     /**
      * @type {func}

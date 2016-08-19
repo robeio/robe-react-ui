@@ -2,7 +2,7 @@ import React from "react";
 import is from "is-js";
 import {
     Store,
-    BinderStoreShallowComponent,
+    StoreComponent,
     Maps
 } from "robe-react-commons";
 
@@ -21,7 +21,7 @@ import Pagination from "./Pagination";
 import "./style.css";
 
 
-export default class DataGrid extends BinderStoreShallowComponent {
+export default class DataGrid extends StoreComponent {
     /**
      * Properties of the component
      *
