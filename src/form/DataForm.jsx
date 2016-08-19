@@ -6,7 +6,7 @@ import {
 import {
     Form
 } from "react-bootstrap";
-import ComponentManager from "../app/ComponentManager";
+import ComponentManager from "./ComponentManager";
 import InputValidations from "../validation/InputValidations";
 
 export default class DataForm extends ShallowComponent {

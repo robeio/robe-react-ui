@@ -1,4 +1,3 @@
-export { default, default as App } from "./app";
 export { default as Wizard } from "./wizard";
 export { default as CategoryTreeList } from "./categorytreelist";
 export { default as CheckBoxTree } from "./checkinputtree";
