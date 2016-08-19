@@ -1,9 +1,9 @@
 import React from "react";
 import InputGroup from "react-bootstrap/lib/InputGroup";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Input from "./BaseInput";
 
-export default class MoneyInput extends BinderShallowComponent {
+export default class MoneyInput extends ShallowComponent {
     /**
      * Properties of the component
      *

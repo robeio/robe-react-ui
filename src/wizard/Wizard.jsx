@@ -1,5 +1,5 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
@@ -9,7 +9,7 @@ import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
 
-export default class Wizard extends BinderShallowComponent {
+export default class Wizard extends ShallowComponent {
      /**
      * PropTypes of the component.
      *

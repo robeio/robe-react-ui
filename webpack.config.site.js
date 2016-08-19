@@ -9,7 +9,7 @@ const path = require("path");
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js")("/site", "/sitebuild", "__test__", "/src");
+const commonSettings = require("./webpack.config.common.js")("/site", "/docs", "__test__", "/src");
 
 
 /**
@@ -63,7 +63,7 @@ commonSettings.output = {
 const fileChanger = new FileChanger({
     move: [{
         from: path.resolve("./static"),
-        to: path.resolve("./sitebuild")
+        to: path.resolve("./docs")
     }
     ]
 });

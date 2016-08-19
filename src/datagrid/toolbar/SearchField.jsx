@@ -1,10 +1,10 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import InputGroup from "react-bootstrap/lib/InputGroup";
 import TextInput from "../../inputs/TextInput";
 import FaIcon from "../../faicon/FaIcon";
 
-export default class SearchField extends BinderShallowComponent {
+export default class SearchField extends ShallowComponent {
 
 
     render(): Object {

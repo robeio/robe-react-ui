@@ -1,6 +1,6 @@
 import React from "react";
 import is from "is-js";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -10,7 +10,7 @@ import Input from "./BaseInput";
  * @class NumericInput
  * @extends {ShallowComponent}
  */
-export default class NumericInput extends BinderShallowComponent {
+export default class NumericInput extends ShallowComponent {
 
     /**
      * Properties of the component

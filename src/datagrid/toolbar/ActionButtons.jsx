@@ -1,5 +1,5 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Maps from "robe-react-commons/lib/utils/Maps";
 import {
     ButtonGroup,
@@ -7,7 +7,7 @@ import {
 } from "react-bootstrap";
 import FaIcon from "../../faicon/FaIcon";
 
-export default class ActionButtons extends BinderShallowComponent {
+export default class ActionButtons extends ShallowComponent {
 
     static propTypes: Map = {
         /**

@@ -1,5 +1,5 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import SideMenuSubItem from "./SideMenuSubItem";
 import SideMenuItem from "./SideMenuItem";
 import "./SideMenu.css";
@@ -11,7 +11,7 @@ import "./SideMenu.css";
  * @class SideMenu
  * @extends {ShallowComponent}
  */
-export default class SideMenu extends BinderShallowComponent {
+export default class SideMenu extends ShallowComponent {
 
     /**
      * Properties of the component

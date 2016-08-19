@@ -1,5 +1,5 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Input from "./BaseInput";
 
 /**
@@ -7,9 +7,9 @@ import Input from "./BaseInput";
  * Password wrapper for BaseInput
  * @export
  * @class PasswordInput
- * @extends {BinderShallowComponent}
+ * @extends {ShallowComponent}
  */
-export default class PasswordInput extends BinderShallowComponent {
+export default class PasswordInput extends ShallowComponent {
     /**
      * Properties of the component
      *

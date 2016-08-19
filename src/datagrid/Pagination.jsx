@@ -1,5 +1,5 @@
 import React from "react";
-import BinderShallowComponent from "robe-react-commons/lib/components/BinderShallowComponent";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {
     Row,
     Col,
@@ -9,7 +9,7 @@ import {
 import BPagination from "react-bootstrap/lib/Pagination";
 import FaIcon from "../faicon/FaIcon";
 
-export default class Pagination extends BinderShallowComponent {
+export default class Pagination extends ShallowComponent {
     static propTypes: Map = {
         /**
          * Fields Configurations to show style on view.
