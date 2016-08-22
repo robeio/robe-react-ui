@@ -54,13 +54,18 @@ describe("checktree/CheckTree", () => {
         );
     };
 
-    it("'props' Controls", () => {
-        const wrapper = mount(getComponent({ items: data }));
+    let values = [];
+
+    const handleChange = (e) => {
+        values.push(e.target.value[0]);
+    };
+
+    it("onChange", () => {
+        let wrapper = mount(getComponent({ items: data, value: values, onChange: handleChange }));
         chai.assert.equal(wrapper.find(CheckInput).length, 8);
-        let array = wrapper.find(CheckInput);
+        let array = wrapper.find(".fa-square-o");
         array.first().simulate("click");
-
-        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 2);
-
+        wrapper = mount(getComponent({ items: data, value: values, onChange: handleChange }));
+        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 1);
     });
 });
