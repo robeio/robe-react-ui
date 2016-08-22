@@ -5,7 +5,7 @@ import CheckInput from "../inputs/CheckInput";
 import "./CheckTree.css";
 
 /**
- * CheckTree is a recursive component which generates a tree of CheckInputs from the given item.
+ * CheckTree is a recursive component which generates a tree of CheckInput's from the given item.
  *
  * @export
  * @class CheckTree
@@ -109,13 +109,14 @@ export default class CheckTree extends ShallowComponent {
             let itemComps = [];
             for (let i = 0; i < children.length; i++) {
                 itemComps.push(<CheckTree
+                    key={children[i][this.props.valueField]}
                     value={this.props.value}
                     items={children[i]}
                     textField={this.props.textField}
                     valueField={this.props.valueField}
                     childrenField={this.props.childrenField}
                     parent={this}
-                    />);
+                />);
             }
             return itemComps;
         }

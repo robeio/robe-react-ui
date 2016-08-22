@@ -163,7 +163,7 @@ class ComponentList {
 
         components.push({
             header: "CheckTree",
-            desc: " is a tree which holds CheckInput's",
+            desc: " is a recursive component which generates a tree of CheckInput's from the given item.",
             json: require("../docs/checktree/CheckTree.json"),
             sample: require("../samples/checktree/CheckTreeSample"),
             code: require("../samples/checktree/CheckTreeSample.txt")

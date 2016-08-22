@@ -1,10 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
-import CheckBoxTree from "checkinputtree/CheckInputTree";
+import CheckTree from "checktree/CheckTree";
 
 
-export default class CheckInputTreeSample extends ShallowComponent {
+export default class CheckTreeSample extends ShallowComponent {
 
     static data = {
         text: "Root",
@@ -58,11 +58,10 @@ export default class CheckInputTreeSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <CheckBoxTree
-                    items={CheckInputTreeSample.data}
+                <CheckTree
+                    items={CheckTreeSample.data}
                     value={this.state.value}
                     onChange={this.handleChange}
-                    ref="checkinput"
                 />
             </div>
         );

@@ -160,7 +160,7 @@ export default class CheckInput extends ValidationComponent {
         }
 
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={onClick}>
+            <div value={value} className={`checkbox ${disabled}`} onClick={onClick} key={value}>
                 <label
                     htmlFor
                     style={{ paddingLeft: "2px" }}
