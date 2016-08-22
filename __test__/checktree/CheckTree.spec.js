@@ -1,10 +1,9 @@
 import chai from "chai";
 import React from "react";
-import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import CheckTree from "checktree/CheckTree";
 import CheckInput from "inputs/CheckInput";
-import { mount, simulate } from 'enzyme';
+import { mount } from "enzyme";
 
 
 describe("checktree/CheckTree", () => {

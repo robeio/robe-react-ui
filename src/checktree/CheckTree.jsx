@@ -5,7 +5,7 @@ import CheckInput from "../inputs/CheckInput";
 import "./CheckTree.css";
 
 /**
- * CheckTree is a recursive component which generates a tree of CheckInputs from the given item.
+ * CheckTree is a recursive component which generates a tree of CheckInput's from the given item.
  *
  * @export
  * @class CheckTree
