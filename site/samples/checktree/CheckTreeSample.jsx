@@ -4,7 +4,7 @@ import Arrays from "robe-react-commons/lib/utils/Arrays";
 import CheckTree from "checktree/CheckTree";
 
 
-export default class CheckInputTreeSample extends ShallowComponent {
+export default class CheckTreeSample extends ShallowComponent {
 
     static data = {
         text: "Root",
@@ -59,11 +59,10 @@ export default class CheckInputTreeSample extends ShallowComponent {
         return (
             <div>
                 <CheckTree
-                    items={CheckInputTreeSample.data}
+                    items={CheckTreeSample.data}
                     value={this.state.value}
                     onChange={this.handleChange}
-                    ref="checkinput"
-                    />
+                />
             </div>
         );
     }
