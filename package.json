@@ -7,7 +7,7 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "test": "karma start webpack.config.test.js --log-level=debug",
+    "test": "karma start webpack.config.test.js",
     "testd": "karma start webpack.config.test.dev.js",
     "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
@@ -80,26 +80,25 @@
     "webpack-file-changer": "1.0.0"
   },
   "dependencies": {
+    "es6-template-strings": "2.0.1",
     "is-js": "0.1.1",
     "js-criteria": "0.0.6",
-    "react": "15.3.1",
-    "react-addons-shallow-compare": "15.3.1",
-    "react-cookie": "0.4.8",
-    "react-dom": "15.3.1",
-    "robe-ajax": "1.0.0",
-    "es6-template-strings": "2.0.1",
     "nprogress": "0.2.0",
     "numeral": "1.5.3",
-    "react-addons-css-transition-group": "15.3.1",
+    "react": "15.3.1",
+    "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-shallow-compare": "15.3.1",
     "react-bootstrap": "0.30.3",
+    "react-cookie": "0.4.8",
     "react-datepicker": "0.29.0",
+    "react-dom": "15.3.1",
     "react-highlight": "0.8.0",
     "react-notifications": "1.3.0",
     "react-quill": "0.4.1",
     "react-router": "2.7.0",
     "react-select": "0.9.1",
     "react-star-rating": "1.4.2",
-    "react-treebeard": "1.1.2",
+    "robe-ajax": "1.0.0",
     "robe-react-commons": "1.0.43"
   }
 }
