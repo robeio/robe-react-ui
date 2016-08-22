@@ -58,8 +58,8 @@ describe("checktree/CheckTree", () => {
         const wrapper = mount(getComponent({ items: data }));
         chai.assert.equal(wrapper.find(CheckInput).length, 8);
         let array = wrapper.find(CheckInput);
-        console.log("array", array);
-        console.log("item", array[0]).simulate("click");
+        array.first().simulate("click");
+
         chai.asser.equal(wrapper.find(".fa-check-square-o").length, 2);
 
     });
