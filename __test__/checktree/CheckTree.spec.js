@@ -60,7 +60,7 @@ describe("checktree/CheckTree", () => {
         let array = wrapper.find(CheckInput);
         array.first().simulate("click");
 
-        chai.asser.equal(wrapper.find(".fa-check-square-o").length, 2);
+        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 2);
 
     });
 });
