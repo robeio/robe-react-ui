@@ -22,6 +22,7 @@ UI components built on top of [React-Bootstrap](https://react-bootstrap.github.i
 * [Karma](https://karma-runner.github.io/0.13/index.html) for testing.
 * [React](https://facebook.github.io/react/) for ui.
 * [React-Bootstrap](https://react-bootstrap.github.io/) for ui components
+* [Enzyme](https://github.com/airbnb/enzyme) for ui testing
 
 ### Documentation
  You can find detailed documentation at [robeio.github.io/robe-react-ui](http://robeio.github.io/robe-react-ui/)

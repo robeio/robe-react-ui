@@ -40,11 +40,10 @@ commonSettings.devtool = "source-map";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 commonSettings.module.loaders.push({
-        test: /\.jsx?$/,
-        exclude: /(__test__|node_modules|bower_components)\//,
-        loader: "isparta"
-    }
-);
+    test: /\.jsx?$/,
+    exclude: /(__test__|node_modules|bower_components)\//,
+    loader: "isparta"
+});
 
 // *optional* isparta options: istanbul behind isparta will use it
 commonSettings.isparta = {
@@ -54,6 +53,13 @@ commonSettings.isparta = {
     babel: {
         presets: ["es2015", "stage-0", "react"]
     }
+};
+
+commonSettings.externals = {
+    "cheerio": "window",
+    "react/addons": true, // important!!
+    "react/lib/ExecutionEnvironment": true,
+    "react/lib/ReactContext": true
 };
 
 const server = new JsonServer(3000);

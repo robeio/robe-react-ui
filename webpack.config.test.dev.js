@@ -44,13 +44,18 @@ commonSettings.debug = true;
  * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
  * @type {string}
  */
-commonSettings.devtool = "inline-source-map";
+commonSettings.devtool = "eval";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
 const server = new JsonServer(3001);
 server.route("testdb.json").upload("/files", "temp").start();
-
+commonSettings.externals = {
+    "cheerio": "window",
+    "react/addons": true, // important!!
+    "react/lib/ExecutionEnvironment": true,
+    "react/lib/ReactContext": true
+};
 module.exports = function configure(config) {
     config.set({
         colors: true,

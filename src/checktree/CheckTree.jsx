@@ -2,9 +2,16 @@ import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
 import CheckInput from "../inputs/CheckInput";
-import "./CheckInputTree.css";
+import "./CheckTree.css";
 
-export default class CheckInputTree extends ShallowComponent {
+/**
+ * CheckTree is a recursive component which generates a tree of CheckInputs from the given item.
+ *
+ * @export
+ * @class CheckTree
+ * @extends {ShallowComponent}
+ */
+export default class CheckTree extends ShallowComponent {
 
     /**
      * PropTypes of the component.
@@ -19,15 +26,15 @@ export default class CheckInputTree extends ShallowComponent {
         /**
          * Text field of the data
          */
-        textField: React.PropTypes.string.isRequired,
+        textField: React.PropTypes.string,
         /**
          * Value field of the data.
          */
-        valueField: React.PropTypes.string.isRequired,
+        valueField: React.PropTypes.string,
         /**
          * Children field of the data.
          */
-        childrenField: React.PropTypes.string.isRequired,
+        childrenField: React.PropTypes.string,
         /**
          * Checked items array.
          */
@@ -43,7 +50,8 @@ export default class CheckInputTree extends ShallowComponent {
         parent: undefined,
         textField: "text",
         valueField: "code",
-        childrenField: "children"
+        childrenField: "children",
+        value: []
     };
 
     constructor(props: Object) {
@@ -70,12 +78,12 @@ export default class CheckInputTree extends ShallowComponent {
                 valueField={this.props.valueField}
                 onChange={this.__onChange}
                 ref="innerInput"
-            />);
+                />);
         let itemComp = (
             <li className="checkboxtree">
                 {input}
                 <ul>
-                    {this.__renderChildren(itemData)}
+                    {this.__renderChildren(itemData) }
                 </ul>
             </li>
         );
@@ -100,14 +108,14 @@ export default class CheckInputTree extends ShallowComponent {
         if (children && children.length > 0) {
             let itemComps = [];
             for (let i = 0; i < children.length; i++) {
-                itemComps.push(<CheckInputTree
+                itemComps.push(<CheckTree
                     value={this.props.value}
                     items={children[i]}
                     textField={this.props.textField}
                     valueField={this.props.valueField}
                     childrenField={this.props.childrenField}
                     parent={this}
-                />);
+                    />);
             }
             return itemComps;
         }

@@ -162,11 +162,11 @@ class ComponentList {
         });
 
         components.push({
-            header: "CheckInputTree",
+            header: "CheckTree",
             desc: " is a tree which holds CheckInput's",
-            json: require("../docs/checkinputtree/CheckInputTree.json"),
-            sample: require("../samples/checkinputtree/CheckInputTreeSample"),
-            code: require("../samples/checkinputtree/CheckInputTreeSample.txt")
+            json: require("../docs/checktree/CheckTree.json"),
+            sample: require("../samples/checktree/CheckTreeSample"),
+            code: require("../samples/checktree/CheckTreeSample.txt")
         });
 
         components.push({
