@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import chai from "chai";
+import { mount } from "enzyme";
 import SelectInput from "inputs/SelectInput";
 import TestUtils from "react-addons-test-utils";
 import Validations from "validation/InputValidations";
+import ComponentTestUtil from "../ComponentTestUtil";
+
 const langs = [
     {
         key: "en",
@@ -141,5 +144,35 @@ describe("inputs/SelectInput", () => {
         );
 
         chai.assert.isFalse(instance.isValid(), "component is valid then isValid() method must return true.");
+    });
+
+    it("'single' onChange", () => {
+        let props = {
+            label: "Select Input Single",
+            items: langs,
+            textField: "value",
+            valueField: "key",
+            multi: true
+        };
+        let wrapper = ComponentTestUtil.mountComponent(props, SelectInput);
+        chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+        wrapper = ComponentTestUtil.mountComponent({
+            value: ["en", "tr"],
+        }, SelectInput, props);
+        chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
+    });
+    it("'multi' onChange", () => {
+        let props = {
+            label: "Select Input Single",
+            items: langs,
+            textField: "value",
+            valueField: "key"
+        };
+        let wrapper = ComponentTestUtil.mountComponent(props, SelectInput);
+        chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
+        wrapper = ComponentTestUtil.mountComponent({
+            value: "en",
+        }, SelectInput, props);
+        chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
     });
 });
