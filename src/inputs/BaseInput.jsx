@@ -97,20 +97,21 @@ export default class BaseInput extends ValidationComponent {
             <ControlLabel> {this.props.label} </ControlLabel>
         );
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
+            let { inputGroupLeft, inputGroupRight, ...newProps } = this.props; // eslint-disable-line no-unused-vars
             return (
                 <FormGroup hidden={this.props.hidden}>
                     {label}
                     <InputGroup>
                         {this.props.inputGroupLeft}
                         <FormControl
-                            {...this.props}
+                            {...newProps}
                             bsStyle="error"
                             ref={BaseInput.refName}
                             value={this.props.value}
-                        />
+                            />
                         {this.props.inputGroupRight}
                     </InputGroup>
-                    {super.validationResult()}
+                    {super.validationResult() }
                 </FormGroup>
             );
         }
@@ -122,8 +123,8 @@ export default class BaseInput extends ValidationComponent {
                     bsStyle="error"
                     ref={BaseInput.refName}
                     value={this.props.value}
-                />
-                {super.validationResult()}
+                    />
+                {super.validationResult() }
             </FormGroup>
         );
     }
