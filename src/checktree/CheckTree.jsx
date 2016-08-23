@@ -78,7 +78,7 @@ export default class CheckTree extends ShallowComponent {
                 valueField={this.props.valueField}
                 onChange={this.__onChange}
                 ref="innerInput"
-                />);
+            />);
         let itemComp = (
             <li className="checkboxtree">
                 {input}
@@ -91,15 +91,10 @@ export default class CheckTree extends ShallowComponent {
     }
     __onChange = (e: Object): boolean => {
         if (this.props.parent) {
-            if (this.props.parent.__onChange) {
-                this.props.parent.__onChange(e);
-            }
+            this.props.parent.__onChange(e);
         } else {
-            if (this.props.onChange) {
-                this.props.onChange(e);
-            }
+            this.props.onChange(e);
         }
-        let isOwner = e.target.value[0] === this.props.items[this.props.valueField];
         return true;
     }
 
