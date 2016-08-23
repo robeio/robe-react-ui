@@ -49,10 +49,6 @@ describe("inputs/CheckInput", () => {
          let wrapper = mount(getComponent(props));
          chai.assert.equal(wrapper.props().label,'Label');
          chai.assert.equal(wrapper.props().disabled,false);
-
-         wrapper.setProps({ label: 'Label 1' ,disabled:true});
-
-         chai.assert.equal(wrapper.props().label,'Label 1');
     });
 
 
@@ -67,13 +63,6 @@ describe("inputs/CheckInput", () => {
 
         checkInput.simulate("click");
         wrapper = mount(getComponent({ items: langs, value: values }));
-        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 1);
-
-        values=[];
-        wrapper = mount(getComponent({ item: lang, value: values, onChange: handleChange }));
-        checkInput = wrapper.find(".fa-square-o").first();
-        checkInput.simulate("click");
-        wrapper = mount(getComponent({ item: lang, value: true, onChange: handleChange }));
         chai.assert.equal(wrapper.find(".fa-check-square-o").length, 1);
 
 
