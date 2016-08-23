@@ -142,6 +142,11 @@ export default class CheckInput extends ValidationComponent {
      * @private
      */
     __createCheckInput(item: Map): Object {
+
+        if(!item){
+            return "item cannot be undefined, please check your code";
+        }
+
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this.isChecked(value);
