@@ -66,5 +66,15 @@ describe("checktree/CheckTree", () => {
         array.first().simulate("click");
         wrapper = mount(getComponent({ items: data, value: values, onChange: handleChange }));
         chai.assert.equal(wrapper.find(".fa-check-square-o").length, 1);
+        array.last().simulate("click");
+        wrapper = mount(getComponent({ items: data, value: values, onChange: handleChange }));
+        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 2);
+        wrapper.unmount();
+
+        wrapper = mount(getComponent({ items: data, value: values }));
+        array.first().simulate("click");
+        array.last().simulate("click");
+        chai.assert.equal(wrapper.find(".fa-check-square-o").length, 2);
+        wrapper.update();
     });
 });
