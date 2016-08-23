@@ -121,6 +121,11 @@ export default class RadioInput extends ValidationComponent {
      * @private
      */
     __createRadioBox(item: Map): Object {
+
+         if(!item){
+            return "item cannot be undefined, please check your code";
+        }
+        
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._value === value;
