@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import PasswordInput from "inputs/PasswordInput";
+import { mount } from "enzyme";
 
 describe("inputs/PasswordInput", () => {
     const getComponent = (props: Object): Object => {
@@ -36,5 +37,32 @@ describe("inputs/PasswordInput", () => {
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.equal(componentNode.isValid(), false);
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+    });
+    let value = "";
+
+    const handleChange = (e) => {
+        value = e.target.value;
+    };
+
+    it("'OnChange' Control", () => {
+        let wrapper = mount(getComponent({ onChange: handleChange }));
+        chai.assert.equal(wrapper.find(PasswordInput).length, 1);
+        let passwordInput = wrapper.find("input").first();
+
+        passwordInput.simulate("change", { target: { value: "robe" } });
+
+        chai.assert.equal("robe", value);
+
+        wrapper = mount(getComponent({}));
+
+        wrapper.setProps({ onChange: undefined });
+
+        passwordInput = wrapper.find("input").first();
+
+        value = "";
+        passwordInput.simulate("change", { target: { value: "" } });
+
+        chai.assert.equal("", value);
+
     });
 });

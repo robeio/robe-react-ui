@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import TextInput from "inputs/TextInput";
-import { mount, simulate,shallow,expect } from 'enzyme';
+import { mount } from "enzyme";
 
 describe("inputs/TextInput", () => {
     const getComponent = (props: Object): Object => {
@@ -39,36 +39,34 @@ describe("inputs/TextInput", () => {
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
     });
 
-    
 
-    let values = "";
+    let value = "";
 
     const handleChange = (e) => {
-    values = e.target.value;};
+        value = e.target.value;
+    };
 
-     it("'OnChange' Control", () => {
-     
+    it("'OnChange' Control", () => {
         let wrapper = mount(getComponent({ onChange: handleChange }));
         chai.assert.equal(wrapper.find(TextInput).length, 1);
         let textInput = wrapper.find("input").first();
 
-        textInput.simulate('change', {target: {value: 'robe'}});
+        textInput.simulate("change", { target: { value: "robe" } });
 
-        chai.assert.equal("robe", values);
+        chai.assert.equal("robe", value);
 
         wrapper = mount(getComponent({}));
 
-        wrapper.setProps({onChange:undefined});
+        wrapper.setProps({ onChange: undefined });
 
         textInput = wrapper.find("input").first();
 
-        values="";
-        textInput.simulate('change', {target: {value: ''}});
+        value = "";
+        textInput.simulate("change", { target: { value: ""} });
 
-        chai.assert.equal("", values);
+        chai.assert.equal("", value);
 
     });
-
 
 
 });
