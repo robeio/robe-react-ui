@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import chai from "chai";
 import CheckList from "inputs/CheckList";
-import Generator from "../test-utils/Generator";
+import ComponentTestUtil from "../ComponentTestUtil";
 import TestUtils from "react-addons-test-utils";
 
 describe("inputs/CheckList", () => {
@@ -42,7 +42,7 @@ describe("inputs/CheckList", () => {
             hidden: false
         };
 
-        let newComponent = Generator.getComponent(defaultProps, CheckList);
+        let newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
 
         chai.assert.deepEqual(instance.props, expectedProps);
@@ -68,7 +68,7 @@ describe("inputs/CheckList", () => {
             hidden: false
         };
 
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
 
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.deepEqual(instance.props, expectedProps);
@@ -85,7 +85,7 @@ describe("inputs/CheckList", () => {
             valueField: "key"
         };
 
-        let newComponent = Generator.getComponent(defaultProps, CheckList);
+        let newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
 
         let instanceDom = ReactDOM.findDOMNode(instance);
@@ -103,7 +103,7 @@ describe("inputs/CheckList", () => {
             valueField: "key"
         };
 
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
 
         instance = TestUtils.renderIntoDocument(newComponent);
 
@@ -122,13 +122,13 @@ describe("inputs/CheckList", () => {
             valueField: "key"
         };
 
-        let newComponent = Generator.getComponent(defaultProps, CheckList);
+        let newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
 
         chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Single Component checked. Thats why isChecked must be true.");
 
         delete defaultProps.value;
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.isFalse(instance.isChecked(), "Given value of CheckList Single Component unchecked. Thats why isChecked must be false.");
 
@@ -143,7 +143,7 @@ describe("inputs/CheckList", () => {
             multi: true
         };
 
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.isTrue(instance.isChecked(), "Given value of CheckList Multi Component checked more than zero. Thats why isChecked must be true.");
         chai.assert.isTrue(instance.isChecked(langs[0].key), "Given value[0] of CheckList Multi Component checked. Thats why isChecked must be true.");
@@ -152,7 +152,7 @@ describe("inputs/CheckList", () => {
 
         delete defaultProps.value;
 
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.isFalse(instance.isChecked(), "Given value of CheckList Single Component must be selected.");
     });
@@ -167,7 +167,7 @@ describe("inputs/CheckList", () => {
             valueField: "key"
         };
 
-        let newComponent = Generator.getComponent(defaultProps, CheckList);
+        let newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         let instance = TestUtils.renderIntoDocument(newComponent);
 
         chai.assert.equal(instance.getValue(), expected, "Given value of CheckList Single Component must equal return of getValue()");
@@ -181,7 +181,7 @@ describe("inputs/CheckList", () => {
             valueField: "key"
         };
 
-        newComponent = Generator.getComponent(defaultProps, CheckList);
+        newComponent = ComponentTestUtil.getComponent(defaultProps, CheckList);
         instance = TestUtils.renderIntoDocument(newComponent);
         chai.assert.equal(instance.getValue(), expected, "Given value of CheckList Multi Component must equal return of getValue()");
     });
