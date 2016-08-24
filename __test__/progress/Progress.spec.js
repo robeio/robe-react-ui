@@ -2,7 +2,7 @@ import chai from "chai";
 import React from "react";
 import Progress from "progress/Progress";
 
-describe("inputs/Progress", () => {
+describe("progress/Progress", () => {
     it("Progress", () => {
         chai.assert.equal(Progress.instance().isStarted(), false);
         Progress.start();
