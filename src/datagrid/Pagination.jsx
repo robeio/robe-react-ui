@@ -14,7 +14,7 @@ export default class Pagination extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        visible: React.PropTypes.boolean,
+        visible: React.PropTypes.bool,
         activePage: React.PropTypes.number,
         pageSize: React.PropTypes.number,
         totalCount: React.PropTypes.number,

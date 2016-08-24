@@ -13,7 +13,7 @@ export default class ActionButtons extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        visible: React.PropTypes.boolean
+        visible: React.PropTypes.bool
     };
     static defaultProps = {
         visible: true,
