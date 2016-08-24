@@ -118,7 +118,6 @@ describe("datagrid/DataGrid", () => {
         grid = mount(getComponent(props));
         pagination = grid.find(Pagination);
         let rows = grid.find(DataGridBodyRow);
-        console.log("ROWWWWSSSSS:", rows.length);
         chai.assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
         grid.unmount();
     });
