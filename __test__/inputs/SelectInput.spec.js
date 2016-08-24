@@ -1,11 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import chai from "chai";
-import { mount } from "enzyme";
 import SelectInput from "inputs/SelectInput";
-import TestUtils from "react-addons-test-utils";
 import Validations from "validation/InputValidations";
-import ComponentTestUtil from "../ComponentTestUtil";
+import TestUtils from "../TestUtils";
 
 const langs = [
     {
@@ -105,7 +102,7 @@ describe("inputs/SelectInput", () => {
             SelectInputReact
         );
 
-        let instanceDom = ReactDOM.findDOMNode(instance);
+        let instanceDom = TestUtils.findDOMNode(instance);
         let inputs = instanceDom.getElementsByTagName("input");
         let input = inputs[0];
         chai.assert.equal(input.value, expected, "Given value to SelectInput must be equal input value which created in DOM.");
@@ -154,10 +151,10 @@ describe("inputs/SelectInput", () => {
             valueField: "key",
             multi: true
         };
-        let wrapper = ComponentTestUtil.mountComponent(props, SelectInput);
+        let wrapper = TestUtils.mount(props, SelectInput);
         chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
-        wrapper = ComponentTestUtil.mountComponent({
-            value: ["en", "tr"],
+        wrapper = TestUtils.mount({
+            value: ["en", "tr"]
         }, SelectInput, props);
         chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
     });
@@ -168,9 +165,9 @@ describe("inputs/SelectInput", () => {
             textField: "value",
             valueField: "key"
         };
-        let wrapper = ComponentTestUtil.mountComponent(props, SelectInput);
+        let wrapper = TestUtils.mount(props, SelectInput);
         chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
-        wrapper = ComponentTestUtil.mountComponent({
+        wrapper = TestUtils.mount({
             value: "en"
         }, SelectInput, props);
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());

@@ -1,9 +1,14 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { mount } from "enzyme";
 import { Maps, Class } from "robe-react-commons";
+import ReactTestUtils from "react-addons-test-utils";
 
-class ComponentTestUtil extends Class {
-    mountComponent(props: Object, ClassComponent: Object, defaultProps): Object {
+class TestUtils extends Class {
+    renderIntoDocument() {
+        return ReactTestUtils.renderIntoDocument.apply(undefined, arguments);
+    }
+    mount(props: Object, ClassComponent: Object, defaultProps): Object {
         this.getComponent(props, ClassComponent, defaultProps)
         if (defaultProps) {
             props = Maps.mergeDeep(props, defaultProps);
@@ -17,6 +22,10 @@ class ComponentTestUtil extends Class {
         }
         return React.createElement(ClassComponent, props);
     }
+
+    findDOMNode() {
+        return ReactDOM.findDOMNode.apply(undefined, arguments);
+    }
 }
 
-export default new ComponentTestUtil();
+export default new TestUtils();
