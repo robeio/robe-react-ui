@@ -171,7 +171,7 @@ describe("inputs/SelectInput", () => {
         let wrapper = ComponentTestUtil.mountComponent(props, SelectInput);
         chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
         wrapper = ComponentTestUtil.mountComponent({
-            value: "en",
+            value: "en"
         }, SelectInput, props);
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
     });
