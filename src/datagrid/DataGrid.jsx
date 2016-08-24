@@ -31,7 +31,7 @@ export default class DataGrid extends StoreComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        fields: React.PropTypes.array,
+        fields: React.PropTypes.array.isRequired,
         /**
          * Holds extra props of components if need.
          */
@@ -39,11 +39,11 @@ export default class DataGrid extends StoreComponent {
         /**
          * set one store
          */
-        store: React.PropTypes.object,
+        store: React.PropTypes.object.isRequired,
         /**
          * toolbar for create,edit,delete and custom buttons
          */
-        toolbar: React.PropTypes.array,
+        toolbar: React.PropTypes.object,
         /**
          * Callback for new button click
          */
@@ -137,10 +137,7 @@ export default class DataGrid extends StoreComponent {
     pageSize = 20;
 
     constructor(props: Object) {
-        super({
-            stores: [props.store]
-        });
-
+        super(props);
         this.state = {
             rows: [],
             totalCount: 0,
@@ -151,11 +148,6 @@ export default class DataGrid extends StoreComponent {
         };
 
         this.activePage = 1;
-
-        let fields = this.props.fields;
-        if (!fields) {
-            console.warn("fields not found.");
-        }
     }
 
     render(): Object {
@@ -166,7 +158,7 @@ export default class DataGrid extends StoreComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.filter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
                     </Col>
 
                 </Row>
@@ -174,7 +166,7 @@ export default class DataGrid extends StoreComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                />
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -185,18 +177,20 @@ export default class DataGrid extends StoreComponent {
                         {this.__generateRows(this.props.fields, this.state.rows) }
                     </tbody>
                 </Table>
-                <Pagination
-                    {...this.props.pagination}
-                    activePage={this.activePage}
-                    visible={this.props.pageable}
-                    pageSizeButtons={this.props.pageSizeButtons}
-                    pageSize={this.pageSize}
-                    onChange={this.__handlePaginationSelect}
-                    onPageSizeChange={this.__pageSizeChange}
-                    refreshable={this.props.onRefresh}
-                    onRefresh={this.__readData}
-                    totalCount={this.state.totalCount}
-                />
+                {this.props.pagination === undefined ? undefined :
+                    (<Pagination
+                        {...this.props.pagination}
+                        activePage={this.activePage}
+                        visible={this.props.pageable}
+                        pageSizeButtons={this.props.pageSizeButtons}
+                        pageSize={this.pageSize}
+                        onChange={this.__handlePaginationSelect}
+                        onPageSizeChange={this.__pageSizeChange}
+                        refreshable={this.props.onRefresh}
+                        onRefresh={this.__readData}
+                        totalCount={this.state.totalCount}
+                        />)
+                }
                 {this.__renderModalConfirm() }
             </Col>
         );
@@ -255,7 +249,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
 
     /**
@@ -294,7 +288,7 @@ export default class DataGrid extends StoreComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                    />
+                        />
                 ) : null;
 
                 trArr.push(
@@ -345,7 +339,7 @@ export default class DataGrid extends StoreComponent {
                         fields={fields}
                         data={row}
                         onSelection={this.__onSelection}
-                    />);
+                        />);
             }
         }
         return rowsArr;
@@ -447,14 +441,14 @@ export default class DataGrid extends StoreComponent {
     }
 
     componentWillMount() {
-        this.pageSize = this.props.pagination.pageSize;
+        if (this.props.pagination !== undefined && this.props.pagination.pageSize !== undefined) {
+            this.pageSize = this.props.pagination.pageSize;
+        }
     }
     componentDidMount() {
         super.componentDidMount();
         this.__readData();
     }
-
-
     /**
      * Do not implement
      * @param store

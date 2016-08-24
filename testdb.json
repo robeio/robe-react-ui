@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Hasan",
+      "surname": "Mumin",
+      "email": "hasanmuminn@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Seray",
+      "surname": "Uzgu",
+      "email": "serayuzgur@gmail.com"
+    },
+    {
+      "id": 3,
+      "name": "Kamil",
+      "surname": "Bükü",
+      "email": "kamilbukum@gmail.com"
+    }
+  ]
+}

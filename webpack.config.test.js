@@ -62,7 +62,7 @@ commonSettings.externals = {
     "react/lib/ReactContext": true
 };
 
-const server = new JsonServer(3000);
+const server = new JsonServer(3001);
 server.route("testdb.json").upload("/files", "temp").start();
 
 module.exports = function configure(config) {

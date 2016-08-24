@@ -50,4 +50,3 @@ site/docs
 # Site building directory
 sitebuild
 jsconfig.json
-testdb.json
