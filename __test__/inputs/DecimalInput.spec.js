@@ -72,6 +72,9 @@ describe("inputs/DecimalInput", () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
         componentNode.__numericFilter(e);
+
+        e.target.value = null;
+        componentNode.__numericFilter(e);
         done();
     });
 });
