@@ -64,7 +64,7 @@ export default class MoneyInput extends ShallowComponent {
         hidden: false
     };
 
-    static refName="innerInput";
+    static refName = "innerInput";
 
     render(): Object {
         return (
@@ -95,7 +95,7 @@ export default class MoneyInput extends ShallowComponent {
         let value = e.target.value;
         value = this.__addThousandSeparator(value);
         let result = this.__isFloat(value) || value === "";
-        if (result && this.props.onChange) {
+        if (result) {
             e.target.parsedValue = value;
             if (this.props.onChange) {
                 result = this.props.onChange(e);
@@ -116,7 +116,11 @@ export default class MoneyInput extends ShallowComponent {
         let found = input.match("(?=.)^(([1-9][0-9]{0,2}(" + this.props.thousandSeparator + "[0-9]{3})*)|0)?(\\" + this.props.decimalSeparator + "[0-9]{0,2})?$");
         return found !== undefined && found !== null;
     }
+
     __addThousandSeparator(input: string): string {
+        if (!input) {
+            return null;
+        }
         let indexDS = input.indexOf(this.props.decimalSeparator);
         if (indexDS === -1) {
             indexDS = input.length;

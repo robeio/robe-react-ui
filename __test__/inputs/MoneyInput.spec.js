@@ -10,7 +10,7 @@ describe("inputs/MoneyInput", () => {
             <MoneyInput
                 label="Label"
                 value={props.value !== undefined ? props.value : "12,345.6"}
-                onChange={props.onChange !== undefined ? props.onChange : () => { }}
+                onChange={props.onChange}
                 validations={{
                     required: (value: any): Array => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
@@ -24,7 +24,6 @@ describe("inputs/MoneyInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "Label");
         chai.assert.equal(componentNode.props.value, "12,345.6");
-        chai.assert.equal(componentNode.props.onChange.name, "");
         chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
     });
 
@@ -84,12 +83,15 @@ describe("inputs/MoneyInput", () => {
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
+        e.target.value = null;
         componentNode.__numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
-            onChange: () => {
-                chai.assert.isOk(false);
-                done("Input value '12,12.1' failed");
-            }
+        }));
+
+        e.target.value = "12345";
+        componentNode.__numericFilter(e);
+        componentNode = TestUtils.renderIntoDocument(getComponent({
+            decimalSeparator: "."
         }));
     
         done();
