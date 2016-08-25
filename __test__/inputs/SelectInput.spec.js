@@ -151,12 +151,14 @@ describe("inputs/SelectInput", () => {
             valueField: "key"
         };
         let wrapper = TestUtils.mount(props, SelectInput);
-        chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
+        let value = wrapper.find(SelectInput).node.getValue();
+        chai.assert.isNull(value);
         chai.assert.equal(wrapper.find("[selected=true]").node, null);
 
         wrapper = TestUtils.mount({
             value: "en"
         }, SelectInput, props);
+
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
         chai.assert.equal(wrapper.find("[selected=true]").node.value, "en");
     });
@@ -171,7 +173,6 @@ describe("inputs/SelectInput", () => {
         let wrapper = TestUtils.mount(props, SelectInput);
 
         chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
-
         chai.assert.equal(wrapper.find("[selected=true]").length, 0);
 
         wrapper = TestUtils.mount({
