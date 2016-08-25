@@ -171,6 +171,9 @@ export default class Wizard extends ShallowComponent {
         if (this.__content === undefined) {
             return false;
         }
+        if (!this.__content._owner) {
+            return true;
+        }
         
         let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
         if (!result) {
