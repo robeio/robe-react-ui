@@ -85,6 +85,7 @@ describe("datagrid/DataGrid", () => {
             fields: model.fields,
             store: store
         };
+        store.getResult();
         let grid = mount(getComponent(props));
         let rows = grid.find(DataGridBodyRow);
         chai.assert.equal(grid.node.getSelectedRows().length, 0, "getSelectetRows() must return empty before selection");
