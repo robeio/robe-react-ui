@@ -20,6 +20,10 @@ export default class SelectInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * map array of options to render.
          */
         items: React.PropTypes.array,
@@ -92,20 +96,24 @@ export default class SelectInput extends ValidationComponent {
     __delimiter = ",";
     _value;
     _onChange;
-
+    __checkSelection;
     /**
      *
      * @param {Object} props
      */
     constructor(props: Object) {
         super(props);
-        this._value = this.props.value;
-        if (!this._value) {
-            this._value = this.props.multi ? [] : "";
-        }
-        this._onChange = (this.props.multi ? this.__onChangeMulti : this.__onChangeSingle);
+        this.componentWillReceiveProps(props);
     }
 
+    componentWillReceiveProps(props: Object) {
+        this._value = props.value;
+        if (!this._value) {
+            this._value = props.multi ? [] : "";
+        }
+        this._onChange = (props.multi ? this.__onChangeMulti : this.__onChangeSingle);
+        this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
+    }
     render(): Object {
         return (
             <FormGroup hidden={this.props.hidden}>
@@ -124,7 +132,44 @@ export default class SelectInput extends ValidationComponent {
                     delimiter={this.__delimiter}
                 />
                 {super.validationResult()}
+                {this.__createRawSelect(this.props.items)}
             </FormGroup>
+        );
+    }
+
+    /**
+     *
+     * @param item
+     * @returns {boolean}
+     * @private
+     */
+    __checkSingleSelection(item: Map): boolean {
+        return this._value === item[this.props.valueField];
+    }
+
+    /**
+     *
+     * @param item
+     * @returns {boolean}
+     * @private
+     */
+    __checkMultiSelection(item: Map): boolean {
+        return this._value.indexOf(item[this.props.valueField]) !== -1;
+    }
+
+    __createRawSelect(items) {
+        const options = [];
+
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            options[i] = this.__checkSelection(item) ?
+                <option value={item[this.props.valueField]} selected>{item[this.props.textField]}</option> :
+                <option value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
+        }
+        return (
+            <select hidden={true} name={this.props.code} multiple={this.props.multi}>
+                {options}
+            </select>
         );
     }
 

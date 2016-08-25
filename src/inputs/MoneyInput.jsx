@@ -15,6 +15,10 @@ export default class MoneyInput extends ShallowComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * Value of the component
          */
         value: React.PropTypes.any.isRequired,
