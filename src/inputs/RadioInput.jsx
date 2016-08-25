@@ -26,6 +26,10 @@ export default class RadioInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * Items will be rendered as radio input.
          */
         items: React.PropTypes.object,
@@ -121,11 +125,9 @@ export default class RadioInput extends ValidationComponent {
      * @private
      */
     __createRadioBox(item: Map): Object {
-
-         if(!item){
+        if (!item) {
             return "item cannot be undefined, please check your code";
         }
-        
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this._value === value;
@@ -134,16 +136,20 @@ export default class RadioInput extends ValidationComponent {
         let input = isChecked ? (
             <input
                 type="hidden"
+                name={this.props.code}
                 value={value}
                 disabled={!isChecked}
             />
         ) : null;
+
+        let onClick = this.__onClick.bind(this, value);
         return (
-            <div className={`radio ${disabled}`} onClick={this.__onClick.bind(this, value)}>
+            <div className={`radio ${disabled}`} onClick={onClick}>
                 <label
+                    htmlFor={this.props.code}
                     style={{ paddingLeft: "2px" }}
                 >
-                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"}/>
+                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"} />
                 </label> {text}
                 {input}
             </div>
@@ -155,7 +161,7 @@ export default class RadioInput extends ValidationComponent {
      * @returns true if selected.
      */
     isChecked = (key: string) => {
-        let isValueNotEmpty = this._value && this._value.length > 0
+        let isValueNotEmpty = this._value && this._value.length > 0;
         return isValueNotEmpty && (typeof key === "undefined" ?
             key !== this._value : true);
     };

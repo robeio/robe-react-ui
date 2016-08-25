@@ -25,6 +25,10 @@ export default class CheckList extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * Array of items. All items will be rendered as separate checkbox input.
          */
         items: React.PropTypes.array,
@@ -165,10 +169,11 @@ export default class CheckList extends ValidationComponent {
             onClick = (this._hasMultiItem ? this.__onClickMulti : this.__onClickSingle).bind(this, value);
         }
 
+        let name = this.props.code ? `${this.props.code}[]` : null;
         return (
             <ListGroupItem style={{ outline: "none" }} className={`checkbox ${disabledStyle} ${opacity}`} onClick={onClick}>
                 <label
-                    htmlFor
+                    htmlFor={name}
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"fa-sm"} />
@@ -176,6 +181,7 @@ export default class CheckList extends ValidationComponent {
                 <input
                     type="hidden"
                     value={value}
+                    name={name}
                     disabled={this.props.disabled}
                 />
             </ListGroupItem>

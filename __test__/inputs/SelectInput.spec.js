@@ -148,28 +148,36 @@ describe("inputs/SelectInput", () => {
             label: "Select Input Single",
             items: langs,
             textField: "value",
-            valueField: "key",
-            multi: true
+            valueField: "key"
         };
         let wrapper = TestUtils.mount(props, SelectInput);
-        chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal(wrapper.find("[selected=true]").node, null);
+
         wrapper = TestUtils.mount({
-            value: ["en", "tr"]
+            value: "en"
         }, SelectInput, props);
-        chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal(wrapper.find("[selected=true]").node.value, "en");
     });
     it("'multi' onChange", () => {
         let props = {
             label: "Select Input Single",
             items: langs,
             textField: "value",
-            valueField: "key"
+            valueField: "key",
+            multi: true
         };
         let wrapper = TestUtils.mount(props, SelectInput);
-        chai.assert.equal("", wrapper.find(SelectInput).node.getValue());
+
+        chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+
+        chai.assert.equal(wrapper.find("[selected=true]").length, 0);
+
         wrapper = TestUtils.mount({
-            value: "en"
+            value: ["en", "tr"]
         }, SelectInput, props);
-        chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
+        chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal(wrapper.find("[selected=true]").length, 2);
     });
 });

@@ -6,57 +6,65 @@ class InputValidations {
     constructor() {
         Application.loadI18n(validationMessages);
     }
-    required = (value: any): string => {
+    required = (value: any, code: string): string => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || value.length === 0) ?
             template(message, {
-                value: value
+                value: value,
+                code: code
             }) : undefined;
     }
-    htmlRequired = (value: any): string => {
+    htmlRequired = (value: any, code: string): string => {
         let message = Application.i18n("validation").required;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || String(value) === "<div><br></div>") ?
             template(message, {
-                value: value
+                value: value,
+                code: code
             }) : undefined;
     }
-    minValue = (minValue: number, value: number): string => {
+    minValue = (minValue: number, value: number, code: string): string => {
         let message = Application.i18n("validation").minValue;
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value < minValue) ?
             template(message, {
                 minValue: minValue,
-                value: value
+                value: value,
+                code: code
             }) : undefined;
     }
-    maxValue = (maxValue: number, value: number): string => {
+    maxValue = (maxValue: number, value: number, code: string): string => {
         let message = Application.i18n("validation").maxValue;
 
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value > maxValue) ?
             template(message, {
-                minValue: maxValue,
-                value: value
+                maxValue: maxValue,
+                value: value,
+                code: code
             }) : undefined;
     }
-    minLength = (min: number, value: string): string => {
+    minLength = (min: number, value: string, code: string): string => {
         let message = Application.i18n("validation").minLength;
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */
         return (valueLength < min) ?
             template(message, {
-                min: min
+                min: min,
+                value: value,
+                code: code,
             }) : undefined;
     }
-    maxLength = (max: number, value: string): string => {
+    maxLength = (max: number, value: string, code: string): string => {
         let message = Application.i18n("validation").maxLength;
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */
         let result = (valueLength > max) ?
             template(message, {
-                max: max
+                max: max,
+                value: value,
+                code: code,
             }) : undefined;
         return result;
     }

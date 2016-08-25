@@ -24,6 +24,10 @@ export default class BaseInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * Value of the component
          */
         value: React.PropTypes.string,

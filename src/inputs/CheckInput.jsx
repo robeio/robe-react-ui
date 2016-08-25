@@ -25,6 +25,10 @@ export default class CheckInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
+         * code use as input field name
+         */
+        code: React.PropTypes.string,
+        /**
          * Array of items. All items will be rendered as separate checkbox input.
          */
         items: React.PropTypes.array,
@@ -142,20 +146,20 @@ export default class CheckInput extends ValidationComponent {
      * @private
      */
     __createCheckInput(item: Map): Object {
-
-        if(!item){
+        if (!item) {
             return "item cannot be undefined, please check your code";
         }
-
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
         let isChecked = this.isChecked(value);
         let icon = isChecked ? " fa-check-square-o" : " fa-square-o";
         let disabled = isChecked ? "disabled-check-input" : "";
+        let name = this.props.code ? `${this.props.code}[]` : null;
         let input = isChecked ? (
             <input
                 type="hidden"
                 value={value}
+                name={name}
                 disabled={!isChecked}
             />
         ) : null;
@@ -167,7 +171,7 @@ export default class CheckInput extends ValidationComponent {
         return (
             <div value={value} className={`checkbox ${disabled}`} onClick={onClick} key={value}>
                 <label
-                    htmlFor
+                    htmlFor={name}
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"fa-sm"} />
