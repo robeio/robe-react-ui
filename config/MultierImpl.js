@@ -88,14 +88,15 @@ module.exports = (app, requestPath, tempFolder) => {
     }
     app.post(new RegExp(escapeRegexp(requestPath) + ".*"), jsonParser, (request, response, next) => {
         var data;
-        console.log(request.body);
-        console.log((Object.prototype.toString.call(request.body)));
         if (Object.prototype.toString.call(request.body) === "[object Array]") {
             data = [];
+
             for (var i = 0; i < request.body.length; i++) {
+                console.log("Loaded file by " + request.body[i] + " file key");
                 data.push(loadFile(request.body[i]));
             }
         } else {
+            console.log("Loaded file by " + request.body.filename + " file key");
             data = loadFile(request.body.filename);
         }
         response.status(200).send(data);
