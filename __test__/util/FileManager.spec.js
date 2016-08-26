@@ -8,26 +8,32 @@ const url = "http://localhost:3001/files";
 describe("util/FileManager", () => {
     it("constructors", () => {
         let props = {
-            request: {
-                url: "http://localhost:3000/files",
-                upload: {
-                    type: "PUT"
-                },
-                load: {
-                    type: "POST"
-                },
-                preview: {
-                    type: "GET"
-                },
-                delete: {
-                    type: "DELETE"
-                }
+            url: "http://localhost:3000/files",
+            upload: {
+                type: "PUT"
+            },
+            info: {
+                type: "POST"
+            },
+            preview: {
+                type: "GET"
+            },
+            delete: {
+                type: "DELETE"
             }
-        }
-        // check uploadProps
+        };
+
+        let manager = new FileManager(props);
+        let exptectedUrl = "http://localhost:3000/files";
+        /* eslint-disable no-underscore-dangle */
         // check infoRequest
+        chai.assert.equal(exptectedUrl, manager.__deleteRequest.__url);
+        // check uploadProps
+        chai.assert.equal(exptectedUrl, manager.__uploadProps.url);
         // check deleteRequest
+        chai.assert.equal(exptectedUrl, manager.__deleteRequest.__url);
         // check previewRequest
+        chai.assert.equal(exptectedUrl, manager.__previewRequest.__url);
     });
 
     it("info `files array`", (done) => {
