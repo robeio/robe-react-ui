@@ -87,9 +87,16 @@ module.exports = (app, requestPath, tempFolder) => {
         return JSON.parse(file);
     }
     app.post(new RegExp(escapeRegexp(requestPath) + ".*"), jsonParser, (request, response, next) => {
-        var data = [];
-        for (var i = 0; i < request.body.length; i++) {
-            data.push(loadFile(request.body[i]));
+        var data;
+        console.log(request.body);
+        console.log((Object.prototype.toString.call(request.body)));
+        if (Object.prototype.toString.call(request.body) === "[object Array]") {
+            data = [];
+            for (var i = 0; i < request.body.length; i++) {
+                data.push(loadFile(request.body[i]));
+            }
+        } else {
+            data = loadFile(request.body.filename);
         }
         response.status(200).send(data);
     });

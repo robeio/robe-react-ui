@@ -1,125 +1,93 @@
-import { AjaxRequest, Maps } from "robe-react-commons";
-import jajax from "robe-ajax";
+import { AjaxRequest, Maps, Class } from "robe-react-commons";
 import HttpError from "robe-react-commons/lib/connections/HttpError";
+import Http from "robe-ajax";
 
-export default class FileManager {
-    /**
-     *
-     */
-    __request;
-    /**
-     *
-     */
-    __info;
-    /**
-     *
-     */
-    __preview;
-    /**
-     *
-     */
-    __delete;
+export default class FileManager extends Class {
 
-    /**
-     *
-     * @param props
-     */
-    constructor(props: Object) {
-        this.__request = FileManager.createRequest(props);
-        this.__info = new AjaxRequest(this.__request.info);
-        this.__preview = new AjaxRequest(this.__request.preview);
-        this.__delete = new AjaxRequest(this.__request.delete);
-        this.upload = this.upload.bind(this);
-        this.uploadFile = this.uploadFile.bind(this);
-        this.load = this.load.bind(this);
-        this.loadFile = this.loadFile.bind(this);
-        this.preview = this.preview.bind(this);
-        this.previewFile = this.previewFile.bind(this);
-        this.delete = this.delete.bind(this);
-        this.deleteFile = this.deleteFile.bind(this);
+    __uploadProps;
+    __infoRequest;
+    __deleteRequest;
+    __previewRequest;
+
+    constructor(props) {
+        super();
+        this.__uploadProps = FileManager.createUpload(props);
+        this.__infoRequest = new AjaxRequest(FileManager.createInfo(props));
+        this.__deleteRequest = new AjaxRequest(FileManager.createDelete(props));
+        this.__previewRequest = new AjaxRequest(FileManager.createPreview(props));
     }
 
-    upload(name: string, files: Array, onSuccess: Function, onError: Function) {
+    /**
+     * @param {any} keys
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    info(keys: any, onSuccess: Function, onError: Function) {
+        this.__infoRequest.call(keys, undefined, onSuccess, FileManager.createOnError(onError));
+    }
+    /**
+     * upload multiple file
+     * @param {string} fieldName
+     * @param {Array} files
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    upload(fieldName: string, files: Array<string>, onSuccess: Function, onError: Function) {
         let formData = new FormData();
-        let appendFile = (value) => {
-            formData.append(name, value);
-        };
-        Maps.forEach(files, appendFile);
+
+        Maps.forEach(files, (value) => {
+            formData.append(fieldName, value);
+        });
+
+        this.__upload(formData, onSuccess, onError);
+    }
+
+    /**
+     * upload single file
+     * @param {string} fieldName
+     * @param {string} files
+     * @param {Function} onSuccess
+     * @param {Function} onError
+     */
+    uploadFile(fieldName: string, file: string, onSuccess: Function, onError: Function) {
+        let formData = new FormData();
+        formData.append(fieldName, file);
+        this.__upload(formData, onSuccess, onError);
+    }
+
+    /**
+     * upload file(s) formData.
+     * @param formData
+     * @param onSuccess
+     * @param onError
+     * @private
+     */
+    __upload(formData, onSuccess: Function, onError: Function) {
         let uploadProps = {
             data: formData,
             success: onSuccess,
             error: FileManager.createOnError(onError)
         };
-        uploadProps = Maps.mergeDeep(uploadProps, this.__request.upload);
-        jajax.ajax(uploadProps);
+        uploadProps = Maps.mergeDeep(uploadProps, this.__uploadProps);
+        Http.ajax(uploadProps);
     }
 
     /**
-     * upload file
-     * @param {string} name
-     * @param {Array} files
+     * @param {any} keys
      * @param {Function} onSuccess
      * @param {Function} onError
      */
-    uploadFile(file: Object, onSuccess: Function, onError: Function) {
-        let formData = new FormData();
-        formData.append(name, file);
+    delete(keys: any, onSuccess: Function, onError: Function) {
+        this.__deleteRequest.call(keys, undefined, onSuccess, FileManager.createOnError(onError));
+    }
 
-        let uploadProps = {
-            data: formData,
-            success: onSuccess,
-            error: FileManager.createOnError(onError)
-        };
-        uploadProps = Maps.mergeDeep(uploadProps, this.__request.upload);
-        jajax.ajax(uploadProps);
-    }
     /**
-     * @param {Array} filenames
+     * @param {any} keys
      * @param {Function} onSuccess
      * @param {Function} onError
      */
-    load(filenames, onSuccess: Function, onError: Function) {
-        this.__info.call(filenames, undefined, onSuccess, FileManager.createOnError(onError));
-    }
-    /**
-     * @param {string} filename
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    loadFile(filename, onSuccess: Function, onError: Function) {
-        this.__info.call([filename], undefined, onSuccess, FileManager.createOnError(onError));
-    }
-    /**
-     * @param {Array} files
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    preview(files, onSuccess: Function, onError: Function) {
-        this.__preview.call(files, undefined, onSuccess, FileManager.createOnError(onError));
-    }
-    /**
-     * @param {Object} file
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    previewFile(file, onSuccess: Function, onError: Function) {
-        this.__preview.call(file, undefined, onSuccess, FileManager.createOnError(onError));
-    }
-    /**
-     * @param {Array} files
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    delete(files, onSuccess: Function, onError: Function) {
-        this.__delete.call(files, undefined, onSuccess, FileManager.createOnError(onError));
-    }
-    /**
-     * @param {Object} file
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    deleteFile(file, onSuccess: Function, onError: Function) {
-        this.__delete.call(file, undefined, onSuccess, FileManager.createOnError(onError));
+    preview(keys: any, onSuccess: Function, onError: Function) {
+        this.__preview.call(keys, undefined, onSuccess, FileManager.createOnError(onError));
     }
 
     /**
@@ -133,68 +101,58 @@ export default class FileManager {
         };
     }
 
-
     /**
      * @param {Object} props
      * @returns {Object}
      */
-    static createRequest(props: Object) {
-        let request = props.request;
-        request.upload = FileManager.createUpload(request);
-        request.info = FileManager.createInfo(request);
-        request.preview = FileManager.createPreview(request);
-        request.delete = FileManager.createDelete(request);
-        return request;
-    }
-    /**
-     * @param {Object} request
-     * @returns {Object}
-     */
-    static createUpload(request) {
-        let uploadRequest = FileManager.createInstance("upload", request, "PUT");
+    static createUpload(props) {
+        let uploadRequest = FileManager.createInstance("upload", props, "PUT");
         if (uploadRequest.contentType === undefined) {
             uploadRequest.contentType = false;
         }
         if (uploadRequest.processData === undefined) {
             uploadRequest.processData = false;
         }
-        FileManager.setCorelationId(request, uploadRequest);
+        FileManager.setCorelationId(props, uploadRequest);
         return uploadRequest;
     }
+
     /**
-     * @param {Object} request
+     * @param {Object} props
      * @returns {Object}
      */
-    static createInfo(request) {
-        let infoRequest = FileManager.createInstance("info", request, "POST");
-        FileManager.setCorelationId(request, infoRequest);
+    static createInfo(props) {
+        let infoRequest = FileManager.createInstance("info", props, "POST");
+        FileManager.setCorelationId(props, infoRequest);
         return infoRequest;
     }
+
     /**
      * @param {Object} request
      * @returns {Object}
      */
-    static createPreview(request) {
-        let previewRequest = FileManager.createInstance("preview", request, "GET");
-        FileManager.setCorelationId(request, previewRequest);
+    static createPreview(props) {
+        let previewRequest = FileManager.createInstance("preview", props, "GET");
+        FileManager.setCorelationId(props, previewRequest);
         return previewRequest;
     }
     /**
-     * @param {Object} request
+     * @param {Object} props
      * @returns {Object}
      */
-    static createDelete(request) {
-        let deleteRequest = FileManager.createInstance("delete", request, "DELETE");
-        FileManager.setCorelationId(request, deleteRequest);
+    static createDelete(props) {
+        let deleteRequest = FileManager.createInstance("delete", props, "DELETE");
+        FileManager.setCorelationId(props, deleteRequest);
         return deleteRequest;
     }
-    static createInstance(key: string, request: Object, type: string) {
-        let instance = request[key];
+
+    static createInstance(key: string, props: Object, type: string) {
+        let instance = props[key];
         if (!instance) {
             instance = {};
         }
         if (!instance.url) {
-            instance.url = request.url;
+            instance.url = props.url;
         }
         if (!instance.type) {
             instance.type = type;
@@ -202,16 +160,15 @@ export default class FileManager {
         return instance;
     }
     /**
-     * @param {Object} request
+     * @param {Object} props
      * @param {Object} destination
      * @returns {Object}
      */
-    static setCorelationId(request: Object, destination: Object) {
-        if (request.correlationId) {
+    static setCorelationId(props: Object, destination: Object) {
+        if (props.correlationId) {
             destination.beforeSend = (req: Object) => {
-                req.setRequestHeader("X-Correlation-ID", request.correlationId);
+                req.setRequestHeader("X-Correlation-ID", props.correlationId);
             };
         }
     }
 }
-
