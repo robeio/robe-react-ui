@@ -20,9 +20,8 @@ export default class SelectInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * code use as input field name
+         * code for the input name
          */
-        code: React.PropTypes.string,
         /**
          * map array of options to render.
          */
@@ -109,7 +108,7 @@ export default class SelectInput extends ValidationComponent {
     componentWillReceiveProps(props: Object) {
         this._value = props.value;
         if (!this._value) {
-            this._value = props.multi ? [] : "";
+            this._value = props.multi ? [] : null;
         }
         this._onChange = (props.multi ? this.__onChangeMulti : this.__onChangeSingle);
         this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
@@ -185,7 +184,7 @@ export default class SelectInput extends ValidationComponent {
             return this.props.multi ?
             this._value.indexOf(value) !== -1 : this._value === value;
         }
-        return !(!this._value) && (this.props.multi ? this._value.length > 0 : this._value !== "");
+        return !(!this._value) && (this.props.multi ? this._value.length > 0 : (this._value !== null && this._value !== ""));
     };
 
     /**
@@ -203,7 +202,7 @@ export default class SelectInput extends ValidationComponent {
      */
     __onChangeSingle(value: string): boolean {
         if (this._value === value) {
-            value = "";
+            value = null;
         }
         let result = this.__callOnChange(value, this._value);
         if (result) {
