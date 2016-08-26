@@ -34,11 +34,9 @@ export default class FileManager extends Class {
      */
     upload(fieldName: string, files: Array<string>, onSuccess: Function, onError: Function) {
         let formData = new FormData();
-
-        Maps.forEach(files, (value) => {
-            formData.append(fieldName, value);
-        });
-
+        for (let i = 0; i < files.length; i++) {
+            formData.append(fieldName, [files[i]]);
+        }
         this.__upload(formData, onSuccess, onError);
     }
 
