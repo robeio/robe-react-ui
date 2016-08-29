@@ -64,22 +64,6 @@ export default class ValidationComponent extends ShallowComponent {
     }
 
     /**
-     * Focuses to the input field.
-     */
-    focus() {
-        this.refs.innerInput.getInputDOMNode().focus();
-    }
-
-    /**
-     * Fired after component mounts. Takes validations from props.
-     */
-    componentDidMount() {
-        if (this.props.focus) {
-            this.focus();
-        }
-    }
-
-    /**
      * Fired after component mounts. Sets focus from props.
      */
     componentWillMount() {

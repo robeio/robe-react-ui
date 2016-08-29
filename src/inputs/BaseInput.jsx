@@ -98,7 +98,7 @@ export default class BaseInput extends ValidationComponent {
      */
     render(): Object {
         let label = (this.props.label === undefined) ? undefined : (
-            <ControlLabel> {this.props.label} </ControlLabel>
+            <ControlLabel>{this.props.label}</ControlLabel>
         );
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             let { inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
@@ -133,6 +133,22 @@ export default class BaseInput extends ValidationComponent {
                 {super.validationResult() }
             </FormGroup>
         );
+    }
+
+    /**
+     * Focuses to the input field.
+     */
+    focus() {
+        this.refs.innerInput.getInputDOMNode().focus();
+    }
+
+    /**
+        * Fired after component mounts. Takes validations from props.
+        */
+    componentDidMount() {
+        if (this.props.focus) {
+            this.focus();
+        }
     }
 
     /**
