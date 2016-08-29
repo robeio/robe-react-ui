@@ -366,7 +366,7 @@ export default class FileUploadInput extends ShallowComponent {
 
         return (
             <ButtonGroup className="pull-right">
-                <Button className="btn-file" bsSize="large" onClick={this.browse}>
+                <Button className="btn-file" bsSize="small" onClick={this.browse}>
                     <Glyphicon glyph="folder-open" />&nbsp; <span className="hidden-xs">Browse …</span>
                     <input
                         {...inputAttributes}
