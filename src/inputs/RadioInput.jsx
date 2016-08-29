@@ -32,7 +32,7 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Items will be rendered as radio input.
          */
-        items: React.PropTypes.object,
+        items: React.PropTypes.array,
         /**
          * Checked value or values
          */
@@ -92,9 +92,9 @@ export default class RadioInput extends ValidationComponent {
             <FormGroup>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
-                   this.__createRadioBoxes(this.props.items)
+                    this.__createRadioBoxes(this.props.items)
                 }
-                {super.validationResult()}
+                {super.validationResult() }
             </FormGroup>
         );
     }
@@ -140,11 +140,11 @@ export default class RadioInput extends ValidationComponent {
                 value={value}
                 disabled={!isChecked}
             />
-        ) : null;
+        ) : undefined;
 
         let onClick = this.__onClick.bind(this, value);
         return (
-            <div className={`radio ${disabled}`} onClick={onClick}>
+            <div className={`radio ${disabled}`} onClick={onClick} key={value}>
                 <label
                     htmlFor={this.props.code}
                     style={{ paddingLeft: "2px" }}
@@ -166,7 +166,7 @@ export default class RadioInput extends ValidationComponent {
             key !== this._value : true);
     };
 
-    getValue() {
+    getValue(): Object {
         return this._value;
     }
 
@@ -174,7 +174,7 @@ export default class RadioInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    __onClick(value) {
+    __onClick(value: Object): boolean {
         let result = true;
         if (this.props.onChange) {
             let e = { target: { value: value } };
