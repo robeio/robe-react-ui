@@ -2,6 +2,8 @@ import React from "react";
 import { FormGroup, InputGroup, ControlLabel, FormControl } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import InputValidations from "../validation/InputValidations";
+import ReactDOM from "react-dom";
+
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
  * Does necessary validations, rendering of validation messages.
@@ -98,7 +100,7 @@ export default class BaseInput extends ValidationComponent {
      */
     render(): Object {
         let label = (this.props.label === undefined) ? undefined : (
-            <ControlLabel> {this.props.label} </ControlLabel>
+            <ControlLabel>{this.props.label}</ControlLabel>
         );
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             let { inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
@@ -112,7 +114,7 @@ export default class BaseInput extends ValidationComponent {
                             bsStyle="error"
                             ref={BaseInput.refName}
                             value={this.props.value}
-                        />
+                            />
                         {this.props.inputGroupRight}
                     </InputGroup>
                     {super.validationResult() }
@@ -129,10 +131,27 @@ export default class BaseInput extends ValidationComponent {
                     bsStyle="error"
                     ref={BaseInput.refName}
                     value={this.props.value}
-                />
+                    />
                 {super.validationResult() }
             </FormGroup>
         );
+    }
+
+    /**
+     * Focuses to the input field.
+     */
+    focus() {
+        let dom = ReactDOM.findDOMNode(this.refs.innerInput);
+        dom.focus();
+    }
+
+    /**
+        * Fired after component mounts. Takes validations from props.
+        */
+    componentDidMount() {
+        if (this.props.focus) {
+            this.focus();
+        }
     }
 
     /**

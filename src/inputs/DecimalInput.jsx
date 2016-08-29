@@ -66,8 +66,12 @@ export default class DecimalInput extends ShallowComponent {
     static refName = "innerInput";
 
     render(): Object {
+        /* eslint-disable no-unused-vars */
+
+        let { decimalSeparator, ...newProps } = this.props;
+
         return (<Input
-            {...this.props}
+            {...newProps}
             type="text"
             ref={DecimalInput.refName}
             step={this.props.step}
