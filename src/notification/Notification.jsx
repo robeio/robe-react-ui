@@ -122,7 +122,7 @@ export default class Notification extends ShallowComponent {
         ev.preventDefault();
     }
 
-    __handleClick = (e) => {
+    __handleClick(e) {
         if (ReactDOM.findDOMNode(this).contains(e.target)) {
             return;
         }
@@ -139,17 +139,18 @@ export default class Notification extends ShallowComponent {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         document.addEventListener("click", this.__handleClick, false);
     }
 
-    componentWillUnmount = () => {
+    componentWillUnmount() {
         document.removeEventListener("click", this.__handleClick, false);
     }
 
     componentWillReceiveProps(nextProps: Object) {
         this.setState({
-            data: nextProps.data || []
+            data: nextProps.data || [],
+            open: nextProps.open
         });
     }
 }

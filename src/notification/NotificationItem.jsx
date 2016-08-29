@@ -31,7 +31,9 @@ export default class NotificationItem extends ShallowComponent {
         );
     }
     __onRead = () => {
-        this.props.onRead(this.props.item.oid);
+        if (this.props.onRead) {
+            this.props.onRead(this.props.item.oid);
+        }
     };
 
 }
