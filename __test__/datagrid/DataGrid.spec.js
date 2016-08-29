@@ -80,14 +80,13 @@ describe("datagrid/DataGrid", () => {
         grid.unmount();
     });
 
-    it("rows - getSelectedRows", () => {
+    it("rows - getSelectedRows", (done) => {
         let props = {
             fields: model.fields,
             store: store
         };
         store.getResult();
         let grid = mount(getComponent(props));
-        window.setTimeout(check, 1000);
 
         function check() {
             let rows = grid.find(DataGridBodyRow);
@@ -95,7 +94,9 @@ describe("datagrid/DataGrid", () => {
             rows.first().simulate("click");
             chai.assert.equal(grid.node.getSelectedRows().length, 1, "getSelectetRows() must return 1 after selection");
             grid.unmount();
+            done();
         }
+        window.setTimeout(check, 1000);
     });
 
     it("pagination", () => {

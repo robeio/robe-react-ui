@@ -29,17 +29,18 @@ export default class SideMenuItem extends ShallowComponent {
         const item = this.props.item;
         const children = item.items;
         let subMenuItems = [];
-
-        for (let j = 0; j < children.length; j++) {
-            let child = children[j];
-            subMenuItems.push(
-                <SideMenuSubItem
-                    key={j}
-                    item={child}
-                    onChange={this.__onChange}
-                    selectedItem={this.props.selectedItem}
-                />
-            );
+        if (children !== undefined) {
+            for (let j = 0; j < children.length; j++) {
+                let child = children[j];
+                subMenuItems.push(
+                    <SideMenuSubItem
+                        key={j}
+                        item={child}
+                        onChange={this.__onChange}
+                        selectedItem={this.props.selectedItem}
+                    />
+                );
+            }
         }
 
         let isActive = this.state.active ? "SideMenu-item SideMenu-item-active" : "SideMenu-item";
