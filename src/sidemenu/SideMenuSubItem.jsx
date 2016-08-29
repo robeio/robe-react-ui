@@ -1,5 +1,5 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { ShallowComponent, Strings } from "robe-react-commons";
 import FaIcon from "../faicon/FaIcon";
 
 /**
@@ -46,7 +46,7 @@ export default class SideMenuSubItem extends ShallowComponent {
     }
 
     componentDidMount() {
-        if (!this.state.active && this.props.item.path.endsWith(this.props.selectedItem)) {
+        if (!this.state.active && Strings.endsWith(this.props.item.path, this.props.selectedItem)) {
             this.__onClick(null);
         }
     }

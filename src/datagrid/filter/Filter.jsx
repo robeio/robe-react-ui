@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import { ShallowComponent, Strings } from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
 import { Input } from "../../inputs/index";
@@ -193,9 +193,9 @@ export default class Filter extends ShallowComponent {
                     }
                     break;
                 case "number":
-                    if (code.endsWith("-min-")) {
+                    if (Strings.endsWith(code, "-min-")) {
                         filter += (`${code.substring(0, code.length - 5)}>=${value}`);
-                    } else if (code.endsWith("-max-")) {
+                    } else if (Strings.endsWith(code, "-max-")) {
                         filter += (`${code.substring(0, code.length - 5)}<=${value}`);
                     }
                     break;
@@ -203,9 +203,9 @@ export default class Filter extends ShallowComponent {
                     filter += (`${code}~=${value}`);
                     break;
                 case "date":
-                    if (code.endsWith("-min-")) {
+                    if (Strings.endsWith(code, "-min-")) {
                         filter += (`${code.substring(0, code.length - 5)}>=${value}`);
-                    } else if (code.endsWith("-max-")) {
+                    } else if (Strings.endsWith(code, "-max-")) {
                         filter += (`${code.substring(0, code.length - 5)}<=${value}`);
                     }
                     break;
