@@ -71,9 +71,11 @@ export default class MoneyInput extends ShallowComponent {
     static refName = "innerInput";
 
     render(): Object {
+        /* eslint-disable no-unused-vars */
+        let { decimalSeparator, thousandSeparator, unit, ...newProps } = this.props;
         return (
             <Input
-                {...this.props}
+                {...newProps}
                 type="text"
                 label={this.props.label}
                 onChange={this.__numericFilter}
