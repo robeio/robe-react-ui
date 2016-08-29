@@ -1,6 +1,5 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import SideMenuSubItem from "./SideMenuSubItem";
 import SideMenuItem from "./SideMenuItem";
 import "./SideMenu.css";
 
@@ -48,7 +47,7 @@ export default class SideMenu extends ShallowComponent {
     render(): Object {
         return (
             <ul className="SideMenu-menu-content">
-                {this.__renderMenuItems()}
+                {this.__renderMenuItems() }
             </ul>
         );
     }
@@ -59,19 +58,12 @@ export default class SideMenu extends ShallowComponent {
 
         for (let i = 0; i < children.length; i++) {
             let child = children[i];
-            if (child.items && child.items.length > 0) {
-                itemComps.push(<SideMenuItem key={i}
-                    item={child}
-                    onChange={this.__onChange}
-                    selectedItem={this.props.selectedItem}
-                />);
-            } else {
-                itemComps.push(<SideMenuSubItem key={i}
-                    item={child}
-                    onChange={this.__onChange}
-                    selectedItem={this.props.selectedItem}
-                />);
-            }
+            itemComps.push(<SideMenuItem
+                key={i}
+                item={child}
+                onChange={this.__onChange}
+                selectedItem={this.props.selectedItem}
+            />);
         }
         return itemComps;
     }
