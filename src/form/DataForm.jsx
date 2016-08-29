@@ -106,7 +106,12 @@ export default class DataForm extends ShallowComponent {
         let code = field.code;
 
         props = props ? Maps.mergeDeep(field, props) : field;
-        props.onChange = this.onChange.bind(this, code);
+
+
+        if (props.onChange) {
+            props.onChange = this.onChange.bind(this, code);
+        }
+
 
         this.state[code] = this.__filterUndefined(this.state[code]);
         if (this.__isNew) {
