@@ -1,7 +1,7 @@
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src");
+const commonSettings = require("./webpack.config.common.js")("/src", "/build", "__test__");
 
 /**
  * Json Server
@@ -90,10 +90,11 @@ module.exports = function configure(config) {
             "karma-mocha-reporter"
         ],
         files: [
-            "__test__/index.js"
+            "__test__/**/*.spec.js"
         ],
         preprocessors: {
-            "__test__/index.js": ["webpack", "sourcemap"]
+            "__test__/**/*.spec.js": ["webpack"],
+            "src/**/*.js": ["webpack"]
         },
         webpack: commonSettings,
         webpackServer: {

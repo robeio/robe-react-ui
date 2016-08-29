@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
-import { Input } from "../../inputs";
+import { Input } from "../../inputs/index";
 
 export default class Filter extends ShallowComponent {
 
@@ -16,7 +16,7 @@ export default class Filter extends ShallowComponent {
          * Fields Configurations to show style on view.
          */
         fields: React.PropTypes.array
-    }
+    };
 
     /**
      * static props
@@ -27,7 +27,8 @@ export default class Filter extends ShallowComponent {
          * Fields Configurations to show style on view.
          */
         fields: []
-    }
+    };
+
     static booleanData = [
         { text: "Hepsi", value: "all" },
         { text: "Evet", value: "true" },
