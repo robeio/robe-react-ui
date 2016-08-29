@@ -62,33 +62,33 @@ describe("util/FileManager", () => {
     //     });
     // });
 
-    it("info `file`", (done) => {
-        let filename = "testfile.txt";
-        let expectedFile = {
-            destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
-            encoding: "7bit",
-            fieldname: "files",
-            filename,
-            mimetype: "plain/text",
-            originalname: "testfile.txt",
-            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.txt.json",
-            size: 2067
-        };
+    // it("info `file`", (done) => {
+    //     let filename = "testfile.txt";
+    //     let expectedFile = {
+    //         destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
+    //         encoding: "7bit",
+    //         fieldname: "files",
+    //         filename,
+    //         mimetype: "plain/text",
+    //         originalname: "testfile.txt",
+    //         path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.txt.json",
+    //         size: 2067
+    //     };
 
-        let manager = new FileManager({
-            url
-        });
+    //     let manager = new FileManager({
+    //         url
+    //     });
 
-        manager.info({
-            filename
-        }, (file) => {
-            chai.assert.deepEqual(expectedFile, file);
-            done();
-        }, (error) => {
-            chai.assert.isOk(false, `Failed read file from server ! Reason : ${error}`);
-            done();
-        });
-    });
+    //     manager.info({
+    //         filename
+    //     }, (file) => {
+    //         chai.assert.deepEqual(expectedFile, file);
+    //         done();
+    //     }, (error) => {
+    //         chai.assert.isOk(false, `Failed read file from server ! Reason : ${error}`);
+    //         done();
+    //     });
+    // });
 
     it("upload", () => {
         let manager = new FileManager({

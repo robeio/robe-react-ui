@@ -80,24 +80,24 @@ describe("datagrid/DataGrid", () => {
         grid.unmount();
     });
 
-    // it("rows - getSelectedRows", (done) => {
-    //     let props = {
-    //         fields: model.fields,
-    //         store: store
-    //     };
-    //     store.getResult();
-    //     let grid = mount(getComponent(props));
+    it("rows - getSelectedRows", (done) => {
+        let props = {
+            fields: model.fields,
+            store: store
+        };
+        store.getResult();
+        let grid = mount(getComponent(props));
 
-    //     function check() {
-    //         let rows = grid.find(DataGridBodyRow);
-    //         chai.assert.equal(grid.node.getSelectedRows().length, 0, "getSelectetRows() must return empty before selection");
-    //         rows.first().simulate("click");
-    //         chai.assert.equal(grid.node.getSelectedRows().length, 1, "getSelectetRows() must return 1 after selection");
-    //         grid.unmount();
-    //         done();
-    //     }
-    //     window.setTimeout(check, 1000);
-    // });
+        function check() {
+            let rows = grid.find(DataGridBodyRow);
+            chai.assert.equal(grid.node.getSelectedRows().length, 0, "getSelectetRows() must return empty before selection");
+            rows.first().simulate("click");
+            chai.assert.equal(grid.node.getSelectedRows().length, 1, "getSelectetRows() must return 1 after selection");
+            grid.unmount();
+            done();
+        }
+        window.setTimeout(check, 1000);
+    });
 
     it("pagination", () => {
         let props = {
