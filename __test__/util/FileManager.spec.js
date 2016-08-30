@@ -37,23 +37,23 @@ describe("util/FileManager", () => {
     });
 
     it("info `files array`", (done) => {
-        let expectedFiles = [
-            {
-                destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
-                encoding: "7bit",
-                fieldname: "files",
-                filename: "testfile.txt",
-                mimetype: "plain/text",
-                originalname: "testfile.txt",
-                path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.txt.json",
-                size: 2067
-            }
-        ];
+        let fileName = "testfile.png";
+        let fileData = {
+            destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
+            encoding: "7bit",
+            fieldname: "files",
+            filename: fileName,
+            mimetype: "image/png",
+            originalname: "testfile.png",
+            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.png.json",
+            size: 2067
+        };
+        let expectedFiles = [fileData];
 
         let manager = new FileManager({
             url
         });
-        manager.info(["testfile.txt"], (files) => {
+        manager.info([fileName], (files) => {
             chai.assert.deepEqual(expectedFiles, files);
             done();
         }, (error) => {
@@ -63,15 +63,15 @@ describe("util/FileManager", () => {
     });
 
     it("info `file`", (done) => {
-        let filename = "testfile.txt";
+        let filename = "testfile.png";
         let expectedFile = {
             destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
             encoding: "7bit",
             fieldname: "files",
-            filename,
-            mimetype: "plain/text",
-            originalname: "testfile.txt",
-            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.txt.json",
+            filename: "testfile.png",
+            mimetype: "image/png",
+            originalname: "testfile.png",
+            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.png.json",
             size: 2067
         };
 
@@ -82,6 +82,7 @@ describe("util/FileManager", () => {
         manager.info({
             filename
         }, (file) => {
+            console.log(file);
             chai.assert.deepEqual(expectedFile, file);
             done();
         }, (error) => {

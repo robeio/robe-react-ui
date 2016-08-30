@@ -1,6 +1,7 @@
 const jsonServer = require("json-server");
 const path = require("path");
 const multerImpl = require("./MultierImpl");
+const appRoot = require("app-root-path");
 
 function fixPath(absolutePath) {
     if (!absolutePath.startsWith("/")) {
@@ -11,10 +12,25 @@ function fixPath(absolutePath) {
     }
     return absolutePath;
 }
+
+function getUserHome() {
+    return process.env.HOME || process.env.USERPROFILE;
+}
+
+function getAppHome(){
+    return appRoot.path;
+}
+
 function Server(port) {
     this.__port = port;
     const server = jsonServer.create();
     server.use(jsonServer.defaults());
+    server.get("application", (req, res) => {
+        res.status(200).json({
+            userPath: getUserHome(),
+            applicationPath: getAppHome()
+        });
+    });
     const routes = [];
 
     this.route = (routePath) => {
