@@ -11,7 +11,8 @@ describe("inputs/BaseInput", () => {
         validations: {
             required: (value: any): Array => {
                 return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
-            }
+            },
+            requiredMessage: "Error Test"
         }
     };
 
@@ -28,11 +29,34 @@ describe("inputs/BaseInput", () => {
         let componentNode = TestUtils.mount(props, BaseInput, props);
         chai.assert.isOk(componentNode.instance().isValid(), "Non-Empty string value must be valid");
         chai.assert.equal(componentNode.find(".input-alert").length, 0, "Non-Empty string value must render ZERO alert");
+        componentNode.unmount();
 
         // Must be invalid
         componentNode = TestUtils.mount({ value: "" }, BaseInput, props);
         chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string value must be invalid");
         chai.assert.equal(componentNode.find(".input-alert").length, 1, "Empty string value must render one alert");
+        chai.assert.equal(componentNode.find(".input-alert").text(), "Error Test", "Custom messages shoud be rendered inside alert");
+        componentNode.unmount();
+
+        // Must be invalid
+        componentNode = TestUtils.mount({
+            value: "Goodbye ",
+            validations: {
+                custom: (hello: string, world: string, value: string): Array => {
+                    return value + world;
+                },
+                custom_args: ["hello", "world"]
+            }
+        }, BaseInput, props);
+        chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string value must be invalid");
+        chai.assert.equal(componentNode.find(".input-alert").text(), "Goodbye world", "Arguments must pass successfully");
+        componentNode.unmount();
+
+        // Must be exception
+        componentNode = TestUtils.mount({ value: "a", validations: { required: "string", custom: "" } }, BaseInput, props);
+        chai.assert.equal(componentNode.find(".input-alert").length, 0, "Empty string value must render ZERO alert");
+        chai.assert.isOk(componentNode.instance().isValid(), "Non-function validations must return true.");
+        componentNode.unmount();
     });
 
     it("'max limit' Control", () => {
