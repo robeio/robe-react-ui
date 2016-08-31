@@ -1,41 +1,56 @@
-import chai from "chai";
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import DateInput from "inputs/DateInput";
+import DateInput from "inputs/DateInput"; // eslint-disable-line import/no-extraneous-dependencies
+import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
+import DatePicker from "react-datepicker";// eslint-disable-line import/no-extraneous-dependencies
+import moment from "moment";// eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/DateInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <DateInput
-                label="DateInput Label Text Example"
-                value={props.value !== undefined ? props.value : "This is some example text must be equals with DateInput value"}
-                onChange={props.onChange !== undefined ? props.onChange : () => { } }
-                validations={{
-                    required: (value: any): Array => {
-                        return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
-                    }
-                }}
-                />
+            <DateInput // eslint-disable-line react/jsx-filename-extension
+                {...props}
+            />
         );
     };
+    it("render", () => {
+        let wrapper = mount(getComponent({ }));
 
-    it("'props' Controls", () => {
+        let dateInput = wrapper.find(DateInput);
+        chai.assert.equal(dateInput.length, 1);
+
         let value = new Date().getTime();
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ value: value }));
-        chai.assert.equal(componentNode.props.label, "DateInput Label Text Example");
-        chai.assert.equal(componentNode.props.value, value);
-        chai.assert.equal(componentNode.props.onChange.name, "");
-        chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
+        wrapper.setProps({ value: value });
+        chai.assert.equal(wrapper.props().value, value);
+
+        wrapper.setProps({ label: "Example Label" });
+        chai.assert.equal(wrapper.props().label, "Example Label");
+        chai.assert.equal(wrapper.find(".control-label").length, 1);
     });
 
-    it("'validations' Control", () => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({}));
-        chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
-        // Must be invalid
-        componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
-        chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+
+    let value = "";
+
+    const handleChange = (e) => {
+        value = e.target.parsedValue;
+    };
+
+    it("onChange", () => {
+        let wrapper = mount(getComponent({ onChange: handleChange }));
+        let datePicker = wrapper.find(DatePicker);
+        chai.assert.equal(datePicker.length, 1);
+
+        let date = moment();
+        let dateFormat = "YYYY-MM-DD";
+
+        wrapper = mount(getComponent({ onChange: handleChange, value: value }));
+
+        wrapper.find("input").simulate("change", {
+            isDefaultPrevented: () => false,
+            target: {
+                value: date.format(dateFormat)
+            }
+        });
+        chai.assert.equal("", value);
     });
 });
