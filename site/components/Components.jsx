@@ -66,7 +66,7 @@ export default class Showcase extends ShallowComponent {
                     />
                     <ListGroup>{componentMenu}</ListGroup>
                 </Col>
-                <Col xs={12} sm={9} üref="componentView">
+                <Col xs={12} sm={9} ref="componentView">
                     {componentDetail}
                 </Col>
             </Grid>
