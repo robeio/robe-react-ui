@@ -1,0 +1,46 @@
+import chai from "chai";
+import React from "react";
+import ModalDataForm from "form/ModalDataForm";
+import { mount } from "enzyme";
+describe("form/ModalDataForm", () => {
+    let fields = [
+        {
+            label: "id",
+            type: "string",
+            code: "id",
+            tooltip: "id",
+            visible: false
+        },
+        {
+            label: "Name",
+            type: "string",
+            code: "name",
+            tooltip: "Name",
+            required: true
+        },
+        {
+            label: "Surname",
+            type: "string",
+            code: "surname",
+            tooltip: "Surname",
+            required: true
+        }
+    ];
+
+    const getComponent = (props: Object): Object => {
+        return (<ModalDataForm {...props} />);// eslint-disable-line react/jsx-filename-extension
+    };
+
+    it("render", () => {
+        let wrapper = mount(getComponent({ fields: fields, onSubmit: () => {} }));
+
+        let modalDataForm = wrapper.find(ModalDataForm);
+        chai.assert.equal(modalDataForm.length, 1);
+        chai.assert.equal(wrapper.state().valid, true);
+        wrapper.setState({ valid: false });
+        chai.assert.equal(wrapper.state().valid, false);
+        wrapper.setProps({ show: false });
+        chai.assert.equal(wrapper.state().show, false);
+        // wrapper.instance().__submitForm();// eslint-disable-line no-underscore-dangle
+    });
+});
