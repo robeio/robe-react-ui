@@ -4,7 +4,7 @@ import * as Input from "../inputs";
 /**
  *
  */
-class ComponentGenerator {
+class ComponentManager {
 
     _componentFinderNames = [];
     _componentFinders = [];
@@ -12,6 +12,21 @@ class ComponentGenerator {
     constructor() {
         this._componentFinderNames.push("__standart");
         this._componentFinders.push(this.__getComponentByType);
+    }
+
+    /**
+     *
+     * @returns Array
+     */
+    getComponentFinderNames(): Array {
+        return this._componentFinderNames;
+    }
+    /**
+     *
+     * @returns Array
+     */
+    getComponentFinders(): Array {
+        return this._componentFinders;
     }
     /**
      *
@@ -88,7 +103,7 @@ class ComponentGenerator {
      *
      * @param componentFinder
      */
-    addComponentFinder(componentFinderName, componentFinder: Function) {
+    addComponentFinder(componentFinderName: string, componentFinder: Function) {
         if (this._componentFinderNames.indexOf(componentFinderName) === -1) {
             this._componentFinderNames.push(componentFinderName);
             this._componentFinders.push(componentFinder);
@@ -96,7 +111,7 @@ class ComponentGenerator {
             throw new Error("Component Finder already exist ! ");
         }
     }
-    deleteComponentFinderByName(componentFinderName) {
+    deleteComponentFinderByName(componentFinderName: string) {
         let index = this._componentFinderNames.indexOf(componentFinderName);
         if (index !== -1) {
             this._componentFinderNames.splice(index, 1);
@@ -104,5 +119,4 @@ class ComponentGenerator {
         }
     }
 }
-
-export default new ComponentGenerator();
+export default new ComponentManager();
