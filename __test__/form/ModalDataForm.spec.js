@@ -1,7 +1,8 @@
-import chai from "chai";
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import ModalDataForm from "form/ModalDataForm";
-import { mount } from "enzyme";
+import ModalDataForm from "form/ModalDataForm"; // eslint-disable-line import/no-extraneous-dependencies
+import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
+
 describe("form/ModalDataForm", () => {
     let fields = [
         {
@@ -41,6 +42,12 @@ describe("form/ModalDataForm", () => {
         chai.assert.equal(wrapper.state().valid, false);
         wrapper.setProps({ show: false });
         chai.assert.equal(wrapper.state().show, false);
+        
+        chai.assert.equal(wrapper.props().showCancelButton, true);
+        chai.assert.equal(wrapper.props().showCancelButton, true);
+        wrapper.setProps({ showCancelButton: false, showSaveButton: false });
+        chai.assert.equal(wrapper.props().showCancelButton, false);
+        chai.assert.equal(wrapper.props().showCancelButton, false);
         // wrapper.instance().__submitForm();// eslint-disable-line no-underscore-dangle
     });
 });
