@@ -37,7 +37,7 @@ export default class ModalDataForm extends ShallowComponent {
         /**
          * Holds Component props and component if need.
          */
-        show: React.PropTypes.boolean,
+        show: React.PropTypes.bool,
         onSubmit: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func,
         cancelButtonText: React.PropTypes.string,
@@ -65,11 +65,11 @@ export default class ModalDataForm extends ShallowComponent {
 
     static dataFormRef = "dataform";
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.componentWillReceiveProps(props);
     }
-    render() {
+    render(): Object {
         return (
             <Modal show={this.state.show}>
                 <Modal.Header>
@@ -119,8 +119,7 @@ export default class ModalDataForm extends ShallowComponent {
         return (<Alert bsStyle="danger" className="input-alert">{errors}</Alert>);
     };
 
-    // __submitForm = (e) => {
-    __submitForm = () => {
+    __submitForm() {
         if (this.doNotSubmit === true) {
             console.warn("Bypassing second submit", this.doNotSubmit);
             return;
@@ -137,9 +136,8 @@ export default class ModalDataForm extends ShallowComponent {
             });
             this.doNotSubmit = false;
         }
-    };
-
-    __onComplete = (message) => {
+    }
+    __onComplete(message: Object) {
         if (this.doNotSubmit === true) {
             this.doNotSubmit = false;
         }
@@ -163,7 +161,7 @@ export default class ModalDataForm extends ShallowComponent {
      *
      * @param nextProps
      */
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Object) {
         this.state = {
             valid: true,
             show: nextProps.show,
