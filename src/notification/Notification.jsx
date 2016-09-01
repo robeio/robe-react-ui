@@ -117,15 +117,15 @@ export default class Notification extends ShallowComponent {
     }
 
 
-    __onNotificationOpenClick = (ev) => {
+    __onNotificationOpenClick = (e: Object) => {
         this.setState({
             open: !this.state.open
         });
-        ev.preventDefault();
+        e.preventDefault();
     }
 
-    __handleClick(e) {
-        if (ReactDOM.findDOMNode(this).contains(e.target)) {
+    __handleClick(e: Object) {
+        if (ReactDOM.findDOMNode(this).contains(e.target)) { // eslint-disable-line
             return;
         }
 

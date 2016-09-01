@@ -1,8 +1,8 @@
 import React from "react";
 import { FormGroup, InputGroup, ControlLabel, FormControl } from "react-bootstrap";
+import ReactDOM from "react-dom";
 import ValidationComponent from "../validation/ValidationComponent";
 import InputValidations from "../validation/InputValidations";
-import ReactDOM from "react-dom";
 
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
@@ -141,7 +141,7 @@ export default class BaseInput extends ValidationComponent {
      * Focuses to the input field.
      */
     focus() {
-        let dom = ReactDOM.findDOMNode(this.refs.innerInput);
+        let dom = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
         dom.focus();
     }
 

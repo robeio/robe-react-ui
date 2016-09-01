@@ -1,11 +1,7 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { ShallowComponent, Assertions } from "robe-react-commons";
 import { Panel, Row, Col, Glyphicon } from "react-bootstrap";
 import "./StackLayout.css";
-
-const style = {
-    minHeight: 200
-};
 
 export default class StackLayout extends ShallowComponent {
 
@@ -82,7 +78,7 @@ export default class StackLayout extends ShallowComponent {
         display: "list",
         style: {},
         items: [],
-        onItemRender: (item, displayType) => {
+        onItemRender: (item: Object, displayType: string): Object => {
             if (displayType === "list") {
                 return (<span> <span style={{ fontSize: "18px" }}> {`${item.key} `}</span>{item.value}</span>);
             }
