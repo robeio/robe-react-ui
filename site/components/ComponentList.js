@@ -199,6 +199,14 @@ class ComponentList {
             sample: require("../samples/form/ModalDataFormSample"),
             code: require("../samples/form/ModalDataFormSample.txt")
         });
+
+        components.push({
+            header: "StackLayout",
+            desc: " is an layout component which supports list and thumbnail view.",
+            json: require("../docs/layouts/StackLayout.json"),
+            sample: require("../samples/layouts/StackLayoutSample"),
+            code: require("../samples/layouts/StackLayoutSample.txt")
+        });
         return components;
     }
 

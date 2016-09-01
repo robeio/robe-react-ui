@@ -54,7 +54,7 @@ export default class StackLayout extends ShallowComponent {
         /**
          * if any item selection changed.
          */
-        onItemSelectionChanged: React.PropTypes.func,
+        onItemClick: React.PropTypes.func,
         /**
          * when a draggable element is dropped in the layout container element.
          */
@@ -87,21 +87,24 @@ export default class StackLayout extends ShallowComponent {
         toolbarPosition: "bottom",
         display: "list",
         style: {},
-        items: []
+        items: [],
+        onItemRender: (item, displayType) => {
+            if (displayType === "list") {
+                return (<span> <span style={{ fontSize: "18px" }}> {`${item.key} `}</span>{item.value}</span>);
+            }
+            return (
+                <span>
+                    <span style={{ fontSize: "24px" }}> {item.key}</span>
+                    <br />
+                    {item.value}
+                </span>);
+        }
     };
 
-    _style;
 
-    _selectedList;
-
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
-        this.onClick = this.onClick.bind(this);
-        this.onDragStart = this.onDragStart.bind(this);
-        this.onDragEnter = this.onDragEnter.bind(this);
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDragOver = this.onDragOver.bind(this);
-        this.onDrop = this.onDrop.bind(this);
+
         this.onClickDisplayList = this.onClickDisplay.bind(this, "list");
         this.onClickDisplayThumbnail = this.onClickDisplay.bind(this, "thumbnail");
         this._selectedList = [];
@@ -110,25 +113,21 @@ export default class StackLayout extends ShallowComponent {
             items: props.items,
             selectedList: this._selectedList
         };
-        this._style = Maps.mergeDeep(props.style, style);
     }
 
-    render() {
-        let component = this.list(this.state.items);
+    render(): Object {
+        let component = this.__renderList(this.state.items);
         let panel = (
-            <Panel
-                header={this.panelToolbar()}
-            >
+            <Panel header={this.panelToolbar() } >
                 <div
-                    className="file-input"
                     onClick={this.onClick}
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}
                     onDragOver={this.onDragOver}
                     onDragLeave={this.onDragLeave}
                     onDrop={this.onDrop}
-                    style={this._style}
-                >
+                    style={this.props.style}
+                    >
                     {component}
                 </div>
             </Panel>
@@ -148,11 +147,11 @@ export default class StackLayout extends ShallowComponent {
             case "left":
                 return (
                     <div className="container-fluid">
-                    <div className="row">
-                        <div className="col">{this.props.toolbar}</div>
-                        <div className="col">{panel}</div>
+                        <div className="row">
+                            <div className="col">{this.props.toolbar}</div>
+                            <div className="col">{panel}</div>
+                        </div>
                     </div>
-                </div>
                 );
             case "right":
                 return (
@@ -165,15 +164,15 @@ export default class StackLayout extends ShallowComponent {
                 );
             default:
                 return (
-                   <div>
-                       {panel}
-                       {this.props.toolbar}
-                   </div>
+                    <div>
+                        {panel}
+                        {this.props.toolbar}
+                    </div>
                 );
         }
     }
 
-    panelToolbar() {
+    panelToolbar(): Object {
         let listClassName = `btn btn-default ${this.state.display === "list" ? "active" : ""}`;
         let thumbnailClassName = `btn btn-default ${this.state.display === "thumbnail" ? "active" : ""}`;
         return [
@@ -186,15 +185,13 @@ export default class StackLayout extends ShallowComponent {
                     <Glyphicon glyph="th-large" />
                 </button>
             </div>,
-            <div className="clearfix"></div>
+            <div className="clearfix" />
         ];
     }
-    list(items: Array) {
+    __renderList(items: Array): Object {
         let components = [];
-        for (let key in items) {
-            if (items.hasOwnProperty(key)) {
-                components.push(this.listItem(items[key]));
-            }
+        for (let i = 0; i < items.length; i++) {
+            components.push(this.__renderListItem(items[i]));
         }
         return (
             <Row>
@@ -203,23 +200,22 @@ export default class StackLayout extends ShallowComponent {
         );
     }
 
-    listItem(item: Map) {
-        let checked = this.state.selectedList.indexOf(item.filename) !== -1 ? "checked" : "";
-        let itemClick = this.onItemClick.bind(this, item);
+    __renderListItem(item: Map): Object {
         let className = null;
+        let itemJson = JSON.stringify(item);
         switch (this.state.display) {
             case "thumbnail":
-                className = `thumbnail ${checked}`;
+                className = "thumbnail";
                 return (
-                    <Col xs={6} md={4} className={className} style={this.props.itemStyle}>
-                        {this.props.onItemRender(item, this.state.display)}
-                     </Col>
-               );
+                    <Col xs={6} md={4} className={className} onClick={this.onItemClick} style={this.props.itemStyle} data={itemJson}>
+                        {this.props.onItemRender(item, this.state.display) }
+                    </Col>
+                );
             default:
-                className = `stacklayout no-float ${checked}`;
+                className = "stacklayout no-float";
                 return (
-                    <Col md={12} className={className} onClick={itemClick} >
-                        {this.props.onItemRender(item, this.state.display)}
+                    <Col md={12} className={className} onClick={this.onItemClick} data={itemJson}>
+                        {this.props.onItemRender(item, this.state.display) }
                     </Col>
                 );
         }
@@ -231,7 +227,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onDragStart(e) {
+    onDragStart(e: Object): boolean {
         e.preventDefault();
         let result = false;
         if (this.props.onDragStart) {
@@ -244,7 +240,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onDragEnter(e) {
+    onDragEnter(e: Object): boolean {
         e.preventDefault();
         let result = false;
         if (this.props.onDragEnter) {
@@ -257,7 +253,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onDragOver(e) {
+    onDragOver(e: Object): boolean {
         e.preventDefault();
         let result = false;
         if (this.props.onDragOver) {
@@ -271,7 +267,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onDragLeave(e) {
+    onDragLeave(e: Object): boolean {
         e.preventDefault();
         let result = false;
         if (this.props.onDragLeave) {
@@ -284,7 +280,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onDrop(e) {
+    onDrop(e: Object): boolean {
         e.preventDefault();
         let result = false;
         if (this.props.onDrop) {
@@ -298,24 +294,18 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onItemClick(item) {
-        this._selectedList = this._selectedList.slice(0);
-        let index = this._selectedList.indexOf(item.filename);
-        if (index === -1) {
-            this._selectedList.push(item.filename);
-        } else {
-            this._selectedList.splice(index, 1);
+    onItemClick(e: Object): boolean {
+        let dataElement = e.target;
+        while (dataElement.getAttribute("data") == null) {
+            dataElement = dataElement.parentElement;
         }
-        this.setState({
-            selectedList: this._selectedList
-        });
-        if (this.props.onItemSelectionChanged) {
-            this.props.onItemSelectionChanged(item, this._selectedList);
+        if (this.props.onItemClick) {
+            this.props.onItemClick(JSON.parse(dataElement.getAttribute("data")));
         }
         return true;
     }
 
-    onClickDisplay(display) {
+    onClickDisplay(display: string) {
         this.setState({
             display
         });
@@ -325,7 +315,7 @@ export default class StackLayout extends ShallowComponent {
      * @param e
      * @returns {boolean}
      */
-    onClick(e) {
+    onClick(e: Object): boolean {
         if (Assertions.isArray(e._dispatchInstances)) {
             return false;
         }
