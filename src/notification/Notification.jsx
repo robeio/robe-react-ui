@@ -55,7 +55,7 @@ export default class Notification extends ShallowComponent {
     render(): Object {
         let open = this.state.open ? "dropdown open" : "dropdown";
         let notificationButtonClass = this.state.open ? "fa-caret-down" : "fa-bell";
-        open = open + (this.props.className ? ` ${this.props.className}` : "");
+        open += (this.props.className ? ` ${this.props.className}` : "");
         return (
             <Col className={open} aria-expanded={true}>
                 <Button bsStyle="primary" id="notify" className="btn-header-button btn-header" role="button" onClick={this.__onNotificationOpenClick}>
@@ -76,11 +76,13 @@ export default class Notification extends ShallowComponent {
         }
         return (
             <div>
-                <li id="notify" componentClass="li" className="divider" />
+                <li id="notify" className="divider" />
                 <div className="notification-footer">
                     <a href={this.props.notificationDetailPath}>
-                        <i className="menu-title pull-right"
-                            onClick={this.__closeNotifyAfterClick}>
+                        <i
+                            className="menu-title pull-right"
+                            onClick={this.__closeNotifyAfterClick}
+                        >
                             {this.props.notificationDetailLabel}
                             <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
                         </i>
