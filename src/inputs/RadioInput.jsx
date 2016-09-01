@@ -3,9 +3,6 @@ import { Assertions } from "robe-react-commons";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
-
-
-
 /**
  * An Input Component which acts as a radio input.
  * @export
@@ -161,7 +158,7 @@ export default class RadioInput extends ValidationComponent {
      * Returns whether it is selected or not.
      * @returns true if selected.
      */
-    isChecked = (key: string) => {
+    isChecked = (key: string): boolean => {
         let isValueNotEmpty = this._value && this._value.length > 0;
         return isValueNotEmpty && (typeof key === "undefined" ?
             key !== this._value : true);
@@ -175,7 +172,7 @@ export default class RadioInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    __onClick(value: Object): boolean {
+    __onClick(value: Object): Object {
         let result = true;
         if (this.props.onChange) {
             let e = { target: { value: value } };

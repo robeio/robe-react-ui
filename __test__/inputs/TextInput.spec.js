@@ -1,14 +1,14 @@
-import chai from "chai";
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import TextInput from "inputs/TextInput";
-import { mount } from "enzyme";
+import TestUtils from "react-addons-test-utils"; // eslint-disable-line import/no-extraneous-dependencies
+import TextInput from "inputs/TextInput"; // eslint-disable-line
+import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/TextInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <TextInput
+            <TextInput // eslint-disable-line react/jsx-filename-extension
                 label="TextInput Label Text Example"
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with TextInput value"}
                 onChange={props.onChange !== undefined ? props.onChange : () => { }}
@@ -32,17 +32,17 @@ describe("inputs/TextInput", () => {
     it("'validations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0); // eslint-disable-line react/no-find-dom-node
         // Must be invalid
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1); // eslint-disable-line react/no-find-dom-node
     });
 
 
     let value = "";
 
-    const handleChange = (e) => {
+    const handleChange = (e: Object) => {
         value = e.target.value;
     };
 
@@ -62,11 +62,8 @@ describe("inputs/TextInput", () => {
         textInput = wrapper.find("input").first();
 
         value = "";
-        textInput.simulate("change", { target: { value: ""} });
+        textInput.simulate("change", { target: { value: "" } });
 
         chai.assert.equal("", value);
-
     });
-
-
 });
