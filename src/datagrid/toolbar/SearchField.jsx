@@ -12,7 +12,7 @@ export default class SearchField extends ShallowComponent {
 
     };
     static defaultProps = {
-        filter:""
+        filter: ""
     };
 
     render(): Object {

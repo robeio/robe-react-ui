@@ -166,7 +166,7 @@ export default class DataGrid extends StoreComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    />
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -189,7 +189,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.onRefresh}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                        />)
+                    />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -249,13 +249,13 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
      * @private
      */
-    __pageSizeChange(e) {
+    __pageSizeChange(e: Object) {
         this.pageSize = parseInt(e.target.value, 10);
         this.__readData();
     }
@@ -263,7 +263,7 @@ export default class DataGrid extends StoreComponent {
     /**
      * @private
      */
-    __handlePaginationSelect(event) {
+    __handlePaginationSelect(event: Object) {
         this.activePage = event;
         this.__readData();
     }
@@ -278,6 +278,7 @@ export default class DataGrid extends StoreComponent {
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
             if (column.type === "upload") {
+                /* eslint-disable no-continue */
                 continue;
             }
             let onClick = this.__openFilterPopups.bind(undefined, column.code);
@@ -288,7 +289,7 @@ export default class DataGrid extends StoreComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                        />
+                    />
                 ) : null;
 
                 trArr.push(

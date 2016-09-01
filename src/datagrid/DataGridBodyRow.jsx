@@ -35,8 +35,7 @@ export default class DataTableBodyRow extends ShallowComponent {
         }
 
         if (!is.object(row)) {
-            console.warn("Undefined data row at:", row);
-            return null;
+            throw Error(`Undefined data row at: ${row}`);
         }
         let rowColumns = [];
         for (let j = 0; j < fields.length; j++) {
@@ -70,6 +69,7 @@ export default class DataTableBodyRow extends ShallowComponent {
                         }
                     }
                 } else if (column.type === "upload") {
+                    /* eslint-disable no-continue */
                     continue;
                 }
                 rowColumns.push(<td key={column.code}>{value}</td>);
@@ -95,8 +95,7 @@ export default class DataTableBodyRow extends ShallowComponent {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        //TODO: find a nice way to decide.
+    shouldComponentUpdate(): boolean {
         return true;
     }
 

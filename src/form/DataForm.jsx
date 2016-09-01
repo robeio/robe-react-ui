@@ -77,7 +77,7 @@ export default class DataForm extends ShallowComponent {
      */
     __props = {};
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         if (props.item) {
             this.__isNew = false;
@@ -87,7 +87,7 @@ export default class DataForm extends ShallowComponent {
         this.__init(this.props.fields, this.props.propsOfFields);
     }
 
-    __init(fields, config) {
+    __init(fields: Array, config: Object) {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
@@ -102,7 +102,7 @@ export default class DataForm extends ShallowComponent {
         }
     }
 
-    __initComponent(field, props) {
+    __initComponent(field: Object, props: Object) {
         let code = field.code;
 
         props = props ? Maps.mergeDeep(field, props) : field;
@@ -148,6 +148,7 @@ export default class DataForm extends ShallowComponent {
             props.validations = {};
         }
         for (let key in InputValidations) {
+            /* eslint-disable */
             if (InputValidations.hasOwnProperty(key)) {
                 if (!props.validations[key] && field[key]) {
                     let type = typeof field[key];
@@ -170,7 +171,7 @@ export default class DataForm extends ShallowComponent {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
-                throw new Error("Column code must define ! ");
+                throw new Error("Column code must define !");
             }
             items.push(this.__createElement(field));
         }

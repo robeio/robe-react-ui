@@ -9,11 +9,6 @@ export default class NotificationItem extends ShallowComponent {
         item: React.PropTypes.object.isRequired
     };
 
-    /* eslint no-useless-constructor: 0*/
-    constructor(props) {
-        super(props);
-    }
-
     render(): Object {
         let item = this.props.item;
 

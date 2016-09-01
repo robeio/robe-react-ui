@@ -30,9 +30,9 @@ export default class Filter extends ShallowComponent {
     };
 
     static booleanData = [
-        { text: "Hepsi", value: "all" },
-        { text: "Evet", value: "true" },
-        { text: "Hayır", value: "false" }
+        { text: "All", value: "all" },
+        { text: "Yes", value: "true" },
+        { text: "No", value: "false" }
     ];
 
     constructor(props: Object) {
@@ -40,7 +40,7 @@ export default class Filter extends ShallowComponent {
         this.state = { filters: {} };
     }
 
-    render() {
+    render(): Object {
         let filterFields = this.__renderFilters(this.props.fields, this.props.visiblePopups);
         if (filterFields === undefined) {
             return <span />;
@@ -55,7 +55,7 @@ export default class Filter extends ShallowComponent {
      * @returns {*}
      * @private
      */
-    __renderFilters(fields: Array, visiblePopups): Array{
+    __renderFilters(fields: Array, visiblePopups: Object): Array {
         let filterFields = [];
         let hasAtLeast1Filter = false;
         for (let i = 0; i < fields.length; i++) {
@@ -83,8 +83,8 @@ export default class Filter extends ShallowComponent {
             }
             filterFields.push(
                 <span
-                key={column.code}
-                style={{ verticalAlign: "bottom", border: "0px" }}
+                    key={column.code}
+                    style={{ verticalAlign: "bottom", border: "0px" }}
                 >
                     {filterField}
                 </span>
@@ -96,18 +96,18 @@ export default class Filter extends ShallowComponent {
         return filterFields;
     }
 
-    __getColID = (id: string) => {
+    __getColID = (id: string): string => {
         return document.getElementById(id);
     }
 
-    __decideFilterField = (column) => {
+    __decideFilterField = (column: Object): Object => {
         let min = null;
         let max = null;
         let onChange;
         let maxOnChange;
         switch (column.type) {
             case "bool":
-                onChange = this.__handleChange.bind(undefined,column.code,column.type);
+                onChange = this.__handleChange.bind(undefined, column.code, column.type);
                 return (<Input.RadioInput
                     data={Filter.booleanData}
                     value={this.state[column.code]}
@@ -181,7 +181,7 @@ export default class Filter extends ShallowComponent {
         }
     }
 
-    __handleChange = (code, type, e) => {
+    __handleChange = (code: string, type: string, e: Object) => {
         let state = this.state;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let filter = "";
