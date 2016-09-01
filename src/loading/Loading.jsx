@@ -11,7 +11,7 @@ export default class Loading extends ShallowComponent {
         textAlign: "center",
         paddingTop: "35%"
     };
-    render() {
+    render(): Object {
         let styleClass = this.props.className === undefined ? "" : this.props.className;
         return (
             <div style={Loading.style}>

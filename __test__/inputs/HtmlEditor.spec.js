@@ -1,13 +1,13 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import HtmlEditor from "inputs/htmleditor/HtmlEditor";
+import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
+import HtmlEditor from "inputs/htmleditor/HtmlEditor";// eslint-disable-line
 
 describe("inputs/htmleditor/HtmlEditor", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <HtmlEditor
+            <HtmlEditor // eslint-disable-line react/jsx-filename-extension
                 label="HtmlEditor Label Text Example"
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with HtmlEditor value"}
                 onChange={props.onChange}
@@ -33,10 +33,10 @@ describe("inputs/htmleditor/HtmlEditor", () => {
             }
         }));
         chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);// eslint-disable-line react/no-find-dom-node
         // Must be invalid
-        componentNode = TestUtils.renderIntoDocument(getComponent({value: ""}));
+        componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);// eslint-disable-line react/no-find-dom-node
     });
 });

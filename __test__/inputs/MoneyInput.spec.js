@@ -1,13 +1,13 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import MoneyInput from "inputs/MoneyInput";
+import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
+import MoneyInput from "inputs/MoneyInput";// eslint-disable-line
 
 describe("inputs/MoneyInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <MoneyInput
+            <MoneyInput // eslint-disable-line react/jsx-filename-extension
                 label="Label"
                 value={props.value !== undefined ? props.value : "12,345.6"}
                 onChange={props.onChange}
@@ -30,16 +30,16 @@ describe("inputs/MoneyInput", () => {
     it("'validations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.isOk(componentNode.isValid(), "Non-Empty string must be valid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");// eslint-disable-line react/no-find-dom-node
         
         // Must be invalid
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: () => { return true; } }));
+        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: (): Object => { return true; } }));
         let e = {
             target: {
                 value: "12,123.1"

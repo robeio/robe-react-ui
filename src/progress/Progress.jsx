@@ -40,7 +40,7 @@ class Progress {
      * @returns NProgress
      */
 
-    instance() {
+    instance(): NProgress {
         return NProgress;
     }
 }

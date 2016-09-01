@@ -1,8 +1,7 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import TestUtils from "../TestUtils";
-import Wizard from "wizard/Wizard";
-import TextInput from "inputs/TextInput";
+import Wizard from "wizard/Wizard";// eslint-disable-line
 
 
 describe("wizard/Wizard", () => {
@@ -10,11 +9,11 @@ describe("wizard/Wizard", () => {
         steps: [
             {
                 title: "Step 1",
-                component: <span>Content1</span>
+                component: <span>Content1</span>// eslint-disable-line react/jsx-filename-extension
             },
             {
                 title: "Step 2",
-                component: <span>Content2</span>
+                component: <span>Content2</span>// eslint-disable-line react/jsx-filename-extension
             }
         ]
     };
@@ -26,7 +25,7 @@ describe("wizard/Wizard", () => {
         for (let i = 0; i < stepButtons.length; i++) {
             let button = stepButtons.at(i);
             let buttonText = button.find("a");
-            chai.assert.equal(buttonText.node.innerText, ("" + (i + 1)), "Step button text must be equal to step index + 1");
+            chai.assert.equal(buttonText.node.innerText, (`${i + 1}`), "Step button text must be equal to step index + 1");
             let buttonLabel = button.find("p");
             chai.assert.equal(buttonLabel.node.innerText, props.steps[i].title, "Step button label must be equal to step title");
         }

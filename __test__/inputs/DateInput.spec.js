@@ -1,6 +1,6 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import DateInput from "inputs/DateInput"; // eslint-disable-line import/no-extraneous-dependencies
+import DateInput from "inputs/DateInput"; // eslint-disable-line
 import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
 import DatePicker from "react-datepicker";// eslint-disable-line import/no-extraneous-dependencies
 import moment from "moment";// eslint-disable-line import/no-extraneous-dependencies
@@ -31,7 +31,7 @@ describe("inputs/DateInput", () => {
 
     let value = "";
 
-    const handleChange = (e) => {
+    const handleChange = (e: Object) => {
         value = e.target.parsedValue;
     };
 
@@ -46,7 +46,7 @@ describe("inputs/DateInput", () => {
         wrapper = mount(getComponent({ onChange: handleChange, value: value }));
 
         wrapper.find("input").simulate("change", {
-            isDefaultPrevented: () => false,
+            isDefaultPrevented: (): boolean => false,// eslint-disable-line
             target: {
                 value: date.format(dateFormat)
             }
