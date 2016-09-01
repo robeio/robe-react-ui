@@ -112,6 +112,7 @@ export default class StackLayout extends ShallowComponent {
         let panel = (
             <Panel header={this.panelToolbar()} >
                 <div
+                    className="StackLayout-container"
                     onClick={this.onClick}
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}

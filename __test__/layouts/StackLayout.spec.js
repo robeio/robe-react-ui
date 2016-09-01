@@ -20,12 +20,6 @@ describe("layouts/StackLayout", () => {
         }
     ];
     const props = {
-        onClick: () => { },
-        onDragStart: () => { },
-        onDragEnter: () => { },
-        onDragLeave: () => { },
-        onDragOver: () => { },
-        onDrop: () => { },
         onClickDisplayList: () => { },
         onClickDisplayThumbnail: () => { },
         toolbar: (<span>toolbar</span>),
@@ -70,4 +64,34 @@ describe("layouts/StackLayout", () => {
         stack.find(".Stacklayout-list").first().simulate("click");
     });
 
+    it("onDragStart", (done) => {
+        stack.find(".StackLayout-container").simulate("dragStart");
+        
+        stack = TestUtils.mount({ onDragStart: () => { done(); return true; } }, StackLayout, props);
+        stack.find(".StackLayout-container").simulate("dragStart");
+    });
+    it("onDragEnter", (done) => {
+        stack.find(".StackLayout-container").simulate("dragEnter");
+        
+        stack = TestUtils.mount({ onDragEnter: () => { done(); return true; } }, StackLayout, props);
+        stack.find(".StackLayout-container").simulate("dragEnter");
+    });
+    it("onDragOver", (done) => {
+        stack.find(".StackLayout-container").simulate("dragOver");
+        
+        stack = TestUtils.mount({ onDragOver: () => { done(); return true; } }, StackLayout, props);
+        stack.find(".StackLayout-container").simulate("dragOver");
+    });
+    it("onDragLeave", (done) => {
+        stack.find(".StackLayout-container").simulate("dragLeave");
+        
+        stack = TestUtils.mount({ onDragLeave: () => { done(); return true; } }, StackLayout, props);
+        stack.find(".StackLayout-container").simulate("dragLeave");
+    });
+    it("onDrop", (done) => {
+        stack.find(".StackLayout-container").simulate("drop");
+        
+        stack = TestUtils.mount({ onDrop: () => { done(); return true; } }, StackLayout, props);
+        stack.find(".StackLayout-container").simulate("drop");
+    });
 });
