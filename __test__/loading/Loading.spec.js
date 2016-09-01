@@ -1,12 +1,12 @@
-import chai from "chai";
+import chai from "chai"; // eslint-disable-line
 import React from "react";
-import Loading from "loading/Loading";
-import { mount } from "enzyme";
+import Loading from "loading/Loading"; // eslint-disable-line
+import { mount } from "enzyme"; // eslint-disable-line
 
 
 describe("loading/Loading", () => {
     const getComponent = (props: Object): Object => {
-        return (<Loading className={props.className} />);
+        return (<Loading className={props.className} />);// eslint-disable-line
     };
     it("render", () => {
         let wrapper = mount(getComponent({}));

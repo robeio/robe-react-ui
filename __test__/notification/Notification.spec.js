@@ -1,17 +1,15 @@
-import chai from "chai";
+import chai from "chai"; // eslint-disable-line
 import React from "react";
-import Notification from "notification/Notification";
-import NotificationItem from "notification/NotificationItem";
-import { mount } from "enzyme";
+import Notification from "notification/Notification"; // eslint-disable-line
+import NotificationItem from "notification/NotificationItem"; // eslint-disable-line
+import { mount } from "enzyme"; // eslint-disable-line
 
 describe("notification/Notification", () => {
     const getComponent = (props: Object): Object => {
-        return (<Notification className="pull-right" {...props} notificationDetailPath="notify"/>);
+        return (<Notification className="pull-right" {...props} notificationDetailPath="notify" />); // eslint-disable-line
     };
     it("render", () => {
-        let wrapper = mount(getComponent({data: []}));
-
-        let span = wrapper.find("span");
+        let wrapper = mount(getComponent({ data: [] }));
         chai.assert.equal(wrapper.find("span").last().text(), "You don't have any notification.");
 
         let data = [{
@@ -38,7 +36,7 @@ describe("notification/Notification", () => {
         let button = wrapper.find("a").first();
         button.simulate("click");
 
-        wrapper.setProps({ onRead: (oid :string) => {
+        wrapper.setProps({ onRead: (oid: string) => {
             chai.assert.equal(oid, "1");
         } });
 

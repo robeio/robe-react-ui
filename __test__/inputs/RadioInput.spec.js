@@ -1,7 +1,7 @@
 import React from "react";
-import chai from "chai";
-import RadioInput from "inputs/RadioInput";
-import {mount} from "enzyme";
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
+import RadioInput from "inputs/RadioInput"; // eslint-disable-line
+import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/RadioInput", () => {
     const langs = [
@@ -14,14 +14,14 @@ describe("inputs/RadioInput", () => {
             value: "tr"
         }, {
             text: "Kurdish",
-            value: "kr"
+            value: "ku"
         }
     ];
 
 
     const getComponent = (props: Object): Object => {
         return (
-            <RadioInput {...props} />
+            <RadioInput {...props} /> // eslint-disable-line react/jsx-filename-extension
         );
     };
 
