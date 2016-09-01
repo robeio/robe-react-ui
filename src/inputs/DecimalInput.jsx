@@ -56,7 +56,7 @@ export default class DecimalInput extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        decimalSeperator: ".",
+        decimalSeparator: ".",
         value: "",
         disabled: false,
         readOnly: false,
@@ -109,7 +109,7 @@ export default class DecimalInput extends ShallowComponent {
         if (input === null || input === undefined) {
             return false;
         }
-        let found = input.match(`^[0-9]{1,6}((\\${this.props.decimalSeperator})|(\\${this.props.decimalSeperator}\\d{1,2}))?$`);
+        let found = input.match(`^[0-9]{1,6}((\\${this.props.decimalSeparator})|(\\${this.props.decimalSeparator}\\d{1,2}))?$`);
         return found !== undefined && found !== null;
     }
 }
