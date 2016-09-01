@@ -127,7 +127,7 @@ export default class Wizard extends ShallowComponent {
     }
 
     __renderPager(): Object {
-        let nextButton = undefined;
+        let nextButton = null;
         if (this.state.currentStep === this.props.steps.length - 1) {
             nextButton = (
                 <Col className="pull-right">
@@ -135,9 +135,7 @@ export default class Wizard extends ShallowComponent {
                         bsStyle="primary"
                         onClick={this.props.onCompleteClick}
                     >
-                    <FaIcon
-                        code="fa-check-circle"
-                    />
+                        <FaIcon code="fa-check-circle" />
                     {this.props.completeButtonText}
                     </Button>
                 </Col>
@@ -149,7 +147,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
-                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right"/>
+                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" />
                 </PageItem>
             );
         }
@@ -160,7 +158,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
-                    <FaIcon code="fa-arrow-left"/>{this.props.preButtonText}
+                    <FaIcon code="fa-arrow-left" />{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
             </Pager>
@@ -171,7 +169,7 @@ export default class Wizard extends ShallowComponent {
         if (this.__content === undefined) {
             return false;
         }
-        if (!this.__content._owner) {
+        if (!this.__content._owner) { // eslint-disable-line no-underscore-dangle
             return true;
         }
         

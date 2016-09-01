@@ -3,7 +3,7 @@ import is from "is-js";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
+import moment from "moment"; // eslint-disable-line import/no-extraneous-dependencies
 import ValidationComponent from "../validation/ValidationComponent";
 import "./DateInput.css";
 

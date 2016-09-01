@@ -79,5 +79,5 @@ export default class SideMenu extends ShallowComponent {
         if (this.props.onChange && subMenuItem !== undefined) {
             this.props.onChange(subMenuItem.props.item);
         }
-    };
+    }
 }

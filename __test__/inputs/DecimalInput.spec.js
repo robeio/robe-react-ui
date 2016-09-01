@@ -1,13 +1,13 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import DecimalInput from "inputs/DecimalInput";
+import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
+import DecimalInput from "inputs/DecimalInput";// eslint-disable-line
 
 describe("inputs/DecimalInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <DecimalInput
+            <DecimalInput // eslint-disable-line react/jsx-filename-extension
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
                 onChange={props.onChange !== undefined ? props.onChange : () => { }}
@@ -31,12 +31,12 @@ describe("inputs/DecimalInput", () => {
     it("'validations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.isOk(componentNode.isValid(), "Non-empty string mus be valid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");// eslint-disable-line react/no-find-dom-node
         // Must be invalid
 
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {

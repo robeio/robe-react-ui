@@ -1,13 +1,13 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import NumericInput from "inputs/NumericInput";
+import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
+import NumericInput from "inputs/NumericInput";// eslint-disable-line
 
 describe("inputs/NumericInput", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <NumericInput
+            <NumericInput // eslint-disable-line react/jsx-filename-extension
                 label="Label"
                 value={props.value !== undefined ? props.value : "42"}
                 onChange={props.onChange}
@@ -30,12 +30,12 @@ describe("inputs/NumericInput", () => {
     it("'validations' Control", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);// eslint-disable-line react/no-find-dom-node
         // Must be invalid
 
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);
+        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {
