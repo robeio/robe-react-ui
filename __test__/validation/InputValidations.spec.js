@@ -1,6 +1,6 @@
-import chai from "chai";
-import React from "react";
-import InputValidations from "validation/InputValidations";
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
+import React from "react"; // eslint-disable-line no-unused-vars
+import InputValidations from "validation/InputValidations"; // eslint-disable-line
 import Application from "robe-react-commons/lib/application/Application";
 
 describe("validation/InputValidations", () => {

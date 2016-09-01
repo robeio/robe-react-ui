@@ -1,6 +1,6 @@
-import chai from "chai";
-import React from "react";
-import Progress from "progress/Progress";
+import chai from "chai"; // eslint-disable-line
+import React from "react"; // eslint-disable-line
+import Progress from "progress/Progress"; // eslint-disable-line
 
 describe("progress/Progress", () => {
     it("Progress", () => {
