@@ -27,14 +27,8 @@ export default class StackLayout extends ShallowComponent {
          * Layout Container style
          */
         style: React.PropTypes.object,
-        items: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.object]
-        ),
-        /**
-         * item container style
-         */
-        itemStyle: React.PropTypes.object,
+        items: React.PropTypes.array,
+        
         /**
          * Add Toolbar to layout . Default position is bottom
          */
@@ -107,18 +101,16 @@ export default class StackLayout extends ShallowComponent {
 
         this.onClickDisplayList = this.onClickDisplay.bind(this, "list");
         this.onClickDisplayThumbnail = this.onClickDisplay.bind(this, "thumbnail");
-        this._selectedList = [];
         this.state = {
             display: props.display,
-            items: props.items,
-            selectedList: this._selectedList
+            items: props.items
         };
     }
 
     render(): Object {
         let component = this.__renderList(this.state.items);
         let panel = (
-            <Panel header={this.panelToolbar() } >
+            <Panel header={this.panelToolbar()} >
                 <div
                     onClick={this.onClick}
                     onDragStart={this.onDragStart}
@@ -127,7 +119,7 @@ export default class StackLayout extends ShallowComponent {
                     onDragLeave={this.onDragLeave}
                     onDrop={this.onDrop}
                     style={this.props.style}
-                    >
+                >
                     {component}
                 </div>
             </Panel>
@@ -205,16 +197,29 @@ export default class StackLayout extends ShallowComponent {
         let itemJson = JSON.stringify(item);
         switch (this.state.display) {
             case "thumbnail":
-                className = "thumbnail";
+                className = "Stacklayout-thumbnail";
                 return (
-                    <Col xs={6} md={4} className={className} onClick={this.onItemClick} style={this.props.itemStyle} data={itemJson}>
+                    <Col
+                        xs={6}
+                        md={4}
+                        className={className}
+                        onClick={this.onItemClick}
+                        data={itemJson}
+                        key={itemJson}
+                    >
                         {this.props.onItemRender(item, this.state.display) }
                     </Col>
                 );
             default:
-                className = "stacklayout no-float";
+                className = "Stacklayout-list no-float";
                 return (
-                    <Col md={12} className={className} onClick={this.onItemClick} data={itemJson}>
+                    <Col
+                        md={12}
+                        className={className}
+                        onClick={this.onItemClick}
+                        data={itemJson}
+                        key={itemJson}
+                    >
                         {this.props.onItemRender(item, this.state.display) }
                     </Col>
                 );

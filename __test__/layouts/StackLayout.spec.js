@@ -1,9 +1,24 @@
 import chai from "chai";
 import TestUtils from "../TestUtils";
 import StackLayout from "layouts/StackLayout";
+import React from "react";
 
 
 describe("layouts/StackLayout", () => {
+    const items = [
+        {
+            key: "1",
+            value: "Item 1"
+        },
+        {
+            key: "2",
+            value: "Item 2"
+        },
+        {
+            key: "3",
+            value: "Item 3"
+        }
+    ];
     const props = {
         onClick: () => { },
         onDragStart: () => { },
@@ -13,32 +28,46 @@ describe("layouts/StackLayout", () => {
         onDrop: () => { },
         onClickDisplayList: () => { },
         onClickDisplayThumbnail: () => { },
-        items: [{ filename: "Sample" }];
+        toolbar: (<span>toolbar</span>),
+        items: items
     };
-    const stack = TestUtils.mount(props, StackLayout, props);
+    let stack = TestUtils.mount({}, StackLayout, props);
 
     it("render", () => {
-        chai.assert.isTrue(subitem.find("li").hasClass("SideMenu-subitem"), "initial class must be SideMenu-subitem");
+        // List view test
+        chai.assert.equal(stack.find(".Stacklayout-list").length, items.length, "List row count must be equal with 'items.length'");
+        chai.assert.equal(stack.find(".Stacklayout-thumbnail").length, 0, "Thumbnail row count must be 0");
 
-        chai.assert.isTrue(subitem.find("i").hasClass(props.item.icon), "fa icon class must be same with the 'props.item.icon'.");
-
-        chai.assert.equal(subitem.find("div[to=\"" + props.item.path + "\"]").text(), props.item.text, "Div text must be same with the 'props.item.text'");
+        // Thumbnail view test
+        stack.setState({ display: "thumbnail" });
+        chai.assert.equal(stack.find(".Stacklayout-thumbnail").length, items.length, "Thumbnail row count must be equal with 'items.length'");
+        chai.assert.equal(stack.find(".Stacklayout-list").length, 0, "List row count must be 0");
     });
 
-    // it("onClick", () => {
-    //     chai.assert.isTrue(subitem.find("li").hasClass("SideMenu-subitem"), "initial class must be SideMenu-subitem");
-    //     subitem.find("div").simulate("click");
-    //     chai.assert.isTrue(subitem.find("li").hasClass("SideMenu-subitem-active"), "Post-click class must be SideMenu-subitem-active");
-    //     subitem.find("div").simulate("click");
-    //     chai.assert.isTrue(subitem.find("li").hasClass("SideMenu-subitem-active"), "After Second click class must be SideMenu-subitem-active");
-    // });
+    it("render - toolbarPosition", () => {
+        // TODO : Check toolbar div position.
 
-    // it("componentDidMount", () => {
-    //     props.selectedItem = props.item.module;
-    //     const subitemSelected = TestUtils.mount(props, SideMenuSubItem, props);
+        stack = TestUtils.mount({ toolbarPosition: "top" }, StackLayout, props);
+        stack.unmount();
 
-    //     chai.assert.isTrue(subitemSelected.find("li").hasClass("SideMenu-subitem-active"), "If 'props.selectedItem' is ending with 'props.item.module' class must be SideMenu-subitem-active");
-    //     subitemSelected.find("div").simulate("click");
-    //     chai.assert.isTrue(subitemSelected.find("li").hasClass("SideMenu-subitem-active"), "After Second click class must be SideMenu-subitem-active");
-    // });
+
+        stack = TestUtils.mount({ toolbarPosition: "left" }, StackLayout, props);
+        stack.unmount();
+
+
+        stack = TestUtils.mount({ toolbarPosition: "right" }, StackLayout, props);
+        stack.unmount();
+    });
+
+    it("onItemClick", (done) => {
+        let newProps = {
+            onItemClick: (item) => {
+                chai.assert.deepEqual(item, items[0], "Item must be equal to clicked items data");
+                done();
+            }
+        };
+        stack = TestUtils.mount(newProps, StackLayout, props);
+        stack.find(".Stacklayout-list").first().simulate("click");
+    });
+
 });
