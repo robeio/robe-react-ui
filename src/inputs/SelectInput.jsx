@@ -156,7 +156,7 @@ export default class SelectInput extends ValidationComponent {
         return this._value.indexOf(item[this.props.valueField]) !== -1;
     }
 
-    __createRawSelect(items) {
+    __createRawSelect(items: Array): Object {
         const options = [];
 
         for (let i = 0; i < items.length; i++) {
