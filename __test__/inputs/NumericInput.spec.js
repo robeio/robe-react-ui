@@ -39,7 +39,7 @@ describe("inputs/NumericInput", () => {
     });
 
     it("'__numericFilter", (done: Function) => {
-        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: () => { return true; } }));
+        let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: (): Object => { return true; } }));
         let e = {
             target: {
                 value: "12"

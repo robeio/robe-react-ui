@@ -33,7 +33,7 @@ class ComponentManager {
      * @param componentType
      * @returns {*}
      */
-    findComponentByType = (componentType: any) => {
+    findComponentByType = (componentType: any): Object => {
         Assertions.isNotEmpty(componentType, true);
         let finderFunction;
         let componentClass;
@@ -55,7 +55,7 @@ class ComponentManager {
      * @returns {*}
      * @private
      */
-    __getComponentByType = (componentType: string) => {
+    __getComponentByType = (componentType: string): Object => {
         Assertions.isString(componentType, true);
         switch (componentType) {
             case "string":

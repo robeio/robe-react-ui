@@ -91,7 +91,7 @@ export default class ModalDataForm extends ShallowComponent {
     }
 
 
-    __renderFooterButtons = () => {
+    __renderFooterButtons = (): Modal.Footer => {
         let showCancelButton = ((this.props.showCancelButton) ?
             <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button> : null);
         let showSaveButton = ((this.props.showSaveButton) ?
@@ -105,7 +105,7 @@ export default class ModalDataForm extends ShallowComponent {
         );
     };
 
-    __renderWarning = () => {
+    __renderWarning = (): Alert => {
         if (this.state.valid) {
             return null;
         }

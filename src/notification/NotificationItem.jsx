@@ -17,7 +17,7 @@ export default class NotificationItem extends ShallowComponent {
                 <a style={{ padding: "0!important" }} onClick={this.__onRead}>
                     <Col className="notification-item">
                         <Col componentClass="h4" className="item-title" style={{ marginBottom: 0 }}>
-                    <Col componentClass="p" style={{ wordWrap: "break-word" }} >{item.description}</Col>
+                            <Col componentClass="p" style={{ wordWrap: "break-word" }} >{item.description}</Col>
                         </Col>
                         <Col componentClass="p" style={{ fontSize: 12 }} className="item-title">{moment(item.notificationDate).format("DD/MM/YYYY HH:mm")}</Col></Col>
                     <li id="notify" className="divider" />

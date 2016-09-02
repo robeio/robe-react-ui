@@ -21,7 +21,7 @@ export default class ModalConfirm extends ShallowComponent {
         cancelButtonText: "No",
     };
 
-    render() {
+    render(): Object {
         return (
             <Modal show={this.props.show}>
                 <Modal.Header>
