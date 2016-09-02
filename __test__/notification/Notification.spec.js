@@ -1,12 +1,12 @@
-import chai from "chai"; // eslint-disable-line
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import Notification from "notification/Notification"; // eslint-disable-line
-import NotificationItem from "notification/NotificationItem"; // eslint-disable-line
-import { mount } from "enzyme"; // eslint-disable-line
+import Notification from "notification/Notification"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
+import NotificationItem from "notification/NotificationItem"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
+import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 
 describe("notification/Notification", () => {
     const getComponent = (props: Object): Object => {
-        return (<Notification className="pull-right" {...props} notificationDetailPath="notify" />); // eslint-disable-line
+        return (<Notification className="pull-right" {...props} notificationDetailPath="notify" />); // eslint-disable-line react/jsx-filename-extension
     };
     it("render", () => {
         let wrapper = mount(getComponent({ data: [] }));

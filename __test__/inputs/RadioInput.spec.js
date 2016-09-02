@@ -1,6 +1,6 @@
 import React from "react";
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
-import RadioInput from "inputs/RadioInput"; // eslint-disable-line
+import RadioInput from "inputs/RadioInput"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/RadioInput", () => {

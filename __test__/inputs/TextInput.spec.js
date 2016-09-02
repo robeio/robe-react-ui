@@ -2,7 +2,7 @@ import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencie
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils"; // eslint-disable-line import/no-extraneous-dependencies
-import TextInput from "inputs/TextInput"; // eslint-disable-line
+import TextInput from "inputs/TextInput"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/TextInput", () => {

@@ -1,6 +1,6 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import ModalDataForm from "form/ModalDataForm"; // eslint-disable-line
+import ModalDataForm from "form/ModalDataForm"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
 
 describe("form/ModalDataForm", () => {

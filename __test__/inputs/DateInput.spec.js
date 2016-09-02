@@ -1,6 +1,6 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
-import DateInput from "inputs/DateInput"; // eslint-disable-line
+import DateInput from "inputs/DateInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
 import DatePicker from "react-datepicker";// eslint-disable-line import/no-extraneous-dependencies
 import moment from "moment";// eslint-disable-line import/no-extraneous-dependencies

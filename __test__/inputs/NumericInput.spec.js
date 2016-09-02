@@ -2,7 +2,7 @@ import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
-import NumericInput from "inputs/NumericInput";// eslint-disable-line
+import NumericInput from "inputs/NumericInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("inputs/NumericInput", () => {
     const getComponent = (props: Object): Object => {

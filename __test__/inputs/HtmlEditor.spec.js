@@ -2,7 +2,7 @@ import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
-import HtmlEditor from "inputs/htmleditor/HtmlEditor";// eslint-disable-line
+import HtmlEditor from "inputs/htmleditor/HtmlEditor";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("inputs/htmleditor/HtmlEditor", () => {
     const getComponent = (props: Object): Object => {

@@ -1,6 +1,6 @@
-import chai from "chai"; // eslint-disable-line
-import React from "react"; // eslint-disable-line
-import Progress from "progress/Progress"; // eslint-disable-line
+import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
+import React from "react"; // eslint-disable-line import/no-extraneous-dependencies, no-unused-vars
+import Progress from "progress/Progress"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("progress/Progress", () => {
     it("Progress", () => {

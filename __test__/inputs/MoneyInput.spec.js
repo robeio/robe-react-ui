@@ -2,7 +2,7 @@ import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";// eslint-disable-line import/no-extraneous-dependencies
-import MoneyInput from "inputs/MoneyInput";// eslint-disable-line
+import MoneyInput from "inputs/MoneyInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("inputs/MoneyInput", () => {
     const getComponent = (props: Object): Object => {

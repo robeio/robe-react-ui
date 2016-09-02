@@ -1,7 +1,6 @@
-import chai from "chai";
+import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
+import SideMenuSubItem from "sidemenu/SideMenuSubItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
-import SideMenuSubItem from "sidemenu/SideMenuSubItem";
-
 
 describe("sidemenu/SideMenuSubItem", () => {
     const props = {
@@ -20,7 +19,7 @@ describe("sidemenu/SideMenuSubItem", () => {
 
         chai.assert.isTrue(subitem.find("i").hasClass(props.item.icon), "fa icon class must be same with the 'props.item.icon'.");
 
-        chai.assert.equal(subitem.find("div[to=\"" + props.item.path + "\"]").text(), props.item.text, "Div text must be same with the 'props.item.text'");
+        chai.assert.equal(subitem.find(`div[to="${props.item.path}"]`).text(), props.item.text, "Div text must be same with the 'props.item.text'");
     });
 
     it("onClick", () => {
