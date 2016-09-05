@@ -48,7 +48,7 @@ commonSettings.devtool = "eval";
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
-const server = new JsonServer(3001);
+const server = new JsonServer(3001, "application");
 server.route("testdb.json").upload("/files", "data/upload").start();
 commonSettings.externals = {
     "cheerio": "window",

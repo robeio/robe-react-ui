@@ -17,20 +17,23 @@ function getUserHome() {
     return process.env.HOME || process.env.USERPROFILE;
 }
 
-function getAppHome(){
+function getAppHome() {
     return appRoot.path;
 }
 
-function Server(port) {
+function Server(port, informationRequestPath) {
     this.__port = port;
     const server = jsonServer.create();
     server.use(jsonServer.defaults());
-    server.get("application", (req, res) => {
-        res.status(200).json({
-            userPath: getUserHome(),
-            applicationPath: getAppHome()
+    if (informationRequestPath) {
+        server.get(informationRequestPath, (req, res) => {
+            res.status(200).json({
+                userPath: getUserHome(),
+                applicationPath: getAppHome()
+            });
         });
-    });
+    }
+
     const routes = [];
 
     this.route = (routePath) => {
@@ -42,10 +45,12 @@ function Server(port) {
         tempFolder = fixPath(tempFolder);
         multerImpl(server, requestPath, tempFolder);
         return this;
-    }
+    };
+
 
     this.start = () => {
-        for (var key in routes) {
+        var key;
+        for (key in routes) {
             server.use(routes[key]);
         }
         /* eslint-disable prefer-template */

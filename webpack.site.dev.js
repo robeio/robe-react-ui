@@ -61,7 +61,7 @@ webPackConfig.plugins.push(new CopyWebpackPlugin([
 webPackConfig.plugins.push(new CachePlugin({}));
 
 
-const server = new JsonServer(3000);
+const server = new JsonServer(3000, "application");
 server.route("data/db.json").upload("/files", "temp").start();
 
 module.exports = webPackConfig;

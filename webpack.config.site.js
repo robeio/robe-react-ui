@@ -43,7 +43,7 @@ commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSi
  * @type {{root: *[]}}
  */
 commonSettings.entry = {
-    "site": "../site/index.js"
+    site: "../site/index.js"
 };
 
 /**
@@ -56,7 +56,7 @@ commonSettings.devtool = "source-map";
 
 commonSettings.output = {
     path: commonSettings.paths.build,
-    filename: "bundle.js",
+    filename: "bundle.js"
     // chunkFilename: "[id].bundle.js"
 };
 

@@ -107,10 +107,7 @@ export default class DataForm extends ShallowComponent {
 
         props = props ? Maps.mergeDeep(field, props) : field;
 
-
-        if (props.onChange) {
-            props.onChange = this.onChange.bind(this, code);
-        }
+        props.onChange = this.onChange.bind(this, code);
 
 
         this.state[code] = this.__filterUndefined(this.state[code]);
@@ -228,8 +225,16 @@ export default class DataForm extends ShallowComponent {
                 state[`$$_items_${code}`] = props.items;
             }
         }
-        this.setState(state);
-        return true;
+        let changeState = true;
+        if(this.props.onChange) {
+            if( this.props.onChange(code, e) === false )  {
+                changeState = false;
+            }
+        }
+        if (changeState) {
+            this.setState(state);
+        }
+        return changeState;
     }
 
     /**

@@ -2,13 +2,13 @@ import chai from "chai";
 import React from "react";
 import TestUtils from "../TestUtils";
 import FileManager from "util/FileManager";
+import { AjaxRequest } from "robe-react-commons";
 
-const url = "http://localhost:3001/files";
-
+const url = TestUtils.getUrl("files");
 describe("util/FileManager", () => {
     it("constructors", () => {
         let props = {
-            url: "http://localhost:3000/files",
+            url: url,
             upload: {
                 type: "PUT"
             },
@@ -24,7 +24,7 @@ describe("util/FileManager", () => {
         };
 
         let manager = new FileManager(props);
-        let exptectedUrl = "http://localhost:3000/files";
+        let exptectedUrl = "http://localhost:3001/files";
         /* eslint-disable no-underscore-dangle */
         // check infoRequest
         chai.assert.equal(exptectedUrl, manager.__deleteRequest.__url);
@@ -92,6 +92,11 @@ describe("util/FileManager", () => {
     });
 
     it("upload", () => {
+        new AjaxRequest({
+            url: "",
+            type: "GET",
+            dataType: "json"
+        })
         let manager = new FileManager({
             url
         });

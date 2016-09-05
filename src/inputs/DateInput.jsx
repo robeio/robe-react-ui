@@ -99,11 +99,7 @@ export default class DateInput extends ValidationComponent {
         }
         let result = true;
         if (this.props.onChange) {
-            result = this.props.onChange(e);
-        }
-        if (!result) {
-            e.preventDefault();
-            e.stopPropagation();
+            result = !(this.props.onChange(e) === false);
         }
         return result;
     }

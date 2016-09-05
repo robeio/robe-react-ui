@@ -82,7 +82,7 @@ describe("inputs/CheckInput", () => {
         checkInput = wrapper.find(".fa-square-o").at(1);
 
         checkInput.simulate("click");
-        wrapper = mount(getComponent({items: langs, value: values, onChange: handleChange}));
+        wrapper = mount(getComponent({ items: langs, value: values, onChange: handleChange }));
 
         chai.assert.equal(wrapper.instance().isChecked("en"), true);
         chai.assert.equal(wrapper.instance().isChecked("tr"), false);
