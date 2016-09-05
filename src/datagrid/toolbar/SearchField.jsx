@@ -8,11 +8,11 @@ export default class SearchField extends ShallowComponent {
 
 
     static propTypes: Map = {
-        filter: React.PropTypes.string
+        value: React.PropTypes.string
 
     };
     static defaultProps = {
-        filter: ""
+        value: ""
     };
 
     render(): Object {
@@ -21,7 +21,7 @@ export default class SearchField extends ShallowComponent {
                 <TextInput
                     inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
                     onChange={this.props.onChange}
-                    value={this.props.filter}
+                    value={this.props.value}
                 />
             );
         }

@@ -347,7 +347,7 @@ export default class DataGrid extends StoreComponent {
     }
 
     __onSearchChanged = (event) => {
-        this.__q = event.target.value;
+        this.state.filter = event.target.value;
         this.activePage = 1;
         this.__readData();
     }
@@ -387,9 +387,9 @@ export default class DataGrid extends StoreComponent {
                         rows: response.data,
                         totalCount: response.totalCount
                     });
-                }, undefined, start, this.pageSize, this.__q, this.__filters);
+                }, undefined, start, this.pageSize, this.state.filter, this.__filters);
         } else {
-            this.props.store.read(undefined, undefined, this.__q, this.__filters);
+            this.props.store.read(undefined, undefined, this.state.filter, this.__filters);
         }
     }
 
