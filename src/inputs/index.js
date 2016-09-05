@@ -2,7 +2,6 @@ export { default as BaseInput } from "./BaseInput";
 export { default as TextInput } from "./TextInput";
 export { default as MoneyInput } from "./MoneyInput";
 export { default as CheckInput } from "./CheckInput";
-export { default as CheckList } from "./CheckList";
 export { default as RadioInput } from "./RadioInput";
 export { default as SelectInput } from "./SelectInput";
 export { default as PasswordInput } from "./PasswordInput";

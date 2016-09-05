@@ -9,7 +9,6 @@ import MoneyInput from "inputs/MoneyInput";// eslint-disable-line
 import RadioInput from "inputs/RadioInput";// eslint-disable-line
 import SelectInput from "inputs/SelectInput";// eslint-disable-line
 import CheckInput from "inputs/CheckInput";// eslint-disable-line
-import CheckList from "inputs/CheckList";// eslint-disable-line
 import HtmlEditor from "inputs/htmleditor/HtmlEditor";// eslint-disable-line
 import FileUploadInput from "inputs/upload/FileUploadInput";// eslint-disable-line
 
@@ -41,9 +40,6 @@ describe("form/ComponentManager", () => {
 
         component = ComponentManager.findComponentByType("check");
         chai.assert.equal(component, CheckInput);
-
-        component = ComponentManager.findComponentByType("checkList");
-        chai.assert.equal(component, CheckList);
 
         component = ComponentManager.findComponentByType("editor");
         chai.assert.equal(component, HtmlEditor);

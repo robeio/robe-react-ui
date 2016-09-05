@@ -86,9 +86,6 @@ class ComponentManager {
             case "check":
             case "CheckInput":
                 return Input.CheckInput;
-            case "checkList":
-            case "CheckList":
-                return Input.CheckList;
             case "editor":
             case "HtmlEditor":
                 return Input.HtmlEditor;
