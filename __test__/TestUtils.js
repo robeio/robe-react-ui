@@ -1,17 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { mount } from "enzyme";
-import { Maps, Class } from "robe-react-commons";
+import { Maps, Class, AjaxRequest } from "robe-react-commons";
 import ReactTestUtils from "react-addons-test-utils";
+
+
+const url = "http://localhost:3001";
+
+const ApplicationInformation = new AjaxRequest({
+    url: `${url}/application`,
+    type: "GET",
+    dataType: "json"
+});
 
 class TestUtils extends Class {
 
-    getTestUrl() {
-        return "http://localhost:3001";
+    getBaseUrl() {
+        return url;
     }
 
-    getUrl(path: string): string {
-        return `http://localhost:3001/${path}`;
+    createUrl(path: string): string {
+        return `${url}/${path}`;
+    }
+
+    getInformation(onSuccess, onError) {
+        ApplicationInformation.call(
+            undefined,
+            undefined,
+            onSuccess,
+            onError
+        );
     }
 
     renderIntoDocument(...args) {
