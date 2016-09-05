@@ -3,12 +3,14 @@ import React from "react";
 import TestUtils from "../TestUtils";
 import FileManager from "util/FileManager";
 import { AjaxRequest } from "robe-react-commons";
+import path from "path";
 
-const url = TestUtils.createUrl("files");
+const filesUrl = TestUtils.createUrl("files");
+
 describe("util/FileManager", () => {
     it("constructors", () => {
         let props = {
-            url: url,
+            url: filesUrl,
             upload: {
                 type: "PUT"
             },
@@ -37,21 +39,21 @@ describe("util/FileManager", () => {
     });
 
     it("info `files array`", (done) => {
-        let fileName = "testfile.png";
+        let fileName = "info_test.png";
         let fileData = {
             destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
             encoding: "7bit",
             fieldname: "files",
             filename: fileName,
             mimetype: "image/png",
-            originalname: "testfile.png",
-            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.png.json",
+            originalname: "info_test.png",
+            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/info_test.png.json",
             size: 2067
         };
         let expectedFiles = [fileData];
 
         let manager = new FileManager({
-            url
+            url: filesUrl
         });
         manager.info([fileName], (files) => {
             chai.assert.deepEqual(expectedFiles, files);
@@ -63,26 +65,25 @@ describe("util/FileManager", () => {
     });
 
     it("info `file`", (done) => {
-        let filename = "testfile.png";
+        let filename = "info_test.png";
         let expectedFile = {
             destination: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files",
             encoding: "7bit",
             fieldname: "files",
-            filename: "testfile.png",
+            filename: "info_test.png",
             mimetype: "image/png",
-            originalname: "testfile.png",
-            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/testfile.png.json",
+            originalname: "info_test.png",
+            path: "/Users/kamilbukum/DEV/robe/robe-react-ui/__test__/files/info_test.png.json",
             size: 2067
         };
 
         let manager = new FileManager({
-            url
+            url: filesUrl
         });
 
         manager.info({
             filename
         }, (file) => {
-            console.log(file);
             chai.assert.deepEqual(expectedFile, file);
             done();
         }, (error) => {
@@ -91,35 +92,64 @@ describe("util/FileManager", () => {
         });
     });
 
-    it("upload", () => {
-        new AjaxRequest({
-            url: "",
-            type: "GET",
-            dataType: "json"
-        })
-        let manager = new FileManager({
-            url
-        });
+    it("upload", (done) => {
+        let test = (app) => {
+            let manager = new FileManager({
+                url: filesUrl
+            });
+
+            let fileInformation = {
+
+            };
+
+            let filePath = path.join(app.applicationPath, "data/browse/browse1.png");
+            console.log(filePath);
+            manager.upload(
+                "files",
+                [filePath],
+                (response) => {
+                    console.log(response);
+                    done();
+                },
+                (error) => {
+                    console.log(error);
+                    done();
+                }
+            );
+        }
+
+        let onSuccess = (response) => {
+            console.log(response);
+            test(response);
+        };
+
+        let onError = (error) => {
+            console.log(error);
+            done();
+        };
+
+        TestUtils.getInformation(onSuccess, onError);
+
         // manager.upload();
     });
 
     it("uploadFile", () => {
         let manager = new FileManager({
-            url
+            url: filesUrl
         });
         // manager.uploadFile();
     });
 
     it("delete", () => {
         let manager = new FileManager({
-            url
+            url: filesUrl
         });
         // manager.delete();
     });
 
     it("preview", () => {
         let manager = new FileManager({
-            url
+            url: filesUrl
         });
         // manager.preview();
     });

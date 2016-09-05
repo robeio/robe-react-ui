@@ -94,33 +94,6 @@ export default class FileUploadInput extends ShallowComponent {
 
     constructor(props) {
         super(props);
-
-        this.onChange = this.onChange.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.onDragStart = this.onDragStart.bind(this);
-        // TODO must change background of div as draging.
-        this.onDragEnter = this.onDragEnter.bind(this);
-        // TODO must change background of div as undraging.
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDragOver = this.onDragOver.bind(this);
-
-        // layout item renderer method.
-        this.onItemRender = this.onItemRender.bind(this);
-
-        // init methods
-        this.onInitSuccess = this.onInitSuccess.bind(this);
-        // upload methods
-        this.onUploadSucess = this.onUploadSucess.bind(this);
-        this.onError = this.onError.bind(this);
-
-        // actions
-        this.browse = this.browse.bind(this);
-
-        this.upload = this.upload.bind(this);
-        this.cancelUpload = this.cancelUpload.bind(this);
-        // delete operation
-        this.deleteItem = this.deleteItem.bind(this);
-        this.onDelete = this.onDelete.bind(this);
         // init component
         this.init();
     }
@@ -130,7 +103,7 @@ export default class FileUploadInput extends ShallowComponent {
      */
     init() {
         this.__value = this.props.value ? this.props.value : [];
-        this.__fileManager = new FileManager(this.props);
+        this.__fileManager = new FileManager(this.props.request);
         this.state = {
             value: []
         };
@@ -264,7 +237,6 @@ export default class FileUploadInput extends ShallowComponent {
         return (
             <Panel>
                 <StackLayout
-                    ref="layout"
                     display={this.props.display}
                     label={this.props.label}
                     items={this.__files}
@@ -276,6 +248,9 @@ export default class FileUploadInput extends ShallowComponent {
                     onDrop={this.onDrop}
                     toolbar={this.createButtons()}
                     toolbarPosition="bottom"
+                    style={{
+                        height:400
+                    }}
                 />
             </Panel>
         );
@@ -389,8 +364,9 @@ export default class FileUploadInput extends ShallowComponent {
      * @returns {boolean}
      */
     onDrop(e) {
-        const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
 
+        const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+        console.log(droppedFiles);
         if (!droppedFiles || droppedFiles.length === 0) {
             this.onError({
                 message: "File couldn't droppped. You must select valid file."

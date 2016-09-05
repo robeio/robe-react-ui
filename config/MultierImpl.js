@@ -75,8 +75,8 @@ module.exports = (app, requestPath, tempFolder) => {
      }
      */
 
-    app.put(new RegExp(escapeRegexp(requestPath) + ".*"), upload.array("files"), (req, res, next) => {
-
+    app.put(new RegExp(escapeRegexp(requestPath) + ".*"), upload.array("files"), (req, res) => {
+        console.log(req.files);
         res.status(200).send(req.files); // You can send any response to the user here
     });
 

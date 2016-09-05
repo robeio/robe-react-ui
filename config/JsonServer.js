@@ -21,19 +21,9 @@ function getAppHome() {
     return appRoot.path;
 }
 
-function Server(port, informationRequestPath) {
-    this.__port = port;
+function Server(port, appPath) {
     const server = jsonServer.create();
     server.use(jsonServer.defaults());
-    if (informationRequestPath) {
-        server.get(informationRequestPath, (req, res) => {
-            res.status(200).json({
-                userPath: getUserHome(),
-                applicationPath: getAppHome()
-            });
-        });
-    }
-
     const routes = [];
 
     this.route = (routePath) => {
@@ -49,13 +39,22 @@ function Server(port, informationRequestPath) {
 
 
     this.start = () => {
+        if (appPath) {
+            server.get(appPath, (req, res) => {
+                res.status(200).json({
+                    userPath: getUserHome(),
+                    applicationPath: getAppHome()
+                });
+            });
+        }
+
         var key;
         for (key in routes) {
             server.use(routes[key]);
         }
         /* eslint-disable prefer-template */
-        server.listen(this.__port, () => {
-            console.log("Server is running on " + this.__port + " port");
+        server.listen(port, () => {
+            console.log("Server is running on " + port + " port");
         });
     };
 }
