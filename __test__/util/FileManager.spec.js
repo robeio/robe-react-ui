@@ -4,7 +4,7 @@ import TestUtils from "../TestUtils";
 import FileManager from "util/FileManager";
 import { AjaxRequest } from "robe-react-commons";
 
-const url = TestUtils.getUrl("files");
+const url = TestUtils.createUrl("files");
 describe("util/FileManager", () => {
     it("constructors", () => {
         let props = {
