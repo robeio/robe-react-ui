@@ -88,10 +88,7 @@ export default class FileUploadInput extends ShallowComponent {
      * }
      * current files
      */
-    __files = {};
-
     __uploadedFiles = [];
-
     constructor(props) {
         super(props);
         // init component
@@ -107,10 +104,13 @@ export default class FileUploadInput extends ShallowComponent {
         this.state = {
             value: []
         };
-        this.__files = {};
+        this.__files = [];
         this.__uploadedFiles = [];
         if (this.__value.length > 0) {
-            this.__fileManager.info(this.__value, this.onInitSuccess, this.onError);
+            this.__fileManager.info(this.__value, this.onInitSuccess, (error) => {
+                this.__value = [];
+                this.onError(error);
+            });
         }
     }
     /**
@@ -119,12 +119,13 @@ export default class FileUploadInput extends ShallowComponent {
     onInitSuccess(files) {
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            if (!file.filename || this.__value.indexOf(file.filename) === -1) {
+            let fileIndex = this.__value.indexOf(file.filename);
+            if (!file.filename || fileIndex === -1) {
                 this.onError({
                     message: `Gelen ${file.path} dosyasında filename kimliği bulunamadı ! `
                 });
             }
-            this.__files[file.filename] = file;
+            this.__files[fileIndex] = file;
         }
 
         this.setState({
@@ -169,13 +170,18 @@ export default class FileUploadInput extends ShallowComponent {
         this.__value = oldValue.slice(0);
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            if (this.__value.indexOf(file.filename) !== -1) {
+            let fileIndex = this.__value.indexOf(file.filename);
+            if (fileIndex !== -1) {
                 this.onError({
                     message: "File Name Exist ! "
                 });
                 return false;
             }
-            this.__files[file.filename] = file;
+            this.__value.push(file.filename);
+            fileIndex = this.__value.indexOf(file.filename);
+            this.__files[fileIndex] = file;
+
+            // new file uploaded
             this.__uploadedFiles.push(file.filename);
         }
         this.setState({
@@ -220,15 +226,15 @@ export default class FileUploadInput extends ShallowComponent {
     onDelete(item: Map) {
         // clone items
         let oldValue = this.__value;
-        let items = oldValue.slice(0);
+        let newValue = oldValue.slice(0);
 
         // find item by filename
-        let index = items.indexOf(item.filename);
+        let index = newValue.indexOf(item.filename);
         // delete item
-        items.splice(index, 1);
-        delete this.__files[item.filename];
+        newValue.splice(index, 1);
+        this.__files.splice(index, 1);
         this.setState({
-            items
+            items: newValue
         });
         this.onChange("delete", item, oldValue);
     }

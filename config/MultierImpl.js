@@ -102,6 +102,21 @@ module.exports = (app, requestPath, tempFolder, fieldName) => {
         response.status(200).send(data);
     });
 
+    function deleteFileAndReturnFilename(file) {
+        var filePath;
+        if (file.path) {
+            filePath = file.path;
+        } else {
+            var fileId = (typeof file === "string") ? file : file.filename;
+            filePath = tempFolder + "/" + fileId;
+        }
+        var information = getInformation(filePath);
+        fs.unlinkSync(filePath);
+        fs.unlinkSync(filePath + ".json");
+        return information;
+    }
+
+
     app.delete(new RegExp(escapeRegexp(requestPath) + ".*"), (request, res, next) => {
         var body = "";
         request.on("data", (data) => {
@@ -113,21 +128,13 @@ module.exports = (app, requestPath, tempFolder, fieldName) => {
             }
         });
 
-        function deleteFileAndReturnFilename(file) {
-            var fileId = (typeof file === "string") ? file : file.path;
-            var filePath = tempFolder + "/" + fileId;
-            var information = getInformation(filePath);
-            fs.unlinkSync(filePath);
-            fs.unlinkSync(filePath + ".json");
-            return information;
-        }
         request.on("end", () => {
             var bodyJson;
             try{
                 bodyJson = JSON.parse(body);
             } catch (e) {
                 bodyJson = {
-                    path: body
+                    filename: body
                 };
             }
             if (Object.prototype.toString.call(bodyJson) === "[object Array]") {

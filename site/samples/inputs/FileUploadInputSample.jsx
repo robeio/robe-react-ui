@@ -3,18 +3,16 @@ import { ShallowComponent } from "robe-react-commons";
 import FileUploadInput from "inputs/upload/FileUploadInput";
 import { Button } from "react-bootstrap";
 
-
-
 const dataId = "3ae7baac-4e1c-6b63-4c07-b28d5b80821f";
 
-const request = {
-    requestId: dataId,
-    url: "http://localhost:3000/files",
+const filesUrl = "http://localhost:3000/files";
+
+let props = {
+    url: filesUrl,
     upload: {
         type: "PUT"
-
     },
-    load: {
+    info: {
         type: "POST"
     },
     preview: {
@@ -42,7 +40,7 @@ export default class FileUploadInputSample extends ShallowComponent {
                     id={dataId}
                     display="thumbnail"
                     label="Dosya Seçimi"
-                    request={request}
+                    request={props}
                     onChange={this.onChange}
                 />
                 <Button onClick={this.__onSubmitNew}>Gönder</Button>

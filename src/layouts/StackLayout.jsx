@@ -23,8 +23,10 @@ export default class StackLayout extends ShallowComponent {
          * Layout Container style
          */
         style: React.PropTypes.object,
+        /**
+         * will Shown given items which type is an array
+         */
         items: React.PropTypes.array,
-        
         /**
          * Add Toolbar to layout . Default position is bottom
          */

@@ -62,6 +62,6 @@ webPackConfig.plugins.push(new CachePlugin({}));
 
 
 const server = new JsonServer(3000, "/application");
-server.route("data/db.json").upload("/files", "temp").start();
+server.route("data/db.json").upload("/files", "data/upload", "files").start();
 
 module.exports = webPackConfig;
