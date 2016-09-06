@@ -63,7 +63,7 @@ commonSettings.externals = {
 };
 
 const server = new JsonServer(3001, "/application");
-server.route("testdb.json").upload("/files", "data/upload").start();
+server.route("testdb.json").upload("/files", "data/upload", "files").start();
 
 module.exports = function configure(config) {
     config.set({

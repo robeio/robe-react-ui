@@ -7,14 +7,12 @@ export default class FileManager extends Class {
     __uploadProps;
     __infoRequest;
     __deleteRequest;
-    __previewRequest;
 
     constructor(props) {
         super();
         this.__uploadProps = FileManager.createUpload(props);
         this.__infoRequest = new AjaxRequest(FileManager.createInfo(props));
         this.__deleteRequest = new AjaxRequest(FileManager.createDelete(props));
-        this.__previewRequest = new AjaxRequest(FileManager.createPreview(props));
     }
 
     /**
@@ -35,7 +33,7 @@ export default class FileManager extends Class {
     upload(fieldName: string, files: Array<string>, onSuccess: Function, onError: Function) {
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
-            formData.append(fieldName, [files[i]]);
+            formData.append(fieldName, files[i]);
         }
         this.__upload(formData, onSuccess, onError);
     }
@@ -80,15 +78,6 @@ export default class FileManager extends Class {
     }
 
     /**
-     * @param {any} keys
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    preview(keys: any, onSuccess: Function, onError: Function) {
-        this.__preview.call(keys, undefined, onSuccess, FileManager.createOnError(onError));
-    }
-
-    /**
      * @param {Function} errorCallback
      * @returns {Function}
      */
@@ -125,15 +114,6 @@ export default class FileManager extends Class {
         return infoRequest;
     }
 
-    /**
-     * @param {Object} request
-     * @returns {Object}
-     */
-    static createPreview(props) {
-        let previewRequest = FileManager.createInstance("preview", props, "GET");
-        FileManager.setCorelationId(props, previewRequest);
-        return previewRequest;
-    }
     /**
      * @param {Object} props
      * @returns {Object}

@@ -31,9 +31,9 @@ function Server(port, appPath) {
         return this;
     };
 
-    this.upload = (requestPath, tempFolder) => {
+    this.upload = (requestPath, tempFolder, fieldName) => {
         tempFolder = fixPath(tempFolder);
-        multerImpl(server, requestPath, tempFolder);
+        multerImpl(server, requestPath, tempFolder, fieldName);
         return this;
     };
 

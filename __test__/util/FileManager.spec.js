@@ -34,8 +34,6 @@ describe("util/FileManager", () => {
         chai.assert.equal(exptectedUrl, manager.__uploadProps.url);
         // check deleteRequest
         chai.assert.equal(exptectedUrl, manager.__deleteRequest.__url);
-        // check previewRequest
-        chai.assert.equal(exptectedUrl, manager.__previewRequest.__url);
     });
 
     it("info `files array`", (done) => {
@@ -92,66 +90,97 @@ describe("util/FileManager", () => {
         });
     });
 
+    let uploadedFiles = null;
+
     it("upload", (done) => {
-        let test = (app) => {
-            let manager = new FileManager({
-                url: filesUrl
-            });
+        let manager = new FileManager({
+            url: filesUrl
+        });
 
-            let fileInformation = {
+        let blob = new Blob(["Lorem ipsum"], {
+            type: "plain/text",
+            filename: "Multi File 1"
+        });
 
-            };
+        let blob2 = new Blob(["Lorem ipsum 2"], {
+            type: "plain/text",
+            filename: "Multi File 2"
+        });
 
-            let filePath = path.join(app.applicationPath, "data/browse/browse1.png");
-            console.log(filePath);
-            manager.upload(
-                "files",
-                [filePath],
-                (response) => {
-                    console.log(response);
-                    done();
-                },
-                (error) => {
-                    console.log(error);
-                    done();
-                }
-            );
+        manager.upload(
+            "files",
+            [blob, blob2],
+            (response) => {
+                uploadedFiles = response;
+                console.log(uploadedFiles)
+                chai.assert.equal(response.length, 2);
+                done();
+            },
+            (error) => {
+                chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
+                done();
+            }
+        );
+    });
+
+    it("uploadFile", (done) => {
+
+        let manager = new FileManager({
+            url: filesUrl
+        });
+
+        /**
+         * {
+         *  fieldname: 'files',
+            originalname: 'blob',
+            encoding: '7bit',
+            mimetype: 'plain/text',
+            filename: 'a2f401e2-c7f1-d012-8abd-8474c803e7ba',
+            destination: '/Users/kamilbukum/DEV/robe/robe-react-ui/data/upload',
+            path: '/Users/kamilbukum/DEV/robe/robe-react-ui/data/upload/a2f401e2-c7f1-d012-8abd-8474c803e7ba',
+            size: 11
+            }
+         */
+        let blob = new Blob(["Lorem ipsum"], {
+            type: "plain/text",
+            filename: "Single File 1"
+        });
+
+
+        manager.uploadFile(
+            "files",
+            blob,
+            (response) => {
+                uploadedFiles = uploadedFiles ? uploadedFiles.concat(response) : response;
+                chai.assert.equal(response.length, 1);
+                done();
+            },
+            (error) => {
+                chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
+                done();
+            }
+        );
+    });
+
+    it("delete", (done) => {
+        let manager = new FileManager({
+            url: filesUrl
+        });
+        let keys = [];
+        for (let i = 0; i < uploadedFiles.length; i++) {
+            keys[i] = uploadedFiles[i].filename;
         }
-
-        let onSuccess = (response) => {
-            console.log(response);
-            test(response);
-        };
-
-        let onError = (error) => {
-            console.log(error);
-            done();
-        };
-
-        TestUtils.getInformation(onSuccess, onError);
-
-        // manager.upload();
+        manager.delete(
+            keys,
+            (response) => {
+                chai.assert.equal(response.length, 3);
+                done();
+            },
+            (error) => {
+                chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
+                done();
+            }
+        );
     });
-
-    it("uploadFile", () => {
-        let manager = new FileManager({
-            url: filesUrl
-        });
-        // manager.uploadFile();
-    });
-
-    it("delete", () => {
-        let manager = new FileManager({
-            url: filesUrl
-        });
-        // manager.delete();
-    });
-
-    it("preview", () => {
-        let manager = new FileManager({
-            url: filesUrl
-        });
-        // manager.preview();
-    });
-
 });
+

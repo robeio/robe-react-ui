@@ -85,16 +85,6 @@ class ComponentList {
             code: require("../samples/inputs/HtmlEditorSample.txt")
         });
 
-
-
-        components.push({
-            header: "CheckList",
-            desc: "",
-            json: require("../docs/inputs/CheckList"),
-            sample: require("../samples/inputs/CheckListSample"),
-            code: require("../samples/inputs/CheckListSample.txt")
-        });
-
         components.push({
             header: "FaIcon",
             desc: "is a wrapper component for font-awesome icons",

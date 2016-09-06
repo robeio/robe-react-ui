@@ -37,7 +37,8 @@ function getInformation(path) {
         size: 0
     };
 }
-module.exports = (app, requestPath, tempFolder) => {
+
+module.exports = (app, requestPath, tempFolder, fieldName) => {
     const storage = multer.diskStorage({
         destination: tempFolder, // Specifies upload location...
         filename: function (req, file, cb) {
@@ -75,8 +76,7 @@ module.exports = (app, requestPath, tempFolder) => {
      }
      */
 
-    app.put(new RegExp(escapeRegexp(requestPath) + ".*"), upload.array("files"), (req, res) => {
-        console.log(req.files);
+    app.put(new RegExp(escapeRegexp(requestPath) + ".*"), fieldName ? upload.array(fieldName) : upload.array(), (req, res) => {
         res.status(200).send(req.files); // You can send any response to the user here
     });
 
@@ -113,13 +113,32 @@ module.exports = (app, requestPath, tempFolder) => {
             }
         });
 
+        function deleteFileAndReturnFilename(file) {
+            var fileId = (typeof file === "string") ? file : file.path;
+            var filePath = tempFolder + "/" + fileId;
+            var information = getInformation(filePath);
+            fs.unlinkSync(filePath);
+            fs.unlinkSync(filePath + ".json");
+            return information;
+        }
         request.on("end", () => {
-            const file = JSON.parse(body);
-                var filePath = path.normalize(file.path);
-                fs.unlinkSync(filePath);
-                fs.unlinkSync(filePath + ".json");
-            res.status(200).send(file);
-            // use post['blah'], etc.
+            var bodyJson;
+            try{
+                bodyJson = JSON.parse(body);
+            } catch (e) {
+                bodyJson = {
+                    path: body
+                };
+            }
+            if (Object.prototype.toString.call(bodyJson) === "[object Array]") {
+                var files = [];
+                for (var i = 0; i < bodyJson.length; i++) {
+                    files[i] = deleteFileAndReturnFilename(bodyJson[i]);
+                }
+                res.status(200).send(files);
+            } else {
+                res.status(200).send(deleteFileAndReturnFilename(bodyJson));
+            }
         });
        // You can send any response to the user here
     });
