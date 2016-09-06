@@ -15,9 +15,6 @@ let props = {
     info: {
         type: "POST"
     },
-    preview: {
-        type: "GET"
-    },
     delete: {
         type: "DELETE"
     }
@@ -40,7 +37,7 @@ export default class FileUploadInputSample extends ShallowComponent {
                     id={dataId}
                     display="thumbnail"
                     label="Dosya Seçimi"
-                    request={props}
+                    remote={props}
                     onChange={this.onChange}
                 />
                 <Button onClick={this.__onSubmitNew}>Gönder</Button>

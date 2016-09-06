@@ -44,20 +44,16 @@ class TestUtils extends Class {
         return shallow(this.createComponent(props, ClassComponent, defaultProps));
     }
 
+    renderClassIntoDocument(props: Object, ClassComponent: Object, defaultProps) {
+        return this.renderIntoDocument(this.createComponent(props, ClassComponent, defaultProps));
+    }
+
     /**
-     * @deprecated
      * @param props
      * @param ClassComponent
      * @param defaultProps
      * @returns {Object}
      */
-    getComponent(props: Object, ClassComponent: Object, defaultProps){
-        if (defaultProps) {
-            props = Maps.mergeDeep(props, defaultProps);
-        }
-        return React.createElement(ClassComponent, props);
-    }
-
     createComponent(props: Object, ClassComponent: Object, defaultProps){
         if (defaultProps) {
             props = Maps.mergeDeep(props, defaultProps);

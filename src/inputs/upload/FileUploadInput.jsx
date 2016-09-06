@@ -18,10 +18,6 @@ export default class FileUploadInput extends ShallowComponent {
      */
     static propTypes: Map = {
         /**
-         * Entity Id will use with relation entity id
-         */
-        objectId: React.PropTypes.any,
-        /**
          * It is field name of uploaded file
          */
         name: React.PropTypes.string.isRequired,
@@ -62,7 +58,7 @@ export default class FileUploadInput extends ShallowComponent {
     static defaultProps = {
         display: "list",
         multiple: true,
-        items: [],
+        value: [],
         autoUpload: true
     };
 
@@ -99,8 +95,8 @@ export default class FileUploadInput extends ShallowComponent {
      *
      */
     init() {
-        this.__value = this.props.value ? this.props.value : [];
-        this.__fileManager = new FileManager(this.props.request);
+        this.__value = this.props.value;
+        this.__fileManager = new FileManager(this.props.remote);
         this.state = {
             value: []
         };
@@ -370,7 +366,6 @@ export default class FileUploadInput extends ShallowComponent {
      * @returns {boolean}
      */
     onDrop(e) {
-
         const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
         console.log(droppedFiles);
         if (!droppedFiles || droppedFiles.length === 0) {
@@ -382,7 +377,10 @@ export default class FileUploadInput extends ShallowComponent {
         for (let i = 0; i < droppedFiles.length; i++) {
             droppedFiles[i].filename = Generator.guid();
         }
-        this.upload(droppedFiles);
+
+        if (this.props.autoUpload) {
+            this.upload(droppedFiles);
+        }
         return true;
     }
 
