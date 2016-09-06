@@ -112,7 +112,6 @@ describe("util/FileManager", () => {
             [blob, blob2],
             (response) => {
                 uploadedFiles = response;
-                console.log(uploadedFiles)
                 chai.assert.equal(response.length, 2);
                 done();
             },

@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const url = require("url");
 const fs = require("fs");
 const path = require("path");
+const colors = require('colors/safe');
+
+function log(msg) {
+    console.log(colors.blue(msg));
+}
 /* eslint-disable prefer-template */
 function guid() {
     function s4() {
@@ -92,11 +97,11 @@ module.exports = (app, requestPath, tempFolder, fieldName) => {
             data = [];
 
             for (var i = 0; i < request.body.length; i++) {
-                console.log("Loaded file by " + request.body[i] + " file key");
+                log(" Requested file by " + request.body[i] + " file key");
                 data.push(loadFile(request.body[i]));
             }
         } else {
-            console.log("Loaded file by " + request.body.filename + " file key");
+            log(" Requested file by " + request.body.filename + " file key");
             data = loadFile(request.body.filename);
         }
         response.status(200).send(data);
@@ -113,6 +118,7 @@ module.exports = (app, requestPath, tempFolder, fieldName) => {
         var information = getInformation(filePath);
         fs.unlinkSync(filePath);
         fs.unlinkSync(filePath + ".json");
+        log(filePath + " deleted from disk");
         return information;
     }
 
