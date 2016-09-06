@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Maps, Class, AjaxRequest } from "robe-react-commons";
 import ReactTestUtils from "react-addons-test-utils";
 
@@ -35,12 +35,13 @@ class TestUtils extends Class {
     renderIntoDocument(...args) {
         return ReactTestUtils.renderIntoDocument.apply(undefined, args);
     }
+
     mount(props: Object, ClassComponent: Object, defaultProps): Object {
-        this.createComponent(props, ClassComponent, defaultProps);
-        if (defaultProps) {
-            props = Maps.mergeDeep(props, defaultProps);
-        }
-        return mount(React.createElement(ClassComponent, props));
+        return mount(this.createComponent(props, ClassComponent, defaultProps));
+    }
+
+    shallow(props: Object, ClassComponent: Object, defaultProps): Object {
+        return shallow(this.createComponent(props, ClassComponent, defaultProps));
     }
 
     /**

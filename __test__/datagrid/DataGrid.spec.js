@@ -4,14 +4,14 @@ import {
     Store,
     RemoteEndPoint,
 } from "robe-react-commons";
+import Promise from "bluebird"
 import DataGrid from "datagrid/DataGrid";
 import DataGridBodyRow from "datagrid/DataGridBodyRow";
 import Pagination from "datagrid/Pagination";
-import { mount } from "enzyme";
-
+import SearchField from "datagrid/toolbar/SearchField";
+import TestUtils from "../TestUtils";
 
 describe("datagrid/DataGrid", () => {
-    const data = [];
     const model = {
         name: "DataGridModel",
         fields: [
@@ -50,18 +50,18 @@ describe("datagrid/DataGrid", () => {
         autoLoad: true
     });
 
-    const getComponent = (props: Object): Object => {
-        return (
-            <DataGrid {...props} />
-        );
-    };
+    let props;
 
-    it("column headers", () => {
-        let props = {
+    beforeEach(() => {
+        props = {
             fields: model.fields,
             store: store,
+            pageable: true
         };
-        let grid = mount(getComponent(props));
+    });
+
+    it("column headers", () => {
+        let grid = TestUtils.mount(props, DataGrid);
         let colArray = grid.find("th");
         chai.assert.equal(colArray.length, 2, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
         chai.assert.equal(colArray.first().node.innerText, "Name");
@@ -70,23 +70,52 @@ describe("datagrid/DataGrid", () => {
     });
 
     it("rows", () => {
-        let props = {
-            fields: model.fields,
-            store: store
-        };
-        let grid = mount(getComponent(props));
+        let grid = TestUtils.mount(props, DataGrid);
         let rows = grid.find(DataGridBodyRow);
         chai.assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
         grid.unmount();
     });
 
-    it("rows - getSelectedRows", (done) => {
-        let props = {
-            fields: model.fields,
-            store: store
+    it("search", (done) => {
+        let grid = TestUtils.shallow(props, DataGrid);
+        let searchField = grid.find(SearchField);
+
+        let start = () => {
+            return Promise.resolve();
         };
+
+        let checkInitialState = (): Promise => {
+            return new Promise((ok) => {
+                chai.assert.equal(grid.instance().getStore().getResult().data.length, 3);
+                searchField.first().simulate("change", { target: { value: "Seray" } });
+                ok();
+            });
+        };
+
+        let checkChangedState = () => {
+            return new Promise((ok) => {
+                let data = grid.instance().getStore().getResult().data;
+                chai.assert.equal(data.length, 1);
+                chai.assert.equal(data[0].name, "Seray");
+                ok();
+            });
+        };
+
+        let finish = () => {
+            grid.unmount();
+            done();
+        };
+
+        start().delay(500)
+            .then(checkInitialState).delay(500)
+            .then(checkChangedState)
+            .then(finish)
+            .catch(done);
+    });
+
+    it("rows - getSelectedRows", (done) => {
         store.getResult();
-        let grid = mount(getComponent(props));
+        let grid = TestUtils.mount(props, DataGrid);
 
         function check() {
             let rows = grid.find(DataGridBodyRow);
@@ -96,15 +125,12 @@ describe("datagrid/DataGrid", () => {
             grid.unmount();
             done();
         }
+
         window.setTimeout(check, 1000);
     });
 
     it("pagination", () => {
-        let props = {
-            fields: model.fields,
-            store: store
-        };
-        let grid = mount(getComponent(props));
+        let grid = TestUtils.mount(props, DataGrid);
         let pagination = grid.find(Pagination);
         chai.assert.equal(pagination.length, 0, "Pagination must be invisible if 'props.pagination' is not given.");
         grid.unmount();
@@ -116,12 +142,12 @@ describe("datagrid/DataGrid", () => {
                 pageSize: 1
             }
         };
-        grid = mount(getComponent(props));
+        grid = TestUtils.mount(props, DataGrid);
         pagination = grid.find(Pagination);
         chai.assert.equal(pagination.length, 1, "Pagination must be rendered if 'props.pagination' is given.");
         grid.unmount();
 
-        grid = mount(getComponent(props));
+        grid = TestUtils.mount(props, DataGrid);
         pagination = grid.find(Pagination);
         let rows = grid.find(DataGridBodyRow);
         chai.assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
