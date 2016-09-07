@@ -80,6 +80,7 @@ export default class SelectInput extends ValidationComponent {
     };
 
     static defaultProps = {
+        items: [],
         placeHolder: "Please Select",
         noResultsText: "No Result",
         textField: "text",
@@ -106,6 +107,9 @@ export default class SelectInput extends ValidationComponent {
     }
 
     componentWillReceiveProps(props: Object) {
+        if (!this.props.items) {
+            this.items = [];
+        }
         this._value = props.value;
         if (!this._value) {
             this._value = props.multi ? [] : null;
