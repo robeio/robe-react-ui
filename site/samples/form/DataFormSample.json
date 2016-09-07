@@ -81,50 +81,6 @@
     ]
   },
   {
-    "label": "CheckList",
-    "code": "city",
-    "type": "checkList",
-    "required": true,
-    "value": "34",
-    "items": [
-      {
-        "value": "34",
-        "text": "Istanbul"
-      },
-      {
-        "value": "21",
-        "text": "Diyarbakır"
-      },
-      {
-        "value": "06",
-        "text": "Ankara"
-      }
-    ]
-  },
-  {
-    "label": "CheckList",
-    "code": "ilce",
-    "type": "checkList",
-    "required": true,
-    "direction": true,
-    "multi": true,
-    "value": ["21", "34"],
-    "items": [
-      {
-        "value": "34",
-        "text": "Istanbul"
-      },
-      {
-        "value": "21",
-        "text": "Diyarbakır"
-      },
-      {
-        "value": "06",
-        "text": "Ankara"
-      }
-    ]
-  },
-  {
     "label": "SelectInput",
     "code": "il",
     "type": "select",
@@ -150,9 +106,7 @@
     "code": "files",
     "type": "file",
     "name": "files",
-    "display": "thumbnail",
-    "request": {
-      "url": "http://localhost:3000/files"
-    }
+    "value": ["info_test.png"],
+    "display": "thumbnail"
   }
 ]

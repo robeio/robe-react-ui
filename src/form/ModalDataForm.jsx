@@ -79,7 +79,7 @@ export default class ModalDataForm extends ShallowComponent {
                     <DataForm
                         ref={ModalDataForm.dataFormRef}
                         fields={this.props.fields}
-                        props={this.props.propsOfFields}
+                        propsOfFields={this.props.propsOfFields}
                         item={this.props.item}
                         onSubmit={this.__submitForm}
                     />

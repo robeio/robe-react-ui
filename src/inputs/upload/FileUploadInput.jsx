@@ -30,9 +30,17 @@ export default class FileUploadInput extends ShallowComponent {
          */
         value: React.PropTypes.arrayOf(React.PropTypes.string),
         /**
+         * FileUploadInputStyle
+         */
+        containerStyle: React.PropTypes.object,
+        /**
          * onChangeEvent event for the component
          */
         onChange: React.PropTypes.func,
+        /**
+         *
+         */
+        onError: React.PropTypes.func,
         /**
          * Presentation Mode
          */
@@ -48,7 +56,11 @@ export default class FileUploadInput extends ShallowComponent {
          * auto upload is false then file will upload when clicking the upload button.
          */
         autoUpload: React.PropTypes.bool,
-        request: React.PropTypes.object
+        request: React.PropTypes.object,
+        /**
+         * will disable browse button
+         */
+        disabledBrowse: React.PropTypes.bool
     };
 
     /**
@@ -56,15 +68,19 @@ export default class FileUploadInput extends ShallowComponent {
      * @static
      */
     static defaultProps = {
+        containerStyle: {
+            height: 400
+        },
         display: "list",
         multiple: true,
         value: [],
-        autoUpload: true
+        autoUpload: true,
+        disabledBrowse: false
     };
 
     /**
      * @type {Array}
-     * @private
+     * @access private
      */
 
     __fileManager;
@@ -88,13 +104,13 @@ export default class FileUploadInput extends ShallowComponent {
     constructor(props) {
         super(props);
         // init component
-        this.init();
+        this.__init();
     }
 
     /**
-     *
+     * @desc initialize input
      */
-    init() {
+    __init() {
         this.__value = this.props.value;
         this.__fileManager = new FileManager(this.props.remote);
         this.state = {
@@ -103,21 +119,23 @@ export default class FileUploadInput extends ShallowComponent {
         this.__files = [];
         this.__uploadedFiles = [];
         if (this.__value.length > 0) {
-            this.__fileManager.info(this.__value, this.onInitSuccess, (error) => {
+            this.__fileManager.info(this.__value, this.__onInitSuccess, (error) => {
                 this.__value = [];
-                this.onError(error);
+                this.__onError(error);
             });
         }
     }
     /**
+     * @desc success callback after loading given files.
      * @param {Array} files
+     * @access private
      */
-    onInitSuccess(files) {
+    __onInitSuccess(files) {
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
             let fileIndex = this.__value.indexOf(file.filename);
             if (!file.filename || fileIndex === -1) {
-                this.onError({
+                this.__onError({
                     message: `Gelen ${file.path} dosyasında filename kimliği bulunamadı ! `
                 });
             }
@@ -131,33 +149,44 @@ export default class FileUploadInput extends ShallowComponent {
         return true;
     }
 
+    /**
+     * @desc Displays File Explorer to select file or files.
+     * @access public
+     */
     browse() {
-        if (!this.props.disableClick) {
+        if (!this.props.disabledBrowse) {
             this.open();
         }
     }
 
+    /**
+     * @desc Opens File Expoler to select file or files
+     * @access private
+     */
     open() {
         this.fileInputEl.value = null;
         this.fileInputEl.click();
     }
 
     /**
+     * @desc Uploads files array by Using FileManager
      * @param {Array} files
      * @returns {boolean}
+     * @access private
      */
     upload(files: Array) {
-        this.__fileManager.upload(this.props.name, files, this.onUploadSucess, this.onError);
+        this.__fileManager.upload(this.props.name, files, this.__onUploadSucess, this.__onError);
         return true;
     }
 
     /**
      * @param {Array} uploadedFiles
      * @return {boolean}
+     * @access private
      */
-    onUploadSucess(files: Array) {
+    __onUploadSucess(files: Array) {
         if (!files || !Assertions.isArray(files) || files.length === 0) {
-            this.onError({
+            this.__onError({
                 message: "Upload Failed ! "
             });
             return false;
@@ -168,7 +197,7 @@ export default class FileUploadInput extends ShallowComponent {
             let file = files[i];
             let fileIndex = this.__value.indexOf(file.filename);
             if (fileIndex !== -1) {
-                this.onError({
+                this.__onError({
                     message: "File Name Exist ! "
                 });
                 return false;
@@ -187,7 +216,15 @@ export default class FileUploadInput extends ShallowComponent {
         return true;
     }
 
-    onError(error: Map) {
+    /**
+     * catchs any FileUploadInput's errors
+     * @param {Map} error
+     * @access private
+     */
+    __onError(error: Map) {
+        if (this.props.onError) {
+            this.props.onError(error);
+        }
         console.log(error);
     }
 
@@ -200,26 +237,28 @@ export default class FileUploadInput extends ShallowComponent {
      *
      * @param {Map} item
      * @returns {boolean}
+     * @access public
      */
     deleteItem(item: Map) {
         // if is uploaded yet then delete it from server.
         if (this.__uploadedFiles.indexOf(item.filename) !== -1) {
             this.__fileManager.delete(item, () => {
-                this.onDelete(item);
+                this.__onDelete(item);
             }, (error) => {
                 error.key = item.filename;
-                this.onError(error);
+                this.__onError(error);
             });
             return true;
         }
-        this.onDelete(item);
+        this.__onDelete(item);
         return true;
     }
 
     /**
      * @param {Map} item
+     * @access private
      */
-    onDelete(item: Map) {
+    __onDelete(item: Map) {
         // clone items
         let oldValue = this.__value;
         let newValue = oldValue.slice(0);
@@ -239,6 +278,7 @@ export default class FileUploadInput extends ShallowComponent {
         return (
             <Panel>
                 <StackLayout
+                    style={this.props.containerStyle}
                     display={this.props.display}
                     label={this.props.label}
                     items={this.__files}
@@ -250,14 +290,12 @@ export default class FileUploadInput extends ShallowComponent {
                     onDrop={this.onDrop}
                     toolbar={this.createButtons()}
                     toolbarPosition="bottom"
-                    style={{
-                        height:400
-                    }}
                 />
             </Panel>
         );
     }
     /**
+     * @desc render items
      * @param {Map} item
      * @param {string} display
      * @returns {Object}
@@ -272,7 +310,7 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
-     *
+     * @desc render item will shown in thumbnail layout
      * @param {Map} item
      * @returns {Array<Object>}
      */
@@ -303,6 +341,7 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
+     * @desc render item will shown in list layout
      * @param item
      * @returns {Object}
      */
@@ -328,6 +367,10 @@ export default class FileUploadInput extends ShallowComponent {
         );
     }
 
+    /**
+     *
+     * @returns {XML}
+     */
     createButtons() {
         const inputAttributes = {
             type: this.props.code ? this.props.code : "file",
@@ -343,7 +386,7 @@ export default class FileUploadInput extends ShallowComponent {
 
         return (
             <ButtonGroup className="pull-right">
-                <Button className="btn-file" bsSize="small" onClick={this.browse}>
+                <Button className="btn-file" bsSize="small" disabled={this.props.disabledBrowse} onClick={this.browse}>
                     <Glyphicon glyph="folder-open" />&nbsp; <span className="hidden-xs">Browse …</span>
                     <input
                         {...inputAttributes}
@@ -354,6 +397,8 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
+     *
+     * @example File
      * File = {
      *       lastModified: 1468913662000,
      *       lastModifiedDate: "Tue Jul 19 2016 10:34:22 GMT+0300 (EEST)",
@@ -362,6 +407,7 @@ export default class FileUploadInput extends ShallowComponent {
      *       type: "application/x-x509-ca-cert",
      *       webkitRelativePath: "",
      *   }
+     * @desc called when any file drop on the presentation layout.
      * @param {Object} e
      * @returns {boolean}
      */
@@ -369,7 +415,7 @@ export default class FileUploadInput extends ShallowComponent {
         const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
         console.log(droppedFiles);
         if (!droppedFiles || droppedFiles.length === 0) {
-            this.onError({
+            this.__onError({
                 message: "File couldn't droppped. You must select valid file."
             });
             return false;
@@ -384,22 +430,44 @@ export default class FileUploadInput extends ShallowComponent {
         return true;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     onDragStart() {
         return false;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     onDragEnter() {
         return false;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     onDragOver() {
         return false;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     onDragLeave() {
         return false;
     }
 
+    /**
+     * @desc called when added or removed files from FileUploadInput
+     * @param event
+     * @param newValue
+     * @param oldValue
+     */
     onChange(event, newValue, oldValue) {
         if (this.props.onChange) {
             let e = {
@@ -413,7 +481,7 @@ export default class FileUploadInput extends ShallowComponent {
         }
     }
     /**
-     * Decides ant update is necessary for re-rendering.
+     * @ desc Decides ant update is necessary for re-rendering.
      * Compares old props and state objects with the newer ones without going deep.
      * @param {Object} nextProps
      * @param {Object} nextState

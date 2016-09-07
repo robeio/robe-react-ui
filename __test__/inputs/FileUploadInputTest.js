@@ -30,16 +30,7 @@ export default class FileUploadInputSample extends ShallowComponent {
     render() {
         return (
             <div>
-                <FileUploadInput
-                    ref="dropZoneUploadNew"
-                    name="files"
-                    id={dataId}
-                    display="thumbnail"
-                    label="Dosya Seçimi"
-                    remote={props}
-                    value={["info_test.png"]}
-                    onChange={this.onChange}
-                />
+
                 <Button onClick={this.__onSubmitNew}>Gönder</Button>
             </div>
         );

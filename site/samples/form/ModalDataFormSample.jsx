@@ -1,8 +1,23 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import ModalDataForm from "form/ModalDataForm";
-import { Button, Modal  } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import fields from "./DataFormSample.json";
+
+const filesUrl = "http://localhost:3000/files";
+
+const remote = {
+    url: filesUrl,
+        upload: {
+        type: "PUT"
+    },
+    info: {
+        type: "POST"
+    },
+    delete: {
+        type: "DELETE"
+    }
+};
 
 export default class ModalDataFormSample extends ShallowComponent {
     /**
@@ -26,6 +41,11 @@ export default class ModalDataFormSample extends ShallowComponent {
                     onSubmit={this.__onSubmit}
                     onCancel={this.toggle}
                     fields={fields}
+                    propsOfFields={{
+                        files: {
+                            remote: remote
+                        }
+                    }}
                 />
                 <Button onClick={this.toggle}>Show Modal</Button>
             </div>
