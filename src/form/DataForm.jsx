@@ -191,7 +191,7 @@ export default class DataForm extends ShallowComponent {
         let props = this.__props[code];
         let Component = ComponentManager.findComponentByType(field.type);
 
-        return <Component ref={`${code}Ref`} {...props} value={this.state[code]} />;
+        return <Component key={`${code}_key`} ref={`${code}Ref`} {...props} value={this.state[code]} />;
     }
 
     /**
@@ -199,7 +199,7 @@ export default class DataForm extends ShallowComponent {
      * @returns {boolean}
      */
     isValid = (): boolean => {
-        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap("isValid", this.refs, "function");
+        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs,"isValid", "function");
         for (let i = 0; i < hasIsValidObjects.length; i++) {
             if (!(hasIsValidObjects[i].isValid())) {
                 return false;

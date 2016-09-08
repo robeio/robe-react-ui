@@ -43,7 +43,7 @@ export default class DataGrid extends StoreComponent {
         /**
          * toolbar for create,edit,delete and custom buttons
          */
-        toolbar: React.PropTypes.object,
+        toolbar: React.PropTypes.array,
         /**
          * Callback for new button click
          */
