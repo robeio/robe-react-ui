@@ -8,6 +8,22 @@ import {
 import ModalDataForm from "form/ModalDataForm";
 import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
+
+const propsOfFields = {
+                    job: {
+                        "items": [
+                            {
+                                "value": "sd",
+                                "text": "Software Developer"
+                            },
+                            {
+                                "value": "sa",
+                                "text": "Software Architect"
+                            }
+                        ]
+                    }
+};
+
 export default class DataGridSample extends ShallowComponent {
     /**
      *
@@ -44,12 +60,12 @@ export default class DataGridSample extends ShallowComponent {
 
     static tableRef = "table";
 
-    render():Object {
+    render(): Object {
         return (
-
             <span>
             <DataGrid
                 fields={this.state.fields}
+                propsOfFields={propsOfFields}
                 store={this.state.store1}
                 ref={DataGridSample.tableRef}
                 toolbar={["create", "edit","delete"]}
@@ -64,6 +80,7 @@ export default class DataGridSample extends ShallowComponent {
             />
             <DataGrid
                 fields={this.state.fields}
+                propsOfFields={propsOfFields}
                 store={this.state.store2}
                 toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
                 onNewClick={this.__add}
@@ -83,6 +100,7 @@ export default class DataGridSample extends ShallowComponent {
                 onCancel={this.__onCancel}
                 item={this.state.item}
                 fields={this.state.fields}
+                propsOfFields={propsOfFields}
             />
             </span>
         );

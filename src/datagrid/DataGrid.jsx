@@ -135,7 +135,8 @@ export default class DataGrid extends StoreComponent {
     __q = undefined;
     __filters = undefined;
     pageSize = 20;
-
+    __fields = [];
+    
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -148,6 +149,22 @@ export default class DataGrid extends StoreComponent {
         };
 
         this.activePage = 1;
+        if (props.propsOfFields) {
+            this.__init(props.fields, props.propsOfFields);
+        } else {
+            this.__fields = props.fields;
+        }
+    }
+
+    __init(fields: Array, propsOfFields: Object) {
+        for (let i = 0; i < fields.length; i++) {
+            let field = fields[i];
+            if (!field.code) {
+                throw new Error("Field code must define ! ");
+            }
+            let props = propsOfFields[field.code];
+            this.__fields[i] = props ? Maps.mergeDeep(field, props) : fields[i];
+        }
     }
 
     render(): Object {
@@ -166,7 +183,7 @@ export default class DataGrid extends StoreComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                />
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -174,7 +191,7 @@ export default class DataGrid extends StoreComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.__generateRows(this.props.fields, this.state.rows) }
+                        {this.__generateRows(this.__fields, this.state.rows) }
                     </tbody>
                 </Table>
                 {this.props.pagination === undefined ? undefined :
@@ -189,7 +206,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.onRefresh}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                    />)
+                        />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -249,7 +266,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
 
     /**
@@ -289,7 +306,7 @@ export default class DataGrid extends StoreComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                    />
+                        />
                 ) : null;
 
                 trArr.push(
