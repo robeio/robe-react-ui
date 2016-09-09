@@ -166,8 +166,8 @@ export default class SelectInput extends ValidationComponent {
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
             options[i] = this.__checkSelection(item) ?
-                <option value={item[this.props.valueField]} selected>{item[this.props.textField]}</option> :
-                <option value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
+                <option key={i} value={item[this.props.valueField]} selected>{item[this.props.textField]}</option> :
+                <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
         }
         return (
             <select hidden={true} name={this.props.code} multiple={this.props.multi}>
