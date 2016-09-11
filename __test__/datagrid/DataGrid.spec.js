@@ -49,7 +49,7 @@ describe("datagrid/DataGrid", () => {
     it("column headers", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let colArray = grid.find("th");
-        assert.equal(colArray.length, 6, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
+        assert.equal(colArray.length, 7, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
         assert.equal(colArray.first().node.innerText, "Name");
         assert.equal(colArray.last().node.innerText, "Gender");
         grid.unmount();
