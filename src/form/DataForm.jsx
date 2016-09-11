@@ -81,7 +81,7 @@ export default class DataForm extends ShallowComponent {
         super(props);
         if (props.item) {
             this.__isNew = false;
-            this.__item = props.item;
+            this.__item = Object.assign({}, props.item);
         }
         this.state = {};
         this.__init(this.props.fields, this.props.propsOfFields);
