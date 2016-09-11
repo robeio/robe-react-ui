@@ -10,18 +10,30 @@ import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
 
 const propsOfFields = {
-                    job: {
-                        "items": [
-                            {
-                                "value": "sd",
-                                "text": "Software Developer"
-                            },
-                            {
-                                "value": "sa",
-                                "text": "Software Architect"
-                            }
-                        ]
-                    }
+    job: {
+        "items": [
+            {
+                "value": "sd",
+                "text": "Software Developer"
+            },
+            {
+                "value": "sa",
+                "text": "Software Architect"
+            }
+        ]
+    },
+    gender: {
+        "items": [
+            {
+                "value": "male",
+                "text": "Erkek"
+            },
+            {
+                "value": "female",
+                "text": "Kadın"
+            }
+        ]
+    }
 };
 
 export default class DataGridSample extends ShallowComponent {
@@ -31,7 +43,7 @@ export default class DataGridSample extends ShallowComponent {
      */
     static idField = "id";
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
 
         let store1 = new Store({
@@ -41,7 +53,7 @@ export default class DataGridSample extends ShallowComponent {
             idField: DataGridSample.idField,
             autoLoad: true
         });
-          let store2 = new Store({
+        let store2 = new Store({
             endPoint: new RemoteEndPoint({
                 url: "http://localhost:3000/users"
             }),
@@ -63,45 +75,45 @@ export default class DataGridSample extends ShallowComponent {
     render(): Object {
         return (
             <span>
-            <DataGrid
-                fields={this.state.fields}
-                propsOfFields={propsOfFields}
-                store={this.state.store1}
-                ref={DataGridSample.tableRef}
-                toolbar={["create", "edit","delete"]}
-                onNewClick={this.__add}
-                onEditClick={this.__edit}
-                onDeleteClick={this.__remove}
-                exportButton={true}
-                pageable={true}
-                editable={true}
-                pagination={{ emptyText: "No data.", pageSize: 50 }}
-                modalConfirm={{ header: "Please do not delete me." }}
-            />
-            <DataGrid
-                fields={this.state.fields}
-                propsOfFields={propsOfFields}
-                store={this.state.store2}
-                toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
-                onNewClick={this.__add}
-                onEditClick={this.__edit}
-                onDeleteClick={this.__remove}
-                exportButton={true}
-                pageable={true}
-                editable={true}
-                pagination={{ pageSize: 3 }}
-                modalConfirm={{ header: "Please do not delete me." }}
-                pageSizeButtons={["1", "2", "3"]}
-            />
-            <ModalDataForm
-                header="Modal Data Form"
-                show={this.state.showModal}
-                onSubmit={this.__onSave}
-                onCancel={this.__onCancel}
-                item={this.state.item}
-                fields={this.state.fields}
-                propsOfFields={propsOfFields}
-            />
+                <DataGrid
+                    fields={this.state.fields}
+                    propsOfFields={propsOfFields}
+                    store={this.state.store1}
+                    ref={DataGridSample.tableRef}
+                    toolbar={["create", "edit", "delete"]}
+                    onNewClick={this.__add}
+                    onEditClick={this.__edit}
+                    onDeleteClick={this.__remove}
+                    exportButton={true}
+                    pageable={true}
+                    editable={true}
+                    pagination={{ emptyText: "No data.", pageSize: 50 }}
+                    modalConfirm={{ header: "Please do not delete me." }}
+                    />
+                <DataGrid
+                    fields={this.state.fields}
+                    propsOfFields={propsOfFields}
+                    store={this.state.store2}
+                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
+                    onNewClick={this.__add}
+                    onEditClick={this.__edit}
+                    onDeleteClick={this.__remove}
+                    exportButton={true}
+                    pageable={true}
+                    editable={true}
+                    pagination={{ pageSize: 3 }}
+                    modalConfirm={{ header: "Please do not delete me." }}
+                    pageSizeButtons={["1", "2", "3"]}
+                    />
+                <ModalDataForm
+                    header="Modal Data Form"
+                    show={this.state.showModal}
+                    onSubmit={this.__onSave}
+                    onCancel={this.__onCancel}
+                    item={this.state.item}
+                    fields={this.state.fields}
+                    propsOfFields={propsOfFields}
+                    />
             </span>
         );
     }

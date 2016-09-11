@@ -19,6 +19,37 @@
       "type": "string",
       "code": "surname",
       "tooltip": "Surname"
+    },
+
+    {
+      "label": "E-Mail",
+      "type": "string",
+      "code": "email",
+      "tooltip": "E-Mail"
+    },
+    {
+      "label": "Password",
+      "type": "password",
+      "code": "password",
+      "tooltip": "Password"
+    },
+    {
+      "label": "Birthdate",
+      "type": "date",
+      "code": "birthdate",
+      "tooltip": "birthdate"
+    },
+    {
+      "label": "Job Title",
+      "type": "list",
+      "code": "job",
+      "tooltip": "Job Title"
+    },
+    {
+      "label": "Gender",
+      "type": "radio",
+      "code": "gender",
+      "tooltip": "Gender"
     }
   ]
 }
