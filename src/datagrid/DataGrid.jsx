@@ -160,7 +160,7 @@ export default class DataGrid extends StoreComponent {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
-                throw new Error("Field code must define ! ");
+                throw new Error("'code' field must be defined");
             }
             let props = propsOfFields[field.code];
             this.__fields[i] = props ? Maps.mergeDeep(field, props) : fields[i];
