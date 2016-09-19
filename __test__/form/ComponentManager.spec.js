@@ -35,13 +35,13 @@ describe("form/ComponentManager", () => {
         component = ComponentManager.findComponentByType("radio");
         chai.assert.equal(component, RadioInput);
 
-        component = ComponentManager.findComponentByType("list");
+        component = ComponentManager.findComponentByType("select");
         chai.assert.equal(component, SelectInput);
 
         component = ComponentManager.findComponentByType("check");
         chai.assert.equal(component, CheckInput);
 
-        component = ComponentManager.findComponentByType("editor");
+        component = ComponentManager.findComponentByType("html");
         chai.assert.equal(component, HtmlEditor);
 
         component = ComponentManager.findComponentByType("file");

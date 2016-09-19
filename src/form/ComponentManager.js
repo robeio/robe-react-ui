@@ -59,35 +59,24 @@ class ComponentManager {
         Assertions.isString(componentType, true);
         switch (componentType) {
             case "string":
-            case "TextInput":
                 return Input.TextInput;
             case "number":
-            case "NumericInput":
                 return Input.NumericInput;
             case "decimal":
-            case "DecimalInput":
                 return Input.DecimalInput;
             case "date":
-            case "DateInput":
                 return Input.DateInput;
             case "password":
-            case "PasswordInput":
                 return Input.PasswordInput;
             case "money":
-            case "MoneyInput":
                 return Input.MoneyInput;
             case "radio":
-            case "RadioInput":
                 return Input.RadioInput;
-            case "list":
             case "select":
-            case "SelectInput":
                 return Input.SelectInput;
             case "check":
-            case "CheckInput":
                 return Input.CheckInput;
-            case "editor":
-            case "HtmlEditor":
+            case "html":
                 return Input.HtmlEditor;
             case "file":
                 return Input.FileUploadInput;
