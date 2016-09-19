@@ -160,7 +160,7 @@ export default class DataGrid extends StoreComponent {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.code) {
-                throw new Error("Field code must define ! ");
+                throw new Error("'code' field must be defined");
             }
             let props = propsOfFields[field.code];
             this.__fields[i] = props ? Maps.mergeDeep(field, props) : fields[i];
@@ -175,7 +175,7 @@ export default class DataGrid extends StoreComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.filter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
                     </Col>
 
                 </Row>
@@ -183,7 +183,7 @@ export default class DataGrid extends StoreComponent {
                     fields={this.props.fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    />
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -206,7 +206,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.onRefresh}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                        />)
+                    />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -266,7 +266,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
@@ -306,7 +306,7 @@ export default class DataGrid extends StoreComponent {
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
-                        />
+                    />
                 ) : null;
 
                 trArr.push(
@@ -357,7 +357,7 @@ export default class DataGrid extends StoreComponent {
                         fields={fields}
                         data={row}
                         onSelection={this.__onSelection}
-                        />);
+                    />);
             }
         }
         return rowsArr;

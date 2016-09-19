@@ -50,21 +50,32 @@ export default class DataTableBodyRow extends ShallowComponent {
                     case "date": {
                         let format = column.format ? column.format : "DD/MM/YYYY";
                         let date = moment(value);
-                        value = date.isValid() ? date.format(format) : "Invalid date";
+                        value = date.isValid() ? date.format(format) : "";
                         break;
                     }
                     case "password":
                         value = "******";
                         break;
-                    case "list":
-                    case "radio":
-                        value = this.__getCollectionValue(column, value);
+                    case "check":
+                    case "CheckInput": {
+                        value = this.__getTextValue(column, value);
+                        if (value === true) {
+                            value = <FaIcon size={"fa-lg"} code="fa-check-square-o" />;
+                        } else if (value === false) {
+                            value = <FaIcon size={"fa-lg"} code="fa-square-o" />;
+                        }
                         break;
-                    case "upload":
+                    }
+                    case "list":
+                    case "select":
+                    case "SelectInput":
+                        value = this.__getTextValue(column, value);
+                        break;
+                    case "radio":
+                        value = this.__getTextValue(column, value);
                         break;
                     default:
                         break;
-
                 }
                 rowColumns.push(<td key={column.code}>{value}</td>);
             }
@@ -80,18 +91,25 @@ export default class DataTableBodyRow extends ShallowComponent {
         );
     }
 
-    __getCollectionValue(column, value) {
-        if (column.items && Array.isArray(column.items)) {
-            let dataTextField = column.dataTextField || "text";
-            let dataValueField = column.dataValueField || "value";
-            for (let k = 0; k < column.items.length; k++) {
-                let item = column.items[k];
-                if (item[dataValueField] === value) {
-                    return item[dataTextField];
+    __getTextValue(column: Object, selectedValues: any): any {
+        let isMultipleSelection = !!column.items;
+        if (!isMultipleSelection) {
+            return selectedValues;
+        }
+        selectedValues = [].concat(selectedValues);
+        let textOfValues = [];
+        let dataTextField = column.dataTextField || "text";
+        let dataValueField = column.dataValueField || "value";
+        for (let i = 0; i < column.items.length; i++) {
+            let item = column.items[i];
+            for (let k = 0; k < selectedValues.length; k++) {
+                let selectedValue = selectedValues[k];
+                if (String(item[dataValueField]) === selectedValue) {
+                    textOfValues.push(item[dataTextField]);
                 }
             }
         }
-        return value;
+        return textOfValues.join("\n");
     }
 
     __onClick() {
