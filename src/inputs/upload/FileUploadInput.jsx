@@ -30,6 +30,10 @@ export default class FileUploadInput extends ShallowComponent {
          */
         value: React.PropTypes.arrayOf(React.PropTypes.string),
         /**
+         * describe Selection File Multi or Single
+         */
+        multiple: React.PropTypes.bool,
+        /**
          * FileUploadInputStyle
          */
         containerStyle: React.PropTypes.object,
@@ -46,13 +50,10 @@ export default class FileUploadInput extends ShallowComponent {
          */
         display: React.PropTypes.oneOf(["list", "thumbnail"]),
         /**
-         *
-         * TODO will implement
          * Max Uploaded file
          */
         maxFileSize: React.PropTypes.bool,
         /**
-         * TODO will implement
          * auto upload is false then file will upload when clicking the upload button.
          */
         autoUpload: React.PropTypes.bool,
@@ -73,9 +74,9 @@ export default class FileUploadInput extends ShallowComponent {
         },
         display: "list",
         multiple: true,
-        value: [],
         autoUpload: true,
-        disabledBrowse: false
+        disabledBrowse: false,
+        maxFileSize: 1000
     };
 
     /**
@@ -100,23 +101,29 @@ export default class FileUploadInput extends ShallowComponent {
      * }
      * current files
      */
+    __files = [];
     __uploadedFiles = [];
+    __maxFileSize = 0;
     constructor(props) {
         super(props);
         // init component
-        this.__init();
+        this.__init(props);
     }
 
     /**
      * @desc initialize input
      */
-    __init() {
-        this.__value = this.props.value;
+    __init(props) {
+        this.__maxFileSize = props.multiple ? props.maxFileSize : 1;
+        if (props.value) {
+            this.__value = props.multiple ? props.value : [props.value];
+        } else {
+            this.__value = [];
+        }
         this.__fileManager = new FileManager(this.props.remote);
         this.state = {
             value: []
         };
-        this.__files = [];
         this.__uploadedFiles = [];
         if (this.__value.length > 0) {
             this.__fileManager.info(this.__value, this.__onInitSuccess, (error) => {
@@ -175,6 +182,12 @@ export default class FileUploadInput extends ShallowComponent {
      * @access private
      */
     upload(files: Array) {
+        if ((files.length + this.__value.length) > this.__maxFileSize) {
+            this.__onError({
+                message: `You cannot add more than ${this.__maxFileSize}`
+            });
+            return false;
+        }
         this.__fileManager.upload(this.props.name, files, this.__onUploadSucess, this.__onError);
         return true;
     }
@@ -271,7 +284,7 @@ export default class FileUploadInput extends ShallowComponent {
         this.setState({
             items: newValue
         });
-        this.onChange("delete", item, oldValue);
+        this.onChange("delete", newValue, oldValue);
     }
 
     render() {
@@ -316,6 +329,15 @@ export default class FileUploadInput extends ShallowComponent {
      */
     thumbnail(item: Map) {
         let onItemDelete = this.deleteItem.bind(this, item);
+        let uploadButton = null;
+
+        if (this.__uploadedFiles.indexOf(item.filename) !== -1) {
+            uploadButton = (
+                <Button bsSize="xsmall">
+                    <Glyphicon glyph="upload" />
+                </Button>
+            );
+        }
         return [
             <span className="gi-5x">
                 <Glyphicon glyph="file" />
@@ -330,9 +352,7 @@ export default class FileUploadInput extends ShallowComponent {
                 <Button bsSize="xsmall" onClick={onItemDelete} >
                     <Glyphicon glyph="remove" />
                 </Button>
-                <Button bsSize="xsmall">
-                    <Glyphicon glyph="upload" />
-                </Button>
+                {uploadButton}
                 <Button bsSize="xsmall">
                     <Glyphicon glyph="zoom-in" />
                 </Button>
@@ -413,7 +433,6 @@ export default class FileUploadInput extends ShallowComponent {
      */
     onDrop(e) {
         const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-        console.log(droppedFiles);
         if (!droppedFiles || droppedFiles.length === 0) {
             this.__onError({
                 message: "File couldn't droppped. You must select valid file."
@@ -431,38 +450,6 @@ export default class FileUploadInput extends ShallowComponent {
     }
 
     /**
-     *
-     * @returns {boolean}
-     */
-    onDragStart() {
-        return false;
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    onDragEnter() {
-        return false;
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    onDragOver() {
-        return false;
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    onDragLeave() {
-        return false;
-    }
-
-    /**
      * @desc called when added or removed files from FileUploadInput
      * @param event
      * @param newValue
@@ -473,12 +460,19 @@ export default class FileUploadInput extends ShallowComponent {
             let e = {
                 target: {
                     event: event,
-                    oldValue: oldValue,
-                    value: newValue
+                    oldValue: this.__getValueByMultipleProperty(oldValue),
+                    value: this.__getValueByMultipleProperty(newValue)
                 }
             };
             this.props.onChange(e);
         }
+    }
+
+    __getValueByMultipleProperty(value: Array) {
+        if (!value || value.length === 0) {
+            return this.props.multiple ? [] : null;
+        }
+        return this.props.multiple ? value : value[0];
     }
     /**
      * @ desc Decides ant update is necessary for re-rendering.

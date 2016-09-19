@@ -37,7 +37,8 @@ export default class DataFormSample extends ShallowComponent {
                     fields={fields}
                     propsOfFields={{
                         files: {
-                            remote: remote
+                            remote: remote,
+                            onCellRender: this.onCellRender
                         }
                     }}
                 />

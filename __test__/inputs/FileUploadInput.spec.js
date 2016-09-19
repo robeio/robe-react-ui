@@ -35,7 +35,7 @@ describe("inputs/upload/FileUploadInput", () => {
         let componentNode = TestUtils.renderClassIntoDocument({}, FileUploadInput, defaultProps);
         chai.assert.equal(componentNode.props.name, "files");
         chai.assert.equal(componentNode.props.display, "thumbnail");
-        chai.assert.deepEqual(componentNode.props.value, []);
+        chai.assert.deepEqual(componentNode.props.value, undefined);
         chai.assert.equal(componentNode.props.autoUpload, true);
         chai.assert.equal(componentNode.props.multiple, true);
         chai.assert.deepEqual(componentNode.props.remote, defaultProps.remote);
@@ -54,67 +54,77 @@ describe("inputs/upload/FileUploadInput", () => {
             display: "list",
             remote: remoteProps,
             autoUpload: false,
+            value: "info_test.png"
+        }, FileUploadInput, defaultProps);
+
+        chai.assert.equal(componentNode.props.display, "list");
+        chai.assert.deepEqual(componentNode.props.value, "info_test.png");
+        chai.assert.equal(componentNode.props.autoUpload, false);
+        chai.assert.equal(componentNode.props.multiple, false);
+        chai.assert.deepEqual(componentNode.props.remote, remoteProps);
+
+        componentNode = TestUtils.renderClassIntoDocument({
+            multiple: true,
+            onChange: onChangeFunction,
+            display: "list",
+            remote: remoteProps,
+            autoUpload: false,
             value: ["info_test.png"]
         }, FileUploadInput, defaultProps);
 
         chai.assert.equal(componentNode.props.display, "list");
         chai.assert.deepEqual(componentNode.props.value, ["info_test.png"]);
         chai.assert.equal(componentNode.props.autoUpload, false);
-        chai.assert.equal(componentNode.props.multiple, false);
+        chai.assert.equal(componentNode.props.multiple, true);
         chai.assert.deepEqual(componentNode.props.remote, remoteProps);
+
     });
     it("render", (done) => {
-
-        /**
-         *
-         * @type {Array}
-
-        let testArray = [];
-
-        let index = ;
-
-        let defaultProps = {
+        let defProps = {
             name: "files",
             display: "thumbnail",
             label: "Dosya Seçimi",
+            value: ["info_test.png"],
             remote: remoteProps,
-            onError: (e) => {
+            onError: (error) => {
+                chai.assert.isOk(false, `FileInput Error -> ${error}`);
                 done();
-                chai.assert.isOk(false, "Hate : " + error);
             }
-         };
+        };
 
-        testArray.push((index) => {
-            let wrapper = null;
-            let wrapper = TestUtils.mount({
+        let testArray = [];
+        let wrapper;
+        testArray.next = () => {
+            let prop = testArray.pop();
+            if (prop) {
+                wrapper = TestUtils.mount(prop, FileUploadInput, defProps);
+            }
+        };
 
-                onChange: (e) => {
-                    testArray[1](1);
-                }
-            }, FileUploadInput, defaultProps);
 
-        });
+        let test2 = {
+            value: ["unknwonfile.png"],
+            onChange: (e) => {
+                chai.assert.isOk(false, `It should give  error ! Because file not found on system ! e: ${e}`);
+                done();
+            },
+            onError: (error) => {
+                chai.assert.isOk(true, `File not found on system. It is correct. Error Detail: ${error}`);
+                done();
+            }
+        };
 
-        testArray.push((index) => {
-            let wrapper = null;
-            let wrapper = TestUtils.mount({
-                onChange: (e) => {
-                    testArray[1](1);
-                }
-            }, FileUploadInput, defaultProps);
-        });
+        let test1 = {
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.oldValue, []);
+                // chai.assert.deepEqual(e.target.value, ["info_test.png"]);
+                testArray.push(test2);
+                testArray.next();
+            }
+        };
 
-        testArray.push((index) => {
-            let wrapper = null;
-            let wrapper = TestUtils.mount({
-                onChange: (e) => {
-                    done();
-                }
-            }, FileUploadInput, defaultProps);
-        });
+        testArray.push(test1);
 
-        testArray[0](0);
-         */
-        done();
-    })
+        testArray.next();
+    });
 });
