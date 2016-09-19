@@ -40,7 +40,7 @@
     },
     {
       "label": "Job Title",
-      "type": "list",
+      "type": "select",
       "code": "job",
       "tooltip": "Job Title"
     },
