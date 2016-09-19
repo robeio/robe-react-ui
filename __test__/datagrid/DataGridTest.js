@@ -8,63 +8,56 @@ import {
 import ModalDataForm from "form/ModalDataForm";
 import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
+import TestUtils from "../TestUtils"
 
 const propsOfFields = {
     job: {
-        "items": [
+        items: [
             {
-                "value": "sd",
-                "text": "Software Developer"
+                value: "sd",
+                text: "Software Developer"
             },
             {
-                "value": "sa",
-                "text": "Software Architect"
+                value: "sa",
+                text: "Software Architect"
             }
         ]
     },
     gender: {
-        "items": [
+        items: [
             {
-                "value": "male",
-                "text": "Erkek"
+                value: "male",
+                text: "Erkek"
             },
             {
-                "value": "female",
-                "text": "Kadın"
+                value: "female",
+                text: "Kadın"
             }
         ]
     }
 };
 
-export default class DataGridSample extends ShallowComponent {
+export default class DataGridTest extends ShallowComponent {
     /**
      *
      * @param props
      */
     static idField = "id";
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
 
-        let store1 = new Store({
+        let store = new Store({
             endPoint: new RemoteEndPoint({
-                url: "http://localhost:3000/users"
+                url: TestUtils.createUrl("users")
             }),
-            idField: DataGridSample.idField,
-            autoLoad: true
-        });
-        let store2 = new Store({
-            endPoint: new RemoteEndPoint({
-                url: "http://localhost:3000/users"
-            }),
-            idField: DataGridSample.idField,
+            idField: DataGridTest.idField,
             autoLoad: true
         });
 
         this.state = {
             fields: DataGridModel.fields,
-            store1: store1,
-            store2: store2,
+            store: store,
             showModal: false,
             item: {}
         };
@@ -78,9 +71,9 @@ export default class DataGridSample extends ShallowComponent {
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                    store={this.state.store1}
-                    ref={DataGridSample.tableRef}
-                    toolbar={["create", "edit", "delete"]}
+                    store={this.state.store}
+                    ref={DataGridTest.tableRef}
+                    toolbar={this.props.toolbar}
                     onNewClick={this.__add}
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}
@@ -89,22 +82,7 @@ export default class DataGridSample extends ShallowComponent {
                     editable={true}
                     pagination={{ emptyText: "No data.", pageSize: 50 }}
                     modalConfirm={{ header: "Please do not delete me." }}
-                    />
-                <DataGrid
-                    fields={this.state.fields}
-                    propsOfFields={propsOfFields}
-                    store={this.state.store2}
-                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
-                    onNewClick={this.__add}
-                    onEditClick={this.__edit}
-                    onDeleteClick={this.__remove}
-                    exportButton={true}
-                    pageable={true}
-                    editable={true}
-                    pagination={{ pageSize: 3 }}
-                    modalConfirm={{ header: "Please do not delete me." }}
-                    pageSizeButtons={["1", "2", "3"]}
-                    />
+                />
                 <ModalDataForm
                     header="Modal Data Form"
                     show={this.state.showModal}
@@ -113,7 +91,7 @@ export default class DataGridSample extends ShallowComponent {
                     item={this.state.item}
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                    />
+                />
             </span>
         );
     }
@@ -124,7 +102,7 @@ export default class DataGridSample extends ShallowComponent {
     };
 
     __edit = () => {
-        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
+        let selectedRows = this.refs[DataGridTest.tableRef].getSelectedRows();
         if (!selectedRows || !selectedRows[0]) {
             return;
         }
@@ -135,26 +113,28 @@ export default class DataGridSample extends ShallowComponent {
         this.setState({ showModal: false });
     };
 
-    __onSave = (newData, callback) => {
-        let id = newData[DataGridSample.idField];
-        if (Assertions.isNotEmpty(id)) {
-            this.state.store1.update(this.state.item, newData);
+    __onSave = (data, callback) => {
+        Assertions.isNotUndefinedAndNull(data, true);
+        let id = data[DataGridTest.idField];
+        if (Assertions.isNotUndefinedAndNull(id)) {
+            this.state.store.update(this.state.item, data);
         } else {
-            this.state.store1.create(newData);
+            this.state.store.create(data);
         }
-        if (newData) {
+        callback = callback || (() => {});
+        if (data) {
             callback(true);
             this.setState({
                 showModal: true
             });
         }
-
-        // this.refs[DataGridSample.tableRef].__readData();
     };
 
     __remove = () => {
-        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
-        console.log("removing ", selectedRows[0]);
+        let selectedRows = this.refs[DataGridTest.tableRef].getSelectedRows();
+        if (selectedRows || selectedRows.length) {
+            this.state.store.delete(selectedRows[0]);
+        }
     };
 
     __showModal = (newItem) => {

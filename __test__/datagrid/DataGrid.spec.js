@@ -9,42 +9,19 @@ import DataGrid from "datagrid/DataGrid";
 import DataGridBodyRow from "datagrid/DataGridBodyRow";
 import Pagination from "datagrid/Pagination";
 import SearchField from "datagrid/toolbar/SearchField";
+import DataGridTest from "./DataGridTest";
+import ModalDataForm from "form/ModalDataForm";
 import TestUtils from "../TestUtils";
+import DataGridModel from "./DataGridModel.json";
+
 
 describe("datagrid/DataGrid", () => {
-    const model = {
-        name: "DataGridModel",
-        fields: [
-            {
-                label: "id",
-                type: "string",
-                code: "id",
-                tooltip: "id",
-                visible: false
-            },
-            {
-                label: "Name",
-                type: "string",
-                code: "name",
-                tooltip: "Name"
-            },
-            {
-                label: "Surname",
-                type: "string",
-                code: "surname",
-                tooltip: "Surname"
-            },
-            {
-                label: "Avatar",
-                type: "upload",
-                code: "avatar",
-                tooltip: "Avatar"
-            }
-        ]
-    };
+    const assert = chai.assert;
+
+    const model = DataGridModel;
     const store = new Store({
         endPoint: new RemoteEndPoint({
-            url: "http://localhost:3001/users"
+            url: TestUtils.createUrl("users")
         }),
         idField: "id",
         autoLoad: true
@@ -60,33 +37,44 @@ describe("datagrid/DataGrid", () => {
         };
     });
 
+    let start = () => {
+        return Promise.resolve();
+    };
+
+    let finish = (wrapper, done) => {
+        wrapper.unmount();
+        done();
+    };
+
     it("column headers", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let colArray = grid.find("th");
-        chai.assert.equal(colArray.length, 2, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
-        chai.assert.equal(colArray.first().node.innerText, "Name");
-        chai.assert.equal(colArray.last().node.innerText, "Surname");
+        assert.equal(colArray.length, 7, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
+        assert.equal(colArray.first().node.innerText, "Name");
+        assert.equal(colArray.last().node.innerText, "Gender");
         grid.unmount();
     });
 
     it("rows", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let rows = grid.find(DataGridBodyRow);
-        chai.assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
+        assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
         grid.unmount();
+    });
+
+    it("nonSearchable", () => {
+        props.searchable = false;
+        let grid = TestUtils.mount(props, DataGrid);
+        let searchField = grid.find(SearchField);
+        assert.equal(searchField.find("input").length, 0);
     });
 
     it("search", (done) => {
         let grid = TestUtils.shallow(props, DataGrid);
         let searchField = grid.find(SearchField);
 
-        let start = () => {
-            return Promise.resolve();
-        };
-
-        let checkInitialState = (): Promise => {
+        let search = () => {
             return new Promise((ok) => {
-                chai.assert.equal(grid.instance().getStore().getResult().data.length, 3);
                 searchField.first().simulate("change", { target: { value: "Seray" } });
                 ok();
             });
@@ -95,21 +83,110 @@ describe("datagrid/DataGrid", () => {
         let checkChangedState = () => {
             return new Promise((ok) => {
                 let data = grid.instance().getStore().getResult().data;
-                chai.assert.equal(data.length, 1);
-                chai.assert.equal(data[0].name, "Seray");
+                assert.equal(data.length, 1);
+                assert.equal(data[0].name, "Seray");
+                searchField.first().simulate("change", { target: { value: "" } });
+                ok([grid, done]);
+            });
+        };
+
+        start().delay(500)
+            .then(search).delay(500)
+            .then(checkChangedState)
+            .spread(finish)
+            .catch(done);
+    })
+
+    it("add", (done) => {
+        props.toolbar = ["create"];
+        let testGrid = TestUtils.mount(props, DataGridTest);
+        let grid = testGrid.find(DataGrid);
+
+        let add = () => {
+            return new Promise((ok) => {
+                let modal = testGrid.find(ModalDataForm);
+                modal.props().onSubmit({ name: "Mehmet", surname: "Güreli" });
                 ok();
             });
         };
 
-        let finish = () => {
-            grid.unmount();
-            done();
+        let testIfAdded = () => {
+            return new Promise((ok) => {
+                let rows = grid.find(DataGridBodyRow);
+                assert.equal(rows.length, 4);
+                ok([testGrid, done]);
+            });
         };
 
         start().delay(500)
-            .then(checkInitialState).delay(500)
-            .then(checkChangedState)
-            .then(finish)
+            .then(add).delay(500)
+            .then(testIfAdded)
+            .spread(finish)
+            .catch(done);
+
+    });
+
+    it("edit", (done) => {
+        let testGrid = TestUtils.mount(props, DataGridTest);
+        let grid = testGrid.find(DataGrid);
+        let oldName;
+
+        let edit = () => {
+            return new Promise((ok) => {
+                let firstRow = grid.find(DataGridBodyRow).first();
+                let data = firstRow.node.props.data;
+                oldName = data.name;
+                data.name = "İsmail";
+                let modal = testGrid.find(ModalDataForm);
+                modal.props().onSubmit(data);
+                ok();
+            });
+        };
+
+        let checkIfEdited = () => {
+            return new Promise((ok) => {
+                let firstRow = grid.find(DataGridBodyRow).first();
+                let data = firstRow.node.props.data;
+                assert.equal(data.name, "İsmail");
+                data.name = oldName;
+                let modal = testGrid.find(ModalDataForm);
+                modal.props().onSubmit(data);
+                ok([testGrid, done]);
+            });
+        };
+
+        start().delay(500)
+            .then(edit).delay(500)
+            .then(checkIfEdited)
+            .spread(finish)
+            .catch(done);
+    });
+
+    it("delete", (done) => {
+        let testGrid = TestUtils.mount(props, DataGridTest);
+        let grid = testGrid.find(DataGrid);
+
+        let deleteRow = () => {
+            return new Promise((ok) => {
+                let rows = grid.find(DataGridBodyRow);
+                rows.last().simulate("click");
+                grid.props().onDeleteClick();
+                ok();
+            });
+        };
+
+        let checkIfDeleted = () => {
+            return new Promise((ok) => {
+                let rows = grid.find(DataGridBodyRow);
+                assert.equal(rows.length, 3);
+                ok([testGrid, done]);
+            });
+        };
+
+        start().delay(500)
+            .then(deleteRow).delay(500)
+            .then(checkIfDeleted)
+            .spread(finish)
             .catch(done);
     });
 
@@ -117,22 +194,26 @@ describe("datagrid/DataGrid", () => {
         store.getResult();
         let grid = TestUtils.mount(props, DataGrid);
 
-        function check() {
-            let rows = grid.find(DataGridBodyRow);
-            chai.assert.equal(grid.node.getSelectedRows().length, 0, "getSelectetRows() must return empty before selection");
-            rows.first().simulate("click");
-            chai.assert.equal(grid.node.getSelectedRows().length, 1, "getSelectetRows() must return 1 after selection");
-            grid.unmount();
-            done();
-        }
+        let check = () => {
+            return new Promise((ok) => {
+                let rows = grid.find(DataGridBodyRow);
+                assert.equal(grid.node.getSelectedRows().length, 0, "getSelectetRows() must return empty before selection");
+                rows.first().simulate("click");
+                assert.equal(grid.node.getSelectedRows().length, 1, "getSelectetRows() must return 1 after selection");
+                ok([grid, done]);
+            });
+        };
 
-        window.setTimeout(check, 1000);
+        start().delay(500)
+            .then(check)
+            .spread(finish)
+            .catch(done);
     });
 
     it("pagination", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let pagination = grid.find(Pagination);
-        chai.assert.equal(pagination.length, 0, "Pagination must be invisible if 'props.pagination' is not given.");
+        assert.equal(pagination.length, 0, "Pagination must be invisible if 'props.pagination' is not given.");
         grid.unmount();
 
         props = {
@@ -144,13 +225,13 @@ describe("datagrid/DataGrid", () => {
         };
         grid = TestUtils.mount(props, DataGrid);
         pagination = grid.find(Pagination);
-        chai.assert.equal(pagination.length, 1, "Pagination must be rendered if 'props.pagination' is given.");
+        assert.equal(pagination.length, 1, "Pagination must be rendered if 'props.pagination' is given.");
         grid.unmount();
 
         grid = TestUtils.mount(props, DataGrid);
         pagination = grid.find(Pagination);
         let rows = grid.find(DataGridBodyRow);
-        chai.assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
+        assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
         grid.unmount();
     });
 });

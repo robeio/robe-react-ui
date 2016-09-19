@@ -42,35 +42,29 @@ export default class DataTableBodyRow extends ShallowComponent {
             let column = fields[j];
             if (column.visible !== false) {
                 let value = row[column.code];
-                if (column.type === "bool") {
-                    value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o" /> :
-                        <FaIcon size={"fa-lg"} code="fa-square-o" />;
-                } else if (column.type === "password") {
-                    value = "******";
-                } else if (column.type === "date") {
-                    if (value) {
+                switch (column.type) {
+                    case "bool":
+                        value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o" /> :
+                            <FaIcon size={"fa-lg"} code="fa-square-o" />;
+                        break;
+                    case "date": {
                         let format = column.format ? column.format : "DD/MM/YYYY";
-                        value = moment(value).format(format);
+                        let date = moment(value);
+                        value = date.isValid() ? date.format(format) : "Invalid date";
+                        break;
                     }
-                } else if (column.type === "list") {
-                    let dataTextField = column.dataTextField || "name";
-                    let dataValueField = column.dataValueField || "oid";
+                    case "password":
+                        value = "******";
+                        break;
+                    case "list":
+                    case "radio":
+                        value = this.__getCollectionValue(column, value);
+                        break;
+                    case "upload":
+                        break;
+                    default:
+                        break;
 
-                    if (is.object(this.props.resources)) {
-                        let data = this.props.resources[column.code];
-                        if (data) {
-                            for (let i = 0; i < data.length; i++) {
-                                let item = data[i];
-                                if (item[dataValueField] === value) {
-                                    value = item[dataTextField];
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                } else if (column.type === "upload") {
-                    /* eslint-disable no-continue */
-                    continue;
                 }
                 rowColumns.push(<td key={column.code}>{value}</td>);
             }
@@ -85,6 +79,21 @@ export default class DataTableBodyRow extends ShallowComponent {
             </tr>
         );
     }
+
+    __getCollectionValue(column, value) {
+        if (column.items && Array.isArray(column.items)) {
+            let dataTextField = column.dataTextField || "text";
+            let dataValueField = column.dataValueField || "value";
+            for (let k = 0; k < column.items.length; k++) {
+                let item = column.items[k];
+                if (item[dataValueField] === value) {
+                    return item[dataTextField];
+                }
+            }
+        }
+        return value;
+    }
+
     __onClick() {
         if (this.props.onSelection) {
             this.props.onSelection(this);
