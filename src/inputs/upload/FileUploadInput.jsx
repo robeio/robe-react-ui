@@ -145,6 +145,7 @@ export default class FileUploadInput extends ShallowComponent {
                 this.__onError({
                     message: `Gelen ${file.path} dosyasında filename kimliği bulunamadı ! `
                 });
+                return false;
             }
             this.__files[fileIndex] = file;
         }
@@ -238,7 +239,6 @@ export default class FileUploadInput extends ShallowComponent {
         if (this.props.onError) {
             this.props.onError(error);
         }
-        console.log(error);
     }
 
     /**

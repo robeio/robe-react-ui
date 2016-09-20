@@ -17,7 +17,8 @@ describe("form/DataForm", () => {
             label: "Name",
             type: "string",
             name: "name",
-            tooltip: "Name"
+            tooltip: "Name",
+            required: true
         },
         {
             label: "Surname",
