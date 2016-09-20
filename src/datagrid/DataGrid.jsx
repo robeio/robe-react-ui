@@ -294,7 +294,7 @@ export default class DataGrid extends StoreComponent {
         let trArr = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
-            if (column.type === "upload") {
+            if (column.type === "file") {
                 /* eslint-disable no-continue */
                 continue;
             }
