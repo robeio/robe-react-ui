@@ -1,15 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { ShallowComponent } from "robe-react-commons";
+import Progress from "progress/Progress";
 import { Components } from "./components";
 import Welcome from "./Welcome";
 import JSDocs from "./JSDocs";
-import { NotFound } from "./error";
 import "./style.css";
-import Progress from "progress/Progress";
+import { NotFound } from "./error";
 
 
-import { ShallowComponent } from "robe-react-commons";
 
 const app = document.getElementById("app");
 
@@ -28,17 +28,17 @@ class Site extends ShallowComponent {
         return (
             <div>
                 <Navbar inverse>
-                 <a href="https://github.com/robeio/robe-react-ui">
+                    <a href="https://github.com/robeio/robe-react-ui">
                         <img
                             style={{ position: "absolute", top: "0px", right: "0px", border: "0px" }}
                             alt="Fork me on GitHub"
-                            src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+                            src="./forkme_right_orange_ff7600.png"
                         />
-                </a>
+                    </a>
                     <Navbar.Header>
                         <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
-                            <a href="#" onClick={this.__onSelect} >Robe React UI</a>
+                            <a onClick={this.__onSelect} >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
@@ -52,7 +52,7 @@ class Site extends ShallowComponent {
         );
     }
 
-    __onSelect = (key) => {
+    __onSelect = (key: string) => {
         Progress.start();
         window.location.hash = `#${key}`;
         this.setState({
