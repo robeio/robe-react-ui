@@ -20,7 +20,6 @@ export default class SideMenuSample extends ShallowComponent {
                 <SideMenu
                     items={MenuData}
                     onChange={this.handleChange}
-                    ref="checkinput"
                     selectedItem="app/modules/Parameters"
                 />
                 <span>Selected Item: {this.state.selectedItem}</span>
