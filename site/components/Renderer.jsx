@@ -61,7 +61,7 @@ export default class Renderer extends ShallowComponent {
         return (
             <div>
                 <h3>{this.props.header}</h3>
-                <h6><code>{`<${this.props.header}> `}</code>{this.props.desc}</h6>
+                <h6><code>{`<${this.props.header}>`}</code> {this.props.desc}</h6>
                 <h4>Examples</h4>
                 <Panel>
                     <this.props.sample.default />
