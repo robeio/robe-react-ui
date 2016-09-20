@@ -64,6 +64,14 @@ class TestUtils extends Class {
     findDOMNode(...args) {
         return ReactDOM.findDOMNode.apply(undefined, args);
     }
+
+    blobToFile(blob: Blob, fileName:string): File {
+        // A Blob() is almost a File() - it's just missing the two properties below which we will add
+        blob.lastModifiedDate = new Date();
+        blob.name = fileName;
+        // Cast to a File() type
+        return blob;
+    }
 }
 
 export default new TestUtils();

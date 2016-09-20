@@ -31,7 +31,8 @@ const defaultProps = {
 
 
 describe("inputs/upload/FileUploadInput", () => {
-    it("props", () => {
+    it("props", (done) => {
+        let expectedFilename = "info_test.png";
         let componentNode = TestUtils.renderClassIntoDocument({}, FileUploadInput, defaultProps);
         chai.assert.equal(componentNode.props.name, "files");
         chai.assert.equal(componentNode.props.display, "thumbnail");
@@ -39,9 +40,7 @@ describe("inputs/upload/FileUploadInput", () => {
         chai.assert.equal(componentNode.props.autoUpload, true);
         chai.assert.equal(componentNode.props.multiple, true);
         chai.assert.deepEqual(componentNode.props.remote, defaultProps.remote);
-        let onChangeFunction = (e) => {
-            console.log(e.target.value);
-        }
+
         let remoteProps = Maps.mergeDeep(defaultProps.remote, {
             info: {
                 type: "GET"
@@ -50,7 +49,13 @@ describe("inputs/upload/FileUploadInput", () => {
 
         componentNode = TestUtils.renderClassIntoDocument({
             multiple: false,
-            onChange: onChangeFunction,
+            onError: (e) => {
+                chai.assert.isOk(false, "Single File Load Error ! ", e);
+                done();
+            },
+            onChange: (e) => {
+                chai.assert.equal(e.target.value, expectedFilename, " FileInput is single ( not multiple ) ! Value must be a string filename value ! ");
+            },
             display: "list",
             remote: remoteProps,
             autoUpload: false,
@@ -65,7 +70,14 @@ describe("inputs/upload/FileUploadInput", () => {
 
         componentNode = TestUtils.renderClassIntoDocument({
             multiple: true,
-            onChange: onChangeFunction,
+            onError: (e) => {
+                chai.assert.isOk(false, "Multiple File Load Error ! ", e);
+                done();
+            },
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.value, [expectedFilename], " FileInput is multiple ! Value must be a array filename value ! ");
+                done();
+            },
             display: "list",
             remote: remoteProps,
             autoUpload: false,
@@ -77,8 +89,8 @@ describe("inputs/upload/FileUploadInput", () => {
         chai.assert.equal(componentNode.props.autoUpload, false);
         chai.assert.equal(componentNode.props.multiple, true);
         chai.assert.deepEqual(componentNode.props.remote, remoteProps);
-
     });
+
     it("render", (done) => {
         let defProps = {
             name: "files",
@@ -126,5 +138,83 @@ describe("inputs/upload/FileUploadInput", () => {
         testArray.push(test1);
 
         testArray.next();
+    });
+
+    it("browse", () => {
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(false, `FileInput Error -> ${error}`);
+            },
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.oldValue, []);
+            }
+        };
+        let wrapper = TestUtils.mount({}, FileUploadInput, defProps);
+        wrapper.instance().browse();
+    });
+
+    it("open", () => {
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(false, `FileInput Error -> ${error}`);
+            },
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.oldValue, []);
+            }
+        };
+        let wrapper = TestUtils.mount({}, FileUploadInput, defProps);
+        wrapper.instance().open();
+    });
+
+    it("upload & deleteItem", (done) => {
+
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(false, `FileInput Error -> ${error}`);
+                done();
+            }
+        };
+
+        let deleteProps = {
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.oldValue, deleteProps.value, "Old Value must has more than one files which files uploaded.");
+                chai.assert.deepEqual(e.target.value, [], "New Value must be an empty array");
+                done();
+            }
+        }
+
+        let wrapper = null;
+        let uploadProps = {
+            onChange: (e) => {
+                chai.assert.deepEqual(e.target.oldValue, [], "Old Value must be an empty array ! ");
+                chai.assert.equal(e.target.value.length, 1);
+                deleteProps.value = e.target.value;
+                wrapper = TestUtils.mount(deleteProps, FileUploadInput, defProps);
+                wrapper.instance().deleteItem({
+                    filename: deleteProps.value[0]
+                });
+            }
+        };
+
+        wrapper = TestUtils.mount(uploadProps, FileUploadInput, defProps);
+        let blob = new Blob(["Lorem ipsum"], {
+            type: "plain/text",
+            filename: "Single File 1"
+        });
+
+        let file: File = TestUtils.blobToFile(blob, "example_file.txt");
+        wrapper.instance().upload([file]);
     });
 });
