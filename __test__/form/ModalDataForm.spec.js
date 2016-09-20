@@ -8,21 +8,21 @@ describe("form/ModalDataForm", () => {
         {
             label: "id",
             type: "string",
-            code: "id",
+            name: "id",
             tooltip: "id",
             visible: false
         },
         {
             label: "Name",
             type: "string",
-            code: "name",
+            name: "name",
             tooltip: "Name",
             required: true
         },
         {
             label: "Surname",
             type: "string",
-            code: "surname",
+            name: "surname",
             tooltip: "Surname",
             required: true
         }

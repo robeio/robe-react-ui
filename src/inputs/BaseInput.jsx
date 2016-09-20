@@ -26,9 +26,9 @@ export default class BaseInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * code use as input field name
+         * name use as input field name
          */
-        code: React.PropTypes.string,
+        name: React.PropTypes.string,
         /**
          * Value of the component
          */
@@ -103,7 +103,7 @@ export default class BaseInput extends ValidationComponent {
             <ControlLabel>{this.props.label}</ControlLabel>
         );
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
-            let { code, tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
+            let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
             return (
                 <FormGroup hidden={this.props.hidden}>
                     {label}
@@ -121,7 +121,7 @@ export default class BaseInput extends ValidationComponent {
                 </FormGroup>
             );
         }
-        let { code, tooltip, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
+        let { tooltip, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
 
         return (
             <FormGroup hidden={this.props.hidden}>

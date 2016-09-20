@@ -393,7 +393,7 @@ export default class FileUploadInput extends ShallowComponent {
      */
     createButtons() {
         const inputAttributes = {
-            type: this.props.code ? this.props.code : "file",
+            type: this.props.name ? this.props.name : "file",
             style: { display: "none" },
             multiple: supportMultiple && this.props.multiple,
             ref: el => this.fileInputEl = el, // eslint-disable-line

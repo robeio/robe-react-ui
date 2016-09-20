@@ -25,7 +25,7 @@ export default class DataForm extends ShallowComponent {
          */
         item: React.PropTypes.object,
         /**
-         * Holds field properties like `code`, `label`, `type`, `visible`, `editable`, `readable`, `label`
+         * Holds field properties like `name`, `label`, `type`, `visible`, `editable`, `readable`, `label`
          */
         fields: React.PropTypes.array.isRequired,
         /**
@@ -90,12 +90,12 @@ export default class DataForm extends ShallowComponent {
     __init(fields: Array, config: Object) {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
-            if (!field.code) {
-                throw new Error("Field code must define ! ");
+            if (!field.name) {
+                throw new Error("Field name must define ! ");
             }
             let props;
             if (config) {
-                props = config[field.code];
+                props = config[field.name];
             }
 
             this.__initComponent(field, props);
@@ -103,25 +103,25 @@ export default class DataForm extends ShallowComponent {
     }
 
     __initComponent(field: Object, props: Object) {
-        let code = field.code;
+        let name = field.name;
 
         props = props ? Maps.mergeDeep(field, props) : field;
 
-        props.onChange = this.onChange.bind(this, code);
+        props.onChange = this.onChange.bind(this, name);
 
 
-        this.state[code] = this.__filterUndefined(this.state[code]);
+        this.state[name] = this.__filterUndefined(this.state[name]);
         if (this.__isNew) {
             if (props.items) {
-                this.state[`$$_items_${code}`] = props.items;
+                this.state[`$$_items_${name}`] = props.items;
             }
-            this.__item[code] = this.__filterUndefined(props.value);
+            this.__item[name] = this.__filterUndefined(props.value);
         } else {
-            this.__item[code] = this.__filterUndefined(this.__item[code]);
+            this.__item[name] = this.__filterUndefined(this.__item[name]);
         }
 
-        this.__props[code] = props;
-        this.state[code] = this.__filterUndefined(this.__item[code]);
+        this.__props[name] = props;
+        this.state[name] = this.__filterUndefined(this.__item[name]);
         this.__setValidations(field);
     }
 
@@ -140,7 +140,7 @@ export default class DataForm extends ShallowComponent {
      * @private
      */
     __setValidations(field: Map) {
-        let props = this.__props[field.code];
+        let props = this.__props[field.name];
         if (!props.validations) {
             props.validations = {};
         }
@@ -167,8 +167,8 @@ export default class DataForm extends ShallowComponent {
         let items = [];
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
-            if (!field.code) {
-                throw new Error("Column code must define !");
+            if (!field.name) {
+                throw new Error("Field name must define !");
             }
             items.push(this.__createElement(field));
         }
@@ -187,11 +187,11 @@ export default class DataForm extends ShallowComponent {
             return null;
         }
 
-        let code = field.code;
-        let props = this.__props[code];
+        let name = field.name;
+        let props = this.__props[name];
         let Component = ComponentManager.findComponentByType(field.type);
 
-        return <Component key={`${code}_key`} ref={`${code}Ref`} {...props} value={this.state[code]} />;
+        return <Component key={`${name}_key`} ref={`${name}Ref`} {...props} value={this.state[name]} />;
     }
 
     /**
@@ -210,24 +210,24 @@ export default class DataForm extends ShallowComponent {
 
     /**
      * Called when any component changed.
-     * @param code
+     * @param name
      * @param e
      * @returns {boolean}
      */
-    onChange(code: any, e: Object): boolean {
+    onChange(name: any, e: Object): boolean {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        this.__item[code] = value;
+        this.__item[name] = value;
         let state = {};
-        state[code] = this.__item[code];
-        let props = this.__props[code];
+        state[name] = this.__item[name];
+        let props = this.__props[name];
         if (props) {
             if (props.items) {
-                state[`$$_items_${code}`] = props.items;
+                state[`$$_items_${name}`] = props.items;
             }
         }
         let changeState = true;
         if(this.props.onChange) {
-            if( this.props.onChange(code, e) === false )  {
+            if( this.props.onChange(name, e) === false )  {
                 changeState = false;
             }
         }

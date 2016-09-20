@@ -41,7 +41,7 @@ export default class DataTableBodyRow extends ShallowComponent {
         for (let j = 0; j < fields.length; j++) {
             let column = fields[j];
             if (column.visible !== false) {
-                let value = row[column.code];
+                let value = row[column.name];
                 switch (column.type) {
                     case "bool":
                         value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o" /> :
@@ -77,7 +77,7 @@ export default class DataTableBodyRow extends ShallowComponent {
                     default:
                         break;
                 }
-                rowColumns.push(<td key={column.code}>{value}</td>);
+                rowColumns.push(<td key={column.name}>{value}</td>);
             }
         }
         let rowClassName = "datagrid-body-row";
