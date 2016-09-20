@@ -22,7 +22,7 @@ export default class SideMenuSample extends ShallowComponent {
                     onChange={this.handleChange}
                     selectedItem="app/modules/Parameters"
                 />
-                <span>Selected Item: {this.state.selectedItem}</span>
+                <span>Selected Item: <b>{this.state.selectedItem}</b></span>
             </div>
         );
     }
