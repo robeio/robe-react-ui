@@ -43,10 +43,6 @@ export default class DataTableBodyRow extends ShallowComponent {
             if (column.visible !== false) {
                 let value = row[column.name];
                 switch (column.type) {
-                    case "bool":
-                        value = value ? <FaIcon size={"fa-lg"} code="fa-check-square-o" /> :
-                            <FaIcon size={"fa-lg"} code="fa-square-o" />;
-                        break;
                     case "date": {
                         let format = column.format ? column.format : "DD/MM/YYYY";
                         let date = moment(value);
@@ -56,8 +52,7 @@ export default class DataTableBodyRow extends ShallowComponent {
                     case "password":
                         value = "******";
                         break;
-                    case "check":
-                    case "CheckInput": {
+                    case "check": {
                         value = this.__getTextValue(column, value);
                         if (value === true) {
                             value = <FaIcon size={"fa-lg"} code="fa-check-square-o" />;
@@ -66,9 +61,7 @@ export default class DataTableBodyRow extends ShallowComponent {
                         }
                         break;
                     }
-                    case "list":
                     case "select":
-                    case "SelectInput":
                         value = this.__getTextValue(column, value);
                         break;
                     case "radio":

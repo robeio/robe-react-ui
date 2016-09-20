@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent, Strings } from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
-import { Input } from "../../inputs/index";
+import * as Input from "../../inputs/index";
 
 export default class Filter extends ShallowComponent {
 

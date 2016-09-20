@@ -8,6 +8,7 @@ export default class TextInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            TextInputNormal: "Some Text"
         };
     }
 
@@ -18,10 +19,6 @@ export default class TextInputSample extends ShallowComponent {
                     label="TextInput"
                     value={this.state.TextInputNormal}
                     onChange={this.__handleChange.bind(undefined, "TextInputNormal")}
-                />
-                <TextInput
-                    label="With Default Value"
-                    value="Default Value"
                 />
                 <TextInput
                     label="With Validations"
