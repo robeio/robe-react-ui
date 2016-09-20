@@ -241,11 +241,6 @@ export default class FileUploadInput extends ShallowComponent {
         console.log(error);
     }
 
-    // TODO if any file uploading then cancelUpload must be enabled.
-    cancelUpload() {
-
-    }
-
     /**
      *
      * @param {Map} item
@@ -393,7 +388,7 @@ export default class FileUploadInput extends ShallowComponent {
      */
     createButtons() {
         const inputAttributes = {
-            type: this.props.name ? this.props.name : "file",
+            type: "file",
             style: { display: "none" },
             multiple: supportMultiple && this.props.multiple,
             ref: el => this.fileInputEl = el, // eslint-disable-line
