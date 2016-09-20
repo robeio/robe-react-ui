@@ -138,6 +138,27 @@ describe("inputs/upload/FileUploadInput", () => {
         testArray.push(test1);
 
         testArray.next();
+    })
+
+    it("__onInitSuccess", () => {
+        let filename = "unknow_file_name";
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(true);
+            },
+            onChange: (e) => {
+                chai.assert.isOk(false, `Coming ${filename} from server is not exist in FileInput ! `);
+            }
+        };
+        let wrapper = TestUtils.mount({}, FileUploadInput, defProps);
+        /* eslint-disable no-underscore-dangle */
+        wrapper.instance().__onInitSuccess([{
+            filename: filename
+        }]);
     });
 
     it("browse", () => {
@@ -175,7 +196,6 @@ describe("inputs/upload/FileUploadInput", () => {
     });
 
     it("upload & deleteItem", (done) => {
-
         let defProps = {
             name: "files",
             display: "thumbnail",
@@ -193,7 +213,7 @@ describe("inputs/upload/FileUploadInput", () => {
                 chai.assert.deepEqual(e.target.value, [], "New Value must be an empty array");
                 done();
             }
-        }
+        };
 
         let wrapper = null;
         let uploadProps = {
@@ -208,6 +228,7 @@ describe("inputs/upload/FileUploadInput", () => {
             }
         };
 
+
         wrapper = TestUtils.mount(uploadProps, FileUploadInput, defProps);
         let blob = new Blob(["Lorem ipsum"], {
             type: "plain/text",
@@ -216,5 +237,86 @@ describe("inputs/upload/FileUploadInput", () => {
 
         let file: File = TestUtils.blobToFile(blob, "example_file.txt");
         wrapper.instance().upload([file]);
+    });
+
+
+    it("check maxFileSize", (done) => {
+        let wrapper;
+        let callCount = 0 ;
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            value: ["info_test.png"],
+            maxFileSize: 1,
+            remote: remoteProps,
+            onError: (error) => {
+                if (callCount === 0) {
+                    chai.assert.isOk(false, `FileInput Error -> ${error}`);
+                } else if (callCount === 1) {
+                    chai.assert.isOk(true);
+                }
+                done();
+            },
+            onChange: (e) => {
+                callCount++;
+                let blob = new Blob(["Lorem ipsum"], {
+                    type: "plain/text",
+                    filename: "Single File 1"
+                });
+
+                let file: File = TestUtils.blobToFile(blob, "example_file.txt");
+                wrapper.instance().upload([file]);
+            }
+        };
+
+        wrapper = TestUtils.mount({}, FileUploadInput, defProps);
+    });
+
+    it("__onUploadSucess", () => {
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(true);
+            },
+            onChange: (e) => {
+                chai.assert.isOk(false, "Callback Uploades files wasn't execute right ! ");
+            }
+        };
+        let wrapper = TestUtils.mount({}, FileUploadInput, defProps);
+        /* eslint-disable no-underscore-dangle */
+        wrapper.instance().__onUploadSucess([]);
+
+    });
+
+
+    it("check fileNameExist", (done) => {
+        let count = 0;
+        let wrapper = null;
+        let defProps = {
+            name: "files",
+            display: "thumbnail",
+            label: "Dosya Seçimi",
+            value: ["info_test.png"],
+            remote: remoteProps,
+            onError: (error) => {
+                chai.assert.isOk(true);
+                done();
+            },
+            onChange: (e) => {
+                if (count > 1) {
+                    chai.assert.isOk(false, "Must give error. Because Uploaded file exist ! ");
+                    done();
+                } else {
+                    count++;
+                    /* eslint-disable no-underscore-dangle */
+                    wrapper.instance().__onUploadSucess([{filename: "info_test.png"}]);
+                }
+            }
+        };
+        wrapper = TestUtils.mount({}, FileUploadInput, defProps);
     });
 });
