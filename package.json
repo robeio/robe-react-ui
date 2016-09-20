@@ -87,10 +87,8 @@
     "is-js": "0.1.1",
     "js-criteria": "0.0.6",
     "nprogress": "0.2.0",
-    "numeral": "1.5.3",
     "react": "15.3.1",
     "react-addons-css-transition-group": "15.3.1",
-    "react-addons-shallow-compare": "15.3.1",
     "react-bootstrap": "0.30.3",
     "react-cookie": "0.4.8",
     "react-datepicker": "0.29.0",
@@ -100,7 +98,6 @@
     "react-quill": "0.4.1",
     "react-router": "2.7.0",
     "react-select": "0.9.1",
-    "react-star-rating": "1.4.2",
     "robe-ajax": "1.0.0",
     "robe-react-commons": "1.0.50",
     "moment": "2.14.1"
