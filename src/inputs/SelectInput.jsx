@@ -20,8 +20,9 @@ export default class SelectInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * code for the input name
+         * name for the input name
          */
+        code: React.PropTypes.string,
         /**
          * map array of options to render.
          */
@@ -170,7 +171,7 @@ export default class SelectInput extends ValidationComponent {
                 <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
         }
         return (
-            <select hidden={true} name={this.props.code} multiple={this.props.multi}>
+            <select hidden={true} name={this.props.name} multiple={this.props.multi}>
                 {options}
             </select>
         );

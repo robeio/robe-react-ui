@@ -11,20 +11,20 @@ describe("form/DataForm", () => {
         {
             label: "id",
             type: "string",
-            code: "id",
+            name: "id",
             tooltip: "id",
             visible: false
         },
         {
             label: "Name",
             type: "string",
-            code: "name",
+            name: "name",
             tooltip: "Name"
         },
         {
             label: "Surname",
             type: "string",
-            code: "surname",
+            name: "surname",
             tooltip: "Surname"
         }
     ];

@@ -17,15 +17,12 @@ export default class SideMenuSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <div className="SideMenu-wrapper">
-                    <SideMenu
-                        items={MenuData}
-                        onChange={this.handleChange}
-                        ref="checkinput"
-                        selectedItem="app/modules/Parameters"
-                    />
-                </div>
-                <span>Selected Item: {this.state.selectedItem}</span>
+                <SideMenu
+                    items={MenuData}
+                    onChange={this.handleChange}
+                    selectedItem="app/modules/Parameters"
+                />
+                <span>Selected Item: <b>{this.state.selectedItem}</b></span>
             </div>
         );
     }

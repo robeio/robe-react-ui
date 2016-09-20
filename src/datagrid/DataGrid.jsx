@@ -159,10 +159,10 @@ export default class DataGrid extends StoreComponent {
     __init(fields: Array, propsOfFields: Object) {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
-            if (!field.code) {
-                throw new Error("'code' field must be defined");
+            if (!field.name) {
+                throw new Error("'name' field must be defined");
             }
-            let props = propsOfFields[field.code];
+            let props = propsOfFields[field.name];
             this.__fields[i] = props ? Maps.mergeDeep(field, props) : fields[i];
         }
     }
@@ -294,15 +294,15 @@ export default class DataGrid extends StoreComponent {
         let trArr = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
-            if (column.type === "upload") {
+            if (column.type === "file") {
                 /* eslint-disable no-continue */
                 continue;
             }
-            let onClick = this.__openFilterPopups.bind(undefined, column.code);
+            let onClick = this.__openFilterPopups.bind(undefined, column.name);
             if (column.visible !== false) {
                 let filterBtn = column.filter === true ? (
                     <i
-                        id={`tableColumn-" +${column.code}`}
+                        id={`tableColumn-" +${column.name}`}
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
@@ -310,7 +310,7 @@ export default class DataGrid extends StoreComponent {
                 ) : null;
 
                 trArr.push(
-                    <th key={column.code} >
+                    <th key={column.name} >
                         {column.label}
                         {filterBtn}
                     </th>

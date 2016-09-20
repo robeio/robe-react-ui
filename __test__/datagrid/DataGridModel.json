@@ -4,44 +4,44 @@
     {
       "label": "id",
       "type": "string",
-      "code": "id",
+      "name": "id",
       "visible": false
     },
     {
       "label": "Name",
       "type": "string",
-      "code": "name"
+      "name": "name"
     },
     {
       "label": "Surname",
       "type": "string",
-      "code": "surname"
+      "name": "surname"
     },
     {
       "label": "E-Mail",
       "type": "string",
-      "code": "email"
+      "name": "email"
     },
     {
       "label": "Password",
       "type": "password",
-      "code": "password"
+      "name": "password"
     },
     {
       "label": "Birthdate",
       "type": "date",
-      "code": "birthdate",
+      "name": "birthdate",
       "filter": true
     },
     {
       "label": "Job Title",
       "type": "select",
-      "code": "job"
+      "name": "job"
     },
     {
       "label": "Avatar",
       "type": "file",
-      "code": "avatar",
+      "name": "avatar",
       "remote": {
         "requestId": "c4e1677e-7f02-11e6-ae22-56b6b6499611",
         "url": "http://localhost:3001/files",
@@ -62,12 +62,12 @@
     {
       "label": "Smoker",
       "type": "check",
-      "code": "smoker"
+      "name": "smoker"
     },
     {
       "label": "Gender",
       "type": "radio",
-      "code": "gender"
+      "name": "gender"
     }
   ]
 }

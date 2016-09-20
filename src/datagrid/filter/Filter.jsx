@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent, Strings } from "robe-react-commons";
 import Popover from "react-bootstrap/lib/Popover";
 import Overlay from "react-bootstrap/lib/Overlay";
-import { Input } from "../../inputs/index";
+import * as Input from "../../inputs/index";
 
 export default class Filter extends ShallowComponent {
 
@@ -66,8 +66,8 @@ export default class Filter extends ShallowComponent {
             }
             let filterField = <span />;
             if (column.filter === true) {
-                let colId = `tableColumn-${column.code}`;
-                let show = visiblePopups[column.code] === true;
+                let colId = `tableColumn-${column.name}`;
+                let show = visiblePopups[column.name] === true;
                 filterField = (
                     <Overlay
                         show={show}
@@ -83,7 +83,7 @@ export default class Filter extends ShallowComponent {
             }
             filterFields.push(
                 <span
-                    key={column.code}
+                    key={column.name}
                     style={{ verticalAlign: "bottom", border: "0px" }}
                 >
                     {filterField}
@@ -107,10 +107,10 @@ export default class Filter extends ShallowComponent {
         let maxOnChange;
         switch (column.type) {
             case "bool":
-                onChange = this.__handleChange.bind(undefined, column.code, column.type);
+                onChange = this.__handleChange.bind(undefined, column.name, column.type);
                 return (<Input.RadioInput
                     data={Filter.booleanData}
-                    value={this.state[column.code]}
+                    value={this.state[column.name]}
                     dataValueField="value"
                     dataTextField="text"
                     onChange={onChange}
@@ -142,20 +142,20 @@ export default class Filter extends ShallowComponent {
                     </span>);
 
             case "string":
-                onChange = this.__handleChange.bind(undefined, column.code, column.type);
+                onChange = this.__handleChange.bind(undefined, column.name, column.type);
                 return (
                     <Input.BaseInput
                         label="Değer"
                         type="text"
-                        key={column.code}
-                        ref={column.code}
-                        value={this.state[column.code]}
+                        key={column.name}
+                        ref={column.name}
+                        value={this.state[column.name]}
                         onChange={onChange}
                     />
                 );
             case "date":
-                min = `${column.code}-max-`;
-                max = `${column.code}-min-`;
+                min = `${column.name}-max-`;
+                max = `${column.name}-min-`;
                 onChange = this.__handleChange.bind(undefined, min, column.type);
                 maxOnChange = this.__handleChange.bind(undefined, max, column.type);
                 return (
@@ -181,7 +181,7 @@ export default class Filter extends ShallowComponent {
         }
     }
 
-    __handleChange = (code: string, type: string, e: Object) => {
+    __handleChange = (name: string, type: string, e: Object) => {
         let state = this.state;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let filter = "";
@@ -189,24 +189,24 @@ export default class Filter extends ShallowComponent {
             switch (type) {
                 case "bool":
                     if (value !== "all") {
-                        filter += (`${code}=${value}`);
+                        filter += (`${name}=${value}`);
                     }
                     break;
                 case "number":
-                    if (Strings.endsWith(code, "-min-")) {
-                        filter += (`${code.substring(0, code.length - 5)}>=${value}`);
-                    } else if (Strings.endsWith(code, "-max-")) {
-                        filter += (`${code.substring(0, code.length - 5)}<=${value}`);
+                    if (Strings.endsWith(name, "-min-")) {
+                        filter += (`${name.substring(0, name.length - 5)}>=${value}`);
+                    } else if (Strings.endsWith(name, "-max-")) {
+                        filter += (`${name.substring(0, name.length - 5)}<=${value}`);
                     }
                     break;
                 case "string":
-                    filter += (`${code}~=${value}`);
+                    filter += (`${name}~=${value}`);
                     break;
                 case "date":
-                    if (Strings.endsWith(code, "-min-")) {
-                        filter += (`${code.substring(0, code.length - 5)}>=${value}`);
-                    } else if (Strings.endsWith(code, "-max-")) {
-                        filter += (`${code.substring(0, code.length - 5)}<=${value}`);
+                    if (Strings.endsWith(name, "-min-")) {
+                        filter += (`${name.substring(0, name.length - 5)}>=${value}`);
+                    } else if (Strings.endsWith(name, "-max-")) {
+                        filter += (`${name.substring(0, name.length - 5)}<=${value}`);
                     }
                     break;
                 default :
@@ -214,8 +214,8 @@ export default class Filter extends ShallowComponent {
             }
         }
 
-        state[code] = value;
-        state.filters[code] = filter;
+        state[name] = value;
+        state.filters[name] = filter;
         this.setState(state);
         if (this.props.onChange) {
             this.props.onChange(state);

@@ -46,9 +46,13 @@ export default class SideMenu extends ShallowComponent {
 
     render(): Object {
         return (
-            <ul className="SideMenu-menu-content">
-                {this.__renderMenuItems() }
-            </ul>
+            <div className="SideMenu-wrapper">
+
+                <ul className="SideMenu-menu-content">
+                    {this.__renderMenuItems() }
+                </ul>
+            </div>
+
         );
     }
 

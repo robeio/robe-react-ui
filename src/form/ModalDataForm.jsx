@@ -27,7 +27,7 @@ export default class ModalDataForm extends ShallowComponent {
          */
         item: React.PropTypes.object,
         /**
-         * Holds field properties like `code`, `label`, `type`, `visible`, `editable`, `readable`, `label`
+         * Holds field properties like `name`, `label`, `type`, `visible`, `editable`, `readable`, `label`
          */
         fields: React.PropTypes.array.isRequired,
         /**
