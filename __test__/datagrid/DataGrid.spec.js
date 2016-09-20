@@ -33,7 +33,8 @@ describe("datagrid/DataGrid", () => {
         props = {
             fields: model.fields,
             store: store,
-            pageable: true
+            pageable: true,
+            onClick: () => { }
         };
     });
 
@@ -46,10 +47,19 @@ describe("datagrid/DataGrid", () => {
         done();
     };
 
+    let rowCount = 0;
+    let columnCount = 0;
+
+    model.fields.forEach((field) => {
+        if (field.type !== "file" && field.visible !== false) {
+            columnCount++;
+        }
+    });
+
     it("column headers", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let colArray = grid.find("th");
-        assert.equal(colArray.length, 7, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
+        assert.equal(colArray.length, columnCount, "Columns must be rendered if the field is not 'upload' or 'visible=false' ");
         assert.equal(colArray.first().node.innerText, "Name");
         assert.equal(colArray.last().node.innerText, "Gender");
         grid.unmount();
@@ -59,6 +69,7 @@ describe("datagrid/DataGrid", () => {
         let grid = TestUtils.mount(props, DataGrid);
         let rows = grid.find(DataGridBodyRow);
         assert.equal(rows.length, store.getResult().data.length, "Row count must be equal with the store data length");
+        rowCount = rows.length;
         grid.unmount();
     });
 
@@ -95,7 +106,7 @@ describe("datagrid/DataGrid", () => {
             .then(checkChangedState)
             .spread(finish)
             .catch(done);
-    })
+    });
 
     it("add", (done) => {
         props.toolbar = ["create"];
@@ -113,7 +124,7 @@ describe("datagrid/DataGrid", () => {
         let testIfAdded = () => {
             return new Promise((ok) => {
                 let rows = grid.find(DataGridBodyRow);
-                assert.equal(rows.length, 4);
+                assert.equal(rows.length, ++rowCount);
                 ok([testGrid, done]);
             });
         };
@@ -123,7 +134,6 @@ describe("datagrid/DataGrid", () => {
             .then(testIfAdded)
             .spread(finish)
             .catch(done);
-
     });
 
     it("edit", (done) => {
@@ -135,7 +145,7 @@ describe("datagrid/DataGrid", () => {
             return new Promise((ok) => {
                 let firstRow = grid.find(DataGridBodyRow).first();
                 let data = firstRow.node.props.data;
-                oldName = data.name;
+                oldName = data.name + "";
                 data.name = "İsmail";
                 let modal = testGrid.find(ModalDataForm);
                 modal.props().onSubmit(data);
@@ -170,7 +180,8 @@ describe("datagrid/DataGrid", () => {
             return new Promise((ok) => {
                 let rows = grid.find(DataGridBodyRow);
                 rows.last().simulate("click");
-                grid.props().onDeleteClick();
+                grid.get(0).__showDeleteConfirm();
+                grid.get(0).__onDeleteConfirm();
                 ok();
             });
         };
@@ -178,7 +189,7 @@ describe("datagrid/DataGrid", () => {
         let checkIfDeleted = () => {
             return new Promise((ok) => {
                 let rows = grid.find(DataGridBodyRow);
-                assert.equal(rows.length, 3);
+                assert.equal(rows.length, --rowCount);
                 ok([testGrid, done]);
             });
         };

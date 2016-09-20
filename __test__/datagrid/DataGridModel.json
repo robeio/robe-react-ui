@@ -5,50 +5,69 @@
       "label": "id",
       "type": "string",
       "code": "id",
-      "tooltip": "id",
       "visible": false
     },
     {
       "label": "Name",
       "type": "string",
-      "code": "name",
-      "tooltip": "Name"
+      "code": "name"
     },
     {
       "label": "Surname",
       "type": "string",
-      "code": "surname",
-      "tooltip": "Surname"
+      "code": "surname"
     },
     {
       "label": "E-Mail",
       "type": "string",
-      "code": "email",
-      "tooltip": "E-Mail"
+      "code": "email"
     },
     {
       "label": "Password",
       "type": "password",
-      "code": "password",
-      "tooltip": "Password"
+      "code": "password"
     },
     {
       "label": "Birthdate",
       "type": "date",
       "code": "birthdate",
-      "tooltip": "birthdate"
+      "filter": true
     },
     {
       "label": "Job Title",
-      "type": "list",
-      "code": "job",
-      "tooltip": "Job Title"
+      "type": "select",
+      "code": "job"
+    },
+    {
+      "label": "Avatar",
+      "type": "file",
+      "code": "avatar",
+      "remote": {
+        "requestId": "c4e1677e-7f02-11e6-ae22-56b6b6499611",
+        "url": "http://localhost:3001/files",
+        "upload": {
+          "type": "PUT"
+        },
+        "load": {
+          "type": "POST"
+        },
+        "preview": {
+          "type": "GET"
+        },
+        "delete": {
+          "type": "DELETE"
+        }
+      }
+    },
+    {
+      "label": "Smoker",
+      "type": "check",
+      "code": "smoker"
     },
     {
       "label": "Gender",
       "type": "radio",
-      "code": "gender",
-      "tooltip": "Gender"
+      "code": "gender"
     }
   ]
 }
