@@ -28,8 +28,9 @@ export default class NotificationSample extends ShallowComponent {
                     data={this.state.data}
                     refresh={this.__readHeaderNotifications}
                     className="pull-right"
-                    notificationDetailPath="notify"
+                    notificationDetailPath="#"
                     onRead={this.__onRead}
+                    notificationDetailClick={this.__notificationDetailClick}
                 />
             </div>
                 <Button onClick={this.__onClickNotify}>
@@ -38,8 +39,8 @@ export default class NotificationSample extends ShallowComponent {
             </div>
         );
     }
-    __onRead=(id: any)=>{
-        console.log(`Notification Read: ${id}`);
+    __onRead=(id: any) => {
+        alert(`Notification Read: ${id}`);// eslint-disable-line no-alert
     }
     __onClickNotify = () => {
         let data = this.refs.notifications.state.data;
@@ -53,6 +54,9 @@ export default class NotificationSample extends ShallowComponent {
             data: data,
             count: data.length
         });
+    };
+    __notificationDetailClick= () => {
+        alert("See All");// eslint-disable-line no-alert
     };
 
 }

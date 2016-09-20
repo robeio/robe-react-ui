@@ -22,17 +22,16 @@ export default class Notification extends ShallowComponent {
      */
     static propTypes = {
         /**
-         * Link for the notification details.
+         * Click event for the notification details.
          * Footer link will be rendered according to this property.
          */
-        notificationDetailPath: React.PropTypes.string,
+        notificationDetailClick: React.PropTypes.func,
         /**
          * Text for the notification details link.
          */
         notificationDetailLabel: React.PropTypes.string,
         /**
-         * Link for the notification details.
-         * Footer link will be rendered according to this property.
+         * Title for the notification popup.
          */
         title: React.PropTypes.string,
     };
@@ -71,22 +70,20 @@ export default class Notification extends ShallowComponent {
     }
 
     __renderFooter(): Object {
-        if (this.props.notificationDetailPath === undefined) {
+        if (this.props.notificationDetailClick === undefined) {
             return undefined;
         }
         return (
             <div>
                 <li id="notify" className="divider" />
                 <div className="notification-footer">
-                    <a href={this.props.notificationDetailPath}>
-                        <i
-                            className="menu-title pull-right"
-                            onClick={this.__closeNotifyAfterClick}
-                        >
-                            {this.props.notificationDetailLabel}
-                            <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
-                        </i>
-                    </a>
+                    <i
+                        className="menu-title pull-right"
+                        onClick={this.__notificationDetailClick}
+                    >
+                        {this.props.notificationDetailLabel}
+                        <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
+                    </i>
                 </div>
             </div>
         );
@@ -121,8 +118,18 @@ export default class Notification extends ShallowComponent {
         this.setState({
             open: !this.state.open
         });
+
         e.preventDefault();
     }
+
+    __notificationDetailClick = (e: Object) => {
+        if (this.props.notificationDetailClick !== undefined) {
+            this.props.notificationDetailClick();
+        }
+        this.__onNotificationOpenClick(e);
+        e.preventDefault();
+    }
+
 
     __handleClick(e: Object) {
         if (ReactDOM.findDOMNode(this).contains(e.target)) { // eslint-disable-line
