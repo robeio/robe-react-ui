@@ -16,9 +16,9 @@ export default class DateInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * code use as input field name
+         * name use as input field name
          */
-        code: React.PropTypes.string,
+        name: React.PropTypes.string,
         /**
          * Value of the component
          */
@@ -71,7 +71,7 @@ export default class DateInput extends ValidationComponent {
                     selected={selected.isValid() ? selected : ""}
                     disabled={this.props.disabled}
                     onChange={this.__onChange}
-                    name={this.props.code}
+                    name={this.props.name}
                     showYearDropdown
                     isClearable={!this.props.disabled}
                     minDate={this.props.minDate}

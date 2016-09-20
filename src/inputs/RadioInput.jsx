@@ -24,9 +24,9 @@ export default class RadioInput extends ValidationComponent {
          */
         label: React.PropTypes.string,
         /**
-         * code use as input field name
+         * name use as input field name
          */
-        code: React.PropTypes.string,
+        name: React.PropTypes.string,
         /**
          * Items will be rendered as radio input.
          */
@@ -124,7 +124,7 @@ export default class RadioInput extends ValidationComponent {
      */
     __createRadioBox(item: Map): Object {
         if (!item) {
-            return "item cannot be undefined, please check your code";
+            return "item cannot be undefined, please check your name";
         }
         let value = item[this.props.valueField];
         let text = item[this.props.textField];
@@ -134,7 +134,7 @@ export default class RadioInput extends ValidationComponent {
         let input = isChecked ? (
             <input
                 type="hidden"
-                name={this.props.code}
+                name={this.props.name}
                 value={value}
                 disabled={!isChecked}
             />
@@ -144,7 +144,7 @@ export default class RadioInput extends ValidationComponent {
         return (
             <div className={`radio ${disabled}`} onClick={onClick} key={value}>
                 <label
-                    htmlFor={this.props.code}
+                    htmlFor={this.props.name}
                     style={{ paddingLeft: "2px" }}
                 >
                     <FaIcon code={`${icon} state-icon`} size={"fa-lg"} />

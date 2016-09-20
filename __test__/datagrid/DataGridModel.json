@@ -4,50 +4,50 @@
     {
       "label": "id",
       "type": "string",
-      "code": "id",
+      "name": "id",
       "tooltip": "id",
       "visible": false
     },
     {
       "label": "Name",
       "type": "string",
-      "code": "name",
+      "name": "name",
       "tooltip": "Name"
     },
     {
       "label": "Surname",
       "type": "string",
-      "code": "surname",
+      "name": "surname",
       "tooltip": "Surname"
     },
     {
       "label": "E-Mail",
       "type": "string",
-      "code": "email",
+      "name": "email",
       "tooltip": "E-Mail"
     },
     {
       "label": "Password",
       "type": "password",
-      "code": "password",
+      "name": "password",
       "tooltip": "Password"
     },
     {
       "label": "Birthdate",
       "type": "date",
-      "code": "birthdate",
+      "name": "birthdate",
       "tooltip": "birthdate"
     },
     {
       "label": "Job Title",
       "type": "select",
-      "code": "job",
+      "name": "job",
       "tooltip": "Job Title"
     },
     {
       "label": "Gender",
       "type": "radio",
-      "code": "gender",
+      "name": "gender",
       "tooltip": "Gender"
     }
   ]

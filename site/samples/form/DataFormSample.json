@@ -1,49 +1,49 @@
 [
   {
     "label": "String Input",
-    "code": "username",
+    "name": "username",
     "type": "string",
     "required": true,
     "minLength": 3
   },
   {
     "label": "Password Input",
-    "code": "password",
+    "name": "password",
     "type": "password",
     "required": true,
     "minLength": 3
   },
   {
     "label": "Number Input",
-    "code": "age",
+    "name": "age",
     "type": "number",
     "required": true,
     "minValue": 5
   },
   {
     "label": "Decimal Input",
-    "code": "rate",
+    "name": "rate",
     "type": "decimal",
     "required": true,
     "minValue": 5
   },
   {
     "label": "Money Input",
-    "code": "price",
+    "name": "price",
     "type": "money",
     "required": true,
     "minValue": 5
   },
   {
     "label": "Date Input",
-    "code": "birthDay",
+    "name": "birthDay",
     "type": "date",
     "required": true,
     "minValue": 5
   },
   {
     "label": "Radio Input",
-    "code": "gender",
+    "name": "gender",
     "type": "radio",
     "required": true,
     "value": "",
@@ -60,7 +60,7 @@
   },
   {
     "label": "CheckInput Input",
-    "code": "lang",
+    "name": "lang",
     "type": "check",
     "required": true,
     "value": ["en", "tr"],
@@ -82,7 +82,7 @@
   },
   {
     "label": "SelectInput",
-    "code": "il",
+    "name": "il",
     "type": "select",
     "required": true,
     "value": "21",
@@ -103,7 +103,7 @@
   },
   {
     "label": "Dosya Seçimi",
-    "code": "files",
+    "name": "files",
     "type": "file",
     "name": "files",
     "value": ["info_test.png"],
