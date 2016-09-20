@@ -177,7 +177,6 @@ describe("inputs/upload/FileUploadInput", () => {
 
         let deleteProps = {
             onChange: (e) => {
-                console.log(e.target.oldValue);
                 chai.assert.deepEqual(e.target.oldValue, deleteProps.value, "Old Value must has more than one files which files uploaded.");
                 chai.assert.deepEqual(e.target.value, [], "New Value must be an empty array");
                 done();
@@ -187,7 +186,6 @@ describe("inputs/upload/FileUploadInput", () => {
         let wrapper = null;
         let uploadProps = {
             onChange: (e) => {
-                console.log(e.target.oldValue);
                 chai.assert.deepEqual(e.target.oldValue, [], "Old Value must be an empty array ! ");
                 chai.assert.equal(e.target.value.length, 1);
                 deleteProps.value = e.target.value;
