@@ -8,7 +8,7 @@ export default class NumericInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            NumericInputNormal: "",
+            NumericInputNormal: "42",
             NumericInputValidations: ""
         };
     }
@@ -23,10 +23,6 @@ export default class NumericInputSample extends ShallowComponent {
                     decimalSeperator="."
                     onChange={this.__handleChange.bind(undefined, "NumericInputNormal") }
                 />
-                <NumericInput
-                    label="With Default Value"
-                    value="42"
-                    />
                 <NumericInput
                     label="With Validations"
                     value={this.state.NumericInputValidations}

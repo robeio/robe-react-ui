@@ -8,6 +8,7 @@ export default class HtmlEditorSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            HtmlEditorNormal: "Some Text"
         };
     }
 
@@ -18,10 +19,6 @@ export default class HtmlEditorSample extends ShallowComponent {
                     label="HtmlEditor"
                     value={this.state.HtmlEditorNormal}
                     onChange={this.__handleChange.bind(this, "HtmlEditorNormal")}
-                />
-                <HtmlEditor
-                    label="With Default Value"
-                    value="Default Value"
                 />
                 <HtmlEditor
                     label="With Validations"

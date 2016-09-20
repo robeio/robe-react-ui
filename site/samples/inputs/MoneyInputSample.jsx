@@ -20,17 +20,13 @@ export default class MoneyInputSample extends ShallowComponent {
                     value={this.state.MoneyInputNormal}
                     thousandsSeparator=","
                     decimalSeperator="."
-                    onChange={this.__handleChange.bind(this, "MoneyInputNormal")}
-                />
-                <MoneyInput
-                    label="With Default Value"
-                    value="42.01"
-                    unit="USD"
+                    onChange={this.__handleChange.bind(this, "MoneyInputNormal") }
                 />
                 <MoneyInput
                     label="With Validations"
                     value={this.state.MoneyInputValidations}
-                    onChange={this.__handleChange.bind(this, "MoneyInputValidations")}
+                    onChange={this.__handleChange.bind(this, "MoneyInputValidations") }
+                    unit="USD"
                     validations={{
                         required: InputValidations.required,
                     }}
@@ -41,8 +37,7 @@ export default class MoneyInputSample extends ShallowComponent {
     __handleChange(code: any, e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        console.log(code);
         state[code] = value;
         this.setState(state);
-    };
+    }
 }
