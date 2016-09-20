@@ -9,6 +9,7 @@ export default class DecimalInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
+            DecimalInputNormal: 42.01
         };
     }
 
@@ -20,11 +21,7 @@ export default class DecimalInputSample extends ShallowComponent {
                     value={this.state.DecimalInputNormal}
                     decimalSeperator="."
                     onChange={this.__handleChange.bind(undefined, "DecimalInputNormal") }
-                    />
-                <DecimalInput
-                    label="With Default Value"
-                    value="42.01"
-                    />
+                />
                 <DecimalInput
                     label="With Validations"
                     value={this.state.DecimalInputValidations}
@@ -32,7 +29,7 @@ export default class DecimalInputSample extends ShallowComponent {
                     validations={{
                         required: InputValidations.required,
                     }}
-                    />
+                />
             </div>
         );
     }

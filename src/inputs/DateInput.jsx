@@ -60,6 +60,7 @@ export default class DateInput extends ValidationComponent {
 
     render(): Object {
         let selected = moment(this.props.value);
+        let isValidDate = selected.isValid() && this.props.value !== undefined;
         let label = this.props.label === undefined ? <span /> :
             <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
         return (
@@ -68,7 +69,7 @@ export default class DateInput extends ValidationComponent {
                 <DatePicker
                     ref={DateInput.refName}
                     className="form-control form-control-error"
-                    selected={selected.isValid() ? selected : ""}
+                    selected={isValidDate ? selected : ""}
                     disabled={this.props.disabled}
                     onChange={this.__onChange}
                     name={this.props.name}
