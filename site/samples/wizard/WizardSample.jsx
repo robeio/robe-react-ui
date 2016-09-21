@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import Wizard from "wizard/Wizard";
+import Wizard from "robe-react-ui/lib/wizard/Wizard";
 import TextInput from "inputs/TextInput";
 
 export default class WizardSample extends ShallowComponent {
