@@ -1,7 +1,18 @@
 .notification-container {
   padding: 0 15px 15px 15px !important;
 }
-
 .notification {
   padding: 15px 15px 15px 58px !important;
+}
+.notification-success:before {
+    font-family: FontAwesome;
+}
+.notification-info:before {
+    font-family: FontAwesome;
+}
+.notification-warning:before {
+    font-family: FontAwesome;
+}
+.notification-error:before {
+    font-family: FontAwesome;
 }
