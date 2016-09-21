@@ -101,17 +101,17 @@ export default class MoneyInput extends ShallowComponent {
      */
     __numericFilter(e: Object): boolean {
         this.caretPosition = this.refs[MoneyInput.refName].getCaretPosition();
-
         let value = e.target.value;
-        console.log("value",value);
+        
+        if (value === undefined || value === null) {
+            value = "";
+        }
+
         let preThCount = value.substring(0, this.caretPosition).split(this.props.thousandSeparator).length;
         value = this.__addThousandSeparator(value);
         let postThCount = value.substring(0, this.caretPosition).split(this.props.thousandSeparator).length;
         this.caretPosition -= (preThCount - postThCount);
 
-        if (value === undefined || value === null) {
-            value = "";
-        }
         let result = this.__isFloat(value) || value === "";
         if (result) {
             e.target.parsedValue = value;
@@ -141,9 +141,9 @@ export default class MoneyInput extends ShallowComponent {
 
     __addThousandSeparator(input: string): string {
         if (!input) {
-            return null;
+            return "";
         }
-        if (input.charAt(0) == this.props.thousandSeparator) {
+        if (input.charAt(0) === this.props.thousandSeparator) {
             input = input.substring(1);
         }
         let indexDS = input.indexOf(this.props.decimalSeparator);
@@ -175,7 +175,6 @@ export default class MoneyInput extends ShallowComponent {
 
     componentDidUpdate() {
         if (this.refs[MoneyInput.refName].isFocused()) {
-            console.log("setting",this.caretPosition);
             this.refs[MoneyInput.refName].setCaretPosition(this.caretPosition);
         }
     }
