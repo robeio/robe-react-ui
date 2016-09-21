@@ -1,56 +1,35 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
-import React from "react";
+import DateInputTest from "./DateInputTest";
 import DateInput from "inputs/DateInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
-import { mount } from "enzyme";// eslint-disable-line import/no-extraneous-dependencies
-import DatePicker from "react-datepicker";// eslint-disable-line import/no-extraneous-dependencies
 import moment from "moment";// eslint-disable-line import/no-extraneous-dependencies
+import TestUtils from "../TestUtils";
 
 describe("inputs/DateInput", () => {
-    const getComponent = (props: Object): Object => {
-        return (
-            <DateInput // eslint-disable-line react/jsx-filename-extension
-                {...props}
-            />
-        );
-    };
+    const assert = chai.assert;
+
     it("render", () => {
-        let wrapper = mount(getComponent({ }));
+        let wrapper = TestUtils.mount({}, DateInput);
 
         let dateInput = wrapper.find(DateInput);
-        chai.assert.equal(dateInput.length, 1);
+        assert.equal(dateInput.length, 1);
 
         let value = new Date().getTime();
         wrapper.setProps({ value: value });
-        chai.assert.equal(wrapper.props().value, value);
+        assert.equal(wrapper.props().value, value);
 
         wrapper.setProps({ label: "Example Label" });
-        chai.assert.equal(wrapper.props().label, "Example Label");
-        chai.assert.equal(wrapper.find(".control-label").length, 1);
+        assert.equal(wrapper.props().label, "Example Label");
+        assert.equal(wrapper.find(".control-label").length, 1);
     });
 
-
-    let value = "";
-
-    const handleChange = (e: Object) => {
-        value = e.target.parsedValue;
-    };
-
     it("onChange", () => {
-        let wrapper = mount(getComponent({ onChange: handleChange }));
-        let datePicker = wrapper.find(DatePicker);
-        chai.assert.equal(datePicker.length, 1);
-
         let date = moment();
-        let dateFormat = "YYYY-MM-DD";
-
-        wrapper = mount(getComponent({ onChange: handleChange, value: value }));
-
-        wrapper.find("input").simulate("change", {
-            isDefaultPrevented: (): boolean => false,// eslint-disable-line
-            target: {
-                value: date.format(dateFormat)
-            }
-        });
-        chai.assert.equal("", value);
+        let dateFormat = "DD-MM-YYYY";
+        let wrapper = TestUtils.mount({ format: dateFormat }, DateInputTest);
+        let dateInput = wrapper.find(DateInput);
+        dateInput.node.__onChange(date);
+        let dateInputValue = dateInput.find("input").node.value;
+        assert.equal(dateInputValue, date.format(dateFormat));
+        dateInput.node.__onChange();
     });
 });
