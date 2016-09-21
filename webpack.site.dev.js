@@ -24,6 +24,10 @@ webPackConfig.entry = {
 
 // webPackConfig.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
+webPackConfig.resolve.alias = {
+    "robe-react-ui/lib": webPackConfig.paths.lib,
+    "robe-react-ui": webPackConfig.paths.lib + "/index"
+}
 
 webPackConfig.devServer = {
     historyApiFallback: true,

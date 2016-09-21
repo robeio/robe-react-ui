@@ -60,6 +60,10 @@ commonSettings.output = {
     // chunkFilename: "[id].bundle.js"
 };
 
+commonSettings.resolve.alias = {
+    "robe-react-ui/lib": commonSettings.paths.lib,
+    "robe-react-ui": commonSettings.paths.lib + "/index"
+}
 const fileChanger = new FileChanger({
     move: [{
         from: path.resolve("./static"),
