@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import DataForm from "form/DataForm";
-import InputValidations from "validation/InputValidations";
+import DataForm from "robe-react-ui/lib/form/DataForm";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 import fields from "./DataFormSample.json";
 
 const filesUrl = "http://localhost:3000/files";

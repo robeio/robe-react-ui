@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import SideMenu from "sidemenu/SideMenu";
+import SideMenu from "robe-react-ui/lib/sidemenu/SideMenu";
 import MenuData from "./MenuData.json";
 
 

@@ -8,7 +8,7 @@ import {
 import {
     ToastContainer,
     Toast
-} from "toast";
+} from "robe-react-ui/lib/toast";
 
 class Example extends ShallowComponent {
     toastMessage = (type) => {

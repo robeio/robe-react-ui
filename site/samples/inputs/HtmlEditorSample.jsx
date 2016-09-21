@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import HtmlEditor from "inputs/htmleditor/HtmlEditor";
-import InputValidations from "validation/InputValidations";
+import HtmlEditor from "robe-react-ui/lib/inputs/htmleditor/HtmlEditor";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class HtmlEditorSample extends ShallowComponent {

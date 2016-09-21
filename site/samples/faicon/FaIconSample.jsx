@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import FaIcon from "faicon/FaIcon";
+import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 
 export default class FaIconSample extends ShallowComponent {
     /* disable-eslint no-useless-constructor */

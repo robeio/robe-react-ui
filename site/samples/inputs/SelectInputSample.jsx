@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import SelectInput from "inputs/SelectInput";
-import InputValidations from "validation/InputValidations";
+import SelectInput from "robe-react-ui/lib/inputs/SelectInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 const langs = [
     {

@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import RadioInput from "inputs/RadioInput";
-import InputValidations from "validation/InputValidations";
+import RadioInput from "robe-react-ui/lib/inputs/RadioInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 const langs = [
     {

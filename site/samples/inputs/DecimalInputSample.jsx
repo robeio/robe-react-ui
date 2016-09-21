@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import DecimalInput from "inputs/DecimalInput";
-import InputValidations from "validation/InputValidations";
+import DecimalInput from "robe-react-ui/lib/inputs/DecimalInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent, Arrays } from "robe-react-commons";
-import CheckTree from "checktree/CheckTree";
+import CheckTree from "robe-react-ui/lib/checktree/CheckTree";
 
 export default class CheckTreeSample extends ShallowComponent {
 

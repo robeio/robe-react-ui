@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import StackLayout from "layouts/StackLayout";
+import StackLayout from "robe-react-ui/lib/layouts/StackLayout";
 
 
 const items = [

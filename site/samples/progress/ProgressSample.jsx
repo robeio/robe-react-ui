@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Button from "react-bootstrap/lib/Button";
-import Progress from "progress/Progress";
+import Progress from "robe-react-ui/lib/progress/Progress";
 
 
 export default class ProgressSample extends ShallowComponent {
