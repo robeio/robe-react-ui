@@ -357,6 +357,7 @@ export default class DataGrid extends StoreComponent {
                         fields={fields}
                         data={row}
                         onSelection={this.__onSelection}
+                        onClick={this.props.onClick}
                     />);
             }
         }

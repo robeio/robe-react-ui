@@ -22,7 +22,7 @@ export default class DateInput extends ValidationComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.string.isRequired,
+        value: React.PropTypes.any,
         /**
          * onChangeEvent event for the component
          */
@@ -69,7 +69,7 @@ export default class DateInput extends ValidationComponent {
                 <DatePicker
                     ref={DateInput.refName}
                     className="form-control form-control-error"
-                    selected={isValidDate ? selected : ""}
+                    selected={isValidDate ? selected : undefined}
                     disabled={this.props.disabled}
                     onChange={this.__onChange}
                     name={this.props.name}
