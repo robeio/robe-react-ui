@@ -70,6 +70,8 @@ export default class MoneyInput extends ShallowComponent {
 
     static refName = "innerInput";
 
+    caretPosition = 0;
+
     render(): Object {
         /* eslint-disable no-unused-vars */
         let { decimalSeparator, thousandSeparator, unit, ...newProps } = this.props;
@@ -98,8 +100,18 @@ export default class MoneyInput extends ShallowComponent {
      * Internal onchange handler for filtering numerics.
      */
     __numericFilter(e: Object): boolean {
+        this.caretPosition = this.refs[MoneyInput.refName].getCaretPosition();
+
         let value = e.target.value;
+        console.log("value",value);
+        let preThCount = value.substring(0, this.caretPosition).split(this.props.thousandSeparator).length;
         value = this.__addThousandSeparator(value);
+        let postThCount = value.substring(0, this.caretPosition).split(this.props.thousandSeparator).length;
+        this.caretPosition -= (preThCount - postThCount);
+
+        if (value === undefined || value === null) {
+            value = "";
+        }
         let result = this.__isFloat(value) || value === "";
         if (result) {
             e.target.parsedValue = value;
@@ -107,9 +119,13 @@ export default class MoneyInput extends ShallowComponent {
                 result = this.props.onChange(e);
             }
         }
-        if (!result) {
+        if (result === false) {
             e.preventDefault();
             e.stopPropagation();
+        }
+
+        if (this.props.value === value) {
+            this.forceUpdate();
         }
         return result;
     }
@@ -126,6 +142,9 @@ export default class MoneyInput extends ShallowComponent {
     __addThousandSeparator(input: string): string {
         if (!input) {
             return null;
+        }
+        if (input.charAt(0) == this.props.thousandSeparator) {
+            input = input.substring(1);
         }
         let indexDS = input.indexOf(this.props.decimalSeparator);
         if (indexDS === -1) {
@@ -152,5 +171,12 @@ export default class MoneyInput extends ShallowComponent {
             output = output + this.props.decimalSeparator + fraction;
         }
         return output;
+    }
+
+    componentDidUpdate() {
+        if (this.refs[MoneyInput.refName].isFocused()) {
+            console.log("setting",this.caretPosition);
+            this.refs[MoneyInput.refName].setCaretPosition(this.caretPosition);
+        }
     }
 }

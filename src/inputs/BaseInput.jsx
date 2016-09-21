@@ -141,8 +141,27 @@ export default class BaseInput extends ValidationComponent {
      * Focuses to the input field.
      */
     focus() {
-        let dom = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
-        dom.focus();
+        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        node.focus();
+    }
+
+    /**
+     * Returns true if the field is the focused field at the document
+     * @returns {boolean}
+     * @memberOf BaseInput
+     */
+    isFocused(): boolean {
+        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        return document.activeElement === node;
+    }
+
+    setCaretPosition(index: number) {
+        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        node.selectionStart = node.selectionEnd = index;
+    }
+    getCaretPosition(): number {
+        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        return node.selectionStart;
     }
 
     /**

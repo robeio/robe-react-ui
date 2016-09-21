@@ -6,9 +6,11 @@ import InputValidations from "validation/InputValidations";
 
 
 export default class MoneyInputSample extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
+            MoneyInputNormal: "123,456,789.12",
+            MoneyInputValidations: ""
         };
     }
 
@@ -18,8 +20,8 @@ export default class MoneyInputSample extends ShallowComponent {
                 <MoneyInput
                     label="MoneyInput"
                     value={this.state.MoneyInputNormal}
-                    thousandsSeparator=","
-                    decimalSeperator="."
+                    thousandSeparator=","
+                    decimalSeparator="."
                     onChange={this.__handleChange.bind(this, "MoneyInputNormal") }
                 />
                 <MoneyInput
