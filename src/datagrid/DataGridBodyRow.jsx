@@ -14,7 +14,18 @@ export default class DataTableBodyRow extends ShallowComponent {
         resources: React.PropTypes.object,
         fields: React.PropTypes.array,
         data: React.PropTypes.object,
-        onSelection: React.PropTypes.func
+        onSelection: React.PropTypes.func,
+
+        /**
+         * Render method for the row. Use for custom row templates
+         */
+        rowRenderer: React.PropTypes.func,
+
+        /**
+         * Render method for the cell. Use for custom cell templates.
+         * Default row template will call for every cell render event.
+         */
+        cellRenderer: React.PropTypes.func
     };
 
     constructor(props: Object) {
@@ -26,6 +37,9 @@ export default class DataTableBodyRow extends ShallowComponent {
     }
 
     render(): Object {
+        if (this.props.rowRenderer !== undefined) {
+            return this.props.rowRenderer(this.props.fields, this.props.data);
+        }
         return this.__generateRow(this.props.fields, this.props.data);
     }
 
@@ -37,40 +51,16 @@ export default class DataTableBodyRow extends ShallowComponent {
         if (!is.object(row)) {
             throw Error(`Undefined data row at: ${row}`);
         }
-        let rowColumns = [];
+        let cells = [];
         for (let j = 0; j < fields.length; j++) {
-            let column = fields[j];
-            if (column.visible !== false) {
-                let value = row[column.name];
-                switch (column.type) {
-                    case "date": {
-                        let format = column.format ? column.format : "DD/MM/YYYY";
-                        let date = moment(value);
-                        value = date.isValid() ? date.format(format) : "";
-                        break;
-                    }
-                    case "password":
-                        value = "******";
-                        break;
-                    case "check": {
-                        value = this.__getTextValue(column, value);
-                        if (value === true) {
-                            value = <FaIcon size={"fa-lg"} code="fa-check-square-o" />;
-                        } else if (value === false) {
-                            value = <FaIcon size={"fa-lg"} code="fa-square-o" />;
-                        }
-                        break;
-                    }
-                    case "select":
-                        value = this.__getTextValue(column, value);
-                        break;
-                    case "radio":
-                        value = this.__getTextValue(column, value);
-                        break;
-                    default:
-                        break;
-                }
-                rowColumns.push(<td key={column.name}>{value}</td>);
+            let cell;
+            if (this.props.cellRenderer !== undefined) {
+                cell = this.props.cellRenderer(j, fields, row);
+            } else {
+                cell = this.__cellRenderer(j, fields, row);
+            }
+            if (cell !== undefined) {
+                cells.push(cell);
             }
         }
         let rowClassName = "datagrid-body-row";
@@ -79,9 +69,45 @@ export default class DataTableBodyRow extends ShallowComponent {
         }
         return (
             <tr className={rowClassName} onClick={this.__onClick}>
-                {rowColumns}
+                {cells}
             </tr>
         );
+    }
+
+    __cellRenderer(idx: number, fields: Array, row: Object) {
+        let column = fields[idx];
+        if (column.visible !== false) {
+            let value = row[column.name];
+            switch (column.type) {
+                case "date": {
+                    let format = column.format ? column.format : "DD/MM/YYYY";
+                    let date = moment(value);
+                    value = date.isValid() ? date.format(format) : "";
+                    break;
+                }
+                case "password":
+                    value = "******";
+                    break;
+                case "check": {
+                    value = this.__getTextValue(column, value);
+                    if (value === true) {
+                        value = <FaIcon size={"fa-lg"} code="fa-check-square-o" />;
+                    } else if (value === false) {
+                        value = <FaIcon size={"fa-lg"} code="fa-square-o" />;
+                    }
+                    break;
+                }
+                case "select":
+                    value = this.__getTextValue(column, value);
+                    break;
+                case "radio":
+                    value = this.__getTextValue(column, value);
+                    break;
+                default:
+                    break;
+            }
+            return (<td key={column.name}>{value}</td>);
+        }
     }
 
     __getTextValue(column: Object, selectedValues: any): any {

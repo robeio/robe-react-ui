@@ -7,7 +7,9 @@ import {
 } from "robe-react-commons";
 import ModalDataForm from "robe-react-ui/lib/form/ModalDataForm";
 import DataGrid from "robe-react-ui/lib/datagrid/DataGrid";
+import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 import DataGridModel from "./DataGridModel.json";
+
 
 const propsOfFields = {
     job: {
@@ -105,6 +107,22 @@ export default class DataGridSample extends ShallowComponent {
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
                     />
+                <DataGrid
+                    fields={this.state.fields}
+                    propsOfFields={propsOfFields}
+                    store={this.state.store2}
+                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
+                    onNewClick={this.__add}
+                    onEditClick={this.__edit}
+                    onDeleteClick={this.__remove}
+                    exportButton={true}
+                    pageable={true}
+                    editable={true}
+                    pagination={{ pageSize: 3 }}
+                    modalConfirm={{ header: "Please do not delete me." }}
+                    pageSizeButtons={["1", "2", "3"]}
+                    cellRenderer={this.__cellRenderer}
+                    />
                 <ModalDataForm
                     header="Modal Data Form"
                     show={this.state.showModal}
@@ -160,4 +178,11 @@ export default class DataGridSample extends ShallowComponent {
     __showModal = (newItem) => {
         this.setState({ showModal: true, item: newItem });
     };
+
+    __cellRenderer(idx: number, fields: Array, row: Object) {
+        if (fields[idx].visible !== false) {
+            return <td><FaIcon code={"fa-smile-o"} /> {row[fields[idx].name] }</td>;
+        }
+        return undefined;
+    }
 }

@@ -94,7 +94,18 @@ export default class DataGrid extends StoreComponent {
         /**
          * show/hide Page size buttons
          */
-        pageSizeButtons: React.PropTypes.array
+        pageSizeButtons: React.PropTypes.array,
+
+        /**
+         * Render method for the row. Use for custom row templates
+         */
+        rowRenderer: React.PropTypes.func,
+
+        /**
+         * Render method for the cell. Use for custom cell templates.
+         * Default row template will call for every cell render event.
+         */
+        cellRenderer: React.PropTypes.func
     };
 
     /**
@@ -358,6 +369,8 @@ export default class DataGrid extends StoreComponent {
                         data={row}
                         onSelection={this.__onSelection}
                         onClick={this.props.onClick}
+                        rowRenderer={this.props.rowRenderer}
+                        cellRenderer={this.props.cellRenderer}
                     />);
             }
         }
