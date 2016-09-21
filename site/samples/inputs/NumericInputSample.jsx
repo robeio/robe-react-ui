@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import NumericInput from "inputs/NumericInput";
-import InputValidations from "validation/InputValidations";
+import NumericInput from "robe-react-ui/lib/inputs/NumericInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class NumericInputSample extends ShallowComponent {

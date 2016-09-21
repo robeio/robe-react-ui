@@ -5,8 +5,8 @@ import {
     RemoteEndPoint,
     Assertions
 } from "robe-react-commons";
-import ModalDataForm from "form/ModalDataForm";
-import DataGrid from "datagrid/DataGrid";
+import ModalDataForm from "robe-react-ui/lib/form/ModalDataForm";
+import DataGrid from "robe-react-ui/lib/datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
 
 const propsOfFields = {

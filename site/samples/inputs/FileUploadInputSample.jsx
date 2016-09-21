@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import FileUploadInput from "inputs/upload/FileUploadInput";
+import FileUploadInput from "robe-react-ui/lib/inputs/upload/FileUploadInput";
 import { Button } from "react-bootstrap";
 
 const dataId = "3ae7baac-4e1c-6b63-4c07-b28d5b80821f";

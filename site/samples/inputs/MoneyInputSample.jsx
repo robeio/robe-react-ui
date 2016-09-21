@@ -1,8 +1,8 @@
 
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import MoneyInput from "inputs/MoneyInput";
-import InputValidations from "validation/InputValidations";
+import MoneyInput from "robe-react-ui/lib/inputs/MoneyInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class MoneyInputSample extends ShallowComponent {

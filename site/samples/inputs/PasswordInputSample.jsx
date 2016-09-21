@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import PasswordInput from "inputs/PasswordInput";
-import InputValidations from "validation/InputValidations";
+import PasswordInput from "robe-react-ui/lib/inputs/PasswordInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class PasswordInputSample extends ShallowComponent {

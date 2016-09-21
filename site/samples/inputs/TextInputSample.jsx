@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import TextInput from "inputs/TextInput";
-import InputValidations from "validation/InputValidations";
+import TextInput from "robe-react-ui/lib/inputs/TextInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class TextInputSample extends ShallowComponent {

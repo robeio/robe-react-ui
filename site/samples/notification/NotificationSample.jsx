@@ -2,7 +2,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Button from "react-bootstrap/lib/Button";
-import Notification from "notification/Notification";
+import Notification from "robe-react-ui/lib/notification/Notification";
 
 
 export default class NotificationSample extends ShallowComponent {

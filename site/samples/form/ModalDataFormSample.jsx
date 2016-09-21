@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import ModalDataForm from "form/ModalDataForm";
+import ModalDataForm from "robe-react-ui/lib/form/ModalDataForm";
 import { Button } from "react-bootstrap";
 import fields from "./DataFormSample.json";
 

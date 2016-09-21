@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import DateInput from "inputs/DateInput";
-import InputValidations from "validation/InputValidations";
+import DateInput from "robe-react-ui/lib/inputs/DateInput";
+import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 import moment from "moment";
 
 
