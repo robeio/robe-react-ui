@@ -209,12 +209,11 @@ export default class DataGrid extends StoreComponent {
                     (<Pagination
                         {...this.props.pagination}
                         activePage={this.activePage}
-                        visible={this.props.pageable}
                         pageSizeButtons={this.props.pageSizeButtons}
                         pageSize={this.pageSize}
                         onChange={this.__handlePaginationSelect}
                         onPageSizeChange={this.__pageSizeChange}
-                        refreshable={this.props.onRefresh}
+                        refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
                     />)
@@ -410,7 +409,7 @@ export default class DataGrid extends StoreComponent {
     }
 
     __readData() {
-        if (this.props.pageable) {
+        if (this.props.pagination) {
             let start = (this.pageSize * (this.activePage - 1));
             this.props.store.read(
                 (response) => {

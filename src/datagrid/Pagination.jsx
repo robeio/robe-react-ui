@@ -14,7 +14,6 @@ export default class Pagination extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        visible: React.PropTypes.bool,
         activePage: React.PropTypes.number,
         pageSize: React.PropTypes.number,
         totalCount: React.PropTypes.number,
@@ -28,7 +27,6 @@ export default class Pagination extends ShallowComponent {
     };
     static defaultProps = {
         pageSizeButtons: [],
-        visible: true,
         pageSize: 5,
         totalCount: 0,
         activePage: 0,
@@ -40,9 +38,6 @@ export default class Pagination extends ShallowComponent {
     * @returns {Object}
     */
     render(): Object {
-        if (!this.props.visible) {
-            return <span />;
-        }
         let items = Math.ceil(this.props.totalCount / this.props.pageSize);
 
         let start = (this.props.pageSize * (this.props.activePage - 1));

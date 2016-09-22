@@ -63,10 +63,19 @@ export default class DataGridSample extends ShallowComponent {
             autoLoad: true
         });
 
+        let store3 = new Store({
+            endPoint: new RemoteEndPoint({
+                url: "http://localhost:3000/users"
+            }),
+            idField: DataGridSample.idField,
+            autoLoad: true
+        });
+
         this.state = {
             fields: DataGridModel.fields,
             store1: store1,
             store2: store2,
+            store3: store3,
             showModal: false,
             item: {}
         };
@@ -87,11 +96,9 @@ export default class DataGridSample extends ShallowComponent {
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}
                     exportButton={true}
-                    pageable={true}
                     editable={true}
-                    pagination={{ emptyText: "No data.", pageSize: 50 }}
                     modalConfirm={{ header: "Please do not delete me." }}
-                    />
+                />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -101,28 +108,27 @@ export default class DataGridSample extends ShallowComponent {
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}
                     exportButton={true}
-                    pageable={true}
                     editable={true}
                     pagination={{ pageSize: 3 }}
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
-                    />
+                />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                    store={this.state.store2}
+                    store={this.state.store3}
                     toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
                     onNewClick={this.__add}
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}
                     exportButton={true}
-                    pageable={true}
+                    refreshable={true}
                     editable={true}
                     pagination={{ pageSize: 3 }}
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
                     cellRenderer={this.__cellRenderer}
-                    />
+                />
                 <ModalDataForm
                     header="Modal Data Form"
                     show={this.state.showModal}
@@ -131,7 +137,7 @@ export default class DataGridSample extends ShallowComponent {
                     item={this.state.item}
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                    />
+                />
             </span>
         );
     }

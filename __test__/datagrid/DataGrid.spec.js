@@ -33,7 +33,7 @@ describe("datagrid/DataGrid", () => {
         props = {
             fields: model.fields,
             store: store,
-            pageable: true,
+            pagination: { pageSize: 1 },
             onClick: () => { }
         };
     });
@@ -222,6 +222,7 @@ describe("datagrid/DataGrid", () => {
     });
 
     it("pagination", () => {
+        props.pagination = undefined;
         let grid = TestUtils.mount(props, DataGrid);
         let pagination = grid.find(Pagination);
         assert.equal(pagination.length, 0, "Pagination must be invisible if 'props.pagination' is not given.");
