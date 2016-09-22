@@ -16,7 +16,7 @@ describe("inputs/MoneyInput", () => {
                         return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
                     }
                 }}
-            />
+                />
         );
     };
 
@@ -31,7 +31,7 @@ describe("inputs/MoneyInput", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.isOk(componentNode.isValid(), "Non-Empty string must be valid");
         chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0, "Non-Empty string value must render ZERO alert");// eslint-disable-line react/no-find-dom-node
-        
+
         // Must be invalid
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
@@ -73,16 +73,13 @@ describe("inputs/MoneyInput", () => {
             done("Input value '12,12.' failed");
         };
         componentNode.__numericFilter(e);
-        componentNode = TestUtils.renderIntoDocument(getComponent({
-            onChange: () => {
-                chai.assert.isOk(false);
-                done("Input value '12q2' failed");
-            }
-        }));
+
         e.target.value = "12q2";
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
+        componentNode.__numericFilter(e);
+
         e.target.value = null;
         componentNode.__numericFilter(e);
         componentNode = TestUtils.renderIntoDocument(getComponent({
@@ -93,7 +90,7 @@ describe("inputs/MoneyInput", () => {
         componentNode = TestUtils.renderIntoDocument(getComponent({
             decimalSeparator: "."
         }));
-    
+
         done();
     });
 });
