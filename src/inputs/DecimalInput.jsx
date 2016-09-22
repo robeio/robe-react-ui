@@ -28,7 +28,7 @@ export default class DecimalInput extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.any.isRequired,
+        value: React.PropTypes.any,
         /**
          * onChange event for the component
          */
@@ -69,7 +69,6 @@ export default class DecimalInput extends ShallowComponent {
         /* eslint-disable no-unused-vars */
 
         let { decimalSeparator, ...newProps } = this.props;
-
         return (<Input
             {...newProps}
             type="text"

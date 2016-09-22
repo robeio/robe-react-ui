@@ -62,8 +62,9 @@ export default class NumericInput extends ShallowComponent {
     static refName="innerInput";
 
     render(): Object {
+        let { thousandSeparator, decimalSeparator, ...newProps } = this.props;
         return (<Input
-            {...this.props}
+            {...newProps}
             value={this.props.value}
             type="text"
             ref={NumericInput.refName}

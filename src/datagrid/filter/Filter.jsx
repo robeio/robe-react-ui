@@ -1,89 +1,60 @@
 import React from "react";
-import { ShallowComponent, Strings } from "robe-react-commons";
-import Popover from "react-bootstrap/lib/Popover";
-import Overlay from "react-bootstrap/lib/Overlay";
-import * as Input from "../../inputs/index";
+import { ShallowComponent } from "robe-react-commons";
+import { Popover, Overlay } from "react-bootstrap";
+import * as Input from "../../inputs";
 
 export default class Filter extends ShallowComponent {
-
-    /**
-     * Properties of the component
-     *
-     * @static
-     */
-    static propTypes: Map = {
-        /**
-         * Fields Configurations to show style on view.
-         */
-        fields: React.PropTypes.array
-    };
-
-    /**
-     * static props
-     * @type {object}
-     */
-    static defaultProps = {
-        /**
-         * Fields Configurations to show style on view.
-         */
-        fields: []
-    };
-
     static booleanData = [
-        { text: "All", value: "all" },
-        { text: "Yes", value: "true" },
-        { text: "No", value: "false" }
+        { text: "Hepsi", value: "all" },
+        { text: "Evet", value: "true" },
+        { text: "Hayır", value: "false" }
     ];
 
-    constructor(props: Object) {
-        super(props);
+    constructor() {
+        super();
         this.state = { filters: {} };
     }
 
-    render(): Object {
+    render() {
         let filterFields = this.__renderFilters(this.props.fields, this.props.visiblePopups);
         if (filterFields === undefined) {
-            return <span />;
+            return (<span />);
         }
         return (<span>{filterFields}</span>);
     }
 
-    /**
-     *
-     * @param {Array} fields
-     * @param visiblePopups
-     * @returns {*}
-     * @private
-     */
-    __renderFilters(fields: Array, visiblePopups: Object): Array {
+    __renderFilters = (fields: Array<Map>, visiblePopups: Map) => {
         let filterFields = [];
         let hasAtLeast1Filter = false;
         for (let i = 0; i < fields.length; i++) {
-            let column = fields[i];
-            /* eslint-disable no-continue */
-            if (column.visible === false) {
+            let field = fields[i];
+            if (field.visible === false) {
+                /* eslint-disable no-continue */
                 continue;
             }
             let filterField = <span />;
-            if (column.filter === true) {
-                let colId = `tableColumn-${column.name}`;
-                let show = visiblePopups[column.name] === true;
+
+            if (field.filter === true) {
+                let colId = `tableColumn-${field.name}`;
+                let show = visiblePopups[field.name] === true;
+                let getColID = document.getElementById(colId);
                 filterField = (
                     <Overlay
-                        show={show}
-                        placement="top"
-                        target={this.__getColID(colId)}
+                        show={show} placement="top"
+                        target={getColID}
                     >
-                        <Popover id={i} placement="top">
-                            {this.__decideFilterField(column)}
+                        <Popover
+                            id="popover"
+                            placement="top"
+                        >
+                            {this.__decideFilterField(field) }
                         </Popover>
-                    </Overlay>
-                );
+                    </Overlay>);
                 hasAtLeast1Filter = true;
             }
             filterFields.push(
                 <span
-                    key={column.name}
+                    key={field.name}
                     style={{ verticalAlign: "bottom", border: "0px" }}
                 >
                     {filterField}
@@ -94,123 +65,152 @@ export default class Filter extends ShallowComponent {
             return undefined;
         }
         return filterFields;
-    }
+    };
 
-    __getColID = (id: string): string => {
-        return document.getElementById(id);
-    }
-
-    __decideFilterField = (column: Object): Object => {
-        let min = null;
-        let max = null;
-        let onChange;
-        let maxOnChange;
-        switch (column.type) {
+    __decideFilterField(field) {
+        let firstHandleChange;
+        let secondHandleChange;
+        switch (field.type) {
             case "bool":
-                onChange = this.__handleChange.bind(undefined, column.name, column.type);
+                firstHandleChange = this.__handleChange.bind(undefined, field.name, field.type);
                 return (<Input.RadioInput
+                    id="popover"
                     data={Filter.booleanData}
-                    value={this.state[column.name]}
+                    value={this.state[field.name]}
                     dataValueField="value"
                     dataTextField="text"
-                    onChange={onChange}
-                />
-                );
+                    showAlert={false}
+                    onChange={firstHandleChange}
+                />);
             case "number":
-                min = `${column.codecolumn.code}-max-`;
-                max = `${column.codecolumn.code}-min-`;
-                onChange = this.__handleChange.bind(undefined, min, column.type);
-                maxOnChange = this.__handleChange.bind(undefined, max, column.type);
-                return (
-                    <span>
-                        <Input.NumericInput
-                            label="Başlangıç"
-                            type="text"
-                            key={min}
-                            value={this.state[min]}
-                            ref={min}
-                            onChange={onChange}
-                        />
-                        <Input.NumericInput
-                            label="Bitiş"
-                            type="text"
-                            key={max}
-                            value={this.state[max]}
-                            ref={max}
-                            onChange={maxOnChange}
-                        />
-                    </span>);
-
+                firstHandleChange = this.__handleChange.bind(undefined, `${field.name}-min-`, field.type);
+                secondHandleChange = this.__handleChange.bind(undefined, `${field.name}-max-`, field.type);
+                return (<span id="popover">
+                    <Input.DecimalInput
+                        id="popover"
+                        label="Başlangıç"
+                        type="text"
+                        key={field.name + "-min-"}
+                        value={this.state[field.name + "-min-"]}
+                        ref={field.name + "-min-"}
+                        showAlert={false}
+                        onChange={firstHandleChange}
+                    />
+                    <Input.DecimalInput
+                        id="popover"
+                        label="Bitiş"
+                        type="text"
+                        key={field.name + "-max-"}
+                        value={this.state[`${field.name}-max-`]}
+                        ref={field.name + "-max-"}
+                        showAlert={false}
+                        onChange={secondHandleChange}
+                    />
+                </span>);
             case "string":
-                onChange = this.__handleChange.bind(undefined, column.name, column.type);
+                firstHandleChange = this.__handleChange.bind(undefined, field.name, field.type);
                 return (
-                    <Input.BaseInput
+                    <Input.TextOnput
+                        id="popover"
                         label="Değer"
                         type="text"
-                        key={column.name}
-                        ref={column.name}
-                        value={this.state[column.name]}
-                        onChange={onChange}
+                        key={field.name}
+                        ref={field.name}
+                        value={this.state[field.name]}
+                        showAlert={false}
+                        onChange={firstHandleChange}
                     />
                 );
             case "date":
-                min = `${column.name}-max-`;
-                max = `${column.name}-min-`;
-                onChange = this.__handleChange.bind(undefined, min, column.type);
-                maxOnChange = this.__handleChange.bind(undefined, max, column.type);
+                firstHandleChange = this.__handleChange.bind(undefined, `${field.name}-min-`, field.type);
+                secondHandleChange = this.__handleChange.bind(undefined, `${field.name}-max-`, field.type);
                 return (
-                    <span>
+                    <span id="popover">
                         <Input.DateInput
+                            id="popover"
                             label="Başlangıç"
-                            key={min}
-                            ref={min}
-                            value={this.state[min]}
-                            onChange={onChange}
+                            key={`${field.name} + "-min-`}
+                            ref={`${field.name} + "-min-`}
+                            value={this.state[`${field.name}-min-`]}
+                            showAlert={false}
+                            onChange={firstHandleChange}
                         />
                         <Input.DateInput
+                            id="popover"
                             label="Bitiş"
-                            key={max}
-                            ref={max}
-                            value={this.state[max]}
-                            onChange={maxOnChange}
+                            key={`${field.name}-max-`}
+                            ref={`${field.name}-max-`}
+                            value={this.state[`${field.name}-max-`]}
+                            showAlert={false}
+                            onChange={secondHandleChange}
                         />
                     </span>
                 );
-            default :
-                throw new Error("Unknown Component ! ");
+            case "list":
+                let dataTextField = field.dataTextField || "name";
+                let dataValueField = field.dataValueField || "oid";
+                let optionLabel = field.optionLabel || "<Lütfen Seçiniz>";
+                firstHandleChange = this.__handleChange.bind(undefined, field.name, field.type);
+                return (
+                    <Input.SelectInput
+                        id="popover"
+                        label="Değer"
+                        key={field.name}
+                        ref={field.name}
+                        value={this.state[field.name]}
+                        dataTextField={dataTextField}
+                        dataValueField={dataValueField}
+                        optionLabel={optionLabel}
+                        data={this.props.resources[field.name]}
+                        showAlert={false}
+                        onChange={firstHandleChange}
+                    />
+                );
+            default:
+                throw new Error("Unknown fields type !");
         }
     }
 
-    __handleChange = (name: string, type: string, e: Object) => {
+    __handleChange = (name, type, e) => {
         let state = this.state;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let filter = "";
-        if (value !== undefined) {
+        if (value !== undefined && value !== "") {
             switch (type) {
                 case "bool":
                     if (value !== "all") {
-                        filter += (`${name}=${value}`);
+                        filter += `${name}=${value}`;
                     }
                     break;
                 case "number":
-                    if (Strings.endsWith(name, "-min-")) {
-                        filter += (`${name.substring(0, name.length - 5)}>=${value}`);
-                    } else if (Strings.endsWith(name, "-max-")) {
-                        filter += (`${name.substring(0, name.length - 5)}<=${value}`);
+                    if (name.endsWith("-min-")) {
+                        filter += `${name.substring(0, name.length - 5)}>=${value}`;
+                    } else if (name.endsWith("-max-")) {
+                        filter += `${name.substring(0, name.length - 5)}<=${value}`;
                     }
                     break;
                 case "string":
-                    filter += (`${name}~=${value}`);
-                    break;
-                case "date":
-                    if (Strings.endsWith(name, "-min-")) {
-                        filter += (`${name.substring(0, name.length - 5)}>=${value}`);
-                    } else if (Strings.endsWith(name, "-max-")) {
-                        filter += (`${name.substring(0, name.length - 5)}<=${value}`);
+                    if (name === "merchantOidRegistrationNumber" || name === "registrationNumber") {
+                        filter += `${name}=${value}`;
+                    } else {
+                        filter += `${name}~=${value}`;
                     }
                     break;
-                default :
-
+                case "textarea":
+                    filter += `${name}~=${value}`;
+                    break;
+                case "date":
+                    if (name.endsWith("-min-")) {
+                        filter += `${name.substring(0, name.length - 5)}>=${value}`;
+                    } else if (name.endsWith("-max-")) {
+                        filter += `${name.substring(0, name.length - 5)}<=${value}`;
+                    }
+                    break;
+                case "list":
+                    filter += `${name}=${value}`;
+                    break;
+                default:
+                    throw new Error(`Unknown field type ! name: ${name} type:${type}`);
             }
         }
 
@@ -221,5 +221,34 @@ export default class Filter extends ShallowComponent {
             this.props.onChange(state);
         }
         this.forceUpdate();
+    };
+
+    __handleClick(e) {
+        let data = e.path;
+        for (let i in data) {
+            let item = data[i];
+            if (item.id && item.id === "popover") {
+                return;
+            }
+        }
+        if (e.target.id === ("popover")) {
+            return;
+        }
+
+        if (e.target.id.startsWith("tableColumn-")) {
+            return;
+        }
+
+        if (this.props.hideFilters) {
+            this.props.hideFilters();
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener("click", this.__handleClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.__handleClick, false);
     }
 }

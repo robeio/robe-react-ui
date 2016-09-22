@@ -27,7 +27,7 @@ export default class TextInput extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.string.isRequired,
+        value: React.PropTypes.string,
         /**
          * onChangeEvent event for the component
          */
@@ -53,7 +53,8 @@ export default class TextInput extends ShallowComponent {
     static defaultProps = {
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        value: ""
     };
 
     static refName = "innerInput";

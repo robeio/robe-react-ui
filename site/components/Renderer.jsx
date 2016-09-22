@@ -91,7 +91,7 @@ export default class Renderer extends ShallowComponent {
         Maps.forEach(data, (value: any, key: string) => {
             let type = value.type !== undefined ? value.type.name : "";
             let defaultVal = value.defaultValue !== undefined ? value.defaultValue.value : "";
-            rows.push(<tr>
+            rows.push(<tr key={key}>
                 <td>{key}</td>
                 <td>{type}</td>
                 <td>{defaultVal}</td>
@@ -128,7 +128,7 @@ export default class Renderer extends ShallowComponent {
             if (value.name.indexOf("__") === 0) {
                 continue;
             }
-            rows.push(<tr>
+            rows.push(<tr key={value.name}>
                 <td>{value.name}</td>
                 <td>{value.returns ? value.returns.type.name : ""}</td>
                 <td>{value.description}</td>

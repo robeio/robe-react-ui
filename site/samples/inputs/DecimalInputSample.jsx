@@ -19,7 +19,7 @@ export default class DecimalInputSample extends ShallowComponent {
                 <DecimalInput
                     label="DecimalInput"
                     value={this.state.DecimalInputNormal}
-                    decimalSeperator="."
+                    decimalSeparator="."
                     onChange={this.__handleChange.bind(undefined, "DecimalInputNormal") }
                 />
                 <DecimalInput

@@ -52,7 +52,7 @@ export default class FileUploadInput extends ShallowComponent {
         /**
          * Max Uploaded file
          */
-        maxFileSize: React.PropTypes.bool,
+        maxFileSize: React.PropTypes.number,
         /**
          * auto upload is false then file will upload when clicking the upload button.
          */

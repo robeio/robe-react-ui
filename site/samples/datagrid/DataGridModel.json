@@ -41,7 +41,7 @@
     },
     {
       "label": "Job Title",
-      "type": "list",
+      "type": "select",
       "name": "job",
       "tooltip": "Job Title"
     },

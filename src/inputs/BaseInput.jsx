@@ -32,7 +32,7 @@ export default class BaseInput extends ValidationComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.string,
+        value: React.PropTypes.any,
         /**
          * Validations for the component
          */

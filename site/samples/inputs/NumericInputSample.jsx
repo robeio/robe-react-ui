@@ -19,8 +19,8 @@ export default class NumericInputSample extends ShallowComponent {
                 <NumericInput
                     label="NumericInput"
                     value={this.state.NumericInputNormal}
-                    thousandsSeparator=","
-                    decimalSeperator="."
+                    thousandSeparator=","
+                    decimalSeparator="."
                     onChange={this.__handleChange.bind(undefined, "NumericInputNormal") }
                 />
                 <NumericInput

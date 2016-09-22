@@ -10,7 +10,7 @@ export default class ValidationComponent extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.string,
+        value: React.PropTypes.any,
         /**
          * Validations for the component
          */
