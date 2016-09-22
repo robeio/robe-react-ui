@@ -2,6 +2,7 @@ import React from "react";
 import chai from "chai";
 import SelectInput from "inputs/SelectInput";
 import Validations from "validation/InputValidations";
+import SelectInputTest from "./SelectInputTest";
 import TestUtils from "../TestUtils";
 
 const langs = [
@@ -143,7 +144,7 @@ describe("inputs/SelectInput", () => {
         chai.assert.isFalse(instance.isValid(), "component is valid then isValid() method must return true.");
     });
 
-    it("'single' onChange", () => {
+    it("isChecked", () => {
         let props = {
             label: "Select Input Single",
             items: langs,
@@ -151,17 +152,40 @@ describe("inputs/SelectInput", () => {
             valueField: "key"
         };
         let wrapper = TestUtils.mount(props, SelectInput);
-        let value = wrapper.find(SelectInput).node.getValue();
+        let selectInput = wrapper.find(SelectInput).node;
+
+        selectInput._onChange("en");
+
+        let isChecked = selectInput.isChecked();
+
+        chai.assert.equal(isChecked, true);
+        isChecked = selectInput.isChecked("tr");
+        chai.assert.equal(isChecked, false);
+    });
+
+    it("'single' onChange", () => {
+        let props = {
+            label: "Select Input Single",
+            items: langs,
+            textField: "value",
+            valueField: "key"
+        };
+        let wrapper = TestUtils.mount(props, SelectInputTest);
+        let selectInput = wrapper.find(SelectInput).node;
+        let value = selectInput.getValue();
         chai.assert.isNull(value);
-        chai.assert.equal(wrapper.find("[selected=true]").node, null);
+        chai.assert.equal(wrapper.find("[selected=true]").selectInput, null);
 
-        wrapper = TestUtils.mount({
-            value: "en"
-        }, SelectInput, props);
-
+        selectInput._onChange("en");
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
         chai.assert.equal(wrapper.find("[selected=true]").node.value, "en");
+
+        selectInput._onChange("en");
+        value = selectInput.getValue();
+        chai.assert.isNull(value);
+        chai.assert.equal(wrapper.find("[selected=true]").selectInput, null);
     });
+
     it("'multi' onChange", () => {
         let props = {
             label: "Select Input Single",
@@ -170,15 +194,17 @@ describe("inputs/SelectInput", () => {
             valueField: "key",
             multi: true
         };
-        let wrapper = TestUtils.mount(props, SelectInput);
-
-        chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+        let wrapper = TestUtils.mount(props, SelectInputTest);
+        let selectInput = wrapper.find(SelectInput).node;
+        chai.assert.deepEqual([], selectInput.getValue());
         chai.assert.equal(wrapper.find("[selected=true]").length, 0);
 
-        wrapper = TestUtils.mount({
-            value: ["en", "tr"]
-        }, SelectInput, props);
+        selectInput._onChange("en,tr");
         chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
         chai.assert.equal(wrapper.find("[selected=true]").length, 2);
+
+        selectInput._onChange(undefined);
+        chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+        chai.assert.equal(wrapper.find("[selected=true]").length, 0);
     });
 });
