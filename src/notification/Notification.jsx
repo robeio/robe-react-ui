@@ -98,7 +98,6 @@ export default class Notification extends ShallowComponent {
                 let item = items[i];
                 notifications.push(
                     <NotificationItem
-                        refresh={this.__refresh}
                         key={i}
                         item={item}
                         onRead={this.props.onRead}
@@ -114,7 +113,7 @@ export default class Notification extends ShallowComponent {
     }
 
 
-    __onNotificationOpenClick = (e: Object) => {
+    __onNotificationOpenClick(e: Object) {
         this.setState({
             open: !this.state.open
         });
@@ -122,10 +121,7 @@ export default class Notification extends ShallowComponent {
         e.preventDefault();
     }
 
-    __notificationDetailClick = (e: Object) => {
-        if (this.props.notificationDetailClick !== undefined) {
-            this.props.notificationDetailClick();
-        }
+    __notificationDetailClick(e: Object) {
         this.__onNotificationOpenClick(e);
         e.preventDefault();
     }
@@ -140,11 +136,6 @@ export default class Notification extends ShallowComponent {
             this.setState({
                 open: false
             });
-        }
-    }
-    __refresh = () => {
-        if (this.props.refresh) {
-            this.props.refresh();
         }
     }
 

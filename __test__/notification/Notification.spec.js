@@ -8,6 +8,10 @@ describe("notification/Notification", () => {
     const getComponent = (props: Object): Object => {
         return (<Notification className="pull-right" {...props} notificationDetailPath="notify" />); // eslint-disable-line react/jsx-filename-extension
     };
+
+    const notificationDetailClick = (e: Object) => {
+        chai.assert.isObject(e, "notificationDetailClick is notifiy");
+    };
     it("render", () => {
         let wrapper = mount(getComponent({ data: [] }));
         chai.assert.equal(wrapper.find("span").last().text(), "You don't have any notification.");
@@ -43,17 +47,21 @@ describe("notification/Notification", () => {
         button = wrapper.find("a").first();
         button.simulate("click");
 
+        chai.assert.equal(wrapper.state().open, false);
         button = wrapper.find("button.btn-header-button").first();
         button.simulate("click");
-
-        // let e = {};
-        // e.target = {};
-        // wrapper.instance().__handleClick(e); // eslint-disable-line no-underscore-dangle
-
+        chai.assert.equal(wrapper.state().open, true);
 
         wrapper.setProps({ data: null });
         chai.assert.equal(wrapper.find(Notification).length, 1);
 
+
+        wrapper = mount(getComponent({ data: [], notificationDetailClick: notificationDetailClick }));
+
+        let footer = wrapper.find("div.notification-footer");
+        chai.assert.equal(footer.length, 1);
+
+        footer.find("i").first().simulate("click");
 
         wrapper.unmount();
     });
