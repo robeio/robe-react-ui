@@ -12,7 +12,8 @@
       "label": "Name",
       "type": "string",
       "name": "name",
-      "tooltip": "Name"
+      "tooltip": "Name",
+      "filter": true
     },
     {
       "label": "Surname",
@@ -20,36 +21,40 @@
       "name": "surname",
       "tooltip": "Surname"
     },
-
     {
       "label": "E-Mail",
       "type": "string",
       "name": "email",
-      "tooltip": "E-Mail"
+      "tooltip": "E-Mail",
+      "filter": true
     },
     {
       "label": "Password",
       "type": "password",
       "name": "password",
-      "tooltip": "Password"
+      "tooltip": "Password",
+      "filter": true
     },
     {
       "label": "Birthdate",
       "type": "date",
       "name": "birthdate",
-      "tooltip": "birthdate"
+      "tooltip": "birthdate",
+      "filter": true
     },
     {
       "label": "Job Title",
       "type": "select",
       "name": "job",
-      "tooltip": "Job Title"
+      "tooltip": "Job Title",
+      "filter": true
     },
     {
       "label": "Gender",
       "type": "radio",
       "name": "gender",
-      "tooltip": "Gender"
+      "tooltip": "Gender",
+      "filter": true
     }
   ]
 }

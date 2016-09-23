@@ -14,14 +14,15 @@ import {
 
 import DataTableBodyRow from "./DataGridBodyRow";
 import ModalConfirm from "../form/ModalConfirm";
-import Filter from "./filter/Filter";
+import Filters from "./filter/Filters";
 import SearchField from "./toolbar/SearchField";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
-import "./style.css";
+import "./DataGrid.css";
 
 
 export default class DataGrid extends StoreComponent {
+
     /**
      * Properties of the component
      *
@@ -147,7 +148,7 @@ export default class DataGrid extends StoreComponent {
     __filters = undefined;
     pageSize = 20;
     __fields = [];
-    
+
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -183,17 +184,19 @@ export default class DataGrid extends StoreComponent {
             <Col className="datagrid">
                 <Row>
                     <Col xs={5} sm={5} lg={4}>
-                        <SearchField onChange={this.__onSearchChanged} value={this.state.filter} visible={this.props.searchable} />
+                        <SearchField onChange={this.__onSearchChanged} value={this.state.qfilter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
                     </Col>
 
                 </Row>
-                <Filter
-                    fields={this.props.fields}
+                <Filters
+                    ref="filters"
+                    fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
+                    idCount={this.getObjectId()}
                 />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
@@ -216,7 +219,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                    />)
+                        />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -276,7 +279,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
 
     /**
@@ -308,14 +311,16 @@ export default class DataGrid extends StoreComponent {
                 /* eslint-disable no-continue */
                 continue;
             }
-            let onClick = this.__openFilterPopups.bind(undefined, column.name);
+            let onClick = this.__openFilterPopup.bind(undefined, column.name);
+
             if (column.visible !== false) {
                 let filterBtn = column.filter === true ? (
                     <i
-                        id={`tableColumn-" +${column.name}`}
+                        id={`tableColumn${this.getObjectId()}-${column.name}`}
                         className="fa fa-filter pull-right"
                         aria-hidden="true"
                         onClick={onClick}
+                        style={{ marginTop: "2px" }}
                     />
                 ) : null;
 
@@ -331,21 +336,25 @@ export default class DataGrid extends StoreComponent {
         return (trArr);
     }
 
-    __openFilterPopups(code) {
-        let isVisible = this.state.visiblePopups[code];
-        let shows = {};
-        shows[code] = !isVisible;
-        this.setState({
-            visiblePopups: shows
+    __openFilterPopup(name: string) {
+        let visiblePopups = this.refs.filters.state.visiblePopups;
+        let isVisible = visiblePopups[name];
+        let popupState = {};
+        popupState[name] = !isVisible;
+        this.refs.filters.setState({
+            visiblePopups: popupState
         });
     }
 
-    __onFilterChanged(filterState) {
-        let filters = [];
-        Maps.forEach(filterState.filters, (a) => {
-            filters.push(a);
-        });
-        this.__filters = filters.join(",");
+    __onFilterChanged() {
+        let filterArr = [];
+        Maps.forEach(
+            this.refs.filters.state.filters,
+            (a: string) => {
+                filterArr.push(a);
+            }
+        );
+        this.__filters = filterArr.join(",");
         this.__readData();
     }
 
@@ -377,7 +386,7 @@ export default class DataGrid extends StoreComponent {
     }
 
     __onSearchChanged = (event) => {
-        this.state.filter = event.target.value;
+        this.state.qfilter = event.target.value;
         this.activePage = 1;
         this.__readData();
     }
@@ -417,9 +426,9 @@ export default class DataGrid extends StoreComponent {
                         rows: response.data,
                         totalCount: response.totalCount
                     });
-                }, undefined, start, this.pageSize, this.state.filter, this.__filters);
+                }, undefined, start, this.pageSize, this.state.qfilter, this.__filters);
         } else {
-            this.props.store.read(undefined, undefined, this.state.filter, this.__filters);
+            this.props.store.read(undefined, undefined, undefined, undefined, this.state.qfilter, this.__filters);
         }
     }
 

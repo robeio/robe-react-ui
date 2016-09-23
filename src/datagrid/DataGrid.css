@@ -66,6 +66,10 @@
     margin-bottom: 0 !important;
 }
 
+.datagrid-table th{
+    color: #444;
+}
+
 @media screen and (max-width: 767px) {
     .datagrid > .table-responsive {
         margin-bottom: 0 !important;
