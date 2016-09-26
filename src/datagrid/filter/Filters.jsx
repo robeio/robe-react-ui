@@ -108,7 +108,7 @@ export default class Filters extends ShallowComponent {
         }
         let target = e.target;
         if (target.id === ("popover") ||
-            target.id.startsWith("tableColumn") || 
+            target.id.indexOf("tableColumn") === 0 || 
             target.className.indexOf("react-datepicker") === 0) {
             return;
         }
