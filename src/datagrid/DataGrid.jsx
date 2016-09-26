@@ -18,6 +18,9 @@ import Filters from "./filter/Filters";
 import SearchField from "./toolbar/SearchField";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
+import Header from "./Header";
+import FaIcon from "../faicon/FaIcon";
+
 import "./DataGrid.css";
 
 
@@ -196,8 +199,8 @@ export default class DataGrid extends StoreComponent {
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    idCount={this.getObjectId()}
-                />
+                    idCount={this.getObjectId() }
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -304,36 +307,21 @@ export default class DataGrid extends StoreComponent {
      * @private
      */
     __generateHeader(fields: Array<Object>): Array<Object> {
-        let trArr = [];
+        let headers = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
-            if (column.type === "file") {
-                /* eslint-disable no-continue */
-                continue;
-            }
-            let onClick = this.__openFilterPopup.bind(undefined, column.name);
-
             if (column.visible !== false) {
-                let filterBtn = column.filter === true ? (
-                    <i
-                        id={`tableColumn${this.getObjectId()}-${column.name}`}
-                        className="fa fa-filter pull-right"
-                        aria-hidden="true"
-                        onClick={onClick}
-                        style={{ marginTop: "2px" }}
-                    />
-                ) : null;
-
-                trArr.push(
-                    <th key={column.name} >
-                        {column.label}
-                        {filterBtn}
-                    </th>
+                headers.push(
+                    <Header
+                        name={`tableColumn${this.getObjectId()}-${column.name}`}
+                        field={column}
+                        onFilterClick={this.__openFilterPopup}
+                        filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
+                        />
                 );
             }
         }
-
-        return (trArr);
+        return (headers);
     }
 
     __openFilterPopup(name: string) {
@@ -346,14 +334,16 @@ export default class DataGrid extends StoreComponent {
         });
     }
 
-    __onFilterChanged() {
+    __onFilterChanged(deleteAll: boolean) {
         let filterArr = [];
-        Maps.forEach(
-            this.refs.filters.state.filters,
-            (a: string) => {
-                filterArr.push(a);
-            }
-        );
+        if (!deleteAll) {
+            Maps.forEach(
+                this.refs.filters.state.filters,
+                (a: string) => {
+                    filterArr.push(a);
+                }
+            );
+        }
         this.__filters = filterArr.join(",");
         this.__readData();
     }
@@ -379,7 +369,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                    />);
+                        />);
             }
         }
         return rowsArr;

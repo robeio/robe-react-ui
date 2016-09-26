@@ -8,7 +8,7 @@ export default class Filter extends ShallowComponent {
         /**
          * Field properties to filter
          */
-        field: React.PropTypes.array.isRequired,
+        field: React.PropTypes.object.isRequired,
         /**
          *Value of the filter
          */
