@@ -310,14 +310,14 @@ export default class DataGrid extends StoreComponent {
         let headers = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
-            if (column.visible !== false) {
+            if (column.visible !== false && column.type !== "file") {
                 headers.push(
                     <Header
                         name={`tableColumn${this.getObjectId()}-${column.name}`}
                         field={column}
                         onFilterClick={this.__openFilterPopup}
                         filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
-                        />
+                    />
                 );
             }
         }
