@@ -82,7 +82,7 @@ export default class Filters extends ShallowComponent {
                 <span
                     key={field.name}
                     style={{ verticalAlign: "bottom", border: "0px" }}
-                >
+                    >
                     {filterField}
                 </span>
             );
@@ -107,7 +107,16 @@ export default class Filters extends ShallowComponent {
     }
 
     __onClearAll() {
-        this.setState({ filters: {} });
+        console.log("clearAll");
+        let state = this.state;
+        for (let key in state) {
+            if (state.hasOwnProperty(key)) { // eslint-disable-line
+                state[key] = undefined;
+            }
+        }
+        state.filters = {};
+        state.visiblePopups = {};
+        this.setState(undefined);
         this.__hideFilters();
         this.props.onChange(true);
         this.forceUpdate();

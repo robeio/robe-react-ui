@@ -3,10 +3,12 @@
   "fields": [
     {
       "label": "id",
-      "type": "string",
+      "type": "number",
       "name": "id",
       "tooltip": "id",
-      "visible": false
+      "visible": true,
+      "filter": true,
+      "range":true
     },
     {
       "label": "Name",
@@ -32,15 +34,15 @@
       "label": "Password",
       "type": "password",
       "name": "password",
-      "tooltip": "Password",
-      "filter": true
+      "tooltip": "Password"
     },
     {
       "label": "Birthdate",
       "type": "date",
       "name": "birthdate",
       "tooltip": "birthdate",
-      "filter": true
+      "filter": true,
+      "range": true
     },
     {
       "label": "Job Title",
