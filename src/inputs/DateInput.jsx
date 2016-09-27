@@ -1,5 +1,4 @@
 import React from "react";
-import is from "is-js";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

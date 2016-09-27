@@ -74,7 +74,7 @@ export default class DataTableBodyRow extends ShallowComponent {
         );
     }
 
-    __cellRenderer(idx: number, fields: Array, row: Object) {
+    __cellRenderer(idx: number, fields: Array, row: Object): Object {
         let column = fields[idx];
         if (column.visible !== false) {
             let value = row[column.name];
@@ -108,6 +108,7 @@ export default class DataTableBodyRow extends ShallowComponent {
             }
             return (<td key={column.name}>{value}</td>);
         }
+        return undefined;
     }
 
     __getTextValue(column: Object, selectedValues: any): any {

@@ -19,7 +19,6 @@ import SearchField from "./toolbar/SearchField";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
 import Header from "./Header";
-import FaIcon from "../faicon/FaIcon";
 
 import "./DataGrid.css";
 
@@ -190,17 +189,17 @@ export default class DataGrid extends StoreComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.qfilter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
                     </Col>
 
                 </Row>
                 <Filters
-                    ref="filters"
+                    ref="filters" //eslint-disable-line
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    idCount={this.getObjectId() }
-                    />
+                    idCount={this.getObjectId()}
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -222,7 +221,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                        />)
+                    />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -282,7 +281,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
@@ -369,19 +368,19 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                        />);
+                    />);
             }
         }
         return rowsArr;
     }
 
-    __onSearchChanged = (event) => {
+    __onSearchChanged = (event: Object) => {
         this.state.qfilter = event.target.value;
         this.activePage = 1;
         this.__readData();
     }
 
-    __onSelection(selection) {
+    __onSelection(selection: Object) {
         if (this.selection !== undefined) {
             if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
@@ -411,7 +410,7 @@ export default class DataGrid extends StoreComponent {
         if (this.props.pagination) {
             let start = (this.pageSize * (this.activePage - 1));
             this.props.store.read(
-                (response) => {
+                (response: Object) => {
                     this.setState({
                         rows: response.data,
                         totalCount: response.totalCount
@@ -422,12 +421,12 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    __getModalConfirmConfig() {
+    __getModalConfirmConfig(): Object {
         let config = Maps.merge(this.props.modalConfirm, DataGrid.defaultProps.modalConfirm);
         return config;
     }
 
-    __getToolbarConfig() {
+    __getToolbarConfig(): Object {
         let config = {
             create: {
                 visible: false,
@@ -456,7 +455,7 @@ export default class DataGrid extends StoreComponent {
                 if (!(config[item] === undefined)) {
                     config[item].visible = true;
                 } else {
-                    console.warn("command not found please use create,update,delete or use your custom command");
+                    console.warn("command not found please use create,update,delete or use your custom command"); //eslint-disable-line
                 }
             } else if (is.hash(item)) {
                 if (config[item.name] === undefined) {

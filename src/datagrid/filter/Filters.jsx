@@ -1,7 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
-import * as Input from "../../inputs";
 import Filter from "./Filter";
 
 export default class Filters extends ShallowComponent {
@@ -66,12 +65,13 @@ export default class Filters extends ShallowComponent {
                 let colId = `tableColumn${this.props.idCount}-${field.name}`;
                 let show = visiblePopups[field.name] === true;
                 let getColID = document.getElementById(colId);
+                let onClear = this.__onClear.bind(undefined, field.name);
                 filterField = (
                     <Overlay show={show} placement="top" target={getColID} >
                         <Popover id="popover" placement="top" >
                             <Filter field={field} value={this.state[field.name]} onChange={this.__onChange} />
                             <ButtonGroup bsSize="xsmall" className="pull-right" style={{ marginBottom: "15px" }}>
-                                <Button bsStyle="danger" onClick={this.__onClear.bind(undefined, field.name)}>Clear</Button>
+                                <Button bsStyle="danger" onClick={onClear}>Clear</Button>
                                 <Button bsStyle="danger" onClick={this.__onClearAll}>Clear All</Button>
                             </ButtonGroup>
                         </Popover>
@@ -115,7 +115,7 @@ export default class Filters extends ShallowComponent {
 
     __handleClick(e: Object) {
         let data = e.path;
-        for (let i in data) {
+        for (let i in data) { // eslint-disable-line
             let item = data[i];
             if (item.id && item.id === "popover") {
                 return;

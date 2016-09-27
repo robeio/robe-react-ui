@@ -62,7 +62,7 @@ export default class NumericInput extends ShallowComponent {
     static refName="innerInput";
 
     render(): Object {
-        let { thousandSeparator, decimalSeparator, ...newProps } = this.props;
+        let { thousandSeparator, decimalSeparator, ...newProps } = this.props;  //eslint-disable-line
         return (<Input
             {...newProps}
             value={this.props.value}
