@@ -150,6 +150,7 @@ export default class DataGrid extends StoreComponent {
     __filters = undefined;
     pageSize = 20;
     __fields = [];
+    __sorts = {};
 
     constructor(props: Object) {
         super(props);
@@ -189,7 +190,7 @@ export default class DataGrid extends StoreComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.qfilter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
                     </Col>
 
                 </Row>
@@ -198,8 +199,8 @@ export default class DataGrid extends StoreComponent {
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    idCount={this.getObjectId()}
-                />
+                    idCount={this.getObjectId() }
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -221,7 +222,7 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                    />)
+                        />)
                 }
                 {this.__renderModalConfirm() }
             </Col>
@@ -281,7 +282,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
 
     /**
@@ -315,12 +316,30 @@ export default class DataGrid extends StoreComponent {
                         name={`tableColumn${this.getObjectId()}-${column.name}`}
                         field={column}
                         onFilterClick={this.__openFilterPopup}
+                        onSortClick={this.__onSortClick}
                         filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
-                    />
+                        sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
+                        />
                 );
             }
         }
         return (headers);
+    }
+
+    __onSortClick(name: string) {
+        let value;
+        switch (this.__sorts[name]) {
+            case "DESC":
+                value = "ASC";
+                break;
+            case "ASC":
+                value = "";
+                break;
+            default:
+                value = "DESC";
+        }
+        this.__sorts[name] = value;
+        this.__readData();
     }
 
     __openFilterPopup(name: string) {
@@ -368,7 +387,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                    />);
+                        />);
             }
         }
         return rowsArr;
@@ -406,18 +425,35 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
+    __map2Array(map: Object): Array {
+        let array = [];
+        Maps.forEach(map, (value: string, key: string) => {
+            if (value !== "") {
+                array.push([key, value]);
+            }
+        });
+        return array;
+    }
+
     __readData() {
+        let queryParams = {
+            q: this.state.qfilter,
+            filters: this.__filters,
+            sort: this.__map2Array(this.__sorts)
+        };
         if (this.props.pagination) {
             let start = (this.pageSize * (this.activePage - 1));
+            queryParams.offset = start;
+            queryParams.limit = this.pageSize;
             this.props.store.read(
                 (response: Object) => {
                     this.setState({
                         rows: response.data,
                         totalCount: response.totalCount
                     });
-                }, undefined, start, this.pageSize, this.state.qfilter, this.__filters);
+                }, undefined, queryParams);
         } else {
-            this.props.store.read(undefined, undefined, undefined, undefined, this.state.qfilter, this.__filters);
+            this.props.store.read(undefined, undefined, queryParams);
         }
     }
 

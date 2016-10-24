@@ -38,7 +38,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref`}
                     value={this.props.value}
                     onChange={this.__handleChange}
-                    />);
+                />);
         }
         let fieldMin = Objects.deepCopy(field);
         fieldMin.name += "-min";
@@ -56,7 +56,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-min`}
                     value={value[0]}
                     onChange={minOnChange}
-                    />
+                />
                 <Component
                     {...fieldMax}
                     style={style}
@@ -64,7 +64,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-max`}
                     value={value[1]}
                     onChange={maxOnChange}
-                    />
+                />
             </div>
         );
     }

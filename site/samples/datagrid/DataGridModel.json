@@ -6,29 +6,33 @@
       "type": "number",
       "name": "id",
       "tooltip": "id",
-      "visible": true,
+      "visible": false,
       "filter": true,
-      "range":true
+      "range": true,
+      "sort": "asc"
     },
     {
       "label": "Name",
       "type": "string",
       "name": "name",
       "tooltip": "Name",
-      "filter": true
+      "filter": true,
+      "sort": "asc"
     },
     {
       "label": "Surname",
       "type": "string",
       "name": "surname",
-      "tooltip": "Surname"
+      "tooltip": "Surname",
+      "sort": "desc"
     },
     {
       "label": "E-Mail",
       "type": "string",
       "name": "email",
       "tooltip": "E-Mail",
-      "filter": true
+      "filter": true,
+      "sort": "asc"
     },
     {
       "label": "Password",
