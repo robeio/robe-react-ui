@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"; // eslint-disable-line import/no-extraneous-dependencies
 import ValidationComponent from "../validation/ValidationComponent";
+import ReactDOM from "react-dom";
+
 import "./DateInput.css";
 
 // Please look at https://github.com/Hacker0x01/react-datepicker
@@ -55,15 +57,21 @@ export default class DateInput extends ValidationComponent {
         hidden: false
     };
 
-    static refName="innerInput";
+    static refName = "innerInput";
+
+    focused = false;
+
 
     render(): Object {
         let selected = moment(this.props.value);
         let isValidDate = selected.isValid() && this.props.value !== undefined;
         let label = this.props.label === undefined ? <span /> :
             <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : "";
+        validationResult = this.isFocused() ? validationResult : undefined;
         return (
-            <FormGroup hidden={this.props.hidden} >
+            <FormGroup hidden={this.props.hidden} validationState={validationState} >
                 {label}
                 <DatePicker
                     ref={DateInput.refName}
@@ -81,8 +89,17 @@ export default class DateInput extends ValidationComponent {
                     showTodayButton={"Bugün"}
                     dateFormat={this.props.format}
                 />
-                {super.validationResult()}
+                {validationResult}
             </FormGroup>);
+    }
+
+    /**
+     * Returns true if the field is the focused field at the document
+     * @returns {boolean}
+     * @memberOf BaseInput
+     */
+    isFocused(): boolean {
+        return this.focused;
     }
 
     /**
@@ -91,6 +108,7 @@ export default class DateInput extends ValidationComponent {
     __onChange(selection: Object): boolean {
         let e = {};
         e.target = {};
+        this.focused = true;
 
         if (selection) {
             e.target.parsedValue = selection.toDate().getTime();
