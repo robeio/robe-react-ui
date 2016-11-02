@@ -35,7 +35,6 @@ describe("inputs/MoneyInput", () => {
         // Must be invalid
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1, "Empty string value must render one alert");// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {

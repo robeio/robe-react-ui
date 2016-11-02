@@ -35,7 +35,6 @@ describe("inputs/NumericInput", () => {
 
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {

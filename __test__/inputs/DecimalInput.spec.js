@@ -31,7 +31,6 @@ describe("inputs/DecimalInput", () => {
 
         componentNode = TestUtils.mount({ value: "" }, DecimalInput, props);
         chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string must be invalid");
-        chai.assert.equal(componentNode.find(".input-alert").length, 1, "Empty string value must render one alert");// eslint-disable-line react/no-find-dom-node
     });
 
     it("'__numericFilter", (done: Function) => {
