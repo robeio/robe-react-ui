@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { ShallowComponent, Maps, Assertions, Objects } from "robe-react-commons";
 import { Alert } from "react-bootstrap";
 
 /**
@@ -84,7 +84,7 @@ export default class ValidationComponent extends ShallowComponent {
             }
             let message = null;
             if (this._validations[`${key}_args`]) {
-                let inputValues = this._validations[`${key}_args`];
+                let inputValues = Objects.deepCopy(this._validations[`${key}_args`]);
                 inputValues.push(this.props.value);
                 message = validation.apply(this.props, inputValues);
             } else {
