@@ -3,29 +3,36 @@
   "fields": [
     {
       "label": "id",
-      "type": "string",
+      "type": "number",
       "name": "id",
       "tooltip": "id",
-      "visible": false
+      "visible": false,
+      "filter": true,
+      "range": true,
+      "sort": "asc"
     },
     {
       "label": "Name",
       "type": "string",
       "name": "name",
-      "tooltip": "Name"
+      "tooltip": "Name",
+      "filter": true,
+      "sort": "asc"
     },
     {
       "label": "Surname",
       "type": "string",
       "name": "surname",
-      "tooltip": "Surname"
+      "tooltip": "Surname",
+      "sort": "desc"
     },
-
     {
       "label": "E-Mail",
       "type": "string",
       "name": "email",
-      "tooltip": "E-Mail"
+      "tooltip": "E-Mail",
+      "filter": true,
+      "sort": "asc"
     },
     {
       "label": "Password",
@@ -37,19 +44,23 @@
       "label": "Birthdate",
       "type": "date",
       "name": "birthdate",
-      "tooltip": "birthdate"
+      "tooltip": "birthdate",
+      "filter": true,
+      "range": true
     },
     {
       "label": "Job Title",
       "type": "select",
       "name": "job",
-      "tooltip": "Job Title"
+      "tooltip": "Job Title",
+      "filter": true
     },
     {
       "label": "Gender",
       "type": "radio",
       "name": "gender",
-      "tooltip": "Gender"
+      "tooltip": "Gender",
+      "filter": true
     }
   ]
 }

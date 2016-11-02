@@ -1,6 +1,7 @@
 import React from "react";
-import { ShallowComponent, Maps, Assertions } from "robe-react-commons";
+import { ShallowComponent, Maps, Assertions, Objects } from "robe-react-commons";
 import { Alert } from "react-bootstrap";
+import "./Validation.css";
 
 /**
  * BaseComponent for React Components which will use Validations
@@ -84,13 +85,13 @@ export default class ValidationComponent extends ShallowComponent {
             }
             let message = null;
             if (this._validations[`${key}_args`]) {
-                let inputValues = this._validations[`${key}_args`];
+                let inputValues = Objects.deepCopy(this._validations[`${key}_args`]);
                 inputValues.push(this.props.value);
                 message = validation.apply(this.props, inputValues);
             } else {
                 message = validation(this.props.value);
             }
-            let messageKey = `${key}Message`;
+            let messageKey = `${key}_message`;
             if (message !== undefined) {
                 if (this._validations[messageKey] !== undefined) {
                     message = this._validations[messageKey];

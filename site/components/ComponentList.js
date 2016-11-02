@@ -197,6 +197,14 @@ class ComponentList {
             sample: require("../samples/layouts/StackLayoutSample"),
             code: require("../samples/layouts/StackLayoutSample.txt")
         });
+
+        components.push({
+            header: "Validation",
+            desc: " is an built-in utility which can be used directly or via DataForm model.",
+            // json: require("../docs/validation/Validation.json"),
+            sample: require("../samples/validation/ValidationSample"),
+            code: require("../samples/validation/ValidationSample.txt")
+        });
         return components;
     }
 

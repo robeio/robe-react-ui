@@ -50,3 +50,5 @@ site/docs
 # Site building directory
 sitebuild
 jsconfig.json
+
+yarn.lock

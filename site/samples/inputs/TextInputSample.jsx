@@ -26,6 +26,8 @@ export default class TextInputSample extends ShallowComponent {
                     onChange={this.__handleChange.bind(undefined, "TextInputValidations")}
                     validations={{
                         required: InputValidations.required,
+                        minLength: InputValidations.minLength,
+                        minLength_args: [3],
                     }}
                 />
             </div>

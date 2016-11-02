@@ -102,37 +102,38 @@ export default class BaseInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel>{this.props.label}</ControlLabel>
         );
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : "";
+        validationResult = this.isFocused() ? validationResult : undefined;
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
             return (
-                <FormGroup hidden={this.props.hidden}>
+                <FormGroup hidden={this.props.hidden} validationState={validationState}>
                     {label}
                     <InputGroup>
                         {this.props.inputGroupLeft}
                         <FormControl
                             {...newProps}
-                            bsStyle="error"
                             ref={BaseInput.refName}
                             value={this.props.value}
-                        />
+                            />
                         {this.props.inputGroupRight}
                     </InputGroup>
-                    {super.validationResult() }
+                    {validationResult}
                 </FormGroup>
             );
         }
         let { tooltip, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
 
         return (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup hidden={this.props.hidden} validationState={validationState}>
                 {label}
                 <FormControl
                     {...newProps}
-                    bsStyle="error"
                     ref={BaseInput.refName}
                     value={this.props.value}
-                />
-                {super.validationResult() }
+                    />
+                {validationResult}
             </FormGroup>
         );
     }

@@ -8,7 +8,7 @@ export default class FileManager extends Class {
     __infoRequest;
     __deleteRequest;
 
-    constructor(props) {
+    constructor(props: Object) {
         super();
         this.__uploadProps = FileManager.createUpload(props);
         this.__infoRequest = new AjaxRequest(FileManager.createInfo(props));
@@ -92,7 +92,7 @@ export default class FileManager extends Class {
      * @param {Object} props
      * @returns {Object}
      */
-    static createUpload(props) {
+    static createUpload(props: Object): Object {
         let uploadRequest = FileManager.createInstance("upload", props, "PUT");
         if (uploadRequest.contentType === undefined) {
             uploadRequest.contentType = false;
@@ -108,7 +108,7 @@ export default class FileManager extends Class {
      * @param {Object} props
      * @returns {Object}
      */
-    static createInfo(props) {
+    static createInfo(props: Object): Object {
         let infoRequest = FileManager.createInstance("info", props, "POST");
         FileManager.setCorelationId(props, infoRequest);
         return infoRequest;
@@ -118,13 +118,13 @@ export default class FileManager extends Class {
      * @param {Object} props
      * @returns {Object}
      */
-    static createDelete(props) {
+    static createDelete(props: Object): Object {
         let deleteRequest = FileManager.createInstance("delete", props, "DELETE");
         FileManager.setCorelationId(props, deleteRequest);
         return deleteRequest;
     }
 
-    static createInstance(key: string, props: Object, type: string) {
+    static createInstance(key: string, props: Object, type: string): Object {
         let instance = props[key];
         if (!instance) {
             instance = {};

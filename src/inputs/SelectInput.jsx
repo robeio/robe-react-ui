@@ -120,7 +120,7 @@ export default class SelectInput extends ValidationComponent {
     }
     render(): Object {
         return (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup hidden={this.props.hidden} style={this.props.style}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 <Select
                     options={this.props.items}

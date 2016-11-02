@@ -30,7 +30,7 @@ commonSettings.cache = true;
  * Switch loaders to debug mode.
  * @type {boolean}
  */
-commonSettings.debug = true;
+commonSettings.debug = false;
 
 /**
  * @link https://webpack.github.io/docs/configuration.html#devtool
@@ -45,6 +45,8 @@ commonSettings.debug = true;
  * @type {string}
  */
 commonSettings.devtool = "eval";
+commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
+
 
 commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
@@ -88,7 +90,25 @@ module.exports = function configure(config) {
         },
         webpack: commonSettings,
         webpackServer: {
-            noInfo: true
+            colors: true,
+            hash: false,
+            version: false,
+            timings: false,
+            assets: false,
+            chunks: false,
+            modules: false,
+            reasons: false,
+            children: false,
+            source: false,
+            errors: false,
+            errorDetails: false,
+            warnings: false,
+            publicPath: false
+        },
+        webpackMiddleware: {
+            // webpack-dev-middleware configuration
+            // i. e.
+            stats: "errors-only"
         },
         reporters: ["mocha"],
         client: {

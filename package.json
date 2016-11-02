@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
@@ -99,7 +99,7 @@
     "react-router": "2.7.0",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.50",
+    "robe-react-commons": "1.0.53",
     "moment": "2.15.1"
   }
 }
