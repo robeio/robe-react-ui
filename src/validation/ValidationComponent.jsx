@@ -50,7 +50,7 @@ export default class ValidationComponent extends ShallowComponent {
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
-        if (!this.isValid()) {
+        if (this.__valid !== true) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         return alerts;
@@ -60,7 +60,7 @@ export default class ValidationComponent extends ShallowComponent {
      * @return {boolean}
      */
     isValid(): boolean {
-        return this.__valid;
+        return this.__valid === true ? true : this.__validate();
     }
 
     /**
