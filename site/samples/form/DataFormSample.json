@@ -72,6 +72,7 @@
     "type": "check",
     "required": true,
     "multi": true,
+    "value": ["en", "tr"],
     "items": [
       {
         "value": "tr",
