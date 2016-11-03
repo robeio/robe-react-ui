@@ -1,6 +1,7 @@
 import React from "react";
 import { ShallowComponent, Maps, Assertions, Objects } from "robe-react-commons";
 import { Alert } from "react-bootstrap";
+import InputValidations from "./InputValidations";
 import "./Validation.css";
 
 /**
@@ -51,7 +52,7 @@ export default class ValidationComponent extends ShallowComponent {
         for (let i = 0; i < errors.length; i++) {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
-        if (this.__valid !== true) {
+        if (!this.isValid()) {
             alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
         }
         return alerts;
@@ -61,7 +62,7 @@ export default class ValidationComponent extends ShallowComponent {
      * @return {boolean}
      */
     isValid(): boolean {
-        return this.__valid === true ? true : this.__validate();
+        return this.__valid;
     }
 
     /**
@@ -80,21 +81,29 @@ export default class ValidationComponent extends ShallowComponent {
     __validate(): Array<string> {
         let messages = [];
         Maps.forEach(this._validations, (validation: Function, key: string) => {
-            if (!Assertions.isFunction(validation)) {
-                return;
+            // It must be a object
+            if (!Assertions.isObject(validation)) {
+                validation = {};
+            }
+            // If func is not given, take a function with the same key from InputValidations
+            if (!validation.func) {
+                validation.func = InputValidations[key];
+                if (!validation.func) {
+                    console.error(`Validation function is not found in the properties or InputValidations key: "${key}"`); // eslint-disable-line
+                    return;
+                }
             }
             let message = null;
-            if (this._validations[`${key}_args`]) {
-                let inputValues = Objects.deepCopy(this._validations[`${key}_args`]);
+            if (validation.args) {
+                let inputValues = Objects.deepCopy(validation.args);
                 inputValues.push(this.props.value);
-                message = validation.apply(this.props, inputValues);
+                message = validation.func.apply(this.props, inputValues);
             } else {
-                message = validation(this.props.value);
+                message = validation.func(this.props.value);
             }
-            let messageKey = `${key}_message`;
             if (message !== undefined) {
-                if (this._validations[messageKey] !== undefined) {
-                    message = this._validations[messageKey];
+                if (validation.message !== undefined) {
+                    message = validation.message;
                 }
                 messages = messages.concat(message);
             }

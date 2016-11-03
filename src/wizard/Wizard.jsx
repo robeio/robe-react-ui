@@ -10,11 +10,11 @@ import "./Wizard.css";
 
 
 export default class Wizard extends ShallowComponent {
-    /**
-    * PropTypes of the component.
-    *
-    * @static
-    */
+     /**
+     * PropTypes of the component.
+     *
+     * @static
+     */
     static propTypes = {
         /**
          * Current page index to render.
@@ -74,9 +74,9 @@ export default class Wizard extends ShallowComponent {
             let step = (
                 <Col key={i} className="wizard-step">
                     <a
-                        onClick={() => { this.__onClickStepButton(i); } }
+                        onClick={() => { this.__onClickStepButton(i); }}
                         className={`btn btn-circle ${styleClass}`}
-                        >
+                    >
                         {i + 1}
                     </a>
                     <p>{item.title}</p>
@@ -134,9 +134,9 @@ export default class Wizard extends ShallowComponent {
                     <Button
                         bsStyle="primary"
                         onClick={this.props.onCompleteClick}
-                        >
+                    >
                         <FaIcon code="fa-check-circle" />
-                        {this.props.completeButtonText}
+                    {this.props.completeButtonText}
                     </Button>
                 </Col>
             );
@@ -146,7 +146,7 @@ export default class Wizard extends ShallowComponent {
                     next
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
-                    >
+                >
                     {this.props.nextButtonText} <FaIcon code="fa-arrow-right" />
                 </PageItem>
             );
@@ -157,7 +157,7 @@ export default class Wizard extends ShallowComponent {
                     previous
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
-                    >
+                >
                     <FaIcon code="fa-arrow-left" />{this.props.preButtonText}
                 </PageItem>
                 {nextButton}
@@ -172,14 +172,10 @@ export default class Wizard extends ShallowComponent {
         if (!this.__content._owner) { // eslint-disable-line no-underscore-dangle
             return true;
         }
-
+        
         let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
-        if (result !== true) {
-            let messages = [];
-            for (let i = 0; i < result.length; i++) {
-                messages.push(<p key={i}>{result[i]}</p>);
-            }
-            NotificationManager.error(messages);
+        if (!result) {
+            NotificationManager.error(result.message);
             return false;
         }
         return true;

@@ -2,8 +2,6 @@ import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Wizard from "robe-react-ui/lib/wizard/Wizard";
 import TextInput from "robe-react-ui/lib/inputs/TextInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
-
 
 export default class WizardSample extends ShallowComponent {
     constructor(props) {
@@ -25,9 +23,6 @@ export default class WizardSample extends ShallowComponent {
                         ref="step"
                         value={this.state.TextInputNormal1}
                         onChange={this.__handleChange.bind(undefined, "TextInputNormal1")}
-                        validations={{
-                            required: InputValidations.required,
-                        }}
                     />
                       
                 },

@@ -122,7 +122,6 @@ export default class DataForm extends ShallowComponent {
 
         this.__props[name] = props;
         this.state[name] = this.__filterUndefined(this.__item[name]);
-        this.__setValidations(field);
     }
 
     render(): Object {
@@ -134,28 +133,6 @@ export default class DataForm extends ShallowComponent {
         return form;
     }
 
-    /**
-     * Set default string validations
-     * @param field
-     * @private
-     */
-    __setValidations(field: Map) {
-        let props = this.__props[field.name];
-        if (!props.validations) {
-            props.validations = {};
-        }
-        for (let key in InputValidations) {
-            /* eslint-disable */
-            if (InputValidations.hasOwnProperty(key)) {
-                if (!props.validations[key] && field[key]) {
-                    let type = typeof field[key];
-                    if (type !== "Function") {
-                        props.validations[key] = type === "boolean" ? InputValidations[key] : InputValidations[key].bind(null, field[key]);
-                    }
-                }
-            }
-        }
-    }
     /**
      * Creates components which will render in Form Data by own fields and field props
      * @param {Array<Map>} fields

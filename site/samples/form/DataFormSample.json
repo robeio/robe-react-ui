@@ -2,51 +2,58 @@
   {
     "label": "String Input",
     "name": "username",
-    "type": "string",
-    "required": true,
-    "minLength": 3
+    "type": "string"
   },
   {
     "label": "Password Input",
     "name": "password",
-    "type": "password",
-    "required": true,
-    "minLength": 3
+    "type": "password"
   },
   {
     "label": "Number Input",
     "name": "age",
     "type": "number",
-    "required": true,
-    "minValue": 5
+    "validations": {
+      "required": {
+        "message": "This is a custom required message."
+      },
+      "minValue": {
+        "args": [5]
+      }
+    }
   },
   {
     "label": "Decimal Input",
     "name": "rate",
     "type": "decimal",
-    "required": true,
-    "minValue": 5
+    "validations": {
+      "required": true
+    }
   },
   {
     "label": "Money Input",
     "name": "price",
     "type": "money",
-    "required": true,
-    "minValue": 5
+    "validations": {
+      "required": true
+    }
   },
   {
     "label": "Date Input",
     "name": "birthDay",
     "type": "date",
-    "required": true,
-    "minValue": 5
+    "validations": {
+      "required": true
+    }
   },
   {
     "label": "Radio Input",
     "name": "gender",
     "type": "radio",
-    "required": true,
     "value": "",
+    "validations": {
+      "required": true
+    },
     "items": [
       {
         "value": "MALE",
@@ -62,12 +69,14 @@
     "label": "CheckInput Input",
     "name": "lang",
     "type": "check",
-    "required": true,
-    "multi": true,
     "value": [
       "en",
       "tr"
     ],
+    "validations": {
+      "required": true
+    },
+    "multi": true,
     "items": [
       {
         "value": "tr",
@@ -87,8 +96,10 @@
     "label": "SelectInput",
     "name": "il",
     "type": "select",
-    "required": true,
     "value": "21",
+    "validations": {
+      "required": true
+    },
     "items": [
       {
         "value": "34",
