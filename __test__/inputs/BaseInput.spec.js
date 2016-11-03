@@ -12,7 +12,7 @@ describe("inputs/BaseInput", () => {
             required: (value: any): Array => {
                 return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
             },
-            requiredMessage: "Error Test"
+            required_message: "Error Test"
         }
     };
 
@@ -34,8 +34,8 @@ describe("inputs/BaseInput", () => {
         // Must be invalid
         componentNode = TestUtils.mount({ value: "" }, BaseInput, props);
         chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string value must be invalid");
-        chai.assert.equal(componentNode.find(".input-alert").length, 1, "Empty string value must render one alert");
-        chai.assert.equal(componentNode.find(".input-alert").text(), "Error Test", "Custom messages shoud be rendered inside alert");
+        chai.assert.equal(componentNode.instance().validationResult().props.children.length, 1, "Empty string value must render one alert");
+        chai.assert.equal(componentNode.instance().validationResult().props.children[0].props.children, "Error Test", "Custom messages shoud be rendered inside alert");
         componentNode.unmount();
 
         // Must be invalid
@@ -49,7 +49,7 @@ describe("inputs/BaseInput", () => {
             }
         }, BaseInput, props);
         chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string value must be invalid");
-        chai.assert.equal(componentNode.find(".input-alert").text(), "Goodbye world", "Arguments must pass successfully");
+        chai.assert.equal(componentNode.instance().validationResult().props.children[0].props.children, "Goodbye world", "Arguments must pass successfully");
         componentNode.unmount();
 
         // Must be exception
@@ -67,6 +67,6 @@ describe("inputs/BaseInput", () => {
             props);
 
         chai.assert.isNotOk(componentNode.instance().isValid(), "1000 char string value must be invalid");
-        chai.assert.equal(componentNode.find(".input-alert").length, 1, "1000 char string value must render one alert");
+        chai.assert.equal(componentNode.instance().validationResult().props.children.length, 1, "1000 char string value must render one alert");
     });
 });
