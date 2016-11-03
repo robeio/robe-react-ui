@@ -141,20 +141,21 @@ export default class DataForm extends ShallowComponent {
      */
     __setValidations(field: Map) {
         let props = this.__props[field.name];
-        if (!props.validations) {
-            props.validations = {};
-        }
-        for (let key in InputValidations) {
-            /* eslint-disable */
-            if (InputValidations.hasOwnProperty(key)) {
-                if (!props.validations[key] && field[key]) {
-                    let type = typeof field[key];
-                    if (type !== "Function") {
-                        props.validations[key] = type === "boolean" ? InputValidations[key] : InputValidations[key].bind(null, field[key]);
-                    }
-                }
-            }
-        }
+        console.log("DataForm", field.name, props);
+        // if (!props.validations) {
+        //     props.validations = {};
+        // }
+        // for (let key in InputValidations) {
+        //     /* eslint-disable */
+        //     if (InputValidations.hasOwnProperty(key)) {
+        //         if (!props.validations[key] && field[key]) {
+        //             let type = typeof field[key];
+        //             if (type !== "Function") {
+        //                 props.validations[key] = type === "boolean" ? InputValidations[key] : InputValidations[key].bind(null, field[key]);
+        //             }
+        //         }
+        //     }
+        // }
     }
     /**
      * Creates components which will render in Form Data by own fields and field props
