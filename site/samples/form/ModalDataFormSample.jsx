@@ -8,7 +8,7 @@ const filesUrl = "http://localhost:3000/files";
 
 const remote = {
     url: filesUrl,
-        upload: {
+    upload: {
         type: "PUT"
     },
     info: {
@@ -24,14 +24,14 @@ export default class ModalDataFormSample extends ShallowComponent {
      *
      * @param props
      */
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             show: false
         };
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
                 <ModalDataForm
@@ -53,7 +53,6 @@ export default class ModalDataFormSample extends ShallowComponent {
     }
 
     __onSubmit = (item, handlerComplete) => {
-        console.log(item)
         handlerComplete(true);
     }
 

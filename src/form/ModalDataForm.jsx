@@ -71,7 +71,7 @@ export default class ModalDataForm extends ShallowComponent {
     }
     render(): Object {
         return (
-            <Modal show={this.state.show}>
+            <Modal show={this.state.show} onHide={this.props.onCancel}>
                 <Modal.Header>
                     <Modal.Title>{this.props.header}</Modal.Title>
                 </Modal.Header>
