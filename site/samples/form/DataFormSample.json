@@ -7,6 +7,14 @@
     "minLength": 3
   },
   {
+    "label": "Textarea Input",
+    "name": "address",
+    "type": "string",
+    "componentClass":"textarea",
+    "required": true,
+    "minLength": 3
+  },
+  {
     "label": "Password Input",
     "name": "password",
     "type": "password",
@@ -63,7 +71,6 @@
     "name": "lang",
     "type": "check",
     "required": true,
-    "value": ["en", "tr"],
     "multi": true,
     "items": [
       {
