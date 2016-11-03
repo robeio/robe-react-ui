@@ -178,7 +178,7 @@ export default class DataForm extends ShallowComponent {
     isValid = (): boolean => {
         let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs, "isValid", "function");
         for (let i = 0; i < hasIsValidObjects.length; i++) {
-            if (hasIsValidObjects[i].isValid() != true) {
+            if (hasIsValidObjects[i].isValid() !== true) {
                 return false;
             }
         }
