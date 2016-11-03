@@ -176,9 +176,9 @@ export default class DataForm extends ShallowComponent {
      * @returns {boolean}
      */
     isValid = (): boolean => {
-        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs,"isValid", "function");
+        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs, "isValid", "function");
         for (let i = 0; i < hasIsValidObjects.length; i++) {
-            if (!(hasIsValidObjects[i].isValid())) {
+            if (hasIsValidObjects[i].isValid() !== true) {
                 return false;
             }
         }
@@ -203,8 +203,8 @@ export default class DataForm extends ShallowComponent {
             }
         }
         let changeState = true;
-        if(this.props.onChange) {
-            if( this.props.onChange(name, e) === false )  {
+        if (this.props.onChange) {
+            if (this.props.onChange(name, e) === false) {
                 changeState = false;
             }
         }
