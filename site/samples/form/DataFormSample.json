@@ -18,9 +18,7 @@
         "message": "This is a custom required message."
       },
       "minValue": {
-        "args": [
-          5
-        ]
+        "args": [5]
       }
     }
   },
@@ -121,7 +119,6 @@
     "label": "Dosya Seçimi",
     "name": "files",
     "type": "file",
-    "name": "files",
     "value": [
       "info_test.png"
     ],
