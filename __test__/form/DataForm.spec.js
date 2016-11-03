@@ -18,7 +18,9 @@ describe("form/DataForm", () => {
             type: "string",
             name: "name",
             tooltip: "Name",
-            required: true
+            validations: {
+                required: true
+            }
         },
         {
             label: "Surname",
@@ -31,17 +33,13 @@ describe("form/DataForm", () => {
         return (<DataForm {...props} />); // eslint-disable-line react/jsx-filename-extension
     };
 
-    let value;
     const handleChange = (code: string, e: Object): boolean => {
-        value = e.target.value;
-        console.log("handleChange", e);
         return true;
     };
     it("render", () => {
         let wrapper = mount(getComponent({ fields: fields }));
         chai.assert.equal(wrapper.find(DataForm).length, 1);
         chai.assert.equal(wrapper.find(TextInput).length, 2);
-
         fields[0].name = "";
         chai.assert.throws(() => {
             wrapper = mount(getComponent({ fields: fields }));
@@ -60,15 +58,13 @@ describe("form/DataForm", () => {
         fields[1].onChange = handleChange;
         let wrapper = mount(getComponent({ fields: fields }));
         wrapper.setState({ name: "Hasan" });
-        // chai.assert.equal(value, "Hasan");
+        chai.assert.equal(wrapper.find('[name="name"]').first().prop("value"), "Hasan");
     });
 
     it("getItem", () => {
         let wrapper = mount(getComponent({ fields: fields }));
         wrapper.setState({ name: "Hasan" });
         let item = wrapper.instance().getItem();
-
-        console.log("ITEM is ", item);
         // chai.assert.equal(item.name, "Hasan");
     });
 

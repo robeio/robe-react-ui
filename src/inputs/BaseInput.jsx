@@ -173,15 +173,4 @@ export default class BaseInput extends ValidationComponent {
             this.focus();
         }
     }
-
-    /**
-     * Fired after component mounts. Sets focus from props.
-     */
-    componentWillMount() {
-        super.componentWillMount();
-        /* eslint-disable no-underscore-dangle */
-        if (this._validations && typeof this.props.value === "string" && !this._validations.maxLength) {
-            this._validations.maxLength = InputValidations.maxLength.bind(this, BaseInput.maxTextLength);
-        }
-    }
 }
