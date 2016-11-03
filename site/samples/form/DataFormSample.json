@@ -7,14 +7,6 @@
     "minLength": 3
   },
   {
-    "label": "Textarea Input",
-    "name": "address",
-    "type": "string",
-    "componentClass":"textarea",
-    "required": true,
-    "minLength": 3
-  },
-  {
     "label": "Password Input",
     "name": "password",
     "type": "password",
@@ -72,7 +64,10 @@
     "type": "check",
     "required": true,
     "multi": true,
-    "value": ["en", "tr"],
+    "value": [
+      "en",
+      "tr"
+    ],
     "items": [
       {
         "value": "tr",
@@ -113,8 +108,9 @@
     "label": "Dosya Seçimi",
     "name": "files",
     "type": "file",
-    "name": "files",
-    "value": ["info_test.png"],
+    "value": [
+      "info_test.png"
+    ],
     "display": "thumbnail"
   }
 ]
