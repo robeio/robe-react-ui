@@ -118,14 +118,14 @@ export default class DataTableBodyRow extends ShallowComponent {
         }
         selectedValues = [].concat(selectedValues);
         let textOfValues = [];
-        let dataTextField = column.dataTextField || "text";
-        let dataValueField = column.dataValueField || "value";
+        let textField = column.textField || "text";
+        let valueField = column.valueField || "value";
         for (let i = 0; i < column.items.length; i++) {
             let item = column.items[i];
             for (let k = 0; k < selectedValues.length; k++) {
                 let selectedValue = selectedValues[k];
-                if (String(item[dataValueField]) === selectedValue) {
-                    textOfValues.push(item[dataTextField]);
+                if (String(item[valueField]) === selectedValue) {
+                    textOfValues.push(item[textField]);
                 }
             }
         }
