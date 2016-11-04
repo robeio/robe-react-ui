@@ -95,7 +95,7 @@ export default class RadioInput extends ValidationComponent {
         this._value = this.props.value;
         let inlineClass = this.props.inline ? "form-inline" : undefined;
         let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : "";
+        let validationState = validationResult !== undefined ? "error" : undefined;
         return (
             <div className={inlineClass}>
                 <FormGroup validationState={validationState}>
