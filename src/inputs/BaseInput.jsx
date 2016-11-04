@@ -77,6 +77,9 @@ export default class BaseInput extends ValidationComponent {
         hidden: false
     };
 
+
+    static isFocusedToInput = false;
+
     static refName = "innerInput";
 
     /**
@@ -103,8 +106,8 @@ export default class BaseInput extends ValidationComponent {
             <ControlLabel>{this.props.label}</ControlLabel>
         );
         let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : "";
-        validationResult = this.isFocused() ? validationResult : undefined;
+        let validationState = validationResult !== undefined ? "error" : undefined;
+        validationResult = this.isFocusedToInput ? validationResult : undefined;
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
             return (
@@ -116,7 +119,7 @@ export default class BaseInput extends ValidationComponent {
                             {...newProps}
                             ref={BaseInput.refName}
                             value={this.props.value}
-                            />
+                        />
                         {this.props.inputGroupRight}
                     </InputGroup>
                     {validationResult}
@@ -132,7 +135,7 @@ export default class BaseInput extends ValidationComponent {
                     {...newProps}
                     ref={BaseInput.refName}
                     value={this.props.value}
-                    />
+                />
                 {validationResult}
             </FormGroup>
         );
@@ -171,6 +174,11 @@ export default class BaseInput extends ValidationComponent {
     componentDidMount() {
         if (this.props.focus) {
             this.focus();
+            this.isFocusedToInput = true;
         }
+    }
+
+    componentDidUpdate() {
+        this.isFocusedToInput = this.isFocused();
     }
 }

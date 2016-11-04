@@ -1,6 +1,6 @@
 import React from "react";
 import { Assertions } from "robe-react-commons";
-import { FormGroup, ControlLabel } from "react-bootstrap";
+import { Form, FormGroup, ControlLabel } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 /**
@@ -30,7 +30,9 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Items will be rendered as radio input.
          */
-        items: React.PropTypes.array,
+        items: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.array]),
         /**
          * Checked value or values
          */
@@ -62,7 +64,11 @@ export default class RadioInput extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+         * it specifies that an input fields is inline or not
+         */
+        inline: React.PropTypes.bool,
     };
 
     /**
@@ -76,7 +82,8 @@ export default class RadioInput extends ValidationComponent {
         valueField: "value",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        inline: false
     };
 
     /**
@@ -86,14 +93,18 @@ export default class RadioInput extends ValidationComponent {
      **/
     render(): Object {
         this._value = this.props.value;
+        let inlineClass = this.props.inline ? "form-inline" : undefined;
+
         return (
-            <FormGroup>
-                <ControlLabel> {this.props.label} </ControlLabel>
-                {
-                    this.__createRadioBoxes(this.props.items)
-                }
-                {super.validationResult() }
-            </FormGroup>
+            <div className={inlineClass}>
+                <FormGroup>
+                    <ControlLabel> {this.props.label} </ControlLabel>
+                    {
+                        this.__createRadioBoxes(this.props.items)
+                    }
+                    {super.validationResult() }
+                </FormGroup>
+            </div>
         );
     }
 
