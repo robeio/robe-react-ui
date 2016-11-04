@@ -70,7 +70,6 @@ export default class ModalDataForm extends ShallowComponent {
         this.componentWillReceiveProps(props);
     }
     render(): Object {
-        console.log("MODAL", this.state.show);
         return (
             <Modal show={this.state.show} onHide={this.props.onCancel}>
                 <Modal.Header>

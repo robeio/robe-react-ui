@@ -24,7 +24,6 @@ export default class Filter extends ShallowComponent {
         if (field.type === "select") {
             style = { width: "176px" };
         }
-        console.log(field.name, this.props.value);
         if (field.range !== true || (
             field.type !== "number" &&
             field.type !== "decimal" &&

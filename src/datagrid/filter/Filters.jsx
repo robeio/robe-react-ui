@@ -107,7 +107,6 @@ export default class Filters extends ShallowComponent {
     }
 
     __onClearAll() {
-        console.log("clearAll");
         let state = this.state;
         for (let key in state) {
             if (state.hasOwnProperty(key)) { // eslint-disable-line
