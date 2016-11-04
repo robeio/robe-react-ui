@@ -95,10 +95,11 @@ export default class DecimalInput extends ShallowComponent {
     __numericFilter(e: Object): boolean {
         let value = e.target.value;
         this.__caretPosition = this.refs[DecimalInput.refName].getCaretPosition();
-        if (value.indexOf(this.props.decimalSeparator) === 0) {
+        let indexOfDS = value.indexOf(this.props.decimalSeparator);
+        if (indexOfDS === 0) {
             value = `0${value}`;
             this.__caretPosition++;
-        } else if (value.charAt(0) === "0" && value.indexOf(this.props.decimalSeparator) !== 1) {
+        } else if (value.charAt(0) === "0" && indexOfDS !== 1 && indexOfDS !== -1) {
             value = value.substring(1);
             this.__caretPosition--;
         }
