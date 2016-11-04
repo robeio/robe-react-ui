@@ -22,8 +22,11 @@ export default class SelectInputSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            MultiSelect: ["en","tr"]
+            MultiSelect: ["en", "tr"]
         };
+
+        this.__handleChangeSelect = this.__handleChange.bind(this, "Select");
+        this.__handleChangeMulti = this.__handleChange.bind(this, "MultiSelect");
     }
 
     render() {
@@ -35,7 +38,7 @@ export default class SelectInputSample extends ShallowComponent {
                     textField="value"
                     valueField="key"
                     value={this.state.Select}
-                    onChange={this.__handleChange.bind(this, "Select")}
+                    onChange={this.___handleChangeSelect}
                 />
                 <SelectInput
                     label="Select Input Multi"
@@ -44,7 +47,7 @@ export default class SelectInputSample extends ShallowComponent {
                     value={this.state.MultiSelect}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(this, "MultiSelect")}
+                    onChange={this.__handleChangeMulti}
                     validations={{
                         required: true
                     }}
@@ -53,10 +56,10 @@ export default class SelectInputSample extends ShallowComponent {
         );
     }
 
-    __handleChange = (code: any, e: Object) => {
+    __handleChange = (name: any, e: Object) => {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[name] = value;
         this.setState(state);
     };
 }
