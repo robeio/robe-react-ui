@@ -190,7 +190,6 @@ export default class SelectInput extends ValidationComponent {
         }
         return !(!this._value) && (this.props.multi ? this._value.length > 0 : (this._value !== null && this._value !== ""));
     };
-
     /**
      * returns checked values as string
      * @returns {string}
