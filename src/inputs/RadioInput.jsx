@@ -1,6 +1,6 @@
 import React from "react";
 import { Assertions } from "robe-react-commons";
-import { Form, FormGroup, ControlLabel } from "react-bootstrap";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
 /**
