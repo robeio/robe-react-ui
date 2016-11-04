@@ -2,7 +2,6 @@ import React from "react";
 import Select from "react-select";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import "react-select/dist/react-select.css";
-
 import ValidationComponent from "../validation/ValidationComponent";
 /**
  * Provide selection in map array data with single or multi choices
@@ -167,7 +166,7 @@ export default class SelectInput extends ValidationComponent {
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
             options[i] = this.__checkSelection(item) ?
-                <option key={i} value={item[this.props.valueField]} selected>{item[this.props.textField]}</option> :
+                <option key={i} value={item[this.props.valueField]} defaultValue>{item[this.props.textField]}</option> :
                 <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
         }
         return (
