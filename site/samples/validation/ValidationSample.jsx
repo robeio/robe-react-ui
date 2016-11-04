@@ -61,7 +61,7 @@ export default class ValidationSample extends ShallowComponent {
                     Also you can define custom message templates with <code>minLength.message</code>.
                     You can give your validation function directly via <code>minLength.func</code> parameter, for an example take a look at <code>please</code> please :).
                 </Well>
-                <code>InputValidations</code> is a signleton class which holds pre-defined validations and a registery for new functions.
+                <code>InputValidations</code> is a singleton class which holds pre-defined validations and a registery for new functions.
                 Registering a validation is essential for reusing functions and makes it accessible from everywhere.
                 Also you should know that <code>DataForm</code> uses these <code>InputValidations</code> to lookup validation names from the given <code>DataModel</code> json.
                 <Highlight className="json">{ex2}</Highlight>
