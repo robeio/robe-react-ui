@@ -95,7 +95,6 @@ export default class DecimalInput extends ShallowComponent {
     __numericFilter(e: Object): boolean {
         let value = e.target.value;
         this.__caretPosition = this.refs[DecimalInput.refName].getCaretPosition();
-        console.log(this.__caretPosition);
         if (value.indexOf(this.props.decimalSeparator) === 0) {
             value = `0${value}`;
             this.__caretPosition++;
@@ -103,8 +102,6 @@ export default class DecimalInput extends ShallowComponent {
             value = value.substring(1);
             this.__caretPosition--;
         }
-
-
         let result = this.__isFloat(value) || value === "";
         if (result && this.props.onChange) {
             e.target.parsedValue = value;
@@ -130,7 +127,6 @@ export default class DecimalInput extends ShallowComponent {
 
     componentDidUpdate() {
         if (this.refs[DecimalInput.refName].isFocused()) {
-            console.log(this.__caretPosition);
             this.refs[DecimalInput.refName].setCaretPosition(this.__caretPosition);
         }
     }
