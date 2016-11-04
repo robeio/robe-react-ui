@@ -114,14 +114,5 @@
         "text": "Ankara"
       }
     ]
-  },
-  {
-    "label": "Dosya Seçimi",
-    "name": "files",
-    "type": "file",
-    "value": [
-      "info_test.png"
-    ],
-    "display": "thumbnail"
   }
 ]
