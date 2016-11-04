@@ -13,26 +13,26 @@ import DataGridModel from "./DataGridModel.json";
 
 const propsOfFields = {
     job: {
-        "items": [
+        items: [
             {
-                "value": "sd",
-                "text": "Software Developer"
+                value: "sd",
+                text: "Software Developer"
             },
             {
-                "value": "sa",
-                "text": "Software Architect"
+                value: "sa",
+                text: "Software Architect"
             }
         ]
     },
     gender: {
-        "items": [
+        items: [
             {
-                "value": "male",
-                "text": "Erkek"
+                value: "male",
+                text: "Erkek"
             },
             {
-                "value": "female",
-                "text": "Kadın"
+                value: "female",
+                text: "Kadın"
             }
         ]
     }

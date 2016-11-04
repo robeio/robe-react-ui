@@ -89,7 +89,7 @@
     "nprogress": "0.2.0",
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.3.2",
-    "react-bootstrap": "0.30.3",
+    "react-bootstrap": "0.30.6",
     "react-cookie": "0.4.8",
     "react-datepicker": "0.29.0",
     "react-dom": "15.3.2",
