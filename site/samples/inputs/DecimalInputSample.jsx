@@ -27,7 +27,7 @@ export default class DecimalInputSample extends ShallowComponent {
                     value={this.state.DecimalInputValidations}
                     onChange={this.__handleChange.bind(undefined, "DecimalInputValidations") }
                     validations={{
-                        required: InputValidations.required,
+                        required: true
                     }}
                 />
             </div>

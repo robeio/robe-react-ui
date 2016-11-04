@@ -24,7 +24,7 @@ export default class PasswordInputSample extends ShallowComponent {
                     value={this.state.PasswordInputValidations}
                     onChange={this.__handleChange.bind(undefined, "PasswordInputValidations")}
                     validations={{
-                        required: InputValidations.required,
+                        required: true
                     }}
                 />
             </div>

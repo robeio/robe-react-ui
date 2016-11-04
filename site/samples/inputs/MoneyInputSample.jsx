@@ -30,7 +30,7 @@ export default class MoneyInputSample extends ShallowComponent {
                     onChange={this.__handleChange.bind(this, "MoneyInputValidations") }
                     unit="USD"
                     validations={{
-                        required: InputValidations.required,
+                        required: true
                     }}
                 />
             </div>

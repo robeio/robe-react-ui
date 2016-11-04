@@ -26,7 +26,7 @@ export default class DateInputSample extends ShallowComponent {
                     value={this.state.DateInputValidations}
                     onChange={this.__handleChange.bind(undefined, "DateInputValidations")}
                     validations={{
-                        required: InputValidations.required,
+                        required: true
                     }}
                 />
             </div>

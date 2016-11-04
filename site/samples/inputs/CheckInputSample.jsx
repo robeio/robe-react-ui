@@ -47,7 +47,7 @@ export default class CheckInputSample extends ShallowComponent {
                     valueField="key"
                     onChange={this.__handleChange.bind(this, "CheckInputGroup")}
                     validations={{
-                        required: InputValidations.required,
+                        required: true
                     }}
                 />
             </div>

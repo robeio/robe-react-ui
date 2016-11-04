@@ -46,7 +46,7 @@ export default class SelectInputSample extends ShallowComponent {
                     valueField="key"
                     onChange={this.__handleChange.bind(this, "MultiSelect")}
                     validations={{
-                        required: InputValidations.required
+                        required: true
                     }}
                 />
             </div>
