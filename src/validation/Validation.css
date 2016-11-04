@@ -8,3 +8,13 @@
     line-height: 14px;
     padding: 14px;
 }
+.input-alert{
+    margin-top: 0px;
+    border-top: 0px;
+    margin-left: 4px;
+    margin-right: 4px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    line-height: 14px;
+    padding: 14px;
+}
