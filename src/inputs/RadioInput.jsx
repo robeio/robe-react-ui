@@ -86,8 +86,10 @@ export default class RadioInput extends ValidationComponent {
      **/
     render(): Object {
         this._value = this.props.value;
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : "";
         return (
-            <FormGroup>
+            <FormGroup validationState={validationState}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 {
                     this.__createRadioBoxes(this.props.items)

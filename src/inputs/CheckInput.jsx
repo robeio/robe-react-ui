@@ -110,15 +110,18 @@ export default class CheckInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel> {this.props.label} </ControlLabel>
         );
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : "";
+
         return (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup hidden={this.props.hidden} validationState={validationState}>
                 {label}
                 {
                     this._hasMultiItem ?
                         this.__createCheckInputs(this.props.items) :
                         this.__createCheckInput(this.props.item)
                 }
-                {super.validationResult()}
+                {validationResult}
             </FormGroup>
         );
     }
