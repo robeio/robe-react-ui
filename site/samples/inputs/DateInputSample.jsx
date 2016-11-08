@@ -29,6 +29,12 @@ export default class DateInputSample extends ShallowComponent {
                         required: true
                     }}
                 />
+                <DateInput
+                    label="DateInput With Custom Localization"
+                    locale="tr"
+                    value={this.state.DateInputNormal}
+                    onChange={this.__handleChange.bind(undefined, "DateInputNormal")}
+                />
             </div>
         );
     }
