@@ -55,8 +55,10 @@ describe("checktree/CheckTree", () => {
 
     let values = [];
 
-    const handleChange = (e) => {
-        values.push(e.target.value[0]);
+    const handleChange = (e, value: String, checked: boolean) => {
+        if (checked) {
+            values.push(value);
+        }
     };
 
     it("onChange", () => {

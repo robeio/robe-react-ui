@@ -65,13 +65,12 @@ export default class CheckTreeSample extends ShallowComponent {
         );
     }
 
-    handleChange = (e) => {
+    handleChange = (e: Object, checkValue: String, checked: boolean) => {
         let value = this.state.value;
-        let index = Arrays.indexOf(value, e.target.value);
-        if (index === -1) {
-            value.push(e.target.value[0]);
+        if (checked) {
+            value.push(checkValue);
         } else {
-            Arrays.remove(value, e.target.value);
+            Arrays.remove(value, checkValue);
         }
         this.setState({
             value: value
