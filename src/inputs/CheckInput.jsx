@@ -164,7 +164,7 @@ export default class CheckInput extends ValidationComponent {
                 value={value}
                 name={name}
                 disabled={!isChecked}
-            />
+                />
         ) : null;
         let onClick = null;
         if (!this.props.disabled) {
@@ -176,7 +176,7 @@ export default class CheckInput extends ValidationComponent {
                 <label
                     htmlFor={name}
                     style={{ paddingLeft: "2px" }}
-                >
+                    >
                     <FaIcon code={`${icon} state-icon`} size={"fa-sm"} />
                 </label> {text}
                 {input}
@@ -258,5 +258,12 @@ export default class CheckInput extends ValidationComponent {
             result = this.props.onChange(e);
         }
         return result;
+    }
+
+    componentWillReceiveProps(nextProps: Object) {
+        this._value = nextProps.value;
+        if (!this._value) {
+            this._value = this._hasMultiItem ? [] : false;
+        }
     }
 }

@@ -54,14 +54,6 @@ export default class CheckTree extends ShallowComponent {
         value: []
     };
 
-    constructor(props: Object) {
-        super(props);
-
-        this.state = {
-            value: this.props.value || []
-        };
-    }
-
     render(): string {
         let itemData = this.props.items;
         let checked = undefined;
@@ -78,7 +70,7 @@ export default class CheckTree extends ShallowComponent {
                 valueField={this.props.valueField}
                 onChange={this.__onChange}
                 ref="innerInput"
-                />);
+            />);
         let itemComp = (
             <li className="checkboxtree">
                 {input}
@@ -113,12 +105,13 @@ export default class CheckTree extends ShallowComponent {
                     valueField={this.props.valueField}
                     childrenField={this.props.childrenField}
                     parent={this}
-                    />);
+                />);
             }
             return itemComps;
         }
         return undefined;
     }
+
     shouldComponentUpdate(): boolean {
         return true;
     }
