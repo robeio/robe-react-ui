@@ -76,8 +76,6 @@ export default class RadioInput extends ValidationComponent {
      * @static
      */
     static defaultProps = {
-        placeHolder: "Please Select",
-        noResultsText: "No Result",
         textField: "text",
         valueField: "value",
         disabled: false,

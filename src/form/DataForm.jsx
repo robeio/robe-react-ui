@@ -109,19 +109,15 @@ export default class DataForm extends ShallowComponent {
 
         props.onChange = this.onChange.bind(this, name);
 
-
-        this.state[name] = this.__filterUndefined(this.state[name]);
         if (this.__isNew) {
             if (props.items) {
                 this.state[`$$_items_${name}`] = props.items;
             }
-            this.__item[name] = this.__filterUndefined(props.value);
-        } else {
-            this.__item[name] = this.__filterUndefined(this.__item[name]);
+            this.__item[name] = props.value;
         }
 
         this.__props[name] = props;
-        this.state[name] = this.__filterUndefined(this.__item[name]);
+        this.state[name] = this.__item[name];
     }
 
     render(): Object {
@@ -229,20 +225,5 @@ export default class DataForm extends ShallowComponent {
      */
     getItem = (): Map => {
         return this.__item;
-    }
-
-    /**
-     * sets initial data if value is empty or null
-     * @param value
-     * @returns {*}
-     * @private
-     */
-    __filterUndefined = (value: any): any => {
-        if (value === 0) {
-            return 0;
-        } else if (!value) {
-            return "";
-        }
-        return value;
     }
 }

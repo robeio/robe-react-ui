@@ -42,7 +42,6 @@ describe("inputs/SelectInput", () => {
             valueField: "value",
             multi: false,
             searchable: true,
-            format: "DD/MM/YYYY",
             disabled: false,
             readOnly: false,
             hidden: false
@@ -67,7 +66,6 @@ describe("inputs/SelectInput", () => {
             placeHolder: "Please Select",
             noResultsText: "No Result",
             searchable: true,
-            format: "DD/MM/YYYY",
             disabled: false,
             readOnly: false,
             hidden: false
@@ -173,17 +171,15 @@ describe("inputs/SelectInput", () => {
         let wrapper = TestUtils.mount(props, SelectInputTest);
         let selectInput = wrapper.find(SelectInput).node;
         let value = selectInput.getValue();
-        chai.assert.isNull(value);
-        chai.assert.equal(wrapper.find("[selected=true]").selectInput, null);
+        chai.assert.equal(wrapper.find("[selected=true]").selectInput, undefined);
 
         selectInput._onChange("en");
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
         chai.assert.equal(wrapper.find("[selected=true]").node.value, "en");
 
-        selectInput._onChange("en");
+        selectInput._onChange(undefined);
         value = selectInput.getValue();
-        chai.assert.isNull(value);
-        chai.assert.equal(wrapper.find("[selected=true]").selectInput, null);
+        chai.assert.equal(wrapper.find("[selected=true]").selectInput, undefined);
     });
 
     it("'multi' onChange", () => {

@@ -25,7 +25,7 @@ export default class DataFormSample extends ShallowComponent {
      *
      * @param props
      */
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
     }
 
@@ -35,18 +35,20 @@ export default class DataFormSample extends ShallowComponent {
                 <DataForm
                     header="Example Data Form Label"
                     fields={fields}
+                    ref="dataform"
+                    onChange={this.onChange}
                     propsOfFields={{
                         files: {
                             remote: remote,
                             onCellRender: this.onCellRender
                         }
                     }}
-                />
+                    />
             </div>
         );
     }
 
     onChange = () => {
-
+        console.log(this.refs.dataform.getItem());
     }
 }

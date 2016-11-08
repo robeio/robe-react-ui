@@ -52,7 +52,6 @@ export default class PasswordInput extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        value: "",
         disabled: false,
         readOnly: false,
         hidden: false

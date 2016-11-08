@@ -87,7 +87,6 @@ export default class SelectInput extends ValidationComponent {
         valueField: "value",
         multi: false,
         searchable: true,
-        format: "DD/MM/YYYY",
         disabled: false,
         readOnly: false,
         hidden: false
@@ -204,9 +203,11 @@ export default class SelectInput extends ValidationComponent {
      * @return {boolean}
      */
     __onChangeSingle(value: string): boolean {
-        if (this._value === value) {
-            value = null;
+
+        if (!value || value === "") {
+            value = undefined;
         }
+      
         let result = this.__callOnChange(value, this._value);
         if (result) {
             this._value = value;
