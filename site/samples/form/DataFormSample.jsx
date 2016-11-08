@@ -35,8 +35,6 @@ export default class DataFormSample extends ShallowComponent {
                 <DataForm
                     header="Example Data Form Label"
                     fields={fields}
-                    ref="dataform"
-                    onChange={this.onChange}
                     propsOfFields={{
                         files: {
                             remote: remote,
@@ -48,7 +46,4 @@ export default class DataFormSample extends ShallowComponent {
         );
     }
 
-    onChange = () => {
-        console.log(this.refs.dataform.getItem());
-    }
 }
