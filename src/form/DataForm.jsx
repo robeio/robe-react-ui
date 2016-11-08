@@ -4,7 +4,7 @@ import {
     Maps
 } from "robe-react-commons";
 import {
-    Form
+    Form, Row, Col
 } from "react-bootstrap";
 import ComponentManager from "./ComponentManager";
 import InputValidations from "../validation/InputValidations";
@@ -39,7 +39,12 @@ export default class DataForm extends ShallowComponent {
         /**
          * Form is defaultExpanded or not
          */
-        defaultExpanded: React.PropTypes.bool
+        defaultExpanded: React.PropTypes.bool,
+
+        /**
+         * Form side by side input columns size
+         */
+        columnsSize: React.PropTypes.oneOf([1, 2, 3, 4, 6, 12])
     };
 
     /**
@@ -49,7 +54,8 @@ export default class DataForm extends ShallowComponent {
     static defaultProps = {
         label: null,
         collapsible: false,
-        defaultExpanded: true
+        defaultExpanded: true,
+        columnsSize: 1
     };
 
     /**
@@ -127,7 +133,9 @@ export default class DataForm extends ShallowComponent {
     render(): Object {
         let form = (
             <Form>
-                {this.__createForm(this.props.fields, this.props.components)}
+                <Row>
+                    {this.__createForm(this.props.fields, this.props.components)}
+                </Row>
             </Form>
         );
         return form;
@@ -168,7 +176,9 @@ export default class DataForm extends ShallowComponent {
         let props = this.__props[name];
         let Component = ComponentManager.findComponentByType(field.type);
 
-        return <Component key={`${name}_key`} ref={`${name}Ref`} {...props} value={this.state[name]} />;
+        let columnsSize = 12 / this.props.columnsSize;
+
+        return (<Col md={columnsSize}><Component key={`${name}_key`} ref={`${name}Ref`} {...props} value={this.state[name]} /></Col>);
     }
 
     /**
