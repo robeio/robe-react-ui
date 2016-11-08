@@ -129,7 +129,7 @@ export default class DataTableBodyRow extends ShallowComponent {
                 }
             }
         }
-        return textOfValues.join("\n");
+        return textOfValues.join(", ");
     }
 
     __onClick() {
