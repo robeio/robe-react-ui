@@ -248,10 +248,7 @@ export default class DataGrid extends StoreComponent {
     __onDeleteConfirm() {
         this.props.onDeleteClick();
         this.__hideDeleteConfirm();
-
-        this.setState({
-            hasSelection: false
-        });
+        this.__clearSelection();
     }
     /**
      * @private
@@ -314,12 +311,13 @@ export default class DataGrid extends StoreComponent {
                 headers.push(
                     <Header
                         name={`tableColumn${this.getObjectId()}-${column.name}`}
+                        key={`tableColumn${this.getObjectId()}-${column.name}`}
                         field={column}
                         onFilterClick={this.__openFilterPopup}
                         onSortClick={this.__onSortClick}
                         filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
-                        />
+                    />
                 );
             }
         }
@@ -380,8 +378,10 @@ export default class DataGrid extends StoreComponent {
             } else {
                 rowsArr.push(
                     <DataTableBodyRow
-                        key={i} resources={this.props.resources}
+                        key={i}
+                        resources={this.props.resources}
                         fields={fields}
+                        idField={this.props.store.__props.idField}
                         data={row}
                         onSelection={this.__onSelection}
                         onClick={this.props.onClick}
@@ -397,6 +397,20 @@ export default class DataGrid extends StoreComponent {
         this.state.qfilter = event.target.value;
         this.activePage = 1;
         this.__readData();
+    }
+    __clearSelection() {
+        if (this.selection !== undefined) {
+            this.selection.setState({
+                selected: false
+            });
+        }
+        this.selection = undefined;
+        this.setState({
+            hasSelection: true
+        });
+        if (this.props.onSelection) {
+            this.props.onSelection(undefined);
+        }
     }
 
     __onSelection(selection: Object) {
@@ -436,6 +450,7 @@ export default class DataGrid extends StoreComponent {
     }
 
     __readData() {
+        this.__clearSelection();
         let queryParams = {
             q: this.state.qfilter,
             filters: this.__filters,

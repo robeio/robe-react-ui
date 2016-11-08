@@ -68,7 +68,7 @@ export default class DataTableBodyRow extends ShallowComponent {
             rowClassName = `${rowClassName}-selected`;
         }
         return (
-            <tr className={rowClassName} onClick={this.__onClick}>
+            <tr className={rowClassName} onClick={this.__onClick} key={row[this.props.idField]}>
                 {cells}
             </tr>
         );

@@ -81,8 +81,6 @@ export default class DataGridSample extends ShallowComponent {
         };
     }
 
-    static tableRef = "table";
-
     render(): Object {
         return (
             <span>
@@ -90,7 +88,7 @@ export default class DataGridSample extends ShallowComponent {
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
                     store={this.state.store1}
-                    ref={DataGridSample.tableRef}
+                    ref="table1"
                     toolbar={["create", "edit", "delete"]}
                     onNewClick={this.__add}
                     onEditClick={this.__edit}
@@ -98,7 +96,7 @@ export default class DataGridSample extends ShallowComponent {
                     exportButton={true}
                     editable={true}
                     modalConfirm={{ header: "Please do not delete me." }}
-                />
+                    />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -112,7 +110,7 @@ export default class DataGridSample extends ShallowComponent {
                     pagination={{ pageSize: 3 }}
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
-                />
+                    />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -128,7 +126,7 @@ export default class DataGridSample extends ShallowComponent {
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
                     cellRenderer={this.__cellRenderer}
-                />
+                    />
                 <ModalDataForm
                     header="Modal Data Form"
                     show={this.state.showModal}
@@ -137,29 +135,29 @@ export default class DataGridSample extends ShallowComponent {
                     item={this.state.item}
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                />
+                    />
             </span>
         );
     }
 
-    __add = () => {
+    __add() {
         let empty = {};
         this.__showModal(empty);
-    };
+    }
 
-    __edit = () => {
-        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
+    __edit() {
+        let selectedRows = this.refs.table1.getSelectedRows();
         if (!selectedRows || !selectedRows[0]) {
             return;
         }
         this.__showModal(selectedRows[0]);
-    };
+    }
 
-    __onCancel = () => {
+    __onCancel() {
         this.setState({ showModal: false });
-    };
+    }
 
-    __onSave = (newData, callback) => {
+    __onSave(newData, callback) {
         let id = newData[DataGridSample.idField];
         if (Assertions.isNotEmpty(id)) {
             this.state.store1.update(this.state.item, newData);
@@ -174,20 +172,20 @@ export default class DataGridSample extends ShallowComponent {
         }
 
         // this.refs[DataGridSample.tableRef].__readData();
-    };
+    }
 
-    __remove = () => {
-        let selectedRows = this.refs[DataGridSample.tableRef].getSelectedRows();
+    __remove() {
+        let selectedRows = this.refs.table1.getSelectedRows();
         console.log("removing ", selectedRows[0]);
-    };
+    }
 
-    __showModal = (newItem) => {
+    __showModal(newItem) {
         this.setState({ showModal: true, item: newItem });
-    };
+    }
 
     __cellRenderer(idx: number, fields: Array, row: Object) {
         if (fields[idx].visible !== false) {
-            return <td><FaIcon code={"fa-smile-o"} /> {row[fields[idx].name] }</td>;
+            return <td key={fields[idx].name}><FaIcon code={"fa-smile-o"} /> {row[fields[idx].name]}</td>;
         }
         return undefined;
     }
