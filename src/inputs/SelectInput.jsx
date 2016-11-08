@@ -97,6 +97,8 @@ export default class SelectInput extends ValidationComponent {
     _value;
     _onChange;
     __checkSelection;
+    focused = false;
+
     /**
      *
      * @param {Object} props
@@ -120,7 +122,7 @@ export default class SelectInput extends ValidationComponent {
     render(): Object {
         let validationResult = super.validationResult();
         let validationState = validationResult !== undefined ? "error" : undefined;
-        validationResult = this.isFocusedToInput ? validationResult : undefined;
+        validationResult = this.focused ? validationResult : undefined;
         return (
             <FormGroup hidden={this.props.hidden} style={this.props.style} validationState={validationState}>
                 <ControlLabel> {this.props.label} </ControlLabel>
@@ -208,7 +210,7 @@ export default class SelectInput extends ValidationComponent {
      */
     __onChangeSingle(value: string): boolean {
 
-        if (!value ||  value === "") {
+        if (!value || value === "") {
             value = undefined;
         }
 
@@ -252,6 +254,7 @@ export default class SelectInput extends ValidationComponent {
      */
     __callOnChange(value: any, oldValue: any): boolean {
         let result = true;
+        this.focused = true;
         if (this.props.onChange) {
             let e = {
                 target: {
@@ -264,4 +267,8 @@ export default class SelectInput extends ValidationComponent {
         }
         return result;
     }
+    isFocused(): boolean {
+        return this.focused;
+    }
+
 }

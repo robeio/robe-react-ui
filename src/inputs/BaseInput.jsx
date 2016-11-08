@@ -77,7 +77,7 @@ export default class BaseInput extends ValidationComponent {
     };
 
 
-    static isFocusedToInput = false;
+    isFocusedToInput = false;
 
     static refName = "innerInput";
 
