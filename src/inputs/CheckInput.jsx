@@ -111,7 +111,7 @@ export default class CheckInput extends ValidationComponent {
             <ControlLabel> {this.props.label} </ControlLabel>
         );
         let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : "";
+        let validationState = validationResult !== undefined ? "error" : undefined;
 
         return (
             <FormGroup hidden={this.props.hidden} validationState={validationState}>
@@ -172,7 +172,7 @@ export default class CheckInput extends ValidationComponent {
         }
 
         return (
-            <div value={value} className={`checkbox ${disabled}`} onClick={onClick} key={value}>
+            <div style={{ cursor: "pointer" }} value={value} className={`checkbox ${disabled}`} onClick={onClick} key={value}>
                 <label
                     htmlFor={name}
                     style={{ paddingLeft: "2px" }}

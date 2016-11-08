@@ -154,7 +154,7 @@ export default class RadioInput extends ValidationComponent {
 
         let onClick = this.__onClick.bind(this, value);
         return (
-            <div className={`radio ${disabled}`} onClick={onClick} key={value}>
+            <div style={{ cursor: "pointer" }} className={`radio ${disabled}`} onClick={onClick} key={value}>
                 <label
                     htmlFor={this.props.name}
                     style={{ paddingLeft: "2px" }}
