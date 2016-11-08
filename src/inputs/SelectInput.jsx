@@ -3,6 +3,7 @@ import Select from "react-select";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import "react-select/dist/react-select.css";
 import ValidationComponent from "../validation/ValidationComponent";
+import "./SelectInput.css";
 /**
  * Provide selection in map array data with single or multi choices
  * You can enable multi-value selection by setting multi={true}
@@ -117,8 +118,11 @@ export default class SelectInput extends ValidationComponent {
         this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
     }
     render(): Object {
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : undefined;
+        validationResult = this.isFocusedToInput ? validationResult : undefined;
         return (
-            <FormGroup hidden={this.props.hidden} style={this.props.style}>
+            <FormGroup hidden={this.props.hidden} style={this.props.style} validationState={validationState}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 <Select
                     options={this.props.items}
@@ -132,8 +136,8 @@ export default class SelectInput extends ValidationComponent {
                     value={this.props.value}
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
-                />
-                {super.validationResult()}
+                    />
+                {validationResult}
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
         );
@@ -185,7 +189,7 @@ export default class SelectInput extends ValidationComponent {
     isChecked = (value: string): boolean => {
         if (typeof value !== "undefined") {
             return this.props.multi ?
-            this._value.indexOf(value) !== -1 : this._value === value;
+                this._value.indexOf(value) !== -1 : this._value === value;
         }
         return !(!this._value) && (this.props.multi ? this._value.length > 0 : (this._value !== null && this._value !== ""));
     };
@@ -204,10 +208,10 @@ export default class SelectInput extends ValidationComponent {
      */
     __onChangeSingle(value: string): boolean {
 
-        if (!value || value === "") {
+        if (!value ||  value === "") {
             value = undefined;
         }
-      
+
         let result = this.__callOnChange(value, this._value);
         if (result) {
             this._value = value;

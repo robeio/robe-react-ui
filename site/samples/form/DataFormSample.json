@@ -95,7 +95,6 @@
     "label": "SelectInput",
     "name": "il",
     "type": "select",
-    "value": "21",
     "validations": {
       "required": true
     },
