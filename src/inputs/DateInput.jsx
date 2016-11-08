@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"; // eslint-disable-line import/no-extraneous-dependencies
 import ValidationComponent from "../validation/ValidationComponent";
-import ReactDOM from "react-dom";
 
 import "./DateInput.css";
 
@@ -43,7 +42,12 @@ export default class DateInput extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+
+        /**
+         * it is key for localization
+         */
+        locale: React.PropTypes.string
     };
 
     /**
@@ -54,12 +58,18 @@ export default class DateInput extends ValidationComponent {
         format: "DD/MM/YYYY",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        locale: "en",
     };
 
     static refName = "innerInput";
 
     focused = false;
+
+    constructor(props: Object) {
+        super(props);
+        moment.locale(this.props.locale);
+    }
 
 
     render(): Object {
@@ -68,7 +78,7 @@ export default class DateInput extends ValidationComponent {
         let label = this.props.label === undefined ? <span /> :
             <ControlLabel className="control-label">{this.props.label}</ControlLabel>;
         let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : "";
+        let validationState = validationResult !== undefined ? "error" : undefined;
         validationResult = this.isFocused() ? validationResult : undefined;
         return (
             <FormGroup hidden={this.props.hidden} validationState={validationState} >
@@ -86,7 +96,6 @@ export default class DateInput extends ValidationComponent {
                     maxDate={this.props.maxDate}
                     startDate={this.props.startDate}
                     endDate={this.props.endDate}
-                    showTodayButton={"Bugün"}
                     dateFormat={this.props.format}
                 />
                 {validationResult}
