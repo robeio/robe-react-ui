@@ -25,7 +25,7 @@ export default class HtmlEditorSample extends ShallowComponent {
                     value={this.state.HtmlEditorValidations}
                     onChange={this.__handleChange.bind(this, "HtmlEditorValidations")}
                     validations={{
-                        required: true
+                        htmlRequired: true
                     }}
                 />
             </div>

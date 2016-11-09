@@ -1,6 +1,6 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import Col from "react-bootstrap/lib/Col";
+import { FormGroup, ControlLabel, Col } from "react-bootstrap";
 import ValidationComponent from "../../validation/ValidationComponent";
 import "./quill.snow.css";
 import "./HtmlEditor.css";
@@ -64,32 +64,37 @@ export default class HtmlEditor extends ValidationComponent {
 
     static refName = "editor";
     static toolbarRefName = "toolbar";
+    focused = false;
 
 
     render(): Object {
+        let validationResult = super.validationResult();
+        let validationState = validationResult !== undefined ? "error" : undefined;
+        validationResult = this.isFocused() ? validationResult : undefined;
         return (
-            <Col className="form-group" hidden={this.props.hidden}>
-                <Col componentClass="label" className="control-label"><span>{this.props.label}</span></Col>
+            <FormGroup className="form-group" hidden={this.props.hidden} validationState={validationState}>
+                <ControlLabel componentClass="label" className="control-label"><span>{this.props.label}</span></ControlLabel>
                 <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
                     <ReactQuill.Toolbar
                         key="toolbar"
                         ref={HtmlEditor.toolbarRefName}
                         items={HtmlEditorItems}
-                    />
+                        />
                     <Col
                         key="editor"
                         ref={HtmlEditor.refName}
                         style={{ height: this.props.height }}
                         className="quill-contents"
-                    />
+                        />
                 </ReactQuill>
-                {super.validationResult()}
+                {validationResult}
 
-            </Col>
+            </FormGroup>
         );
     }
 
     __onChange(value: string) {
+        this.focused = true;
         const e = {};
         e.target = {};
         e.target.parsedValue = value;
@@ -98,4 +103,15 @@ export default class HtmlEditor extends ValidationComponent {
             this.props.onChange(e);
         }
     }
+
+
+    /**
+   * Returns true if the field is the focused field at the document
+   * @returns {boolean}
+   * @memberOf BaseInput
+   */
+    isFocused(): boolean {
+        return this.focused;
+    }
+
 }

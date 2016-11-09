@@ -360,7 +360,6 @@ export default class DataGrid extends StoreComponent {
                 }
             );
         }
-        console.log(filterArr);
         this.__filters = filterArr;
         this.__readData();
     }
@@ -388,7 +387,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                        />);
+                    />);
             }
         }
         return rowsArr;
