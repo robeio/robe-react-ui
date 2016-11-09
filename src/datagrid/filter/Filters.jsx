@@ -71,8 +71,8 @@ export default class Filters extends ShallowComponent {
                         <Popover id="popover" placement="top" >
                             <Filter field={field} value={this.state[field.name]} onChange={this.__onChange} />
                             <ButtonGroup bsSize="xsmall" className="pull-right" style={{ marginBottom: "15px" }}>
-                                <Button bsStyle="danger" onClick={onClear}>Clear</Button>
-                                <Button bsStyle="danger" onClick={this.__onClearAll}>Clear All</Button>
+                                <Button bsStyle="danger" onClick={onClear}>{this.props.clearButtonText}</Button>
+                                <Button bsStyle="danger" onClick={this.__onClearAll}>{this.props.clearAllButtonText}</Button>
                             </ButtonGroup>
                         </Popover>
                     </Overlay>);

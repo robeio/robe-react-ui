@@ -96,7 +96,8 @@ export default class DataGridSample extends ShallowComponent {
                     exportButton={true}
                     editable={true}
                     modalConfirm={{ header: "Please do not delete me." }}
-                    />
+                    filter={{ clearButtonText: "Clear 1", clearAllButtonText: "Clear All Filters" }}
+                />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -110,7 +111,7 @@ export default class DataGridSample extends ShallowComponent {
                     pagination={{ pageSize: 3 }}
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
-                    />
+                />
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}

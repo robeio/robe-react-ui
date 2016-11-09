@@ -108,7 +108,15 @@ export default class DataGrid extends StoreComponent {
          * Render method for the cell. Use for custom cell templates.
          * Default row template will call for every cell render event.
          */
-        cellRenderer: React.PropTypes.func
+        cellRenderer: React.PropTypes.func,
+
+        /**
+         * Filter properties of the grid.
+         */
+        filter: React.PropTypes.shape({
+            clearButtonText: React.PropTypes.string,
+            clearAllButtonText: React.PropTypes.string
+        }),
     };
 
     /**
@@ -141,7 +149,11 @@ export default class DataGrid extends StoreComponent {
             message: "The selected entry will be deleted.You can not be undone.",
             okButtonText: "Yes",
             cancelButtonText: "No"
-        }
+        },
+        filter: {
+            clearButtonText: "Clear",
+            clearAllButtonText: "Clear All",
+        },
     };
 
     activePage = 1;
@@ -190,7 +202,7 @@ export default class DataGrid extends StoreComponent {
                         <SearchField onChange={this.__onSearchChanged} value={this.state.qfilter} visible={this.props.searchable} />
                     </Col>
                     <Col xs={7} sm={7} lg={8}>
-                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig() } />
+                        <ActionButtons visible={this.props.editable} items={this.__getToolbarConfig()} />
                     </Col>
 
                 </Row>
@@ -199,16 +211,18 @@ export default class DataGrid extends StoreComponent {
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
-                    idCount={this.getObjectId() }
+                    idCount={this.getObjectId()}
+                    clearButtonText={this.props.filter.clearButtonText}
+                    clearAllButtonText={this.props.filter.clearAllButtonText}
                     />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
-                            {this.__generateHeader(this.props.fields) }
+                            {this.__generateHeader(this.props.fields)}
                         </tr>
                     </thead>
                     <tbody>
-                        {this.__generateRows(this.__fields, this.state.rows) }
+                        {this.__generateRows(this.__fields, this.state.rows)}
                     </tbody>
                 </Table>
                 {this.props.pagination === undefined ? undefined :
@@ -224,7 +238,7 @@ export default class DataGrid extends StoreComponent {
                         totalCount={this.state.totalCount}
                         />)
                 }
-                {this.__renderModalConfirm() }
+                {this.__renderModalConfirm()}
             </Col>
         );
     }
@@ -317,7 +331,7 @@ export default class DataGrid extends StoreComponent {
                         onSortClick={this.__onSortClick}
                         filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
-                    />
+                        />
                 );
             }
         }
@@ -356,7 +370,9 @@ export default class DataGrid extends StoreComponent {
             Maps.forEach(
                 this.refs.filters.state.filters,
                 (a: string) => {
-                    filterArr.push(a);
+                    if (a !== undefined) {
+                        filterArr.push(a);
+                    }
                 }
             );
         }
@@ -387,7 +403,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                    />);
+                        />);
             }
         }
         return rowsArr;
