@@ -54,7 +54,7 @@ class ComponentList {
 
         components.push({
             header: "SelectInput",
-            desc: "is the input fields to provide selection items from given array items",
+            desc: "is the input field to provide selection items from given array items",
             json: require("../docs/inputs/SelectInput"),
             sample: require("../samples/inputs/SelectInputSample"),
             code: require("../samples/inputs/SelectInputSample.txt")
@@ -62,7 +62,7 @@ class ComponentList {
 
         components.push({
             header: "CheckInput",
-            desc: "is the input fields to provide check given item",
+            desc: "is the input field to provide check given item",
             json: require("../docs/inputs/CheckInput"),
             sample: require("../samples/inputs/CheckInputSample"),
             code: require("../samples/inputs/CheckInputSample.txt")
@@ -70,7 +70,7 @@ class ComponentList {
 
         components.push({
             header: "RadioInput",
-            desc: "is the input fields to provide check given item",
+            desc: "is the input field to provide check given item",
             json: require("../docs/inputs/RadioInput"),
             sample: require("../samples/inputs/RadioInputSample"),
             code: require("../samples/inputs/RadioInputSample.txt")
@@ -115,7 +115,7 @@ class ComponentList {
 
         components.push({
             header: "Notification",
-            desc: " is an notification component with total count and popup list.",
+            desc: " is a notification component with total count and popup list.",
             json: require("../docs/notification/Notification.json"),
             sample: require("../samples/notification/NotificationSample"),
             code: require("../samples/notification/NotificationSample.txt")
@@ -129,7 +129,7 @@ class ComponentList {
          */
         components.push({
             header: "Toast",
-            desc: " is an Toast Message Sample component.",
+            desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
             json: {
                 methods: [
                     { name: "info", description: "Toast.info(message, title, timeOut, callback)" },
@@ -144,7 +144,7 @@ class ComponentList {
 
         components.push({
             header: "FileUploadInput",
-            desc: " is an File Upload Component",
+            desc: " is a File Upload Component",
             json: require("../docs/inputs/upload/FileUploadInput.json"),
             sample: require("../samples/inputs/FileUploadInputSample"),
             code: require("../samples/inputs/FileUploadInputSample.txt")
@@ -152,7 +152,7 @@ class ComponentList {
 
         components.push({
             header: "Wizard",
-            desc: " is a multipage wizard component",
+            desc: " is a multipage wizard component. You can use this component to navigate user through long forms/processes step by step. It collects all data from the steps and gives you at finish stage.",
             json: require("../docs/wizard/Wizard.json"),
             sample: require("../samples/wizard/WizardSample"),
             code: require("../samples/wizard/WizardSample.txt")
@@ -176,7 +176,7 @@ class ComponentList {
 
         components.push({
             header: "DataGrid",
-            desc: " is a smart grid",
+            desc: " is a smart grid with filter, sort, search capabilities.",
             json: require("../docs/datagrid/DataGrid.json"),
             sample: require("../samples/datagrid/DataGridSample"),
             code: require("../samples/datagrid/DataGridSample.txt")
@@ -184,14 +184,14 @@ class ComponentList {
 
         components.push({
             header: "DataForm",
-            desc: "is  an DataForm to create or edit data",
+            desc: "is a form component which is generated from model to create or edit data.",
             json: require("../docs/form/DataForm"),
             sample: require("../samples/form/DataFormSample"),
             code: require("../samples/form/DataFormSample.txt")
         });
         components.push({
             header: "ModalDataForm",
-            desc: " is an ModalDataForm component submit editing data.",
+            desc: " is an modal component which opens a DataForm inside.",
             json: require("../docs/form/ModalDataForm.json"),
             sample: require("../samples/form/ModalDataFormSample"),
             code: require("../samples/form/ModalDataFormSample.txt")
@@ -199,7 +199,7 @@ class ComponentList {
 
         components.push({
             header: "StackLayout",
-            desc: " is an layout component which supports list and thumbnail view.",
+            desc: " is a layout component which supports list and thumbnail view.",
             json: require("../docs/layouts/StackLayout.json"),
             sample: require("../samples/layouts/StackLayoutSample"),
             code: require("../samples/layouts/StackLayoutSample.txt")
@@ -207,10 +207,16 @@ class ComponentList {
 
         components.push({
             header: "Validation",
-            desc: " is an built-in utility which can be used directly or via DataForm model.",
-            // json: require("../docs/validation/Validation.json"),
+            desc: " is a built-in utility which can be used directly or via DataForm model.",
             sample: require("../samples/validation/ValidationSample"),
             code: require("../samples/validation/ValidationSample.txt")
+        });
+
+         components.push({
+            header: "Model (for DataForm & DataGrid)",
+            desc: " is a built-in mechanism which is used by DataGrid and Dataform.",
+            sample: require("../samples/model/ModelSample"),
+            code: require("../samples/model/ModelSample.txt")
         });
         return components;
     }

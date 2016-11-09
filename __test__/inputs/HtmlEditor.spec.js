@@ -12,9 +12,7 @@ describe("inputs/htmleditor/HtmlEditor", () => {
                 value={props.value !== undefined ? props.value : "This is some example text must be equals with HtmlEditor value"}
                 onChange={props.onChange}
                 validations={{
-                    required: (value: any): Array => {
-                        return (value === undefined || value === null || value === "") ? "Not Valid" : undefined;
-                    }
+                    htmlRequired: true
                 }}
             />
         );
@@ -24,7 +22,7 @@ describe("inputs/htmleditor/HtmlEditor", () => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({}));
         chai.assert.equal(componentNode.props.label, "HtmlEditor Label Text Example");
         chai.assert.equal(componentNode.props.value, "This is some example text must be equals with HtmlEditor value");
-        chai.assert.isDefined(componentNode.props.validations.required, "Validation prop error");
+        chai.assert.isDefined(componentNode.props.validations.htmlRequired, "Validation prop error");
     });
 
     it("'validations' Control", () => {
@@ -33,10 +31,8 @@ describe("inputs/htmleditor/HtmlEditor", () => {
             }
         }));
         chai.assert.equal(componentNode.isValid(), true);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 0);// eslint-disable-line react/no-find-dom-node
         // Must be invalid
         componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
         chai.assert.equal(componentNode.isValid(), false);
-        chai.assert.equal(ReactDOM.findDOMNode(componentNode).getElementsByClassName("input-alert").length, 1);// eslint-disable-line react/no-find-dom-node
     });
 });
