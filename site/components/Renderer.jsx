@@ -62,7 +62,7 @@ export default class Renderer extends ShallowComponent {
         let codeSection = this.props.code ?
             (<div>
                 {highlight}
-                <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>)
+                <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
             </div>) : undefined;
         return (
             <div>
