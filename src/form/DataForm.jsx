@@ -121,7 +121,7 @@ export default class DataForm extends ShallowComponent {
         }
 
         this.__props[name] = props;
-        this.state[name] = this.__item[name];
+        this.state[name] = this.__item[name] || this.__props[name].value;
     }
 
     render(): Object {
