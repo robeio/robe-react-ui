@@ -6,18 +6,10 @@ import {
 import {
     ShallowComponent
 } from "robe-react-commons";
-import TextInput from "robe-react-ui/lib/inputs/TextInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 import Highlight from "react-highlight";
 import ex1 from "./Snippet1.txt";
-import ex2 from "./Snippet2.txt";
-
 
 export default class ModelSample extends ShallowComponent {
-
-    constructor(props: Object) {
-        super(props);
-    }
 
     render(): Object {
         return (

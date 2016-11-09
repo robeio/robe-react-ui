@@ -15,7 +15,7 @@ class ComponentList {
             sample: require("../samples/inputs/TextInputSample"),
             code: require("../samples/inputs/TextInputSample.txt")
         });
-         components.push({
+        components.push({
             header: "TextArea",
             desc: "is the large input field to collect multi line text data from form.",
             json: require("../docs/inputs/TextArea"),
@@ -208,15 +208,13 @@ class ComponentList {
         components.push({
             header: "Validation",
             desc: " is a built-in utility which can be used directly or via DataForm model.",
-            sample: require("../samples/validation/ValidationSample"),
-            code: require("../samples/validation/ValidationSample.txt")
+            sample: require("../samples/validation/ValidationSample")
         });
 
-         components.push({
+        components.push({
             header: "Model (for DataForm & DataGrid)",
             desc: " is a built-in mechanism which is used by DataGrid and Dataform.",
-            sample: require("../samples/model/ModelSample"),
-            code: require("../samples/model/ModelSample.txt")
+            sample: require("../samples/model/ModelSample")
         });
         return components;
     }

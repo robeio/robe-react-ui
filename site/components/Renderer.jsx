@@ -58,6 +58,12 @@ export default class Renderer extends ShallowComponent {
                 {this.props.code}
             </Highlight>);
         }
+
+        let codeSection = this.props.code ?
+            (<div>
+                {highlight}
+                <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>)
+            </div>) : undefined;
         return (
             <div>
                 <h3>{this.props.header}</h3>
@@ -65,8 +71,7 @@ export default class Renderer extends ShallowComponent {
                 <h4>Examples</h4>
                 <Panel>
                     <this.props.sample.default />
-                    {highlight}
-                    <Button bsStyle="link" bsSize="xsmall" className="pull-right" onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
+                    {codeSection}
                 </Panel>
                 <h4>{this.props.json.props ? "Props" : ""}</h4>
                 {this.__renderPropsTable(this.props.json.props)}
