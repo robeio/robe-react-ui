@@ -79,6 +79,9 @@ export default class Filter extends ShallowComponent {
                 case "string":
                     filter = [name, "~=", value];
                     break;
+                case "text":
+                    filter = [name, "~=", value];
+                    break;
                 case "number":
                     filter = [name, "=", value];
                     break;
