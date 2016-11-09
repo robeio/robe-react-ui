@@ -15,6 +15,13 @@ class ComponentList {
             sample: require("../samples/inputs/TextInputSample"),
             code: require("../samples/inputs/TextInputSample.txt")
         });
+         components.push({
+            header: "TextArea",
+            desc: "is the large input field to collect multi line text data from form.",
+            json: require("../docs/inputs/TextArea"),
+            sample: require("../samples/inputs/TextAreaSample"),
+            code: require("../samples/inputs/TextAreaSample.txt")
+        });
         components.push({
             header: "PasswordInput",
             desc: "is the default input field to collect password data from form.",

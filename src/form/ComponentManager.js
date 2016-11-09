@@ -60,6 +60,8 @@ class ComponentManager {
         switch (componentType) {
             case "string":
                 return Input.TextInput;
+            case "text":
+                return Input.TextArea;
             case "number":
                 return Input.NumericInput;
             case "decimal":
@@ -80,7 +82,7 @@ class ComponentManager {
                 return Input.HtmlEditor;
             case "file":
                 return Input.FileUploadInput;
-            default :
+            default:
                 throw new Error(`Unknown ${componentType} type !`);
         }
     }
