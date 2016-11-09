@@ -360,7 +360,8 @@ export default class DataGrid extends StoreComponent {
                 }
             );
         }
-        this.__filters = filterArr.join(",");
+        console.log(filterArr);
+        this.__filters = filterArr;
         this.__readData();
     }
 

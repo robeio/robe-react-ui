@@ -17,7 +17,8 @@ export default class Filter extends ShallowComponent {
     }
 
     render(): Object {
-        let field = this.props.field;
+        let field = Objects.deepCopy(this.props.field);
+        field.validations = undefined;
         let name = field.name;
         let Component = ComponentManager.findComponentByType(field.type);
         let style = {};
@@ -37,7 +38,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref`}
                     value={this.props.value}
                     onChange={this.__handleChange}
-                />);
+                    />);
         }
         let fieldMin = Objects.deepCopy(field);
         fieldMin.name += "-min";
@@ -55,7 +56,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-min`}
                     value={value[0]}
                     onChange={minOnChange}
-                />
+                    />
                 <Component
                     {...fieldMax}
                     style={style}
@@ -63,7 +64,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-max`}
                     value={value[1]}
                     onChange={maxOnChange}
-                />
+                    />
             </div>
         );
     }
@@ -72,35 +73,35 @@ export default class Filter extends ShallowComponent {
         let field = this.props.field;
         let name = field.name;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        let filter = "";
+        let filter = [];
         if (value !== "" && value !== undefined && value !== null) {
             switch (field.type) {
                 case "string":
-                    filter = `${name}~=${value}`;
+                    filter = [name, "~=", value];
                     break;
                 case "number":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "decimal":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "date":
-                    filter = `${name}>=${value}`;
+                    filter = [name, ">=", value];
                     break;
                 case "password":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "money":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "radio":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "select":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 case "check":
-                    filter = `${name}=${value}`;
+                    filter = [name, "=", value];
                     break;
                 default:
                     return true;
