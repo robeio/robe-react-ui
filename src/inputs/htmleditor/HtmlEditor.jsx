@@ -1,4 +1,5 @@
 import React from "react";
+import { findDOMNode } from "react-dom";
 import ReactQuill from "react-quill";
 import { FormGroup, ControlLabel, Col } from "react-bootstrap";
 import ValidationComponent from "../../validation/ValidationComponent";
@@ -48,7 +49,12 @@ export default class HtmlEditor extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+
+         /**
+         * it specifies that an input field height be auto resize
+         */
+        autoResize: React.PropTypes.bool
     };
 
     /**
@@ -59,7 +65,8 @@ export default class HtmlEditor extends ValidationComponent {
         height: 100,
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        autoResize: false
     };
 
     static refName = "editor";
@@ -79,18 +86,34 @@ export default class HtmlEditor extends ValidationComponent {
                         key="toolbar"
                         ref={HtmlEditor.toolbarRefName}
                         items={HtmlEditorItems}
-                        />
+                    />
                     <Col
                         key="editor"
                         ref={HtmlEditor.refName}
-                        style={{ height: this.props.height }}
+                        onKeyUp={this.props.autoResize ? this.__resize : undefined}
+                        style={{ height: this.props.height, minHeight: this.props.height }}
                         className="quill-contents"
-                        />
+                    />
                 </ReactQuill>
                 {validationResult}
 
             </FormGroup>
         );
+    }
+
+    __resize() {
+        let element = findDOMNode(this).children[1].children[1];
+        if (element) {
+            let height = element.scrollHeight;
+            let propHeight = this.props.height;
+
+            if (height > propHeight) {
+                element.style.height = "auto";
+            } else {
+                element.style.height = `${propHeight}px`;
+            }
+            element.style.maxHeight = `${height}px`;
+        }
     }
 
     __onChange(value: string) {

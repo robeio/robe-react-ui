@@ -8,26 +8,35 @@ export default class HtmlEditorSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            HtmlEditorNormal: "Some Text"
+            HtmlEditorNormal: "Some Text",
+            HtmlEditorAutoReize: ""
         };
     }
 
     render() {
         return (
             <div>
-                <HtmlEditor
-                    label="HtmlEditor"
-                    value={this.state.HtmlEditorNormal}
-                    onChange={this.__handleChange.bind(this, "HtmlEditorNormal")}
-                />
-                <HtmlEditor
-                    label="With Validations"
-                    value={this.state.HtmlEditorValidations}
-                    onChange={this.__handleChange.bind(this, "HtmlEditorValidations")}
-                    validations={{
+             <HtmlEditor
+                 label="HtmlEditor"
+                 value={this.state.HtmlEditorNormal}
+                 onChange={this.__handleChange.bind(this, "HtmlEditorNormal")}
+             />
+            <HtmlEditor
+                label="HtmlEditor with AutoReize and Height"
+                value={this.state.HtmlEditorAutoReize}
+                autoResize
+                height={150}
+                onChange={this.__handleChange.bind(this, "HtmlEditorAutoReize")}
+            />
+            <HtmlEditor
+                label="With Validations"
+                value={this.state.HtmlEditorValidations}
+                onChange={this.__handleChange.bind(this, "HtmlEditorValidations")}
+                validations={{
                         htmlRequired: true
                     }}
-                />
+            />
+                
             </div>
         );
     }
