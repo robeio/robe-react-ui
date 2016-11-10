@@ -66,9 +66,9 @@ export default class RadioInput extends ValidationComponent {
          */
         hidden: React.PropTypes.bool,
         /**
-         * it specifies that an input fields is inline or not
+         * it specifies that an radios will be horizontal or not.
          */
-        inline: React.PropTypes.bool,
+        horizontal: React.PropTypes.bool,
     };
 
     /**
@@ -81,7 +81,8 @@ export default class RadioInput extends ValidationComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        inline: false
+        inline: false,
+        horizontal: false,
     };
 
     /**
@@ -91,17 +92,15 @@ export default class RadioInput extends ValidationComponent {
      **/
     render(): Object {
         this._value = this.props.value;
-        let inlineClass = this.props.inline ? "form-inline" : undefined;
+        let inlineClass = this.props.inline || this.props.horizontal ? "form-inline" : undefined;
         let validationResult = super.validationResult();
         let validationState = validationResult !== undefined ? "error" : undefined;
         return (
             <div className={inlineClass}>
                 <FormGroup validationState={validationState}>
                     <ControlLabel> {this.props.label} </ControlLabel>
-                    {
-                        this.__createRadioBoxes(this.props.items)
-                    }
-                    {super.validationResult() }
+                    <div style={{ minHeight: "34px", paddingTop: this.props.horizontal ? "6px" : "0px" }}>{this.__createRadioBoxes(this.props.items)}</div>
+                    {super.validationResult()}
                 </FormGroup>
             </div>
         );
@@ -147,7 +146,7 @@ export default class RadioInput extends ValidationComponent {
                 name={this.props.name}
                 value={value}
                 disabled={!isChecked}
-            />
+                />
         ) : undefined;
 
         let onClick = this.__onClick.bind(this, value);
@@ -156,7 +155,7 @@ export default class RadioInput extends ValidationComponent {
                 <label
                     htmlFor={this.props.name}
                     style={{ paddingLeft: "2px" }}
-                >
+                    >
                     <FaIcon code={`${icon} state-icon`} size={"fa-lg"} />
                 </label> {text}
                 {input}

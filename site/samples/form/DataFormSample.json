@@ -18,7 +18,9 @@
         "message": "This is a custom required message."
       },
       "minValue": {
-        "args": [5]
+        "args": [
+          5
+        ]
       }
     }
   },
@@ -50,6 +52,7 @@
     "label": "Radio Input",
     "name": "gender",
     "type": "radio",
+    "horizontal": true,
     "validations": {
       "required": true
     },

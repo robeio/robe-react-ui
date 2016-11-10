@@ -99,7 +99,7 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.54",
+    "robe-react-commons": "1.0.55",
     "moment": "2.15.2"
   }
 }
