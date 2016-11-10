@@ -1,7 +1,7 @@
 import React from "react";
+import { findDOMNode } from "react-dom";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Input from "./BaseInput";
-
 /**
  * TextArea is a component for default one lined text inputs.
  *
@@ -43,7 +43,11 @@ export default class TextArea extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+         /**
+         * it specifies that an input field height be auto resize
+         */
+        autoResize: React.PropTypes.bool
     };
 
     /**
@@ -54,6 +58,7 @@ export default class TextArea extends ShallowComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
+        autoResize: false,
         value: ""
     };
 
@@ -69,6 +74,7 @@ export default class TextArea extends ShallowComponent {
                 {...this.props}
                 onChange={this.__onChange}
                 type="textarea"
+                onKeyDown={this.props.autoResize ? this.__resize : undefined}
                 componentClass="textarea"
                 ref={TextArea.refName}
             />);
@@ -80,6 +86,24 @@ export default class TextArea extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[TextArea.refName].isValid();
+    }
+
+    __resize() {
+        let element = findDOMNode(this).children[1];
+        if (element) {
+            setTimeout(() => {
+                let minHeight;
+                if (this.props.style && this.props.style.minHeight) {
+                    minHeight = this.props.style.minHeight;
+                } else {
+                    minHeight = 56;
+                }
+                element.style.height = "auto";
+                element.style.minHeight = `${minHeight}px`;
+                let height = element.scrollHeight;
+                element.style.height = `${height}px`;
+            }, 0);
+        }
     }
 
     /**

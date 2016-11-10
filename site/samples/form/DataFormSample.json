@@ -111,9 +111,18 @@
         "text": "Diyarbakır"
       },
       {
-        "value": "06",
+        "value": "6",
         "text": "Ankara"
       }
     ]
+  },
+  {
+    "label": "SelectInput Cascading From SelectInput",
+    "name": "ilce",
+    "type": "select",
+    "validations": {
+      "required": true
+    },
+    "items": []
   }
 ]

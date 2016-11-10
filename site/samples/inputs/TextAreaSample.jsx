@@ -8,7 +8,8 @@ export default class TextAreaSample extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            TextAreaNormal: "Some Text"
+            TextAreaNormal: "Some Text",
+            TextAreaAutoResize: ""
         };
     }
 
@@ -30,6 +31,13 @@ export default class TextAreaSample extends ShallowComponent {
                             args: [3]
                         }
                     }}
+                />
+                <TextArea
+                    label="TextArea With AutoResize And MinHeight"
+                    autoResize
+                    style={{ minHeight: 100 }}
+                    value={this.state.TextAreaAutoResize}
+                    onChange={this.__handleChange.bind(undefined, "TextAreaAutoResize")}
                 />
             </div>
         );
