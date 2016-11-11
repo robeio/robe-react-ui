@@ -1,8 +1,16 @@
 [
   {
-    "label": "String Input",
+    "label": "String Input (With regex validation)",
     "name": "username",
-    "type": "string"
+    "type": "string",
+    "validations":{
+      "regex": {
+        "message": "Only letter",
+        "args": [
+          "^[a-zA-Z\\s\\ç\\Ç\\ö\\Ö\\ş\\Ş\\ı\\İ\\ğ\\Ğ\\ü\\Ü]+$"
+        ]
+      }
+    }
   },
   {
     "label": "Password Input",

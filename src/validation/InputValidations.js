@@ -68,6 +68,16 @@ class InputValidations {
             }) : undefined;
         return result;
     }
+    regex = (regex: string, value: any, code: string): string => {
+        let message = Application.i18n("validation").regex;
+        /* eslint-disable no-eval */
+        return !(new RegExp(regex).test(value)) ?
+            template(message, {
+                value: value,
+                code: code,
+                regex: regex
+            }) : undefined;
+    }
 
 }
 
