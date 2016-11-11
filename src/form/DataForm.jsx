@@ -83,12 +83,7 @@ export default class DataForm extends ShallowComponent {
 
     constructor(props: Object) {
         super(props);
-        if (props.item) {
-            this.__isNew = false;
-            this.__item = Object.assign({}, props.item);
-        }
-        this.state = {};
-        this.__init(this.props.fields, this.props.propsOfFields);
+        this.componentWillReceiveProps(this.props);
     }
 
     __init(fields: Array, config: Object) {
@@ -233,5 +228,14 @@ export default class DataForm extends ShallowComponent {
      */
     getItem = (): Map => {
         return this.__item;
+    }
+
+    componentWillReceiveProps(nextProps: Object) {
+        if (nextProps.item) {
+            this.__isNew = false;
+            this.__item = Object.assign({}, nextProps.item);
+        }
+        this.state = {};
+        this.__init(nextProps.fields, nextProps.propsOfFields);
     }
 }
