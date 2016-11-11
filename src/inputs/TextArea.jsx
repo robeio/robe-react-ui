@@ -74,7 +74,7 @@ export default class TextArea extends ShallowComponent {
                 {...this.props}
                 onChange={this.__onChange}
                 type="textarea"
-                onKeyDown={this.props.autoResize ? this.__resize : undefined}
+                onKeyUp={this.props.autoResize ? this.__resize : undefined}
                 componentClass="textarea"
                 ref={TextArea.refName}
             />);
@@ -91,18 +91,16 @@ export default class TextArea extends ShallowComponent {
     __resize() {
         let element = findDOMNode(this).children[1];
         if (element) {
-            setTimeout(() => {
-                let minHeight;
-                if (this.props.style && this.props.style.minHeight) {
-                    minHeight = this.props.style.minHeight;
-                } else {
-                    minHeight = 56;
-                }
-                element.style.height = "auto";
-                element.style.minHeight = `${minHeight}px`;
-                let height = element.scrollHeight;
-                element.style.height = `${height}px`;
-            }, 0);
+            let minHeight;
+            if (this.props.style && this.props.style.minHeight) {
+                minHeight = this.props.style.minHeight;
+            } else {
+                minHeight = 56;
+            }
+            element.style.height = "auto";
+            element.style.minHeight = `${minHeight}px`;
+            let height = element.scrollHeight;
+            element.style.height = `${height}px`;
         }
     }
 
