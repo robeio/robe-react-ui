@@ -90,9 +90,7 @@ describe("util/FileManager", () => {
         });
     });
 
-    let uploadedFiles = null;
-
-    it("upload", (done) => {
+    it("upload & delete", (done) => {
         let manager = new FileManager({
             url: filesUrl
         });
@@ -111,75 +109,26 @@ describe("util/FileManager", () => {
             "files",
             [blob, blob2],
             (response) => {
-                uploadedFiles = response;
                 chai.assert.equal(response.length, 2);
-                done();
+                let uploadedFiles = [response[0].filename, response[1].filename];
+                manager.delete(
+                    uploadedFiles,
+                    (response2) => {
+                        chai.assert.equal(response2.length, 2);
+                        done();
+                    },
+                    (error) => {
+                        chai.assert.isOk(false, "File couldn't delete ! Detail : ", error);
+                        done(error);
+                    }
+                );
             },
             (error) => {
                 chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
-                done();
+                done(error);
             }
         );
     });
 
-    it("uploadFile", (done) => {
-
-        let manager = new FileManager({
-            url: filesUrl
-        });
-
-        /**
-         * {
-         *  fieldname: 'files',
-            originalname: 'blob',
-            encoding: '7bit',
-            mimetype: 'plain/text',
-            filename: 'a2f401e2-c7f1-d012-8abd-8474c803e7ba',
-            destination: '/Users/kamilbukum/DEV/robe/robe-react-ui/data/upload',
-            path: '/Users/kamilbukum/DEV/robe/robe-react-ui/data/upload/a2f401e2-c7f1-d012-8abd-8474c803e7ba',
-            size: 11
-            }
-         */
-        let blob = new Blob(["Lorem ipsum"], {
-            type: "plain/text",
-            filename: "Single File 1"
-        });
-
-
-        manager.uploadFile(
-            "files",
-            blob,
-            (response) => {
-                uploadedFiles = uploadedFiles ? uploadedFiles.concat(response) : response;
-                chai.assert.equal(response.length, 1);
-                done();
-            },
-            (error) => {
-                chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
-                done();
-            }
-        );
-    });
-
-    it("delete", (done) => {
-        let manager = new FileManager({
-            url: filesUrl
-        });
-        let keys = [];
-        for (let i = 0; i < uploadedFiles.length; i++) {
-            keys[i] = uploadedFiles[i].filename;
-        }
-        manager.delete(
-            keys,
-            (response) => {
-                chai.assert.equal(response.length, 3);
-                done();
-            },
-            (error) => {
-                chai.assert.isOk(false, "File couldn't upload ! Detail : ", error);
-                done();
-            }
-        );
-    });
 });
 

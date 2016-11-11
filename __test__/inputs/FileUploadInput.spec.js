@@ -203,28 +203,25 @@ describe("inputs/upload/FileUploadInput", () => {
             remote: remoteProps,
             onError: (error) => {
                 chai.assert.isOk(false, `FileInput Error -> ${error}`);
-                done();
-            }
-        };
-
-        let deleteProps = {
-            onChange: (e) => {
-                chai.assert.deepEqual(e.target.oldValue, deleteProps.value, "Old Value must has more than one files which files uploaded.");
-                chai.assert.deepEqual(e.target.value, [], "New Value must be an empty array");
-                done();
+                done(error);
             }
         };
 
         let wrapper = null;
         let uploadProps = {
             onChange: (e) => {
-                chai.assert.deepEqual(e.target.oldValue, [], "Old Value must be an empty array ! ");
-                chai.assert.equal(e.target.value.length, 1);
-                deleteProps.value = e.target.value;
-                wrapper = TestUtils.mount(deleteProps, FileUploadInput, defProps);
-                wrapper.instance().deleteItem({
-                    filename: deleteProps.value[0]
-                });
+                if (e.target.event === "upload") {
+                    chai.assert.deepEqual(e.target.oldValue, [], "Old Value must be an empty array ! ");
+                    chai.assert.equal(e.target.value.length, 1);
+                    console.log(e);
+                    wrapper.instance().deleteItem({
+                        filename: e.target.value[0]
+                    });
+                } else if (e.target.event === "delete") {
+                    // chai.assert.deepEqual(e.target.oldValue, deleteProps.value, "Old Value must has more than one files which files uploaded.");
+                    // chai.assert.deepEqual(e.target.value, [], "New Value must be an empty array");
+                    done();
+                }
             }
         };
 
@@ -242,7 +239,7 @@ describe("inputs/upload/FileUploadInput", () => {
 
     it("check maxFileSize", (done) => {
         let wrapper;
-        let callCount = 0 ;
+        let callCount = 0;
         let defProps = {
             name: "files",
             display: "thumbnail",
@@ -313,7 +310,7 @@ describe("inputs/upload/FileUploadInput", () => {
                 } else {
                     count++;
                     /* eslint-disable no-underscore-dangle */
-                    wrapper.instance().__onUploadSucess([{filename: "info_test.png"}]);
+                    wrapper.instance().__onUploadSucess([{ filename: "info_test.png" }]);
                 }
             }
         };

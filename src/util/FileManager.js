@@ -39,19 +39,6 @@ export default class FileManager extends Class {
     }
 
     /**
-     * upload single file
-     * @param {string} fieldName
-     * @param {string} files
-     * @param {Function} onSuccess
-     * @param {Function} onError
-     */
-    uploadFile(fieldName: string, file: string, onSuccess: Function, onError: Function) {
-        let formData = new FormData();
-        formData.append(fieldName, file);
-        this.__upload(formData, onSuccess, onError);
-    }
-
-    /**
      * upload file(s) formData.
      * @param formData
      * @param onSuccess
