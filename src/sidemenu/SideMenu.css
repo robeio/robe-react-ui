@@ -5,11 +5,6 @@
     height: 100%;
     overflow-y: auto;
     background: #FFF;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    border: lightgray solid 1px;
     cursor: pointer;
 }
 
@@ -32,8 +27,6 @@
 }
 .SideMenu-wrapper li{
     list-style-type: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
     display: block;
     text-decoration:none;
 }

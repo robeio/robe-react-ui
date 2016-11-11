@@ -3,7 +3,8 @@ import is from "is-js";
 import {
     Store,
     StoreComponent,
-    Maps
+    Maps,
+    Assertions
 } from "robe-react-commons";
 
 import {
@@ -371,7 +372,13 @@ export default class DataGrid extends StoreComponent {
                 this.refs.filters.state.filters,
                 (a: string) => {
                     if (a !== undefined) {
-                        filterArr.push(a);
+                        if (Assertions.isArray(a)) {
+                            for (let i = 0; i < a.length; i++) {
+                                filterArr.push(a[i]);
+                            }
+                        } else {
+                            filterArr.push(a);
+                        }
                     }
                 }
             );

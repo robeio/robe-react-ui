@@ -115,13 +115,20 @@ export default class Filter extends ShallowComponent {
     }
 
     __handleRangeChange(name: string, e: Object): boolean {
+
         let field = this.props.field;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let valueArr = Objects.deepCopy(this.props.value === undefined ? [] : this.props.value);
         let isMin = name.substr(name.length - 4) === "-min";
+        let oldValues = [];
+        if (this.props.value !== undefined) {
+            oldValues = this.props.value;
+        }
         if (isMin) {
             valueArr[0] = value;
+            valueArr[1] = oldValues[1];
         } else {
+            valueArr[0] = oldValues[0];
             valueArr[1] = value;
         }
         let filter = [];
@@ -131,17 +138,15 @@ export default class Filter extends ShallowComponent {
             case "date":
             case "money":
                 if (valueArr[0] !== undefined && valueArr[0] !== "") {
-                    filter.push(`${field.name}>=${valueArr[0]}`);
+                    filter.push([field.name, ">=", valueArr[0]]);
                 }
                 if (valueArr[1] !== undefined && valueArr[1] !== "") {
-                    filter.push(`${field.name}<=${valueArr[1]}`);
+                    filter.push([field.name, "<=", valueArr[1]]);
                 }
-                filter = filter.join(",");
                 break;
             default:
                 return true;
         }
-
         this.props.onChange(field.name, valueArr, filter);
         return true;
     }

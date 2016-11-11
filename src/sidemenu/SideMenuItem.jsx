@@ -1,5 +1,9 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {
+    Collapse,
+    Fade
+} from "react-bootstrap";
 import SideMenuSubItem from "./SideMenuSubItem";
 import FaIcon from "../faicon/FaIcon";
 /**
@@ -38,21 +42,21 @@ export default class SideMenuItem extends ShallowComponent {
                         item={child}
                         onChange={this.__onChange}
                         selectedItem={this.props.selectedItem}
-                    />
+                        />
                 );
             }
         }
 
         let isActive = this.state.active ? "SideMenu-item SideMenu-item-active" : "SideMenu-item";
-        let isExpanded = this.state.active ? "collapse in" : "collapse out";
-
         return (
             <div >
                 <li className={isActive} onClick={this.__onClick}>
                     <FaIcon code={item.icon} size="fa-lg" />
                     {item.text}
                 </li>
-                <ul className={isExpanded}>{subMenuItems}</ul>
+                <Collapse in={this.state.active}>
+                    <ul >{subMenuItems}</ul>
+                </Collapse>
             </div>);
     }
 

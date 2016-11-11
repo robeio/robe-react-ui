@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.0.42",
+  "version": "1.0.44",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
@@ -80,12 +80,13 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.3",
     "webpack-dev-server": "1.16.2",
-    "webpack-file-changer": "1.0.0"
+    "webpack-file-changer": "^1.0.0"
   },
   "dependencies": {
     "es6-template-strings": "2.0.1",
     "is-js": "0.1.1",
     "js-criteria": "0.0.6",
+    "moment": "2.15.2",
     "nprogress": "0.2.0",
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.3.2",
@@ -99,7 +100,6 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.55",
-    "moment": "2.15.2"
+    "robe-react-commons": "1.0.56"
   }
 }
