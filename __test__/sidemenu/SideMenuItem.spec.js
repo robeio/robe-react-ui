@@ -1,6 +1,9 @@
 import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
 import SideMenuItem from "sidemenu/SideMenuItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
+import {
+    Collapse
+} from "react-bootstrap";
 
 describe("sidemenu/SideMenuItem", () => {
     const props = {
@@ -31,28 +34,22 @@ describe("sidemenu/SideMenuItem", () => {
         chai.assert.isTrue(li.hasClass("SideMenu-item"), "initial class must be SideMenu-item");
         chai.assert.isTrue(li.find("i").hasClass(props.item.icon),
             "fa icon class must be same with the 'props.item.icon'.");
-
         chai.assert.equal(li.text(), props.item.text, "li text must be same with the 'props.item.text'");
-
-        let ul = item.find(".out");
-
-        chai.assert.equal(ul.find(".SideMenu-subitem").length, props.item.items.length,
+        let ul = item.find("ul");
+        chai.assert.equal(ul.find("li").length, props.item.items.length,
             "It must be same child count with 'props.item.items.length'");
     });
 
     it("onClick", () => {
         let li = item.find(".SideMenu-item");
         chai.assert.isTrue(li.hasClass("SideMenu-item"), "initial class must be SideMenu-item");
-        chai.assert.isDefined(item.find(".out").node, "Pre-click out must be defined");
-
+        chai.assert.isFalse(item.find(Collapse).prop("in"), "Pre-Click must be collapsed");
         li.simulate("click");
         chai.assert.isTrue(li.hasClass("SideMenu-item-active"),
             "Post-click class must be SideMenu-item-active");
-        chai.assert.isUndefined(item.find(".out").node, "Post-click out must be undefined");
-        chai.assert.isDefined(item.find(".in").node, "Post-click in must be defined");
-
-        let ul = item.find(".in");
-        chai.assert.equal(ul.find(".SideMenu-subitem").length, props.item.items.length,
+        chai.assert.isTrue(item.find(Collapse).prop("in"), "Post-Click must be expanded");
+        let ul = item.find(Collapse);
+        chai.assert.equal(ul.find("li").length, props.item.items.length,
             "It must be same child count with 'props.item.items.length'");
     });
 
