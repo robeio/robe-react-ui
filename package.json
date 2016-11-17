@@ -43,7 +43,7 @@
     "chai": "3.5.0",
     "codecov.io": "0.1.6",
     "colors": "^1.1.2",
-    "copy-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "3.0.1",
     "css-loader": "0.25.0",
     "enzyme": "2.5.1",
     "escape-string-regexp": "1.0.5",
