@@ -9,5 +9,6 @@ export { default as PasswordInput } from "./PasswordInput";
 export { default as NumericInput } from "./NumericInput";
 export { default as DecimalInput } from "./DecimalInput";
 export { default as DateInput } from "./DateInput";
+export { default as DatePicker } from "./datepicker/DatePicker";
 export { default as HtmlEditor } from "./htmleditor/HtmlEditor";
 export { default as FileUploadInput } from "./upload/FileUploadInput";

@@ -22,8 +22,22 @@
         "flowtype"
     ],
     "rules": {
-        "no-trailing-spaces": ["error", { "skipBlankLines": true }],
-        "object-shorthand": ["off", "always", { "ignoreConstructors": true }],
+        "no-plusplus": [
+            0
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": true
+            }
+        ],
+        "object-shorthand": [
+            "off",
+            "always",
+            {
+                "ignoreConstructors": true
+            }
+        ],
         "linebreak-style": [
             "error",
             "unix"
@@ -32,9 +46,17 @@
             "error",
             "always"
         ],
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allowAfterThis": true
+            }
+        ],
         "no-restricted-syntax": 0,
-        "max-len": [2, 300],
+        "max-len": [
+            2,
+            300
+        ],
         "quotes": [
             2,
             "double",
@@ -50,7 +72,9 @@
         "indent": [
             2,
             4,
-            {"SwitchCase": 1}
+            {
+                "SwitchCase": 1
+            }
         ],
         "no-eq-null": 0,
         "one-var": [
@@ -67,7 +91,10 @@
             1,
             4
         ],
-        "react/jsx-indent-props": [1, 4],
+        "react/jsx-indent-props": [
+            1,
+            4
+        ],
         "react/jsx-no-duplicate-props": 2,
         "react/sort-comp": 0,
         "react/prop-types": [
@@ -99,7 +126,10 @@
             1,
             "^([A-Z][a-z0-9]+)+Type$"
         ],
-        "arrow-body-style": ["error", "always"]
+        "arrow-body-style": [
+            "error",
+            "always"
+        ]
     },
     "settings": {
         "flowtype": {

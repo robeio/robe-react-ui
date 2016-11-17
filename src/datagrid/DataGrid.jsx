@@ -371,7 +371,6 @@ export default class DataGrid extends StoreComponent {
             Maps.forEach(
                 this.refs.filters.state.filters,
                 (a: string) => {
-                    console.log(a);
                     if (a !== undefined) {
                         if (Assertions.isArray(a[0])) {
                             for (let i = 0; i < a.length; i++) {

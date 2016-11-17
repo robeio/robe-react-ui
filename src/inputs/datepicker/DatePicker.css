@@ -1,0 +1,21 @@
+.DatePicker-day{
+    cursor: pointer;
+    text-align: center;
+}
+.DatePicker-day:hover{
+    background: #337ab7;
+    color: white;
+}
+
+.DatePicker-day-disabled{
+    text-align: center;
+    color: #bbb;
+
+}
+.DatePicker-day-selected{
+    cursor: pointer;
+    text-align: center;
+    color: red;
+    background: #ddd;
+    font-weight: bold;
+}

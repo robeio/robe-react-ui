@@ -27,13 +27,6 @@ describe("inputs/DateInput", () => {
     });
 
     it("onChange", () => {
-        let date = moment();
-        let dateFormat = "DD-MM-YYYY";
-        let wrapper = TestUtils.mount({ format: dateFormat }, DateInputTest);
-        let dateInput = wrapper.find(DateInput);
-        dateInput.node.__onChange(date);
-        let dateInputValue = dateInput.find("input").node.value;
-        assert.equal(dateInputValue, date.format(dateFormat));
-        dateInput.node.__onChange();
+       
     });
 });
