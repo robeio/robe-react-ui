@@ -161,7 +161,7 @@ export default class DataGridSample extends ShallowComponent {
     __onSave(newData, callback) {
         let id = newData[DataGridSample.idField];
         if (Assertions.isNotEmpty(id)) {
-            this.state.store1.update(this.state.item, newData);
+            this.state.store1.update(newData);
         } else {
             this.state.store1.create(newData);
         }

@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.0.50",
+  "version": "1.0.51",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
@@ -11,7 +11,7 @@
     "testd": "karma start webpack.config.test.dev.js",
     "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
-    "build": "webpack --config webpack.config.build.js  --progress --profile --colors && babel ./src --out-dir ./lib  --copy-files",
+    "build": "babel ./src --out-dir ./lib  --copy-files",
     "site": "webpack --config webpack.config.site.js  --progress --profile --colors",
     "start": "webpack-dev-server --config webpack.site.dev.js --colors"
   },
@@ -99,6 +99,6 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.56"
+    "robe-react-commons": "1.0.59"
   }
 }

@@ -50,3 +50,12 @@ site
 .hash.json
 .travis.yml
 Pro
+config
+data
+dist
+sitebuild
+static
+webpack.config.build.js
+webpack.config.site.js
+webpack.config.test.dev.js
+webpack.site.dev.js
