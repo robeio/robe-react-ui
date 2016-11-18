@@ -138,7 +138,7 @@ export default class SelectInput extends ValidationComponent {
                     value={this.props.value}
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
-                    />
+                />
                 {validationResult}
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
@@ -209,7 +209,6 @@ export default class SelectInput extends ValidationComponent {
      * @return {boolean}
      */
     __onChangeSingle(value: string): boolean {
-
         if (!value || value === "") {
             value = undefined;
         }

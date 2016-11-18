@@ -79,8 +79,8 @@ export default class HtmlEditor extends ValidationComponent {
         let validationState = validationResult !== undefined ? "error" : undefined;
         validationResult = this.isFocused() ? validationResult : undefined;
         return (
-            <FormGroup className="form-group" hidden={this.props.hidden} validationState={validationState}>
-                <ControlLabel componentClass="label" className="control-label"><span>{this.props.label}</span></ControlLabel>
+            <FormGroup hidden={this.props.hidden} validationState={validationState}>
+                <ControlLabel><span>{this.props.label}</span></ControlLabel>
                 <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
                     <ReactQuill.Toolbar
                         key="toolbar"

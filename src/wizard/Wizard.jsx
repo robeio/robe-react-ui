@@ -142,24 +142,24 @@ export default class Wizard extends ShallowComponent {
             );
         } else {
             nextButton = (
-                <PageItem
+                <Pager.Item
                     next
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
                     {this.props.nextButtonText} <FaIcon code="fa-arrow-right" />
-                </PageItem>
+                </Pager.Item>
             );
         }
         return (
             <Pager>
-                <PageItem
+                <Pager.Item
                     previous
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                 >
                     <FaIcon code="fa-arrow-left" />{this.props.preButtonText}
-                </PageItem>
+                </Pager.Item>
                 {nextButton}
             </Pager>
         );

@@ -167,7 +167,7 @@ export default class DataForm extends ShallowComponent {
 
         let columnsSize = 12 / this.props.columnsSize;
 
-        return (<Col md={columnsSize}><Component key={`${name}_key`} ref={`${name}Ref`} {...props} value={this.state[name]} /></Col>);
+        return (<Col key={`${name}_key`} md={columnsSize}><Component ref={`${name}Ref`} {...props} value={this.state[name]} /></Col>);
     }
 
     /**
