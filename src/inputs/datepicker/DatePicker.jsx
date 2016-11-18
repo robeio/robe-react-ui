@@ -58,7 +58,10 @@ export default class DatePicker extends ShallowComponent {
             weekDays[i] = <th key={i}>{weekDays[i]}</th>;
         }
         this.weekDays = weekDays;
-        this.state = { moment: momentjs(this.props.value) };
+        let value = momentjs(this.props.value);
+        value = value.isBefore(this.props.minDate) ? momentjs(this.props.minDate) : value;
+        value = value.isAfter(this.props.maxDate) ? momentjs(this.props.maxDate) : value;
+        this.state = { moment: value };
         this.__renderMonthSelectBox();
         this.__renderYearSelectBox();
     }
