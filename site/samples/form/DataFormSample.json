@@ -15,7 +15,8 @@
   {
     "label": "Password Input",
     "name": "password",
-    "type": "password"
+    "type": "password",
+    "value":""
   },
   {
     "label": "Number Input",

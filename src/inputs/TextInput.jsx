@@ -64,9 +64,10 @@ export default class TextInput extends ShallowComponent {
      * @returns
      */
     render(): Object {
+        let { minWidth, ...props } = this.props;
         return (
             <Input
-                {...this.props}
+                {...props}
                 onChange={this.__onChange}
                 type="text"
                 ref={TextInput.refName}

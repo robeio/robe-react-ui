@@ -69,9 +69,10 @@ export default class TextArea extends ShallowComponent {
      * @returns
      */
     render(): Object {
+        let { autoResize, ...props } = this.props;
         return (
             <Input
-                {...this.props}
+                {...props}
                 onChange={this.__onChange}
                 type="textarea"
                 onKeyUp={this.props.autoResize ? this.__resize : undefined}

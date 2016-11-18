@@ -168,7 +168,7 @@ export default class StackLayout extends ShallowComponent {
         let thumbnailClassName = `btn btn-default ${this.state.display === "thumbnail" ? "active" : ""}`;
         return [
             this.props.label,
-            <div className="btn-group pull-right">
+            <div key="toolbar-btn-group-pull-right" className="btn-group pull-right">
                 <button type="button" className={listClassName} onClick={this.onClickDisplayList}>
                     <Glyphicon glyph="list" />
                 </button>
@@ -176,7 +176,7 @@ export default class StackLayout extends ShallowComponent {
                     <Glyphicon glyph="th-large" />
                 </button>
             </div>,
-            <div className="clearfix" />
+            <div key="toolbar-clearfix" className="clearfix" />
         ];
     }
     __renderList(items: Array): Object {
