@@ -1,7 +1,8 @@
 import React from "react";
 import {
     ShallowComponent,
-    Maps
+    Maps,
+    Objects
 } from "robe-react-commons";
 import {
     Form, Row, Col
@@ -114,8 +115,12 @@ export default class DataForm extends ShallowComponent {
             }
             this.__item[name] = props.value;
         }
+        let newProps =  Objects.deepCopy(props);
 
-        this.__props[name] = props;
+        delete newProps.sort;
+        delete newProps.range;
+
+        this.__props[name] = newProps;
         this.state[name] = this.__item[name] || this.__props[name].value;
     }
 

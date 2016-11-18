@@ -46,7 +46,7 @@ export default class PasswordInput extends ShallowComponent {
         hidden: React.PropTypes.bool
     };
 
-    static refName="innerInput";
+    static refName = "innerInput";
     /**
      * defaultProps
      * @static
@@ -54,7 +54,8 @@ export default class PasswordInput extends ShallowComponent {
     static defaultProps = {
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        value: ""
     };
 
     /**
@@ -68,7 +69,7 @@ export default class PasswordInput extends ShallowComponent {
                 onChange={this.__onChange}
                 type="password"
                 ref={PasswordInput.refName}
-            />);
+                />);
     }
 
     /**

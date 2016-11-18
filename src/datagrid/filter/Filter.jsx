@@ -18,7 +18,8 @@ export default class Filter extends ShallowComponent {
 
     render(): Object {
         let field = Objects.deepCopy(this.props.field);
-        field.validations = undefined;
+        delete field.validations;
+        delete field.sort;
         let name = field.name;
         let Component = ComponentManager.findComponentByType(field.type);
         let style = {};
@@ -30,6 +31,8 @@ export default class Filter extends ShallowComponent {
             field.type !== "decimal" &&
             field.type !== "money" &&
             field.type !== "date")) {
+            delete field.range;
+
             return (
                 <Component
                     {...field}
@@ -38,11 +41,13 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref`}
                     value={this.props.value}
                     onChange={this.__handleChange}
-                    />);
+                />);
         }
         let fieldMin = Objects.deepCopy(field);
+        delete fieldMin.range;
         fieldMin.name += "-min";
         let fieldMax = Objects.deepCopy(field);
+        delete fieldMax.range;
         fieldMax.name += "-max";
         let minOnChange = this.__handleRangeChange.bind(undefined, fieldMin.name);
         let maxOnChange = this.__handleRangeChange.bind(undefined, fieldMax.name);
@@ -56,7 +61,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-min`}
                     value={value[0]}
                     onChange={minOnChange}
-                    />
+                />
                 <Component
                     {...fieldMax}
                     style={style}
@@ -64,7 +69,7 @@ export default class Filter extends ShallowComponent {
                     ref={`${name}Ref-max`}
                     value={value[1]}
                     onChange={maxOnChange}
-                    />
+                />
             </div>
         );
     }

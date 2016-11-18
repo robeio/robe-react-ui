@@ -94,7 +94,7 @@ export default class SelectInput extends ValidationComponent {
     };
 
     __delimiter = ",";
-    _value;
+    _value = "";
     _onChange;
     __checkSelection;
     focused = false;
@@ -113,8 +113,8 @@ export default class SelectInput extends ValidationComponent {
             this.items = [];
         }
         this._value = props.value;
-        if (!this._value) {
-            this._value = props.multi ? [] : null;
+        if (this._value === "") {
+            this._value = props.multi ? [] : "";
         }
         this._onChange = (props.multi ? this.__onChangeMulti : this.__onChangeSingle);
         this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
@@ -138,7 +138,7 @@ export default class SelectInput extends ValidationComponent {
                     value={this.props.value}
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
-                />
+                    />
                 {validationResult}
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
@@ -170,12 +170,10 @@ export default class SelectInput extends ValidationComponent {
 
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
-            options[i] = this.__checkSelection(item) ?
-                <option key={i} value={item[this.props.valueField]} selected>{item[this.props.textField]}</option> :
-                <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
+            options[i] = <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
         }
         return (
-            <select hidden={true} name={this.props.name} multiple={this.props.multi}>
+            <select hidden={true} name={this.props.name} multiple={this.props.multi} value={this._value} onChange={this._onChange}>
                 {options}
             </select>
         );

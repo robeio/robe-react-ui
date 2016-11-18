@@ -3,7 +3,7 @@
     "label": "String Input (With regex validation)",
     "name": "username",
     "type": "string",
-    "validations":{
+    "validations": {
       "regex": {
         "message": "Only letter",
         "args": [
@@ -16,7 +16,7 @@
     "label": "Password Input",
     "name": "password",
     "type": "password",
-    "value":""
+    "value": ""
   },
   {
     "label": "Number Input",

@@ -122,7 +122,7 @@ export default class DateInput extends ShallowComponent {
             overlayValue = this.props.value === "" ? undefined : this.props.value;
         }
         /* eslint-disable no-unused-vars */
-        let { format, locale, ...newProps } = this.props;
+        let { format, locale, minDate, maxDate, ...newProps } = this.props;
         return (
             <div>
                 <Overlay show={this.state.open} placement="bottom" target={document.getElementById(this.id)} >
@@ -132,7 +132,9 @@ export default class DateInput extends ShallowComponent {
                             onSelect={this.__onClick}
                             locale={locale}
                             value={overlayValue}
-                            >Today</DatePicker>
+                            minDate={this.props.minDate}
+                            maxDate={this.props.maxDate}
+                        />
                     </Popover>
                 </Overlay>
                 <Input
@@ -146,8 +148,7 @@ export default class DateInput extends ShallowComponent {
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-
-                    />
+                />
             </div>);
     }
 
