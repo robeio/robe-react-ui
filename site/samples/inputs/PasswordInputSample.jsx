@@ -7,8 +7,8 @@ export default class PasswordInputSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            passwordInputNormal: "",
-            passwordInputValidations: ""
+            PasswordInputNormal: "",
+            PasswordInputValidations: ""
         };
     }
 
@@ -17,12 +17,12 @@ export default class PasswordInputSample extends ShallowComponent {
             <div>
                 <PasswordInput
                     label="PasswordInput"
-                    value={this.state.passwordInputNormal}
+                    value={this.state.PasswordInputNormal}
                     onChange={this.__handleChange.bind(undefined, "PasswordInputNormal")}
                 />
                 <PasswordInput
                     label="With Validations"
-                    value={this.state.passwordInputValidations}
+                    value={this.state.PasswordInputValidations}
                     onChange={this.__handleChange.bind(undefined, "PasswordInputValidations")}
                     validations={{
                         required: true
