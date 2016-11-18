@@ -1,9 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import momentjs from "moment";
-import { Popover, Overlay } from "react-bootstrap";
+import { Popover, Overlay, InputGroup } from "react-bootstrap";
 import Input from "./BaseInput";
 import DatePicker from "./datepicker/DatePicker";
+import FaIcon from "../faicon/FaIcon";
 
 
 /**
@@ -144,6 +145,8 @@ export default class DateInput extends ShallowComponent {
                     value={parsedValue}
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
+                    inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
+
                     />
             </div>);
     }
