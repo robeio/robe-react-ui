@@ -107,7 +107,6 @@ export default class DataFormSample extends ShallowComponent {
             }
             this.setState(state);
         }
-
         return true;
     }
 

@@ -175,7 +175,6 @@ describe("inputs/SelectInput", () => {
 
         selectInput._onChange("en");
         chai.assert.equal("en", wrapper.find(SelectInput).node.getValue());
-        chai.assert.equal(wrapper.find("[selected=true]").node.value, "en");
 
         selectInput._onChange(undefined);
         value = selectInput.getValue();
@@ -197,10 +196,8 @@ describe("inputs/SelectInput", () => {
 
         selectInput._onChange("en,tr");
         chai.assert.deepEqual(["en", "tr"], wrapper.find(SelectInput).node.getValue());
-        chai.assert.equal(wrapper.find("[selected=true]").length, 2);
 
         selectInput._onChange(undefined);
         chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
-        chai.assert.equal(wrapper.find("[selected=true]").length, 0);
     });
 });

@@ -115,7 +115,8 @@ export default class DataForm extends ShallowComponent {
             }
             this.__item[name] = props.value;
         }
-        let newProps =  Objects.deepCopy(props);
+        let newProps = {};
+        Maps.mergeDeep(props, newProps);
 
         delete newProps.sort;
         delete newProps.range;
