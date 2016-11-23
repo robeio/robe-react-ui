@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import DataForm from "robe-react-ui/lib/form/DataForm";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 import fields from "./DataFormSample.json";
 const filesUrl = "http://localhost:3000/files";
 
@@ -64,7 +63,6 @@ const ilce = {
 };
 
 export default class DataFormSample extends ShallowComponent {
-
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -97,15 +95,16 @@ export default class DataFormSample extends ShallowComponent {
     onChange(name: string, e: Object): boolean {
         if (name === "il") {
             let value = e.target.value;
-            let state = this.state;
+            let nextState = this.cloneState();
             if (value) {
                 let items = ilce[value];
-                state.propsOfFields.ilce.items = items;
+                nextState.propsOfFields.ilce.items = items;
             } else {
-                state.propsOfFields.ilce.items = [];
-                state.propsOfFields.ilce.value = undefined;
+                nextState.propsOfFields.ilce.items = [];
+                nextState.propsOfFields.ilce.value = undefined;
             }
-            this.setState(state);
+            this.setState(nextState);
+            return true;
         }
         return true;
     }

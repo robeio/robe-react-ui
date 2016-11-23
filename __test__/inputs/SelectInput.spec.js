@@ -199,5 +199,6 @@ describe("inputs/SelectInput", () => {
 
         selectInput._onChange(undefined);
         chai.assert.deepEqual([], wrapper.find(SelectInput).node.getValue());
+
     });
 });

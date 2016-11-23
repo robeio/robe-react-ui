@@ -113,7 +113,7 @@ export default class SelectInput extends ValidationComponent {
             this.items = [];
         }
         this._value = props.value;
-        if (this._value === "") {
+        if (!this._value) {
             this._value = props.multi ? [] : "";
         }
         this._onChange = (props.multi ? this.__onChangeMulti : this.__onChangeSingle);
