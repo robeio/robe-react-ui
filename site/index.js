@@ -10,7 +10,6 @@ import "./style.css";
 import { NotFound } from "./error";
 
 
-
 const app = document.getElementById("app");
 
 
@@ -30,7 +29,7 @@ class Site extends ShallowComponent {
                 <Navbar inverse>
                     <a href="https://github.com/robeio/robe-react-ui">
                         <img
-                            style={{ position: "absolute", top: "0px", right: "0px", border: "0px" }}
+                            style={{ position: "absolute", top: "0px", right: "0px", border: "0px", zIndex: 1 }}
                             alt="Fork me on GitHub"
                             src="./forkme_right_orange_ff7600.png"
                         />
