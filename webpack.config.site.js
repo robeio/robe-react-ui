@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const FileChanger = require("webpack-file-changer");
 const path = require("path");
-
+const package = require("./package.json");
 
 /**
  * import common webpack settings
@@ -64,10 +64,19 @@ commonSettings.resolve.alias = {
     "robe-react-ui/lib": commonSettings.paths.lib,
     "robe-react-ui": commonSettings.paths.lib + "/index"
 }
+
 const fileChanger = new FileChanger({
     move: [{
         from: path.resolve("./static"),
         to: path.resolve("./docs")
+    }
+    ],
+    change: [{
+        file: "./docs/index.html",
+        parameters: {
+            "\\$VERSION": package.version,
+            "\\$BUILD_TIME": new Date()
+        }
     }
     ]
 });

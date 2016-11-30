@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.53
+
+* upgraded **robe-react-commons** library version from *1.0.61* to *1.0.62*
+
 ## 1.0.52
 
 * Fixed null problem of Multi SelectInput
