@@ -137,9 +137,9 @@ export default class FileUploadInput extends ShallowComponent {
      * @param {Array} files
      * @access private
      */
-    __onInitSuccess(comingFiles) {
-        for (let i = 0; i < comingFiles.length; i++) {
-            let file = comingFiles[i];
+    __onInitSuccess(files) {
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
             let fileIndex = this.__value.indexOf(file.filename);
             if (!file.filename || fileIndex === -1) {
                 this.__onError({
@@ -182,14 +182,14 @@ export default class FileUploadInput extends ShallowComponent {
      * @returns {boolean}
      * @access private
      */
-    upload(uploadedFilesArrayMap: Array) {
-        if ((uploadedFilesArrayMap.length + this.__value.length) > this.__maxFileSize) {
+    upload(files: Array) {
+        if ((files.length + this.__value.length) > this.__maxFileSize) {
             this.__onError({
                 message: `You cannot add more than ${this.__maxFileSize}`
             });
             return false;
         }
-        this.__fileManager.upload(this.props.name, uploadedFilesArrayMap, this.__onUploadSucess.bind(uploadedFilesArrayMap), this.__onError);
+        this.__fileManager.upload(this.props.name, files, this.__onUploadSucess, this.__onError);
         return true;
     }
 
@@ -198,7 +198,7 @@ export default class FileUploadInput extends ShallowComponent {
      * @return {boolean}
      * @access private
      */
-    __onUploadSucess(uploadedFilesArrayMap: Array, files: Array) {
+    __onUploadSucess(files: Array) {
         if (!files || !Assertions.isArray(files) || files.length === 0) {
             this.__onError({
                 message: "Upload Failed ! "
@@ -209,14 +209,6 @@ export default class FileUploadInput extends ShallowComponent {
         this.__value = oldValue.slice(0);
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            let filename;
-            if (typeof file === "string") {
-                filename = file;
-                file = uploadedFilesArrayMap[i];
-                file.filename = filename;
-            }
-            uploadedFilesArrayMap[i] = file;
-
             let fileIndex = this.__value.indexOf(file.filename);
             if (fileIndex !== -1) {
                 this.__onError({
@@ -377,14 +369,14 @@ export default class FileUploadInput extends ShallowComponent {
                 }}
             >
                 <tbody>
-                    <tr>
-                        <td>
-                            <Glyphicon glyph="file" />
-                        </td>
-                        <td>{item.originalname}</td>
-                        <td>{item.mime}</td>
-                        <td>{item.size}</td>
-                    </tr>
+                <tr>
+                    <td>
+                        <Glyphicon glyph="file" />
+                    </td>
+                    <td>{item.originalname}</td>
+                    <td>{item.mime}</td>
+                    <td>{item.size}</td>
+                </tr>
                 </tbody>
             </Table>
         );
@@ -464,8 +456,7 @@ export default class FileUploadInput extends ShallowComponent {
                 target: {
                     event: event,
                     oldValue: this.__getValueByMultipleProperty(oldValue),
-                    value: this.__getValueByMultipleProperty(newValue),
-                    info: this.files
+                    value: this.__getValueByMultipleProperty(newValue)
                 }
             };
             this.props.onChange(e);

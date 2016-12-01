@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.0.55
+## 1.0.56
 * upgraded npm package.
 
 ## 1.0.53
