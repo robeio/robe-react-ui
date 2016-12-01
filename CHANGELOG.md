@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.55
+* upgraded npm package.
+
 ## 1.0.53
 
 * upgraded **robe-react-commons** library version from *1.0.61* to *1.0.62*
