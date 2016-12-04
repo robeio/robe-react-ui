@@ -1,4 +1,4 @@
-# Robe-React-IU
+# Robe-React-UI
 #### UI library built on top of <code>React-Bootstrap</code>
 
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
