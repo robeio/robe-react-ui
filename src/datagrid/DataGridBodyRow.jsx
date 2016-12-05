@@ -1,8 +1,7 @@
 import React from "react";
-import moment from "moment";
 import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
-import FaIcon from "../faicon/FaIcon";
+import ComponentManager from "../form/ComponentManager";
 
 export default class DataTableBodyRow extends ShallowComponent {
 
@@ -30,7 +29,6 @@ export default class DataTableBodyRow extends ShallowComponent {
 
     constructor(props: Object) {
         super(props);
-        moment.locale("tr");
         this.state = {
             selected: false
         };
@@ -78,58 +76,10 @@ export default class DataTableBodyRow extends ShallowComponent {
         let column = fields[idx];
         if (column.visible !== false) {
             let value = row[column.name];
-            switch (column.type) {
-                case "date": {
-                    let format = column.format ? column.format : "DD/MM/YYYY";
-                    let date = moment(value);
-                    value = date.isValid() ? date.format(format) : "";
-                    break;
-                }
-                case "password":
-                    value = "******";
-                    break;
-                case "check": {
-                    value = this.__getTextValue(column, value);
-                    if (value === true) {
-                        value = <FaIcon size={"fa-lg"} code="fa-check-square-o" />;
-                    } else if (value === false) {
-                        value = <FaIcon size={"fa-lg"} code="fa-square-o" />;
-                    }
-                    break;
-                }
-                case "select":
-                    value = this.__getTextValue(column, value);
-                    break;
-                case "radio":
-                    value = this.__getTextValue(column, value);
-                    break;
-                default:
-                    break;
-            }
-            return (<td key={column.name}>{value}</td>);
+            let result = ComponentManager.getComponentDisplayValue(column.type, column, value);
+            return (<td key={column.name}>{result}</td>);
         }
         return undefined;
-    }
-
-    __getTextValue(column: Object, selectedValues: any): any {
-        let isMultipleSelection = !!column.items;
-        if (!isMultipleSelection) {
-            return selectedValues;
-        }
-        selectedValues = [].concat(selectedValues);
-        let textOfValues = [];
-        let textField = column.textField || "text";
-        let valueField = column.valueField || "value";
-        for (let i = 0; i < column.items.length; i++) {
-            let item = column.items[i];
-            for (let k = 0; k < selectedValues.length; k++) {
-                let selectedValue = selectedValues[k];
-                if (String(item[valueField]) === selectedValue) {
-                    textOfValues.push(item[textField]);
-                }
-            }
-        }
-        return textOfValues.join(", ");
     }
 
     __onClick() {

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.57
+* ComponentManager structure changed.
+* upgraded npm package.
+
 ## 1.0.56
 * upgraded npm package.
 
