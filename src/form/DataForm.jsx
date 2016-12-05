@@ -168,7 +168,7 @@ export default class DataForm extends ShallowComponent {
 
         let name = field.name;
         let props = this.__props[name];
-        let Component = ComponentManager.getComponentType(field.type);
+        let Component = ComponentManager.getComponent(field.type);
 
         let columnsSize = 12 / this.props.columnsSize;
 

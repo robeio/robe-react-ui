@@ -76,7 +76,7 @@ export default class DataTableBodyRow extends ShallowComponent {
         let column = fields[idx];
         if (column.visible !== false) {
             let value = row[column.name];
-            let result = ComponentManager.getComponentDisplayValue(column.type, column, value);
+            let result = ComponentManager.getDisplayAsText(column.type, column, value);
             return (<td key={column.name}>{result}</td>);
         }
         return undefined;
