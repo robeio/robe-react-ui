@@ -8,37 +8,37 @@ class ComponentManager {
     COMPONENTS =
         {
             string: {
-                type: Input.TextInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.TextInput,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             text: {
-                type: Input.TextArea,
-                display: (column: Object, value: string): Object => {
+                component: Input.TextArea,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             number: {
-                type: Input.NumericInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.NumericInput,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             decimal: {
-                type: Input.DecimalInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.DecimalInput,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             date: {
-                type: Input.DateInput,
-                display: (column: Object, value: string): Object => {
-                    let format = column.format ? column.format : "DD/MM/YYYY";
+                component: Input.DateInput,
+                displayAsText: (field: Object, value: string): Object => {
+                    let format = field.format ? field.format : "DD/MM/YYYY";
                     /**
                      * TODO check locale this again
                      */
-                    let locale = column.locale ? column.locale : "tr";
+                    let locale = field.locale ? field.locale : "tr";
                     moment.locale(locale);
                      /**
                      * TODO check locale this again
@@ -48,33 +48,33 @@ class ComponentManager {
                 }
             },
             password: {
-                type: Input.PasswordInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.PasswordInput,
+                displayAsText: (/* field: Object , value: string */): Object => {
                     return "*****";
                 }
             },
             money: {
-                type: Input.MoneyInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.MoneyInput,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             radio: {
-                type: Input.RadioInput,
-                display: (column: Object, value: string): Object => {
-                    return this.__getTextValue(column, value);
+                component: Input.RadioInput,
+                displayAsText: (field: Object, value: string): Object => {
+                    return this.__getTextValue(field, value);
                 }
             },
             select: {
-                type: Input.SelectInput,
-                display: (column: Object, value: string): Object => {
-                    return this.__getTextValue(column, value);
+                component: Input.SelectInput,
+                displayAsText: (field: Object, value: string): Object => {
+                    return this.__getTextValue(field, value);
                 }
             },
             check: {
-                type: Input.CheckInput,
-                display: (column: Object, value: string): Object => {
-                    let result = this.__getTextValue(column, value);
+                component: Input.CheckInput,
+                displayAsText: (field: Object, value: string): Object => {
+                    let result = this.__getTextValue(field, value);
                     if (result === true) {
                         return (<FaIcon size={"fa-lg"} code="fa-check-square-o" />); // eslint-disable-line
                     }
@@ -82,48 +82,72 @@ class ComponentManager {
                 }
             },
             html: {
-                type: Input.HtmlEditor,
-                display: (column: Object, value: string): Object => {
+                component: Input.HtmlEditor,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             },
             file: {
-                type: Input.FileUploadInput,
-                display: (column: Object, value: string): Object => {
+                component: Input.FileUploadInput,
+                displayAsText: (field: Object, value: string): Object => {
                     return value;
                 }
             }
         };
 
-    addComponent(componentType: string, component: Object, display: Function) {
+    addComponent(componentType: string, component: Object, displayAsText: Function) {
         Assertions.isString(componentType, true);
-        Assertions.isFunction(display, true);
+        Assertions.isFunction(displayAsText, true);
         this.COMPONENTS[componentType] = {
-            type: component,
-            display: display
+            component: component,
+            displayAsText: displayAsText
         };
     }
-    getComponentType(type: string): Object {
-        return this.COMPONENTS[type].type;
+
+    /**
+     *
+     * @param type
+     * @returns {*}
+     */
+    getComponent(type: string): Object {
+        return this.COMPONENTS[type].component;
     }
-    getComponentDisplayValue(type: string, column: Object, value: string): Object {
+
+    /**
+     *
+     * @param type
+     * @param field
+     * @param value
+     * @returns {*|Object}
+     */
+    getDisplayAsText(type: string, field: Object, value: string): Object {
         let component = this.COMPONENTS[type];
         Assertions.isNotUndefined(component, true);
-        Assertions.isNotUndefined(component.display, true);
-        Assertions.isFunction(component.display, true);
-        return component.display(column, value);
+        Assertions.isNotUndefined(component.displayAsText, true);
+        Assertions.isFunction(component.displayAsText, true);
+        return component.displayAsText(field, value);
     }
-    __getTextValue(column: Object, selectedValues: any): any {
-        let isMultipleSelection = !!column.items;
+
+
+    /**
+     *
+     * @param field
+     * @param selectedValues
+     * @returns {*}
+     * @private
+     */
+     /* eslint-disable class-methods-use-this */
+    __getTextValue(field: Object, selectedValues: any): any {
+        let isMultipleSelection = !!field.items;
         if (!isMultipleSelection) {
             return selectedValues;
         }
         selectedValues = [].concat(selectedValues);
         let textOfValues = [];
-        let textField = column.textField || "text";
-        let valueField = column.valueField || "value";
-        for (let i = 0; i < column.items.length; i++) {
-            let item = column.items[i];
+        let textField = field.textField || "text";
+        let valueField = field.valueField || "value";
+        for (let i = 0; i < field.items.length; i++) {
+            let item = field.items[i];
             for (let k = 0; k < selectedValues.length; k++) {
                 let selectedValue = selectedValues[k];
                 if (String(item[valueField]) === selectedValue) {
