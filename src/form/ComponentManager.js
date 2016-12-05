@@ -1,3 +1,4 @@
+import React from "react";
 import Assertions from "robe-react-commons/lib/utils/Assertions";
 import moment from "moment";
 import * as Input from "../inputs";
