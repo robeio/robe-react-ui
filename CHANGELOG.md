@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.58
+* Focus bug on input fields fixed.
+* Validation bug on first key press fixed.
+* Dependencies updated.
+
 ## 1.0.57
 * ComponentManager structure changed.
 * upgraded npm package.

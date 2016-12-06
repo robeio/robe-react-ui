@@ -77,7 +77,6 @@ export default class BaseInput extends ValidationComponent {
     };
 
 
-    isFocusedToInput = false;
 
     static refName = "innerInput";
 
@@ -106,7 +105,7 @@ export default class BaseInput extends ValidationComponent {
         );
         let validationResult = super.validationResult();
         let validationState = validationResult !== undefined ? "error" : undefined;
-        validationResult = this.isFocusedToInput ? validationResult : undefined;
+        validationResult = this.isFocused() ? validationResult : undefined;
         if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
             let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
             return (
@@ -173,11 +172,7 @@ export default class BaseInput extends ValidationComponent {
     componentDidMount() {
         if (this.props.focus) {
             this.focus();
-            this.isFocusedToInput = true;
         }
     }
 
-    componentDidUpdate() {
-        this.isFocusedToInput = this.isFocused();
-    }
 }
