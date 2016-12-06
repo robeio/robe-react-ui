@@ -112,6 +112,7 @@ export default class HtmlEditor extends ValidationComponent {
             } else {
                 element.style.height = `${propHeight}px`;
             }
+            element.style.overflow = "hidden";
             element.style.maxHeight = `${height}px`;
         }
     }

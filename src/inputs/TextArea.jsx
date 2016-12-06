@@ -100,6 +100,7 @@ export default class TextArea extends ShallowComponent {
             }
             element.style.height = "auto";
             element.style.minHeight = `${minHeight}px`;
+            element.style.overflow = "hidden";
             let height = element.scrollHeight;
             element.style.height = `${height}px`;
         }
