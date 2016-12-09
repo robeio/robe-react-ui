@@ -45,7 +45,11 @@ export default class NumericInput extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -56,10 +60,11 @@ export default class NumericInput extends ShallowComponent {
         value: "",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
-    static refName="innerInput";
+    static refName = "innerInput";
 
     render(): Object {
         let { thousandSeparator, decimalSeparator, ...newProps } = this.props;  //eslint-disable-line
@@ -69,7 +74,7 @@ export default class NumericInput extends ShallowComponent {
             type="text"
             ref={NumericInput.refName}
             onChange={this.__numericFilter}
-        />);
+            />);
     }
 
     /**

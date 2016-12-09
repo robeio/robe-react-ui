@@ -44,10 +44,14 @@ export default class TextArea extends ShallowComponent {
          * it specifies that an input field is hidden or visible
          */
         hidden: React.PropTypes.bool,
-         /**
-         * it specifies that an input field height be auto resize
-         */
-        autoResize: React.PropTypes.bool
+        /**
+        * it specifies that an input field height be auto resize
+        */
+        autoResize: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -59,7 +63,8 @@ export default class TextArea extends ShallowComponent {
         readOnly: false,
         hidden: false,
         autoResize: false,
-        value: ""
+        value: "",
+        validationDisplay: "block"
     };
 
     static refName = "innerInput";
@@ -78,7 +83,7 @@ export default class TextArea extends ShallowComponent {
                 onKeyUp={this.props.autoResize ? this.__resize : undefined}
                 componentClass="textarea"
                 ref={TextArea.refName}
-            />);
+                />);
     }
 
     /**

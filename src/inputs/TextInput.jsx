@@ -43,7 +43,11 @@ export default class TextInput extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -54,7 +58,8 @@ export default class TextInput extends ShallowComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        value: ""
+        value: "",
+        validationDisplay: "block"
     };
 
     static refName = "innerInput";
@@ -71,7 +76,7 @@ export default class TextInput extends ShallowComponent {
                 onChange={this.__onChange}
                 type="text"
                 ref={TextInput.refName}
-            />);
+                />);
     }
 
     /**
@@ -94,6 +99,7 @@ export default class TextInput extends ShallowComponent {
             e.preventDefault();
             e.stopPropagation();
         }
+        this.refs[TextInput.refName].focus = true;
         return result;
     }
 }

@@ -43,7 +43,11 @@ export default class PasswordInput extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     static refName = "innerInput";
@@ -55,7 +59,8 @@ export default class PasswordInput extends ShallowComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        value: ""
+        value: "",
+        validationDisplay: "block"
     };
 
     /**

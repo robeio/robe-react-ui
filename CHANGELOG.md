@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.0
+- Validation has a new display option. **validationDisplay** property will take *"block"* or *"overlay"*  to decide how to show messages. All inputs refactored to work like that.
+- DataForm and ModalDataForm will forward **validationDisplay** property to all fields defined inside.
+- Tests and Showcase modified according to the new usage.
+
+
 ## 1.0.58
 * Focus bug on input fields fixed.
 * Validation bug on first key press fixed.

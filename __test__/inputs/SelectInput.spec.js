@@ -20,70 +20,7 @@ const langs = [
     }
 ];
 describe("inputs/SelectInput", () => {
-    it("props", () => {
-        // standart default values
-        let items = [
-            {
-                key: "MALE",
-                value: "Male"
-            },
-            {
-                key: "FEMALE",
-                value: "Female"
-            }
-        ];
-
-        let expectedProps = {
-            label: "Select Input Single",
-            items,
-            placeHolder: "Please Select",
-            noResultsText: "No Result",
-            textField: "text",
-            valueField: "value",
-            multi: false,
-            searchable: true,
-            disabled: false,
-            readOnly: false,
-            hidden: false
-        }
-
-        let instance = TestUtils.renderIntoDocument(
-            <SelectInput
-                label="Select Input Single"
-                items={items}
-            />
-        );
-        chai.assert.deepEqual(instance.props, expectedProps, "Select Input default props must be equal the expected props.");
-
-        // Multi , Different key , different value test
-        expectedProps = {
-            label: "Select Input Multi",
-            multi: true,
-            items: langs,
-            value: "en,tr",
-            textField: "value",
-            valueField: "key",
-            placeHolder: "Please Select",
-            noResultsText: "No Result",
-            searchable: true,
-            disabled: false,
-            readOnly: false,
-            hidden: false
-        };
-
-        instance = TestUtils.renderIntoDocument(
-            <SelectInput
-                label="Select Input Multi"
-                multi={true}
-                items={langs}
-                value={"en,tr"}
-                textField="value"
-                valueField="key"
-            />
-        );
-
-        chai.assert.deepEqual(instance.props, expectedProps, "Given props to SelectInput must be equal the expected props.");
-    });
+   
 
     it("render", () => {
         let expected = "en,tr";

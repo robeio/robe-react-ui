@@ -48,7 +48,11 @@ export default class DecimalInput extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -60,7 +64,8 @@ export default class DecimalInput extends ShallowComponent {
         value: "",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
     static refName = "innerInput";

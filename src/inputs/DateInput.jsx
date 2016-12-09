@@ -69,6 +69,10 @@ export default class DateInput extends ShallowComponent {
          *Maximum date to show at the picker.
          */
         maxDate: React.PropTypes.number,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -83,7 +87,8 @@ export default class DateInput extends ShallowComponent {
         locale: "en",
         value: undefined,
         minDate: momentjs("01/01/1900", "DD/MM/YYYY").toDate().getTime(),
-        maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime()
+        maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime(),
+        validationDisplay: "block"
     };
 
     static refName = "innerInput";
@@ -134,7 +139,7 @@ export default class DateInput extends ShallowComponent {
                             value={overlayValue}
                             minDate={this.props.minDate}
                             maxDate={this.props.maxDate}
-                        />
+                            />
                     </Popover>
                 </Overlay>
                 <Input
@@ -148,7 +153,7 @@ export default class DateInput extends ShallowComponent {
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-                />
+                    />
             </div>);
     }
 
@@ -167,6 +172,7 @@ export default class DateInput extends ShallowComponent {
         let result = true;
         let value = this.__formatString(e.target.value);
         e.target.value = value;
+        e.target.name = this.props.name;
 
         if (!this.validChars.test(value) || !this.__checkPartialRegex(value) || value.length > this.props.format.length) {
             // Do not take input if maxlength exeeded or invalid char entered.
@@ -265,7 +271,8 @@ export default class DateInput extends ShallowComponent {
             let e = {
                 target: {
                     value: momentjs(this.props.value).format(this.props.format),
-                    parsedValue: newMoment.toDate().getTime()
+                    parsedValue: newMoment.toDate().getTime(),
+                    name: this.props.name
                 }
             };
             this.props.onChange(e);

@@ -69,6 +69,10 @@ export default class RadioInput extends ValidationComponent {
          * it specifies that an radios will be horizontal or not.
          */
         horizontal: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -83,6 +87,7 @@ export default class RadioInput extends ValidationComponent {
         hidden: false,
         inline: false,
         horizontal: false,
+        validationDisplay: "block"
     };
 
     /**
@@ -93,16 +98,15 @@ export default class RadioInput extends ValidationComponent {
     render(): Object {
         this._value = this.props.value;
         let inlineClass = this.props.inline || this.props.horizontal ? "form-inline" : undefined;
-        let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : undefined;
-        return (
-            <div className={inlineClass}>
-                <FormGroup validationState={validationState}>
+        return super.wrapComponent(
+            (
+                <FormGroup >
                     <ControlLabel> {this.props.label} </ControlLabel>
-                    <div style={{ minHeight: "34px", paddingTop: this.props.horizontal ? "6px" : "0px" }}>{this.__createRadioBoxes(this.props.items)}</div>
-                    {super.validationResult()}
+                    < div className={"form-control " + inlineClass} style={{ height: "auto" }}>
+                        <div style={{ minHeight: "34px", paddingTop: this.props.horizontal ? "6px" : "6px" }}>{this.__createRadioBoxes(this.props.items)}</div>
+                    </div>
                 </FormGroup>
-            </div>
+            )
         );
     }
 
@@ -110,7 +114,7 @@ export default class RadioInput extends ValidationComponent {
      *
      * @param items
      * @returns {Array}
-     * @private
+                * @private
      */
     __createRadioBoxes(items: Array<Map>): Array {
         let components = null;
@@ -129,7 +133,7 @@ export default class RadioInput extends ValidationComponent {
      *
      * @param item
      * @returns {Object}
-     * @private
+                    * @private
      */
     __createRadioBox(item: Map): Object {
         if (!item) {
@@ -184,7 +188,7 @@ export default class RadioInput extends ValidationComponent {
     __onClick(value: Object): Object {
         let result = true;
         if (this.props.onChange) {
-            let e = { target: { value: value } };
+            let e = { target: { value: value, name: this.props.name } };
             result = this.props.onChange(e);
         }
         return result;

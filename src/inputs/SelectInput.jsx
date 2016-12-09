@@ -77,7 +77,11 @@ export default class SelectInput extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     static defaultProps = {
@@ -90,14 +94,14 @@ export default class SelectInput extends ValidationComponent {
         searchable: true,
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
     __delimiter = ",";
     _value = "";
     _onChange;
     __checkSelection;
-    focused = false;
 
     /**
      *
@@ -120,11 +124,9 @@ export default class SelectInput extends ValidationComponent {
         this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
     }
     render(): Object {
-        let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : undefined;
-        validationResult = this.focused ? validationResult : undefined;
-        return (
-            <FormGroup hidden={this.props.hidden} style={this.props.style} validationState={validationState}>
+
+        return super.wrapComponent(
+            <FormGroup hidden={this.props.hidden} style={this.props.style}>
                 <ControlLabel> {this.props.label} </ControlLabel>
                 <Select
                     options={this.props.items}
@@ -139,7 +141,6 @@ export default class SelectInput extends ValidationComponent {
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
                     />
-                {validationResult}
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
         );
@@ -257,15 +258,12 @@ export default class SelectInput extends ValidationComponent {
                 target: {
                     value: value,
                     oldValue: oldValue,
-                    parsedValue: value
+                    parsedValue: value,
+                    name: this.props.name
                 }
             };
             result = this.props.onChange(e);
         }
         return result;
     }
-    isFocused(): boolean {
-        return this.focused;
-    }
-
 }

@@ -70,7 +70,11 @@ export default class CheckInput extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
 
@@ -83,7 +87,8 @@ export default class CheckInput extends ValidationComponent {
         valueField: "value",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
     _value;
@@ -110,20 +115,17 @@ export default class CheckInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel> {this.props.label} </ControlLabel>
         );
-        let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : undefined;
-
-        return (
-            <FormGroup hidden={this.props.hidden} validationState={validationState}>
+        return super.wrapComponent(
+            (<FormGroup hidden={this.props.hidden} >
                 {label}
-                {
-                    this._hasMultiItem ?
-                        this.__createCheckInputs(this.props.items) :
-                        this.__createCheckInput(this.props.item)
-                }
-                {validationResult}
-            </FormGroup>
-        );
+                <div className="form-control" style={{ height: "auto" }}>
+                    {
+                        this._hasMultiItem ?
+                            this.__createCheckInputs(this.props.items) :
+                            this.__createCheckInput(this.props.item)
+                    }
+                </div>
+            </FormGroup>));
     }
 
     /**
@@ -252,7 +254,8 @@ export default class CheckInput extends ValidationComponent {
                 target: {
                     value: value,
                     oldValue: oldValue,
-                    parsedValue: value
+                    parsedValue: value,
+                    name: this.props.name
                 }
             };
             result = this.props.onChange(e);

@@ -7,7 +7,7 @@ import "./FileUploadInput.css";
 // https://github.com/felixrieseberg/React-Dropzone-Component
 
 const supportMultiple = (typeof document !== "undefined" && document && document.createElement) ?
-"multiple" in document.createElement("input") :
+    "multiple" in document.createElement("input") :
     true;
 
 export default class FileUploadInput extends ShallowComponent {
@@ -61,7 +61,11 @@ export default class FileUploadInput extends ShallowComponent {
         /**
          * will disable browse button
          */
-        disabledBrowse: React.PropTypes.bool
+        disabledBrowse: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -76,7 +80,8 @@ export default class FileUploadInput extends ShallowComponent {
         multiple: true,
         autoUpload: true,
         disabledBrowse: false,
-        maxFileSize: 1000
+        maxFileSize: 1000,
+        validationDisplay: "block"
     };
 
     /**
@@ -298,7 +303,7 @@ export default class FileUploadInput extends ShallowComponent {
                     onDrop={this.onDrop}
                     toolbar={this.createButtons()}
                     toolbarPosition="bottom"
-                />
+                    />
             </Panel>
         );
     }
@@ -343,7 +348,7 @@ export default class FileUploadInput extends ShallowComponent {
                 style={{
                     margin: 5
                 }}
-            >
+                >
                 <Button bsSize="xsmall" onClick={onItemDelete} >
                     <Glyphicon glyph="remove" />
                 </Button>
@@ -367,16 +372,16 @@ export default class FileUploadInput extends ShallowComponent {
                 style={{
                     display: "inline-block"
                 }}
-            >
+                >
                 <tbody>
-                <tr>
-                    <td>
-                        <Glyphicon glyph="file" />
-                    </td>
-                    <td>{item.originalname}</td>
-                    <td>{item.mime}</td>
-                    <td>{item.size}</td>
-                </tr>
+                    <tr>
+                        <td>
+                            <Glyphicon glyph="file" />
+                        </td>
+                        <td>{item.originalname}</td>
+                        <td>{item.mime}</td>
+                        <td>{item.size}</td>
+                    </tr>
                 </tbody>
             </Table>
         );
@@ -405,7 +410,7 @@ export default class FileUploadInput extends ShallowComponent {
                     <Glyphicon glyph="folder-open" />&nbsp; <span className="hidden-xs">Browse …</span>
                     <input
                         {...inputAttributes}
-                    />
+                        />
                 </Button>
             </ButtonGroup>
         );
@@ -456,7 +461,8 @@ export default class FileUploadInput extends ShallowComponent {
                 target: {
                     event: event,
                     oldValue: this.__getValueByMultipleProperty(oldValue),
-                    value: this.__getValueByMultipleProperty(newValue)
+                    value: this.__getValueByMultipleProperty(newValue),
+                    name: this.props.name
                 }
             };
             this.props.onChange(e);

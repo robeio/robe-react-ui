@@ -51,10 +51,14 @@ export default class HtmlEditor extends ValidationComponent {
          */
         hidden: React.PropTypes.bool,
 
-         /**
-         * it specifies that an input field height be auto resize
-         */
-        autoResize: React.PropTypes.bool
+        /**
+        * it specifies that an input field height be auto resize
+        */
+        autoResize: React.PropTypes.bool,
+        /**
+       *Defines the display style of the Validation message.
+       */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -66,37 +70,32 @@ export default class HtmlEditor extends ValidationComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        autoResize: false
+        autoResize: false,
+        validationDisplay: "block"
     };
 
     static refName = "editor";
     static toolbarRefName = "toolbar";
-    focused = false;
 
 
     render(): Object {
-        let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : undefined;
-        validationResult = this.isFocused() ? validationResult : undefined;
-        return (
-            <FormGroup hidden={this.props.hidden} validationState={validationState}>
+        return super.wrapComponent(
+            <FormGroup hidden={this.props.hidden}>
                 <ControlLabel><span>{this.props.label}</span></ControlLabel>
                 <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
                     <ReactQuill.Toolbar
                         key="toolbar"
                         ref={HtmlEditor.toolbarRefName}
                         items={HtmlEditorItems}
-                    />
+                        />
                     <Col
                         key="editor"
                         ref={HtmlEditor.refName}
                         onKeyUp={this.props.autoResize ? this.__resize : undefined}
                         style={{ height: this.props.height, minHeight: this.props.height }}
                         className="quill-contents"
-                    />
+                        />
                 </ReactQuill>
-                {validationResult}
-
             </FormGroup>
         );
     }
@@ -118,24 +117,12 @@ export default class HtmlEditor extends ValidationComponent {
     }
 
     __onChange(value: string) {
-        this.focused = true;
         const e = {};
-        e.target = {};
+        e.target = { name: this.props.name };
         e.target.parsedValue = value;
 
         if (this.props.onChange) {
             this.props.onChange(e);
         }
     }
-
-
-    /**
-   * Returns true if the field is the focused field at the document
-   * @returns {boolean}
-   * @memberOf BaseInput
-   */
-    isFocused(): boolean {
-        return this.focused;
-    }
-
 }

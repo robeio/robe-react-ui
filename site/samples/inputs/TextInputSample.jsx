@@ -19,7 +19,7 @@ export default class TextInputSample extends ShallowComponent {
                     label="TextInput"
                     value={this.state.TextInputNormal}
                     onChange={this.__handleChange.bind(undefined, "TextInputNormal")}
-                />
+                    />
                 <TextInput
                     label="With Validations"
                     value={this.state.TextInputValidations}
@@ -30,7 +30,19 @@ export default class TextInputSample extends ShallowComponent {
                             args: [3]
                         }
                     }}
-                />
+                    />
+                <TextInput
+                    label="With Validations Overlay"
+                    validationDisplay="overlay"
+                    value={this.state.TextInputValidations}
+                    onChange={this.__handleChange.bind(undefined, "TextInputValidations")}
+                    validations={{
+                        required: true,
+                        minLength: {
+                            args: [3]
+                        }
+                    }}
+                    />
             </div>
         );
     }

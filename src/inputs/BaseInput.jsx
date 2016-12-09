@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup, InputGroup, ControlLabel, FormControl } from "react-bootstrap";
+import { FormGroup, InputGroup, ControlLabel, FormControl, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ReactDOM from "react-dom";
 import ValidationComponent from "../validation/ValidationComponent";
 
@@ -63,7 +63,11 @@ export default class BaseInput extends ValidationComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+         *Defines the display style of the Validation message.
+         */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -73,7 +77,8 @@ export default class BaseInput extends ValidationComponent {
     static defaultProps = {
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
 
@@ -103,40 +108,34 @@ export default class BaseInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel>{this.props.label}</ControlLabel>
         );
-        let validationResult = super.validationResult();
-        let validationState = validationResult !== undefined ? "error" : undefined;
-        validationResult = this.isFocused() ? validationResult : undefined;
-        if (this.props.inputGroupLeft !== undefined || this.props.inputGroupRight !== undefined) {
-            let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
-            return (
-                <FormGroup hidden={this.props.hidden} validationState={validationState}>
-                    {label}
-                    <InputGroup>
-                        {this.props.inputGroupLeft}
-                        <FormControl
-                            {...newProps}
-                            ref={BaseInput.refName}
-                            value={this.props.value}
-                        />
-                        {this.props.inputGroupRight}
-                    </InputGroup>
-                    {validationResult}
-                </FormGroup>
-            );
-        }
-        let { tooltip, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
 
-        return (
-            <FormGroup hidden={this.props.hidden} validationState={validationState}>
+        let { tooltip, inputGroupLeft, inputGroupRight, validations, ...newProps } = this.props; // eslint-disable-line no-unused-vars
+
+        let component = (<FormControl
+            {...newProps}
+            ref={BaseInput.refName}
+            value={this.props.value}
+            />);
+
+        if (inputGroupLeft !== undefined || inputGroupRight !== undefined) {
+            component = (
+                <InputGroup>
+                    {inputGroupLeft}
+                    {component}
+                    {inputGroupRight}
+
+                </InputGroup>
+            )
+        }
+        component = (
+            <FormGroup hidden={this.props.hidden}>
                 {label}
-                <FormControl
-                    {...newProps}
-                    ref={BaseInput.refName}
-                    value={this.props.value}
-                />
-                {validationResult}
+                {component}
+
             </FormGroup>
         );
+        return super.wrapComponent(component);
+
     }
 
     /**
@@ -150,7 +149,7 @@ export default class BaseInput extends ValidationComponent {
     /**
      * Returns true if the field is the focused field at the document
      * @returns {boolean}
-     * @memberOf BaseInput
+            * @memberOf BaseInput
      */
     isFocused(): boolean {
         let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line

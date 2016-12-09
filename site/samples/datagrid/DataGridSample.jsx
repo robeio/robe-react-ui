@@ -133,7 +133,7 @@ export default class DataGridSample extends ShallowComponent {
                     show={this.state.showModal}
                     onSubmit={this.__onSave}
                     onCancel={this.__onCancel}
-                    item={this.state.item}
+                    defaultValues={this.state.item}
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
                     />

@@ -25,7 +25,7 @@ export default class ModalDataForm extends ShallowComponent {
         /**
          * Hold data in a map
          */
-        item: React.PropTypes.object,
+        defaulValues: React.PropTypes.object,
         /**
          * Holds field properties like `name`, `label`, `type`, `visible`, `editable`, `readable`, `label`
          */
@@ -43,7 +43,11 @@ export default class ModalDataForm extends ShallowComponent {
         cancelButtonText: React.PropTypes.string,
         submitButtonText: React.PropTypes.string,
         showCancelButton: React.PropTypes.bool,
-        showSaveButton: React.PropTypes.bool
+        showSaveButton: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -58,7 +62,7 @@ export default class ModalDataForm extends ShallowComponent {
         submitButtonText: "Kaydet",
         showCancelButton: true,
         showSaveButton: true,
-
+        validationDisplay: "block"
     };
 
     doNotSubmit = false;
@@ -80,9 +84,10 @@ export default class ModalDataForm extends ShallowComponent {
                         ref={ModalDataForm.dataFormRef}
                         fields={this.props.fields}
                         propsOfFields={this.props.propsOfFields}
-                        item={this.props.item}
+                        defaultValues={this.props.defaultValues}
                         onSubmit={this.__submitForm}
-                    />
+                        validationDisplay={this.props.validationDisplay}
+                        />
                     {this.__renderWarning()}
                 </Modal.Body>
                 {this.__renderFooterButtons()}

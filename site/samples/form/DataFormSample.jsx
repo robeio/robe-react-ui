@@ -66,47 +66,52 @@ export default class DataFormSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
+            defaultValues: {
+                age:2
+            },
             propsOfFields: {
                 files: {
                     remote: remote,
-                    onCellRender: this.onCellRender
+                },
+                il: {
+                    onChange: this.onCityChange
                 },
                 ilce: {
                     items: [],
                     value: undefined
                 }
-            } };
+            }
+        };
     }
 
     render(): Object {
         return (
             <div>
                 <DataForm
+                    ref="dataform"
                     header="Example Data Form Label"
                     fields={fields}
                     columnsSize={2}
-                    onChange={this.onChange}
                     propsOfFields={this.state.propsOfFields}
-                />
+                    defaultValues={this.state.defaultValues}
+                    />
             </div>
         );
     }
 
-    onChange(name: string, e: Object): boolean {
-        if (name === "il") {
-            let value = e.target.value;
-            let nextState = this.cloneState();
-            if (value) {
-                let items = ilce[value];
-                nextState.propsOfFields.ilce.items = items;
-            } else {
-                nextState.propsOfFields.ilce.items = [];
-                nextState.propsOfFields.ilce.value = undefined;
-            }
-            this.setState(nextState);
-            return true;
-        }
-        return true;
+    onCityChange(name, e) {
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        let state2 = {
+            propsOfFields: {
+                ilce: {
+                    items: ilce[value]
+                }
+            },
+            // defaultValues: this.refs.dataform.state
+        };
+        console.log("sample", this.state);
+        console.log("dataform", this.refs.dataform.state);
+        this.setState(state2);
     }
 
 }

@@ -51,7 +51,11 @@ export default class MoneyInput extends ShallowComponent {
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool
+        hidden: React.PropTypes.bool,
+        /**
+        *Defines the display style of the Validation message.
+        */
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
     /**
@@ -65,7 +69,8 @@ export default class MoneyInput extends ShallowComponent {
         value: "",
         disabled: false,
         readOnly: false,
-        hidden: false
+        hidden: false,
+        validationDisplay: "block"
     };
 
     static refName = "innerInput";
@@ -85,7 +90,7 @@ export default class MoneyInput extends ShallowComponent {
                 value={this.props.value}
                 ref={MoneyInput.refName}
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-            />);
+                />);
     }
 
     /**
@@ -102,7 +107,7 @@ export default class MoneyInput extends ShallowComponent {
     __numericFilter(e: Object): boolean {
         this.caretPosition = this.refs[MoneyInput.refName].getCaretPosition();
         let value = e.target.value;
-        
+
         if (value === undefined || value === null) {
             value = "";
         }

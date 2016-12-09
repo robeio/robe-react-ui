@@ -30,8 +30,7 @@ export default class DatePicker extends ShallowComponent {
         /**
          *Maximum date to show at the picker.
          */
-        maxDate: React.PropTypes.number,
-
+        maxDate: React.PropTypes.number
     };
 
     /**

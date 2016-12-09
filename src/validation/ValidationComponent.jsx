@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent, Maps, Assertions, Objects } from "robe-react-commons";
-import { Alert } from "react-bootstrap";
+import { Alert, OverlayTrigger, Tooltip } from "react-bootstrap";
 import InputValidations from "./InputValidations";
 import "./Validation.css";
 
@@ -16,7 +16,9 @@ export default class ValidationComponent extends ShallowComponent {
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object
+        validations: React.PropTypes.object,
+
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
     /**
      * Max length allowed message.
@@ -53,10 +55,39 @@ export default class ValidationComponent extends ShallowComponent {
             messages.push(<p key={i}>{errors[i]}</p>);
         }
         if (!this.isValid()) {
-            alerts = <Alert className="input-alert" bsStyle="danger">{messages}</Alert>;
+            alerts = messages;
         }
         return alerts;
     }
+
+    wrapComponent(component: Object, placement: string): Object {
+        let result = this.validationResult();
+        // if (result !== undefined) {
+        let showMsg = result !== undefined;
+        let newProps = showMsg ? { validationState: "error" } : {};
+        console.log(this.props.displayType)
+        if (this.props.validationDisplay === "block") {
+            let tooltip = <Alert className="input-alert" bsStyle="danger">{result}</Alert>;
+            let newComponent = React.cloneElement(component,
+                newProps,
+                component.props.children,
+                showMsg ? tooltip : <span></span>);
+            return newComponent;
+        } else {
+            let newComponent = React.cloneElement(component, newProps);
+            let tooltip = <Tooltip id="tooltip">{result}</Tooltip>;
+            return (
+                <OverlayTrigger placement={placement ? placement : "bottom"}
+                    overlay={showMsg ? tooltip : <span></span>}
+                    >
+                    {newComponent}
+                </OverlayTrigger>
+            );
+        }
+        // }
+        return component;
+    }
+
     /**
      * Returns validity of the component.
      * @return {boolean}

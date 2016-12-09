@@ -9,14 +9,18 @@
         "args": [
           "^[a-zA-Z\\s\\ç\\Ç\\ö\\Ö\\ş\\Ş\\ı\\İ\\ğ\\Ğ\\ü\\Ü]+$"
         ]
-      }
+      },
+      "required": true
     }
   },
   {
     "label": "Password Input",
     "name": "password",
     "type": "password",
-    "value": ""
+    "value": "",
+    "validations": {
+      "required": true
+    }
   },
   {
     "label": "Number Input",

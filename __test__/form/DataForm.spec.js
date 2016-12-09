@@ -11,7 +11,8 @@ describe("form/DataForm", () => {
             type: "string",
             name: "id",
             tooltip: "id",
-            visible: false
+            visible: false,
+            
         },
         {
             label: "Name",
@@ -43,7 +44,7 @@ describe("form/DataForm", () => {
         fields[0].name = "";
         chai.assert.throws(() => {
             wrapper = mount(getComponent({ fields: fields }));
-        }, "Field name must define ! ");
+        }, "Field name must be defined ! ");
 
         fields[0].name = "id";
         wrapper = mount(getComponent({ fields: fields }));
@@ -61,11 +62,11 @@ describe("form/DataForm", () => {
         chai.assert.equal(wrapper.find('[name="name"]').first().prop("value"), "Hasan");
     });
 
-    it("getItem", () => {
+    it("state", () => {
         let wrapper = mount(getComponent({ fields: fields }));
         wrapper.setState({ name: "Hasan" });
-        let item = wrapper.instance().getItem();
-        // chai.assert.equal(item.name, "Hasan");
+        let item = wrapper.instance().state;
+        chai.assert.equal(item.name, "Hasan");
     });
 
     it("submit", () => {
