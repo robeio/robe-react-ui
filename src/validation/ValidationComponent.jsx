@@ -62,10 +62,8 @@ export default class ValidationComponent extends ShallowComponent {
 
     wrapComponent(component: Object, placement: string): Object {
         let result = this.validationResult();
-        // if (result !== undefined) {
         let showMsg = result !== undefined;
         let newProps = showMsg ? { validationState: "error" } : {};
-        console.log(this.props.displayType)
         if (this.props.validationDisplay === "block") {
             let tooltip = <Alert className="input-alert" bsStyle="danger">{result}</Alert>;
             let newComponent = React.cloneElement(component,
