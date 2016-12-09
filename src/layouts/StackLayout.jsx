@@ -80,7 +80,10 @@ export default class StackLayout extends ShallowComponent {
         display: "list",
         style: {},
         items: [],
-        onItemRender: (item: Object, displayType: string): Object => {
+        onItemRender: StackLayout.onItemRender
+    };
+
+    static onItemRender (item: Object, displayType: string): Object {
             if (displayType === "list") {
                 return (<span> <span style={{ fontSize: "18px" }}> {`${item.key} `}</span>{item.value}</span>);
             }
@@ -90,8 +93,7 @@ export default class StackLayout extends ShallowComponent {
                     <br />
                     {item.value}
                 </span>);
-        }
-    };
+    }
 
 
     constructor(props: Object) {

@@ -70,6 +70,7 @@ export default class CheckTree extends ShallowComponent {
                 valueField={this.props.valueField}
                 onChange={this.__onChange}
                 ref="innerInput"
+                formControl ={false}
             />);
         let itemComp = (
             <li className="checkboxtree">

@@ -74,7 +74,11 @@ export default class CheckInput extends ValidationComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(['overlay', 'block']),
+        /**
+         * Defines class of the check input. (form-control or not)
+         */
+        formControl: React.PropTypes.bool
     };
 
 
@@ -88,7 +92,8 @@ export default class CheckInput extends ValidationComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        validationDisplay: "block"
+        validationDisplay: "block",
+        formControl: true
     };
 
     _value;
@@ -118,7 +123,7 @@ export default class CheckInput extends ValidationComponent {
         return super.wrapComponent(
             (<FormGroup hidden={this.props.hidden} >
                 {label}
-                <div className="form-control" style={{ height: "auto" }}>
+                <div className={this.props.formControl?"form-control":""} style={{ height: "auto" }}>
                     {
                         this._hasMultiItem ?
                             this.__createCheckInputs(this.props.items) :
