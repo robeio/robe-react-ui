@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.1.1
+* fixed duplicate call onchange problem in **DataForm** .
+
 ## 1.1.0
 - Validation has a new display option. **validationDisplay** property will take *"block"* or *"overlay"*  to decide how to show messages. All inputs refactored to work like that.
 - DataForm and ModalDataForm will forward **validationDisplay** property to all fields defined inside.

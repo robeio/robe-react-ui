@@ -67,11 +67,11 @@ export default class DataFormSample extends ShallowComponent {
         super(props);
         this.state = {
             defaultValues: {
-                age:2
+                age: 2
             },
             propsOfFields: {
                 files: {
-                    remote: remote,
+                    remote: remote
                 },
                 il: {
                     onChange: this.onCityChange
@@ -94,24 +94,18 @@ export default class DataFormSample extends ShallowComponent {
                     columnsSize={2}
                     propsOfFields={this.state.propsOfFields}
                     defaultValues={this.state.defaultValues}
-                    />
+                />
             </div>
         );
     }
 
-    onCityChange(name, e) {
+    onCityChange(e) {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        let state2 = {
-            propsOfFields: {
-                ilce: {
-                    items: ilce[value]
-                }
-            },
-            // defaultValues: this.refs.dataform.state
+        return {
+            ilce: {
+                items: ilce[value],
+                value: null
+            }
         };
-        console.log("sample", this.state);
-        console.log("dataform", this.refs.dataform.state);
-        this.setState(state2);
     }
-
 }

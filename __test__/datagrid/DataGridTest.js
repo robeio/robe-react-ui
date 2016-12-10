@@ -8,7 +8,7 @@ import {
 import ModalDataForm from "form/ModalDataForm";
 import DataGrid from "datagrid/DataGrid";
 import DataGridModel from "./DataGridModel.json";
-import TestUtils from "../TestUtils"
+import TestUtils from "../TestUtils";
 
 const propsOfFields = {
     job: {

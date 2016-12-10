@@ -1,7 +1,9 @@
 import React from "react";
 import {
     ShallowComponent,
-    Maps
+    Maps,
+    Objects,
+    Assertions
 } from "robe-react-commons";
 import {
     Form, Row, Col
@@ -59,6 +61,7 @@ export default class DataForm extends ShallowComponent {
         defaultExpanded: true,
         columnsSize: 1,
         defaultValues: {},
+        propsOfFields: {},
         validationDisplay: "block"
     };
 
@@ -76,51 +79,34 @@ export default class DataForm extends ShallowComponent {
      */
     __onChanges = {};
 
-    constructor(props: Object) {
+    __columnSize;
+    constructor(props) {
         super(props);
-        this.state = {};
-        this.componentWillReceiveProps(this.props);
+        this.state = props.defaultValues;
+        this.componentWillReceiveProps(props);
     }
 
-    __init(fields: Array, config: Object) {
+    componentWillReceiveProps(nextProps) {
+        this.__columnSize = 12 / nextProps.columnsSize;
+        let fields = nextProps.fields;
+        let props = nextProps.propsOfFields;
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
-            if (!field.name) {
+            let name = field.name;
+            if (!name) {
                 throw new Error("Field name must be defined ! ");
             }
-            let props;
-            if (config) {
-                props = config[field.name];
-            }
-
-            this.__initComponent(field, props);
+            let prop = Objects.clone(field, [Array]);
+            let config = Objects.mergeClone(props[name], prop, [Array]);
+            this.__setPropsOfField(name, config, this.state);
         }
     }
 
-    __initComponent(field: Object, props: Object) {
-        let name = field.name;
-        if (!this.__onChanges[name] && props !== undefined) {
-            this.__onChanges[name] = props.onChange;
-        }
-        props = props ? Maps.mergeDeep(props, field) : field;
-
-        props.onChange = this.onChange;
-
-        let newProps = {};
-        Maps.mergeDeep(props, newProps);
-
-        delete newProps.sort;
-        delete newProps.range;
-
-        this.__props[name] = newProps;
-        this.state[name] = this.state[name] || this.props.defaultValues[name] || newProps.value;
-    }
-
-    render(): Object {
+    render():Object {
         let form = (
             <Form>
                 <Row>
-                    {this.__createForm(this.props.fields, this.props.components)}
+                    {this.__createForm(this.props.fields)}
                 </Row>
             </Form>
         );
@@ -134,7 +120,7 @@ export default class DataForm extends ShallowComponent {
      * @returns {Array}
      * @private
      */
-    __createForm = (fields: Array<Map>): Array => {
+    __createForm = (fields:Array<Map>):Array => {
         let items = [];
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
@@ -153,25 +139,32 @@ export default class DataForm extends ShallowComponent {
      * @returns {Object}
      * @private
      */
-    __createElement = (field: Map): Object => {
+    __createElement = (field:Map):Object => {
         if (field.visible === false) {
             return null;
         }
-
         let name = field.name;
         let props = this.__props[name];
         let Component = ComponentManager.getComponent(field.type);
 
-        let columnsSize = 12 / this.props.columnsSize;
-
-        return (<Col key={`${name}_key`} md={columnsSize}><Component ref={`${name}Ref`} {...props} value={this.state[name]} validationDisplay={this.props.validationDisplay} /></Col>);
+        return (
+            <Col key={`${name}_key`} md={this.__columnSize}>
+                <Component
+                    ref={`${name}Ref`}
+                    {...props}
+                    onChange={this.onChange}
+                    value={this.state[name]}
+                    validationDisplay={this.props.validationDisplay}
+                />
+            </Col>
+        );
     }
 
     /**
      * Checks validations of all components in form data
      * @returns {boolean}
      */
-    isValid = (): boolean => {
+    isValid = ():boolean => {
         let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs, "isValid", "function");
         for (let i = 0; i < hasIsValidObjects.length; i++) {
             if (hasIsValidObjects[i].isValid() !== true) {
@@ -182,44 +175,79 @@ export default class DataForm extends ShallowComponent {
     };
 
     /**
+     * @param name
+     * @param props
+     * @param state
+     * @private
+     */
+    __setPropsOfFields(propsOfFields:Object, state:Object) {
+        if (Assertions.isObject(propsOfFields)) {
+            for (let targetName in propsOfFields) {
+                if (Objects.hasProperty(propsOfFields, targetName)) {
+                    this.__setPropsOfField(targetName, propsOfFields[targetName], state);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param name
+     * @param props
+     * @param state
+     * @private
+     */
+    __setPropsOfField(name:string, props:Object, state:Object) {
+        if (!this.__props[name]) this.__props[name] = {};
+        if (props) {
+            for (let targetName in props) {
+                if (Objects.hasProperty(props, targetName)) {
+                    switch (targetName) {
+                        case "value":
+                            state[name] = props[targetName];
+                            this.__props[name][targetName] = props[targetName];
+                            break;
+                        case "onChange":
+                            this.__onChanges[name] = props[targetName];
+                            break;
+                        default:
+                            this.__props[name][targetName] = props[targetName];
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Called when any component changed.
      * @param name
      * @param e
      * @returns {boolean}
      */
-    onChange(e: Object): boolean {
+    onChange(e:Object):boolean {
         let name = e.target.name;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-
         let state = {};
-        state[name] = value
-        let props = this.__props[name];
+        state[name] = value;
 
-        let changeState = true;
         if (this.props.onChange) {
-            if (this.props.onChange(name, e) === false) {
-                changeState = false;
+            if (this.props.onChange(e) === false) {
+                return false;
             }
         }
-        if (changeState) {
-            this.setState(state);
-        }
+
         if (this.__onChanges[name]) {
-            this.__onChanges[name](name, e);
+            let result = this.__onChanges[name](e);
+            this.__setPropsOfFields(result, state);
         }
-        return changeState;
+        this.setState(state);
     }
 
     /**
      * Checks validation of data and return valid data. If data is not valid then return false
      * @returns {boolean}
      */
-    submit(): any {
+    submit():any {
         let valid = this.isValid();
         return valid ? this.state : false;
-    }
-
-    componentWillReceiveProps(nextProps: Object) {
-        this.__init(nextProps.fields, nextProps.propsOfFields);
     }
 }
