@@ -1,0 +1,21 @@
+{
+    "label": "Number Input",
+    "name": "age",
+    "type": "number",
+    "validations": {
+      "required": {
+        "message": "This is a custom required message."
+      },
+      "minValue": {
+        "args": [5]
+      }
+    }
+  },
+  {
+    "label": "Decimal Input",
+    "name": "rate",
+    "type": "decimal",
+    "validations": {
+      "required": true
+    }
+  },

@@ -3,13 +3,10 @@
 * DateInput now supports long & formatted string.
 * changed name of *__validate** method as *validate* in **ValidationsComponent** to be callable as public method. 
 * added validate method to all Input Components classes that are exist under the in **inputs/** folder.
-* docs folder name changed to jsons.
-* New docs folder was created.
 * Locations of folders changed;
     * /samples to  /components/samples
-    * /jsons  to  /components/jsons
-    * /components/ComponentList.jsx  to  /docs/ComponentList.jsx
-    * /components/Renderer.jsx  to  /docs/Renderer.jsx
+    * /docs  to  /components/jsons
+    * New site/docs folder now includes detailed documentation (Validation, Model, etc.) 
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .

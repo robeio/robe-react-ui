@@ -1,10 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import Renderer from "../docs/Renderer";
+import Renderer from "./Renderer";
 import { Grid, Col, ListGroup, ListGroupItem, InputGroup } from "react-bootstrap";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
-import ComponentList from "../docs/ComponentList";
+import ComponentList from "./ComponentList";
 import Progress from "progress/Progress";
 import TextInput from "inputs/TextInput";
 import FaIcon from "faicon/FaIcon";
@@ -24,8 +24,8 @@ export default class Showcase extends ShallowComponent {
     render(): Object {
         let componentDetail;
         let componentMenu = [];
-        let components = ComponentList.getComponentList(this.state, this.__handleChange);
-     
+        let components = ComponentList.getList(this.state, this.__handleChange);
+
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
             let active = this.state.componentSelection === `Components/${item.header}`;
@@ -36,7 +36,7 @@ export default class Showcase extends ShallowComponent {
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
-                    >
+                        >
                         {item.header}
                     </ListGroupItem>);
                 if (active) {
@@ -48,7 +48,7 @@ export default class Showcase extends ShallowComponent {
                             json={item.json}
                             sample={item.sample}
                             code={item.code}
-                        />);
+                            />);
                 }
             }
         }
@@ -63,7 +63,7 @@ export default class Showcase extends ShallowComponent {
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
                         placeholder="Search"
-                    />
+                        />
                     <ListGroup>{componentMenu}</ListGroup>
                 </Col>
                 <Col xs={12} sm={9} ref="componentView">

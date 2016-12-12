@@ -3,7 +3,8 @@ import { render } from "react-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
-import { Components } from "./components";
+import Components from "./components/Components";
+import Docs from "./docs/Docs";
 import Welcome from "./Welcome";
 import JSDocs from "./JSDocs";
 import "./style.css";
@@ -42,6 +43,7 @@ class Site extends ShallowComponent {
                     </Navbar.Header>
                     <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
                         <NavItem eventKey="Components" >Components</NavItem>
+                        <NavItem eventKey="Docs" >Docs</NavItem>
                         <NavItem eventKey="JSDocs" >JSDocs</NavItem>
                         <NavItem eventKey="About" >About</NavItem>
                     </Nav>
@@ -63,6 +65,10 @@ class Site extends ShallowComponent {
             case "Components":
                 return (
                     <Components />
+                );
+            case "Docs":
+                return (
+                    <Docs />
                 );
             case "JSDocs":
                 return (
