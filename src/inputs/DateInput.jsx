@@ -147,7 +147,7 @@ export default class DateInput extends ShallowComponent {
                             value={overlayValue}
                             minDate={this.props.minDate}
                             maxDate={this.props.maxDate}
-                        />
+                            />
                     </Popover>
                 </Overlay>
                 <Input
@@ -160,8 +160,8 @@ export default class DateInput extends ShallowComponent {
                     value={parsedValue}
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
-                    inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-                />
+                    inputGroupRight={<InputGroup.Addon onClick={this.__onClick} ><FaIcon code="fa-calendar" /></InputGroup.Addon>}
+                    />
             </div>
         );
     }
@@ -304,7 +304,9 @@ export default class DateInput extends ShallowComponent {
             try {
                 if (target.id === (this.id) ||
                     target.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover" ||
-                    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover") {
+                    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover" ||
+                    target.className === "fa fa-fw fa-calendar fa-sm " ||
+                    target.children[0].className === "fa fa-fw fa-calendar fa-sm ") {
                     return;
                 }
             } catch (exeption) {

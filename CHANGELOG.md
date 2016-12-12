@@ -9,6 +9,7 @@
     * New site/docs folder now includes detailed documentation (Validation, Model, etc.) 
 * DataGrid row css changed.
 * Filter ComponentManager bug fixed.
+* Now DateInput addon click triggers popup
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
