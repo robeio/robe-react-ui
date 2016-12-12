@@ -8,6 +8,7 @@
     * /docs  to  /components/jsons
     * New site/docs folder now includes detailed documentation (Validation, Model, etc.) 
 * DataGrid row css changed.
+* Filter ComponentManager bug fixed.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .

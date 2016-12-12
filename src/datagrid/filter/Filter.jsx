@@ -21,7 +21,7 @@ export default class Filter extends ShallowComponent {
         delete field.validations;
         delete field.sort;
         let name = field.name;
-        let Component = ComponentManager.findComponentByType(field.type);
+        let Component = ComponentManager.getComponent(field.type);
         let style = {};
         if (field.type === "select") {
             style = { width: "176px" };
