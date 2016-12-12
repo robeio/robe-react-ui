@@ -1,6 +1,13 @@
 # Change Log
 ## 1.1.2 - Developing
 * DateInput now supports long & formatted string.
+* docs folder name changed to jsons.
+* New docs folder was created.
+* Locations of folders changed;
+    * /samples to  /components/samples
+    * /jsons  to  /components/jsons
+    * /components/ComponentList.jsx  to  /docs/ComponentList.jsx
+    * /components/Renderer.jsx  to  /docs/Renderer.jsx
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
