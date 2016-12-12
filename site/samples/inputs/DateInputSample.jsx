@@ -1,48 +1,52 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import DateInput from "robe-react-ui/lib/inputs/DateInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
-import moment from "moment";
 
 
 export default class DateInputSample extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             DateInputNormal: new Date().getTime()
         };
     }
 
-    render() {
+
+    render(): Object {
         return (
             <div>
                 <DateInput
                     label="DateInput"
+                    name="DateInputNormal"
                     value={this.state.DateInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "DateInputNormal")}
+                    onChange={this.__handleChange}
                 />
                 <DateInput
                     label="With Validations"
+                    name="DateInputValidations"
                     value={this.state.DateInputValidations}
-                    onChange={this.__handleChange.bind(undefined, "DateInputValidations")}
+                    onChange={this.__handleChange}
                     validations={{
                         required: true
                     }}
                 />
                 <DateInput
                     label="DateInput With Custom Localization"
+                    name="DateInputNormal"
                     locale="tr"
                     format="YYYY MM DD"
                     value={this.state.DateInputNormal}
-                    onChange={this.__handleChange.bind(undefined, "DateInputNormal")}
+                    onChange={this.__handleChange}
                 />
             </div>
         );
     }
-    __handleChange = (code: any, e: Object) => {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[e.target.name] = value;
         this.setState(state);
-    };
+    }
+
 }
+

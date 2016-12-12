@@ -1,6 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import momentjs from "moment";
+import is from "is-js";
 import { Popover, Overlay, InputGroup } from "react-bootstrap";
 import Input from "./BaseInput";
 import DatePicker from "./datepicker/DatePicker";
@@ -72,7 +73,7 @@ export default class DateInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -119,7 +120,14 @@ export default class DateInput extends ShallowComponent {
      * @returns
      */
     render(): Object {
-        let parsedValue = this.isPartial ? "Invalid date" : momentjs(this.props.value).format(this.props.format);
+        let parsedValue;
+        if (this.isPartial) {
+            parsedValue = "Invalid date";
+        } else if (is.number(this.props.value)) {
+            parsedValue = momentjs(this.props.value).format(this.props.format);
+        } else {
+            parsedValue = momentjs(this.props.value, this.props.format).format(this.props.format);
+        }
         let overlayValue;
         if (parsedValue === "Invalid date" || this.isPartial) {
             parsedValue = this.props.value;
@@ -139,7 +147,7 @@ export default class DateInput extends ShallowComponent {
                             value={overlayValue}
                             minDate={this.props.minDate}
                             maxDate={this.props.maxDate}
-                            />
+                        />
                     </Popover>
                 </Overlay>
                 <Input
@@ -153,7 +161,7 @@ export default class DateInput extends ShallowComponent {
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-                    />
+                />
             </div>);
     }
 
@@ -222,7 +230,7 @@ export default class DateInput extends ShallowComponent {
         return newValue.join("");
     }
 
-    __checkPartialRegex(value: string) {
+    __checkPartialRegex(value: string): boolean {
         let formatParts = this.props.format.split(this.separator);
         let valueParts = value.split(this.separator);
         let valueIndex = 0;

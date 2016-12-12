@@ -1,4 +1,6 @@
 # Change Log
+## 1.1.2 - Developing
+* DateInput now supports long & formatted string.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
