@@ -16,6 +16,7 @@
     * Sample page updated.
 * React-Bootstrap link added to the showcase's navbar.
 * All input field samples updated with better event handling (e.target.name)
+* HtmlEditor css fixed. (corners rounded)
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
