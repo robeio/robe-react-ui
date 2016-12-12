@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import CheckInput from "robe-react-ui/lib/inputs/CheckInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 const langs = [
@@ -20,7 +19,7 @@ const langs = [
 ];
 
 export default class CheckInputSample extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             CheckInputSingle: false,
@@ -28,24 +27,26 @@ export default class CheckInputSample extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
                 <CheckInput
                     label="CheckInput Single"
+                    name="CheckInputSingle"
                     item={langs[0]}
                     value={this.state.CheckInputSingle}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(this, "CheckInputSingle")}
+                    onChange={this.__handleChange}
                 />
                 <CheckInput
                     label="CheckInput Group"
+                    name="CheckInputGroup"
                     items={langs}
                     value={this.state.CheckInputGroup}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChange.bind(this, "CheckInputGroup")}
+                    onChange={this.__handleChange}
                     validations={{
                         required: true
                     }}
@@ -53,11 +54,11 @@ export default class CheckInputSample extends ShallowComponent {
             </div>
         );
     }
-    __handleChange = (code: any, e: Object) => {
+    __handleChange(e: Object): boolean {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[e.target.name] = value;
         this.setState(state);
         return true;
-    };
+    }
 }
