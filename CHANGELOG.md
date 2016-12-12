@@ -10,6 +10,7 @@
 * DataGrid row css changed.
 * Filter ComponentManager bug fixed.
 * Now DateInput addon click triggers popup
+* validationDisplay example added to ValidationSample
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
