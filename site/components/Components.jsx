@@ -1,10 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import Renderer from "./Renderer";
+import Renderer from "../docs/Renderer";
 import { Grid, Col, ListGroup, ListGroupItem, InputGroup } from "react-bootstrap";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
-import ComponentList from "./ComponentList";
+import ComponentList from "../docs/ComponentList";
 import Progress from "progress/Progress";
 import TextInput from "inputs/TextInput";
 import FaIcon from "faicon/FaIcon";
