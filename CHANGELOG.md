@@ -15,6 +15,7 @@
     * Assets deleted. Now we are taking icons from npm.
     * Sample page updated.
 * React-Bootstrap link added to the showcase's navbar.
+* All input field samples updated with better event handling (e.target.name)
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
