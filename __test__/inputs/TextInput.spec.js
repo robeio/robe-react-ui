@@ -65,4 +65,13 @@ describe("inputs/TextInput", () => {
 
         chai.assert.equal("", value);
     });
+
+    it("'validate'", () => {
+        let componentNode = TestUtils.renderIntoDocument(getComponent({}));
+        chai.assert.equal(componentNode.validate(componentNode.props.value).length, 0);
+        // Must be invalid
+        componentNode = TestUtils.renderIntoDocument(getComponent({ value: "" }));
+        chai.assert.equal(componentNode.validate(componentNode.props.value).length, 1);
+    });
+
 });

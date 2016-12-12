@@ -67,7 +67,7 @@ export default class BaseInput extends ValidationComponent {
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -79,9 +79,7 @@ export default class BaseInput extends ValidationComponent {
         readOnly: false,
         hidden: false,
         validationDisplay: "block"
-    };
-
-
+    }
 
     static refName = "innerInput";
 
@@ -111,11 +109,13 @@ export default class BaseInput extends ValidationComponent {
 
         let { tooltip, inputGroupLeft, inputGroupRight, validations, validationDisplay, ...newProps } = this.props; // eslint-disable-line no-unused-vars
 
-        let component = (<FormControl
-            {...newProps}
-            ref={BaseInput.refName}
-            value={this.props.value}
-            />);
+        let component = (
+            <FormControl
+                {...newProps}
+                ref={BaseInput.refName}
+                value={this.props.value}
+            />
+        );
 
         if (inputGroupLeft !== undefined || inputGroupRight !== undefined) {
             component = (
@@ -125,7 +125,7 @@ export default class BaseInput extends ValidationComponent {
                     {inputGroupRight}
 
                 </InputGroup>
-            )
+            );
         }
         component = (
             <FormGroup hidden={this.props.hidden}>

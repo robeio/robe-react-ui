@@ -18,7 +18,7 @@ export default class ValidationComponent extends ShallowComponent {
          */
         validations: React.PropTypes.object,
 
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
     /**
      * Max length allowed message.
@@ -48,7 +48,7 @@ export default class ValidationComponent extends ShallowComponent {
 
     validationResult(): Object {
         let alerts;
-        let errors = this.__validate();
+        let errors = this.validate(this.props.value);
         this.__valid = (errors.length === 0);
         let messages = [];
         for (let i = 0; i < errors.length; i++) {
@@ -75,7 +75,8 @@ export default class ValidationComponent extends ShallowComponent {
             let newComponent = React.cloneElement(component, newProps);
             let tooltip = <Tooltip id="tooltip">{result}</Tooltip>;
             return (
-                <OverlayTrigger placement={placement ? placement : "bottom"}
+                <OverlayTrigger
+                    placement={placement || "bottom"}
                     overlay={showMsg ? tooltip : <span></span>}
                     >
                     {newComponent}
@@ -107,7 +108,7 @@ export default class ValidationComponent extends ShallowComponent {
      * Validates the input components and returns error messages.
      * @return { Array<string>} array of messages.
      */
-    __validate(): Array<string> {
+    validate(value: any): Array<string> {
         let messages = [];
         Maps.forEach(this._validations, (validation: Function, key: string) => {
             // It must be a object
@@ -125,10 +126,10 @@ export default class ValidationComponent extends ShallowComponent {
             let message = null;
             if (validation.args) {
                 let inputValues = Objects.deepCopy(validation.args);
-                inputValues.push(this.props.value);
+                inputValues.push(value);
                 message = validation.func.apply(this.props, inputValues);
             } else {
-                message = validation.func(this.props.value);
+                message = validation.func(value);
             }
             if (message !== undefined) {
                 if (validation.message !== undefined) {

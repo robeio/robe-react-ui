@@ -52,7 +52,7 @@ export default class DecimalInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -76,14 +76,16 @@ export default class DecimalInput extends ShallowComponent {
         /* eslint-disable no-unused-vars */
 
         let { decimalSeparator, ...newProps } = this.props;
-        return (<Input
-            {...newProps}
-            type="text"
-            ref={DecimalInput.refName}
-            step={this.props.step}
-            value={this.props.value}
-            onChange={this.__numericFilter}
-            />);
+        return (
+            <Input
+                {...newProps}
+                type="text"
+                ref={DecimalInput.refName}
+                step={this.props.step}
+                value={this.props.value}
+                onChange={this.__numericFilter}
+            />
+        );
     }
 
     /**
@@ -92,6 +94,16 @@ export default class DecimalInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[DecimalInput.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[DecimalInput.refName].validate(value);
     }
 
     /**

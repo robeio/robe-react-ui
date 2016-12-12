@@ -43,7 +43,7 @@ export default class SelectInput extends ValidationComponent {
          */
         textField: React.PropTypes.string,
         /**
-         * displayed when there's no value
+         * displayed when there"s no value
          */
         placeHolder: React.PropTypes.string,
         /**
@@ -81,7 +81,7 @@ export default class SelectInput extends ValidationComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     static defaultProps = {
@@ -124,7 +124,6 @@ export default class SelectInput extends ValidationComponent {
         this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
     }
     render(): Object {
-
         return super.wrapComponent(
             <FormGroup hidden={this.props.hidden} style={this.props.style}>
                 <ControlLabel> {this.props.label} </ControlLabel>
@@ -140,7 +139,7 @@ export default class SelectInput extends ValidationComponent {
                     value={this.props.value}
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
-                    />
+                />
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
         );

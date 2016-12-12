@@ -49,7 +49,7 @@ export default class NumericInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -68,13 +68,15 @@ export default class NumericInput extends ShallowComponent {
 
     render(): Object {
         let { thousandSeparator, decimalSeparator, ...newProps } = this.props;  //eslint-disable-line
-        return (<Input
-            {...newProps}
-            value={this.props.value}
-            type="text"
-            ref={NumericInput.refName}
-            onChange={this.__numericFilter}
-            />);
+        return (
+            <Input
+                {...newProps}
+                value={this.props.value}
+                type="text"
+                ref={NumericInput.refName}
+                onChange={this.__numericFilter}
+            />
+        );
     }
 
     /**
@@ -83,6 +85,16 @@ export default class NumericInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[NumericInput.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[NumericInput.refName].validate(value);
     }
 
     /**

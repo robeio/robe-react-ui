@@ -95,9 +95,9 @@ export default class DateInput extends ShallowComponent {
     static refName = "innerInput";
     static idCounter = 1;
     isPartial = true;
-    id
-    validChars
-    separator
+    id;
+    validChars;
+    separator;
 
     constructor(props: Object) {
         super(props);
@@ -162,7 +162,8 @@ export default class DateInput extends ShallowComponent {
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
                 />
-            </div>);
+            </div>
+        );
     }
 
     /**
@@ -171,6 +172,16 @@ export default class DateInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[DateInput.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[DateInput.refName].validate(value);
     }
 
     /**

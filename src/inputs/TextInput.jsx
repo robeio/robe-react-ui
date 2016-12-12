@@ -47,7 +47,7 @@ export default class TextInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -85,6 +85,16 @@ export default class TextInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[TextInput.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[TextInput.refName].validate(value);
     }
 
     /**

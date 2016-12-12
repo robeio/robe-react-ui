@@ -74,7 +74,7 @@ export default class CheckInput extends ValidationComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block']),
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
         /**
          * Defines class of the check input. (form-control or not)
          */
@@ -171,7 +171,7 @@ export default class CheckInput extends ValidationComponent {
                 value={value}
                 name={name}
                 disabled={!isChecked}
-                />
+            />
         ) : null;
         let onClick = null;
         if (!this.props.disabled) {

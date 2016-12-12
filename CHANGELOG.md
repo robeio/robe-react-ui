@@ -1,6 +1,9 @@
 # Change Log
 ## 1.1.2 - Developing
 * DateInput now supports long & formatted string.
+* changed name of *__validate** method as *validate* in **ValidationsComponent** to be callable as public method. 
+* added validate method to all Input Components classes that are exist under the in **inputs/** folder.
+
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .

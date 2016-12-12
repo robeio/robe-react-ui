@@ -55,7 +55,7 @@ export default class MoneyInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -90,7 +90,8 @@ export default class MoneyInput extends ShallowComponent {
                 value={this.props.value}
                 ref={MoneyInput.refName}
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-                />);
+            />
+        );
     }
 
     /**
@@ -99,6 +100,16 @@ export default class MoneyInput extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[MoneyInput.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[MoneyInput.refName].validate(value);
     }
 
     /**

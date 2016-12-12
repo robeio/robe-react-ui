@@ -51,7 +51,7 @@ export default class TextArea extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -83,7 +83,8 @@ export default class TextArea extends ShallowComponent {
                 onKeyUp={this.props.autoResize ? this.__resize : undefined}
                 componentClass="textarea"
                 ref={TextArea.refName}
-                />);
+            />
+        );
     }
 
     /**
@@ -92,6 +93,16 @@ export default class TextArea extends ShallowComponent {
      */
     isValid(): boolean {
         return this.refs[TextArea.refName].isValid();
+    }
+
+    /**
+     * checks validation by current value
+     * isValid then return empty Array else return Array<String>
+     * isValid = Array.length != 0
+     * @param value
+     */
+    validate(value: any): Array<string> {
+        return this.refs[TextArea.refName].validate(value);
     }
 
     __resize() {
