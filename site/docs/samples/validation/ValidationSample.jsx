@@ -25,14 +25,13 @@ export default class ValidationSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <span>
+                <p>
                     You can use <code>validation</code> property to give your validation functions.
-                    All components which extends <code>ValidationComponent</code> will automatically take and execute on each run.
+                    All components which extends <code>ValidationComponent</code> will automatically take and execute them on each run.
                     Either our pre-defined validations at <code>InputValidations</code> or your brand new validation functions can be used.
-
-                </span>
+                </p>
                 <TextInput
-                    label="Example 1"
+                    label="Example 1 (Block Display)"
                     value={this.state.example1}
                     onChange={this.__handleChangeEx1}
                     validations={{
@@ -52,6 +51,24 @@ export default class ValidationSample extends ShallowComponent {
                         }
                     }}
                 />
+                <TextInput
+                    label="Example 2 (Overlay Display)"
+                    value={this.state.example1}
+                    onChange={this.__handleChangeEx1}
+                    validationDisplay="overlay"
+                    validations={{
+                        required: {
+                            message: "This a custom required message."
+                        },
+                        minLength: {
+                            args: [3]
+                        }
+                    }}
+                />
+                <p>
+                    We support two type of option for displaying the validation messages. This is determined by <code>validationDisplay</code> property.
+                    You can provide validationDisplay property via input field or via <code>DataForm</code> (will forward this property to all inputs).
+                </p>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <Well>
                     As you can see from the source code validation property takes a map of validations.
