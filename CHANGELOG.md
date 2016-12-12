@@ -7,6 +7,7 @@
     * /samples to  /components/samples
     * /docs  to  /components/jsons
     * New site/docs folder now includes detailed documentation (Validation, Model, etc.) 
+* DataGrid row css changed.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
