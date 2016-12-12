@@ -97,6 +97,7 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.66"
+    "robe-react-commons": "1.0.66",
+    "font-awesome":"4.7.0"
   }
 }

@@ -3,35 +3,33 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 
 export default class FaIconSample extends ShallowComponent {
-    /* disable-eslint no-useless-constructor */
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
+    static blStyle = { color: "#337ab7" };
+
+    render(): Object {
         return (
             <div>
-                <div>
-                    <span>FaIcon -> fa-check-square-o state-icon</span>
-                    <div>
-                        <FaIcon code={"fa-check-square-o state-icon"} />
-                    </div>
-                </div>
+                <FaIcon code="fa-thumbs-o-up" size="fa-5x" />
+                <FaIcon code="fa-thumbs-o-up" size="fa-4x" />
+                <FaIcon code="fa-thumbs-o-up" size="fa-3x" />
+                <FaIcon code="fa-thumbs-o-up" size="fa-2x" />
+                <FaIcon code="fa-thumbs-o-up" />
                 <hr />
-                <div>
-                    <span>FaIcon -> fa-check-square-o state-icon with custom style -> color red</span>
-                    <div>
-                        <FaIcon code={"fa-check-square-o state-icon"} style={{ "color": "red" }} />
-                    </div>
-                </div>
+                <FaIcon code="fa-thumbs-up" size="fa-5x" style={FaIconSample.blStyle} />
+                <FaIcon code="fa-thumbs-up" size="fa-4x" style={FaIconSample.blStyle} />
+                <FaIcon code="fa-thumbs-up" size="fa-3x" style={FaIconSample.blStyle} />
+                <FaIcon code="fa-thumbs-up" size="fa-2x" style={FaIconSample.blStyle} />
+                <FaIcon code="fa-thumbs-up" style={FaIconSample.blStyle} />
                 <hr />
-                <div>
-                    <span>FaIcon fa-square-o state-icon size->fa-2x</span>
-                    <div>
-                        <FaIcon code={"fa-square-o state-icon"} size={"fa-2x"} />
-                    </div>
-                </div>
-                <hr />
+                <p>
+                    Please visit <a
+                        href="http://fontawesome.io/icons/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        fontawesome.io</a> for more.
+                </p>
+
             </div>
         );
     }

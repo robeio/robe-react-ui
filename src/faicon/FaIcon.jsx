@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import "./font-awesome/4.6.1/css/font-awesome.min.css";
+import "font-awesome/css/font-awesome.min.css";
 
 /**
  * This component wraps font-awesome elements. Also it loads font-awesome.min.css. No need to load it somewhere else.

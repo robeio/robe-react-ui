@@ -11,6 +11,9 @@
 * Filter ComponentManager bug fixed.
 * Now DateInput addon click triggers popup
 * validationDisplay example added to ValidationSample
+* FaIcon (fontawssome)
+    * Assets deleted. Now we are taking icons from npm.
+    * Sample page updated.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .

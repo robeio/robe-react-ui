@@ -94,7 +94,7 @@ class ComponentList {
 
         components.push({
             header: "FaIcon",
-            desc: "is a wrapper component for font-awesome icons",
+            desc: "is a wrapper component for font-awesome icons.",
             json: require("./jsons/faicon/FaIcon"),
             sample: require("./samples/faicon/FaIconSample"),
             code: require("./samples/faicon/FaIconSample.txt")
