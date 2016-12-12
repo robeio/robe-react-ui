@@ -24,7 +24,7 @@ class Site extends ShallowComponent {
     }
 
     render(): Object {
-        let activePage = this.__getActivePage(this.state.activeKey);
+        let activePage = Site.getActivePage(this.state.activeKey);
         return (
             <div>
                 <Navbar inverse>
@@ -33,12 +33,12 @@ class Site extends ShallowComponent {
                             style={{ position: "absolute", top: "0px", right: "0px", border: "0px", zIndex: 1 }}
                             alt="Fork me on GitHub"
                             src="./forkme_right_orange_ff7600.png"
-                        />
+                            />
                     </a>
                     <Navbar.Header>
                         <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
-                            <a onClick={this.__onSelect} >Robe React UI</a>
+                            <a onClick={this.__goWelcome} >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
@@ -46,21 +46,31 @@ class Site extends ShallowComponent {
                         <NavItem eventKey="Docs" >Docs</NavItem>
                         <NavItem eventKey="JSDocs" >JSDocs</NavItem>
                         <NavItem eventKey="About" >About</NavItem>
+                        <NavItem eventKey="React-Bootstrap">
+                            <img src="https://react-bootstrap.github.io/assets/logo.png" alt="rblogo" width={20} /> React Bootstrap
+                        </NavItem>
                     </Nav>
                 </Navbar>
                 {activePage}
-            </div>
+            </div >
         );
     }
 
-    __onSelect = (key: string) => {
+    __goWelcome() {
+        this.__onSelect("Welcome");
+    }
+    __onSelect(key: string) {
         Progress.start();
+        if (key === "React-Bootstrap") {
+            window.open("https://react-bootstrap.github.io/components.html");
+            return;
+        }
         window.location.hash = `#${key}`;
         this.setState({
             activeKey: key
         });
-    };
-    __getActivePage = (path: string) => {
+    }
+    static getActivePage(path: string): Object {
         switch (path) {
             case "Components":
                 return (

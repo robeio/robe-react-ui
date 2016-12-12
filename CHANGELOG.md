@@ -14,6 +14,7 @@
 * FaIcon (fontawssome)
     * Assets deleted. Now we are taking icons from npm.
     * Sample page updated.
+* React-Bootstrap link added to the showcase's navbar.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
