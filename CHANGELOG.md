@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.3 - Developing
+* fixed DataForm Sample async change DataForm problem.
 
 ## 1.1.2
 * Upgraded **robe-react-commons** library
