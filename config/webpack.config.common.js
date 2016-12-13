@@ -1,4 +1,5 @@
 const path = require("path");
+const Utility = require("./util/Utility");
 
 function InitConfiguration(src, build, test, lib, babelOptions) {
     /**
@@ -6,12 +7,12 @@ function InitConfiguration(src, build, test, lib, babelOptions) {
      * @type {{root: (string|*), node_modules: (string|*)}}
      */
     const paths = {
-        root: __dirname,
-        app: path.join(__dirname, src),
-        build: path.join(__dirname, build),
-        test: path.join(__dirname, test),
-        lib: lib ? path.join(__dirname, lib) : null,
-        node_modules: path.join(__dirname, "/node_modules")
+        root: Utility.projectDir,
+        app: path.join(Utility.projectDir, src),
+        build: path.join(Utility.projectDir, build),
+        test: path.join(Utility.projectDir, test),
+        lib: lib ? path.join(Utility.projectDir, lib) : null,
+        node_modules: path.join(Utility.projectDir, "/node_modules")
     };
 
     if (!babelOptions) {

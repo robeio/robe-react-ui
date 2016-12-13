@@ -1,4 +1,5 @@
 # Change Log
+
 ## 1.1.2 - Developing
 * DateInput now supports long & formatted string.
 * changed name of *__validate** method as *validate* in **ValidationsComponent** to be callable as public method. 
@@ -17,6 +18,7 @@
 * React-Bootstrap link added to the showcase's navbar.
 * All input field samples updated with better event handling (e.target.name)
 * HtmlEditor css fixed. (corners rounded)
+* Config Structure changed. 
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .

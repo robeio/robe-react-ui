@@ -94,6 +94,7 @@ describe("datagrid/DataGrid", () => {
         let checkChangedState = () => {
             return new Promise((ok) => {
                 let data = grid.instance().getStore().getResult().data;
+                console.log("DataGrid Result: ", data);
                 assert.equal(data.length, 1);
                 assert.equal(data[0].name, "Seray");
                 searchField.first().simulate("change", { target: { value: "" } });
@@ -101,8 +102,8 @@ describe("datagrid/DataGrid", () => {
             });
         };
 
-        start().delay(500)
-            .then(search).delay(500)
+        start().delay(1000)
+            .then(search).delay(1000)
             .then(checkChangedState)
             .spread(finish)
             .catch(done);
