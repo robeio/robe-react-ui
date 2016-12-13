@@ -10,7 +10,7 @@ import TextInput from "inputs/TextInput";
 import FaIcon from "faicon/FaIcon";
 
 
-export default class Showcase extends ShallowComponent {
+export default class Components extends ShallowComponent {
 
     constructor(props:Object) {
         super(props);
