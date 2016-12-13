@@ -1,0 +1,19 @@
+//default properties for url
+defaultProps = {
+    read: {
+        type: "GET",
+        url: this.props.url
+    },
+    create: {
+        type: "POST",
+        url: this.props.url
+    },
+    update: {
+        type: "PUT",
+        url: this.props.url
+    },
+    delete: {
+        type: "DELETE",
+        url: this.props.url
+    }
+};

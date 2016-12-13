@@ -34,7 +34,7 @@ export default class AjaxRequestSample extends ShallowComponent {
                 </span>
                 <Highlight className="javascript">{ex3}</Highlight>
                 <span>
-                    You can inflate the following example.
+                    You can inflate the following <code>example</code>.
                 </span>
                 <Highlight className="javascript">{ex4}</Highlight>
 

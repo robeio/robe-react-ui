@@ -23,7 +23,13 @@ class DocList {
             desc: " Perform an asynchronous HTTP (Ajax) request.",
             sample: require("./samples/ajaxrequest/AjaxRequestSample")
         });
-        
+
+        components.push({
+            header: "Remote Endpoint",
+            desc: " Perform asynchronous HTTP (Ajax) requests under one roof.",
+            sample: require("./samples/endpoint/RemoteEndPointSample")
+        });
+
         return components;
     }
 

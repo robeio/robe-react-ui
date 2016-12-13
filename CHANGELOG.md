@@ -26,6 +26,7 @@
 * HtmlEditor css fixed. (corners rounded)
 * Config Structure changed. 
 * Added docs for Ajax Request.
+* Added docs for Remote Endpoint.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
