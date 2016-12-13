@@ -15,7 +15,7 @@
     * field will not call props.onChange until the value is valid. 
 * validationDisplay example added to ValidationSample
 * FaIcon (fontawssome)
-    * Assets deleted. Now we are taking icons from npm.
+    * Assets deleted. Now we are taking icons from **npm**.
     * Sample page updated.
 * React-Bootstrap link added to the showcase's navbar.
 * All input field samples updated with better event handling (e.target.name)
