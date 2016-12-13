@@ -192,5 +192,6 @@ export default class DataFormSample extends ShallowComponent {
             value: null
         }, nextState.propsOfFields3.ilce);
         this.setState(nextState);
+        return false;
     }
 }
