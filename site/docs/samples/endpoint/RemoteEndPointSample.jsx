@@ -54,10 +54,9 @@ export default class RemoteEndPointSample extends ShallowComponent {
                 </span>
                 <Highlight className="javascript">{ex7}</Highlight>
                 <span>
-                    You can inflate the following example.
+                    Call current url.
                 </span>
                 <Highlight className="javascript">{ex8}</Highlight>
-
             </div>);
     }
 

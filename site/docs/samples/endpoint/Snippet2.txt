@@ -1,3 +1,4 @@
 let endPoint = new RemoteEndPoint({
-    url: "http://.."
+    url: "http://..",
+    ...
 });
