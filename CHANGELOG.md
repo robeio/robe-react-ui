@@ -21,6 +21,7 @@
 * All input field samples updated with better event handling (e.target.name)
 * HtmlEditor css fixed. (corners rounded)
 * Config Structure changed. 
+* Added docs for Ajax Request.
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
