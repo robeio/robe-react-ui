@@ -119,11 +119,10 @@ export default class BaseInput extends ValidationComponent {
 
         if (inputGroupLeft !== undefined || inputGroupRight !== undefined) {
             component = (
-                <InputGroup>
+                <InputGroup onClick={this.props.onClick}>
                     {inputGroupLeft}
                     {component}
                     {inputGroupRight}
-
                 </InputGroup>
             );
         }
@@ -131,11 +130,9 @@ export default class BaseInput extends ValidationComponent {
             <FormGroup hidden={this.props.hidden}>
                 {label}
                 {component}
-
             </FormGroup>
         );
         return super.wrapComponent(component);
-
     }
 
     /**

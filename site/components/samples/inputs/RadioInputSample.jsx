@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import RadioInput from "robe-react-ui/lib/inputs/RadioInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 const langs = [
     {
@@ -19,14 +18,12 @@ const langs = [
 ];
 
 export default class RadioInputSample extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             RadioInputSingle: "en",
             RadioInputGroup: "tr"
         };
-        this.radioInputSingleChange = this.__handleChange.bind(undefined, "RadioInputSingle");
-        this.radioInputGroupChange = this.__handleChange.bind(undefined, "RadioInputGroup");
     }
 
     render(): Object {
@@ -34,37 +31,39 @@ export default class RadioInputSample extends ShallowComponent {
             <div>
                 <RadioInput
                     label="RadioInput Single"
+                    name="RadioInputSingle"
                     items={langs[0]}
                     value={this.state.RadioInputSingle}
                     textField="value"
                     valueField="key"
-                    onChange={this.radioInputSingleChange}
+                    onChange={this.__handleChange}
                 />
                 <RadioInput
                     label="RadioInput Group"
+                    name="RadioInputGroup"
                     items={langs}
                     value={this.state.RadioInputGroup}
                     textField="value"
                     valueField="key"
-                    onChange={this.radioInputGroupChange}
+                    onChange={this.__handleChange}
                 />
-
                 <RadioInput
                     label="RadioInput Group Inline"
+                    name="RadioInputGroup"
                     items={langs}
                     inline
                     value={this.state.RadioInputGroup}
                     textField="value"
                     valueField="key"
-                    onChange={this.radioInputGroupChange}
+                    onChange={this.__handleChange}
                 />
             </div>
         );
     }
-    __handleChange = (code: any, e: Object) => {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[e.target.name] = value;
         this.setState(state);
-    };
+    }
 }

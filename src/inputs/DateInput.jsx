@@ -105,7 +105,7 @@ export default class DateInput extends ShallowComponent {
         DateInput.idCounter++;
         this.state = {
             open: false,
-
+            value: this.props.value
         };
         if (momentjs(this.props.value).isValid() && this.props.value !== "" && this.props.value !== undefined) {
             this.isPartial = false;
@@ -121,18 +121,19 @@ export default class DateInput extends ShallowComponent {
      */
     render(): Object {
         let parsedValue;
+        let value = this.state.value;
         if (this.isPartial) {
             parsedValue = "Invalid date";
-        } else if (is.number(this.props.value)) {
-            parsedValue = momentjs(this.props.value).format(this.props.format);
+        } else if (is.number(value)) {
+            parsedValue = momentjs(value).format(this.props.format);
         } else {
-            parsedValue = momentjs(this.props.value, this.props.format).format(this.props.format);
+            parsedValue = momentjs(value, this.props.format).format(this.props.format);
         }
         let overlayValue;
         if (parsedValue === "Invalid date" || this.isPartial) {
-            parsedValue = this.props.value;
+            parsedValue = value;
         } else {
-            overlayValue = this.props.value === "" ? undefined : this.props.value;
+            overlayValue = value === "" ? undefined : value;
         }
         /* eslint-disable no-unused-vars */
         let { format, locale, minDate, maxDate, ...newProps } = this.props;
@@ -147,7 +148,7 @@ export default class DateInput extends ShallowComponent {
                             value={overlayValue}
                             minDate={this.props.minDate}
                             maxDate={this.props.maxDate}
-                        />
+                            />
                     </Popover>
                 </Overlay>
                 <Input
@@ -160,8 +161,8 @@ export default class DateInput extends ShallowComponent {
                     value={parsedValue}
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
-                    inputGroupRight={<InputGroup.Addon><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-                />
+                    inputGroupRight={<InputGroup.Addon onClick={this.__onClick} ><FaIcon code="fa-calendar" /></InputGroup.Addon>}
+                    />
             </div>
         );
     }
@@ -206,6 +207,11 @@ export default class DateInput extends ShallowComponent {
             e.target.parsedValue = this.isPartial ? undefined : momentjs(value, this.props.format, true).toDate().getTime();
             if (isNaN(e.target.parsedValue)) {
                 e.target.parsedValue = undefined;
+                this.setState({
+                    open: false,
+                    value: e.target.value
+                });
+                return;
             }
             result = this.props.onChange(e);
         }
@@ -289,7 +295,7 @@ export default class DateInput extends ShallowComponent {
             this.isPartial = false;
             let e = {
                 target: {
-                    value: momentjs(this.props.value).format(this.props.format),
+                    value: momentjs(this.state.value).format(this.props.format),
                     parsedValue: newMoment.toDate().getTime(),
                     name: this.props.name
                 }
@@ -304,7 +310,9 @@ export default class DateInput extends ShallowComponent {
             try {
                 if (target.id === (this.id) ||
                     target.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover" ||
-                    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover") {
+                    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id === "popover" ||
+                    target.className === "fa fa-fw fa-calendar fa-sm " ||
+                    target.children[0].className === "fa fa-fw fa-calendar fa-sm ") {
                     return;
                 }
             } catch (exeption) {
@@ -326,6 +334,13 @@ export default class DateInput extends ShallowComponent {
         }
         throw String("Format is invalid.");
     }
+
+    componentWillReceiveProps(nextProps: Object) {
+        this.setState({
+            value: nextProps.value
+        });
+    }
+
 
 
     componentDidMount() {

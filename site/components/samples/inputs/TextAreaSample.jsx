@@ -1,11 +1,10 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import TextArea from "robe-react-ui/lib/inputs/TextArea";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class TextAreaSample extends ShallowComponent {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             TextAreaNormal: "Some Text",
@@ -13,18 +12,20 @@ export default class TextAreaSample extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
                 <TextArea
                     label="TextArea"
+                    name="TextAreaNormal"
                     value={this.state.TextAreaNormal}
-                    onChange={this.__handleChange.bind(undefined, "TextAreaNormal")}
+                    onChange={this.__handleChange}
                 />
                 <TextArea
                     label="With Validations"
+                    name=""
                     value={this.state.TextAreaValidations}
-                    onChange={this.__handleChange.bind(undefined, "TextAreaValidations")}
+                    onChange={this.__handleChange}
                     validations={{
                         required: true,
                         minLength: {
@@ -34,18 +35,19 @@ export default class TextAreaSample extends ShallowComponent {
                 />
                 <TextArea
                     label="TextArea With AutoResize And MinHeight"
+                    name="TextAreaAutoResize"
                     autoResize
                     style={{ minHeight: 100 }}
                     value={this.state.TextAreaAutoResize}
-                    onChange={this.__handleChange.bind(undefined, "TextAreaAutoResize")}
+                    onChange={this.__handleChange}
                 />
             </div>
         );
     }
-    __handleChange = (code: any, e: Object) => {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[e.target.name] = value;
         this.setState(state);
-    };
+    }
 }

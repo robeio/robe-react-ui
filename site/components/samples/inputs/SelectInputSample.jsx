@@ -1,7 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import SelectInput from "robe-react-ui/lib/inputs/SelectInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 const langs = [
     {
@@ -19,35 +18,34 @@ const langs = [
 ];
 export default class SelectInputSample extends ShallowComponent {
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             MultiSelect: ["en", "tr"]
         };
-
-        this.__handleChangeSelect = this.__handleChange.bind(this, "Select");
-        this.__handleChangeMulti = this.__handleChange.bind(this, "MultiSelect");
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
                 <SelectInput
                     label="Select Input Single"
+                    name="Select"
                     items={langs}
                     textField="value"
                     valueField="key"
                     value={this.state.Select}
-                    onChange={this.___handleChangeSelect}
+                    onChange={this.__handleChange}
                 />
                 <SelectInput
                     label="Select Input Multi"
+                    name="MultiSelect"
                     multi={true}
                     items={langs}
                     value={this.state.MultiSelect}
                     textField="value"
                     valueField="key"
-                    onChange={this.__handleChangeMulti}
+                    onChange={this.__handleChange}
                     validations={{
                         required: true
                     }}
@@ -56,10 +54,10 @@ export default class SelectInputSample extends ShallowComponent {
         );
     }
 
-    __handleChange = (name: any, e: Object) => {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[name] = value;
+        state[e.target.name] = value;
         this.setState(state);
-    };
+    }
 }

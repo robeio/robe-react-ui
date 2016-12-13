@@ -1,8 +1,8 @@
 <TextInput
-    label="Example 1"
-    value = { this.state.example1 }
-    onChange = { this.__handleChangeEx1 }
-    validations = {{
+    label="Example 1 (Block Display)"
+    value={this.state.example1}
+    onChange={this.__handleChangeEx1}
+    validations={{
         required: {
             message: "This a custom required message."
         },
@@ -16,6 +16,20 @@
                 }
                 return undefined;
             }
+        }
+    }}
+/>
+<TextInput
+    label="Example 2 (Overlay Display)"
+    value={this.state.example1}
+    onChange={this.__handleChangeEx1}
+    validationDisplay="overlay"
+    validations={{
+        required: {
+            message: "This a custom required message."
+        },
+        minLength: {
+            args: [3]
         }
     }}
 />

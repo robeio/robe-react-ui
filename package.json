@@ -7,13 +7,13 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "test": "karma start webpack.config.test.js",
-    "testd": "karma start webpack.config.test.dev.js",
+    "test": "karma start config/webpack.config.test.js",
+    "testd": "karma start config/webpack.config.test.dev.js",
     "docs": "NODE_ENV=docs ./node_modules/.bin/esdoc -c esdoc.json",
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
-    "build": "node ./prebuild.js ./lib & babel ./src --out-dir ./lib  --copy-files",
-    "site": "node ./prebuild.js ./docs & webpack --config webpack.config.site.js  --progress --profile --colors",
-    "start": "webpack-dev-server --config webpack.site.dev.js --colors"
+    "build": "node ./config/prebuild.js ./lib & babel ./src --out-dir ./lib  --copy-files",
+    "site": "node ./config/prebuild.js ./docs & webpack --config config/webpack.config.site.js  --progress --profile --colors",
+    "start": "webpack-dev-server --config config/webpack.site.dev.js --colors"
   },
   "docs": "./node_modules/.bin/esdoc -c esdoc.json",
   "keywords": [
@@ -97,6 +97,7 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "robe-ajax": "1.0.0",
-    "robe-react-commons": "1.0.66"
+    "robe-react-commons": "1.0.66",
+    "font-awesome":"4.7.0"
   }
 }

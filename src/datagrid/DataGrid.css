@@ -6,6 +6,9 @@
     width: 100%;
     background: white;
 }
+.datagrid tbody tr td{
+    vertical-align: middle;
+}
 .datagrid-header-row {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -25,11 +28,12 @@
     border-bottom: solid whitesmoke 1px;
     margin-left: 0px;
     margin-right: 0px;
+    height: 30px;
     cursor: pointer;
 }
 
 .datagrid-body-row:hover {
-    background: whitesmoke;
+    background: #cfe6f9 !important;
 }
 
 .datagrid-body-row-selected {
@@ -38,7 +42,8 @@
     border-bottom: solid whitesmoke 1px;
     margin-left: 0px;
     margin-right: 0px;
-    background: #8bb8e8;
+    height: 30px;
+    background: #9ed2ff !important;
     cursor: pointer;
     color: black;
 }

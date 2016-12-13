@@ -2,7 +2,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import MoneyInput from "robe-react-ui/lib/inputs/MoneyInput";
-import InputValidations from "robe-react-ui/lib/validation/InputValidations";
 
 
 export default class MoneyInputSample extends ShallowComponent {
@@ -14,20 +13,22 @@ export default class MoneyInputSample extends ShallowComponent {
         };
     }
 
-    render() {
+    render(): Object {
         return (
             <div>
                 <MoneyInput
                     label="MoneyInput"
+                    name="MoneyInputNormal"
                     value={this.state.MoneyInputNormal}
                     thousandSeparator=","
                     decimalSeparator="."
-                    onChange={this.__handleChange.bind(this, "MoneyInputNormal") }
+                    onChange={this.__handleChange}
                 />
                 <MoneyInput
                     label="With Validations"
+                    name="MoneyInputValidations"
                     value={this.state.MoneyInputValidations}
-                    onChange={this.__handleChange.bind(this, "MoneyInputValidations") }
+                    onChange={this.__handleChange}
                     unit="USD"
                     validations={{
                         required: true
@@ -36,10 +37,10 @@ export default class MoneyInputSample extends ShallowComponent {
             </div>
         );
     }
-    __handleChange(code: any, e: Object) {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[code] = value;
+        state[e.target.name] = value;
         this.setState(state);
     }
 }
