@@ -120,6 +120,7 @@ export default class DataFormSample extends ShallowComponent {
                         columnsSize={2}
                         propsOfFields={this.state.propsOfFields1}
                         defaultValues={this.state.defaultValues}
+                        validationDisplay={"overlay"}
                     />
                 </Panel>
                 <Panel header="Sample 2 ">
@@ -164,10 +165,11 @@ export default class DataFormSample extends ShallowComponent {
 
     /**
      * Given second parameter that's callback function of this method modifies the props of fields property of the DataForm.
+     *
      * @param e
      * @param change
      */
-    onCityChange2(e, change) {
+    onCityChange2(e, change): boolean {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         change({
             ilce: {
@@ -175,6 +177,7 @@ export default class DataFormSample extends ShallowComponent {
                 value: null
             }
         });
+        return false;
     }
 
     /**
