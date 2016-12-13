@@ -1,0 +1,7 @@
+update(
+    newItem : Map,
+    idField : string,
+    successCallback : Function,
+    errorCallback : Function) {
+    ...
+}

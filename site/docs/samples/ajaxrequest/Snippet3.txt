@@ -1,4 +1,4 @@
-ajaxRequest.call(
+call(
     data: Object,
     queryParams: Object,
     success: Function,
