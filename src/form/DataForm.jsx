@@ -60,7 +60,6 @@ export default class DataForm extends ShallowComponent {
         collapsible: false,
         defaultExpanded: true,
         columnsSize: 1,
-        defaultValues: {},
         propsOfFields: {},
         validationDisplay: "block"
     };
@@ -82,11 +81,15 @@ export default class DataForm extends ShallowComponent {
     __columnSize;
     constructor(props) {
         super(props);
-        this.state = props.defaultValues;
-        this.componentWillReceiveProps(props);
+        this.state = {};
+        this.__init(props, props.defaultValues);
     }
 
     componentWillReceiveProps(nextProps) {
+       this.__init(nextProps);
+    }
+
+    __init(nextProps, defaultValues){
         this.__columnSize = 12 / nextProps.columnsSize;
         let fields = nextProps.fields;
         let props = nextProps.propsOfFields;
@@ -96,12 +99,15 @@ export default class DataForm extends ShallowComponent {
             if (!name) {
                 throw new Error("Field name must be defined ! ");
             }
+
             let prop = Objects.clone(field, [Array]);
             let config = Objects.mergeClone(props[name], prop, [Array]);
+            if(defaultValues) {
+                config.value = defaultValues[name];
+            }
             this.__setPropsOfField(name, config, this.state);
         }
     }
-
     render():Object {
         let form = (
             <Form>

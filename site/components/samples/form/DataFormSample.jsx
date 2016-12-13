@@ -99,6 +99,7 @@ export default class DataFormSample extends ShallowComponent {
                     remote: remote
                 },
                 il: {
+                    value: "34",
                     onChange: this.onCityChange3
                 },
                 ilce: {
@@ -114,7 +115,7 @@ export default class DataFormSample extends ShallowComponent {
             <div>
                 <Panel header="Sample 1 ">
                     <DataForm
-                        ref="dataform"
+                        ref="dataform1"
                         header="Example Data Form Label"
                         fields={fields}
                         columnsSize={2}
@@ -125,7 +126,7 @@ export default class DataFormSample extends ShallowComponent {
                 </Panel>
                 <Panel header="Sample 2 ">
                     <DataForm
-                        ref="dataform"
+                        ref="dataform2"
                         header="Example Data Form Label"
                         fields={fields}
                         columnsSize={2}
@@ -135,10 +136,11 @@ export default class DataFormSample extends ShallowComponent {
                 </Panel>
                 <Panel header="Sample 3 ">
                     <DataForm
-                        ref="dataform"
+                        ref="dataform3"
                         header="Example Data Form Label"
                         fields={fields}
                         columnsSize={2}
+                        onChange={DataFormSample.appliedChangesToObject.bind(undefined, this.state.propsOfFields3)}
                         propsOfFields={this.state.propsOfFields3}
                         defaultValues={this.state.defaultValues}
                     />
@@ -180,6 +182,13 @@ export default class DataFormSample extends ShallowComponent {
         return false;
     }
 
+    static appliedChangesToObject(obj: any, e){
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        if(obj[e.target.name]) {
+            obj[e.target.name] = {};
+        }
+        obj[e.target.name].value = value;
+    }
     /**
      * Changes state of this object and regenerates DataForm.
      * @param e
