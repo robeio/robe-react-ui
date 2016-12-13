@@ -224,6 +224,7 @@ export default class DataForm extends ShallowComponent {
      * @returns {boolean}
      */
     onChange(e: Object): boolean {
+        let me = this;
         let name = e.target.name;
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         let state = {};
@@ -236,10 +237,20 @@ export default class DataForm extends ShallowComponent {
         }
 
         if (this.__onChanges[name]) {
-            let result = this.__onChanges[name](e);
-            this.__setPropsOfFields(result, state);
+            let result = this.__onChanges[name](e, (result) => {
+                me.__setPropsOfFields(result, state);
+                me.setState(state);
+                return false;
+            });
+            if(result) {
+                this.__setPropsOfFields(result, state);
+            }
+            if(result != false) {
+                this.setState(state);
+            }
+        } else {
+            this.setState(state);
         }
-        this.setState(state);
         return true;
     }
 

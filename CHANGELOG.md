@@ -1,6 +1,8 @@
 # Change Log
 
 ## 1.1.2 - Developing
+* Upgraded **robe-react-commons** library
+* Changed DataForm and added Samples to **DataForm Sample**.
 * DateInput now supports long & formatted string.
 * changed name of *__validate** method as *validate* in **ValidationsComponent** to be callable as public method. 
 * added validate method to all Input Components classes that are exist under the in **inputs/** folder.

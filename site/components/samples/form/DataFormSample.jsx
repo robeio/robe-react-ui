@@ -1,5 +1,6 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { Panel } from "react-bootstrap";
+import { ShallowComponent, Objects } from "robe-react-commons";
 import DataForm from "robe-react-ui/lib/form/DataForm";
 import fields from "./DataFormSample.json";
 const filesUrl = "http://localhost:3000/files";
@@ -69,12 +70,36 @@ export default class DataFormSample extends ShallowComponent {
             defaultValues: {
                 age: 2
             },
-            propsOfFields: {
+            propsOfFields1: {
                 files: {
                     remote: remote
                 },
                 il: {
                     onChange: this.onCityChange
+                },
+                ilce: {
+                    items: [],
+                    value: undefined
+                }
+            },
+            propsOfFields2: {
+                files: {
+                    remote: remote
+                },
+                il: {
+                    onChange: this.onCityChange2
+                },
+                ilce: {
+                    items: [],
+                    value: undefined
+                }
+            },
+            propsOfFields3: {
+                files: {
+                    remote: remote
+                },
+                il: {
+                    onChange: this.onCityChange3
                 },
                 ilce: {
                     items: [],
@@ -87,18 +112,45 @@ export default class DataFormSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <DataForm
-                    ref="dataform"
-                    header="Example Data Form Label"
-                    fields={fields}
-                    columnsSize={2}
-                    propsOfFields={this.state.propsOfFields}
-                    defaultValues={this.state.defaultValues}
-                />
+                <Panel header="Sample 1 ">
+                    <DataForm
+                        ref="dataform"
+                        header="Example Data Form Label"
+                        fields={fields}
+                        columnsSize={2}
+                        propsOfFields={this.state.propsOfFields1}
+                        defaultValues={this.state.defaultValues}
+                    />
+                </Panel>
+                <Panel header="Sample 2 ">
+                    <DataForm
+                        ref="dataform"
+                        header="Example Data Form Label"
+                        fields={fields}
+                        columnsSize={2}
+                        propsOfFields={this.state.propsOfFields2}
+                        defaultValues={this.state.defaultValues}
+                    />
+                </Panel>
+                <Panel header="Sample 3 ">
+                    <DataForm
+                        ref="dataform"
+                        header="Example Data Form Label"
+                        fields={fields}
+                        columnsSize={2}
+                        propsOfFields={this.state.propsOfFields3}
+                        defaultValues={this.state.defaultValues}
+                    />
+                </Panel>
             </div>
         );
     }
 
+    /**
+     * Returning Object of this method modifies the props of fields property of the DataForm.
+     * @param e
+     * @return {{ilce: {items: *, value: null}}}
+     */
     onCityChange(e) {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         return {
@@ -107,5 +159,35 @@ export default class DataFormSample extends ShallowComponent {
                 value: null
             }
         };
+    }
+
+
+    /**
+     * Given second parameter that's callback function of this method modifies the props of fields property of the DataForm.
+     * @param e
+     * @param change
+     */
+    onCityChange2(e, change) {
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        change({
+            ilce: {
+                items: ilce[value],
+                value: null
+            }
+        });
+    }
+
+    /**
+     * Changes state of this object and regenerates DataForm.
+     * @param e
+     */
+    onCityChange3(e) {
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        let nextState = this.cloneState();
+        Objects.mergeClone({
+            items: ilce[value],
+            value: null
+        }, nextState.propsOfFields3.ilce);
+        this.setState(nextState);
     }
 }
