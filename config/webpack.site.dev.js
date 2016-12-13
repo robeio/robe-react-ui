@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
-const JsonServer = require("./config/JsonServer");
+const JsonServer = require("./server/JsonServer");
 
 
 const babelOptions = {
@@ -27,7 +27,7 @@ webPackConfig.entry = {
 webPackConfig.resolve.alias = {
     "robe-react-ui/lib": webPackConfig.paths.lib,
     "robe-react-ui": webPackConfig.paths.lib + "/index"
-}
+};
 
 webPackConfig.devServer = {
     historyApiFallback: true,
@@ -66,6 +66,6 @@ webPackConfig.plugins.push(new CachePlugin({}));
 
 
 const server = new JsonServer(3000, "/application");
-server.route("data/db.json").upload("/files", "data/upload", "files").start();
+server.route("config/data/db.json").upload("/files", "config/data/upload", "files").start();
 
 module.exports = webPackConfig;

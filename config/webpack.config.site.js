@@ -1,7 +1,8 @@
 const webpack = require("webpack");
 const FileChanger = require("webpack-file-changer");
+const Utility = require("./util/Utility");
 const path = require("path");
-const package = require("./package.json");
+const package = require("../package.json");
 
 /**
  * import common webpack settings
@@ -67,8 +68,8 @@ commonSettings.resolve.alias = {
 
 const fileChanger = new FileChanger({
     move: [{
-        from: path.resolve("./static"),
-        to: path.resolve("./docs")
+        from: path.join(Utility.projectDir, "static"),
+        to: path.join(Utility.projectDir, "./docs")
     }
     ],
     change: [{
