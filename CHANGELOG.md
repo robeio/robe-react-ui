@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.2 - Developing
+## 1.1.3 - Developing
+
+## 1.1.2
 * Upgraded **robe-react-commons** library
 * Changed DataForm and added Samples to **DataForm Sample**.
 * DateInput now supports long & formatted string.
