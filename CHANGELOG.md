@@ -9,7 +9,9 @@
     * New site/docs folder now includes detailed documentation (Validation, Model, etc.) 
 * DataGrid row css changed.
 * Filter ComponentManager bug fixed.
-* Now DateInput addon click triggers popup
+* DateInput
+    * Addon click triggers popup
+    * field will not call props.onChange until the value is valid. 
 * validationDisplay example added to ValidationSample
 * FaIcon (fontawssome)
     * Assets deleted. Now we are taking icons from npm.
