@@ -45,7 +45,6 @@ export default class DateInputSample extends ShallowComponent {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;
-        console.log("onChange");
         this.setState(state);
     }
 
