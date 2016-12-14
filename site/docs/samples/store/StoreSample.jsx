@@ -15,7 +15,7 @@ import ex5 from "./Snippet5.txt";
 import ex6 from "./Snippet6.txt";
 import ex7 from "./Snippet7.txt";
 
-export default class RemoteEndpointSample extends ShallowComponent {
+export default class StoreSample extends ShallowComponent {
 
     constructor(props:Object) {
         super(props);
@@ -25,31 +25,31 @@ export default class RemoteEndpointSample extends ShallowComponent {
         return (
             <div>
                 <span>
-                    You can perform with same settings for <code>create, read, update, delete</code>.
+                    PropTypes
                 </span>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <span>
-                    The ajax options can be specified separately for <code>create, read, update, delete</code>.
+                    Default props.
                 </span>
                 <Highlight className="javascript">{ex2}</Highlight>
                 <span>
-                    The <code>create</code> method must be called to perform a the create request.
+                    You can perform with same settings for <code>create, read, update, delete</code>.
                 </span>
                 <Highlight className="javascript">{ex3}</Highlight>
                 <span>
-                    The <code>read</code> method must be called to perform a the read request.
+                    The <code>create</code> method must be called to perform a the create request.
                 </span>
                 <Highlight className="javascript">{ex4}</Highlight>
                 <span>
-                    The <code>update</code> method must be called to perform a the update request.
+                    The <code>read</code> method must be called to perform a the read request.
                 </span>
                 <Highlight className="javascript">{ex5}</Highlight>
                 <span>
-                    The <code>delete</code> method must be called to perform a the delete request.
+                    The <code>update</code> method must be called to perform a the update request.
                 </span>
                 <Highlight className="javascript">{ex6}</Highlight>
                 <span>
-                    Call current url.
+                    The <code>delete</code> method must be called to perform a the delete request.
                 </span>
                 <Highlight className="javascript">{ex7}</Highlight>
             </div>);

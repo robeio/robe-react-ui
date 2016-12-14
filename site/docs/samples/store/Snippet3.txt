@@ -1,0 +1,10 @@
+import RemoteEndPoint from "robe-react-commons/lib/endpoint/RemoteEndPoint";
+    ...
+    let store = new Store({
+        endPoint: new RemoteEndPoint({
+            url: path
+        }),
+        idField: idField,
+        autoLoad: true
+    });
+    ...

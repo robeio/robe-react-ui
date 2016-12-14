@@ -27,7 +27,13 @@ class DocList {
         components.push({
             header: "Remote Endpoint",
             desc: " Perform asynchronous HTTP (Ajax) requests under one roof.",
-            sample: require("./samples/endpoint/RemoteEndPointSample")
+            sample: require("./samples/endpoint/RemoteEndpointSample")
+        });
+        
+        components.push({
+            header: "Store",
+            desc: " Base of Store to keep data and to trigger dependencies component.",
+            sample: require("./samples/store/StoreSample")
         });
 
         return components;

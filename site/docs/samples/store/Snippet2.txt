@@ -1,0 +1,14 @@
+defaultProps = {
+    idField: "oid",
+    autoLoad: false,
+    importer: (response: any): any => {
+        return response;
+    },
+    /*
+     * A result which holds default totalCount and data to return if store not initialize
+     */
+    result: {
+        data: [],
+        totalCount: 0
+    }
+}

@@ -30,6 +30,8 @@
 * Config Structure changed. 
 * Added docs for Ajax Request.
 * Added docs for Remote Endpoint.
+* Added docs for Store.
+* Was changed name  docs/samples/endpoint/RemoteEndPoint to docs/samples/endpoint/RemoteEndpoint
 
 ## 1.1.1
 * fixed duplicate call onchange problem in **DataForm** .
