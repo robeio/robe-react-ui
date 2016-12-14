@@ -1,6 +1,7 @@
-read(
-    queryParams : Object,
-    successCallBack : Function,
-    errorCallback : Function) : boolean {
+update(
+    newItem : Map,
+    idField : string,
+    successCallback : Function,
+    errorCallback : Function) {
     ...
 }

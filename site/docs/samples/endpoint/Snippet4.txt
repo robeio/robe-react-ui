@@ -1,6 +1,6 @@
-create(
-    item : Map,
-    successCallback : Function,
+read(
+    queryParams : Object,
+    successCallBack : Function,
     errorCallback : Function) : boolean {
     ...
 }

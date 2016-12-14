@@ -22,11 +22,11 @@ export default class AjaxRequestSample extends ShallowComponent {
         return (
             <div>
                 <span>
-                    All settings are optional. A default can be set to an option. The default options are as follows.
+                    You can define <code>Ajax Request</code> as follows.
                 </span>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <span>
-                    You can define <code>Ajax Request</code> as follows.
+                    All settings are optional. A default can be set to an option. The default options are as follows.
                 </span>
                 <Highlight className="javascript">{ex2}</Highlight>
                 <span>

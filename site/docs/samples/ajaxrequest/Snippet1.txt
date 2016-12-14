@@ -1,10 +1,7 @@
-defaultProps = {
-    type: "POST",
-    dataType: "json",
-    contentType: "application/json; charset=utf-8",
-    xhrFields: {
-        withCredentials: true
-    },
-    async: true,
-    crossDomain: true
-};
+let options = {
+    url: "docs",
+    type: "GET",
+    ...
+}
+
+let ajaxRequest = new AjaxRequest(options);

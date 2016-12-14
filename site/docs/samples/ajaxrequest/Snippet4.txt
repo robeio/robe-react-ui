@@ -12,12 +12,7 @@
             type: type
         });
 
-        ajaxRequest.call(
-            data,
-            queryParams,
-            success,
-            error,
-            pathParams);
+        ajaxRequest.call(data,queryParams,success,error,pathParams);
 
     };
 

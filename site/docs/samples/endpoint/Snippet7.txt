@@ -1,7 +1,3 @@
-delete(
-    item : Map,
-    idField : string,
-    successCallback : Function,
-    errorCallback : Function) {
+getUrl() : string {
     ...
 }

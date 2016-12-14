@@ -1,26 +1,6 @@
-options = {
-    url: "http://..",
-    read: {
-        type: "GET",
-        url: "../all",
-        ...
-    },
-    create: {
-        type: "POST",
-        url: "../create",
-        ...
-    },
-    update: {
-        type: "PUT",
-        url: "../update",
-        ...
-    },
-    delete: {
-        type: "DELETE",
-        url: "../delete",
-        ...
-    }
-
-};
-
-let endPoint = new RemoteEndPoint(options);
+create(
+    item : Map,
+    successCallback : Function,
+    errorCallback : Function) : boolean {
+    ...
+}
