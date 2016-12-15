@@ -73,6 +73,11 @@ body {
     border-bottom: 3px solid #333;
 }
 
+pre {
+    padding: 0 !important;
+    border: 1px solid #eee !important;
+}
+
 @media (min-width: 768px) {
     .navbar {
         border-radius: 0px;
