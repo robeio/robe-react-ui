@@ -4,6 +4,12 @@
 * change DataForm Sample
 * fixed DataForm defaultValues problem.
 * fixed DataForm Sample async change DataForm problem.
+* CheckTree
+    * 2 methods added getSelectedItems and getUnselectedItems
+    * Parent click now modifies children state.
+    * Reimplemented with Tree component.
+    * Tests are modified.
+* Tree component added. You can use with custom item renderers.
 
 ## 1.1.2
 * Upgraded **robe-react-commons** library
