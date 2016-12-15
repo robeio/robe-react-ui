@@ -1,6 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
+import Tree from "../tree/Tree";
 import CheckInput from "../inputs/CheckInput";
 import "./CheckTree.css";
 
@@ -22,7 +23,7 @@ export default class CheckTree extends ShallowComponent {
         /**
          * Data for the tree to view
          */
-        items: React.PropTypes.object.isRequired,
+        items: React.PropTypes.array.isRequired,
         /**
          * Text field of the data
          */
@@ -39,79 +40,140 @@ export default class CheckTree extends ShallowComponent {
          * Checked items array.
          */
         value: React.PropTypes.array,
-        /**
-         * Parent component of the tree item
-         */
-        parent: React.PropTypes.object
-
     };
 
     static defaultProps = {
-        parent: undefined,
         textField: "text",
         valueField: "code",
         childrenField: "children",
         value: []
     };
 
-    render(): string {
-        let itemData = this.props.items;
-        let checked = undefined;
-        let value = itemData[this.props.valueField];
-        if (Arrays.indexOf(this.props.value, value) !== -1) {
+    __value = [];
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            value: this.props.value
+        };
+    }
+
+
+    render(): Object {
+        return (
+            <div>
+                <Tree
+                    items={this.props.items}
+                    value={this.state.value}
+                    onChange={this.__onChange}
+                    itemRenderer={CheckTree.itemRenderer}
+                />
+            </div>
+        );
+    }
+
+    /**
+    * A default CheckInput renderer implementation for the Tree component.
+    * @static
+    * @param {Object} props properties to use at render
+    * @returns {Object} a CheckInput
+    * @memberOf CheckTree
+    */
+    static itemRenderer(props: Object): Object {
+        let checked;
+        let value = props.item[props.valueField];
+        if (Arrays.indexOf(props.value, value) !== -1) {
             checked = [value];
         }
-
-        let input =
-            (<CheckInput
-                items={[itemData]}
+        return (
+            <CheckInput
+                items={[props.item]}
                 value={checked}
-                textField={this.props.textField}
-                valueField={this.props.valueField}
-                onChange={this.__onChange}
-                ref="innerInput"
-                formControl ={false}
+                textField={props.textField}
+                valueField={props.valueField}
+                name={`${props.item[props.valueField]}`}
+                formControl={false}
+                onChange={props.onChange}
             />);
-        let itemComp = (
-            <li className="checkboxtree">
-                {input}
-                <ul>
-                    {this.__renderChildren(itemData)}
-                </ul>
-            </li>
-        );
-        return itemComp;
-    }
-    __onChange = (e: Object): boolean => {
-        if (this.props.parent) {
-            this.props.parent.__onChange(e);
-        } else {
-            let checked = e.target.value.length === 1;
-            let value = checked ? e.target.value[0] : e.target.oldValue[0];
-            this.props.onChange(e, value, checked);
-        }
-        return true;
     }
 
-    __renderChildren = (itemData: Map) => {
-        let children = itemData[this.props.childrenField];
-        if (children && children.length > 0) {
-            let itemComps = [];
-            for (let i = 0; i < children.length; i++) {
-                itemComps.push(<CheckTree
-                    key={children[i][this.props.valueField]}
-                    value={this.props.value}
-                    items={children[i]}
-                    textField={this.props.textField}
-                    valueField={this.props.valueField}
-                    childrenField={this.props.childrenField}
-                    parent={this}
-                />);
+    __onChange = (e: Object) => {
+        let values = this.state.value;
+        let value = e.target.parsedValue[0];
+
+        if (value) {
+            values.push(value);
+            let selected = this.__getChildrenValues(value);
+            values = values.concat(selected);
+        } else {
+            value = e.target.oldValue[0];
+            Arrays.remove(values, value);
+            let unselected = this.__getChildrenValues(value);
+            for (let i = 0; i < unselected.length; i++) {
+                Arrays.remove(values, unselected[i]);
             }
-            return itemComps;
         }
-        return undefined;
+        this.setState({
+            value: values
+        });
+        this.__value = values;
+        if (this.props.onChange) {
+            this.props.onChange(values);
+        }
+    };
+
+    __getChildrenValues(selectedValue: any): Array {
+        let selectedChildren = [];
+        this.__traverseItems(this.props.items, (item: any) => {
+            let value = item[this.props.valueField];
+            if (value === selectedValue) {
+                this.__traverseItems(item[this.props.childrenField], (item2: any) => {
+                    let value2 = item2[this.props.valueField];
+                    selectedChildren.push(value2);
+                });
+            }
+        });
+        return selectedChildren;
     }
+
+    /**
+     * Returns an array of the unselected values from the given items tree.
+     * @returns {Array}
+     * @memberOf CheckTree
+     */
+    getUnselectedItems(): Array {
+        let unselected = [];
+        let items = this.props.items;
+        let values = this.__value;
+        this.__traverseItems(items, (item: any) => {
+            let value = item[this.props.valueField];
+            if (Arrays.indexOf(values, value) === -1) {
+                unselected.push(value);
+            }
+        });
+        return unselected;
+    }
+    /**
+     * Returns an array of the selected values from the given items tree.
+     * @returns {Array}
+     * @memberOf CheckTree
+     */
+    getSelectedItems(): Array {
+        return this.__value;
+    }
+    __traverseItems(items: Array, callback: Function) {
+        if (items === undefined) {
+            return;
+        }
+        for (let i = 0; i < items.length; i++) {
+            callback(items[i]);
+            let children = items[i][this.props.childrenField];
+            if (children) {
+                this.__traverseItems(children, callback);
+            }
+        }
+    }
+
 
     shouldComponentUpdate(): boolean {
         return true;
