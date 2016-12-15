@@ -4,6 +4,7 @@
 * change DataForm Sample
 * fixed DataForm defaultValues problem.
 * fixed DataForm Sample async change DataForm problem.
+* fixed style in site
 
 ## 1.1.2
 * Upgraded **robe-react-commons** library

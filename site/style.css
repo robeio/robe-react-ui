@@ -1,48 +1,79 @@
 html {
-    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-    font-family: proxima-nova,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-family: proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     color: #484848;
     line-height: 1.28;
 }
 
-.banner{
+body {
+    overflow: hidden;
+}
+
+.banner {
     background: #333;
     color: white;
-    padding-top:40px;
-    padding-bottom:40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 20px
 }
-.footer{
-    border-top: #333 dotted 1px; 
-    padding-top:10px;
-    padding-bottom:10px;
+
+.footer {
+    border-top: #333 dotted 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-top: 20px
 }
- .navbar {
+
+.navbar {
     position: relative;
     min-height: 50px;
     margin-bottom: 0px;
-    border: 1px solid transparent;
+    border: none;
 }
-.navbar-header img{
-    float: left!important;
+
+.navbar-header img {
+    float: left !important;
     margin-top: 5px;
     margin-bottom: 10px;
     margin-right: 20px;
     height: 34px;
 }
-.navbar-header a{
-    color:white !important;
+
+.navbar-header a {
+    color: white !important;
 }
 
-.btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
     outline: 0px;
     outline-offset: -2px;
 }
 
-@media (min-width: 768px){
+.container > .navbar-header {
+    border-bottom: 3px solid transparent;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .active > a:hover {
+    color: #fff;
+    background-color: #080808;
+    border-bottom: 3px solid #87CEFA;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #fff;
+    background-color: #333;
+    border-bottom: 3px solid #333;
+}
+
+@media (min-width: 768px) {
     .navbar {
         border-radius: 0px;
     }

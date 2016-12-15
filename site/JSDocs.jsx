@@ -6,10 +6,11 @@ export default class JSDocs extends React.Component {
     static style = {
         minHeight: "100%",
         width: "100%",
-        position: "fixed"
+        position: "fixed",
+        border: "none"
     };
 
-    render(): Object {
+    render():Object {
         return (
             <iframe
                 style={JSDocs.style}
