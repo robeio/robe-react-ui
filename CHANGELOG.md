@@ -2,6 +2,8 @@
 
 ## 1.1.4 Developing
 * fixed style in site
+* DatePicker bug fixed.
+* Dependencies updated.
 
 ## 1.1.3
 * change DataForm Sample
@@ -30,7 +32,7 @@
     * Addon click triggers popup
     * field will not call props.onChange until the value is valid. 
 * validationDisplay example added to ValidationSample
-* FaIcon (fontawssome)
+* FaIcon (fontawesome)
     * Assets deleted. Now we are taking icons from **npm**.
     * Sample page updated.
 * React-Bootstrap link added to the showcase's navbar.
