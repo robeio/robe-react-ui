@@ -128,6 +128,7 @@ export default class DateInput extends ShallowComponent {
             parsedValue = momentjs(value).format(this.props.format);
         } else {
             parsedValue = momentjs(value, this.props.format).format(this.props.format);
+            value = momentjs(value, this.props.format);
         }
         let overlayValue;
         if (parsedValue === "Invalid date" || this.isPartial) {
@@ -135,6 +136,7 @@ export default class DateInput extends ShallowComponent {
         } else {
             overlayValue = value === "" ? undefined : value;
         }
+
         /* eslint-disable no-unused-vars */
         let { format, locale, minDate, maxDate, ...newProps } = this.props;
         return (
@@ -148,7 +150,7 @@ export default class DateInput extends ShallowComponent {
                             value={overlayValue}
                             minDate={this.props.minDate}
                             maxDate={this.props.maxDate}
-                            />
+                        />
                     </Popover>
                 </Overlay>
                 <Input

@@ -7,7 +7,8 @@ export default class DateInputSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            DateInputNormal: new Date().getTime()
+            DateInputNormal: new Date().getTime(),
+            DateInputValidations: "05/10/1992"
         };
     }
 
@@ -20,7 +21,7 @@ export default class DateInputSample extends ShallowComponent {
                     name="DateInputNormal"
                     value={this.state.DateInputNormal}
                     onChange={this.__handleChange}
-                />
+                    />
                 <DateInput
                     label="With Validations"
                     name="DateInputValidations"
@@ -29,7 +30,7 @@ export default class DateInputSample extends ShallowComponent {
                     validations={{
                         required: true
                     }}
-                />
+                    />
                 <DateInput
                     label="DateInput With Custom Localization"
                     name="DateInputNormal"
@@ -37,7 +38,7 @@ export default class DateInputSample extends ShallowComponent {
                     format="YYYY MM DD"
                     value={this.state.DateInputNormal}
                     onChange={this.__handleChange}
-                />
+                    />
             </div>
         );
     }
