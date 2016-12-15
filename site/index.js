@@ -55,7 +55,8 @@ class Site extends ShallowComponent {
                         </NavItem>
                     </Nav>
                 </Navbar>
-                <div style={{overflowY:"auto",overflowX:"hidden",height:window.innerHeight-48}}>
+                <div id="activePege"
+                     style={{overflowY:"auto",overflowX:"hidden",height:window.innerHeight-48}}>
                     {activePage}
                 </div>
             </div>
@@ -73,6 +74,10 @@ class Site extends ShallowComponent {
             return;
         }
         window.location.hash = `#${key}`;
+
+        let element = document.getElementById("activePege");
+        element.scrollTop = 0;
+        
         this.setState({
             activeKey: key
         });
