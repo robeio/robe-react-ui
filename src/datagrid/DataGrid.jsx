@@ -20,6 +20,8 @@ import SearchField from "./toolbar/SearchField";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
 import Header from "./Header";
+import NotificationManager from "react-notifications/lib/NotificationManager";
+
 
 import "./DataGrid.css";
 
@@ -269,9 +271,9 @@ export default class DataGrid extends StoreComponent {
      * @private
      */
     __showDeleteConfirm() {
-        this.setState({
-            modalDeleteConfirm: true
-        });
+        let show = this.selection ? true : false;
+        show == false ? NotificationManager.warning("Silme işlemi için önce seçim yapmalısınız.") : null;
+        this.setState({modalDeleteConfirm: show});
     }
 
     /**
