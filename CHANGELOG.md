@@ -1,9 +1,13 @@
 # Change Log
 
-## 1.1.4 Developing
+## 1.1.5 Developing
+
+
+## 1.1.4 
 * fixed style in site
 * DatePicker bug fixed.
 * Dependencies updated.
+* bug fix childrenField in CheckTree 
 
 ## 1.1.3
 * change DataForm Sample

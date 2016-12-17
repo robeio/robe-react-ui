@@ -39,7 +39,7 @@ export default class CheckTree extends ShallowComponent {
         /**
          * Checked items array.
          */
-        value: React.PropTypes.array,
+        value: React.PropTypes.array
     };
 
     static defaultProps = {
@@ -51,7 +51,7 @@ export default class CheckTree extends ShallowComponent {
 
     __value = [];
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         this.state = {
             value: this.props.value
@@ -59,12 +59,13 @@ export default class CheckTree extends ShallowComponent {
     }
 
 
-    render(): Object {
+    render():Object {
         return (
             <div>
                 <Tree
                     items={this.props.items}
                     value={this.state.value}
+                    childrenField={this.props.childrenField}
                     onChange={this.__onChange}
                     itemRenderer={CheckTree.itemRenderer}
                 />
@@ -73,13 +74,13 @@ export default class CheckTree extends ShallowComponent {
     }
 
     /**
-    * A default CheckInput renderer implementation for the Tree component.
-    * @static
-    * @param {Object} props properties to use at render
-    * @returns {Object} a CheckInput
-    * @memberOf CheckTree
-    */
-    static itemRenderer(props: Object): Object {
+     * A default CheckInput renderer implementation for the Tree component.
+     * @static
+     * @param {Object} props properties to use at render
+     * @returns {Object} a CheckInput
+     * @memberOf CheckTree
+     */
+    static itemRenderer(props:Object):Object {
         let checked;
         let value = props.item[props.valueField];
         if (Arrays.indexOf(props.value, value) !== -1) {
@@ -97,7 +98,7 @@ export default class CheckTree extends ShallowComponent {
             />);
     }
 
-    __onChange = (e: Object) => {
+    __onChange = (e:Object) => {
         let values = this.state.value;
         let value = e.target.parsedValue[0];
 
@@ -122,12 +123,12 @@ export default class CheckTree extends ShallowComponent {
         }
     };
 
-    __getChildrenValues(selectedValue: any): Array {
+    __getChildrenValues(selectedValue:any):Array {
         let selectedChildren = [];
-        this.__traverseItems(this.props.items, (item: any) => {
+        this.__traverseItems(this.props.items, (item:any) => {
             let value = item[this.props.valueField];
             if (value === selectedValue) {
-                this.__traverseItems(item[this.props.childrenField], (item2: any) => {
+                this.__traverseItems(item[this.props.childrenField], (item2:any) => {
                     let value2 = item2[this.props.valueField];
                     selectedChildren.push(value2);
                 });
@@ -141,11 +142,11 @@ export default class CheckTree extends ShallowComponent {
      * @returns {Array}
      * @memberOf CheckTree
      */
-    getUnselectedItems(): Array {
+    getUnselectedItems():Array {
         let unselected = [];
         let items = this.props.items;
         let values = this.__value;
-        this.__traverseItems(items, (item: any) => {
+        this.__traverseItems(items, (item:any) => {
             let value = item[this.props.valueField];
             if (Arrays.indexOf(values, value) === -1) {
                 unselected.push(value);
@@ -153,15 +154,17 @@ export default class CheckTree extends ShallowComponent {
         });
         return unselected;
     }
+
     /**
      * Returns an array of the selected values from the given items tree.
      * @returns {Array}
      * @memberOf CheckTree
      */
-    getSelectedItems(): Array {
+    getSelectedItems():Array {
         return this.__value;
     }
-    __traverseItems(items: Array, callback: Function) {
+
+    __traverseItems(items:Array, callback:Function) {
         if (items === undefined) {
             return;
         }
@@ -175,7 +178,7 @@ export default class CheckTree extends ShallowComponent {
     }
 
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate():boolean {
         return true;
     }
 }

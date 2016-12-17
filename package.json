@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.1.4-rc1",
+  "version": "1.1.5-rc1",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
