@@ -1,3 +1,9 @@
+process.argv.slice(4)[0]
+var testFile = null;
+if(process.argv.length > 4) {
+    testFile = process.argv.slice(4)[0];
+}
+
 const babelOptions = {
     presets: [
         "react",
@@ -59,8 +65,9 @@ commonSettings.externals = {
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
 };
+
 module.exports = function configure(config) {
-    config.set({
+    var conf = {
         basePath: "../",
         colors: true,
         captureTimeout: 3000,
@@ -84,12 +91,6 @@ module.exports = function configure(config) {
             "karma-webpack",
             "karma-mocha-reporter"
         ],
-        files: [
-            "__test__/index.dev.js"
-        ],
-        preprocessors: {
-            "__test__/index.dev.js": ["webpack"]
-        },
         webpack: commonSettings,
         webpackServer: {
             colors: true,
@@ -118,5 +119,16 @@ module.exports = function configure(config) {
                 timeout: 15000
             }
         }
-    });
+    };
+
+    let filePattern = "__test__/index.dev.js";
+    if(testFile) {
+        filePattern = "__test__/**/*/"+testFile+".spec.js";
+    }
+    conf.files = [
+        filePattern
+    ];
+    conf.preprocessors = {};
+    conf.preprocessors[filePattern] = ["webpack"];
+    config.set(conf);
 };
