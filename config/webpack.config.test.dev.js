@@ -4,6 +4,7 @@ if(process.argv.length > 4) {
     testFile = process.argv.slice(4)[0];
 }
 
+
 const babelOptions = {
     presets: [
         "react",
@@ -123,7 +124,11 @@ module.exports = function configure(config) {
 
     let filePattern = "__test__/index.dev.js";
     if(testFile) {
-        filePattern = "__test__/**/*/"+testFile+".spec.js";
+        if(!testFile.startsWith("./__test__") && !testFile.startsWith("__test__") && !testFile.startsWith("/")) {
+            filePattern = "__test__/**/*/"+testFile+".spec.js";
+        } else {
+            filePattern = testFile;
+        }
     }
     conf.files = [
         filePattern
