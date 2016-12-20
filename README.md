@@ -73,3 +73,21 @@ $ npm test              # Run unit tests with Mocha
 ```shell
 $ npm run testd         # Run unit tests with Mocha
 ```
+
+* Development Test Examples 
+
+
+```ssh
+    npm run testd Wizard
+```
+```ssh
+    npm run testd ./__test__/wizard/Wizard.spec.js
+```
+```ssh
+    npm run testd __test__/wizard/Wizard.spec.js
+```
+```ssh
+    npm run testd /Users/kamilbukum/DEV/robe/robe-react-ui/__test__/wizard/Wizard.spec.js
+```
+
+
