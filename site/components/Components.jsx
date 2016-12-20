@@ -36,7 +36,7 @@ export default class Components extends ShallowComponent {
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
-                    >
+                        >
                         {item.header}
                     </ListGroupItem>);
                 if (active) {
@@ -48,7 +48,7 @@ export default class Components extends ShallowComponent {
                             json={item.json}
                             sample={item.sample}
                             code={item.code}
-                        />);
+                            />);
                 }
             }
         }
@@ -63,7 +63,7 @@ export default class Components extends ShallowComponent {
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
                         placeholder="Search"
-                    />
+                        />
                     <Nav bsStyle="tabs" justified activeKey={this.state.selectedGroup} onSelect={this.__onGroupChange}>
                         <NavItem eventKey="complex" ><FaIcon code="fa-cubes" fixed={false} /> Complex</NavItem>
                         <NavItem eventKey="inputs" ><FaIcon code="fa-terminal" fixed={false} /> Inputs</NavItem>
@@ -79,8 +79,21 @@ export default class Components extends ShallowComponent {
     }
 
     __onGroupChange = (selectedKey: string) => {
+        let selectedComponent;
+        switch (selectedKey) {
+            case "complex": {
+                selectedComponent = "DataGrid";
+            } break;
+            case "inputs": {
+                selectedComponent = "TextInput";
+            } break;
+            case "charts": {
+                selectedComponent = "AreaChart";
+            }
+        }
         this.setState({
-            selectedGroup: selectedKey
+            selectedGroup: selectedKey,
+            componentSelection: `Components/${selectedComponent}`
         });
     };
 
