@@ -1,6 +1,7 @@
 # Robe-React-UI
 #### UI library built on top of <code>React-Bootstrap</code>
 
+[![npm package](https://badge.fury.io/js/robe-react-ui.svg)](https://badge.fury.io/js/robe-react-ui.svg)
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
 [![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
@@ -21,6 +22,7 @@ UI components built on top of [React-Bootstrap](https://react-bootstrap.github.i
 * [Karma](https://karma-runner.github.io/0.13/index.html) for testing.
 * [React](https://facebook.github.io/react/) for ui.
 * [React-Bootstrap](https://react-bootstrap.github.io/) for ui components
+* [Recharts](http://recharts.org/) for ui chart components
 * [Enzyme](https://github.com/airbnb/enzyme) for ui testing
 * [Open-Color]
 
