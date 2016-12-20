@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import { RobeAreaChart } from "robe-react-ui/lib/chart";
+import { RadarChart } from "robe-react-ui/lib/chart";
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -11,21 +11,24 @@ let data = [
     { name: "Page F", uv: 2390, pv: 3800, amt: 2500, fill: "#d0ed57" },
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
-export default class RobeAreaChartSample extends ShallowComponent {
+export default class RobeRadarChartSample extends ShallowComponent {
 
     render(): Object {
         return (
             <div>
                 <div className="form-group">
-                    <RobeAreaChart
-                        name="area-chart"
+                    <RadarChart
+                        name="radar-chart"
                         propsOfChart={{ width: 600, height: 400, data: data }}
-                        propsOfChildrens={[{ dataKey: "uv", stroke: "red", fill: "red" }, { dataKey: "pv", stroke: "blue", fill: "blue" }]}
-                        propsOfXAxis={{ dataKey: "name" }}
-                        propsOfYAxis propsOfToolTip propsOfCartesianGrid propsOfLegend
+                        propsOfChildrens={[
+                            { dataKey: "uv", stroke: "red", fill: "red", fillOpacity: 0.6 },
+                            { dataKey: "pv", stroke: "blue", fill: "blue", fillOpacity: 0.6 }
+                        ]}
+                        propsOfToolTip propsOfPolarGrid propsOfLegend
+                        propsOfPolarRadiusAxis propsOfPolarAngleAxis={{ dataKey: "name" }}
                     />
                 </div>
-                <a rel="noopener noreferrer" target="_blank" href="http://recharts.org/api/#AreaChart">Read More About AreaChart</a>
+                <a rel="noopener noreferrer" target="_blank" href="http://recharts.org/api/#RadarChart">Read More About RadarChart</a>
             </div>
         );
     }

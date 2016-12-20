@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { ScatterChart, Scatter, ZAxis } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { ScatterChart as Chart, Scatter, ZAxis } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobeScatterChart extends RobeBaseChart {
+export default class ScatterChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -11,26 +11,26 @@ export default class RobeScatterChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
-         * {@link http://recharts.org/api#AreaChart}
+         * {@link http://recharts.org/api#ScatterChart}
          */
         propsOfChart: PropTypes.shape({
-            ...ScatterChart.PropTypes
+            ...Chart.PropTypes
         }).isRequired,
 
          /**
-         * {@link http://recharts.org/api/#Area}
+         * {@link http://recharts.org/api/#Scatter}
          */
 
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
             ...Scatter.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         })).isRequired,
 
         /**
-         * {@link http://recharts.org/api/#YAxis}
+         * {@link http://recharts.org/api/#ZAxis}
          */
         propsOfZAxis: React.PropTypes.oneOfType([
             PropTypes.shape({
@@ -41,13 +41,13 @@ export default class RobeScatterChart extends RobeBaseChart {
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <ScatterChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderScatters()}
                 {this.__renderXAxis()}
                 {this.__renderYAxis()}
@@ -55,7 +55,7 @@ export default class RobeScatterChart extends RobeBaseChart {
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </ScatterChart>
+            </Chart>
         );
     }
     __renderScatters(): Object {

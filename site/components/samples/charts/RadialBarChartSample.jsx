@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import { RobeRadialBarChart } from "robe-react-ui/lib/chart";
+import { RadialBarChart } from "robe-react-ui/lib/chart";
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -11,13 +11,13 @@ let data = [
     { name: "Page F", uv: 2390, pv: 3800, amt: 2500, fill: "#d0ed57" },
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
-export default class RobeRadialBarChartSample extends ShallowComponent {
+export default class RadialBarChartSample extends ShallowComponent {
 
     render(): Object {
         return (
             <div>
                 <div className="form-group">
-                    <RobeRadialBarChart
+                    <RadialBarChart
                         name="radar-chart"
                         propsOfChart={{ width: 600, height: 400, data: data, cx: 150, cy: 150, innerRadius: 20, outerRadius: 140, barSize: 10 }}
                         propsOfChildrens={[

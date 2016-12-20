@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import { RobeBarChart } from "robe-react-ui/lib/chart";
+import { LineChart } from "robe-react-ui/lib/chart";
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -11,21 +11,21 @@ let data = [
     { name: "Page F", uv: 2390, pv: 3800, amt: 2500, fill: "#d0ed57" },
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
-export default class RobeBarChartSample extends ShallowComponent {
+export default class LineChartSample extends ShallowComponent {
 
     render(): Object {
         return (
             <div>
-                <a>Read More</a>
                 <div className="form-group">
-                    <RobeBarChart
+                    <LineChart
+                        name="line-chart"
                         propsOfChart={{ width: 600, height: 400, data: data }}
                         propsOfChildrens={[{ dataKey: "uv", stroke: "red", fill: "red" }, { dataKey: "pv", stroke: "blue", fill: "blue" }]}
                         propsOfXAxis={{ dataKey: "name" }}
                         propsOfYAxis propsOfToolTip propsOfCartesianGrid propsOfLegend
                     />
                 </div>
-                <a rel="noopener noreferrer" target="_blank" href="http://recharts.org/api/#BarChart">Read More About BarChart</a>
+                <a rel="noopener noreferrer" target="_blank" href="http://recharts.org/api/#LineChart">Read More About LineChart</a>
             </div>
         );
     }

@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { ScatterChart, Scatter } from "recharts";
+import { ScatterChart as Chart, Scatter } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeScatterChart from "chart/RobeScatterChart";// eslint-disable-line
+import ScatterChart from "chart/ScatterChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,10 +14,10 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeScatterChart", () => {
+describe("chart/ScatterChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeScatterChart {...props} />// eslint-disable-line
+            <ScatterChart {...props} />// eslint-disable-line
         );
     };
 
@@ -33,8 +33,8 @@ describe("chart/RobeScatterChart", () => {
             propsOfZAxis: { dataKey: "amt", unit: "cm", range: [60, 400], name: "AMT" }
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeScatterChart).length, 1);
         chai.assert.equal(wrapper.find(ScatterChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
         chai.assert.equal(wrapper.find(Scatter).length, 3);
     });
 });

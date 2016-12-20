@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { BarChart, Bar } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { BarChart as Chart, Bar } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobeBarChart extends RobeBaseChart {
+export default class BarChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -11,14 +11,14 @@ export default class RobeBarChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
          * {@link http://recharts.org/api#BarChart}
          */
         propsOfChart: PropTypes.shape({
-            ...BarChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
          /**
@@ -27,25 +27,25 @@ export default class RobeBarChart extends RobeBaseChart {
 
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
             ...Bar.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         })).isRequired
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <BarChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderBars()}
                 {this.__renderXAxis()}
                 {this.__renderYAxis()}
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </BarChart>
+            </Chart>
         );
     }
     __renderBars(): Object {

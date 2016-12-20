@@ -1,8 +1,11 @@
 import React, { PropTypes } from "react";
-import { ComposedChart, Area, Bar, Line } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import Chart from "recharts/lib/chart/ComposedChart";
+import Area from "recharts/lib/cartesian/Area";
+import Bar from "recharts/lib/cartesian/Bar";
+import Line from "recharts/lib/cartesian/Line";
+import BaseChart from "./BaseChart";
 
-export default class RobeComposedChart extends RobeBaseChart {
+export default class ComposedChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -12,14 +15,14 @@ export default class RobeComposedChart extends RobeBaseChart {
     static propTypes: Map = {
 
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
          * {@link http://recharts.org/api#ComposedChart}
          */
         propsOfChart: PropTypes.shape({
-            ...ComposedChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
         /**
@@ -46,18 +49,18 @@ export default class RobeComposedChart extends RobeBaseChart {
 
         propsOfLines: PropTypes.arrayOf(PropTypes.shape({
             ...Line.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         }))
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <ComposedChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderAreas()}
                 {this.__renderBars()}
                 {this.__renderLines()}
@@ -66,7 +69,7 @@ export default class RobeComposedChart extends RobeBaseChart {
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </ComposedChart>
+            </Chart>
         );
     }
     __renderAreas(): Object {

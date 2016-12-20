@@ -5,7 +5,7 @@
 * was update Tree style.
 * chart api added.
 * CheckTree bugs fixed. (textField, valueField, childrenValue forwarding).
-
+* Added Single File Test Support & Test Debuging.
 
 ## 1.1.4 
 * fixed style in site
