@@ -1,7 +1,7 @@
 # Robe-React-UI
 #### UI library built on top of <code>React-Bootstrap</code>
 
-[![npm package](https://badge.fury.io/js/robe-react-ui.svg)](https://badge.fury.io/js/robe-react-ui.svg)
+[![npm package](https://badge.fury.io/js/robe-react-ui.svg)](https://badge.fury.io/js/robe-react-ui)
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
 [![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
