@@ -50,13 +50,15 @@ export default class Tree extends ShallowComponent {
         textField: "text",
         valueField: "code",
         childrenField: "children",
-        value: []
+        value: [],
+        root: true
     };
 
     render():string {
         if (this.props.items) {
             return (
-                <ul className="tree" style={{paddingLeft:10}}>
+                <ul className="tree"
+                    style={{paddingLeft:this.props.root?0:35}}>
                     {this.__renderChildren(this.props.items)}
                 </ul>
             );
