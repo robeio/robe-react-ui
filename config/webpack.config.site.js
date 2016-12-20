@@ -57,7 +57,7 @@ commonSettings.devtool = "source-map";
 
 commonSettings.output = {
     path: commonSettings.paths.build,
-    filename: "bundle.js"
+    filename: "bundle.[hash].js"
     // chunkFilename: "[id].bundle.js"
 };
 
@@ -76,7 +76,8 @@ const fileChanger = new FileChanger({
         file: "./docs/index.html",
         parameters: {
             "\\$VERSION": package.version,
-            "\\$BUILD_TIME": new Date()
+            "\\$BUILD_TIME": new Date(),
+            "bundle\\.js": "bundle.[hash].js"
         }
     }
     ]
