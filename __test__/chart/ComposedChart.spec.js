@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { RadarChart, Radar } from "recharts";
+import { ComposedChart as Chart, Area, Bar, Line } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeRadarChart from "chart/RobeRadarChart";// eslint-disable-line
+import ComposedChart from "chart/ComposedChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,21 +14,24 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeRadarChart", () => {
+describe("chart/ComposedChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeRadarChart {...props} />// eslint-disable-line
+            <ComposedChart {...props} />// eslint-disable-line
         );
     };
 
     it("render", () => {
         let props = { propsOfChart: { width: 600, height: 400, data: data },
-            propsOfChildrens: [{ dataKey: "uv", stroke: "red", fill: "red", fillOpacity: 0.6 }, { dataKey: "pv", stroke: "blue", fill: "blue", fillOpacity: 0.6 }],
-            propsOfPolarAngleAxis: { dataKey: "name" }
+            propsOfAreas: [{ dataKey: "uv", stroke: "red", fill: "red" }],
+            propsOfBars: [{ dataKey: "pv", stroke: "blue", fill: "blue" }],
+            propsOfLines: [{ dataKey: "amt", stroke: "yellow", fill: "yellow" }]
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeRadarChart).length, 1);
-        chai.assert.equal(wrapper.find(RadarChart).length, 1);
-        chai.assert.equal(wrapper.find(Radar).length, 2);
+        chai.assert.equal(wrapper.find(ComposedChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
+        chai.assert.equal(wrapper.find(Area).length, 1);
+        chai.assert.equal(wrapper.find(Bar).length, 1);
+        chai.assert.equal(wrapper.find(Line).length, 1);
     });
 });

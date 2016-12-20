@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { ComposedChart, Area, Bar, Line } from "recharts";
+import { LineChart as Chart, Line } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeComposedChart from "chart/RobeComposedChart";// eslint-disable-line
+import LineChart from "chart/LineChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,24 +14,20 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeComposedChart", () => {
+describe("chart/LineChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeComposedChart {...props} />// eslint-disable-line
+            <LineChart {...props} />// eslint-disable-line
         );
     };
 
     it("render", () => {
         let props = { propsOfChart: { width: 600, height: 400, data: data },
-            propsOfAreas: [{ dataKey: "uv", stroke: "red", fill: "red" }],
-            propsOfBars: [{ dataKey: "pv", stroke: "blue", fill: "blue" }],
-            propsOfLines: [{ dataKey: "amt", stroke: "yellow", fill: "yellow" }]
+            propsOfChildrens: [{ dataKey: "uv", stroke: "red", fill: "red" }, { dataKey: "pv", stroke: "blue", fill: "blue" }]
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeComposedChart).length, 1);
-        chai.assert.equal(wrapper.find(ComposedChart).length, 1);
-        chai.assert.equal(wrapper.find(Area).length, 1);
-        chai.assert.equal(wrapper.find(Bar).length, 1);
-        chai.assert.equal(wrapper.find(Line).length, 1);
+        chai.assert.equal(wrapper.find(LineChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
+        chai.assert.equal(wrapper.find(Line).length, 2);
     });
 });

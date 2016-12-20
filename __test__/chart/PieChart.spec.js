@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { RadialBarChart, RadialBar } from "recharts";
+import { PieChart as Chart, Pie } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeRadialBarChart from "chart/RobeRadialBarChart";// eslint-disable-line
+import PieChart from "chart/PieChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,23 +14,23 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeRadialBarChart", () => {
+describe("chart/PieChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeRadialBarChart {...props} />// eslint-disable-line
+            <PieChart {...props} />// eslint-disable-line
         );
     };
 
     it("render", () => {
-        let props = { propsOfChart: { width: 600, height: 400, data: data, cx: 150, cy: 150, innerRadius: 20, outerRadius: 140, barSize: 10 },
+        let props = { propsOfChart: { width: 600, height: 400 },
             propsOfChildrens: [
-                 { dataKey: "uv", startAngle: 90, endAngle: -270, minAngle: 15, label: true, background: true, clockWise: true },
-                 { dataKey: "pv", startAngle: 90, endAngle: 270, minAngle: 15, label: true, background: true, clockWise: true }
+                { valueKey: "uv", cx: 200, cy: 200, outerRadius: 20, stroke: "red", fill: "red", data: data, label: true },
+                { valueKey: "pv", cx: 200, cy: 200, innerRadius: 100, outerRadius: 120, stroke: "blue", fill: "blue", data: data, label: true }
             ]
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeRadialBarChart).length, 1);
-        chai.assert.equal(wrapper.find(RadialBarChart).length, 1);
-        chai.assert.equal(wrapper.find(RadialBar).length, 2);
+        chai.assert.equal(wrapper.find(PieChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
+        chai.assert.equal(wrapper.find(Pie).length, 2);
     });
 });
