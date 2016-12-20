@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { RadialBarChart, RadialBar } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { RadialBarChart as Chart, RadialBar } from "recharts";
+import RadarChart from "./RadarChart";
 
-export default class RobeRadialBarChart extends RobeBaseChart {
+export default class RadialBarChart extends RadarChart {
 
     /**
      * Properties of the component
@@ -11,37 +11,37 @@ export default class RobeRadialBarChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...RadarChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
-         * {@link http://recharts.org/api#AreaChart}
+         * {@link http://recharts.org/api#RadialBarChart}
          */
         propsOfChart: PropTypes.shape({
-            ...RadialBarChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...RadarChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
          /**
-         * {@link http://recharts.org/api/#Area}
+         * {@link http://recharts.org/api/#RadialBar}
          */
 
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
             ...RadialBar.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...RadarChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         })).isRequired
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...RadarChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <RadialBarChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderRadialBars()}
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </RadialBarChart>
+            </Chart>
         );
     }
     __renderRadialBars(): Object {

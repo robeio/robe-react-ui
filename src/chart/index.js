@@ -1,9 +1,9 @@
-export { default as RobeAreaChart } from "./RobeAreaChart";
-export { default as RobeBarChart } from "./RobeBarChart";
-export { default as RobeLineChart } from "./RobeLineChart";
-export { default as RobeComposedChart } from "./RobeComposedChart";
-export { default as RobePieChart } from "./RobePieChart";
-export { default as RobeRadarChart } from "./RobeRadarChart";
-export { default as RobeRadialBarChart } from "./RobeRadialBarChart";
-export { default as RobeScatterChart } from "./RobeScatterChart";
+export { default as AreaChart } from "./AreaChart";
+export { default as BarChart } from "./BarChart";
+export { default as LineChart } from "./LineChart";
+export { default as ComposedChart } from "./ComposedChart";
+export { default as PieChart } from "./PieChart";
+export { default as RadarChart } from "./RadarChart";
+export { default as RadialBarChart } from "./RadialBarChart";
+export { default as ScatterChart } from "./ScatterChart";
 

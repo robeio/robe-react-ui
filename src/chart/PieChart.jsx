@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { PieChart, Pie } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { PieChart as Chart, Pie } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobePieChart extends RobeBaseChart {
+export default class PieChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -11,18 +11,18 @@ export default class RobePieChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
-         * {@link http://recharts.org/api#AreaChart}
+         * {@link http://recharts.org/api#PieChart}
          */
         propsOfChart: PropTypes.shape({
-            ...PieChart.PropTypes,
+            ...Chart.PropTypes,
             width: PropTypes.number.isRequired,
             height: PropTypes.number.isRequired,
         }).isRequired,
 
          /**
-         * {@link http://recharts.org/api/#Area}
+         * {@link http://recharts.org/api/#Pie}
          */
 
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
@@ -32,19 +32,19 @@ export default class RobePieChart extends RobeBaseChart {
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <PieChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderPies()}
                 {this.__renderXAxis()}
                 {this.__renderYAxis()}
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </PieChart>
+            </Chart>
         );
     }
     __renderPies(): Object {

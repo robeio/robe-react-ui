@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { AreaChart, Area } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { AreaChart as Chart, Area } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobeAreaChart extends RobeBaseChart {
+export default class AreaChart extends BaseChart {
     /**
      * Properties of the component
      *
@@ -10,14 +10,14 @@ export default class RobeAreaChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
          * {@link http://recharts.org/api#AreaChart}
          */
         propsOfChart: PropTypes.shape({
-            ...AreaChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
          /**
@@ -25,24 +25,24 @@ export default class RobeAreaChart extends RobeBaseChart {
          */
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
             ...Area.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         })).isRequired
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
     render(): Object {
         return (
-            <AreaChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderAreas()}
                 {this.__renderXAxis()}
                 {this.__renderYAxis()}
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </AreaChart>
+            </Chart>
         );
     }
     __renderAreas(): Object {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { RadarChart, Radar, PolarAngleAxis, PolarRadiusAxis, PolarGrid } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { RadarChart as Chart, Radar, PolarAngleAxis, PolarRadiusAxis, PolarGrid } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobeRadarChart extends RobeBaseChart {
+export default class RadarChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -11,13 +11,13 @@ export default class RobeRadarChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
-         * {@link http://recharts.org/api#AreaChart}
+         * {@link http://recharts.org/api#RadarChart}
          */
         propsOfChart: PropTypes.shape({
-            ...RadarChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
          /**
@@ -60,7 +60,7 @@ export default class RobeRadarChart extends RobeBaseChart {
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS,
         propsOfPolarAngleAxis: false,
         propsOfPolarRadiusAxis: false,
         propsOfPolarGrid: false
@@ -68,7 +68,7 @@ export default class RobeRadarChart extends RobeBaseChart {
 
     render(): Object {
         return (
-            <RadarChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderRadars()}
                 {this.__renderPolarAngleAxis()}
                 {this.__renderPolarRadiusAxis()}
@@ -76,7 +76,7 @@ export default class RobeRadarChart extends RobeBaseChart {
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </RadarChart>
+            </Chart>
         );
     }
     __renderRadars(): Object {

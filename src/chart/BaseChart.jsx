@@ -2,7 +2,7 @@ import React, { PropTypes } from "react";
 import { ShallowComponent } from "robe-react-commons";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-export default class RobeBaseChart extends ShallowComponent {
+export default class BaseChart extends ShallowComponent {
 
     /**
      * Properties of the component
@@ -12,7 +12,7 @@ export default class RobeBaseChart extends ShallowComponent {
     static DEFAULT_PROP_OF_TYPES_AXIS: Map = {
 
         /**
-         * {@link http://recharts.org/api/#YAxis}
+         * {@link http://recharts.org/api/#XAxis}
          */
         propsOfXAxis: React.PropTypes.oneOfType([
             PropTypes.shape({

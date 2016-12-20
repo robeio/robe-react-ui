@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react";
-import { LineChart, Line } from "recharts";
-import RobeBaseChart from "./RobeBaseChart";
+import { LineChart as Chart, Line } from "recharts";
+import BaseChart from "./BaseChart";
 
-export default class RobeBarChart extends RobeBaseChart {
+export default class LineChart extends BaseChart {
 
     /**
      * Properties of the component
@@ -11,41 +11,41 @@ export default class RobeBarChart extends RobeBaseChart {
      */
     static propTypes: Map = {
 
-        ...RobeBaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
-        ...RobeBaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
+        ...BaseChart.DEFAULT_PROP_OF_TYPES_AXIS,
+        ...BaseChart.DEFAULT_PROP_OF_GENERAL_COMPONENTS,
         /**
-         * {@link http://recharts.org/api#BarChart}
+         * {@link http://recharts.org/api#LineChart}
          */
         propsOfChart: PropTypes.shape({
-            ...LineChart.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHART
+            ...Chart.PropTypes,
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHART
         }).isRequired,
 
         /**
-        * {@link http://recharts.org/api/#Bar}
+        * {@link http://recharts.org/api/#Line}
         */
 
         propsOfChildrens: PropTypes.arrayOf(PropTypes.shape({
             ...Line.PropTypes,
-            ...RobeBaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
+            ...BaseChart.DEFAULT_PROP_TYPES_OF_CHILDREN
         })).isRequired
     };
 
     static defaultProps = {
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
-        ...RobeBaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_AXIS,
+        ...BaseChart.DEFAULT_PROPS_VALUE_OF_GENERAL_COMPONENTS
     };
 
     render(): Object {
         return (
-            <LineChart {...this.props.propsOfChart}>
+            <Chart {...this.props.propsOfChart}>
                 {this.__renderLines()}
                 {this.__renderXAxis()}
                 {this.__renderYAxis()}
                 {this.__renderToolTip()}
                 {this.__renderCartesianGrid()}
                 {this.__renderLegend()}
-            </LineChart>
+            </Chart>
         );
     }
     __renderLines(): Object {

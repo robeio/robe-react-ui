@@ -206,67 +206,67 @@ class ComponentList {
         });
 
         components.push({
-            header: "RobeAreaChart",
+            header: "AreaChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeAreaChart.json"),
-            sample: require("./samples/charts/RobeAreaChartSample"),
-            code: require("./samples/charts/RobeAreaChartSample.txt")
+            // json: require("./jsons/charts/AreaChart.json"),
+            sample: require("./samples/charts/AreaChartSample"),
+            code: require("./samples/charts/AreaChartSample.txt")
         });
 
         components.push({
-            header: "RobeBarChart",
+            header: "BarChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeBarChart.json"),
-            sample: require("./samples/charts/RobeBarChartSample"),
-            code: require("./samples/charts/RobeBarChartSample.txt")
+            // json: require("./jsons/charts/BarChart.json"),
+            sample: require("./samples/charts/BarChartSample"),
+            code: require("./samples/charts/BarChartSample.txt")
         });
 
         components.push({
-            header: "RobeComposedChart",
+            header: "ComposedChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeComposedChart.json"),
-            sample: require("./samples/charts/RobeComposedChartSample"),
-            code: require("./samples/charts/RobeComposedChartSample.txt")
+            // json: require("./jsons/charts/ComposedChart.json"),
+            sample: require("./samples/charts/ComposedChartSample"),
+            code: require("./samples/charts/ComposedChartSample.txt")
         });
 
         components.push({
-            header: "RobeLineChart",
+            header: "LineChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeLineChart.json"),
-            sample: require("./samples/charts/RobeLineChartSample"),
-            code: require("./samples/charts/RobeLineChartSample.txt")
+            // json: require("./jsons/charts/LineChart.json"),
+            sample: require("./samples/charts/LineChartSample"),
+            code: require("./samples/charts/LineChartSample.txt")
         });
 
         components.push({
-            header: "RobePieChart",
+            header: "PieChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobePieChart.json"),
-            sample: require("./samples/charts/RobePieChartSample"),
-            code: require("./samples/charts/RobePieChartSample.txt")
+            // json: require("./jsons/charts/PieChart.json"),
+            sample: require("./samples/charts/PieChartSample"),
+            code: require("./samples/charts/PieChartSample.txt")
         });
 
         components.push({
-            header: "RobeRadarChart",
+            header: "RadarChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeRadarChart.json"),
-            sample: require("./samples/charts/RobeRadarChartSample"),
-            code: require("./samples/charts/RobeRadarChartSample.txt")
+            // json: require("./jsons/charts/RadarChart.json"),
+            sample: require("./samples/charts/RadarChartSample"),
+            code: require("./samples/charts/RadarChartSample.txt")
         });
 
         components.push({
-            header: "RobeRadialBarChart",
+            header: "RadialBarChart",
             desc: " is a layout chart",
-            // json: require("./jsons/charts/RobeRadialBarChart.json"),
-            sample: require("./samples/charts/RobeRadialBarChartSample"),
-            code: require("./samples/charts/RobeRadialBarChartSample.txt")
+            // json: require("./jsons/charts/RadialBarChart.json"),
+            sample: require("./samples/charts/RadialBarChartSample"),
+            code: require("./samples/charts/RadialBarChartSample.txt")
         });
 
         components.push({
-            header: "RobeScatterChart",
+            header: "ScatterChart",
             desc: " is a layout chart",
             // json: require("./jsons/charts/RobeScatterChart.json"),
-            sample: require("./samples/charts/RobeScatterChartSample"),
-            code: require("./samples/charts/RobeScatterChartSample.txt")
+            sample: require("./samples/charts/ScatterChartSample"),
+            code: require("./samples/charts/ScatterChartSample.txt")
         });
         
         return components;
