@@ -6,7 +6,7 @@ class ComponentList {
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
     getList(): Array {
-        let components = { inputs: [], complex: [], charts: [], complex: [] };
+        let components = { inputs: [], complex: [], charts: [] };
         /* eslint-disable global-require */
         components.inputs.push({
             header: "TextInput",
