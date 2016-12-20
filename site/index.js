@@ -1,21 +1,21 @@
 import React from "react";
-import {render} from "react-dom";
-import {Navbar, Nav, NavItem} from "react-bootstrap";
-import {ShallowComponent} from "robe-react-commons";
+import { render } from "react-dom";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
 import Welcome from "./Welcome";
 import JSDocs from "./JSDocs";
 import "./style.css";
-import {NotFound} from "./error";
+import { NotFound } from "./error";
 
 
 const app = document.getElementById("app");
 
 
 class Site extends ShallowComponent {
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         let path = window.location.hash.substring(1).split("/")[0];
         this.state = {
@@ -23,7 +23,7 @@ class Site extends ShallowComponent {
         };
     }
 
-    render():Object {
+    render(): Object {
         let activePage = Site.getActivePage(this.state.activeKey);
         return (
             <div>
@@ -36,10 +36,12 @@ class Site extends ShallowComponent {
                         />
                     </a>
                     <Navbar.Header>
-                        <img src="./avatar.png" alt="logo"/>
+                        <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
-                            <a style={{cursor:"pointer"}}
-                               onClick={this.__goWelcome}>Robe React UI</a>
+                            <a
+                                style={{ cursor: "pointer" }}
+                                onClick={this.__goWelcome}
+                            >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
@@ -48,15 +50,19 @@ class Site extends ShallowComponent {
                         <NavItem eventKey="JSDocs">JSDocs</NavItem>
                         <NavItem eventKey="About">About</NavItem>
                         <NavItem eventKey="React-Bootstrap">
-                            <img src="https://react-bootstrap.github.io/assets/logo.png"
-                                 alt="rblogo"
-                                 width={18}/> React
+                            <img
+                                src="https://react-bootstrap.github.io/assets/logo.png"
+                                alt="rblogo"
+                                width={18}
+                            /> React
                             Bootstrap
                         </NavItem>
                     </Nav>
                 </Navbar>
-                <div id="activePege"
-                     style={{overflowY:"auto",overflowX:"hidden",height:window.innerHeight-48}}>
+                <div
+                    id="activePege"
+                    style={{ overflowY: "auto", overflowX: "hidden", height: window.innerHeight - 48 }}
+                >
                     {activePage}
                 </div>
             </div>
@@ -67,7 +73,7 @@ class Site extends ShallowComponent {
         this.__onSelect("Welcome");
     }
 
-    __onSelect(key:string) {
+    __onSelect(key: string) {
         Progress.start();
         if (key === "React-Bootstrap") {
             window.open("https://react-bootstrap.github.io/components.html");
@@ -77,13 +83,13 @@ class Site extends ShallowComponent {
 
         let element = document.getElementById("activePege");
         element.scrollTop = 0;
-        
+
         this.setState({
             activeKey: key
         });
     }
 
-    static getActivePage(path:string):Object {
+    static getActivePage(path: string): Object {
         switch (path) {
             case "Components":
                 return (

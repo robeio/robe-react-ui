@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
-import {Grid, Col, ListGroup, ListGroupItem, InputGroup} from "react-bootstrap";
+import { Grid, Col, ListGroup, ListGroupItem, InputGroup, Nav, NavItem } from "react-bootstrap";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import ComponentList from "./ComponentList";
@@ -12,18 +12,19 @@ import FaIcon from "faicon/FaIcon";
 
 export default class Components extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
-            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/TextInput" : window.location.hash.substring(1),
-            filter: ""
+            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/DataGrid" : window.location.hash.substring(1),
+            filter: "",
+            selectedGroup: "complex"
         };
     }
 
-    render():Object {
+    render(): Object {
         let componentDetail;
         let componentMenu = [];
-        let components = ComponentList.getList(this.state, this.__handleChange);
+        let components = ComponentList.getList(this.state, this.__handleChange)[this.state.selectedGroup];
 
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
@@ -35,7 +36,7 @@ export default class Components extends ShallowComponent {
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
-                    >
+                        >
                         {item.header}
                     </ListGroupItem>);
                 if (active) {
@@ -47,7 +48,7 @@ export default class Components extends ShallowComponent {
                             json={item.json}
                             sample={item.sample}
                             code={item.code}
-                        />);
+                            />);
                 }
             }
         }
@@ -56,13 +57,18 @@ export default class Components extends ShallowComponent {
                 <NotificationContainer />
                 <h2>Components</h2>
                 <h5>Here you can find the samples and usages of the components.</h5>
-                <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid",paddingLeft:0 }}>
+                <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid", paddingLeft: 0 }}>
                     <TextInput
                         inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
                         placeholder="Search"
-                    />
+                        />
+                    <Nav bsStyle="tabs" justified activeKey={this.state.selectedGroup} onSelect={this.__onGroupChange}>
+                        <NavItem eventKey="complex" ><FaIcon code="fa-cubes" fixed={false} /> Complex</NavItem>
+                        <NavItem eventKey="inputs" ><FaIcon code="fa-terminal" fixed={false} /> Inputs</NavItem>
+                        <NavItem eventKey="charts" ><FaIcon code="fa-line-chart" fixed={false} /> Charts</NavItem>
+                    </Nav>
                     <ListGroup>{componentMenu}</ListGroup>
                 </Col>
                 <Col xs={12} sm={9} ref="componentView">
@@ -72,13 +78,32 @@ export default class Components extends ShallowComponent {
         );
     }
 
-    __onFilterChange = (e:Object) => {
+    __onGroupChange = (selectedKey: string) => {
+        let selectedComponent;
+        switch (selectedKey) {
+            case "complex": {
+                selectedComponent = "DataGrid";
+            } break;
+            case "inputs": {
+                selectedComponent = "TextInput";
+            } break;
+            case "charts": {
+                selectedComponent = "AreaChart";
+            }
+        }
+        this.setState({
+            selectedGroup: selectedKey,
+            componentSelection: `Components/${selectedComponent}`
+        });
+    };
+
+    __onFilterChange = (e: Object) => {
         this.setState({
             filter: e.target.value
         });
     };
 
-    __onComponenListClick = (e:Object) => {
+    __onComponenListClick = (e: Object) => {
         this.setState({
             componentSelection: `Components/${e.target.text}`
         });

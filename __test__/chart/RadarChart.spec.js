@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { LineChart, Line } from "recharts";
+import { RadarChart as Chart, Radar } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeLineChart from "chart/RobeLineChart";// eslint-disable-line
+import RadarChart from "chart/RadarChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,20 +14,21 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeLineChart", () => {
+describe("chart/RadarChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeLineChart {...props} />// eslint-disable-line
+            <RadarChart {...props} />// eslint-disable-line
         );
     };
 
     it("render", () => {
         let props = { propsOfChart: { width: 600, height: 400, data: data },
-            propsOfChildrens: [{ dataKey: "uv", stroke: "red", fill: "red" }, { dataKey: "pv", stroke: "blue", fill: "blue" }]
+            propsOfChildrens: [{ dataKey: "uv", stroke: "red", fill: "red", fillOpacity: 0.6 }, { dataKey: "pv", stroke: "blue", fill: "blue", fillOpacity: 0.6 }],
+            propsOfPolarAngleAxis: { dataKey: "name" }
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeLineChart).length, 1);
-        chai.assert.equal(wrapper.find(LineChart).length, 1);
-        chai.assert.equal(wrapper.find(Line).length, 2);
+        chai.assert.equal(wrapper.find(RadarChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
+        chai.assert.equal(wrapper.find(Radar).length, 2);
     });
 });

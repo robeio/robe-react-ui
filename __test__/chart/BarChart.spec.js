@@ -1,8 +1,8 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import { AreaChart, Area } from "recharts";
+import { BarChart as Chart, Bar } from "recharts";
 import { mount } from "enzyme";// eslint-disable-line
-import RobeAreaChart from "chart/RobeAreaChart";// eslint-disable-line
+import BarChart from "chart/BarChart";// eslint-disable-line
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
@@ -14,10 +14,10 @@ let data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100, fill: "#ffc658" },
 ];
 
-describe("chart/RobeAreaChart", () => {
+describe("chart/BarChart", () => {
     const getComponent = (props: Object): Object => {
         return (
-            <RobeAreaChart {...props} />// eslint-disable-line
+            <BarChart {...props} />// eslint-disable-line
         );
     };
 
@@ -26,8 +26,8 @@ describe("chart/RobeAreaChart", () => {
             propsOfChildrens: [{ dataKey: "uv", stroke: "red", fill: "red" }, { dataKey: "pv", stroke: "blue", fill: "blue" }]
         };
         let wrapper = mount(getComponent(props));
-        chai.assert.equal(wrapper.find(RobeAreaChart).length, 1);
-        chai.assert.equal(wrapper.find(AreaChart).length, 1);
-        chai.assert.equal(wrapper.find(Area).length, 2);
+        chai.assert.equal(wrapper.find(BarChart).length, 1);
+        chai.assert.equal(wrapper.find(Chart).length, 1);
+        chai.assert.equal(wrapper.find(Bar).length, 2);
     });
 });
