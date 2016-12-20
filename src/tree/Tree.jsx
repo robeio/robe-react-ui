@@ -53,10 +53,10 @@ export default class Tree extends ShallowComponent {
         value: []
     };
 
-    render(): string {
+    render():string {
         if (this.props.items) {
             return (
-                <ul className="tree">
+                <ul className="tree" style={{paddingLeft:10}}>
                     {this.__renderChildren(this.props.items)}
                 </ul>
             );
@@ -65,7 +65,7 @@ export default class Tree extends ShallowComponent {
     }
 
 
-    __renderChildren(items: Array): Array {
+    __renderChildren(items:Array):Array {
         let children = [];
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
@@ -83,13 +83,14 @@ export default class Tree extends ShallowComponent {
         return children;
     }
 
-    onChange(e: Object): boolean {
+    onChange(e:Object):boolean {
         if (this.props.onChange) {
             this.props.onChange(e);
         }
         return true;
     }
-    shouldComponentUpdate(): boolean {
+
+    shouldComponentUpdate():boolean {
         return true;
     }
 }
