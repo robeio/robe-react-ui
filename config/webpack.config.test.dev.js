@@ -1,98 +1,78 @@
-process.argv.slice(4)[0]
-var testFile = null;
-if(process.argv.length > 4) {
-    testFile = process.argv.slice(4)[0];
-}
-
-
-const babelOptions = {
-    presets: [
-        "react",
-        "es2015",
-        "stage-0"
-    ],
-    plugins: ["doc-gen"]
-};
-/**
- * import common webpack settings
- */
-const commonSettings = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src", babelOptions);
-
-/**
- * Json Server
- * @type {config|exports|module.exports}
- */
+const path = require('path');
 const JsonServer = require("./server/JsonServer");
+const Utility = require("./util/Utility");
 
-/**
- * @link https://webpack.github.io/docs/configuration.html#cache
- * Cache generated modules and chunks to improve performance for multiple incremental builds.
- This is enabled by default in watch mode.
- * @type {boolean}
- */
-commonSettings.cache = true;
+const paths = {
+    src: path.join(Utility.projectDir, 'src')
+};
 
-/**
- * @link https://webpack.github.io/docs/configuration.html#debug
- * Switch loaders to debug mode.
- * @type {boolean}
- */
-commonSettings.debug = false;
+const webpackConfig = {
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+        root: paths.src,
+    },
+    devtool: 'inline-source-map',
+    module: {
+        loaders: [
+            {
+                test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.s?css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
+                /**
+                 * @link https://github.com/webpack/json-loader
+                 * npm install json-loader --save-dev
+                 */
+                test: /\.json$/,
+                loader: "json-loader"
+            },
+            {
+                /**
+                 * @link https://github.com/webpack/url-loader
+                 * npm install url-loader --save-dev
+                 */
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+                loader: "url?limit=100000&name=[name].[ext]"
+            }
+        ]
+    },
+    externals: {
+        cheerio: "window",
+        "react/addons": true, // important!!
+        "react/lib/ExecutionEnvironment": true,
+        "react/lib/ReactContext": true
+    }
+};
 
-/**
- * @link https://webpack.github.io/docs/configuration.html#devtool
- * Choose a developer tool to enhance debugging.
- * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
- * @type {string}
- */
-/**
- * @link https://webpack.github.io/docs/configuration.html#devtool
- * Choose a developer tool to enhance debugging.
- * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
- * @type {string}
- */
-commonSettings.devtool = "eval";
-commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
-
-
-commonSettings.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
 const server = new JsonServer(3001, "/application");
 server.route("config/data/testdb.json").upload("/files", "config/data/upload", "files").start();
 
-commonSettings.externals = {
-    cheerio: "window",
-    "react/addons": true, // important!!
-    "react/lib/ExecutionEnvironment": true,
-    "react/lib/ReactContext": true
-};
-
-module.exports = function configure(config) {
-    var conf = {
+module.exports = function (config) {
+    const conf = {
         basePath: "../",
-        colors: true,
-        captureTimeout: 3000,
-        browserDisconnectTimeout: 3000,
-        browserDisconnectTolerance: 1,
-        browserNoActivityTimeout: 60000,
-        browsers: ["Chrome_DEV"],
+        browsers: ["Chrome_travis_ci"],
         singleRun: false,
         frameworks: ["mocha"],
         customLaunchers: {
-            Chrome_DEV: {
+            Chrome_travis_ci: {
                 base: "Chrome",
-                flags: ["--disable-web-security"]
+                flags: ["--no-sandbox"]
             }
         },
         plugins: [
-            "karma-chrome-launcher",
-            "karma-chai",
-            "karma-mocha",
-            "karma-sourcemap-loader",
             "karma-webpack",
-            "karma-mocha-reporter"
+            'karma-mocha',
+            'karma-mocha-reporter',
+            'karma-chrome-launcher',
+            'karma-coverage',
+            "karma-sourcemap-loader"
         ],
-        webpack: commonSettings,
+        webpack: webpackConfig,
         webpackServer: {
             colors: true,
             hash: false,
@@ -104,9 +84,9 @@ module.exports = function configure(config) {
             reasons: false,
             children: false,
             source: false,
-            errors: false,
-            errorDetails: false,
-            warnings: false,
+            errors: true,
+            errorDetails: true,
+            warnings: true,
             publicPath: false
         },
         webpackMiddleware: {
@@ -121,19 +101,11 @@ module.exports = function configure(config) {
             }
         }
     };
-
-    let filePattern = "__test__/index.dev.js";
-    if(testFile) {
-        if(!testFile.startsWith("./__test__") && !testFile.startsWith("__test__") && !testFile.startsWith("/")) {
-            filePattern = "__test__/**/*/"+testFile+".spec.js";
-        } else {
-            filePattern = testFile;
-        }
-    }
+    var filePattern = Utility.getTestPattern(process.argv, "__test__/**/*.spec.js");
     conf.files = [
         filePattern
     ];
     conf.preprocessors = {};
-    conf.preprocessors[filePattern] = ["webpack"];
+    conf.preprocessors[filePattern] = ['webpack'];
     config.set(conf);
 };

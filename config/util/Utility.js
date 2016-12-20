@@ -133,6 +133,23 @@ var Utility = function Utility() {
         }
         return args;
     }.bind(this);
+
+
+    this.getTestPattern = function getTestPattern(args, defaultPattern) {
+        var testFile = null;
+        if(process.argv.length > 4) {
+            testFile = args.slice(4)[0];
+        }
+        let filePattern = defaultPattern;
+        if(testFile) {
+            if(!testFile.startsWith("./__test__") && !testFile.startsWith("__test__") && !testFile.startsWith("/")) {
+                filePattern = "__test__/**/*/"+testFile+".spec.js";
+            } else {
+                filePattern = testFile;
+            }
+        }
+        return filePattern;
+    }.bind(this);
 };
 
 module.exports = new Utility();
