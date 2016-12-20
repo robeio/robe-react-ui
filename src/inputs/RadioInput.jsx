@@ -1,8 +1,9 @@
 import React from "react";
-import { Assertions } from "robe-react-commons";
-import { FormGroup, ControlLabel } from "react-bootstrap";
+import {Assertions} from "robe-react-commons";
+import {FormGroup, ControlLabel} from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
+import "./RadioInput.css"
 /**
  * An Input Component which acts as a radio input.
  * @export
@@ -70,8 +71,8 @@ export default class RadioInput extends ValidationComponent {
          */
         horizontal: React.PropTypes.bool,
         /**
-        *Defines the display style of the Validation message.
-        */
+         *Defines the display style of the Validation message.
+         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
@@ -95,15 +96,19 @@ export default class RadioInput extends ValidationComponent {
      * render
      * @returns {string}
      **/
-    render(): Object {
+    render():Object {
         this._value = this.props.value;
         let inlineClass = this.props.inline || this.props.horizontal ? "form-inline" : undefined;
         return super.wrapComponent(
             (
                 <FormGroup >
                     <ControlLabel> {this.props.label} </ControlLabel>
-                    < div className={"form-control " + inlineClass} style={{ height: "auto" }}>
-                        <div style={{ minHeight: "34px", paddingTop: this.props.horizontal ? "6px" : "6px" }}>{this.__createRadioBoxes(this.props.items)}</div>
+                    <div className={"form-control " + inlineClass}
+                         style={{ height: "auto" }}>
+                        <div
+                            style={{ minHeight: "22px", paddingTop: 0 }}>
+                            {this.__createRadioBoxes(this.props.items)}
+                        </div>
                     </div>
                 </FormGroup>
             )
@@ -114,9 +119,9 @@ export default class RadioInput extends ValidationComponent {
      *
      * @param items
      * @returns {Array}
-                * @private
+     * @private
      */
-    __createRadioBoxes(items: Array<Map>): Array {
+    __createRadioBoxes(items:Array<Map>):Array {
         let components = null;
         if (Assertions.isArray(items)) {
             components = [];
@@ -133,9 +138,9 @@ export default class RadioInput extends ValidationComponent {
      *
      * @param item
      * @returns {Object}
-                    * @private
+     * @private
      */
-    __createRadioBox(item: Map): Object {
+    __createRadioBox(item:Map):Object {
         if (!item) {
             return "item cannot be undefined, please check your name";
         }
@@ -150,7 +155,7 @@ export default class RadioInput extends ValidationComponent {
                 name={this.props.name}
                 value={value}
                 disabled={!isChecked}
-                />
+            />
         ) : undefined;
 
         let onClick = this.__onClick.bind(this, value);
@@ -159,8 +164,8 @@ export default class RadioInput extends ValidationComponent {
                 <label
                     htmlFor={this.props.name}
                     style={{ paddingLeft: "2px" }}
-                    >
-                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"} />
+                >
+                    <FaIcon code={`${icon} state-icon`} size={"fa-lg"}/>
                 </label> {text}
                 {input}
             </div>
@@ -171,13 +176,13 @@ export default class RadioInput extends ValidationComponent {
      * Returns whether it is selected or not.
      * @returns true if selected.
      */
-    isChecked = (key: string): boolean => {
+    isChecked = (key:string):boolean => {
         let isValueNotEmpty = this._value && this._value.length > 0;
         return isValueNotEmpty && (typeof key === "undefined" ?
             key !== this._value : true);
     };
 
-    getValue(): Object {
+    getValue():Object {
         return this._value;
     }
 
@@ -185,10 +190,10 @@ export default class RadioInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    __onClick(value: Object): Object {
+    __onClick(value:Object):Object {
         let result = true;
         if (this.props.onChange) {
-            let e = { target: { value: value, name: this.props.name } };
+            let e = {target: {value: value, name: this.props.name}};
             result = this.props.onChange(e);
         }
         return result;

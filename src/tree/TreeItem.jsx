@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
-import { ControlLabel } from "react-bootstrap";
+import {ControlLabel} from "react-bootstrap";
 import Tree from "./Tree";
 
 import "./Tree.css";
@@ -40,7 +40,7 @@ export default class TreeItem extends ShallowComponent {
         /**
          * Checked items array.
          */
-        value: React.PropTypes.array,
+        value: React.PropTypes.array
 
     };
 
@@ -48,10 +48,11 @@ export default class TreeItem extends ShallowComponent {
         textField: "text",
         valueField: "code",
         childrenField: "children",
-        value: []
+        value: [],
+        root: false
     };
 
-    render(): string {
+    render():string {
         let item = this.props.item;
         return (
             <li>
@@ -68,20 +69,20 @@ export default class TreeItem extends ShallowComponent {
         );
     }
 
-    __getItemRenderer(props: Object): Object {
+    __getItemRenderer(props:Object):Object {
         return this.props.itemRenderer ?
             this.props.itemRenderer(props) :
             <ControlLabel>{this.props.item[this.props.textField]}</ControlLabel>;
     }
 
-    onChange(e: Object): boolean {
+    onChange(e:Object):boolean {
         if (this.props.onChange) {
             this.props.onChange(e);
         }
         return true;
     }
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate():boolean {
         return true;
     }
 }
