@@ -4,6 +4,7 @@
 * was update RadioInput css.
 * was update Tree style.
 * chart api added.
+* CheckTree bugs fixed. (textField, valueField, childrenValue forwarding).
 
 
 ## 1.1.4 
