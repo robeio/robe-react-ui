@@ -1,5 +1,4 @@
 import React from "react";
-import Dom from "react-dom";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import momentjs from "moment";
 import is from "is-js";
@@ -106,9 +105,7 @@ export default class DateInput extends ShallowComponent {
         DateInput.idCounter++;
         this.state = {
             open: false,
-            value: this.props.value,
-            selectionStart: undefined,
-            selectionEnd: undefined
+            value: this.props.value
         };
         if (momentjs(this.props.value).isValid() && this.props.value !== "" && this.props.value !== undefined) {
             this.isPartial = false;
@@ -123,7 +120,7 @@ export default class DateInput extends ShallowComponent {
      * @returns
      */
     render():Object {
-        let parsedValue;
+        let parsedValue = "";
         let value = this.state.value;
 
         if (this.isPartial) {
@@ -132,7 +129,8 @@ export default class DateInput extends ShallowComponent {
             parsedValue = momentjs(value).format(this.props.format);
         } else if (this.__checkPartialRegex(value)) {
             parsedValue = momentjs(value, this.props.format).format(this.props.format);
-            value = momentjs(value, this.props.format);
+            if (value)
+                value = momentjs(value, this.props.format);
         }
 
         let overlayValue;
@@ -271,11 +269,11 @@ export default class DateInput extends ShallowComponent {
         e.target.name = this.props.name;
 
         if (!this.validChars.test(value) || !this.__checkPartialRegex(value)) {
+            // Do not take input if maxlength exeeded or invalid char entered.
             this.setState({
                 color: "#a94442"
             });
-            return true;
-        } else if (this.props.onChange) {
+        } else if (this.props.onChange && value.length <= this.props.format.length) {
             this.setState({
                 color: undefined
             });
@@ -287,6 +285,8 @@ export default class DateInput extends ShallowComponent {
                     open: false,
                     value: e.target.value
                 });
+                if (e.target.value === "")
+                    this.props.onChange(e);
                 return;
             }
             result = this.props.onChange(e);
