@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.5 Developing
+## 1.1.6 Developing
+
+## 1.1.5 
 * was update RadioInput css.
 * was update Tree style.
 * chart api added.
