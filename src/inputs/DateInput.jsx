@@ -175,6 +175,10 @@ export default class DateInput extends ShallowComponent {
     }
 
     __onKeyDown(e) {
+        if (!(e.key === "ArrowUp" || e.key === "ArrowDown")) {
+            return;
+        }
+        e.preventDefault();
 
         let value = this.state.value;
         if (!value)
@@ -210,42 +214,33 @@ export default class DateInput extends ShallowComponent {
         }
 
         if (e.key === "ArrowUp") {
-            e.preventDefault();
-            valueParts[partIndex] = (parseInt(valueParts[partIndex]) + 1).toString();
+            let tempValue = parseInt(valueParts[partIndex]) + 1;
+            valueParts[partIndex] = tempValue < 10 ? '0' + tempValue : tempValue.toString();
         }
         else if (e.key === "ArrowDown") {
-            e.preventDefault();
             let tempValue = parseInt(valueParts[partIndex]) - 1;
-            valueParts[partIndex] = (tempValue <= 0 ? "01" : tempValue).toString();
-        } else {
-            this.setState({selectionStart: undefined, selectionEnd: undefined});
-            return;
+            valueParts[partIndex] = tempValue < 10 ? '0' + tempValue : tempValue.toString();
         }
         value = valueParts.join(this.separator);
         let valid = momentjs(value, this.props.format).format(this.props.format);
 
         if (!this.__checkPartialRegex(value) || valid === "Invalid date") {
-            this.setState({selectionStart: undefined, selectionEnd: undefined});
             return;
         }
         this.setState({
             value: value,
-            selectionStart: selectionStart,
-            selectionEnd: selectionEnd,
             open: false
         });
-
         e.target.parsedValue = momentjs(value, this.props.format).toDate().getTime();
         e.target.value = value;
         if (this.props.onChange)
             this.props.onChange(e);
+
+        e.target.selectionStart = selectionStart;
+        e.target.selectionEnd = selectionEnd;
     }
 
     __onKeyUp(e) {
-        if (this.state.selectionStart != undefined && this.state.selectionEnd != undefined) {
-            e.target.selectionStart = this.state.selectionStart;
-            e.target.selectionEnd = this.state.selectionEnd;
-        }
     }
 
     /**
@@ -297,8 +292,7 @@ export default class DateInput extends ShallowComponent {
             result = this.props.onChange(e);
         }
         this.setState({
-            open: false,
-            value: e.target.value
+            open: false
         });
 
         if (!result) {
