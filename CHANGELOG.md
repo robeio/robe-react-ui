@@ -8,6 +8,7 @@
     * textField, valueField, childrenValue props forwarding.
     * parent selection duplicate child state fixed.
 * Added Single File Test Support & Test Debuging.
+* Showcase url-state sync fixed.
 
 ## 1.1.4 
 * fixed style in site

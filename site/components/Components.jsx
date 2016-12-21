@@ -15,7 +15,7 @@ export default class Components extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/DataGrid" : window.location.hash.substring(1),
+            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/complex/DataGrid" : window.location.hash.substring(1),
             filter: "",
             selectedGroup: "complex"
         };
@@ -24,15 +24,16 @@ export default class Components extends ShallowComponent {
     render(): Object {
         let componentDetail;
         let componentMenu = [];
-        let components = ComponentList.getList(this.state, this.__handleChange)[this.state.selectedGroup];
+        let selectedGroup = window.location.hash.split("/")[1] || this.state.selectedGroup;
+        let components = ComponentList.getList(this.state, this.__handleChange)[selectedGroup];
 
         for (let i = 0; i < components.length; i++) {
             let item = components[i];
-            let active = this.state.componentSelection === `Components/${item.header}`;
+            let active = this.state.componentSelection === `Components/${selectedGroup}/${item.header}`;
             if (item.header.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1) {
                 componentMenu.push(
                     <ListGroupItem
-                        href={`#Components/${item.header}`}
+                        href={`#Components/${selectedGroup}/${item.header}`}
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
@@ -64,14 +65,14 @@ export default class Components extends ShallowComponent {
                         value={this.state.filter}
                         placeholder="Search"
                         />
-                    <Nav bsStyle="tabs" justified activeKey={this.state.selectedGroup} onSelect={this.__onGroupChange}>
+                    <Nav bsStyle="tabs" justified activeKey={selectedGroup} onSelect={this.__onGroupChange}>
                         <NavItem eventKey="complex" ><FaIcon code="fa-cubes" fixed={false} /> Complex</NavItem>
                         <NavItem eventKey="inputs" ><FaIcon code="fa-terminal" fixed={false} /> Inputs</NavItem>
                         <NavItem eventKey="charts" ><FaIcon code="fa-line-chart" fixed={false} /> Charts</NavItem>
                     </Nav>
                     <ListGroup>{componentMenu}</ListGroup>
                 </Col>
-                <Col xs={12} sm={9} ref="componentView">
+                <Col xs={12} sm={9}>
                     {componentDetail}
                 </Col>
             </Grid>
@@ -89,11 +90,13 @@ export default class Components extends ShallowComponent {
             } break;
             case "charts": {
                 selectedComponent = "AreaChart";
-            }
+            } break;
+            default:
         }
+        window.location.hash = `Components/${selectedKey}/${selectedComponent}`;
         this.setState({
             selectedGroup: selectedKey,
-            componentSelection: `Components/${selectedComponent}`
+            componentSelection: `Components/${selectedKey}/${selectedComponent}`
         });
     };
 
@@ -105,8 +108,9 @@ export default class Components extends ShallowComponent {
 
     __onComponenListClick = (e: Object) => {
         this.setState({
-            componentSelection: `Components/${e.target.text}`
+            componentSelection: `Components/${this.state.selectedGroup}/${e.target.text}`
         });
         Progress.start();
     };
+
 }
