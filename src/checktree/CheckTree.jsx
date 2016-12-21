@@ -70,7 +70,7 @@ export default class CheckTree extends ShallowComponent {
                     valueField={this.props.valueField}
                     onChange={this.__onChange}
                     itemRenderer={CheckTree.itemRenderer}
-                />
+                    />
             </div>
         );
     }
@@ -108,6 +108,7 @@ export default class CheckTree extends ShallowComponent {
             values.push(value);
             let selected = this.__getChildrenValues(value);
             values = values.concat(selected);
+            values = CheckTree.filterDuplicates(values);
         } else {
             value = e.target.oldValue[0];
             Arrays.remove(values, value);
@@ -124,6 +125,19 @@ export default class CheckTree extends ShallowComponent {
             this.props.onChange(values);
         }
     };
+    static filterDuplicates(src: Array): Array {
+        let sorted = src.slice().sort();
+        let result = [];
+        if (sorted[0] !== undefined) {
+            result.push(sorted[0]);
+        }
+        for (let i = 1; i < sorted.length; i++) {
+            if (sorted[i] !== sorted[i - 1]) {
+                result.push(sorted[i]);
+            }
+        }
+        return result;
+    }
 
     __getChildrenValues(selectedValue: any): Array {
         let selectedChildren = [];
