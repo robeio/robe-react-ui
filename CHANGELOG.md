@@ -8,6 +8,8 @@
     * textField, valueField, childrenValue props forwarding.
     * parent selection duplicate child state fixed.
 * Added Single File Test Support & Test Debuging.
+* Auto increment feature added to DateInput
+
 
 ## 1.1.4 
 * fixed style in site

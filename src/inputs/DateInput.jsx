@@ -1,8 +1,9 @@
 import React from "react";
+import Dom from "react-dom";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import momentjs from "moment";
 import is from "is-js";
-import { Popover, Overlay, InputGroup } from "react-bootstrap";
+import {Popover, Overlay, InputGroup} from "react-bootstrap";
 import Input from "./BaseInput";
 import DatePicker from "./datepicker/DatePicker";
 import FaIcon from "../faicon/FaIcon";
@@ -21,7 +22,7 @@ export default class DateInput extends ShallowComponent {
      *
      * @static
      */
-    static propTypes: Map = {
+    static propTypes:Map = {
         /**
          * Label for the form control.
          */
@@ -71,8 +72,8 @@ export default class DateInput extends ShallowComponent {
          */
         maxDate: React.PropTypes.number,
         /**
-        *Defines the display style of the Validation message.
-        */
+         *Defines the display style of the Validation message.
+         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
@@ -99,13 +100,15 @@ export default class DateInput extends ShallowComponent {
     validChars;
     separator;
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         this.id = `DatePicker-${DateInput.idCounter}`;
         DateInput.idCounter++;
         this.state = {
             open: false,
-            value: this.props.value
+            value: this.props.value,
+            selectionStart: undefined,
+            selectionEnd: undefined
         };
         if (momentjs(this.props.value).isValid() && this.props.value !== "" && this.props.value !== undefined) {
             this.isPartial = false;
@@ -119,30 +122,30 @@ export default class DateInput extends ShallowComponent {
      *
      * @returns
      */
-    render(): Object {
+    render():Object {
         let parsedValue;
         let value = this.state.value;
+
         if (this.isPartial) {
             parsedValue = "Invalid date";
         } else if (is.number(value)) {
             parsedValue = momentjs(value).format(this.props.format);
-        } else {
+        } else if (this.__checkPartialRegex(value)) {
             parsedValue = momentjs(value, this.props.format).format(this.props.format);
             value = momentjs(value, this.props.format);
         }
+
         let overlayValue;
         if (parsedValue === "Invalid date" || this.isPartial) {
             parsedValue = value;
         } else {
             overlayValue = value === "" ? undefined : value;
         }
-
-        /* eslint-disable no-unused-vars */
-        let { format, locale, minDate, maxDate, ...newProps } = this.props;
+        let {format, locale, minDate, maxDate, ...newProps} = this.props;
         return (
             <div>
-                <Overlay show={this.state.open} placement="bottom" target={document.getElementById(this.id)} >
-                    <Popover id="popover" >
+                <Overlay show={this.state.open} placement="bottom" target={document.getElementById(this.id)}>
+                    <Popover id="popover">
                         <DatePicker
                             onChange={this.__onChangeDatePicker}
                             onSelect={this.__onClick}
@@ -161,19 +164,95 @@ export default class DateInput extends ShallowComponent {
                     ref={DateInput.refName}
                     placeholder={this.props.format}
                     value={parsedValue}
+                    onKeyDown={this.__onKeyDown}
+                    onKeyUp={this.__onKeyUp}
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon onClick={this.__onClick} ><FaIcon code="fa-calendar" /></InputGroup.Addon>}
-                    />
+                />
             </div>
         );
+    }
+
+    __onKeyDown(e) {
+
+        let value = this.state.value;
+        if (!value)
+            return;
+        if (is.number(value)) {
+            value = momentjs(value).format(this.props.format);
+        } else {
+            value = momentjs(value, this.props.format).format(this.props.format);
+        }
+        if (!isNaN(value) || !this.__checkPartialRegex(value)) {
+            return;
+        }
+
+        let selectionStart = e.target.selectionStart;
+        let selectionEnd;
+
+        let formatParts = this.props.format.split(this.separator);
+        let valueParts = value.split(this.separator);
+
+        let temp = "";
+        let oldTemp = "";
+        let partIndex = 0;
+        for (let i = 0; i < formatParts.length; i++) {
+            let item = formatParts[i];
+            oldTemp = temp;
+            temp += "/" + item;
+            if (selectionStart < temp.length) {
+                partIndex = i;
+                selectionStart = oldTemp.length;
+                selectionEnd = temp.length - 1;
+                break;
+            }
+        }
+
+        if (e.key === "ArrowUp") {
+            e.preventDefault();
+            valueParts[partIndex] = (parseInt(valueParts[partIndex]) + 1).toString();
+        }
+        else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            let tempValue = parseInt(valueParts[partIndex]) - 1;
+            valueParts[partIndex] = (tempValue <= 0 ? "01" : tempValue).toString();
+        } else {
+            this.setState({selectionStart: undefined, selectionEnd: undefined});
+            return;
+        }
+        value = valueParts.join(this.separator);
+        let valid = momentjs(value, this.props.format).format(this.props.format);
+
+        if (!this.__checkPartialRegex(value) || valid === "Invalid date") {
+            this.setState({selectionStart: undefined, selectionEnd: undefined});
+            return;
+        }
+        this.setState({
+            value: value,
+            selectionStart: selectionStart,
+            selectionEnd: selectionEnd,
+            open: false
+        });
+
+        e.target.parsedValue = momentjs(value, this.props.format).toDate().getTime();
+        e.target.value = value;
+        if (this.props.onChange)
+            this.props.onChange(e);
+    }
+
+    __onKeyUp(e) {
+        if (this.state.selectionStart != undefined && this.state.selectionEnd != undefined) {
+            e.target.selectionStart = this.state.selectionStart;
+            e.target.selectionEnd = this.state.selectionEnd;
+        }
     }
 
     /**
      * Returns the validity of the value.
      * @return true - value is valid, false - invalid
      */
-    isValid(): boolean {
+    isValid():boolean {
         return this.refs[DateInput.refName].isValid();
     }
 
@@ -183,24 +262,24 @@ export default class DateInput extends ShallowComponent {
      * isValid = Array.length != 0
      * @param value
      */
-    validate(value: any): Array<string> {
+    validate(value:any):Array<string> {
         return this.refs[DateInput.refName].validate(value);
     }
 
     /**
-    * Internal onchange handler for filtering numerics.
-    */
-    __onChange(e: Object): boolean {
+     * Internal onchange handler for filtering numerics.
+     */
+    __onChange(e:Object):boolean {
         let result = true;
         let value = this.__formatString(e.target.value);
         e.target.value = value;
         e.target.name = this.props.name;
 
-        if (!this.validChars.test(value) || !this.__checkPartialRegex(value) || value.length > this.props.format.length) {
-            // Do not take input if maxlength exeeded or invalid char entered.
+        if (!this.validChars.test(value) || !this.__checkPartialRegex(value)) {
             this.setState({
                 color: "#a94442"
             });
+            return true;
         } else if (this.props.onChange) {
             this.setState({
                 color: undefined
@@ -218,7 +297,8 @@ export default class DateInput extends ShallowComponent {
             result = this.props.onChange(e);
         }
         this.setState({
-            open: false
+            open: false,
+            value: e.target.value
         });
 
         if (!result) {
@@ -228,7 +308,7 @@ export default class DateInput extends ShallowComponent {
         return result;
     }
 
-    __formatString(value: string): string {
+    __formatString(value:string):string {
         let format = this.props.format;
         let dayAtLeft = format.indexOf("DD") === 0;
         value = value.split(this.separator).join("");
@@ -249,46 +329,58 @@ export default class DateInput extends ShallowComponent {
         return newValue.join("");
     }
 
-    __checkPartialRegex(value: string): boolean {
+    __checkPartialRegex(value:string):boolean {
         let formatParts = this.props.format.split(this.separator);
         let valueParts = value.split(this.separator);
-        let valueIndex = 0;
+        let minDate = momentjs(this.props.minDate).format(this.props.format);
+        let maxDate = momentjs(this.props.maxDate).format(this.props.format);
+        let minParts = minDate.split(this.separator);
+        let maxParts = maxDate.split(this.separator);
+
         for (let i = 0; i < 3; i++) {
             switch (formatParts[i]) {
-                case "DD": {
-                    let day = value.substring(valueIndex, valueIndex + 2);
-                    if (parseInt(day, 10) > 31) {
-                        return false;
+                case "DD":
+                {
+                    let day = valueParts[i];
+                    if (parseInt(day, 10) > 31 || parseInt(day, 10) < 1) {
+                        if (day.length >= 2)
+                            return false;
                     }
-                    valueIndex += 3;
                     break;
                 }
-                case "MM": {
-                    let month = value.substring(valueIndex, valueIndex + 2);
-                    if (parseInt(month, 10) > 12) {
-                        return false;
-                    } valueIndex += 3;
+                case "MM":
+                {
+                    let month = valueParts[i];
+                    if (parseInt(month, 10) > 12 || parseInt(month, 10) < 1) {
+                        if (month.length >= 2)
+                            return false;
+                    }
                     break;
                 }
-                case "YYYY": {
-                    let year = value.substring(valueIndex, valueIndex + 4);
-                    year = parseInt(year, 10);
-                    valueIndex += 5;
+                case "YYYY":
+                {
+                    let year = valueParts[i];
+                    let minYear = minParts[i];
+                    let maxYear = maxParts[i];
+                    if (parseInt(year, 10) > parseInt(maxYear, 10) || parseInt(year, 10) < parseInt(minYear, 10)) {
+                        if (year.length >= minYear.length)
+                            return false;
+                    }
                     break;
                 }
                 default:
             }
         }
         return true;
-        // Check day and month boundaries;
     }
 
-    __onClick(e: Object) {
+    __onClick(e:Object) {
         this.setState({
             open: !this.state.open
         });
     }
-    __onChangeDatePicker(newMoment: Object) {
+
+    __onChangeDatePicker(newMoment:Object) {
         this.refs[DateInput.refName].focus();
         this.setState({
             color: undefined
@@ -306,7 +398,7 @@ export default class DateInput extends ShallowComponent {
         }
     }
 
-    __hidePicker(e: Object) {
+    __hidePicker(e:Object) {
         let target = e.target;
         if (this.state.open) {
             try {
@@ -326,7 +418,7 @@ export default class DateInput extends ShallowComponent {
         }
     }
 
-    __findSeparator(): String {
+    __findSeparator():String {
         let format = this.props.format;
         for (let i = 0; i < format.length; i++) {
             let ch = format.charAt(i);
@@ -337,12 +429,11 @@ export default class DateInput extends ShallowComponent {
         throw String("Format is invalid.");
     }
 
-    componentWillReceiveProps(nextProps: Object) {
+    componentWillReceiveProps(nextProps:Object) {
         this.setState({
             value: nextProps.value
         });
     }
-
 
 
     componentDidMount() {
