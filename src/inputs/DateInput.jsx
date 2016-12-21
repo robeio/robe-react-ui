@@ -122,7 +122,6 @@ export default class DateInput extends ShallowComponent {
     render():Object {
         let parsedValue = "";
         let value = this.state.value;
-
         if (this.isPartial) {
             parsedValue = "Invalid date";
         } else if (is.number(value)) {
@@ -137,7 +136,10 @@ export default class DateInput extends ShallowComponent {
         if (parsedValue === "Invalid date" || this.isPartial) {
             parsedValue = value;
         } else {
-            overlayValue = value === "" ? undefined : value;
+            overlayValue = value === "" ? undefined : parsedValue;
+        }
+        if (!is.number(overlayValue)) {
+            overlayValue = momentjs(overlayValue, this.props.format, true).toDate().getTime();
         }
         let {format, locale, minDate, maxDate, ...newProps} = this.props;
         return (
