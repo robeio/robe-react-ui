@@ -201,6 +201,13 @@ class ComponentList {
             code: require("./samples/toast/ToastSample.txt")
         });
 
+        components.complex.push({
+            header: "ReCaptcha",
+            desc: "ReCaptcha",
+            sample: require("./samples/recaptcha/ReCaptchaSample"),
+            code: require("./samples/recaptcha/ReCaptchaSample.txt")
+        });
+
         components.charts.push({
             header: "AreaChart",
             desc: " is a layout chart",
