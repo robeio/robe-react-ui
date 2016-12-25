@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import { ComposedChart } from "robe-react-ui/lib/chart";
+import ComposedChart from "robe-react-ui/lib/chart/ComposedChart";
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },

@@ -1,6 +1,6 @@
 import React from "react";
 import { ShallowComponent } from "robe-react-commons";
-import { LineChart } from "robe-react-ui/lib/chart";
+import LineChart from "robe-react-ui/lib/chart/LineChart";
 
 let data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400, fill: "#8884d8" },
