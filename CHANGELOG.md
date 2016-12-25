@@ -3,6 +3,9 @@
 ## 1.1.6 Developing
 * Bug fixed in DateInput
 * ReCaptcha component added.
+* added **RadiusGroup** element
+* added **ThumbnailGroup** and **ThumbnailItem**
+* added **EventLayout** element.
 
 ## 1.1.5 
 * was update RadioInput css.
