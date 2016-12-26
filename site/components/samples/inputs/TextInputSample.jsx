@@ -34,9 +34,9 @@ export default class TextInputSample extends ShallowComponent {
                 />
                 <TextInput
                     label="With Validations Overlay"
-                    name="TextInputValidations"
+                    name="TextInputValidationsOverlay"
                     validationDisplay="overlay"
-                    value={this.state.TextInputValidations}
+                    value={this.state.TextInputValidationsOverlay}
                     onChange={this.__handleChange}
                     validations={{
                         required: true,

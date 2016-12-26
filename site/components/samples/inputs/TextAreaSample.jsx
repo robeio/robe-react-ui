@@ -23,7 +23,7 @@ export default class TextAreaSample extends ShallowComponent {
                 />
                 <TextArea
                     label="With Validations"
-                    name=""
+                    name="TextAreaValidations"
                     value={this.state.TextAreaValidations}
                     onChange={this.__handleChange}
                     validations={{
