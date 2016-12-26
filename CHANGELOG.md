@@ -3,6 +3,7 @@
 ## 1.1.6 Developing
 * Bug fixed in DateInput
 * ReCaptcha component added.
+* Bug fixed in CheckTree
 
 ## 1.1.5 
 * was update RadioInput css.
