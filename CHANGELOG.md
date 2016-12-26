@@ -7,6 +7,9 @@
 * added **ThumbnailGroup** and **ThumbnailItem**
 * added **EventLayout** element.
 * Bug fixed in CheckTree
+* The Action Buttons style in DataGrid has been fixed
+
+
 
 ## 1.1.5 
 * was update RadioInput css.
