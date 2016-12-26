@@ -9,6 +9,7 @@
 * Bug fixed in CheckTree
 * The Action Buttons style in DataGrid has been fixed
 * GoogleMap component added.
+* zoom prop added to GoogleMap sample
 
 ## 1.1.5 
 * was update RadioInput css.

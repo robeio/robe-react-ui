@@ -9,6 +9,8 @@ import "./GoogleMap.css";
 export default class BounceMarker extends ShallowComponent {
 
     static propTypes = {
+        lat: React.PropTypes.number.isRequired,
+        lng: React.PropTypes.number.isRequired,
         description: React.PropTypes.string,
         inputType: React.PropTypes.oneOf(["textInput", "textArea", "none"]),
         inputStyle: React.PropTypes.object,

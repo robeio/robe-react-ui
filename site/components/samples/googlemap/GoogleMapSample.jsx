@@ -16,7 +16,7 @@ export default class GoogleMapSample extends ShallowComponent {
         this.state = {
             center: {lat: 41.017224, lng: 28.949146},
             selectedCenter: {lat: 41.017224, lng: 28.949146},
-            zoom: 10
+            zoom: 11
         };
     }
 
@@ -35,6 +35,7 @@ export default class GoogleMapSample extends ShallowComponent {
                             apiParams: this.state.apiParams,
                             onPlacesChanged: this.__onSearchBoxPlaceChange}}
                         options={this.__createMapOptions()}
+                        zoom={this.state.zoom}
                         onClick={this.__onMapClick}
                         onGoogleApiLoaded={this.__onApiLoaded}
                         yesIWantToUseGoogleMapApiInternals
@@ -112,7 +113,7 @@ export default class GoogleMapSample extends ShallowComponent {
                 lat: places[0].geometry.location.lat(),
                 lng: places[0].geometry.location.lng()
             },
-            zoom: 15
+            zoom: 13
         });
     };
 
