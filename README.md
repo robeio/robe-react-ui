@@ -24,6 +24,7 @@ UI components built on top of [React-Bootstrap](https://react-bootstrap.github.i
 * [React-Bootstrap](https://react-bootstrap.github.io/) for ui components
 * [Recharts](http://recharts.org/) for ui chart components
 * [Recaptcha](https://github.com/appleboy/react-recaptcha) for ui reCAPTCHA component
+* [GoogleMap](https://github.com/istarkov/google-map-react) for ui GoogleMap component
 * [Enzyme](https://github.com/airbnb/enzyme) for ui testing
 * [Open-Color]
 
