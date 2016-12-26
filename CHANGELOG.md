@@ -7,6 +7,7 @@
 * added **ThumbnailGroup** and **ThumbnailItem**
 * added **EventLayout** element.
 * Bug fixed in CheckTree
+* The Action Buttons style in DataGrid has been fixed
 * GoogleMap component added.
 
 ## 1.1.5 
