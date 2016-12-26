@@ -208,6 +208,13 @@ class ComponentList {
             code: require("./samples/recaptcha/ReCaptchaSample.txt")
         });
 
+        components.complex.push({
+            header: "GoogleMap",
+            desc: "is a wrapper component for GoogleMaps API",
+            sample: require("./samples/googlemap/GoogleMapSample"),
+            code: require("./samples/googlemap/GoogleMapSample.txt")
+        });
+
         components.charts.push({
             header: "AreaChart",
             desc: " is a layout chart",
