@@ -1,21 +1,21 @@
 import React from "react";
-import {render} from "react-dom";
-import {Navbar, Nav, NavItem, Button} from "react-bootstrap";
-import {ShallowComponent} from "robe-react-commons";
+import { render } from "react-dom";
+import { Navbar, Nav, NavItem, Button } from "react-bootstrap";
+import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
 import Welcome from "./Welcome";
 import JSDocs from "./JSDocs";
 import "./style.css";
-import {NotFound} from "./error";
+import { NotFound } from "./error";
 
 
 const app = document.getElementById("app");
 
 
 class Site extends ShallowComponent {
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         let path = window.location.hash.substring(1).split("/")[0];
         this.state = {
@@ -23,7 +23,7 @@ class Site extends ShallowComponent {
         };
     }
 
-    render():Object {
+    render(): Object {
         let activePage = Site.getActivePage(this.state.activeKey);
         return (
             <div>
@@ -36,10 +36,11 @@ class Site extends ShallowComponent {
                         />
                     </a>
                     <Navbar.Header>
-                        <Navbar.Toggle style={{float:"left",marginLeft:10}}/>
-                        <img src="./avatar.png" alt="logo"/>
+                        <Navbar.Toggle style={{ float: "left", marginLeft: 10 }} />
+                        <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
                             <a
+                                href="#Welcome"
                                 style={{ cursor: "pointer" }}
                                 onClick={this.__goWelcome}
                             >Robe React UI</a>
@@ -47,12 +48,12 @@ class Site extends ShallowComponent {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav
-                            style={{marginTop:0}}
+                            style={{ marginTop: 0 }}
                             activeKey={this.state.activeKey}
-                            onSelect={this.__onSelect}>
+                            onSelect={this.__onSelect}
+                        >
                             <NavItem eventKey="Components">Components</NavItem>
                             <NavItem eventKey="Docs">Docs</NavItem>
-                            <NavItem eventKey="JSDocs">JSDocs</NavItem>
                             <NavItem eventKey="About">About</NavItem>
                             <NavItem eventKey="React-Bootstrap">
                                 <img
@@ -62,12 +63,15 @@ class Site extends ShallowComponent {
                                 /> React
                                 Bootstrap
                             </NavItem>
+                            <NavItem eventKey="Recharts" className="re-charts">
+                                {"<Recharts />"}
+                            </NavItem>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 <div
                     id="activePege"
-                    style={{ overflowY: "auto", overflowX: "hidden", height: window.innerHeight-48}}
+                    style={{ overflowY: "auto", overflowX: "hidden", height: window.innerHeight - 48 }}
                 >
                     {activePage}
                 </div>
@@ -79,10 +83,14 @@ class Site extends ShallowComponent {
         this.__onSelect("Welcome");
     }
 
-    __onSelect(key:string) {
+    __onSelect(key: string) {
         Progress.start();
         if (key === "React-Bootstrap") {
             window.open("https://react-bootstrap.github.io/components.html");
+            return;
+        }
+        if (key === "Recharts") {
+            window.open("http://recharts.org/");
             return;
         }
         window.location.hash = `#${key}`;
@@ -95,7 +103,7 @@ class Site extends ShallowComponent {
         });
     }
 
-    static getActivePage(path:string):Object {
+    static getActivePage(path: string): Object {
         switch (path) {
             case "Components":
                 return (
