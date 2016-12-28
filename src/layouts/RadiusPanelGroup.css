@@ -1,0 +1,44 @@
+.rb-list-radius-group {
+    padding-left: 0;
+}
+.rb-list-radius-group-item {
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom: 0;
+}
+.rb-list-radius-group-item:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: 1px solid #ddd;
+}
+.rb-list-radius-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.rb-list-radius-group-item:not(first-child):not(:last-child) {
+    border-radius: 0;
+    border-top: 1px solid #ddd;
+}
+
+.rb-list-radius-group-item:not(:only-child) .rb-file-browse-left {
+    border-left:0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.rb-list-radius-group-item:not(:only-child) .rb-file-browse-right {
+    border-left:0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.rb-list-radius-group-item.horizontal > * {
+    display: table;
+    border-collapse: separate;
+}

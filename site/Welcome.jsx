@@ -3,7 +3,6 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import { Grid, Row, Col, Alert, Image, Jumbotron } from "react-bootstrap";
 import FaIcon from "faicon/FaIcon";
 
-
 export default class Welcome extends ShallowComponent {
 
     render(): Object {
@@ -23,32 +22,36 @@ export default class Welcome extends ShallowComponent {
                         </Jumbotron>
                     </Row >
                     <Row className="well" >
-                                <Col sm={4}>
-                                    <h4>DataGrid with Model support</h4>
+                        <Col sm={4}>
+                            <h4>DataGrid with Model support</h4>
                                     Models with dynamic validation support, makes it very easy to develop screens for CRUD operations and more.
                                     Filters, sorting, form generation from models and more.
                                 </Col>
-                                <Col sm={4}>
-                                    <h4>Standardized usage</h4>
+                        <Col sm={4}>
+                            <h4>Standardized usage</h4>
                                     It is important to provide a complete and easy to learn component set.
                                     Harmonic usage of different components wrapped together with a single naming and one way of usage.
                                     
                                 </Col>
-                                <Col sm={4}>
-                                    <h4>Ready for complex needs</h4>
+                        <Col sm={4}>
+                            <h4>Ready for complex needs</h4>
                                     We develop real-life projects with this library, so we add components and samples continuously.
                                     Complex task will be easier to execute with samples from real applications.
                                 </Col>
-                            </Row>
-                    <Row>
-                        <Alert bsStyle="danger">
-                            <h4>Danger!</h4>
-                            <FaIcon code="fa-exclamation-triangle" /> The project is under active development, and APIs will change.
-                        </Alert>
+                    </Row>
+                    <Row className="well" >
+                        <Col sm={6}>
+                            <h4>Bootstrap Support</h4>
+                                   We support bootstrap components by wrapping <a href="https://react-bootstrap.github.io/components.html"><code>React Bootstrap</code></a>.
+                        </Col>
+                        <Col sm={6}>
+                            <h4>Charting Support</h4>
+                                   We support Area, Bar, Line, Pie, Radar and another chart components by wrapping <a href="http://recharts.org/"><code>Recharts</code></a>.
+                        </Col>
                     </Row>
                     <Row>
                         <Alert bsStyle="warning">
-                            <FaIcon code="fa-exclamation" /> This project is at alpha state, may contain bugs.
+                            <FaIcon code="fa-exclamation" /> This project is at beta state, may contain bugs.
                         </Alert>
                     </Row>
 

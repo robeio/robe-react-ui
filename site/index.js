@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { Navbar, Nav, NavItem, Button } from "react-bootstrap";
 import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
@@ -27,7 +27,7 @@ class Site extends ShallowComponent {
         let activePage = Site.getActivePage(this.state.activeKey);
         return (
             <div>
-                <Navbar inverse>
+                <Navbar inverse collapseOnSelect>
                     <a href="https://github.com/robeio/robe-react-ui">
                         <img
                             style={{ position: "absolute", top: "0px", right: "0px", border: "0px", zIndex: 1 }}
@@ -36,28 +36,38 @@ class Site extends ShallowComponent {
                         />
                     </a>
                     <Navbar.Header>
+                        <Navbar.Toggle style={{ float: "left", marginLeft: 10 }} />
                         <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
                             <a
+                                href="#Welcome"
                                 style={{ cursor: "pointer" }}
                                 onClick={this.__goWelcome}
                             >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
-                    <Nav activeKey={this.state.activeKey} onSelect={this.__onSelect}>
-                        <NavItem eventKey="Components">Components</NavItem>
-                        <NavItem eventKey="Docs">Docs</NavItem>
-                        <NavItem eventKey="JSDocs">JSDocs</NavItem>
-                        <NavItem eventKey="About">About</NavItem>
-                        <NavItem eventKey="React-Bootstrap">
-                            <img
-                                src="https://react-bootstrap.github.io/assets/logo.png"
-                                alt="rblogo"
-                                width={18}
-                            /> React
-                            Bootstrap
-                        </NavItem>
-                    </Nav>
+                    <Navbar.Collapse>
+                        <Nav
+                            style={{ marginTop: 0 }}
+                            activeKey={this.state.activeKey}
+                            onSelect={this.__onSelect}
+                        >
+                            <NavItem eventKey="Components">Components</NavItem>
+                            <NavItem eventKey="Docs">Docs</NavItem>
+                            <NavItem eventKey="About">About</NavItem>
+                            <NavItem eventKey="React-Bootstrap">
+                                <img
+                                    src="https://react-bootstrap.github.io/assets/logo.png"
+                                    alt="rblogo"
+                                    width={18}
+                                /> React
+                                Bootstrap
+                            </NavItem>
+                            <NavItem eventKey="Recharts" className="re-charts">
+                                {"<Recharts />"}
+                            </NavItem>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
                 <div
                     id="activePege"
@@ -77,6 +87,10 @@ class Site extends ShallowComponent {
         Progress.start();
         if (key === "React-Bootstrap") {
             window.open("https://react-bootstrap.github.io/components.html");
+            return;
+        }
+        if (key === "Recharts") {
+            window.open("http://recharts.org/");
             return;
         }
         window.location.hash = `#${key}`;

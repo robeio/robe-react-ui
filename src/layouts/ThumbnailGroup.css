@@ -1,0 +1,42 @@
+.rb-thumbnail-box{
+    text-align: center;
+    padding: 10px;
+}
+
+.rb-thumbnail-box > * {
+    vertical-align: top;
+    word-wrap: break-word;
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    -webkit-transition: box-shadow 0.5s ease;
+    -moz-transition: box-shadow 0.5s ease;
+    -o-transition: box-shadow 0.5s ease;
+    -ms-transition: box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
+}
+
+.rb-thumbnail-box > div > .rb-close {
+    float: right;
+    margin-top: -8px;
+    margin-right: -7px;
+    cursor: pointer;
+    color: #e2e2e2;
+}
+.rb-thumbnail-box > div > .rb-close {
+    float: right;
+    margin-top: -8px;
+    margin-right: -7px;
+    cursor: pointer;
+    color: #e2e2e2;
+}
+.rb-thumbnail-box > div > .rb-close:hover {
+    color: #777;
+}
+
+.rb-thumbnail-box.sm > div {
+    padding: 5px;
+    margin: 5px;
+}

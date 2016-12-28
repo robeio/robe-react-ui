@@ -22,7 +22,8 @@ export default class RadioInputSample extends ShallowComponent {
         super(props);
         this.state = {
             RadioInputSingle: "en",
-            RadioInputGroup: "tr"
+            RadioInputGroup: "tr",
+            RadioInputGroupInline: "tr"
         };
     }
 
@@ -49,10 +50,10 @@ export default class RadioInputSample extends ShallowComponent {
                 />
                 <RadioInput
                     label="RadioInput Group Inline"
-                    name="RadioInputGroup"
+                    name="RadioInputGroupInline"
                     items={langs}
                     inline
-                    value={this.state.RadioInputGroup}
+                    value={this.state.RadioInputGroupInline}
                     textField="value"
                     valueField="key"
                     onChange={this.__handleChange}

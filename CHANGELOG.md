@@ -1,6 +1,17 @@
 # Change Log
 
-## 1.1.5 Developing
+## 1.1.6 Developing
+* Bug fixed in DateInput
+* ReCaptcha component added.
+* added **RadiusGroup** element
+* added **ThumbnailGroup** and **ThumbnailItem**
+* added **EventLayout** element.
+* Bug fixed in CheckTree
+* The Action Buttons style in DataGrid has been fixed
+* GoogleMap component added.
+* zoom prop added to GoogleMap sample
+
+## 1.1.5 
 * was update RadioInput css.
 * was update Tree style.
 * chart api added.
@@ -10,7 +21,7 @@
 * Added Single File Test Support & Test Debuging.
 * Showcase url-state sync fixed.
 * Auto increment feature added to DateInput
-* Dependencies Updated.
+* Bug fixed in DateInput
 
 ## 1.1.4 
 * fixed style in site

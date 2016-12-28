@@ -108,7 +108,9 @@ export default class Notification extends ShallowComponent {
         }
         return (
             <Col>
-                <span style={{ padding: "10px" }}>You don't have any notification.</span>
+                <span style={{ padding: "10px" }} >
+                    You don't have any notification.
+                </span>
             </Col>);
     }
 
