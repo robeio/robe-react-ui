@@ -10,6 +10,7 @@
 * Added Single File Test Support & Test Debuging.
 * Showcase url-state sync fixed.
 * Auto increment feature added to DateInput
+* Dependencies Updated.
 
 ## 1.1.4 
 * fixed style in site

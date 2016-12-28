@@ -286,7 +286,7 @@ export default class DataGrid extends StoreComponent {
     /**
      * @private
      */
-    __renderModalConfirm() {
+    __renderModalConfirm(): Object {
         let config = this.__getModalConfirmConfig();
         return (
             <ModalConfirm
@@ -387,7 +387,7 @@ export default class DataGrid extends StoreComponent {
         this.__readData();
     }
 
-    __generateRows(fields, rows) {
+    __generateRows(fields: , rows: Array): Object {
         if (!rows) {
             return null;
         }
@@ -469,7 +469,7 @@ export default class DataGrid extends StoreComponent {
                 array.push([key, value]);
             }
         });
-        return array;
+        return array.length === 0 ? undefined : array;
     }
 
     __readData() {
