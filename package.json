@@ -101,6 +101,6 @@
     "react-select": "0.9.1",
     "recharts": "0.20.0",
     "robe-ajax": "1.0.1",
-    "robe-react-commons": "1.0.70"
+    "robe-react-commons": "1.0.71"
   }
 }
