@@ -55,6 +55,7 @@ data
 dist
 sitebuild
 static
+md
 webpack.config.build.js
 webpack.config.site.js
 webpack.config.test.dev.js

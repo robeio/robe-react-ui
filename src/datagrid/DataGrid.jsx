@@ -393,7 +393,7 @@ export default class DataGrid extends StoreComponent {
         this.__readData();
     }
 
-    __generateRows(fields: , rows: Array): Object {
+    __generateRows(fields: Array, rows: Array): Object {
         if (!rows) {
             return null;
         }

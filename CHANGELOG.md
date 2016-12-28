@@ -1,6 +1,9 @@
 # Change Log
 
-## 1.1.6 Developing
+## 1.1.7 -- Developing...
+
+
+## 1.1.6
 * Bug fixed in DateInput
 * ReCaptcha component added.
 * added **RadiusGroup** element
@@ -10,6 +13,7 @@
 * The Action Buttons style in DataGrid has been fixed
 * GoogleMap component added.
 * zoom prop added to GoogleMap sample
+* Dependencies Updated.
 
 ## 1.1.5 
 * was update RadioInput css.
