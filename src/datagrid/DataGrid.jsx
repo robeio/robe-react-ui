@@ -31,7 +31,7 @@ export default class DataGrid extends StoreComponent {
      *
      * @static
      */
-    static propTypes:Map = {
+    static propTypes: Map = {
         /**
          * Fields Configurations to show style on view.
          */
@@ -119,7 +119,6 @@ export default class DataGrid extends StoreComponent {
             clearAllButtonText: React.PropTypes.string
         }),
     };
-
     /**
      * static props
      * @type {object}
@@ -128,23 +127,25 @@ export default class DataGrid extends StoreComponent {
         editable: true,
         searchable: true,
         refreshable: false,
-        toolbar: {
-            create: {
+        toolbar: [
+            {
+                name: "create",
                 visible: false,
                 text: "New",
                 icon: "fa-plus"
-            },
-            edit: {
+
+            }, {
+                name: "edit",
                 visible: false,
                 text: "Edit",
                 icon: "fa-pencil"
-            },
-            delete: {
+            }, {
+                name: "delete",
                 visible: false,
                 text: "Delete",
                 icon: "fa-trash"
             }
-        },
+        ],
         modalConfirm: {
             header: "Are you sure you want to delete?",
             message: "The selected entry will be deleted.You can not be undone.",
@@ -165,7 +166,7 @@ export default class DataGrid extends StoreComponent {
     __fields = [];
     __sorts = {};
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             rows: [],
@@ -184,7 +185,7 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    __init(fields:Array, propsOfFields:Object) {
+    __init(fields: Array, propsOfFields: Object) {
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.name) {
@@ -195,7 +196,7 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    render():Object {
+    render(): Object {
         return (
             <Col className="datagrid">
                 <Row>
@@ -203,12 +204,14 @@ export default class DataGrid extends StoreComponent {
                         <SearchField
                             onChange={this.__onSearchChanged}
                             value={this.state.qfilter}
-                            visible={this.props.searchable}/>
+                            visible={this.props.searchable}
+                        />
                     </Col>
-                    <Col xs={7} sm={7} lg={8} style={{marginBottom:15}}>
+                    <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
                         <ActionButtons
                             visible={this.props.editable}
-                            items={this.__getToolbarConfig()}/>
+                            items={this.__getToolbarConfig()}
+                        />
                     </Col>
 
                 </Row>
@@ -223,12 +226,12 @@ export default class DataGrid extends StoreComponent {
                 />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
-                    <tr>
-                        {this.__generateHeader(this.props.fields)}
-                    </tr>
+                        <tr>
+                            {this.__generateHeader(this.props.fields)}
+                        </tr>
                     </thead>
                     <tbody>
-                    {this.__generateRows(this.__fields, this.state.rows)}
+                        {this.__generateRows(this.__fields, this.state.rows)}
                     </tbody>
                 </Table>
                 {this.props.pagination === undefined ? undefined :
@@ -253,7 +256,7 @@ export default class DataGrid extends StoreComponent {
      * Selected rows
      * @returns {Array}
      */
-    getSelectedRows():Object {
+    getSelectedRows(): Object {
         let selections = [];
         if (this.selection) {
             selections.push(this.selection.props.data);
@@ -306,7 +309,7 @@ export default class DataGrid extends StoreComponent {
     /**
      * @private
      */
-    __pageSizeChange(e:Object) {
+    __pageSizeChange(e: Object) {
         this.pageSize = parseInt(e.target.value, 10);
         this.__readData();
     }
@@ -314,7 +317,7 @@ export default class DataGrid extends StoreComponent {
     /**
      * @private
      */
-    __handlePaginationSelect(event:Object) {
+    __handlePaginationSelect(event: Object) {
         this.activePage = event;
         this.__readData();
     }
@@ -324,7 +327,7 @@ export default class DataGrid extends StoreComponent {
      * @returns {Array<Object>}
      * @private
      */
-    __generateHeader(fields:Array<Object>):Array<Object> {
+    __generateHeader(fields: Array<Object>): Array<Object> {
         let headers = [];
         for (let i = 0; i < fields.length; i++) {
             const column = fields[i];
@@ -345,7 +348,7 @@ export default class DataGrid extends StoreComponent {
         return (headers);
     }
 
-    __onSortClick(name:string) {
+    __onSortClick(name: string) {
         let value;
         switch (this.__sorts[name]) {
             case "DESC":
@@ -361,7 +364,7 @@ export default class DataGrid extends StoreComponent {
         this.__readData();
     }
 
-    __openFilterPopup(name:string) {
+    __openFilterPopup(name: string) {
         let visiblePopups = this.refs.filters.state.visiblePopups;
         let isVisible = visiblePopups[name];
         let popupState = {};
@@ -371,12 +374,12 @@ export default class DataGrid extends StoreComponent {
         });
     }
 
-    __onFilterChanged(deleteAll:boolean) {
+    __onFilterChanged(deleteAll: boolean) {
         let filterArr = [];
         if (!deleteAll) {
             Maps.forEach(
                 this.refs.filters.state.filters,
-                (a:string) => {
+                (a: string) => {
                     if (a !== undefined) {
                         if (Assertions.isArray(a[0])) {
                             for (let i = 0; i < a.length; i++) {
@@ -422,7 +425,7 @@ export default class DataGrid extends StoreComponent {
         return rowsArr;
     }
 
-    __onSearchChanged = (event:Object) => {
+    __onSearchChanged = (event: Object) => {
         this.state.qfilter = event.target.value;
         this.activePage = 1;
         this.__readData();
@@ -443,7 +446,7 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    __onSelection(selection:Object) {
+    __onSelection(selection: Object) {
         if (this.selection !== undefined) {
             if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
@@ -469,9 +472,9 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    __map2Array(map:Object):Array {
+    __map2Array(map: Object): Array {
         let array = [];
-        Maps.forEach(map, (value:string, key:string) => {
+        Maps.forEach(map, (value: string, key: string) => {
             if (value !== "") {
                 array.push([key, value]);
             }
@@ -491,7 +494,7 @@ export default class DataGrid extends StoreComponent {
             queryParams.offset = start;
             queryParams.limit = this.pageSize;
             this.props.store.read(
-                (response:Object) => {
+                (response: Object) => {
                     this.setState({
                         rows: response.data,
                         totalCount: response.totalCount
@@ -502,12 +505,12 @@ export default class DataGrid extends StoreComponent {
         }
     }
 
-    __getModalConfirmConfig():Object {
+    __getModalConfirmConfig(): Object {
         let config = Maps.merge(this.props.modalConfirm, DataGrid.defaultProps.modalConfirm);
         return config;
     }
 
-    __getToolbarConfig():Object {
+    __getToolbarConfig(): Object {
         let config = {
             create: {
                 visible: false,
@@ -531,12 +534,12 @@ export default class DataGrid extends StoreComponent {
             }
         };
 
-        Maps.forEach(this.props.toolbar, (item:Object) => {
+        Maps.forEach(this.props.toolbar, (item: Object) => {
             if (is.string(item)) {
                 if (!(config[item] === undefined)) {
                     config[item].visible = true;
                 } else {
-                    console.warn("command not found please use create,update,delete or use your custom command"); //eslint-disable-line
+                    console.warn("command not found please use create,edit,delete or use your custom command"); //eslint-disable-line
                 }
             } else if (is.hash(item)) {
                 if (config[item.name] === undefined) {
@@ -565,7 +568,7 @@ export default class DataGrid extends StoreComponent {
      * Do not implement
      * @param store
      */
-    triggerChange(store:Store) {
+    triggerChange(store: Store) {
         this.setState({
             rows: store.getResult().data,
             totalCount: store.getResult().totalCount
