@@ -2,6 +2,7 @@
 
 ## 1.1.7 -- Developing...
 * robe-react-commons updated
+* Bug fixed in DateInput
 
 ## 1.1.6
 * Bug fixed in DateInput

@@ -122,25 +122,33 @@ export default class DateInput extends ShallowComponent {
     render():Object {
         let parsedValue = "";
         let value = this.state.value;
+
         if (this.isPartial) {
             parsedValue = "Invalid date";
         } else if (is.number(value)) {
             parsedValue = momentjs(value).format(this.props.format);
-        } else if (this.__checkPartialRegex(value)) {
+        } else if (this.__checkPartialRegex(value.toString())) {
             parsedValue = momentjs(value, this.props.format).format(this.props.format);
             if (value)
                 value = momentjs(value, this.props.format);
         }
 
         let overlayValue;
+
         if (parsedValue === "Invalid date" || this.isPartial) {
             parsedValue = value;
         } else {
             overlayValue = value === "" ? undefined : parsedValue;
         }
+
+        if (!overlayValue) {
+            overlayValue = momentjs(new Date(), this.props.format).toDate().getTime();
+        }
+
         if (!is.number(overlayValue)) {
             overlayValue = momentjs(overlayValue, this.props.format, true).toDate().getTime();
         }
+
         let {format, locale, minDate, maxDate, ...newProps} = this.props;
         return (
             <div>
@@ -165,7 +173,6 @@ export default class DateInput extends ShallowComponent {
                     placeholder={this.props.format}
                     value={parsedValue}
                     onKeyDown={this.__onKeyDown}
-                    onKeyUp={this.__onKeyUp}
                     onClick={this.__onClick}
                     style={{ color: this.state.color }}
                     inputGroupRight={<InputGroup.Addon onClick={this.__onClick} ><FaIcon code="fa-calendar" /></InputGroup.Addon>}
@@ -188,7 +195,7 @@ export default class DateInput extends ShallowComponent {
         } else {
             value = momentjs(value, this.props.format).format(this.props.format);
         }
-        if (!isNaN(value) || !this.__checkPartialRegex(value)) {
+        if (!isNaN(value) || !this.__checkPartialRegex(value.toString())) {
             return;
         }
 
@@ -213,18 +220,19 @@ export default class DateInput extends ShallowComponent {
             }
         }
 
+        let tempValue;
         if (e.key === "ArrowUp") {
-            let tempValue = parseInt(valueParts[partIndex]) + 1;
-            valueParts[partIndex] = tempValue < 10 ? '0' + tempValue : tempValue.toString();
+            tempValue = parseInt(valueParts[partIndex]) + 1;
         }
         else if (e.key === "ArrowDown") {
-            let tempValue = parseInt(valueParts[partIndex]) - 1;
-            valueParts[partIndex] = tempValue < 10 ? '0' + tempValue : tempValue.toString();
+            tempValue = parseInt(valueParts[partIndex]) - 1;
         }
+        valueParts[partIndex] = tempValue < 10 ? '0' + tempValue : tempValue.toString();
+
         value = valueParts.join(this.separator);
         let valid = momentjs(value, this.props.format).format(this.props.format);
 
-        if (!this.__checkPartialRegex(value) || valid === "Invalid date") {
+        if (!this.__checkPartialRegex(value.toString()) || valid === "Invalid date") {
             return;
         }
         this.setState({
@@ -238,9 +246,6 @@ export default class DateInput extends ShallowComponent {
 
         e.target.selectionStart = selectionStart;
         e.target.selectionEnd = selectionEnd;
-    }
-
-    __onKeyUp(e) {
     }
 
     /**
@@ -270,7 +275,7 @@ export default class DateInput extends ShallowComponent {
         e.target.value = value;
         e.target.name = this.props.name;
 
-        if (!this.validChars.test(value) || !this.__checkPartialRegex(value)) {
+        if (!this.validChars.test(value) || !this.__checkPartialRegex(value.toString())) {
             // Do not take input if maxlength exeeded or invalid char entered.
             this.setState({
                 color: "#a94442"
