@@ -3,7 +3,8 @@ import {
     ShallowComponent,
     Store,
     RemoteEndPoint,
-    Assertions
+    Assertions,
+    LocalEndPoint
 } from "robe-react-commons";
 import ModalDataForm from "robe-react-ui/lib/form/ModalDataForm";
 import DataGrid from "robe-react-ui/lib/datagrid/DataGrid";
@@ -49,23 +50,26 @@ export default class DataGridSample extends ShallowComponent {
         super(props);
 
         let store1 = new Store({
-            endPoint: new RemoteEndPoint({
-                url: "http://localhost:3000/users"
+            endPoint: new LocalEndPoint({
+                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
+                idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
             autoLoad: true
         });
         let store2 = new Store({
-            endPoint: new RemoteEndPoint({
-                url: "http://localhost:3000/users"
+            endPoint: new LocalEndPoint({
+                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
+                idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
             autoLoad: true
         });
 
         let store3 = new Store({
-            endPoint: new RemoteEndPoint({
-                url: "http://localhost:3000/users"
+            endPoint: new LocalEndPoint({
+                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
+                idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
             autoLoad: true
@@ -127,7 +131,7 @@ export default class DataGridSample extends ShallowComponent {
                     modalConfirm={{ header: "Please do not delete me." }}
                     pageSizeButtons={["1", "2", "3"]}
                     cellRenderer={this.__cellRenderer}
-                    />
+                />
                 <ModalDataForm
                     header="Modal Data Form"
                     show={this.state.showModal}
@@ -136,7 +140,7 @@ export default class DataGridSample extends ShallowComponent {
                     defaultValues={this.state.item}
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
-                    />
+                />
             </span>
         );
     }
@@ -178,6 +182,7 @@ export default class DataGridSample extends ShallowComponent {
     __remove() {
         let selectedRows = this.refs.table1.getSelectedRows();
         console.log("removing ", selectedRows[0]);
+        this.state.store1.delete(selectedRows[0]);
     }
 
     __showModal(newItem) {
