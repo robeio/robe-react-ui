@@ -2,6 +2,7 @@
 
 ## 1.1.8 -- Developing...
 * robe-react-commons updated
+* Added Copy Button to Highlight
 
 ## 1.1.7
 * robe-react-commons updated

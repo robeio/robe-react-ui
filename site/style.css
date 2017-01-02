@@ -81,6 +81,10 @@ pre {
     border: 1px solid #eee !important;
 }
 
+pre code {
+    padding-top: 25px !important;
+}
+
 @media (min-width: 768px) {
     .navbar {
         border-radius: 0px;
