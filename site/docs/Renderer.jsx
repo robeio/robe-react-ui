@@ -44,7 +44,7 @@ export default class Renderer extends ShallowComponent {
         json: {}
     };
     /* eslint no-useless-constructor: 0*/
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             showCode: false
@@ -52,7 +52,7 @@ export default class Renderer extends ShallowComponent {
     }
 
     render(): Object {
-        let highlight = undefined;
+        let highlight;
         if (this.state.showCode) {
             highlight = (<Highlight className="javascript">
                 {this.props.code}
@@ -67,16 +67,16 @@ export default class Renderer extends ShallowComponent {
         return (
             <div>
                 <h3>{this.props.header}</h3>
-                <h6><code>{`<${this.props.header}>`}</code> {this.props.desc}</h6>
+                <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
                 <h4>Examples</h4>
                 <Panel>
                     <this.props.sample.default />
                     {codeSection}
                 </Panel>
                 <h4>{this.props.json.props ? "Props" : ""}</h4>
-                {this.__renderPropsTable(this.props.json.props)}
+                {Renderer.renderPropsTable(this.props.json.props)}
                 <h4>{this.props.json.methods ? "Methods" : ""}</h4>
-                {this.__renderMethodsTable(this.props.json.methods)}
+                {Renderer.renderMethodsTable(this.props.json.methods)}
             </div >);
     }
 
@@ -86,7 +86,7 @@ export default class Renderer extends ShallowComponent {
         });
     }
 
-    __renderPropsTable(data: Object): Array {
+    static renderPropsTable(data: Object): Array {
         if (data === undefined) {
             return undefined;
         }
@@ -122,7 +122,7 @@ export default class Renderer extends ShallowComponent {
             </Table>
         );
     }
-    __renderMethodsTable(data: Object): Array {
+    static renderMethodsTable(data: Object): Array {
         if (data === undefined) {
             return undefined;
         }
@@ -130,14 +130,13 @@ export default class Renderer extends ShallowComponent {
 
         for (let i = 0; i < data.length; i++) {
             let value = data[i];
-            if (value.name.indexOf("__") === 0) {
-                continue;
+            if (value.name.indexOf("__") !== 0) {
+                rows.push(<tr key={value.name}>
+                    <td>{value.name}</td>
+                    <td>{value.returns ? value.returns.type.name : ""}</td>
+                    <td>{value.description}</td>
+                </tr>);
             }
-            rows.push(<tr key={value.name}>
-                <td>{value.name}</td>
-                <td>{value.returns ? value.returns.type.name : ""}</td>
-                <td>{value.description}</td>
-            </tr>);
         }
 
         return (

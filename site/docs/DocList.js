@@ -40,6 +40,11 @@ class DocList {
             desc: " Adding additional components to your inputs",
             sample: require("./samples/addon/InputAddon")
         });
+        components.push({
+            header: "i18n",
+            desc: " Supporting multiple languages",
+            sample: require("./samples/i18n/I18n")
+        });
 
         return components;
     }
