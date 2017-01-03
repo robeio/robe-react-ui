@@ -1,6 +1,7 @@
 .has-error .Select-control {
     border-color: #a94442 !important
 }
-.Select{
-    height: 34px !important;
+
+.Select {
+    min-height: 34px !important;
 }
