@@ -3,7 +3,6 @@
 
 [![npm package](https://badge.fury.io/js/robe-react-ui.svg)](https://badge.fury.io/js/robe-react-ui)
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
-[![Docs Coverage](https://doc.esdoc.org/github.com/robeio/robe-react-ui/badge.svg)](https://doc.esdoc.org/github.com/robeio/robe-react-ui)
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
 [![Dependency Status](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af/badge.svg)](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af)
  

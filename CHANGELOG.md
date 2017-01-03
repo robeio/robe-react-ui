@@ -4,7 +4,7 @@
 * robe-react-commons updated
 * Added Copy Button to Highlight
 * update style in SelectInput
-* js-criteria and robe-react-common version incremented.
+* Dependencies updated
 
 
 ## 1.1.7
