@@ -55,7 +55,12 @@ export default class MoneyInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+         /**
+        * Left Input Addon
+        */
+        inputGroupLeft: React.PropTypes.object
+
     };
 
     /**

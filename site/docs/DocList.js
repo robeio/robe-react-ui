@@ -35,6 +35,11 @@ class DocList {
             desc: " Base of Store to keep data and to trigger dependencies component.",
             sample: require("./samples/store/StoreSample")
         });
+        components.push({
+            header: "Input Addons",
+            desc: " Adding additional components to your inputs",
+            sample: require("./samples/addon/InputAddon")
+        });
 
         return components;
     }

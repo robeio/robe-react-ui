@@ -1,0 +1,20 @@
+<TextInput
+    label="Example 1 (Text Left)"
+    value=""
+    inputGroupLeft={<InputGroup.Addon > Text to left</InputGroup.Addon>}
+    />
+<TextInput
+    label="Example 2 (Text Right)"
+    value=""
+    inputGroupRight={<InputGroup.Addon > or to right</InputGroup.Addon>}
+    />
+<TextInput
+    label="Example 3 (Icon Left)"
+    value=""
+    inputGroupLeft={<InputGroup.Addon > <FaIcon code="fa-user-circle-o" /></InputGroup.Addon>}
+    />
+<TextInput
+    label="Example 4 (Icon Right)"
+    value=""
+    inputGroupRight={<InputGroup.Addon > <FaIcon code="fa-unlock-alt" /></InputGroup.Addon>}
+/>

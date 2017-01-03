@@ -47,7 +47,15 @@ export default class TextInput extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        /**
+        * Left Input Addon
+        */
+        inputGroupLeft: React.PropTypes.object,
+        /**
+        * Right Input Addon
+        */
+        inputGroupRight: React.PropTypes.object
     };
 
     /**

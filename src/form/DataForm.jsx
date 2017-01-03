@@ -48,7 +48,7 @@ export default class DataForm extends ShallowComponent {
         /**
        *Defines the display style of the Validation message.
        */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
