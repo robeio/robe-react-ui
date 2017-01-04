@@ -5,6 +5,7 @@
 * Added Copy Button to Highlight
 * update style in SelectInput
 * Dependencies updated
+* Sample Projects added to the showcase
 
 
 ## 1.1.7
