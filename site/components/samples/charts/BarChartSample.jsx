@@ -16,7 +16,6 @@ export default class BarChartSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <a>Read More</a>
                 <div className="form-group">
                     <BarChart
                         propsOfChart={{ width: 600, height: 400, data: data }}
