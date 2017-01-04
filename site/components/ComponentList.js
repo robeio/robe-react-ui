@@ -203,21 +203,21 @@ class ComponentList {
 
         components.complex.push({
             header: "ReCaptcha",
-            desc: "ReCaptcha",
+            desc: " is a CAPTCHA-like system designed to establish that a computer user is human (normally in order to protect websites from bots) and, at the same time, assist in the digitization of books",
             sample: require("./samples/recaptcha/ReCaptchaSample"),
             code: require("./samples/recaptcha/ReCaptchaSample.txt")
         });
 
         components.complex.push({
             header: "GoogleMap",
-            desc: "is a wrapper component for GoogleMaps API",
+            desc: " is a wrapper component for GoogleMaps API",
             sample: require("./samples/googlemap/GoogleMapSample"),
             code: require("./samples/googlemap/GoogleMapSample.txt")
         });
 
         components.charts.push({
             header: "AreaChart",
-            desc: " is a layout chart",
+            desc: " displays graphically quantitative data. It is based on the line chart. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares with an area chart two or more quantities.",
             // json: require("./jsons/charts/AreaChart.json"),
             sample: require("./samples/charts/AreaChartSample"),
             code: require("./samples/charts/AreaChartSample.txt")
@@ -225,7 +225,7 @@ class ComponentList {
 
         components.charts.push({
             header: "BarChart",
-            desc: " is a layout chart",
+            desc: " a bar chart or bar graph is a chart or graph that presents grouped data with rectangle|rectangular bars with lengths proportional to the values that they represent. The bars can be plotted vertically or horizontally. A vertical bar chart is sometimes called a Line graph.",
             // json: require("./jsons/charts/BarChart.json"),
             sample: require("./samples/charts/BarChartSample"),
             code: require("./samples/charts/BarChartSample.txt")
@@ -233,7 +233,7 @@ class ComponentList {
 
         components.charts.push({
             header: "ComposedChart",
-            desc: " is a layout chart",
+            desc: " is a layout for area, bar and line chart together.",
             // json: require("./jsons/charts/ComposedChart.json"),
             sample: require("./samples/charts/ComposedChartSample"),
             code: require("./samples/charts/ComposedChartSample.txt")
@@ -241,7 +241,7 @@ class ComponentList {
 
         components.charts.push({
             header: "LineChart",
-            desc: " is a layout chart",
+            desc: " a line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.It is a basic type of chart common in many fields.It is a basic type of chart common in many fields.",
             // json: require("./jsons/charts/LineChart.json"),
             sample: require("./samples/charts/LineChartSample"),
             code: require("./samples/charts/LineChartSample.txt")
@@ -249,7 +249,7 @@ class ComponentList {
 
         components.charts.push({
             header: "PieChart",
-            desc: " is a layout chart",
+            desc: " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportion. In a pie chart, the arc length of each slice (and consequently its central angle and area), is proportional to the quantity it represents",
             // json: require("./jsons/charts/PieChart.json"),
             sample: require("./samples/charts/PieChartSample"),
             code: require("./samples/charts/PieChartSample.txt")
@@ -257,7 +257,7 @@ class ComponentList {
 
         components.charts.push({
             header: "RadarChart",
-            desc: " is a layout chart",
+            desc: " a radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point. The relative position and angle of the axes is typically uninformative",
             // json: require("./jsons/charts/RadarChart.json"),
             sample: require("./samples/charts/RadarChartSample"),
             code: require("./samples/charts/RadarChartSample.txt")
@@ -273,7 +273,7 @@ class ComponentList {
 
         components.charts.push({
             header: "ScatterChart",
-            desc: " is a layout chart",
+            desc: " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data",
             // json: require("./jsons/charts/RobeScatterChart.json"),
             sample: require("./samples/charts/ScatterChartSample"),
             code: require("./samples/charts/ScatterChartSample.txt")
