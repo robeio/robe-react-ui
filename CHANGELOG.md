@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.8 -- Developing...
+## 1.1.9 -- Developing...
+
+## 1.1.8
 * robe-react-commons updated
 * Added Copy Button to Highlight
 * update style in SelectInput
