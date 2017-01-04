@@ -194,7 +194,8 @@ class ComponentList {
                     { name: "info", description: "Toast.info(message, title, timeOut, callback)" },
                     { name: "success", description: "Toast.success(message, title, timeOut, callback)" },
                     { name: "warning", description: "Toast.warning(message, title, timeOut, callback)" },
-                    { name: "error", description: "Toast.error(message, title, timeOut, callback)" }
+                    { name: "error", description: "Toast.error(message, title, timeOut, callback)" },
+                    { name: "configure", description: "Toast.configure(numMaxVisible)" }
                 ]
             },
             sample: require("./samples/toast/ToastSample"),
