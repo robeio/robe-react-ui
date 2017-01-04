@@ -1,12 +1,13 @@
-.react-datepicker__input-container{
-    display: block;
+.popover-content {
+    padding: 8px !important;
+    border: none;
 }
-.react-datepicker__close-icon::after {
-    margin-top: -22px;
-    background-color: transparent;
-    font-size: 16px;
-    color: #999;
-}
-.react-datepicker__close-icon:hover:after {
-    color: #D0021B;
+
+.popover {
+    padding: 0;
+    border-radius: 4px;
+
+    -webkit-box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
 }

@@ -5,6 +5,7 @@
 * Added Copy Button to Highlight
 * update style in SelectInput
 * Dependencies updated
+* DateInput bugs fixed.
 
 
 ## 1.1.7
