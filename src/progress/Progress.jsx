@@ -10,7 +10,7 @@ class Progress {
      * Creates an instance of Progress.
      */
     constructor() {
-        NProgress.configure({ showSpinner: false });
+        this.configure({ showSpinner: false });
     }
 
     /**
