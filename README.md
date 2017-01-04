@@ -16,7 +16,7 @@ UI components built on top of [React-Bootstrap](https://react-bootstrap.github.i
 
 ##### What's inside
 * [Webpack](https://webpack.github.io/) for all development (server,hotload etc.) and build (package, optimize, etc.) needs.
-* [Babel](https://babeljs.io/flow) for writing codes with ES6 syntax and transpiling them browser compatible codes. 
+* [Babel](https://babeljs.io/) for writing codes with ES6 syntax and transpiling them browser compatible codes. 
 * [ESLint](http://eslint.org/) for protecting our nice formatted codes.
 * [Karma](https://karma-runner.github.io/0.13/index.html) for testing.
 * [React](https://facebook.github.io/react/) for ui.
