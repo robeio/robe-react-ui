@@ -6,7 +6,7 @@ import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
 import Welcome from "./Welcome";
-import JSDocs from "./JSDocs";
+import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
 import { NotFound } from "./error";
 
@@ -54,6 +54,7 @@ class Site extends ShallowComponent {
                         >
                             <NavItem eventKey="Components">Components</NavItem>
                             <NavItem eventKey="Docs">Docs</NavItem>
+                            <NavItem eventKey="Samples">Samples</NavItem>
                             <NavItem eventKey="About">About</NavItem>
                             <NavItem eventKey="React-Bootstrap">
                                 <img
@@ -110,17 +111,16 @@ class Site extends ShallowComponent {
                     <Components />
                 );
             case "Docs":
-                return (
-                    <Docs />
-                );
+                return <Docs />;
+                
             case "JSDocs":
-                return (
-                    <JSDocs />
-                );
+                return <JSDocs />;
+                
             case "About":
-                return (
-                    <NotFound />
-                );
+                return <NotFound />;
+                
+            case "Samples":
+                return <SampleProjects />;
             default:
                 return (
                     <Welcome />
