@@ -1,19 +1,11 @@
 import React from "react";
-import {
-    ButtonToolbar, Button
-} from "react-bootstrap";
-import {
-    ShallowComponent
-} from "robe-react-commons";
-import {
-    ToastContainer,
-    Toast
-} from "robe-react-ui/lib/toast";
-
+import { ButtonToolbar, Button } from "react-bootstrap";
+import { ShallowComponent } from "robe-react-commons";
+import { ToastContainer, Toast } from "robe-react-ui/lib/toast";
 import NumericInput from "robe-react-ui/lib/inputs/NumericInput";
 
 
-class Example extends ShallowComponent {
+class ToastSample extends ShallowComponent {
 
 
     constructor(props: Object) {
@@ -83,4 +75,4 @@ class Example extends ShallowComponent {
     }
 }
 
-export default Example;
+export default ToastSample;

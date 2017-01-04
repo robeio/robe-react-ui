@@ -2,7 +2,7 @@ import InputValidations from "validation/InputValidations";
 
 class DocList {
 
-    getList():Array {
+    getList(): Array {
         let components = [];
         /* eslint-disable global-require */
 
@@ -44,6 +44,11 @@ class DocList {
             header: "i18n",
             desc: " Supporting multiple languages",
             sample: require("./samples/i18n/I18n")
+        });
+        components.push({
+            header: "Toast",
+            desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
+            sample: require("./samples/toast/ToastSample")
         });
 
         return components;

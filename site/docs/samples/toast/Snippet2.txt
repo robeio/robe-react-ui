@@ -1,0 +1,2 @@
+Toast.configure(numMaxVisible);
+
