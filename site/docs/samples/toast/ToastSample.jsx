@@ -52,6 +52,7 @@ class ToastSample extends ShallowComponent {
                     <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
                 </ButtonToolbar>
                 <br />
+                <br />
                 <p>Also you can configure maximum visible notifications count. </p>
                 <Highlight className="javascript">{Snippet2}</Highlight>
                 <NumericInput
@@ -68,6 +69,10 @@ class ToastSample extends ShallowComponent {
                     <Button bsStyle="warning" onClick={this.toastMessage("warning")}>Warning</Button>
                     <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
                 </ButtonToolbar>
+                <br />
+                <p><code>NotificationContainer</code> wrapped as <code>ToastContainer</code>,</p>
+                <p><code>NotificationManager</code> wrapped as <code>Toast</code>.</p>
+                <a rel="noopener noreferrer" target="_blank" href="https://github.com/minhtranite/react-notifications">Read More About Toast</a>
                 
                 <ToastContainer />
             </div>
