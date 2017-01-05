@@ -7,7 +7,7 @@ class ProjectList {
             desc: "A skeleton application. Login, Menu, CRUDs...",
             image: "robe-admin-ui.png",
             link: "https://github.com/robeio/robe-react-admin",
-            features: ["WebSocket", "Router", "DataGrid", "Charts"]
+            features: ["Router", "DataGrid", "Charts"]
         });
 
         components.push({

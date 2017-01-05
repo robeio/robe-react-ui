@@ -23,16 +23,6 @@
       "email": "kamilbukum@gmail.com",
       "gender": "male",
       "smoker": false
-    },
-    {
-      "name": "Mehmet",
-      "surname": "Güreli",
-      "id": 4
-    },
-    {
-      "name": "Mehmet",
-      "surname": "Güreli",
-      "id": 5
     }
   ]
 }
