@@ -10,6 +10,7 @@ import ModalDataForm from "robe-react-ui/lib/form/ModalDataForm";
 import DataGrid from "robe-react-ui/lib/datagrid/DataGrid";
 import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 import DataGridModel from "./DataGridModel.json";
+import { ControlLabel } from "react-bootstrap";
 
 
 const propsOfFields = {
@@ -40,10 +41,7 @@ const propsOfFields = {
 };
 
 export default class DataGridSample extends ShallowComponent {
-    /**
-     *
-     * @param props
-     */
+
     static idField = "id";
 
     constructor(props: Object) {
@@ -88,6 +86,7 @@ export default class DataGridSample extends ShallowComponent {
     render(): Object {
         return (
             <span>
+                <ControlLabel>DataGrid (CRUD Toolbar)</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -100,8 +99,8 @@ export default class DataGridSample extends ShallowComponent {
                     exportButton={true}
                     editable={true}
                     modalConfirm={{ header: "Please do not delete me." }}
-                    filter={{ clearButtonText: "Clear 1", clearAllButtonText: "Clear All Filters" }}
                 />
+                <ControlLabel>DataGrid (Custom Toolbar and Pagination)</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -112,25 +111,18 @@ export default class DataGridSample extends ShallowComponent {
                     onDeleteClick={this.__remove}
                     exportButton={true}
                     editable={true}
-                    pagination={{ pageSize: 3 }}
                     modalConfirm={{ header: "Please do not delete me." }}
+                    refreshable={true}
+                    pagination={{ pageSize: 1 }}
                     pageSizeButtons={["1", "2", "3"]}
                 />
+                <ControlLabel>DataGrid (Custom Cell Renderer)</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
                     store={this.state.store3}
-                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
-                    onNewClick={this.__add}
-                    onEditClick={this.__edit}
-                    onDeleteClick={this.__remove}
                     exportButton={true}
-                    refreshable={true}
-                    editable={true}
-                    pagination={{ pageSize: 3 }}
-                    modalConfirm={{ header: "Please do not delete me." }}
-                    pageSizeButtons={["1", "2", "3"]}
-                    cellRenderer={this.__cellRenderer}
+                    cellRenderer={DataGridSample.cellRenderer}
                 />
                 <ModalDataForm
                     header="Modal Data Form"
@@ -162,7 +154,7 @@ export default class DataGridSample extends ShallowComponent {
         this.setState({ showModal: false });
     }
 
-    __onSave(newData, callback) {
+    __onSave(newData: Object, callback: Function) {
         let id = newData[DataGridSample.idField];
         if (Assertions.isNotEmpty(id)) {
             this.state.store1.update(newData);
@@ -175,21 +167,18 @@ export default class DataGridSample extends ShallowComponent {
                 showModal: true
             });
         }
-
-        // this.refs[DataGridSample.tableRef].__readData();
     }
 
     __remove() {
         let selectedRows = this.refs.table1.getSelectedRows();
-        console.log("removing ", selectedRows[0]);
         this.state.store1.delete(selectedRows[0]);
     }
 
-    __showModal(newItem) {
+    __showModal(newItem: Object) {
         this.setState({ showModal: true, item: newItem });
     }
 
-    __cellRenderer(idx: number, fields: Array, row: Object) {
+    static cellRenderer(idx: number, fields: Array, row: Object) {
         if (fields[idx].visible !== false) {
             return <td key={fields[idx].name}><FaIcon code={"fa-smile-o"} /> {row[fields[idx].name]}</td>;
         }
