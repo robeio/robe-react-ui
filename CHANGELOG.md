@@ -1,6 +1,8 @@
 # Change Log
 
 ## 1.1.9 -- Developing...
+* DataGridSample is more compact and clear now.
+
 
 ## 1.1.8
 * robe-react-commons updated
