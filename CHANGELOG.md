@@ -2,7 +2,7 @@
 
 ## 1.1.9 -- Developing...
 * DataGridSample is more compact and clear now.
-
+* DatePicker bugs fixed.
 
 ## 1.1.8
 * robe-react-commons updated
@@ -11,7 +11,6 @@
 * Dependencies updated
 * Sample Projects added to the showcase
 * DateInput bugs fixed.
-
 
 ## 1.1.7
 * robe-react-commons updated

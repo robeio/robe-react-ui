@@ -2,24 +2,12 @@
     cursor: pointer;
     text-align: center;
     background: #ffffff;
-    background: -moz-linear-gradient(left, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-    background: -webkit-linear-gradient(left, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-    background: -o-linear-gradient(left, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-    background: -ms-linear-gradient(left, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-    background: linear-gradient(to right, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=1);
-
+    font-weight: 500;
 }
 
 .DatePicker-day:hover {
 
     background: #499bea;
-    background: -moz-linear-gradient(left, #499bea 0%, #207ce5 100%);
-    background: -webkit-linear-gradient(left, #499bea 0%, #207ce5 100%);
-    background: -o-linear-gradient(left, #499bea 0%, #207ce5 100%);
-    background: -ms-linear-gradient(left, #499bea 0%, #207ce5 100%);
-    background: linear-gradient(to right, #499bea 0%, #207ce5 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5', GradientType=1);
     color: white;
 }
 
@@ -34,15 +22,8 @@
     text-align: center;
     color: #ffffff;
     font-weight: bold;
-
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#606c88+0,3f4c6b+100;Grey+3D+%232 */
     background: #606c88; /* Old browsers */
-    background: -moz-linear-gradient(top,  #606c88 0%, #3f4c6b 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #606c88 0%,#3f4c6b 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #606c88 0%,#3f4c6b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
-
-
+    border-color: #606c88;
 }
 
 .DatePicker-table {
@@ -56,13 +37,8 @@
     border-bottom-width: 0;
 }
 
-.DatePicker-table > thead > tr:nth-child(2) {
-    background: #eeeeee;
-    background: -moz-linear-gradient(top, #eeeeee 0%, #dddddd 50%);
-    background: -webkit-linear-gradient(top, #eeeeee 0%, #dddddd 50%);
-    background: linear-gradient(to bottom, #eeeeee 0%, #dddddd 50%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0);
-
+.DatePicker-table > thead > tr:nth-child(2) > th {
+    background: #eaeaea;
 }
 
 .DatePicker-table > tbody > tr > td,

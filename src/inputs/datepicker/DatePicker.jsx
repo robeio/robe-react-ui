@@ -58,7 +58,7 @@ export default class DatePicker extends ShallowComponent {
         }
         this.weekDays = weekDays;
 
-        let value = momentjs(this.props.value);
+        let value = momentjs(this.props.value).set("hour", 12);
         value = value.isBefore(this.props.minDate) ? momentjs(this.props.minDate) : value;
         value = value.isAfter(this.props.maxDate) ? momentjs(this.props.maxDate) : value;
         this.state = {moment: value};
@@ -70,34 +70,31 @@ export default class DatePicker extends ShallowComponent {
         let grid = [];
         let className = "DatePicker-day";
         let moment = this.state.moment;
-        let currentMonthMax = moment.daysInMonth();
-        let startDate = momentjs(moment).startOf("month").startOf("week");
-        let day = startDate.date();
-        let preMonthMax = startDate.daysInMonth();
         let enabled = false;
-        for (let i = 0; i < 5; i++) {
-            let row = [];
-            for (let j = 0; j < 7; j++) {
-                if (preMonthMax < day && !enabled) {
-                    preMonthMax = 32;
-                    enabled = true;
-                    day = 1;
-                } else if (currentMonthMax < day && enabled) {
-                    currentMonthMax = 32;
-                    enabled = false;
-                    day = 1;
-                }
-                className = enabled ? "DatePicker-day" : "DatePicker-day-disabled";
+        let currentMonth = momentjs(moment).startOf("month").startOf("week");
+        let isoWeekday = currentMonth.startOf('week').isoWeekday() % 7;
+        currentMonth = currentMonth.add(isoWeekday - currentMonth.day(), "day");
 
-                if (className !== "DatePicker-day-disabled" && moment.date() === day) {
-                    className = "DatePicker-day-selected";
-                }
-                row.push(<td key={day} className={className}
-                             onClick={enabled ? this.__onClickDay : undefined}>{day++}</td>); //eslint-disable-line
+        for (let i = 0; i < 6; i++) {
+            let row = [];
+            let weekMoment = momentjs(currentMonth);
+            if ((weekMoment.get("month") == weekMoment.add(7, "day").get("month")) && (weekMoment.get("month") != moment.get("month"))) {
+                continue;
+            }
+            for (let j = 0; j < 7; j++) {
+                enabled = moment.get("month") == currentMonth.get("month");
+                className = enabled ? moment.get("date") == currentMonth.get("date") ? "DatePicker-day-selected" : "DatePicker-day" : "DatePicker-day-disabled";
+                row.push(
+                    <td key={currentMonth.get("date")}
+                        className={className}
+                        onClick={enabled ? this.__onClickDay : undefined}>
+                        {currentMonth.get("date")}
+                    </td>);
+                currentMonth.add(1, "day");
             }
             grid.push(<tr key={i}>{row}</tr>);
         }
-
+        
         return (
             <Table bordered className="DatePicker-table">
                 <thead>
