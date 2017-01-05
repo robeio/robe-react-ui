@@ -9,7 +9,7 @@ import "./DatePicker.css";
 
 export default class DatePicker extends ShallowComponent {
 
-    static propTypes:Map = {
+    static propTypes: Map = {
         /**
          * Value of the component
          */
@@ -49,7 +49,7 @@ export default class DatePicker extends ShallowComponent {
     weekDays;
     monthSelectBox;
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         momentjs.locale(this.props.locale);
         let weekDays = momentjs.weekdaysMin(true);
@@ -61,12 +61,12 @@ export default class DatePicker extends ShallowComponent {
         let value = momentjs(this.props.value).set("hour", 12);
         value = value.isBefore(this.props.minDate) ? momentjs(this.props.minDate) : value;
         value = value.isAfter(this.props.maxDate) ? momentjs(this.props.maxDate) : value;
-        this.state = {moment: value};
+        this.state = { moment: value };
         this.__renderMonthSelectBox();
         this.__renderYearSelectBox();
     }
 
-    render():Object {
+    render(): Object {
         let grid = [];
         let className = "DatePicker-day";
         let moment = this.state.moment;
@@ -78,31 +78,37 @@ export default class DatePicker extends ShallowComponent {
         for (let i = 0; i < 6; i++) {
             let row = [];
             let weekMoment = momentjs(currentMonth);
-            if ((weekMoment.get("month") == weekMoment.add(7, "day").get("month")) && (weekMoment.get("month") != moment.get("month"))) {
+            if ((weekMoment.get("month") === weekMoment.add(7, "day").get("month")) && (weekMoment.get("month") !== moment.get("month"))) {
                 continue;
             }
             for (let j = 0; j < 7; j++) {
-                enabled = moment.get("month") == currentMonth.get("month");
-                className = enabled ? moment.get("date") == currentMonth.get("date") ? "DatePicker-day-selected" : "DatePicker-day" : "DatePicker-day-disabled";
+                enabled = moment.get("month") === currentMonth.get("month");
+                className = enabled ?
+                    moment.get("date") === currentMonth.get("date") ?
+                        "DatePicker-day-selected" :
+                        "DatePicker-day" :
+                    "DatePicker-day-disabled";
                 row.push(
-                    <td key={currentMonth.get("date")}
+                    <td
+                        key={currentMonth.get("date")}
                         className={className}
-                        onClick={enabled ? this.__onClickDay : undefined}>
+                        onClick={enabled ? this.__onClickDay : undefined}
+                    >
                         {currentMonth.get("date")}
                     </td>);
                 currentMonth.add(1, "day");
             }
             grid.push(<tr key={i}>{row}</tr>);
         }
-        
+
         return (
             <Table bordered className="DatePicker-table">
                 <thead>
-                <tr>
-                    <th colSpan={3}>{this.yearSelectBox}</th>
-                    <th colSpan={4}>{this.monthSelectBox}</th>
-                </tr>
-                <tr >{this.weekDays}</tr>
+                    <tr>
+                        <th colSpan={3}>{this.yearSelectBox}</th>
+                        <th colSpan={4}>{this.monthSelectBox}</th>
+                    </tr>
+                    <tr >{this.weekDays}</tr>
                 </thead>
                 <tbody>{grid}</tbody>
             </Table>);
@@ -114,8 +120,7 @@ export default class DatePicker extends ShallowComponent {
             months[i] = <option key={i} value={i}>{months[i]}</option>;
         }
         this.monthSelectBox = (
-            <FormControl componentClass="select" placeholder="Month" onChange={this.__onChangeMonth}
-                         defaultValue={this.state.moment.month()}>
+            <FormControl componentClass="select" placeholder="Month" onChange={this.__onChangeMonth} defaultValue={this.state.moment.month()}>
                 {months}
             </FormControl>
         );
@@ -129,28 +134,27 @@ export default class DatePicker extends ShallowComponent {
             years[i] = <option key={i} value={i}>{i}</option>;
         }
         this.yearSelectBox = (
-            <FormControl componentClass="select" placeholder="Year" onChange={this.__onChangeYear}
-                         defaultValue={this.state.moment.year()}>
+            <FormControl componentClass="select" placeholder="Year" onChange={this.__onChangeYear} defaultValue={this.state.moment.year()}>
                 {years}
             </FormControl>
         );
     }
 
-    __onChangeYear(e:Object) {
+    __onChangeYear(e: Object) {
         let year = parseInt(e.target.selectedOptions[0].value, 10);
         let newMoment = this.state.moment;
         newMoment.year(year);
         this.__onChange(newMoment);
     }
 
-    __onChangeMonth(e:Object) {
+    __onChangeMonth(e: Object) {
         let month = parseInt(e.target.selectedOptions[0].value, 10);
         let newMoment = this.state.moment;
         newMoment.month(month);
         this.__onChange(newMoment);
     }
 
-    __onClickDay(e:Object) {
+    __onClickDay(e: Object) {
         let day = parseInt(e.target.innerText, 10);
         let newMoment = this.state.moment;
         newMoment.date(day);
@@ -160,7 +164,7 @@ export default class DatePicker extends ShallowComponent {
         }
     }
 
-    __onChange(newMoment:Object) {
+    __onChange(newMoment: Object) {
         this.setState({
             moment: newMoment
         });
@@ -169,7 +173,7 @@ export default class DatePicker extends ShallowComponent {
         }
     }
 
-    shouldComponentUpdate():boolean {
+    shouldComponentUpdate(): boolean {
         return true;
     }
 }
