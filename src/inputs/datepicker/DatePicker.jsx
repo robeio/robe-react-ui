@@ -2,6 +2,7 @@ import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {
     Table,
+    ControlLabel,
     FormControl
 } from "react-bootstrap";
 import momentjs from "moment";
@@ -9,11 +10,19 @@ import "./DatePicker.css";
 
 export default class DatePicker extends ShallowComponent {
 
-    static propTypes: Map = {
+    static propTypes:Map = {
         /**
          * Value of the component
          */
         value: React.PropTypes.number,
+        /**
+         * name use as input field name
+         */
+        name: React.PropTypes.string,
+        /**
+         * Label for the form control.
+         */
+        label: React.PropTypes.string,
         /**
          * Change event for the component
          */
@@ -24,13 +33,25 @@ export default class DatePicker extends ShallowComponent {
         onSelect: React.PropTypes.func,
 
         /**
-         *Minimum date to show at the picker.
+         * Minimum date to show at the picker.
          */
         minDate: React.PropTypes.number,
         /**
-         *Maximum date to show at the picker.
+         * Maximum date to show at the picker.
          */
-        maxDate: React.PropTypes.number
+        maxDate: React.PropTypes.number,
+
+        /**
+         *  Max width of component
+         */
+        maxWidth: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number]),
+
+        /**
+         *  Base CSS class and prefix for the component
+         */
+        className: React.PropTypes.string
     };
 
     /**
@@ -44,12 +65,14 @@ export default class DatePicker extends ShallowComponent {
         locale: "en",
         value: new Date().getTime(),
         minDate: momentjs("01/01/1900", "DD/MM/YYYY").toDate().getTime(),
-        maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime()
+        maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime(),
+        maxWidth: "100%",
+        className: "center-block"
     };
     weekDays;
     monthSelectBox;
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         momentjs.locale(this.props.locale);
         let weekDays = momentjs.weekdaysMin(true);
@@ -61,12 +84,12 @@ export default class DatePicker extends ShallowComponent {
         let value = momentjs(this.props.value).set("hour", 12);
         value = value.isBefore(this.props.minDate) ? momentjs(this.props.minDate) : value;
         value = value.isAfter(this.props.maxDate) ? momentjs(this.props.maxDate) : value;
-        this.state = { moment: value };
+        this.state = {moment: value};
         this.__renderMonthSelectBox();
         this.__renderYearSelectBox();
     }
 
-    render(): Object {
+    render():Object {
         let grid = [];
         let className = "DatePicker-day";
         let moment = this.state.moment;
@@ -100,18 +123,24 @@ export default class DatePicker extends ShallowComponent {
             }
             grid.push(<tr key={i}>{row}</tr>);
         }
+        let label = this.props.label != undefined ?
+            <ControlLabel>{this.props.label}</ControlLabel> :
+            undefined;
 
         return (
-            <Table bordered className="DatePicker-table">
-                <thead>
+            <div className={this.props.className} style={{maxWidth:this.props.maxWidth}}>
+                {label}
+                <Table bordered className="DatePicker-table">
+                    <thead>
                     <tr>
                         <th colSpan={3}>{this.yearSelectBox}</th>
                         <th colSpan={4}>{this.monthSelectBox}</th>
                     </tr>
                     <tr >{this.weekDays}</tr>
-                </thead>
-                <tbody>{grid}</tbody>
-            </Table>);
+                    </thead>
+                    <tbody>{grid}</tbody>
+                </Table>
+            </div>);
     }
 
     __renderMonthSelectBox() {
@@ -120,7 +149,8 @@ export default class DatePicker extends ShallowComponent {
             months[i] = <option key={i} value={i}>{months[i]}</option>;
         }
         this.monthSelectBox = (
-            <FormControl componentClass="select" placeholder="Month" onChange={this.__onChangeMonth} defaultValue={this.state.moment.month()}>
+            <FormControl componentClass="select" placeholder="Month" onChange={this.__onChangeMonth}
+                         defaultValue={this.state.moment.month()}>
                 {months}
             </FormControl>
         );
@@ -134,27 +164,28 @@ export default class DatePicker extends ShallowComponent {
             years[i] = <option key={i} value={i}>{i}</option>;
         }
         this.yearSelectBox = (
-            <FormControl componentClass="select" placeholder="Year" onChange={this.__onChangeYear} defaultValue={this.state.moment.year()}>
+            <FormControl componentClass="select" placeholder="Year" onChange={this.__onChangeYear}
+                         defaultValue={this.state.moment.year()}>
                 {years}
             </FormControl>
         );
     }
 
-    __onChangeYear(e: Object) {
+    __onChangeYear(e:Object) {
         let year = parseInt(e.target.selectedOptions[0].value, 10);
         let newMoment = this.state.moment;
         newMoment.year(year);
         this.__onChange(newMoment);
     }
 
-    __onChangeMonth(e: Object) {
+    __onChangeMonth(e:Object) {
         let month = parseInt(e.target.selectedOptions[0].value, 10);
         let newMoment = this.state.moment;
         newMoment.month(month);
         this.__onChange(newMoment);
     }
 
-    __onClickDay(e: Object) {
+    __onClickDay(e:Object) {
         let day = parseInt(e.target.innerText, 10);
         let newMoment = this.state.moment;
         newMoment.date(day);
@@ -164,16 +195,23 @@ export default class DatePicker extends ShallowComponent {
         }
     }
 
-    __onChange(newMoment: Object) {
+    __onChange(newMoment:Object) {
         this.setState({
             moment: newMoment
         });
         if (this.props.onChange) {
-            this.props.onChange(newMoment);
+            let e = {
+                target: {
+                    value: new Date(newMoment.toDate().getTime()).toDateString(),
+                    parsedValue: newMoment.toDate().getTime(),
+                    name: this.props.name
+                }
+            };
+            this.props.onChange(e);
         }
     }
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate():boolean {
         return true;
     }
 }
