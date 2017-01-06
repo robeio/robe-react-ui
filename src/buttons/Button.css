@@ -1,0 +1,6 @@
+.ajaxButton{
+    transition: all 2s !important;
+}
+.ajaxButton :hover {
+    background: red !important;
+}

@@ -101,6 +101,13 @@ class ComponentList {
         });
 
         components.complex.push({
+            header: "Button",
+            desc: " is a smart button component which prevents multiple clicks on ajax calls.",
+            json: require("./jsons/buttons/Button.json"),
+            sample: require("./samples/buttons/ButtonSample"),
+            code: require("./samples/buttons/ButtonSample.txt")
+        });
+        components.complex.push({
             header: "DataGrid",
             desc: " is a smart grid with filter, sort, search capabilities.",
             json: require("./jsons/datagrid/DataGrid.json"),
@@ -185,7 +192,7 @@ class ComponentList {
             code: require("./samples/notification/NotificationSample.txt")
         });
 
-       
+
         components.complex.push({
             header: "Toast",
             desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
