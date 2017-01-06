@@ -5,8 +5,8 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getList(): Array {
-        let components = { inputs: [], complex: [], charts: [] };
+    getList():Array {
+        let components = {inputs: [], complex: [], charts: []};
         /* eslint-disable global-require */
         components.inputs.push({
             header: "TextInput",
@@ -82,6 +82,14 @@ class ComponentList {
             json: require("./jsons/inputs/DateInput"),
             sample: require("./samples/inputs/DateInputSample"),
             code: require("./samples/inputs/DateInputSample.txt")
+        });
+
+        components.inputs.push({
+            header: "DatePicker",
+            desc: "is the input field for collecting date data.",
+            json: require("./jsons/inputs/datepicker/DatePicker"),
+            sample: require("./samples/inputs/DatePickerSample"),
+            code: require("./samples/inputs/DatePickerSample.txt")
         });
 
         components.inputs.push({
@@ -171,9 +179,9 @@ class ComponentList {
             code: require("./samples/progress/ProgressSample.txt"),
             json: {
                 methods: [
-                    { name: "start", description: "Starts the progress indicator on top of the page" },
-                    { name: "done", description: "Completes the progress indicator on top of the page" },
-                    { name: "configure", description: "Configure the indicator" }]
+                    {name: "start", description: "Starts the progress indicator on top of the page"},
+                    {name: "done", description: "Completes the progress indicator on top of the page"},
+                    {name: "configure", description: "Configure the indicator"}]
             }
         });
 
@@ -185,17 +193,17 @@ class ComponentList {
             code: require("./samples/notification/NotificationSample.txt")
         });
 
-       
+
         components.complex.push({
             header: "Toast",
             desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
             json: {
                 methods: [
-                    { name: "info", description: "Toast.info(message, title, timeOut, callback)" },
-                    { name: "success", description: "Toast.success(message, title, timeOut, callback)" },
-                    { name: "warning", description: "Toast.warning(message, title, timeOut, callback)" },
-                    { name: "error", description: "Toast.error(message, title, timeOut, callback)" },
-                    { name: "configure", description: "Toast.configure(numMaxVisible)" }
+                    {name: "info", description: "Toast.info(message, title, timeOut, callback)"},
+                    {name: "success", description: "Toast.success(message, title, timeOut, callback)"},
+                    {name: "warning", description: "Toast.warning(message, title, timeOut, callback)"},
+                    {name: "error", description: "Toast.error(message, title, timeOut, callback)"},
+                    {name: "configure", description: "Toast.configure(numMaxVisible)"}
                 ]
             },
             sample: require("./samples/toast/ToastSample"),
