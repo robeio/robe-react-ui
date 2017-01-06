@@ -6,6 +6,8 @@
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
 [![Dependency Status](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af/badge.svg)](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af)
  
+ [CHANGE LOG](./CHANGELOG.md)
+
  Please take a look at [Project Site](http://robeio.github.io/robe-react-ui/)
 
 RRU = Robe-React-UI
