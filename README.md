@@ -1,3 +1,4 @@
+![Showcase](./showcase.gif)
 # Robe-React-UI
 #### UI library built on top of <code>React-Bootstrap</code>
 
