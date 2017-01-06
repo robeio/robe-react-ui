@@ -1,8 +1,7 @@
 import React from "react";
 import { ShallowComponent, Assertions } from "robe-react-commons";
-import { Panel, Row, Col, Glyphicon } from "react-bootstrap";
 
-export default class StackLayout extends ShallowComponent {
+export default class EventLayout extends ShallowComponent {
 
     /**
      * Properties of the component
@@ -10,10 +9,6 @@ export default class StackLayout extends ShallowComponent {
      * @static
      */
     static propTypes: Map = {
-        /**
-         * will Shown given items which type is an array
-         */
-        items: React.PropTypes.array,
         /**
          * if layout container clicked then triggered.
          */
@@ -45,7 +40,7 @@ export default class StackLayout extends ShallowComponent {
     }
 
     render(): Object {
-        let { onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop, ...props } = this.props;
+        let { onDrop, ...props } = this.props;
         return (
             <div
                 {...props}
@@ -53,7 +48,7 @@ export default class StackLayout extends ShallowComponent {
                 onDragEnter={this.onDragEnter}
                 onDragOver={this.onDragOver}
                 onDragLeave={this.onDragLeave}
-                onDrop={this.onDrop}
+                onDrop={onDrop ? this.onDrop: null}
             >
                 {this.props.children}
             </div>

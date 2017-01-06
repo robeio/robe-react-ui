@@ -1,6 +1,5 @@
 import React from "react";
-import { Clearfix } from "react-bootstrap";
-import Icon from "../faicon/index";
+import { Glyphicon } from "react-bootstrap";
 import { ShallowComponent } from "robe-react-commons";
 
 export default class ThumbnailItem extends ShallowComponent {
@@ -21,10 +20,10 @@ export default class ThumbnailItem extends ShallowComponent {
     render(): Object {
         let closeButton = null;
         if(this.props.onClose) {
-            closeButton = <Icon icon="remove"  className="rb-close" onClick={this.props.onClose}/>
+            closeButton = <Glyphicon glyph="remove" className="rb-close" onClick={this.props.onClose} />
         }
         return (
-            <div className="center-block rb-unspaced" style={this.props.style} >
+            <div className="center-block rb-unspaced"style={this.props.style} >
                 {closeButton}
                 {this.props.children}
             </div>

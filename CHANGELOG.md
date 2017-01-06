@@ -1,12 +1,21 @@
 # Change Log
 
-## 1.1.10 -- Developing...
+## 1.1.11 -- Developing...
+* changed *upload* method of MultierImpl at server side.
+* rewritten **inputs/upload/FileUploadInput** 
+* added new **DragDropLayout** layout to use as Parent React Component.
+* added new **EventLayout** layout to use as Parent React Component.
+* added new **ThumbnailGroup** and **ThumbnailItem** layouts to use as Parent React Component.
+* added **util/css/ClassName** utility class which provides some operations on classname attribute of DOM Element.
+* added **util/css/Style** utility class which provides some operations on classname attribute of DOM Element.
+* rewritten **util/FileManager** test because of **FileUploadInput** component changed.
+* added **util/Files** which provides some operations about the "FILE".
+* upgraded **robe-react-commons** library.
 
-## 1.1.9
+## 1.1.10
 * DataGridSample is more compact and clear now.
 * DatePicker bugs fixed.
-* Button component added for issue #12.*
-* ModalDataForm uses new Button for submit.
+* Button component added for issue #12.
 
 ## 1.1.8
 * robe-react-commons updated

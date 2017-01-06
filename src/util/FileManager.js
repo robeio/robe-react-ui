@@ -33,9 +33,14 @@ export default class FileManager extends Class {
     upload(fieldName: string, files: Array<string>, onSuccess: Function, onError: Function) {
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
-            formData.append(fieldName, files[i]);
+            formData.append(fieldName, files[i].file);
         }
-        this.__upload(formData, onSuccess, onError);
+        this.__upload(formData, (response) => {
+            for (let i = 0; i < response.length; i++) {
+                files[i].id = response[i].id;
+            }
+            onSuccess(files);
+        }, onError);
     }
 
     /**

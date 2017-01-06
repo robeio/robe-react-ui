@@ -5,8 +5,8 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getList(): Array {
-        let components = { inputs: [], complex: [], charts: [] };
+    getList():Array {
+        let components = {inputs: [], complex: [], charts: []};
         /* eslint-disable global-require */
         components.inputs.push({
             header: "TextInput",
@@ -109,6 +109,13 @@ class ComponentList {
         });
 
         components.complex.push({
+            header: "Button",
+            desc: " is a smart button component which prevents multiple clicks on ajax calls.",
+            json: require("./jsons/buttons/Button.json"),
+            sample: require("./samples/buttons/ButtonSample"),
+            code: require("./samples/buttons/ButtonSample.txt")
+        });
+        components.complex.push({
             header: "DataGrid",
             desc: " is a smart grid with filter, sort, search capabilities.",
             json: require("./jsons/datagrid/DataGrid.json"),
@@ -179,9 +186,9 @@ class ComponentList {
             code: require("./samples/progress/ProgressSample.txt"),
             json: {
                 methods: [
-                    { name: "start", description: "Starts the progress indicator on top of the page" },
-                    { name: "done", description: "Completes the progress indicator on top of the page" },
-                    { name: "configure", description: "Configure the indicator" }]
+                    {name: "start", description: "Starts the progress indicator on top of the page"},
+                    {name: "done", description: "Completes the progress indicator on top of the page"},
+                    {name: "configure", description: "Configure the indicator"}]
             }
         });
 
@@ -199,11 +206,11 @@ class ComponentList {
             desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
             json: {
                 methods: [
-                    { name: "info", description: "Toast.info(message, title, timeOut, callback)" },
-                    { name: "success", description: "Toast.success(message, title, timeOut, callback)" },
-                    { name: "warning", description: "Toast.warning(message, title, timeOut, callback)" },
-                    { name: "error", description: "Toast.error(message, title, timeOut, callback)" },
-                    { name: "configure", description: "Toast.configure(numMaxVisible)" }
+                    {name: "info", description: "Toast.info(message, title, timeOut, callback)"},
+                    {name: "success", description: "Toast.success(message, title, timeOut, callback)"},
+                    {name: "warning", description: "Toast.warning(message, title, timeOut, callback)"},
+                    {name: "error", description: "Toast.error(message, title, timeOut, callback)"},
+                    {name: "configure", description: "Toast.configure(numMaxVisible)"}
                 ]
             },
             sample: require("./samples/toast/ToastSample"),
@@ -222,13 +229,6 @@ class ComponentList {
             desc: " is a wrapper component for GoogleMaps API",
             sample: require("./samples/googlemap/GoogleMapSample"),
             code: require("./samples/googlemap/GoogleMapSample.txt")
-        });
-        components.complex.push({
-            header: "Button",
-            desc: " is a smart button component which prevents multiple clicks on ajax calls.",
-            json: require("./jsons/buttons/Button.json"),
-            sample: require("./samples/buttons/ButtonSample"),
-            code: require("./samples/buttons/ButtonSample.txt")
         });
 
         components.charts.push({

@@ -1,18 +1,19 @@
 import React from "react";
 import { Clearfix } from "react-bootstrap";
-import Icon from "../faicon/index";
 import ThumbnailItem from "./ThumbnailItem";
 import { ShallowComponent } from "robe-react-commons";
 import "./ThumbnailGroup.css";
 
-export default class ThumbnailLayout extends ShallowComponent {
+export default class ThumbnailGroup extends ShallowComponent {
     /**
      * Properties of the component
      *
      * @static
      */
     static propTypes: Map = {
-        style: React.PropTypes.object
+        id: React.PropTypes.string,
+        style: React.PropTypes.object,
+        className: React.PropTypes.string
     };
 
     constructor(props: Object) {
@@ -21,8 +22,8 @@ export default class ThumbnailLayout extends ShallowComponent {
 
     render(): Object {
         return (
-            <div>
-                <div className="rb-thumbnail-box" style={this.props.style} >
+            <div {...this.props} >
+                <div id={this.props.id ? `${this.props.id}_box` : null} className="rb-thumbnail-box" style={this.props.style} >
                     {this.renderItems()}
                 </div>
                 <Clearfix />
