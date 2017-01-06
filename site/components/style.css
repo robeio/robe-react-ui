@@ -1,0 +1,41 @@
+.collapsing > .list-group-item,
+.collapse > .list-group-item,
+.collapse.in > .list-group-item {
+    border-radius: 0 !important;
+    border-bottom: none !important;
+}
+
+.parent .collapse:last-child > .list-group-item:last-child {
+    border-bottom: 1px solid #dddddd !important;
+}
+
+.parent > .list-group-item {
+    color: #333 !important;
+    font-weight: 500;
+    background-color: #eeeeee !important;
+}
+
+.parent > .list-group-item:hover {
+    color: #333;
+    background-color: #eeeeee;
+}
+
+:focus {
+    outline: none;
+}
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    background-color: transparent;
+    border-left: 2px solid #87CEFA !important;
+    border-color: #dddddd;
+    color: #444;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+    text-decoration: none;
+}

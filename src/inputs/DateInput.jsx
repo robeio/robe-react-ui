@@ -376,14 +376,14 @@ export default class DateInput extends ShallowComponent {
             color: undefined
         });
         if (this.props.onChange) {
-            let e = {
+            let element = {
                 target: {
                     value: momentjs(this.state.value).format(this.props.format),
                     parsedValue: e.target.parsedValue,
                     name: this.props.name
                 }
             };
-            this.props.onChange(e);
+            this.props.onChange(element);
         }
     }
 
