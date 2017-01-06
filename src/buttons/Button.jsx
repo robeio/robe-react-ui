@@ -68,8 +68,9 @@ export default class Button extends ShallowComponent {
      */
     render(): Object {
         let onClick = this.props.onClickAsync !== undefined ? this.__onClickAsync : this.props.onClick;
+        let {onClickAsync, ...newProps } = this.props; //eslint-disable-line
         return (
-            <BButton {...this.props} onClick={onClick} className="ajaxButton">
+            <BButton {...newProps} onClick={onClick} className="ajaxButton">
                 {this.props.children}
                 {this.state.isLoading ? (<span> &nbsp; <FaIcon code={`${this.props.loadingIndicator} fa-spin`} /> </span>) : undefined}
             </BButton>

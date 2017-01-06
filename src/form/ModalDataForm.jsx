@@ -2,9 +2,9 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import {
     Modal,
-    Button,
     Alert
 } from "react-bootstrap";
+import Button from "../buttons/Button";
 import DataForm from "./DataForm";
 
 export default class ModalDataForm extends ShallowComponent {
@@ -65,8 +65,6 @@ export default class ModalDataForm extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    doNotSubmit = false;
-
     static dataFormRef = "dataform";
 
     constructor(props: Object) {
@@ -87,7 +85,7 @@ export default class ModalDataForm extends ShallowComponent {
                         defaultValues={this.props.defaultValues}
                         onSubmit={this.__submitForm}
                         validationDisplay={this.props.validationDisplay}
-                        />
+                    />
                     {this.__renderWarning()}
                 </Modal.Body>
                 {this.__renderFooterButtons()}
@@ -100,7 +98,7 @@ export default class ModalDataForm extends ShallowComponent {
         let showCancelButton = ((this.props.showCancelButton) ?
             <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button> : null);
         let showSaveButton = ((this.props.showSaveButton) ?
-            <Button bsStyle="primary" onClick={this.__submitForm}>{this.props.submitButtonText}</Button> : null);
+            <Button bsStyle="primary" ref="submitBtn" onClickAsync={this.__submitForm}>{this.props.submitButtonText}</Button> : null);
 
         return (
             <Modal.Footer>
@@ -125,12 +123,6 @@ export default class ModalDataForm extends ShallowComponent {
     };
 
     __submitForm() {
-        if (this.doNotSubmit === true) {
-            console.warn("Bypassing second submit", this.doNotSubmit);
-            return;
-        }
-        this.doNotSubmit = true;
-
         let item = this.refs[ModalDataForm.dataFormRef].submit();
         if (item && this.props.onSubmit) {
             this.props.onSubmit(item, this.__onComplete);
@@ -139,14 +131,10 @@ export default class ModalDataForm extends ShallowComponent {
                 valid: false,
                 invalidText: this.props.invalidText
             });
-            this.doNotSubmit = false;
+            this.__done();
         }
     }
     __onComplete(message: Object) {
-        if (this.doNotSubmit === true) {
-            this.doNotSubmit = false;
-        }
-
         if (message === true) { // that me no error that is ok
             this.setState({
                 show: false
@@ -159,6 +147,13 @@ export default class ModalDataForm extends ShallowComponent {
                 valid: false,
                 invalidText: message
             });
+        }
+        this.__done();
+    }
+
+    __done() {
+        if (this.refs.submitBtn) {
+            this.refs.submitBtn.done();
         }
     }
 
