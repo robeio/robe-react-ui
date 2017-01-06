@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.9 -- Developing...
+## 1.1.10 -- Developing...
+
+## 1.1.9
 * DataGridSample is more compact and clear now.
 * DatePicker bugs fixed.
 * Button component added for issue #12.*
