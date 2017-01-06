@@ -1,7 +1,7 @@
 # Change Log
 
 ## 1.1.11 -- Developing...
-* changed *upload* method of MultierImpl at server side.
+* changed  *upload* method of MultierImpl at server side.
 * rewritten **inputs/upload/FileUploadInput** 
 * added new **DragDropLayout** layout to use as Parent React Component.
 * added new **EventLayout** layout to use as Parent React Component.
@@ -11,6 +11,8 @@
 * rewritten **util/FileManager** test because of **FileUploadInput** component changed.
 * added **util/Files** which provides some operations about the "FILE".
 * upgraded **robe-react-commons** library.
+* fixed manuel upload of **FileUploadInput**
+* fixed manuel delete of **FileUploadInput**
 
 ## 1.1.10
 * DataGridSample is more compact and clear now.

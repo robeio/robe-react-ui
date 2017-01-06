@@ -34,7 +34,7 @@ export default class FileUploadInput extends ValidationComponent {
      *
      * @static
      */
-    static propTypes: Map = {
+    static propTypes = {
         /**
          * Style map for the component.
          */
@@ -98,7 +98,7 @@ export default class FileUploadInput extends ValidationComponent {
         validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
     };
 
-    static defaultProps: Map = {
+    static defaultProps = {
         multiple: true,
         itemStyle: {},
         placeHolder: "Drag file to here",
@@ -143,7 +143,7 @@ export default class FileUploadInput extends ValidationComponent {
         if(this.__value && this.__value.length > 0) {
             this.__fileManager.info(this.__value, this.onLoad, this.onError);
         }
-        this.__initialValue = this.__value;
+        this.__initialValue = this.__value.slice(0);
     }
     onLoad(fileArray){
         let files = {};
@@ -251,7 +251,7 @@ export default class FileUploadInput extends ValidationComponent {
     }
     upload(droppedFiles){
         let onUpload = this.onUpload.bind(undefined, droppedFiles);
-        this.__fileManager.upload(droppedFiles, onUpload, this.onError.bind("upload"));
+        this.__fileManager.upload(this.props.name, droppedFiles, onUpload, this.onError.bind("upload"));
     }
 
     onUpload(droppedFiles, uploadedFiles){
