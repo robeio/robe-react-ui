@@ -31,7 +31,7 @@ export default class Style {
             if(!domNode.style) {
                 return ;
             }
-            Objects.forEach(style, (value, key: any) => {
+            Maps.forEach(style, (value, key: any) => {
                 delete domNode.style[key];
             });
         }
