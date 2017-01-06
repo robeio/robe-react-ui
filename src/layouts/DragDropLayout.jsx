@@ -2,7 +2,7 @@ import React from "react";
 import { ShallowComponent } from "robe-react-commons";
 import {findDOMNode} from "react-dom";
 import { Generator } from "robe-react-commons";
-import { ClassName, Style } from "../util/CSS";
+import { ClassName, Style } from "../util/css";
 import EventLayout from "./EventLayout";
 import "./DragDropLayout.css";
 
@@ -13,7 +13,7 @@ export default class DragDropLayout extends ShallowComponent {
      *
      * @static
      */
-    static propTypes: Map = {
+    static propTypes = {
         style: React.PropTypes.object,
         /**
          * if layout container clicked then triggered.
@@ -31,12 +31,12 @@ export default class DragDropLayout extends ShallowComponent {
     };
     __componentId;
     layoutDomRef;
-    constructor(props: Object) {
+    constructor(props) {
         super(props);
         this.__componentId = Generator.guid();
     }
 
-    render(): Object {
+    render() {
         return (
             <EventLayout
                 ref={(el) => { this.layoutDomRef = findDOMNode(el)}}
