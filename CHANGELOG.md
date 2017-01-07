@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.11 -- Developing...
+## 1.1.12 -- Developing...
+
+## 1.1.11
 * changed  *upload* method of MultierImpl at server side.
 * rewritten **inputs/upload/FileUploadInput** 
 * added new **DragDropLayout** layout to use as Parent React Component.
@@ -16,6 +18,8 @@
 * fixed CSS module not found problem. changed path of CSS utils class as util/css
 * DateInput bug fixed
 * Progress sample modified for better experience
+* upgraded dependencies. 
+* removed some dependencies which defined in robe-react-commons project.
 
 ## 1.1.10
 * DataGridSample is more compact and clear now.

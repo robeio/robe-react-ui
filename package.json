@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
@@ -15,7 +15,7 @@
     "site": "node ./config/prebuild.js ./docs & webpack --config config/webpack.config.site.js  --progress --profile --colors",
     "start": "webpack-dev-server --config config/webpack.site.dev.js --colors"
   },
-  "docs": "./node_modules/.bin/esdoc -c esdoc.json",
+  "docs": "./nreact-highlightode_modules/.bin/esdoc -c esdoc.json",
   "keywords": [
     "react",
     "es6",
@@ -88,7 +88,7 @@
     "nprogress": "0.2.0",
     "react-addons-css-transition-group": "15.4.2",
     "react-bootstrap": "0.30.7",
-    "react-highlight": "1.0.0",
+    "react-highlight": "0.9.0",
     "react-notifications": "1.3.0",
     "react-quill": "0.4.1",
     "react-recaptcha": "2.2.5",
