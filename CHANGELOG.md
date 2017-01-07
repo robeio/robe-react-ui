@@ -15,6 +15,7 @@
 * fixed manuel delete of **FileUploadInput**
 * fixed CSS module not found problem. changed path of CSS utils class as util/css
 * DateInput bug fixed
+* Progress sample modified for better experience
 
 ## 1.1.10
 * DataGridSample is more compact and clear now.
