@@ -398,6 +398,9 @@ export default class DateInput extends ShallowComponent {
                     target.children[0].className === "fa fa-fw fa-calendar fa-sm ") {
                     return;
                 }
+                else if (target.id === "month-select" || target.id === "year-select") {
+                    return;
+                }
             } catch (exeption) {
                 // no problem
             }

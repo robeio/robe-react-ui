@@ -149,7 +149,7 @@ export default class DatePicker extends ShallowComponent {
             months[i] = <option key={i} value={i}>{months[i]}</option>;
         }
         this.monthSelectBox = (
-            <FormControl componentClass="select" placeholder="Month" onChange={this.__onChangeMonth}
+            <FormControl id="month-select" componentClass="select" placeholder="Month" onChange={this.__onChangeMonth}
                          defaultValue={this.state.moment.month()}>
                 {months}
             </FormControl>
@@ -164,7 +164,7 @@ export default class DatePicker extends ShallowComponent {
             years[i] = <option key={i} value={i}>{i}</option>;
         }
         this.yearSelectBox = (
-            <FormControl componentClass="select" placeholder="Year" onChange={this.__onChangeYear}
+            <FormControl id="year-select" componentClass="select" placeholder="Year" onChange={this.__onChangeYear}
                          defaultValue={this.state.moment.year()}>
                 {years}
             </FormControl>
