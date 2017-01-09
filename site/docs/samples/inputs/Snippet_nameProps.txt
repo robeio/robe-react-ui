@@ -1,0 +1,21 @@
+render(): Object {
+    return (
+        <div>
+            <TextInput
+                name="TextInput1"
+                value={this.state.TextInput1}
+                onChange={this.onChange}
+                />
+            <TextInput
+                name="TextInput2"
+                value={this.state.TextInput2}
+                onChange={this.onChange}
+                />
+        </div>
+    );
+}
+onChange(e: Object) {
+    let state = {};
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+}

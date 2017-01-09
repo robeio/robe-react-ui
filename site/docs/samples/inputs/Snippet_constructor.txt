@@ -1,0 +1,23 @@
+constructor(){
+    this.onChangeT1 = this.onChange.bind(undefined, "TextInput1")
+    this.onChangeT2 = this.onChange.bind(undefined, "TextInput2")
+}
+render(): Object {
+    return (
+        <div>
+            <TextInput
+                value={this.state.TextInput1}
+                onChange={this.onChangeT1}
+                />
+            <TextInput
+                value={this.state.TextInput2}
+                onChange={this.onChangeT2}
+                />
+        </div>
+    );
+}
+onChange(name: string, e: Object) {
+    let state = {};
+    state[name] = e.target.value;
+    this.setState(state);
+}

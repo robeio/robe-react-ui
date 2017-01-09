@@ -28,7 +28,7 @@ class Site extends ShallowComponent {
         return (
             <div>
                 <Navbar inverse collapseOnSelect>
-                    <a href="https://github.com/robeio/robe-react-ui">
+                    <a href="https://github.com/robeio/robe-react-ui" target="_blank">
                         <img
                             style={{ position: "absolute", top: "0px", right: "0px", border: "0px", zIndex: 1 }}
                             alt="Fork me on GitHub"
