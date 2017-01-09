@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.12 -- Developing...
+*Modal close bug fixed at DateInput
 
 ## 1.1.11
 * changed  *upload* method of MultierImpl at server side.
