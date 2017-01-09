@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent, Assertions } from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 
 export default class EventLayout extends ShallowComponent {
 
@@ -10,15 +10,15 @@ export default class EventLayout extends ShallowComponent {
      */
     static propTypes: Map = {
         /**
-         * if layout container clicked then triggered.
+         * The onclick event occurs when the element clicked.
          */
         onClick: React.PropTypes.func,
         /**
-         * when a draggable element is dropped in the layout container element.
+         * The ondrop event occurs when a draggable element or text selection is dropped on a valid drop target.
          */
         onDrop: React.PropTypes.func,
         /**
-         * when a draggable element is moved out of the layout container element.
+         * The onDragLeave event occurs when a draggable element or text selection leaves a valid drop target.
          */
         onDragLeave: React.PropTypes.func,
         /**

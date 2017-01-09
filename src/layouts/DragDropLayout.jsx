@@ -6,6 +6,10 @@ import { ClassName, Style } from "../util/css";
 import EventLayout from "./EventLayout";
 import "./DragDropLayout.css";
 
+/**
+ * <DragDropLayout> is a layout component which provides drag and drop files on events on layer.
+ * Also provide when clicked layer.
+ */
 export default class DragDropLayout extends ShallowComponent {
 
     /**
@@ -14,12 +18,10 @@ export default class DragDropLayout extends ShallowComponent {
      * @static
      */
     static propTypes = {
-        style: React.PropTypes.object,
         /**
-         * Reference Id is used to call onDrag and onDrop on reference element when dragging or dropping.
-         * It is important when DragDropLayout include another layer to restrict drag drop events.
+         * Used to change current styles of DragDropLayout.
          */
-        referenceId: React.PropTypes.string,
+        style: React.PropTypes.object,
         /**
          * if layout container clicked then triggered.
          */
@@ -28,13 +30,12 @@ export default class DragDropLayout extends ShallowComponent {
          * when a draggable element is dropped in the layout container element.
          */
         onDrop: React.PropTypes.func,
+        /**
+         * Used to change the styles of the DragDropLayout  when anything dragged  on.
+         */
         draggedStyle: React.PropTypes.object,
     };
 
-    static defaultProps = {
-
-    };
-    isEntered = 0;
     __componentId;
     layoutDomRef;
     constructor(props) {
@@ -43,10 +44,11 @@ export default class DragDropLayout extends ShallowComponent {
     }
 
     render() {
+        this.isEntered = 0;
         return (
             <EventLayout
                 ref={(el) => { this.layoutDomRef = findDOMNode(el)}}
-                className="rb-drag-drop-box"
+                className="rb-drag-drop-box vertical-center"
                 id={this.__componentId}
                 onDragEnter={this.onDragEnter}
                 onDragLeave={this.onDragLeave}
@@ -59,21 +61,17 @@ export default class DragDropLayout extends ShallowComponent {
         );
     }
     onDragEnter(e) {
-        if(e.target.id === this.__componentId || (this.props.referenceId && e.target.id === this.props.referenceId)) {
-            this.isEntered += 1;
-        }
+        this.isEntered += 1;
         ClassName.add(this.layoutDomRef, "rb-dragged");
         Style.add(this.layoutDomRef, this.props.draggedStyle);
     }
 
     onDragLeave(e) {
-        if(e.target.id === this.__componentId || (this.props.referenceId && e.target.id === this.props.referenceId)) {
-            this.isEntered -= 1;
-            if(this.isEntered <= 0) {
-                ClassName.remove(this.layoutDomRef, "rb-dragged");
-                Style.remove(this.layoutDomRef, this.props.draggedStyle);
-                Style.add(this.layoutDomRef, this.props.style);
-            }
+        this.isEntered -= 1;
+        if(this.isEntered <= 0) {
+            ClassName.remove(this.layoutDomRef, "rb-dragged");
+            Style.remove(this.layoutDomRef, this.props.draggedStyle);
+            Style.add(this.layoutDomRef, this.props.style);
         }
     }
 
@@ -86,15 +84,6 @@ export default class DragDropLayout extends ShallowComponent {
             this.props.onDrop({
                 target: e.dataTransfer
             });
-        }
-    }
-
-    componentDidMount(){
-        if(this.props.referenceId) {
-            let domNode = document.getElementById(this.props.referenceId);
-            domNode.onDrop = this.onDrop;
-            domNode.onDragEnter = this.onDragEnter;
-            domNode.onDragLeave = this.onDragLeave;
         }
     }
 }

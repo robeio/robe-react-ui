@@ -172,6 +172,14 @@ class ComponentList {
         });
 
         components.complex.push({
+            header: "DragDropLayout",
+            desc: " is a layout component which provides drag and drop also click events on layer.",
+            json: require("./jsons/layouts/DragDropLayout.json"),
+            sample: require("./samples/layouts/DragDropLayoutSample"),
+            code: require("./samples/layouts/DragDropLayoutSample.txt")
+        });
+
+        components.complex.push({
             header: "FaIcon",
             desc: "is a wrapper component for font-awesome icons.",
             json: require("./jsons/faicon/FaIcon"),
