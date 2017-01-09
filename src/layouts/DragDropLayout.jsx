@@ -29,6 +29,7 @@ export default class DragDropLayout extends ShallowComponent {
     static defaultProps = {
 
     };
+    isEntered = 0;
     __componentId;
     layoutDomRef;
     constructor(props) {
@@ -53,19 +54,26 @@ export default class DragDropLayout extends ShallowComponent {
         );
     }
     onDragEnter(e) {
+        if(e.target.id === this.__componentId || (this.props.referenceId && e.target.id === this.props.referenceId)) {
+            this.isEntered += 1;
+        }
         ClassName.add(this.layoutDomRef, "rb-dragged");
         Style.add(this.layoutDomRef, this.props.draggedStyle);
     }
 
     onDragLeave(e) {
-        if(e.target.id === this.__componentId) {
-            ClassName.remove(this.layoutDomRef, "rb-dragged");
-            Style.remove(this.layoutDomRef, this.props.draggedStyle);
-            Style.add(this.layoutDomRef, this.props.style);
+        if(e.target.id === this.__componentId || (this.props.referenceId && e.target.id === this.props.referenceId)) {
+            this.isEntered -= 1;
+            if(this.isEntered <= 0) {
+                ClassName.remove(this.layoutDomRef, "rb-dragged");
+                Style.remove(this.layoutDomRef, this.props.draggedStyle);
+                Style.add(this.layoutDomRef, this.props.style);
+            }
         }
     }
 
     onDrop(e) {
+        this.isEntered = 0;
         ClassName.remove(this.layoutDomRef, "rb-dragged");
         Style.remove(this.layoutDomRef, this.props.draggedStyle);
         Style.add(this.layoutDomRef, this.props.style);
@@ -73,6 +81,15 @@ export default class DragDropLayout extends ShallowComponent {
             this.props.onDrop({
                 target: e.dataTransfer
             });
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.referenceId) {
+            let domNode = document.getElementById(this.props.referenceId);
+            domNode.onDrop = this.onDrop;
+            domNode.onDragEnter = this.onDragEnter;
+            domNode.onDragLeave = this.onDragLeave;
         }
     }
 }

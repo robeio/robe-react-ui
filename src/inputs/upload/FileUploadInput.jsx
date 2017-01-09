@@ -184,6 +184,7 @@ export default class FileUploadInput extends ValidationComponent {
                     ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el)}}
                     onDrop={this.onDrop}
                     onClick={this.browse}
+                    referenceId={`${this.__componentId}_box`}
                 >
                     <ThumbnailGroup
                         id={this.__componentId}
