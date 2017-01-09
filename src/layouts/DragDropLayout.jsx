@@ -16,6 +16,11 @@ export default class DragDropLayout extends ShallowComponent {
     static propTypes = {
         style: React.PropTypes.object,
         /**
+         * Reference Id is used to call onDrag and onDrop on reference element when dragging or dropping.
+         * It is important when DragDropLayout include another layer to restrict drag drop events.
+         */
+        referenceId: React.PropTypes.string,
+        /**
          * if layout container clicked then triggered.
          */
         onClick: React.PropTypes.func,

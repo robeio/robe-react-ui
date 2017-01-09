@@ -1,7 +1,8 @@
 # Change Log
 
 ## 1.1.12 -- Developing...
-*Modal close bug fixed at DateInput
+* Modal close bug fixed at DateInput
+* Fixed drag leave animation of DragDropLayout problem.
 
 ## 1.1.11
 * changed  *upload* method of MultierImpl at server side.
