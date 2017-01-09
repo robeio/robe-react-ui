@@ -31,13 +31,13 @@ node_modules
 
 mocha.json
 esdoc
-docs
+/docs
 __test__
 webpack.config.common.js
 webpack.config.dev.js
 webpack.config.prod.js
 webpack.config.test.js
-manual
+/manual
 .babelrc
 .eslintrc
 .npmignore
@@ -50,8 +50,8 @@ site
 .hash.json
 .travis.yml
 Pro
-config
-data
+/config
+/data
 dist
 sitebuild
 static

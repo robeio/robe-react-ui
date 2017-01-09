@@ -1,6 +1,9 @@
 # Change Log
 
-## 1.1.12 -- Developing...
+## 1.1.13 -- Developing...
+
+## 1.1.12
+* fixed npmignore problems.
 
 ## 1.1.11
 * changed  *upload* method of MultierImpl at server side.
