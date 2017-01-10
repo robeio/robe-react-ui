@@ -21,7 +21,7 @@
     z-index: 1;
     opacity: 0;
     position: absolute;
-    transition: .2s;
+    transition: .5s;
     margin: -12px -4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -65,12 +65,23 @@
     border: 1px solid #c14d4d;
     color: white;
     opacity: 0.8;
+    border-radius: 4px;
 }
 
 .upload {
     background-color: #34a853;
     border: 1px solid #298642;
+    color: white;
     opacity: 0.8;
+    border-radius: 4px;
+}
+
+.download {
+    background-color: #295880;
+    border: 1px solid #295880;
+    color: white;
+    opacity: 0.8;
+    border-radius: 4px;
 }
 
 .select {
@@ -86,6 +97,7 @@
 
 .remove:hover,
 .select:hover,
+.download:hover,
 .upload:hover {
     opacity: 1;
 }
