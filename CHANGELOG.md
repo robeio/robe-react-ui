@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.13 -- Developing...
+## 1.1.14 -- Developing...
+
+## 1.1.13
 * FileUploadInput bugs fixed and design developed
 * DateInput bugs fixed and FileUploadInput design developed
 
