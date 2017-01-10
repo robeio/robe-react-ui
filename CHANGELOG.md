@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.13 -- Developing...
+* FileUploadInput bugs fixed and design developed
 
 ## 1.1.12
 * fixed npmignore problems.

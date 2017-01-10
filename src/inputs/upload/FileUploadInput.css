@@ -8,16 +8,17 @@
     float: left;
     cursor: pointer;
 }
+
 .rb-upload-image {
     position: relative;
     vertical-align: middle;
     display: block;
-    margin:auto;
+    margin: auto;
     height: 43px;
     width: 60px;
 }
 
-.rb-upload-image i{
+.rb-upload-image i {
     font-size: 4em !important;
     width: auto !important;
     height: auto !important;
@@ -33,6 +34,7 @@
     width: 100%;
     overflow: hidden
 }
+
 .rb-upload-icon {
     position: relative;
     display: block;
@@ -41,7 +43,9 @@
 }
 
 .rb-upload-name {
-   padding-top: 10px;
+    padding-top: 5px;
+    margin-top: 20px;
+    border-top: 1px solid #eaeaea;
 }
 
 .rb-upload-name div {
@@ -62,14 +66,15 @@
     color: #555;
     background-color: #fff;
     background-image: none;
-    border: 1px dotted #ccc;
     border-radius: 4px;
     -moz-border-radius: 4px;
 }
+
 .rb-upload-toolbar > * {
     cursor: pointer;
     margin: 4px;
 }
+
 .rb-upload-toolbar.rb-radius-bottom {
     border-radius: 0px;
     border-bottom-left-radius: 4px;
@@ -79,6 +84,7 @@
     -moz-border-radius-bottomright: 4px;
     border-top: 0px;
 }
+
 .rb-upload-toolbar.rb-radius-top {
     border-radius: 0px;
     border-top-left-radius: 4px;
@@ -88,7 +94,6 @@
     -moz-border-radius-topright: 4px;
     border-bottom: 0px;
 }
-
 
 .rb-upload-item-tooltip .tooltip-inner {
     background-color: #e2e2e2;
