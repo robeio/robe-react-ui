@@ -40,7 +40,7 @@ export default class InputSample extends ShallowComponent {
                 <p>
                     <h4>value & parsedValue</h4>
                     This field always carrries the string representation of the inputs value. That's why we usually get the value by
-                    <code>let value = e.target.parsedValue || e.target.value;</code>
+                    <p><code>let value = e.target.parsedValue || e.target.value;</code></p>
                     For a quick example please take a look at following table.
                     <Table>
                         <thead>
