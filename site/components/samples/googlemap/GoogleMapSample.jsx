@@ -69,7 +69,6 @@ export default class GoogleMapSample extends ShallowComponent {
     };
 
     __onMapClick(callback:Object) {
-        console.log(callback);
         this.setState({
             selectedCenter: {
                 lat: callback.lat,

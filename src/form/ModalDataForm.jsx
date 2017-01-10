@@ -65,7 +65,8 @@ export default class ModalDataForm extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static dataFormRef = "dataform";
+    __dataFormComponent;
+    __submitButtonComponent;
 
     constructor(props: Object) {
         super(props);
@@ -79,13 +80,13 @@ export default class ModalDataForm extends ShallowComponent {
                 </Modal.Header>
                 <Modal.Body>
                     <DataForm
-                        ref={ModalDataForm.dataFormRef}
+                        ref={(component: Object) => { this.__dataFormComponent = component; } }
                         fields={this.props.fields}
                         propsOfFields={this.props.propsOfFields}
                         defaultValues={this.props.defaultValues}
                         onSubmit={this.__submitForm}
                         validationDisplay={this.props.validationDisplay}
-                    />
+                        />
                     {this.__renderWarning()}
                 </Modal.Body>
                 {this.__renderFooterButtons()}
@@ -98,7 +99,7 @@ export default class ModalDataForm extends ShallowComponent {
         let showCancelButton = ((this.props.showCancelButton) ?
             <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button> : null);
         let showSaveButton = ((this.props.showSaveButton) ?
-            <Button bsStyle="primary" ref="submitBtn" onClickAsync={this.__submitForm}>{this.props.submitButtonText}</Button> : null);
+            <Button bsStyle="primary" ref={(component: Object) => { this.__submitButtonComponent = component; } } onClickAsync={this.__submitForm}>{this.props.submitButtonText}</Button> : null);
 
         return (
             <Modal.Footer>
@@ -123,7 +124,7 @@ export default class ModalDataForm extends ShallowComponent {
     };
 
     __submitForm() {
-        let item = this.refs[ModalDataForm.dataFormRef].submit();
+        let item = this.__dataFormComponent.submit();
         if (item && this.props.onSubmit) {
             this.props.onSubmit(item, this.__onComplete);
         } else {
@@ -152,8 +153,8 @@ export default class ModalDataForm extends ShallowComponent {
     }
 
     __done() {
-        if (this.refs.submitBtn) {
-            this.refs.submitBtn.done();
+        if (this.__submitButtonComponent) {
+            this.__submitButtonComponent.done();
         }
     }
 

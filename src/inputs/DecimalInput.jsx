@@ -76,8 +76,7 @@ export default class DecimalInput extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static refName = "innerInput";
-
+    innerComponent;
     __caretPosition;
 
     render(): Object {
@@ -88,7 +87,7 @@ export default class DecimalInput extends ShallowComponent {
             <Input
                 {...newProps}
                 type="text"
-                ref={DecimalInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
                 step={this.props.step}
                 value={this.props.value}
                 onChange={this.__numericFilter}
@@ -101,7 +100,7 @@ export default class DecimalInput extends ShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs[DecimalInput.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -111,7 +110,7 @@ export default class DecimalInput extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[DecimalInput.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     /**
@@ -120,7 +119,7 @@ export default class DecimalInput extends ShallowComponent {
     __numericFilter(e: Object): boolean {
         let value = e.target.value;
         if (value !== null && value !== undefined) {
-            this.__caretPosition = this.refs[DecimalInput.refName].getCaretPosition();
+            this.__caretPosition = this.innerComponent.getCaretPosition();
             let indexOfDS = value.indexOf(this.props.decimalSeparator);
             if (indexOfDS === 0) {
                 value = `0${value}`;
@@ -139,8 +138,8 @@ export default class DecimalInput extends ShallowComponent {
             e.preventDefault();
             e.stopPropagation();
         }
-        if (this.refs[DecimalInput.refName].isFocused()) {
-            this.refs[DecimalInput.refName].setCaretPosition(this.__caretPosition);
+        if (this.innerComponent.isFocused()) {
+            this.innerComponent.setCaretPosition(this.__caretPosition);
         }
         return result;
     }
@@ -154,8 +153,8 @@ export default class DecimalInput extends ShallowComponent {
     }
 
     componentDidUpdate() {
-        if (this.refs[DecimalInput.refName].isFocused()) {
-            this.refs[DecimalInput.refName].setCaretPosition(this.__caretPosition);
+        if (this.innerComponent.isFocused()) {
+            this.innerComponent.setCaretPosition(this.__caretPosition);
         }
     }
 }

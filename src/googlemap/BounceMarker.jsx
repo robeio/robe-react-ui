@@ -25,48 +25,52 @@ export default class BounceMarker extends ShallowComponent {
         inputType: "none"
     };
 
-    constructor(props):Object {
+    trigger;
+
+    constructor(props): Object {
         super(props);
         this.state = {
             description: props.description || ""
         }
     }
 
-    render():Object {
+    render(): Object {
         return (<span>
-                {this.__renderMarker()}
-            </span>
+            {this.__renderMarker()}
+        </span>
         );
     }
 
     __renderMarker() {
         if (this.props.overlay)
-            return (<span><OverlayTrigger ref="bounceTrigger" trigger="click" rootClose
-                                          placement={this.props.overlayPlacement}
-                                          overlay={<Popover id="popover-trigger-click-root-close"
-                     style={this.props.overlayStyle}>
-                     {this.props.inputType == "textArea" ? <TextArea style={this.props.inputStyle}
-                          name="description"
-                          value={this.state.description}
-                          onChange={this.__handleChange}
-                /> : this.props.inputType == "textInput" ? <TextInput style={this.props.inputStyle}
-                          name="description"
-                          value={this.state.description}
-                          onChange={this.__handleChange}
-                /> : this.state.description}
+            return (<span><OverlayTrigger
+                ref={(component: Object) => { this.trigger = component } }
+                trigger="click" rootClose
+                placement={this.props.overlayPlacement}
+                overlay={<Popover id="popover-trigger-click-root-close"
+                    style={this.props.overlayStyle}>
+                    {this.props.inputType == "textArea" ? <TextArea style={this.props.inputStyle}
+                        name="description"
+                        value={this.state.description}
+                        onChange={this.__handleChange}
+                        /> : this.props.inputType == "textInput" ? <TextInput style={this.props.inputStyle}
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.__handleChange}
+                            /> : this.state.description}
 
-            </Popover>}>
+                </Popover>}>
                 <div className="pin bounce"></div>
             </OverlayTrigger>
-            <div className="pulse"></div></span>);
+                <div className="pulse"></div></span>);
         else
             return (<span>
                 <div className="pin bounce"></div>
-            <div className="pulse"></div>
+                <div className="pulse"></div>
             </span>);
     };
 
-    __handleChange(e:Object) {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;

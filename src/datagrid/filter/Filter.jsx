@@ -16,6 +16,8 @@ export default class Filter extends ShallowComponent {
         value: React.PropTypes.any
     }
 
+    __refMap = {};
+
     render(): Object {
         let field = Objects.deepCopy(this.props.field);
         delete field.validations;
@@ -37,11 +39,9 @@ export default class Filter extends ShallowComponent {
                 <Component
                     {...field}
                     style={style}
-                    key={`${name}_key`}
-                    ref={`${name}Ref`}
                     value={this.props.value}
                     onChange={this.__handleChange}
-                />);
+                    />);
         }
         let fieldMin = Objects.deepCopy(field);
         delete fieldMin.range;
@@ -58,18 +58,16 @@ export default class Filter extends ShallowComponent {
                     {...fieldMin}
                     style={style}
                     key={`${name}_key-min`}
-                    ref={`${name}Ref-min`}
                     value={value[0]}
                     onChange={minOnChange}
-                />
+                    />
                 <Component
                     {...fieldMax}
                     style={style}
                     key={`${name}_key-max`}
-                    ref={`${name}Ref-max`}
                     value={value[1]}
                     onChange={maxOnChange}
-                />
+                    />
             </div>
         );
     }

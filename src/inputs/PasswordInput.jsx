@@ -48,9 +48,9 @@ export default class PasswordInput extends ShallowComponent {
         *Defines the display style of the Validation message.
         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
-         /**
-        * Left Input Addon
-        */
+        /**
+       * Left Input Addon
+       */
         inputGroupLeft: React.PropTypes.object,
         /**
         * Right Input Addon
@@ -58,7 +58,7 @@ export default class PasswordInput extends ShallowComponent {
         inputGroupRight: React.PropTypes.object
     };
 
-    static refName = "innerInput";
+    innerComponent;
     /**
      * defaultProps
      * @static
@@ -81,7 +81,7 @@ export default class PasswordInput extends ShallowComponent {
                 {...this.props}
                 onChange={this.__onChange}
                 type="password"
-                ref={PasswordInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
             />
         );
     }
@@ -91,7 +91,7 @@ export default class PasswordInput extends ShallowComponent {
      * @return true if it is valid.
      */
     isValid(): boolean {
-        return this.refs[PasswordInput.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -101,7 +101,7 @@ export default class PasswordInput extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[PasswordInput.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     /**

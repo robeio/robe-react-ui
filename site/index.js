@@ -71,7 +71,7 @@ class Site extends ShallowComponent {
                     </Navbar.Collapse>
                 </Navbar>
                 <div
-                    id="activePege"
+                    id="activePage"
                     style={{ overflowY: "auto", overflowX: "hidden", height: window.innerHeight - 48 }}
                 >
                     {activePage}
@@ -96,7 +96,7 @@ class Site extends ShallowComponent {
         }
         window.location.hash = `#${key}`;
 
-        let element = document.getElementById("activePege");
+        let element = document.getElementById("activePage");
         element.scrollTop = 0;
 
         this.setState({

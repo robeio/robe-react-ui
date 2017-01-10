@@ -165,6 +165,7 @@ export default class DataGrid extends StoreComponent {
     pageSize = 20;
     __fields = [];
     __sorts = {};
+    __filterComponent;
 
     constructor(props: Object) {
         super(props);
@@ -216,7 +217,7 @@ export default class DataGrid extends StoreComponent {
 
                 </Row>
                 <Filters
-                    ref="filters" //eslint-disable-line
+                    ref={(component: Object) => { this.__filterComponent = component; }}
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
@@ -339,7 +340,7 @@ export default class DataGrid extends StoreComponent {
                         field={column}
                         onFilterClick={this.__openFilterPopup}
                         onSortClick={this.__onSortClick}
-                        filter={this.refs.filters !== undefined ? this.refs.filters.state.filters[column.name] : undefined}
+                        filter={this.__filterComponent !== undefined ? this.__filterComponent.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
                     />
                 );
@@ -365,11 +366,11 @@ export default class DataGrid extends StoreComponent {
     }
 
     __openFilterPopup(name: string) {
-        let visiblePopups = this.refs.filters.state.visiblePopups;
+        let visiblePopups = this.__filterComponent.state.visiblePopups;
         let isVisible = visiblePopups[name];
         let popupState = {};
         popupState[name] = !isVisible;
-        this.refs.filters.setState({
+        this.__filterComponent.setState({
             visiblePopups: popupState
         });
     }
@@ -378,7 +379,7 @@ export default class DataGrid extends StoreComponent {
         let filterArr = [];
         if (!deleteAll) {
             Maps.forEach(
-                this.refs.filters.state.filters,
+                this.__filterComponent.state.filters,
                 (a: string) => {
                     if (a !== undefined) {
                         if (Assertions.isArray(a[0])) {

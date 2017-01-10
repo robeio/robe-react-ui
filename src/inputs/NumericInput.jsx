@@ -50,9 +50,9 @@ export default class NumericInput extends ShallowComponent {
         *Defines the display style of the Validation message.
         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
-         /**
-        * Left Input Addon
-        */
+        /**
+       * Left Input Addon
+       */
         inputGroupLeft: React.PropTypes.object,
         /**
         * Right Input Addon
@@ -72,7 +72,7 @@ export default class NumericInput extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static refName = "innerInput";
+    innerComponent;
 
     render(): Object {
         let { thousandSeparator, decimalSeparator, ...newProps } = this.props;  //eslint-disable-line
@@ -81,7 +81,7 @@ export default class NumericInput extends ShallowComponent {
                 {...newProps}
                 value={this.props.value}
                 type="text"
-                ref={NumericInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
                 onChange={this.__numericFilter}
             />
         );
@@ -92,7 +92,7 @@ export default class NumericInput extends ShallowComponent {
      * @return true if it is valid.
      */
     isValid(): boolean {
-        return this.refs[NumericInput.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -102,7 +102,7 @@ export default class NumericInput extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[NumericInput.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     /**

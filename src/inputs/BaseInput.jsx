@@ -81,7 +81,7 @@ export default class BaseInput extends ValidationComponent {
         validationDisplay: "block"
     }
 
-    static refName = "innerInput";
+    innerComponent;
 
     /**
      * Max length.
@@ -112,9 +112,9 @@ export default class BaseInput extends ValidationComponent {
         let component = (
             <FormControl
                 {...newProps}
-                ref={BaseInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
                 value={this.props.value}
-            />
+                />
         );
 
         if (inputGroupLeft !== undefined || inputGroupRight !== undefined) {
@@ -139,7 +139,7 @@ export default class BaseInput extends ValidationComponent {
      * Focuses to the input field.
      */
     focus() {
-        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        let node = ReactDOM.findDOMNode(this.innerComponent); // eslint-disable-line
         node.focus();
     }
 
@@ -149,16 +149,16 @@ export default class BaseInput extends ValidationComponent {
             * @memberOf BaseInput
      */
     isFocused(): boolean {
-        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        let node = ReactDOM.findDOMNode(this.innerComponent); // eslint-disable-line
         return document.activeElement === node;
     }
 
     setCaretPosition(index: number) {
-        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        let node = ReactDOM.findDOMNode(this.innerComponent); // eslint-disable-line
         node.selectionStart = node.selectionEnd = index;
     }
     getCaretPosition(): number {
-        let node = ReactDOM.findDOMNode(this.refs.innerInput); // eslint-disable-line
+        let node = ReactDOM.findDOMNode(this.innerComponent); // eslint-disable-line
         return node.selectionStart;
     }
 

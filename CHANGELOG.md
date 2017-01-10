@@ -2,6 +2,7 @@
 
 ## 1.1.13 -- Developing...
 * FileUploadInput bugs fixed and design developed
+* string refs -> callback refs
 
 ## 1.1.12
 * fixed npmignore problems.

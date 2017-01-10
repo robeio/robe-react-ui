@@ -56,9 +56,9 @@ export default class MoneyInput extends ShallowComponent {
         *Defines the display style of the Validation message.
         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
-         /**
-        * Left Input Addon
-        */
+        /**
+       * Left Input Addon
+       */
         inputGroupLeft: React.PropTypes.object
 
     };
@@ -78,9 +78,9 @@ export default class MoneyInput extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static refName = "innerInput";
-
+    innerComponent;
     caretPosition = 0;
+
 
     render(): Object {
         /* eslint-disable no-unused-vars */
@@ -93,9 +93,9 @@ export default class MoneyInput extends ShallowComponent {
                 onChange={this.__numericFilter}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
-                ref={MoneyInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
                 inputGroupRight={<InputGroup.Addon>{this.props.unit}</InputGroup.Addon>}
-            />
+                />
         );
     }
 
@@ -104,7 +104,7 @@ export default class MoneyInput extends ShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs[MoneyInput.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -114,14 +114,14 @@ export default class MoneyInput extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[MoneyInput.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     /**
      * Internal onchange handler for filtering numerics.
      */
     __numericFilter(e: Object): boolean {
-        this.caretPosition = this.refs[MoneyInput.refName].getCaretPosition();
+        this.caretPosition = this.innerComponent.getCaretPosition();
         let value = e.target.value;
 
         if (value === undefined || value === null) {
@@ -195,8 +195,8 @@ export default class MoneyInput extends ShallowComponent {
     }
 
     componentDidUpdate() {
-        if (this.refs[MoneyInput.refName].isFocused()) {
-            this.refs[MoneyInput.refName].setCaretPosition(this.caretPosition);
+        if (this.innerComponent.isFocused()) {
+            this.innerComponent.setCaretPosition(this.caretPosition);
         }
     }
 }

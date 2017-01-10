@@ -70,7 +70,7 @@ export default class TextInput extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static refName = "innerInput";
+    innerComponent;
     /**
      * Renders the component.
      *
@@ -83,7 +83,7 @@ export default class TextInput extends ShallowComponent {
                 {...props}
                 onChange={this.__onChange}
                 type="text"
-                ref={TextInput.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
                 />);
     }
 
@@ -92,7 +92,7 @@ export default class TextInput extends ShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs[TextInput.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -102,7 +102,7 @@ export default class TextInput extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[TextInput.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     /**
@@ -117,7 +117,7 @@ export default class TextInput extends ShallowComponent {
             e.preventDefault();
             e.stopPropagation();
         }
-        this.refs[TextInput.refName].focus = true;
+        this.innerComponent.focus = true;
         return result;
     }
 }

@@ -79,6 +79,8 @@ export default class DataForm extends ShallowComponent {
     __onChanges = {};
 
     __columnSize;
+    __refMap = {};
+
     constructor(props) {
         super(props);
         this.state = {};
@@ -86,10 +88,10 @@ export default class DataForm extends ShallowComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-       this.__init(nextProps);
+        this.__init(nextProps);
     }
 
-    __init(nextProps, defaultValues){
+    __init(nextProps, defaultValues) {
         this.__columnSize = 12 / nextProps.columnsSize;
         let fields = nextProps.fields;
         let props = nextProps.propsOfFields;
@@ -102,13 +104,13 @@ export default class DataForm extends ShallowComponent {
 
             let prop = Objects.clone(field, [Array]);
             let config = Objects.mergeClone(props[name], prop, [Array]);
-            if(defaultValues) {
+            if (defaultValues) {
                 config.value = defaultValues[name];
             }
             this.__setPropsOfField(name, config, this.state);
         }
     }
-    render():Object {
+    render(): Object {
         let form = (
             <Form>
                 <Row>
@@ -126,7 +128,7 @@ export default class DataForm extends ShallowComponent {
      * @returns {Array}
      * @private
      */
-    __createForm = (fields:Array<Map>):Array => {
+    __createForm = (fields: Array<Map>): Array => {
         let items = [];
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
@@ -145,7 +147,7 @@ export default class DataForm extends ShallowComponent {
      * @returns {Object}
      * @private
      */
-    __createElement = (field:Map):Object => {
+    __createElement = (field: Map): Object => {
         if (field.visible === false) {
             return null;
         }
@@ -156,12 +158,12 @@ export default class DataForm extends ShallowComponent {
         return (
             <Col key={`${name}_key`} md={this.__columnSize}>
                 <Component
-                    ref={`${name}Ref`}
+                    ref={(component: Object) => { this.__refMap[`${name}Ref`] = component; } }
                     {...props}
                     onChange={this.onChange}
                     value={this.state[name]}
                     validationDisplay={this.props.validationDisplay}
-                />
+                    />
             </Col>
         );
     }
@@ -170,8 +172,8 @@ export default class DataForm extends ShallowComponent {
      * Checks validations of all components in form data
      * @returns {boolean}
      */
-    isValid = ():boolean => {
-        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.refs, "isValid", "function");
+    isValid = (): boolean => {
+        let hasIsValidObjects = Maps.getObjectsWhichHasKeyInMap(this.__refMap, "isValid", "function");
         for (let i = 0; i < hasIsValidObjects.length; i++) {
             if (hasIsValidObjects[i].isValid() !== true) {
                 return false;
@@ -186,7 +188,7 @@ export default class DataForm extends ShallowComponent {
      * @param state
      * @private
      */
-    __setPropsOfFields(propsOfFields:Object, state:Object) {
+    __setPropsOfFields(propsOfFields: Object, state: Object) {
         if (Assertions.isObject(propsOfFields)) {
             for (let targetName in propsOfFields) {
                 if (Objects.hasProperty(propsOfFields, targetName)) {
@@ -202,7 +204,7 @@ export default class DataForm extends ShallowComponent {
      * @param state
      * @private
      */
-    __setPropsOfField(name:string, props:Object, state:Object) {
+    __setPropsOfField(name: string, props: Object, state: Object) {
         if (!this.__props[name]) this.__props[name] = {};
         if (props) {
             for (let targetName in props) {
@@ -243,15 +245,15 @@ export default class DataForm extends ShallowComponent {
         }
 
         if (this.__onChanges[name]) {
-            let result = this.__onChanges[name](e, (result) => {
-                me.__setPropsOfFields(result, state);
+            let result = this.__onChanges[name](e, (result2: boolean) => {
+                me.__setPropsOfFields(result2, state);
                 me.setState(state);
                 return false;
             });
-            if(result) {
+            if (result) {
                 this.__setPropsOfFields(result, state);
             }
-            if(result != false) {
+            if (result !== false) {
                 this.setState(state);
             }
         } else {
@@ -264,7 +266,7 @@ export default class DataForm extends ShallowComponent {
      * Checks validation of data and return valid data. If data is not valid then return false
      * @returns {boolean}
      */
-    submit():any {
+    submit(): any {
         let valid = this.isValid();
         return valid ? this.state : false;
     }

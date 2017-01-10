@@ -52,9 +52,9 @@ export default class TextArea extends ShallowComponent {
         *Defines the display style of the Validation message.
         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
-         /**
-        * Left Input Addon
-        */
+        /**
+       * Left Input Addon
+       */
         inputGroupLeft: React.PropTypes.object,
         /**
         * Right Input Addon
@@ -75,7 +75,7 @@ export default class TextArea extends ShallowComponent {
         validationDisplay: "block"
     };
 
-    static refName = "innerInput";
+    innerComponent;
     /**
      * Renders the component.
      *
@@ -90,7 +90,7 @@ export default class TextArea extends ShallowComponent {
                 type="textarea"
                 onKeyUp={this.props.autoResize ? this.__resize : undefined}
                 componentClass="textarea"
-                ref={TextArea.refName}
+                ref={(component: Object) => { this.innerComponent = component } }
             />
         );
     }
@@ -100,7 +100,7 @@ export default class TextArea extends ShallowComponent {
      * @return true - value is valid, false - invalid
      */
     isValid(): boolean {
-        return this.refs[TextArea.refName].isValid();
+        return this.innerComponent.isValid();
     }
 
     /**
@@ -110,7 +110,7 @@ export default class TextArea extends ShallowComponent {
      * @param value
      */
     validate(value: any): Array<string> {
-        return this.refs[TextArea.refName].validate(value);
+        return this.innerComponent.validate(value);
     }
 
     __resize() {
