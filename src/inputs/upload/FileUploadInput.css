@@ -55,7 +55,6 @@
     word-break: break-all;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #555;
 }
 
 .rb-upload-toolbar {

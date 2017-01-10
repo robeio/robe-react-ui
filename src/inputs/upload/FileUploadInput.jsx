@@ -218,9 +218,9 @@ export default class FileUploadInput extends ValidationComponent {
                           onClick={this.onSelectAll}>
                     Select All
                 </Checkbox>
-                <Glyphicon className="pull-right" glyph="cloud-download"/>
-                <Glyphicon className="pull-right" glyph="cloud-upload" onClick={this.uploadAll}/>
-                <FaIcon code="fa-trash pull-right" size="fa-sm" onClick={this.deleteAll}/>
+                <Glyphicon className="pull-right" glyph="cloud-download" onClick={this.downloadSelectAll}/>
+                <Glyphicon className="pull-right" glyph="cloud-upload" onClick={this.uploadSelectAll}/>
+                <FaIcon code="fa-trash pull-right" size="fa-sm" onClick={this.deleteSelectAll}/>
             </div>
         );
     }
@@ -259,7 +259,7 @@ export default class FileUploadInput extends ValidationComponent {
         return Objects.mergeClone(this.state.files, newFiles);
     }
 
-    uploadAll() {
+    uploadSelectAll() {
         Maps.forEach(this.state.selectedFiles, (file, key) => {
             if (!file.isUploaded) {
                 this.upload([file])
@@ -296,9 +296,12 @@ export default class FileUploadInput extends ValidationComponent {
         });
     }
 
-    deleteAll() {
+    deleteSelectAll() {
         Maps.forEach(this.state.selectedFiles, (file, key) => {
             this.deleteFile(file);
+        });
+        this.setState({
+            selectedFiles: []
         });
     }
 
@@ -351,30 +354,32 @@ export default class FileUploadInput extends ValidationComponent {
         let elements = [];
         Maps.forEach(files, (file, key) => {
             let selected = Arrays.isExistByKey(this.state.selectedFiles, "key", file);
-            let className = selected ? "rb-thumbnail-toolbar selected-item " : "rb-thumbnail-toolbar";
+            let classNameToolbar = selected ? "rb-thumbnail-toolbar selected-item" : "rb-thumbnail-toolbar";
+            let classNameItem = file.isUploaded ? "" : " waiting ";
+            classNameItem += selected ? " selected-item " : "";
 
-            let deleteIcon = <FaIcon code="fa-trash" size="fa-sm"
-                                     onClick={this.deleteFile.bind(undefined, file)}/>;
-            let uploadIcon = !file.isUploaded ?
-                <FaIcon code="fa-upload" size="fa-sm"
-                        onClick={this.uploadFile.bind(undefined, file)}/> : null;
+            let uploadIcon = file.isUploaded ?
+                <FaIcon code={"fa-download"} size="fa-sm"
+                        onClick={this.downloadFile.bind(undefined, file)}/> :
+                <FaIcon code={"fa-upload"} size="fa-sm"
+                        onClick={this.uploadFile.bind(undefined, file)}/>;
 
-            let selectIcon = selected ? "fa-check-circle-o" : "fa-circle-o";
-
+            let selectIcon = selected ? "fa-check-square-o" : "fa-square-o";
             elements.push(
                 <ThumbnailItem
-                    className={file.isUploaded ? "" : "waiting"}
+                    className={classNameItem}
                     key={file.key}>
-                    <div className={className}>
-                        <div className="rb-thumbnail-toolbar-item remove">
-                            {deleteIcon}
-                        </div>
-                        <div className="rb-thumbnail-toolbar-item upload">
-                            {uploadIcon}
-                        </div>
+                    <div className={classNameToolbar}>
                         <div className="rb-thumbnail-toolbar-item select">
                             <FaIcon code={selectIcon} size="fa-sm"
                                     onClick={this.onSelect.bind(undefined, file)}/>
+                        </div>
+                        <div className="rb-thumbnail-toolbar-item remove">
+                            <FaIcon code="fa-trash" size="fa-sm"
+                                    onClick={this.deleteFile.bind(undefined, file)}/>
+                        </div>
+                        <div className="rb-thumbnail-toolbar-item upload">
+                            {uploadIcon}
                         </div>
                     </div>
                     <div className="rb-upload-input" style={{...this.__style,  ...this.props.itemStyle}}>
@@ -425,6 +430,14 @@ export default class FileUploadInput extends ValidationComponent {
 
     }
 
+    downloadSelectAll() {
+
+    }
+
+    downloadFile() {
+
+    }
+
     onSelect(file) {
         let selectedFiles = this.state.selectedFiles;
         let isExist = Arrays.isExistByKey(selectedFiles, "key", file);
@@ -434,9 +447,9 @@ export default class FileUploadInput extends ValidationComponent {
             selectedFiles.push(file);
         }
         this.setState({
+            changed: !this.state.changed,
             selectedFiles: selectedFiles
         });
-        this.forceUpdate();
     }
 
     onSelectAll() {
