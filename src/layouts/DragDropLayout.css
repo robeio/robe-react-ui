@@ -17,24 +17,11 @@
     background-image: none;
 }
 
-.rb-drag-drop-box:hover .rb-thumbnail-box:empty {
-    opacity: 0.1;
-}
-
-.rb-drag-drop-box .rb-thumbnail-box:empty {
-    height: 122px;
-    width: 100%;
-    opacity: 0.3;
-    transition: .3s;
-    background: url("../../static/drop-drag-file.png") 50% 50% no-repeat transparent;
-}
-
 .rb-drag-drop-box.rb-dragged,
 .rb-drag-drop-box .rb-dragged {
-    border: 1px dashed #d0d6da;
     background-color: #f5f6f7;
     cursor: progress;
-    opacity: 0.5;
+    opacity: 1;
     filter: alpha(opacity=50);
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);

@@ -32,7 +32,7 @@ export default class I18n extends ShallowComponent {
                 </p>
                 <Well>
                     <p>As you can see from the code it will first print <code>This field is required.</code></p>
-                    <p>Than it will print <code>Value must be less or equal to 3</code></p>
+                    <p>Than it will print <code>Value must be greater or equal to 3</code></p>
                 </Well>
             </div>
         );

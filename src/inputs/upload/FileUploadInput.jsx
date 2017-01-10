@@ -175,7 +175,6 @@ export default class FileUploadInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel> {this.props.label} </ControlLabel>
         );
-
         return (
             <FormGroup hidden={this.props.hidden}>
                 {label}
@@ -355,7 +354,7 @@ export default class FileUploadInput extends ValidationComponent {
         let elements = [];
         Maps.forEach(files, (file, key) => {
             let selected = Arrays.isExistByKey(this.state.selectedFiles, "key", file);
-            let classNameItem = file.isUploaded ? "" : " waiting ";
+            let classNameItem = file.isUploaded ? "" : " waiting-item ";
             classNameItem += selected ? " selected-item " : "";
 
             let downloadIcon = file.isUploaded ?
