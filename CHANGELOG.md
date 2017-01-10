@@ -1,8 +1,14 @@
 # Change Log
 
-## 1.1.13 -- Developing...
-* FileUploadInput bugs fixed and design developed
+## 1.1.15 -- Developing...
+
+## 1.1.14
 * string refs -> callback refs #29
+* FileUploadInput bugs fixed
+
+## 1.1.13
+* FileUploadInput bugs fixed and design developed
+* DateInput bugs fixed and FileUploadInput design developed
 
 ## 1.1.12
 * fixed npmignore problems.
