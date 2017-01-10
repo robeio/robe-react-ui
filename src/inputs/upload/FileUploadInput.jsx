@@ -182,12 +182,12 @@ export default class FileUploadInput extends ValidationComponent {
                 <FormControl
                     {...attributes}
                 />
-                {this.createToolbar("top")}
                 <DragDropLayout
                     ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el)}}
                     onDrop={this.onDrop}
                     onClick={this.browse}
                 >
+                    {this.createToolbar("top")}
                     <ThumbnailGroup
                         id={this.__componentId}
                     >
@@ -214,13 +214,14 @@ export default class FileUploadInput extends ValidationComponent {
 
         return (
             <div className={`rb-upload-toolbar rb-radius-${this.props.toolbarPosition}`}>
-                <Checkbox className="pull-left" checked={selectAllChecked}
+                <Checkbox className="pull-left toolbar-chekbox"
+                          checked={selectAllChecked}
                           onClick={this.onSelectAll}>
                     Select All
                 </Checkbox>
-                <Glyphicon className="pull-right" glyph="cloud-download"/>
-                <Glyphicon className="pull-right" glyph="cloud-upload" onClick={this.uploadAll}/>
-                <FaIcon code="fa-trash pull-right" size="fa-sm" onClick={this.deleteAll}/>
+                <FaIcon code="fa-download pull-right " size="fa-sm" onClick={this.downloadSelectAll}/>
+                <FaIcon code="fa-upload pull-right " size="fa-sm" onClick={this.uploadSelectAll}/>
+                <FaIcon code="fa-trash pull-right " size="fa-sm" onClick={this.deleteSelectAll}/>
             </div>
         );
     }
@@ -259,16 +260,16 @@ export default class FileUploadInput extends ValidationComponent {
         return Objects.mergeClone(this.state.files, newFiles);
     }
 
-    uploadAll() {
+    uploadSelectAll() {
         Maps.forEach(this.state.selectedFiles, (file, key) => {
             if (!file.isUploaded) {
-                this.upload([file])
+                this.upload([file]);
             }
         });
     }
 
     uploadFile(file) {
-
+        this.upload([file]);
     }
 
     upload(droppedFiles) {
@@ -296,9 +297,12 @@ export default class FileUploadInput extends ValidationComponent {
         });
     }
 
-    deleteAll() {
+    deleteSelectAll() {
         Maps.forEach(this.state.selectedFiles, (file, key) => {
             this.deleteFile(file);
+        });
+        this.setState({
+            selectedFiles: []
         });
     }
 
@@ -351,30 +355,35 @@ export default class FileUploadInput extends ValidationComponent {
         let elements = [];
         Maps.forEach(files, (file, key) => {
             let selected = Arrays.isExistByKey(this.state.selectedFiles, "key", file);
-            let className = selected ? "rb-thumbnail-toolbar selected-item " : "rb-thumbnail-toolbar";
+            let classNameItem = file.isUploaded ? "" : " waiting ";
+            classNameItem += selected ? " selected-item " : "";
 
-            let deleteIcon = <FaIcon code="fa-trash" size="fa-sm"
-                                     onClick={this.deleteFile.bind(undefined, file)}/>;
+            let downloadIcon = file.isUploaded ?
+                <FaIcon code="fa-download" size="fa-sm"
+                        onClick={this.downloadFile.bind(undefined, file)}/> : null;
             let uploadIcon = !file.isUploaded ?
                 <FaIcon code="fa-upload" size="fa-sm"
                         onClick={this.uploadFile.bind(undefined, file)}/> : null;
 
-            let selectIcon = selected ? "fa-check-circle-o" : "fa-circle-o";
-
+            let selectIcon = selected ? "fa-check-square-o" : "fa-square-o";
             elements.push(
                 <ThumbnailItem
-                    className={file.isUploaded ? "" : "waiting"}
+                    className={classNameItem}
                     key={file.key}>
-                    <div className={className}>
+                    <div className={selected ? "rb-thumbnail-toolbar selected-item" : "rb-thumbnail-toolbar"}>
+                        <div className="rb-thumbnail-toolbar-item select">
+                            <FaIcon code={selectIcon} size="fa-sm"
+                                    onClick={this.onSelect.bind(undefined, file)}/>
+                        </div>
                         <div className="rb-thumbnail-toolbar-item remove">
-                            {deleteIcon}
+                            <FaIcon code="fa-trash" size="fa-sm"
+                                    onClick={this.deleteFile.bind(undefined, file)}/>
                         </div>
                         <div className="rb-thumbnail-toolbar-item upload">
                             {uploadIcon}
                         </div>
-                        <div className="rb-thumbnail-toolbar-item select">
-                            <FaIcon code={selectIcon} size="fa-sm"
-                                    onClick={this.onSelect.bind(undefined, file)}/>
+                        <div className="rb-thumbnail-toolbar-item download">
+                            {downloadIcon}
                         </div>
                     </div>
                     <div className="rb-upload-input" style={{...this.__style,  ...this.props.itemStyle}}>
@@ -425,6 +434,21 @@ export default class FileUploadInput extends ValidationComponent {
 
     }
 
+    downloadSelectAll() {
+        Maps.forEach(this.state.selectedFiles, (file, key) => {
+            if (file.isUploaded) {
+                this.downloadFile(file);
+            }
+        });
+        this.setState({
+            selectedFiles: []
+        });
+    }
+
+    downloadFile(file) {
+        window.open("files/" + file.key);
+    }
+
     onSelect(file) {
         let selectedFiles = this.state.selectedFiles;
         let isExist = Arrays.isExistByKey(selectedFiles, "key", file);
@@ -434,9 +458,9 @@ export default class FileUploadInput extends ValidationComponent {
             selectedFiles.push(file);
         }
         this.setState({
+            changed: !this.state.changed,
             selectedFiles: selectedFiles
         });
-        this.forceUpdate();
     }
 
     onSelectAll() {

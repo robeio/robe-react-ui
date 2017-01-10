@@ -4,16 +4,17 @@ import DateInput from "robe-react-ui/lib/inputs/DateInput";
 
 
 export default class DateInputSample extends ShallowComponent {
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         this.state = {
             DateInputNormal: new Date().getTime(),
-            DateInputValidations: "05/10/1992"
-        };
+            DateInputValidations: new Date()
+        }
+        ;
     }
 
 
-    render(): Object {
+    render():Object {
         return (
             <div>
                 <DateInput
@@ -21,7 +22,7 @@ export default class DateInputSample extends ShallowComponent {
                     name="DateInputNormal"
                     value={this.state.DateInputNormal}
                     onChange={this.__handleChange}
-                    />
+                />
                 <DateInput
                     label="With Validations"
                     name="DateInputValidations"
@@ -30,7 +31,7 @@ export default class DateInputSample extends ShallowComponent {
                     validations={{
                         required: true
                     }}
-                    />
+                />
                 <DateInput
                     label="DateInput With Custom Localization"
                     name="DateInputNormal"
@@ -38,11 +39,12 @@ export default class DateInputSample extends ShallowComponent {
                     format="YYYY MM DD"
                     value={this.state.DateInputNormal}
                     onChange={this.__handleChange}
-                    />
+                />
             </div>
         );
     }
-    __handleChange(e: Object) {
+
+    __handleChange(e:Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;

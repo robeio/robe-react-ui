@@ -55,13 +55,12 @@
     word-break: break-all;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #555;
 }
 
 .rb-upload-toolbar {
-    display: block;
+    display: inline-block;
     width: 100%;
-    height: 25px;
+    height: 18px;
     font-size: 14px;
     color: #555;
     background-color: #fff;
@@ -72,7 +71,20 @@
 
 .rb-upload-toolbar > * {
     cursor: pointer;
-    margin: 4px;
+    margin: 0;
+}
+
+.toolbar-chekbox {
+    margin-top: -4px;
+}
+
+.rb-drag-drop-box  .rb-thumbnail-box {
+    margin-top: -8px;
+}
+
+.rb-upload-toolbar > *:hover {
+    color: #295880;
+    font-weight: 500;
 }
 
 .rb-upload-toolbar.rb-radius-bottom {

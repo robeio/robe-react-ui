@@ -142,6 +142,10 @@ export default class DateInput extends ShallowComponent {
             parsedValue = momentjs(value, this.props.format).format(this.props.format);
             overlayValue = momentjs(value, this.props.format).valueOf();
         }
+        else if (momentjs(value).isValid()) {
+            parsedValue = momentjs(value).format(this.props.format);
+            overlayValue = momentjs(value, this.props.format).valueOf();
+        }
 
         let {format, locale, minDate, maxDate, ...newProps} = this.props;
         return (

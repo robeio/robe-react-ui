@@ -60,12 +60,17 @@ export default class DragDropLayout extends ShallowComponent {
             </EventLayout>
         );
     }
+    /**
+     * triggered when a draggable element drag inside of the Layout.
+     */
     onDragEnter(e) {
         this.isEntered += 1;
         ClassName.add(this.layoutDomRef, "rb-dragged");
         Style.add(this.layoutDomRef, this.props.draggedStyle);
     }
-
+    /**
+     * triggered when a draggable element drag out of the Layout.
+     */
     onDragLeave(e) {
         this.isEntered -= 1;
         if(this.isEntered <= 0) {
@@ -74,7 +79,9 @@ export default class DragDropLayout extends ShallowComponent {
             Style.add(this.layoutDomRef, this.props.style);
         }
     }
-
+    /**
+     * triggered when a draggable element is dropped in the layout.
+     */
     onDrop(e) {
         this.isEntered = 0;
         ClassName.remove(this.layoutDomRef, "rb-dragged");
