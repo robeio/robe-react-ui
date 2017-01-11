@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.15 -- Developing...
+* Showcase refresh bug fixed.
 
 ## 1.1.14
 * string refs -> callback refs #29

@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
-import {Grid, Col, Collapse, ListGroup, ListGroupItem, InputGroup, Nav, NavItem} from "react-bootstrap";
+import { Grid, Col, Collapse, ListGroup, ListGroupItem, InputGroup, Nav, NavItem } from "react-bootstrap";
 import "react-notifications/lib/notifications.css";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import ComponentList from "./ComponentList";
@@ -13,18 +13,19 @@ import "./style.css"
 
 export default class Components extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             componentSelection: window.location.hash.substring(1) === "Components" ? "Components/complex/DataGrid" : window.location.hash.substring(1),
             filter: "",
-            selectedGroup: "complex"
+            selectedGroup: window.location.hash.substring(1) === "Components" ? "complex" : window.location.hash.split("/")[1]
         };
     }
 
-    render():Object {
+    render(): Object {
         let componentDetail;
         let componentMenu = [];
+        console.log("render")
         let selectedGroup = window.location.hash.split("/")[1] || this.state.selectedGroup;
         let components = ComponentList.getList(this.state, this.__handleChange)[selectedGroup];
 
@@ -38,7 +39,7 @@ export default class Components extends ShallowComponent {
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
-                    >
+                        >
                         {item.header}
                     </ListGroupItem>);
                 if (active) {
@@ -50,7 +51,7 @@ export default class Components extends ShallowComponent {
                             json={item.json}
                             sample={item.sample}
                             code={item.code}
-                        />);
+                            />);
                 }
             }
         }
@@ -65,31 +66,31 @@ export default class Components extends ShallowComponent {
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
                         placeholder="Search"
-                    />
+                        />
                     <ListGroup className="parent">
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined,"complex")}>
-                            <FaIcon code="fa-cubes" fixed={false}/>&nbsp;
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "complex")}>
+                            <FaIcon code="fa-cubes" fixed={false} />&nbsp;
                             Complex
                         </ListGroupItem>
-                        <Collapse in={selectedGroup==="complex"}>
+                        <Collapse in={selectedGroup === "complex"}>
                             <div>
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined,"inputs")}>
-                            <FaIcon code="fa-terminal" fixed={false}/>&nbsp;
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "inputs")}>
+                            <FaIcon code="fa-terminal" fixed={false} />&nbsp;
                             Inputs
                         </ListGroupItem>
-                        <Collapse in={selectedGroup==="inputs"}>
+                        <Collapse in={selectedGroup === "inputs"}>
                             <div>
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined,"charts")}>
-                            <FaIcon code="fa-line-chart" fixed={false}/>&nbsp;
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "charts")}>
+                            <FaIcon code="fa-line-chart" fixed={false} />&nbsp;
                             Charts
                         </ListGroupItem>
-                        <Collapse in={selectedGroup==="charts"}>
+                        <Collapse in={selectedGroup === "charts"}>
                             <div>
                                 {componentMenu}
                             </div>
@@ -104,23 +105,23 @@ export default class Components extends ShallowComponent {
         );
     }
 
-    __onGroupChange = (selectedKey:string) => {
+    __onGroupChange = (selectedKey: string) => {
         let selectedComponent;
         switch (selectedKey) {
             case "complex":
-            {
-                selectedComponent = "DataGrid";
-            }
+                {
+                    selectedComponent = "DataGrid";
+                }
                 break;
             case "inputs":
-            {
-                selectedComponent = "TextInput";
-            }
+                {
+                    selectedComponent = "TextInput";
+                }
                 break;
             case "charts":
-            {
-                selectedComponent = "AreaChart";
-            }
+                {
+                    selectedComponent = "AreaChart";
+                }
                 break;
             default:
         }
@@ -131,13 +132,14 @@ export default class Components extends ShallowComponent {
         });
     };
 
-    __onFilterChange = (e:Object) => {
+    __onFilterChange = (e: Object) => {
         this.setState({
             filter: e.target.value
         });
     };
 
-    __onComponenListClick = (e:Object) => {
+    __onComponenListClick = (e: Object) => {
+        console.log(`Components/${this.state.selectedGroup}/${e.target.text}`);
         this.setState({
             componentSelection: `Components/${this.state.selectedGroup}/${e.target.text}`
         });
