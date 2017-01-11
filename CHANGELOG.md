@@ -4,6 +4,7 @@
 * Showcase refresh bug fixed.0
 * BaseInput now forwards bsSize property.
 * FileUploadInput updated
+* All components are using i18n now. #11
 
 ## 1.1.14
 * string refs -> callback refs #29
