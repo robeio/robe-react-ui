@@ -1,12 +1,17 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {
     Row,
     Col,
     ButtonGroup,
     Button
 } from "react-bootstrap";
+import {
+    Application,
+    ShallowComponent
+} from "robe-react-commons";
 import BPagination from "react-bootstrap/lib/Pagination";
+import template from "es6-template-strings";
+
 import FaIcon from "../faicon/FaIcon";
 
 export default class Pagination extends ShallowComponent {
@@ -22,7 +27,7 @@ export default class Pagination extends ShallowComponent {
         onChange: React.PropTypes.func,
         onPageSizeChange: React.PropTypes.func,
         onRefresh: React.PropTypes.func,
-        pageSizeButtons: React.PropTypes.array
+        pageSizeButtons: React.PropTypes.array,
 
     };
     static defaultProps = {
@@ -30,8 +35,6 @@ export default class Pagination extends ShallowComponent {
         pageSize: 5,
         totalCount: 0,
         activePage: 0,
-        emptyText: "No data to display.",
-        displayText: "Showing {start} to {end} of {total} entries"
     };
 
     /**
@@ -49,7 +52,7 @@ export default class Pagination extends ShallowComponent {
         }
         let paginationText;
         if (total !== 0) {
-            let text = this.props.displayText.replace(/\{start\}/g, (start + 1)).replace(/\{end\}/g, end).replace(/\{total\}/g, total);
+            let text = template(this.props.displayText, { start: start + 1, end, total });
             paginationText = (<p>{text}</p>);
         } else {
             paginationText = (<p>{this.props.emptyText}</p>);
@@ -86,7 +89,7 @@ export default class Pagination extends ShallowComponent {
                             items={items}
                             maxButtons={5}
                             bsSize="xsmall"
-                        />
+                            />
                     </Col>
                     <Col sm={4} className="text-center" style={{ paddingTop: "5px" }}>
                         {paginationText}

@@ -1,0 +1,12 @@
+{
+    "modalconfirm": {
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "modaldataform": {
+        "header": "Details",
+        "invalidField": "Please check all necessary fields are valid.",
+        "ok": "Save",
+        "cancel": "Cancel"
+    }
+}

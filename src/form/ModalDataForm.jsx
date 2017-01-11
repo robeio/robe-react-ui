@@ -1,11 +1,17 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {
+    ShallowComponent,
+    Application
+} from "robe-react-commons";
 import {
     Modal,
     Alert
 } from "react-bootstrap";
 import Button from "../buttons/Button";
 import DataForm from "./DataForm";
+import formMessages from "./formMessages.json"
+
+Application.loadI18n(formMessages);
 
 export default class ModalDataForm extends ShallowComponent {
 
@@ -47,7 +53,7 @@ export default class ModalDataForm extends ShallowComponent {
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**
@@ -56,10 +62,10 @@ export default class ModalDataForm extends ShallowComponent {
      */
     static defaultProps = {
         show: false,
-        header: "Detay",
-        invalidText: ["Lütfen zorunlu alanların eksiksiz doldurulduğundan emin olunuz."],
-        cancelButtonText: "İptal",
-        submitButtonText: "Kaydet",
+        header: Application.i18n("modaldataform").header,
+        invalidText: [Application.i18n("modaldataform").invalidField],
+        cancelButtonText: Application.i18n("modaldataform").cancel,
+        submitButtonText: Application.i18n("modaldataform").ok,
         showCancelButton: true,
         showSaveButton: true,
         validationDisplay: "block"

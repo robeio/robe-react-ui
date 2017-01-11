@@ -58,7 +58,7 @@ export default class HtmlEditor extends ValidationComponent {
         /**
        *Defines the display style of the Validation message.
        */
-        validationDisplay: React.PropTypes.oneOf(['overlay', 'block'])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     /**

@@ -98,7 +98,6 @@ export default class DataGridSample extends ShallowComponent {
                     onDeleteClick={this.__remove}
                     exportButton={true}
                     editable={true}
-                    modalConfirm={{ header: "Please do not delete me." }}
                 />
                 <ControlLabel>DataGrid (Custom Toolbar and Pagination)</ControlLabel>
                 <DataGrid
@@ -111,7 +110,6 @@ export default class DataGridSample extends ShallowComponent {
                     onDeleteClick={this.__remove}
                     exportButton={true}
                     editable={true}
-                    modalConfirm={{ header: "Please do not delete me." }}
                     refreshable={true}
                     pagination={{ pageSize: 1 }}
                     pageSizeButtons={["1", "2", "3"]}
@@ -125,7 +123,6 @@ export default class DataGridSample extends ShallowComponent {
                     cellRenderer={DataGridSample.cellRenderer}
                 />
                 <ModalDataForm
-                    header="Modal Data Form"
                     show={this.state.showModal}
                     onSubmit={this.__onSave}
                     onCancel={this.__onCancel}

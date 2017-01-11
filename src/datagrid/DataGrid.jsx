@@ -1,6 +1,7 @@
 import React from "react";
 import is from "is-js";
 import {
+    Application,
     Store,
     StoreComponent,
     Maps,
@@ -20,9 +21,11 @@ import SearchField from "./toolbar/SearchField";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
 import Header from "./Header";
+import dataGridMessages from "./dataGridMessages.json";
 
 import "./DataGrid.css";
 
+Application.loadI18n(dataGridMessages);
 
 export default class DataGrid extends StoreComponent {
 
@@ -131,30 +134,30 @@ export default class DataGrid extends StoreComponent {
             {
                 name: "create",
                 visible: false,
-                text: "New",
+                text: Application.i18n("datagrid").create,
                 icon: "fa-plus"
 
             }, {
                 name: "edit",
                 visible: false,
-                text: "Edit",
+                text: Application.i18n("datagrid").edit,
                 icon: "fa-pencil"
             }, {
                 name: "delete",
                 visible: false,
-                text: "Delete",
+                text: Application.i18n("datagrid").delete,
                 icon: "fa-trash"
             }
         ],
         modalConfirm: {
-            header: "Are you sure you want to delete?",
-            message: "The selected entry will be deleted.You can not be undone.",
-            okButtonText: "Yes",
-            cancelButtonText: "No"
+            header: Application.i18n("datagrid").deleteQuestion,
+            message: Application.i18n("datagrid").deleteMessage,
+            okButtonText: Application.i18n("datagrid").deleteOk,
+            cancelButtonText: Application.i18n("datagrid").deleteCancel
         },
         filter: {
-            clearButtonText: "Clear",
-            clearAllButtonText: "Clear All"
+            clearButtonText: Application.i18n("datagrid").filterClear,
+            clearAllButtonText: Application.i18n("datagrid").filterClearAll
         }
     };
 
@@ -206,25 +209,26 @@ export default class DataGrid extends StoreComponent {
                             onChange={this.__onSearchChanged}
                             value={this.state.qfilter}
                             visible={this.props.searchable}
-                        />
+                            placeholder={Application.i18n("datagrid").search}
+                            />
                     </Col>
                     <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
                         <ActionButtons
                             visible={this.props.editable}
                             items={this.__getToolbarConfig()}
-                        />
+                            />
                     </Col>
 
                 </Row>
                 <Filters
-                    ref={(component: Object) => { this.__filterComponent = component; }}
+                    ref={(component: Object) => { this.__filterComponent = component; } }
                     fields={this.__fields}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
                     idCount={this.getObjectId()}
                     clearButtonText={this.props.filter.clearButtonText}
                     clearAllButtonText={this.props.filter.clearAllButtonText}
-                />
+                    />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -246,7 +250,9 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                    />)
+                        emptyText={Application.i18n("datagrid").paginationEmpty}
+                        displayText={Application.i18n("datagrid").paginationDisplay}
+                        />)
                 }
                 {this.__renderModalConfirm()}
             </Col>
@@ -304,7 +310,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-            />);
+                />);
     }
 
     /**
@@ -342,7 +348,7 @@ export default class DataGrid extends StoreComponent {
                         onSortClick={this.__onSortClick}
                         filter={this.__filterComponent !== undefined ? this.__filterComponent.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
-                    />
+                        />
                 );
             }
         }
@@ -420,7 +426,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                    />);
+                        />);
             }
         }
         return rowsArr;
@@ -515,20 +521,20 @@ export default class DataGrid extends StoreComponent {
         let config = {
             create: {
                 visible: false,
-                text: "New",
+                text: Application.i18n("datagrid").create,
                 icon: "fa-plus",
                 onClick: this.props.onNewClick
             },
             edit: {
                 visible: false,
-                text: "Edit",
+                text: Application.i18n("datagrid").edit,
                 icon: "fa-pencil",
                 onClick: this.props.onEditClick,
                 disabled: !this.state.hasSelection
             },
             delete: {
                 visible: false,
-                text: "Delete",
+                text: Application.i18n("datagrid").delete,
                 icon: "fa-trash",
                 onClick: this.__showDeleteConfirm,
                 disabled: !this.state.hasSelection

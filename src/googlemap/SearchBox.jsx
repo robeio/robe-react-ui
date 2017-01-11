@@ -1,6 +1,11 @@
 import React, { PropTypes } from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {
+    ShallowComponent,
+    Application
+} from "robe-react-commons";
 import TextInput from "../inputs/TextInput";
+import gmMessages from "./googleMapMessages.json"
+Application.loadI18n(gmMessages);
 
 export default class SearchBox extends ShallowComponent {
 
@@ -10,7 +15,7 @@ export default class SearchBox extends ShallowComponent {
     };
 
     static defaultProps = {
-        placeholder: "Search in a known location"
+        placeholder: Application.i18n("googlemap").searchBox
     };
 
     constructor(props: Object) {

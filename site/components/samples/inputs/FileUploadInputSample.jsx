@@ -32,31 +32,29 @@ export default class FileUploadInputSample extends ShallowComponent {
                     ref="dropZoneUploadNew"
                     name="files"
                     display="thumbnail"
-                    label="Dosya Seçimi"
+                    label="Select files"
                     remote={props}
                     value={["info_test.png"]}
                     onChange={this.onChange}
                     placeHolder="Upload Files"
-                    browseButtonText="Browse..."
                     multiple={true}
-                />
+                    />
                 <br />
-                <Button onClick={this.__onSubmitNew}>Gönder</Button>
+                <Button onClick={this.__onSubmitNew}>Send</Button>
             </div>
         );
     }
-    onSubmit = (code) => {
+    onSubmit(code) {
         this.refs[code].onSubmitted(this.onSuccess, this.onError);
     }
-    onSuccess = (data) => {
+    onSuccess(data) {
         console.log(data);
     }
 
-    onError = (error) => {
+    onError(error) {
         console.log(error);
     }
-
-    onChange = (e) => {
+    onChange(e) {
         console.log(e);
     }
 }

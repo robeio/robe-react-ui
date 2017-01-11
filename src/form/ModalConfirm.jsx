@@ -1,7 +1,13 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import {
+    ShallowComponent,
+    Application
+} from "robe-react-commons";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
+import modalConfirmMessages from "./formMessages.json"
+
+Application.loadI18n(modalConfirmMessages);
 
 export default class ModalConfirm extends ShallowComponent {
 
@@ -17,8 +23,8 @@ export default class ModalConfirm extends ShallowComponent {
 
 
     static defaultProps = {
-        okButtonText: "Yes",
-        cancelButtonText: "No",
+        okButtonText: Application.i18n("modalconfirm").ok,
+        cancelButtonText: Application.i18n("modalconfirm").cancel,
     };
 
     render(): Object {
