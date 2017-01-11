@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ShallowComponent } from "robe-react-commons";
+import { ShallowComponent, Application } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import NotificationItem from "./NotificationItem";
 import "./Notification.css";
+import messages from "./notificationMessages.json";
+
+Application.loadI18n(messages);
 /**
  * Notification is a view component for representing all notifications via a clickable icon and count label.
  * Also a popup will show the details of the notifications.
@@ -37,8 +40,8 @@ export default class Notification extends ShallowComponent {
     };
 
     static defaultProps = {
-        title: "Notifications",
-        notificationDetailLabel: "See all"
+        title: Application.i18n("notification").title,
+        notificationDetailLabel: Application.i18n("notification").details
     };
 
 
@@ -80,7 +83,7 @@ export default class Notification extends ShallowComponent {
                     <i
                         className="menu-title pull-right"
                         onClick={this.__notificationDetailClick}
-                    >
+                        >
                         {this.props.notificationDetailLabel}
                         <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
                     </i>
@@ -101,7 +104,7 @@ export default class Notification extends ShallowComponent {
                         key={i}
                         item={item}
                         onRead={this.props.onRead}
-                    />
+                        />
                 );
             }
             return (<Col className="notifications-wrapper">{notifications}</Col>);
@@ -109,7 +112,7 @@ export default class Notification extends ShallowComponent {
         return (
             <Col>
                 <span style={{ padding: "10px" }} >
-                    You don't have any notification.
+                    {Application.i18n("notification").noContent}
                 </span>
             </Col>);
     }

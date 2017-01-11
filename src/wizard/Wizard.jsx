@@ -1,5 +1,5 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { ShallowComponent, Application }from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
@@ -8,6 +8,8 @@ import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
+import messages from "./wizardMessages.json";
+Application.loadI18n(messages);
 
 export default class Wizard extends ShallowComponent {
      /**
@@ -36,9 +38,9 @@ export default class Wizard extends ShallowComponent {
 
     static defaultProps = {
         currentStep: 0,
-        nextButtonText: "Next",
-        preButtonText: "Previous",
-        completeButtonText: "Finish"
+        nextButtonText: Application.i18n("wizard").next,
+        preButtonText: Application.i18n("wizard").previous,
+        completeButtonText: Application.i18n("wizard").complete
     };
     __stepValidInfo = [];
     __content = undefined;
