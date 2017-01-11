@@ -7,10 +7,10 @@
 [![codecov](https://codecov.io/gh/robeio/robe-react-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/robeio/robe-react-ui)
 [![Dependency Status](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af/badge.svg)](https://www.versioneye.com/user/projects/58232e6e73023b003f2875af)
 
-#### Browsers support
-| <img src="./static/edge.png" alt="IE / Edge" width="16px" height="16px" /></br>IE / Edge | <img src="./static/firefox.png" alt="Firefox" width="16px" height="16px" /></br>Firefox | <img src="./static/chrome.png" alt="Chrome" width="16px" height="16px" /></br>Chrome | <img src="./static/safari.png" alt="Safari" width="16px" height="16px" /></br>Safari | <img src="./static/opera.png" alt="Opera" width="16px" height="16px" /></br>Opera | <img src="./static/vivaldi.png" alt="Vivaldi" width="16px" height="16px" /></br>Vivaldi | <img src="./static/safari-ios.png" alt="iOS Safari" width="16px" height="16px" /></br>iOS Safari | <img src="./static/opera-mini.png" alt="Opera Mini" width="16px" height="16px" /></br>Opera Mini | <img src="./static/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" /></br>Chrome for Android |
-| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
-| INPROGRESS| 29+| INPROGRESS | INPROGRESS | INPROGRESS | INPROGRESS | INPROGRESS | INPROGRESS | INPROGRESS
+#### Browsers support (will be updated)
+| <img src="./static/edge.png" alt="IE / Edge" width="16px" height="16px" /></br>IE / Edge | <img src="./static/firefox.png" alt="Firefox" width="16px" height="16px" /></br>Firefox | <img src="./static/chrome.png" alt="Chrome" width="16px" height="16px" /></br>Chrome | <img src="./static/safari.png" alt="Safari" width="16px" height="16px" /></br>Safari | <img src="./static/opera.png" alt="Opera" width="16px" height="16px" /></br>Opera |
+| :---------: | :---------: | :---------: | :---------: | :---------: |
+| 13+ | 29+| 45+ | 9.1+ | 32+ |
 
  ## [CHANGE LOG](./CHANGELOG.md)
  

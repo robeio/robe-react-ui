@@ -4,7 +4,7 @@ import Recaptcha from "react-recaptcha/dist/react-recaptcha";
 
 export default class ReCaptcha extends ShallowComponent {
 
-    static LANGUAGE_MAP = new Map();/* make global load every language only once time */
+    static LANGUAGE_MAP = {};/* make global load every language only once time */
     static URL = "https://www.google.com/recaptcha/api.js";
     /**
      * Properties of the component
@@ -32,10 +32,10 @@ export default class ReCaptcha extends ShallowComponent {
          */
 
         let lang = this.props.lang;
-        let isLoaded = ReCaptcha.LANGUAGE_MAP.get(lang);
+        let isLoaded = ReCaptcha.LANGUAGE_MAP[lang];
 
         if (!isLoaded) {
-            ReCaptcha.LANGUAGE_MAP.set(lang, true);
+            ReCaptcha.LANGUAGE_MAP[lang]=true;
             const script = document.createElement("script");
             script.src = `${ReCaptcha.URL}?hl=${lang}`;
             script.async = true;
