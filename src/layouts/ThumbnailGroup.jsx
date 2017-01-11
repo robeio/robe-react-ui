@@ -14,7 +14,7 @@ export default class ThumbnailGroup extends ShallowComponent {
         id: React.PropTypes.string,
         style: React.PropTypes.object,
         className: React.PropTypes.string,
-        placeHolder: React.PropTypes.string
+        placeholder: React.PropTypes.string
     };
 
     constructor(props:Object) {
@@ -24,7 +24,7 @@ export default class ThumbnailGroup extends ShallowComponent {
     render():Object {
         return (
             <div {...this.props} >
-                <div placeholder={this.props.placeHolder} id={this.props.id ? `${this.props.id}_box` : null}
+                <div placeholder={this.props.placeholder} id={this.props.id ? `${this.props.id}_box` : null}
                      className="rb-thumbnail-box" style={this.props.style}>
                     {this.renderItems()}
                 </div>

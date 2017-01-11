@@ -1,10 +1,9 @@
 import { Application } from "robe-react-commons";
 import template from "es6-template-strings";
 import validationMessages from "./validationMessages.json";
-
+Application.loadI18n(validationMessages);
 class InputValidations {
     constructor() {
-        Application.loadI18n(validationMessages);
     }
     required = (value: any, code: string): string => {
         let message = Application.i18n("validation").required;

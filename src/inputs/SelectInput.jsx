@@ -2,8 +2,13 @@ import React from "react";
 import Select from "react-select";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import "react-select/dist/react-select.css";
+import { Application } from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import "./SelectInput.css";
+
+import InputMessages from "./inputMessages.json";
+Application.loadI18n(InputMessages);
+
 /**
  * Provide selection in map array data with single or multi choices
  * You can enable multi-value selection by setting multi={true}
@@ -45,7 +50,7 @@ export default class SelectInput extends ValidationComponent {
         /**
          * displayed when there"s no value
          */
-        placeHolder: React.PropTypes.string,
+        placeholder: React.PropTypes.string,
         /**
          * callback function when selected values changed
          */
@@ -86,8 +91,8 @@ export default class SelectInput extends ValidationComponent {
 
     static defaultProps = {
         items: [],
-        placeHolder: "Please Select",
-        noResultsText: "No Result",
+        placeholder: Application.i18n("SelectInput").placeholder,
+        noResultsText: Application.i18n("SelectInput").noResult,
         textField: "text",
         valueField: "value",
         multi: false,
@@ -134,12 +139,12 @@ export default class SelectInput extends ValidationComponent {
                     multi={this.props.multi}
                     noResultsText={this.props.noResultsText}
                     disabled={this.props.disabled}
-                    placeholder={this.props.placeHolder}
+                    placeholder={this.props.placeholder}
                     searchable={this.props.searchable}
                     value={this.props.value}
                     onChange={this._onChange}
                     delimiter={this.__delimiter}
-                />
+                    />
                 {this.__createRawSelect(this.props.items)}
             </FormGroup>
         );
