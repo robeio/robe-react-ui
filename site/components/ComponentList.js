@@ -201,6 +201,13 @@ class ComponentList {
         });
 
         components.complex.push({
+            header: "ProgressBar",
+            desc: " is an indicator component for the heavy ajax loaded sites.",
+            sample: require("./samples/progress/ProgressBarSample"),
+            code: require("./samples/progress/ProgressBarSample.txt"),
+        });
+
+        components.complex.push({
             header: "Notification",
             desc: " is a notification component with total count and popup list.",
             json: require("./jsons/notification/Notification.json"),
