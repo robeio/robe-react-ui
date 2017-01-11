@@ -3,6 +3,7 @@
 ## 1.1.15 -- Developing...
 * Showcase refresh bug fixed.0
 * BaseInput now forwards bsSize property.
+* FileUploadInput updated
 
 ## 1.1.14
 * string refs -> callback refs #29

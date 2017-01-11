@@ -1,7 +1,7 @@
 import React from "react";
-import { Clearfix } from "react-bootstrap";
+import {Clearfix} from "react-bootstrap";
 import ThumbnailItem from "./ThumbnailItem";
-import { ShallowComponent } from "robe-react-commons";
+import {ShallowComponent} from "robe-react-commons";
 import "./ThumbnailGroup.css";
 
 export default class ThumbnailGroup extends ShallowComponent {
@@ -10,20 +10,22 @@ export default class ThumbnailGroup extends ShallowComponent {
      *
      * @static
      */
-    static propTypes: Map = {
+    static propTypes:Map = {
         id: React.PropTypes.string,
         style: React.PropTypes.object,
-        className: React.PropTypes.string
+        className: React.PropTypes.string,
+        placeHolder: React.PropTypes.string
     };
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
     }
 
-    render(): Object {
+    render():Object {
         return (
             <div {...this.props} >
-                <div id={this.props.id ? `${this.props.id}_box` : null} className="rb-thumbnail-box" style={this.props.style} >
+                <div placeholder={this.props.placeHolder} id={this.props.id ? `${this.props.id}_box` : null}
+                     className="rb-thumbnail-box" style={this.props.style}>
                     {this.renderItems()}
                 </div>
                 <Clearfix />
@@ -31,9 +33,9 @@ export default class ThumbnailGroup extends ShallowComponent {
         );
     }
 
-    renderItems(){
+    renderItems() {
         return React.Children.map(this.props.children, (child) => {
-            if(child.type === ThumbnailItem) {
+            if (child.type === ThumbnailItem) {
                 return child;
             }
         });
