@@ -10,9 +10,86 @@
     word-wrap: break-word;
     display: inline-block;
     border-radius: 4px;
+    transition: .5s;
     border: 1px solid #cccccc;
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rb-selected {
+    opacity: 1 !important;
+    color: #295880 !important;
+    background-color: #a8d1ff;
+    border-color: #5c8bb3 !important;
+}
+
+.rb-focused {
+    color: #298642;
+    border: 1px solid #34a853;
+}
+
+.rb-progress {
+    z-index: 2;
+    position: absolute;
+    transition: .5s;
+    width: 100%;
+    height: 100%;
+    margin: -12px -4px;
+    opacity: .8;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+.rb-progress-content {
+    position: absolute;
+    height: 14px;
+    top: 40%;
+    left: 10%;
+    right: 10%;
+    background-color: #bbbbbb;
+    border-radius: 10px;
+}
+
+.rb-progress-bar {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    background: #34a853;
+
+    background-image: -webkit-linear-gradient(45deg, hsla(0, 0%, 100%, .15) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .15) 0, hsla(0, 0%, 100%, .15) 75%, transparent 0, transparent);
+    background-image: linear-gradient(45deg, hsla(0, 0%, 100%, .15) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .15) 0, hsla(0, 0%, 100%, .15) 75%, transparent 0, transparent);
+    background-size: 40px 40px;
+
+    -webkit-animation: progress-bar-stripes 1s linear infinite;
+    animation: progress-bar-stripes 1s linear infinite;
+
+    border-radius: 10px;
+
+}
+
+.rb-progress-bar-start {
+    -webkit-animation: progress-bar-stripes 1s linear infinite, rb-progress-bar-start 7s linear;
+    animation: progress-bar-stripes 1s linear infinite, rb-progress-bar-start 7s linear;
+}
+
+@keyframes rb-progress-bar-start {
+    0% {
+        width: 20%;
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+.rb-progress-bar-finish {
+    -webkit-animation: rb-progress-bar-finish 1s linear;
+    animation: rb-progress-bar-finish 1s linear;
+}
+
+@keyframes rb-progress-bar-finish {
+    100% {
+        width: 100%;
+    }
 }
 
 .rb-thumbnail-toolbar {
@@ -26,6 +103,11 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     background-color: #fafafa;
+}
+
+.rb-selected .rb-thumbnail-toolbar {
+    background-color: #a8d1ff !important;
+    opacity: 1 !important;
 }
 
 .rb-thumbnail-toolbar:hover,
@@ -53,6 +135,7 @@
 }
 
 .rb-thumbnail-toolbar-item:hover {
+    opacity: 1;
     pointer-events: all;
 }
 

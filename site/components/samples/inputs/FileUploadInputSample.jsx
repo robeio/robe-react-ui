@@ -36,9 +36,10 @@ export default class FileUploadInputSample extends ShallowComponent {
                     remote={props}
                     value={["info_test.png"]}
                     onChange={this.onChange}
-                    placeHolder="Upload Files"
+                    placeHolder="Drag and drop files here."
+                    browseButtonText="Browse..."
                     multiple={true}
-                    />
+                />
                 <br />
                 <Button onClick={this.__onSubmitNew}>Send</Button>
             </div>

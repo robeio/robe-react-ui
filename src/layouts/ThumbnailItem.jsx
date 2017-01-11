@@ -9,26 +9,57 @@ export default class ThumbnailItem extends ShallowComponent {
      * @static
      */
     static propTypes:Map = {
-        onClose: React.PropTypes.func,
-        style: React.PropTypes.object
+        className: React.PropTypes.string,
+        style: React.PropTypes.object,
+        focused: React.PropTypes.bool,
+        selected: React.PropTypes.bool,
+        progress: React.PropTypes.bool
+    };
+
+    /**
+     * Default properties of the component
+     *
+     * @static
+     */
+    static defaultProps = {
+        focused: false,
+        selected: false,
+        progress: false
     };
 
     constructor(props:Object) {
         super(props);
+
+        this.state = {
+            progress: true
+        }
     }
 
     render():Object {
         let className = "center-block ";
-        if (this.props.className)
+        if (this.props.className) {
             className += this.props.className;
-
-        let closeButton = null;
-        if (this.props.onClose) {
-            closeButton = <Glyphicon glyph="remove" className="rb-close" onClick={this.props.onClose}/>
         }
+        if (this.props.focused) {
+            className += " rb-focused";
+        }
+        if (this.props.selected) {
+            className += " rb-selected";
+        }
+
+        let progress = "rb-progress-bar";
+        if (this.state.progress)
+            progress += " rb-progress-bar-start";
+        else
+            progress += " rb-progress-bar-finish";
         return (
             <div className={className} style={this.props.style}>
-                {closeButton}
+                <div className="rb-progress" style={{display:this.props.progress?"inherit":"none"}}>
+                    <button onClick={()=>this.setState({progress:!this.state.progress})}>{this.state.progress}</button>
+                    <div className="rb-progress-content">
+                        <div className={progress}></div>
+                    </div>
+                </div>
                 {this.props.children}
             </div>
         );
