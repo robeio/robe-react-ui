@@ -156,20 +156,8 @@
     opacity: 1;
 }
 
-.selected-item {
-    opacity: 1 !important;
-    color: #295880 !important;
-    background-color: #a8d1ff;
-    border-color: #5c8bb3 !important;
-}
-
-.waiting-item {
-    color: #298642;
-    border: 1px solid #34a853;
-}
-
 .rb-drag-drop-box .rb-thumbnail-box:empty:after {
-    content: "Drag and drop files here.";
+    content: attr(placeholder);
 }
 
 .rb-drag-drop-box .rb-thumbnail-box:empty {

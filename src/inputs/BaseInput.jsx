@@ -127,7 +127,7 @@ export default class BaseInput extends ValidationComponent {
             );
         }
         component = (
-            <FormGroup hidden={this.props.hidden}>
+            <FormGroup hidden={this.props.hidden} bsSize={this.props.bsSize}>
                 {label}
                 {component}
             </FormGroup>

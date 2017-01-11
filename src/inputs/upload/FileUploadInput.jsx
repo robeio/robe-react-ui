@@ -101,7 +101,7 @@ export default class FileUploadInput extends ValidationComponent {
     static defaultProps = {
         multiple: true,
         itemStyle: {},
-        placeHolder: "Drag file to here",
+        placeHolder: "Drag and drop files here.",
         maxFileSize: 1000,
         toolbarPosition: "top",
         itemToolbarPosition: "bottom",
@@ -188,6 +188,7 @@ export default class FileUploadInput extends ValidationComponent {
                 >
                     {this.createToolbar("top")}
                     <ThumbnailGroup
+                        placeHolder={this.props.placeHolder}
                         id={this.__componentId}
                     >
                         {this.renderItems(this.state.files)}
@@ -354,8 +355,6 @@ export default class FileUploadInput extends ValidationComponent {
         let elements = [];
         Maps.forEach(files, (file, key) => {
             let selected = Arrays.isExistByKey(this.state.selectedFiles, "key", file);
-            let classNameItem = file.isUploaded ? "" : " waiting-item ";
-            classNameItem += selected ? " selected-item " : "";
 
             let downloadIcon = file.isUploaded ?
                 <FaIcon code="fa-download" size="fa-sm"
@@ -367,9 +366,10 @@ export default class FileUploadInput extends ValidationComponent {
             let selectIcon = selected ? "fa-check-square-o" : "fa-square-o";
             elements.push(
                 <ThumbnailItem
-                    className={classNameItem}
+                    focused={!file.isUploaded}
+                    selected={selected}
                     key={file.key}>
-                    <div className={selected ? "rb-thumbnail-toolbar selected-item" : "rb-thumbnail-toolbar"}>
+                    <div className={"rb-thumbnail-toolbar"}>
                         <div className="rb-thumbnail-toolbar-item select">
                             <FaIcon code={selectIcon} size="fa-sm"
                                     onClick={this.onSelect.bind(undefined, file)}/>

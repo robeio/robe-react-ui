@@ -25,7 +25,6 @@ export default class Components extends ShallowComponent {
     render(): Object {
         let componentDetail;
         let componentMenu = [];
-        console.log("render")
         let selectedGroup = window.location.hash.split("/")[1] || this.state.selectedGroup;
         let components = ComponentList.getList(this.state, this.__handleChange)[selectedGroup];
 
@@ -139,7 +138,6 @@ export default class Components extends ShallowComponent {
     };
 
     __onComponenListClick = (e: Object) => {
-        console.log(`Components/${this.state.selectedGroup}/${e.target.text}`);
         this.setState({
             componentSelection: `Components/${this.state.selectedGroup}/${e.target.text}`
         });
