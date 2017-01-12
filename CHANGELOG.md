@@ -1,6 +1,8 @@
 # Change Log
+## 1.1.16 -- Developing...
 
-## 1.1.15 -- Developing...
+
+## 1.1.15
 * Showcase refresh bug fixed.0
 * BaseInput now forwards bsSize property.
 * FileUploadInput bugs fixed
