@@ -38,8 +38,8 @@ export default class Notification extends ShallowComponent {
     };
 
     static defaultProps = {
-        title: Application.i18n("notification.Notification").title,
-        notificationDetailLabel: Application.i18n("notification.Notification").details
+        title: Application.i18n("notification.Notification", "title"),
+        notificationDetailLabel: Application.i18n("notification.Notification", "details")
     };
 
 
@@ -110,7 +110,7 @@ export default class Notification extends ShallowComponent {
         return (
             <Col>
                 <span style={{ padding: "10px" }} >
-                    {Application.i18n("notification.Notification").noContent}
+                    {Application.i18n("notification.Notification", "noContent")}
                 </span>
             </Col>);
     }

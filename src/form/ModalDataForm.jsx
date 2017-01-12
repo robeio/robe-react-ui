@@ -60,10 +60,10 @@ export default class ModalDataForm extends ShallowComponent {
      */
     static defaultProps = {
         show: false,
-        header: Application.i18n("form.ModalDataForm").header,
-        invalidText: [Application.i18n("form.ModalDataForm").invalidField],
-        cancelButtonText: Application.i18n("form.ModalDataForm").cancel,
-        submitButtonText: Application.i18n("form.ModalDataForm").ok,
+        header: Application.i18n("form.ModalDataForm", "header"),
+        invalidText: [Application.i18n("form.ModalDataForm", "invalidField")],
+        cancelButtonText: Application.i18n("form.ModalDataForm", "cancel"),
+        submitButtonText: Application.i18n("form.ModalDataForm", "ok"),
         showCancelButton: true,
         showSaveButton: true,
         validationDisplay: "block"

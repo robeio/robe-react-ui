@@ -18,7 +18,6 @@ describe("inputs/DateInput", () => {
         assert.equal(wrapper.props().label, "Example Label");
         assert.equal(wrapper.find(".control-label").length, 1);
 
-        assert.equal(wrapper.props().locale, "en");
         wrapper.setProps({ locale: "tr" });
         assert.equal(wrapper.props().locale, "tr");
     });

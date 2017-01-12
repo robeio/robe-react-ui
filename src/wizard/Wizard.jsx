@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent, Application }from "robe-react-commons";
+import { ShallowComponent, Application } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
@@ -9,11 +9,11 @@ import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
 export default class Wizard extends ShallowComponent {
-     /**
-     * PropTypes of the component.
-     *
-     * @static
-     */
+    /**
+    * PropTypes of the component.
+    *
+    * @static
+    */
     static propTypes = {
         /**
          * Current page index to render.
@@ -35,9 +35,9 @@ export default class Wizard extends ShallowComponent {
 
     static defaultProps = {
         currentStep: 0,
-        nextButtonText: Application.i18n("wizard.Wizard").next,
-        preButtonText: Application.i18n("wizard.Wizard").previous,
-        completeButtonText: Application.i18n("wizard.Wizard").complete
+        nextButtonText: Application.i18n("wizard.Wizard", "next"),
+        preButtonText: Application.i18n("wizard.Wizard", "previous"),
+        completeButtonText: Application.i18n("wizard.Wizard", "complete")
     };
     __stepValidInfo = [];
     __content = undefined;
@@ -73,9 +73,9 @@ export default class Wizard extends ShallowComponent {
             let step = (
                 <Col key={i} className="wizard-step">
                     <a
-                        onClick={() => { this.__onClickStepButton(i); }}
+                        onClick={() => { this.__onClickStepButton(i); } }
                         className={`btn btn-circle ${styleClass}`}
-                    >
+                        >
                         {i + 1}
                     </a>
                     <p>{item.title}</p>
@@ -133,9 +133,9 @@ export default class Wizard extends ShallowComponent {
                     <Button
                         bsStyle="primary"
                         onClick={this.props.onCompleteClick}
-                    >
+                        >
                         <FaIcon code="fa-check-circle" />
-                    {this.props.completeButtonText}
+                        {this.props.completeButtonText}
                     </Button>
                 </Col>
             );
@@ -145,7 +145,7 @@ export default class Wizard extends ShallowComponent {
                     next
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
-                >
+                    >
                     {this.props.nextButtonText} <FaIcon code="fa-arrow-right" />
                 </Pager.Item>
             );
@@ -156,7 +156,7 @@ export default class Wizard extends ShallowComponent {
                     previous
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
-                >
+                    >
                     <FaIcon code="fa-arrow-left" />{this.props.preButtonText}
                 </Pager.Item>
                 {nextButton}
@@ -171,7 +171,7 @@ export default class Wizard extends ShallowComponent {
         if (!this.__content._owner) { // eslint-disable-line no-underscore-dangle
             return true;
         }
-        
+
         let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
         if (!result) {
             NotificationManager.error(result.message);

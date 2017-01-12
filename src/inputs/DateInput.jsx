@@ -91,7 +91,7 @@ export default class DateInput extends ShallowComponent {
         readOnly: false,
         hidden: false,
         format: "DD/MM/YYYY",
-        locale: Application.i18n("inputs.DateInput").locale,
+        locale: Application.i18n("inputs.DateInput", "locale"),
         value: undefined,
         minDate: momentjs("01/01/1900", "DD/MM/YYYY").toDate().getTime(),
         maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime(),

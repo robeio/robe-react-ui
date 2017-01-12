@@ -14,7 +14,7 @@ describe("notification/Notification", () => {
     };
     it("render", () => {
         let wrapper = mount(getComponent({ data: [] }));
-        chai.assert.equal(wrapper.find("span").last().text(), "You don't have any notification.");
+        chai.assert.equal(wrapper.find(NotificationItem).length, 0);
 
         let data = [{
             oid: "1",

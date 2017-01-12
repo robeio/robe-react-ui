@@ -100,7 +100,7 @@ export default class FileUploadInput extends ValidationComponent {
     static defaultProps = {
         multiple: true,
         itemStyle: {},
-        placeholder: Application.i18n("inputs.upload.FileUploadInput").placeholder,
+        placeholder: Application.i18n("inputs.upload.FileUploadInput","placeholder"),
         maxFileSize: 1000,
         toolbarPosition: "top",
         autoUpload: true,

@@ -18,7 +18,7 @@ export default class ReCaptcha extends ShallowComponent {
 
     static defaultProps = {
         ...Recaptcha.defaultProps,
-        language: Application.i18n("recaptcha.ReCaptcha").language
+        language: Application.i18n("recaptcha.ReCaptcha", "language")
 
     };
 
@@ -36,7 +36,7 @@ export default class ReCaptcha extends ShallowComponent {
         let isLoaded = ReCaptcha.LANGUAGE_MAP[lang];
 
         if (!isLoaded) {
-            ReCaptcha.LANGUAGE_MAP[lang]=true;
+            ReCaptcha.LANGUAGE_MAP[lang] = true;
             const script = document.createElement("script");
             script.src = `${ReCaptcha.URL}?hl=${lang}`;
             script.async = true;

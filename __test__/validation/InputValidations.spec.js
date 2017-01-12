@@ -5,7 +5,7 @@ import Application from "robe-react-commons/lib/application/Application";
 
 describe("validation/InputValidations", () => {
     function resetValidationMessage() {
-        Application.loadI18n({ validation: {
+        Application.loadI18n({"validation.InputValidations": {
             required: "This field is required.",
             minValue: "Value must be greater or equal to ${minValue}",
             maxValue: "Value must be less or equal to ${maxValue}",
@@ -29,7 +29,7 @@ describe("validation/InputValidations", () => {
         required = InputValidations.required({});
         chai.assert.equal(required, undefined);
 
-        Application.loadI18n({ validation: { required: "${code} field is required." } });
+        Application.loadI18n({ "validation.InputValidations": { required: "${code} field is required." } });
 
         required = InputValidations.required(undefined, "robe");
         chai.assert.equal(required, "robe field is required.");
@@ -50,7 +50,7 @@ describe("validation/InputValidations", () => {
         htmlRequired = InputValidations.htmlRequired({});
         chai.assert.equal(htmlRequired, undefined);
 
-        Application.loadI18n({ validation: { required: "${code} field is required." } });
+        Application.loadI18n({ "validation.InputValidations": { required: "${code} field is required." } });
 
         htmlRequired = InputValidations.htmlRequired(htmlRequired, "robe");
         chai.assert.equal(htmlRequired, "robe field is required.");
@@ -68,7 +68,7 @@ describe("validation/InputValidations", () => {
         minValue = InputValidations.minValue(5, null);
         chai.assert.equal(minValue, "Value must be greater or equal to 5");
 
-        Application.loadI18n({ validation: { minValue: "${code} field must be greater or equal to ${minValue}" } });
+        Application.loadI18n({ "validation.InputValidations": { minValue: "${code} field must be greater or equal to ${minValue}" } });
 
         minValue = InputValidations.minValue(5, 2, "robe");
         chai.assert.equal(minValue, "robe field must be greater or equal to 5");
@@ -86,7 +86,7 @@ describe("validation/InputValidations", () => {
         maxValue = InputValidations.maxValue(5, null);
         chai.assert.equal(maxValue, "Value must be less or equal to 5");
 
-        Application.loadI18n({ validation: { maxValue: "${code} field must be less or equal to ${maxValue}" } });
+        Application.loadI18n({ "validation.InputValidations": { maxValue: "${code} field must be less or equal to ${maxValue}" } });
 
         maxValue = InputValidations.maxValue(5, 7, "robe");
         chai.assert.equal(maxValue, "robe field must be less or equal to 5");
@@ -104,7 +104,7 @@ describe("validation/InputValidations", () => {
         minLength = InputValidations.minLength(5, 6);
         chai.assert.equal(minLength, undefined);
 
-        Application.loadI18n({ validation: { minLength: "${code} input cannot be less than ${min} characters." } });
+        Application.loadI18n({ "validation.InputValidations": { minLength: "${code} input cannot be less than ${min} characters." } });
 
         minLength = InputValidations.minLength(5, "test", "robe");
         chai.assert.equal(minLength, "robe input cannot be less than 5 characters.");
@@ -119,7 +119,7 @@ describe("validation/InputValidations", () => {
         maxLength = InputValidations.maxLength(5, null);
         chai.assert.equal(maxLength, undefined);
 
-        Application.loadI18n({ validation: { maxLength: "${code} input cannot be more than ${max} characters." } });
+        Application.loadI18n({ "validation.InputValidations": { maxLength: "${code} input cannot be more than ${max} characters." } });
 
         maxLength = InputValidations.maxLength(5, "test value", "robe");
         chai.assert.equal(maxLength, "robe input cannot be more than 5 characters.");

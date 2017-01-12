@@ -5,7 +5,8 @@
 * BaseInput now forwards bsSize property.
 * FileUploadInput bugs fixed
 * All components are using i18n now. #11
-* Application component added as a wrappwe component for all of the application and managing global settings (forex. language)
+* Application component added as a wrapper component for all of the application and managing global settings (forex. language) #19
+* robe-react.commons upgraded. #19
 
 ## 1.1.14
 * string refs -> callback refs #29

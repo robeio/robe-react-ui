@@ -89,8 +89,8 @@ export default class SelectInput extends ValidationComponent {
 
     static defaultProps = {
         items: [],
-        placeholder: Application.i18n("inputs.SelectInput").placeholder,
-        noResultsText: Application.i18n("inputs.SelectInput").noResult,
+        placeholder: Application.i18n("inputs.SelectInput", "placeholder"),
+        noResultsText: Application.i18n("inputs.SelectInput", "noResult"),
         textField: "text",
         valueField: "value",
         multi: false,

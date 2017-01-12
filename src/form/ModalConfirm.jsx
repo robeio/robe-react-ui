@@ -20,8 +20,8 @@ export default class ModalConfirm extends ShallowComponent {
 
 
     static defaultProps = {
-        okButtonText: Application.i18n("form.ModalConfirm").ok,
-        cancelButtonText: Application.i18n("form.ModalConfirm").cancel,
+        okButtonText: Application.i18n("form.ModalConfirm", "ok"),
+        cancelButtonText: Application.i18n("form.ModalConfirm", "cancel"),
     };
 
     render(): Object {

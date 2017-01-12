@@ -14,7 +14,7 @@ export default class GoogleMap extends ShallowComponent {
 
     static defaultProps = {
         ...Googlemap.defaultProps,
-        language: Application.i18n("googlemap.GoogleMap").language
+        language: Application.i18n("googlemap.GoogleMap","language")
     };
 
     render(): Object {

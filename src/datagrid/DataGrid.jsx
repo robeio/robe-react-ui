@@ -131,30 +131,30 @@ export default class DataGrid extends StoreComponent {
             {
                 name: "create",
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").create,
+                text: Application.i18n("datagrid.DataGrid", "create"),
                 icon: "fa-plus"
 
             }, {
                 name: "edit",
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").edit,
+                text: Application.i18n("datagrid.DataGrid", "edit"),
                 icon: "fa-pencil"
             }, {
                 name: "delete",
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").delete,
+                text: Application.i18n("datagrid.DataGrid", "delete"),
                 icon: "fa-trash"
             }
         ],
         modalConfirm: {
-            header: Application.i18n("datagrid.DataGrid").deleteQuestion,
-            message: Application.i18n("datagrid.DataGrid").deleteMessage,
-            okButtonText: Application.i18n("datagrid.DataGrid").deleteOk,
-            cancelButtonText: Application.i18n("datagrid.DataGrid").deleteCancel
+            header: Application.i18n("datagrid.DataGrid", "deleteQuestion"),
+            message: Application.i18n("datagrid.DataGrid", "deleteMessage"),
+            okButtonText: Application.i18n("datagrid.DataGrid", "deleteOk"),
+            cancelButtonText: Application.i18n("datagrid.DataGrid", "deleteCancel")
         },
         filter: {
-            clearButtonText: Application.i18n("datagrid.DataGrid").filterClear,
-            clearAllButtonText: Application.i18n("datagrid.DataGrid").filterClearAll
+            clearButtonText: Application.i18n("datagrid.DataGrid", "filterClear"),
+            clearAllButtonText: Application.i18n("datagrid.DataGrid", "filterClearAll")
         }
     };
 
@@ -206,7 +206,7 @@ export default class DataGrid extends StoreComponent {
                             onChange={this.__onSearchChanged}
                             value={this.state.qfilter}
                             visible={this.props.searchable}
-                            placeholder={Application.i18n("datagrid.DataGrid").search}
+                            placeholder={Application.i18n("datagrid.DataGrid", "search")}
                             />
                     </Col>
                     <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
@@ -518,20 +518,20 @@ export default class DataGrid extends StoreComponent {
         let config = {
             create: {
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").create,
+                text: Application.i18n("datagrid.DataGrid", "create"),
                 icon: "fa-plus",
                 onClick: this.props.onNewClick
             },
             edit: {
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").edit,
+                text: Application.i18n("datagrid.DataGrid", "edit"),
                 icon: "fa-pencil",
                 onClick: this.props.onEditClick,
                 disabled: !this.state.hasSelection
             },
             delete: {
                 visible: false,
-                text: Application.i18n("datagrid.DataGrid").delete,
+                text: Application.i18n("datagrid.DataGrid", "delete"),
                 icon: "fa-trash",
                 onClick: this.__showDeleteConfirm,
                 disabled: !this.state.hasSelection
