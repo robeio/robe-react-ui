@@ -2,7 +2,6 @@ import React from "react";
 import { FormGroup, InputGroup, ControlLabel, FormControl, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ReactDOM from "react-dom";
 import ValidationComponent from "../validation/ValidationComponent";
-
 /**
  * BaseInput is a base component which wraps React-Bootstraps input component.
  * Does necessary validations, rendering of validation messages.

@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { Navbar, Nav, NavItem, Button } from "react-bootstrap";
-import { ShallowComponent,Application } from "robe-react-commons";
+import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
@@ -9,7 +9,7 @@ import Welcome from "./Welcome";
 import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
 import { NotFound } from "./error";
-import enLang from "robe-react-ui/lib/assets/lang_en_US.json"
+import Application from "robe-react-ui/lib/Application"
 
 
 const app = document.getElementById("app");
@@ -22,20 +22,19 @@ class Site extends ShallowComponent {
         this.state = {
             activeKey: path
         };
-        Application.loadI18n(enLang);
     }
 
     render(): Object {
         let activePage = Site.getActivePage(this.state.activeKey);
         return (
-            <div>
+            <Application language={this.state.language} >
                 <Navbar inverse collapseOnSelect>
                     <a href="https://github.com/robeio/robe-react-ui" target="_blank">
                         <img
                             style={{ position: "absolute", top: "0px", right: "0px", border: "0px", zIndex: 1 }}
                             alt="Fork me on GitHub"
                             src="./forkme_right_orange_ff7600.png"
-                        />
+                            />
                     </a>
                     <Navbar.Header>
                         <Navbar.Toggle style={{ float: "left", marginLeft: 10 }} />
@@ -45,7 +44,7 @@ class Site extends ShallowComponent {
                                 href="#Welcome"
                                 style={{ cursor: "pointer" }}
                                 onClick={this.__goWelcome}
-                            >Robe React UI</a>
+                                >Robe React UI</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Navbar.Collapse>
@@ -53,7 +52,7 @@ class Site extends ShallowComponent {
                             style={{ marginTop: 0 }}
                             activeKey={this.state.activeKey}
                             onSelect={this.__onSelect}
-                        >
+                            >
                             <NavItem eventKey="Components">Components</NavItem>
                             <NavItem eventKey="Docs">Docs</NavItem>
                             <NavItem eventKey="Samples">Samples</NavItem>
@@ -63,11 +62,17 @@ class Site extends ShallowComponent {
                                     src="https://react-bootstrap.github.io/assets/logo.png"
                                     alt="rblogo"
                                     width={18}
-                                /> React
+                                    /> React
                                 Bootstrap
                             </NavItem>
                             <NavItem eventKey="Recharts" className="re-charts">
                                 {"<Recharts />"}
+                            </NavItem>
+                            <NavItem eventKey="en_US">
+                                English
+                            </NavItem>
+                            <NavItem eventKey="tr_TR" >
+                                Türkçe
                             </NavItem>
                         </Nav>
                     </Navbar.Collapse>
@@ -75,10 +80,10 @@ class Site extends ShallowComponent {
                 <div
                     id="activePage"
                     style={{ overflowY: "auto", overflowX: "hidden", height: window.innerHeight - 48 }}
-                >
+                    >
                     {activePage}
                 </div>
-            </div>
+            </Application>
         );
     }
 
@@ -94,6 +99,19 @@ class Site extends ShallowComponent {
         }
         if (key === "Recharts") {
             window.open("http://recharts.org/");
+            return;
+        }
+        if (key === "en_US") {
+            this.setState({
+                language: undefined
+            });
+            return;
+        }
+        if (key === "tr_TR") {
+            let lang = require("./tr_TR.json");
+            this.setState({
+                language: lang
+            });
             return;
         }
         window.location.hash = `#${key}`;
@@ -114,13 +132,13 @@ class Site extends ShallowComponent {
                 );
             case "Docs":
                 return <Docs />;
-                
+
             case "JSDocs":
                 return <JSDocs />;
-                
+
             case "About":
                 return <NotFound />;
-                
+
             case "Samples":
                 return <SampleProjects />;
             default:

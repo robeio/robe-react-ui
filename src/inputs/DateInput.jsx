@@ -1,5 +1,5 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { ShallowComponent, Application } from "robe-react-commons";
 import momentjs from "moment";
 import is from "is-js";
 import { Popover, Overlay, InputGroup } from "react-bootstrap";
@@ -91,7 +91,7 @@ export default class DateInput extends ShallowComponent {
         readOnly: false,
         hidden: false,
         format: "DD/MM/YYYY",
-        locale: "en",
+        locale: Application.i18n("inputs.DateInput").locale,
         value: undefined,
         minDate: momentjs("01/01/1900", "DD/MM/YYYY").toDate().getTime(),
         maxDate: momentjs("31/12/2100", "DD/MM/YYYY").toDate().getTime(),

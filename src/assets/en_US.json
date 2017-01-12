@@ -26,8 +26,17 @@
     "googlemap.SearchBox": {
         "placeholder": "Search"
     },
+    "googlemap.GoogleMap": {
+        "language": "en"
+    },
+    "recaptcha.ReCaptcha": {
+        "language": "en"
+    },
     "inputs.upload.FileUploadInput": {
         "placeholder": "Drag and drop files here."
+    },
+    "inputs.DateInput": {
+        "locale": "en"
     },
     "inputs.SelectInput": {
         "placeholder": "Please Select",

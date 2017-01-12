@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import { ShallowComponent } from "robe-react-commons";
+import { ShallowComponent, Application } from "robe-react-commons";
 import Recaptcha from "react-recaptcha/dist/react-recaptcha";
 
 export default class ReCaptcha extends ShallowComponent {
@@ -13,16 +13,17 @@ export default class ReCaptcha extends ShallowComponent {
      */
     static propTypes: Map = {
         ...Recaptcha.PropTypes,
-        lang: PropTypes.string,
+        language: PropTypes.string,
     };
 
     static defaultProps = {
         ...Recaptcha.defaultProps,
-        lang: "en"
+        language: Application.i18n("recaptcha.ReCaptcha").language
+
     };
 
     render(): Object {
-        let { lang, ...props } = this.props;// eslint-disable-line no-unused-vars
+        let { language, ...props } = this.props;// eslint-disable-line no-unused-vars
         return (<Recaptcha {...props} />);
     }
 
@@ -31,7 +32,7 @@ export default class ReCaptcha extends ShallowComponent {
          * make this to static load only once time
          */
 
-        let lang = this.props.lang;
+        let lang = this.props.language;
         let isLoaded = ReCaptcha.LANGUAGE_MAP[lang];
 
         if (!isLoaded) {

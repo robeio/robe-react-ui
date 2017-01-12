@@ -27,7 +27,6 @@ export default class GoogleMapSample extends ShallowComponent {
                     <GoogleMap
                         bootstrapURLKeys={{
                             key: this.props.apiKey,
-                            language: 'tr',
                             libraries:'places'}}
                         defaultZoom={this.props.zoom}
                         center={this.state.center}
