@@ -1,5 +1,5 @@
 import { Generator, Maps } from "robe-react-commons";
-const MimeTypes = require("../data/mime.json");
+const MimeTypes = require("../assets/mime.json");
 
 const SIZE_TYPES = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 

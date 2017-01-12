@@ -8,9 +8,6 @@ import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
-import messages from "./wizardMessages.json";
-Application.loadI18n(messages);
-
 export default class Wizard extends ShallowComponent {
      /**
      * PropTypes of the component.
@@ -38,9 +35,9 @@ export default class Wizard extends ShallowComponent {
 
     static defaultProps = {
         currentStep: 0,
-        nextButtonText: Application.i18n("wizard").next,
-        preButtonText: Application.i18n("wizard").previous,
-        completeButtonText: Application.i18n("wizard").complete
+        nextButtonText: Application.i18n("wizard.Wizard").next,
+        preButtonText: Application.i18n("wizard.Wizard").previous,
+        completeButtonText: Application.i18n("wizard.Wizard").complete
     };
     __stepValidInfo = [];
     __content = undefined;

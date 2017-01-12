@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { Navbar, Nav, NavItem, Button } from "react-bootstrap";
-import { ShallowComponent } from "robe-react-commons";
+import { ShallowComponent,Application } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
@@ -9,6 +9,7 @@ import Welcome from "./Welcome";
 import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
 import { NotFound } from "./error";
+import enLang from "robe-react-ui/lib/assets/lang_en_US.json"
 
 
 const app = document.getElementById("app");
@@ -21,6 +22,7 @@ class Site extends ShallowComponent {
         this.state = {
             activeKey: path
         };
+        Application.loadI18n(enLang);
     }
 
     render(): Object {

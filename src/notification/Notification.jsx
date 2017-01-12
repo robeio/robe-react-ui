@@ -6,9 +6,7 @@ import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import NotificationItem from "./NotificationItem";
 import "./Notification.css";
-import messages from "./notificationMessages.json";
 
-Application.loadI18n(messages);
 /**
  * Notification is a view component for representing all notifications via a clickable icon and count label.
  * Also a popup will show the details of the notifications.
@@ -40,8 +38,8 @@ export default class Notification extends ShallowComponent {
     };
 
     static defaultProps = {
-        title: Application.i18n("notification").title,
-        notificationDetailLabel: Application.i18n("notification").details
+        title: Application.i18n("notification.Notification").title,
+        notificationDetailLabel: Application.i18n("notification.Notification").details
     };
 
 

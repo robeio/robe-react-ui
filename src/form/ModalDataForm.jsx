@@ -9,9 +9,7 @@ import {
 } from "react-bootstrap";
 import Button from "../buttons/Button";
 import DataForm from "./DataForm";
-import formMessages from "./formMessages.json"
 
-Application.loadI18n(formMessages);
 
 export default class ModalDataForm extends ShallowComponent {
 
@@ -62,10 +60,10 @@ export default class ModalDataForm extends ShallowComponent {
      */
     static defaultProps = {
         show: false,
-        header: Application.i18n("modaldataform").header,
-        invalidText: [Application.i18n("modaldataform").invalidField],
-        cancelButtonText: Application.i18n("modaldataform").cancel,
-        submitButtonText: Application.i18n("modaldataform").ok,
+        header: Application.i18n("form.ModalDataForm").header,
+        invalidText: [Application.i18n("form.ModalDataForm").invalidField],
+        cancelButtonText: Application.i18n("form.ModalDataForm").cancel,
+        submitButtonText: Application.i18n("form.ModalDataForm").ok,
         showCancelButton: true,
         showSaveButton: true,
         validationDisplay: "block"

@@ -4,8 +4,6 @@ import {
     Application
 } from "robe-react-commons";
 import TextInput from "../inputs/TextInput";
-import gmMessages from "./googleMapMessages.json"
-Application.loadI18n(gmMessages);
 
 export default class SearchBox extends ShallowComponent {
 
@@ -15,7 +13,7 @@ export default class SearchBox extends ShallowComponent {
     };
 
     static defaultProps = {
-        placeholder: Application.i18n("googlemap").searchBox
+        placeholder: Application.i18n("googlemap.SearchBox").placeholder
     };
 
     constructor(props: Object) {

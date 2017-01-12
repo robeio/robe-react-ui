@@ -6,8 +6,6 @@ import { Application } from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import "./SelectInput.css";
 
-import InputMessages from "./inputMessages.json";
-Application.loadI18n(InputMessages);
 
 /**
  * Provide selection in map array data with single or multi choices
@@ -91,8 +89,8 @@ export default class SelectInput extends ValidationComponent {
 
     static defaultProps = {
         items: [],
-        placeholder: Application.i18n("SelectInput").placeholder,
-        noResultsText: Application.i18n("SelectInput").noResult,
+        placeholder: Application.i18n("inputs.SelectInput").placeholder,
+        noResultsText: Application.i18n("inputs.SelectInput").noResult,
         textField: "text",
         valueField: "value",
         multi: false,

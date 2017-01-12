@@ -10,4 +10,3 @@ export { default as Progress } from "./progress";
 export { default as SideMenu } from "./sidemenu";
 export { default as InputValidations } from "./validation";
 export { default as Button } from "./buttons";
-

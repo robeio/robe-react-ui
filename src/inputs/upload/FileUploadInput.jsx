@@ -10,8 +10,6 @@ import ThumbnailGroup from "../../layouts/ThumbnailGroup";
 import ThumbnailItem from "../../layouts/ThumbnailItem";
 import FaIcon from "../../faicon/FaIcon";
 import "./FileUploadInput.css";
-import messages from "./fileUploadInputMessages.json"
-Application.loadI18n(messages);
 
 const supportMultiple = (typeof document !== "undefined" && document && document.createElement) ? "multiple" in document.createElement("input") : true;
 
@@ -103,7 +101,7 @@ export default class FileUploadInput extends ValidationComponent {
     static defaultProps = {
         multiple: true,
         itemStyle: {},
-        placeholder: Application.i18n("fileuploadinput").placeholder,
+        placeholder: Application.i18n("inputs.upload.FileUploadInput").placeholder,
         maxFileSize: 1000,
         toolbarPosition: "top",
         itemToolbarPosition: "bottom",
