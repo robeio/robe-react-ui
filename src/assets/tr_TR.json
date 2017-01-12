@@ -15,7 +15,7 @@
     },
     "form.ModalConfirm": {
         "ok": "Evet",
-        "cancel": "Hayıt"
+        "cancel": "Hayır"
     },
     "form.ModalDataForm": {
         "header": "Detaylar",

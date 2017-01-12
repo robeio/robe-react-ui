@@ -1,6 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
-import { Navbar, Nav, NavItem, Button } from "react-bootstrap";
+import {
+    Navbar,
+    Nav,
+    NavItem,
+    NavDropdown,
+    Button,
+    MenuItem
+} from "react-bootstrap";
 import { ShallowComponent } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
@@ -9,7 +16,7 @@ import Welcome from "./Welcome";
 import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
 import { NotFound } from "./error";
-import Application from "robe-react-ui/lib/Application"
+import Application from "robe-react-ui/lib/Application";
 
 
 const app = document.getElementById("app");
@@ -68,12 +75,11 @@ class Site extends ShallowComponent {
                             <NavItem eventKey="Recharts" className="re-charts">
                                 {"<Recharts />"}
                             </NavItem>
-                            <NavItem eventKey="en_US">
-                                English
-                            </NavItem>
-                            <NavItem eventKey="tr_TR" >
-                                Türkçe
-                            </NavItem>
+                            <NavDropdown title="Language" id="nav-dropdown" style={{ display: "none" }}>
+                                <MenuItem eventKey="en_US">English</MenuItem>
+                                <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
+                            </NavDropdown>
+
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -108,7 +114,7 @@ class Site extends ShallowComponent {
             return;
         }
         if (key === "tr_TR") {
-            let lang = require("./tr_TR.json");
+            let lang = "./assets/tr_TR.json";
             this.setState({
                 language: lang
             });

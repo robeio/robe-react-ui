@@ -110,7 +110,7 @@ export default class Notification extends ShallowComponent {
         return (
             <Col>
                 <span style={{ padding: "10px" }} >
-                    {Application.i18n("notification").noContent}
+                    {Application.i18n("notification.Notification").noContent}
                 </span>
             </Col>);
     }

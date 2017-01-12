@@ -31,12 +31,20 @@ export default class Application extends ShallowComponent {
         super(props);
         let language = Cookies.get("language", "./assets/en_US.json");
         if (Assertions.isString(language)) {
-            CA.loadI18n(require(language));
+            try {
+                CA.loadI18n(require(language));
+            } catch (error) {
+                console.error(error);
+                Cookies.remove("language");
+                CA.loadI18n(require("./assets/en_US.json"));
+            }
         } else {
             CA.loadI18n(language);
         }
-
     }
+
+    //TODO: Commondaki methodların buradan ulaşılabilmesi.
+
     render() {
         let {language, ...newProps} = this.props;
         return (<div {...newProps}>
