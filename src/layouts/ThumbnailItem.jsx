@@ -1,7 +1,7 @@
 import React from "react";
 import {Glyphicon} from "react-bootstrap";
 import {ShallowComponent} from "robe-react-commons";
-import ProgressBar from "robe-react-ui/lib/progress/ProgressBar"
+import ProgressBar from "../progress/ProgressBar"
 
 export default class ThumbnailItem extends ShallowComponent {
     /**
