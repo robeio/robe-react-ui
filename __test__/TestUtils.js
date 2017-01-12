@@ -4,6 +4,8 @@ import { mount, shallow } from "enzyme";
 import { Maps, Class, AjaxRequest } from "robe-react-commons";
 import ReactTestUtils from "react-addons-test-utils";
 
+import CA from "robe-react-commons/lib/application/Application";
+CA.loadI18n(require("assets/en_US.json"));
 
 const url = "http://localhost:3001";
 
