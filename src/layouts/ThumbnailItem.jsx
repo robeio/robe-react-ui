@@ -1,6 +1,7 @@
 import React from "react";
 import {Glyphicon} from "react-bootstrap";
 import {ShallowComponent} from "robe-react-commons";
+import ProgressBar from "robe-react-ui/lib/progress/ProgressBar"
 
 export default class ThumbnailItem extends ShallowComponent {
     /**
@@ -13,7 +14,7 @@ export default class ThumbnailItem extends ShallowComponent {
         style: React.PropTypes.object,
         focused: React.PropTypes.bool,
         selected: React.PropTypes.bool,
-        progress: React.PropTypes.bool
+        loading: React.PropTypes.bool
     };
 
     /**
@@ -24,15 +25,11 @@ export default class ThumbnailItem extends ShallowComponent {
     static defaultProps = {
         focused: false,
         selected: false,
-        progress: false
+        loading: false
     };
 
     constructor(props:Object) {
         super(props);
-
-        this.state = {
-            progress: true
-        }
     }
 
     render():Object {
@@ -46,20 +43,9 @@ export default class ThumbnailItem extends ShallowComponent {
         if (this.props.selected) {
             className += " rb-selected";
         }
-
-        let progress = "rb-progress-bar";
-        if (this.state.progress)
-            progress += " rb-progress-bar-start";
-        else
-            progress += " rb-progress-bar-finish";
         return (
             <div className={className} style={this.props.style}>
-                <div className="rb-progress" style={{display:this.props.progress?"inherit":"none"}}>
-                    <button onClick={()=>this.setState({progress:!this.state.progress})}>{this.state.progress}</button>
-                    <div className="rb-progress-content">
-                        <div className={progress}></div>
-                    </div>
-                </div>
+                <ProgressBar loading={this.props.loading}/>
                 {this.props.children}
             </div>
         );

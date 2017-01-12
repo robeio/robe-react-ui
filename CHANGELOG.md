@@ -3,7 +3,7 @@
 ## 1.1.15 -- Developing...
 * Showcase refresh bug fixed.0
 * BaseInput now forwards bsSize property.
-* FileUploadInput updated
+* FileUploadInput bugs fixed
 * All components are using i18n now. #11
 
 ## 1.1.14
