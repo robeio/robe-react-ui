@@ -43,7 +43,7 @@
 
 .rb-selected .rb-thumbnail-toolbar {
     background-color: #a8d1ff !important;
-    opacity: 1 !important;
+    opacity: .8 !important;
 }
 
 .rb-thumbnail-toolbar:hover,
@@ -51,7 +51,7 @@
 .rb-thumbnail-toolbar:active,
 .rb-thumbnail-toolbar:focus:hover,
 .rb-thumbnail-toolbar:active:hover {
-    opacity: 1;
+    opacity: .8;
 }
 
 .rb-thumbnail-toolbar-item {

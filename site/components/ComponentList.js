@@ -214,21 +214,13 @@ class ComponentList {
             sample: require("./samples/notification/NotificationSample"),
             code: require("./samples/notification/NotificationSample.txt")
         });
-
+        
 
         components.complex.push({
             header: "Toast",
-            desc: " is a toast message showing utility. Helps developer to show toast messages easly and in a standardized way",
-            json: {
-                methods: [
-                    {name: "info", description: "Toast.info(message, title, timeOut, callback)"},
-                    {name: "success", description: "Toast.success(message, title, timeOut, callback)"},
-                    {name: "warning", description: "Toast.warning(message, title, timeOut, callback)"},
-                    {name: "error", description: "Toast.error(message, title, timeOut, callback)"},
-                    {name: "configure", description: "Toast.configure(numMaxVisible)"}
-                ]
-            },
+            desc: " is a toaster message showing utility. Helps developer to show toaster messages easly and in a standardized way",
             sample: require("./samples/toast/ToastSample"),
+            json: require("./jsons/toast/Toast.json"),
             code: require("./samples/toast/ToastSample.txt")
         });
 

@@ -1,6 +1,6 @@
 # Change Log
 ## 1.1.16 -- Developing...
-
+* Added new Toast
 
 ## 1.1.15
 * Showcase refresh bug fixed.0

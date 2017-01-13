@@ -1,5 +1,6 @@
 import React from "react";
 import {ShallowComponent} from "robe-react-commons";
+import ClassName from "../util/css/ClassName";
 import "./ProgressBar.css"
 
 export default class ProgressBar extends ShallowComponent {
@@ -29,23 +30,22 @@ export default class ProgressBar extends ShallowComponent {
 
     render():Object {
 
-        let progress = "rb-progress";
-        let bar = "rb-progress-bar";
+        let progress = {className: "rb-progress"};
+        let bar = {className: "rb-progress-bar"};
 
         if (this.props.loading) {
-            bar += " rb-progress-bar-start";
+            ClassName.add(bar, "rb-progress-bar-start");
         }
         else {
-            bar += " rb-progress-bar-finish";
-            progress += " rb-progress-finish"
+            ClassName.add(bar, "rb-progress-bar-finish");
+            ClassName.add(progress, "rb-progress-finish");
         }
-
-
+        
         return (
             <div className={this.props.className} style={this.props.style}>
-                <div className={progress}>
+                <div className={progress.className}>
                     <div className="rb-progress-content">
-                        <div className={bar}></div>
+                        <div className={bar.className}></div>
                     </div>
                 </div>
             </div>

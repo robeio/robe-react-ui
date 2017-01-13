@@ -82,6 +82,9 @@ export default class FileUploadInput extends ValidationComponent {
          * auto upload is false then file will upload when clicking the upload button.
          */
         autoUpload: React.PropTypes.bool,
+        /**
+         *
+         */
         remote: React.PropTypes.object,
         /**
          *
@@ -103,7 +106,7 @@ export default class FileUploadInput extends ValidationComponent {
         placeholder: Application.i18n("inputs.upload.FileUploadInput","placeholder"),
         maxFileSize: 1000,
         toolbarPosition: "top",
-        autoUpload: true,
+        autoUpload: false,
         validationDisplay: "block"
     };
 
@@ -214,7 +217,7 @@ export default class FileUploadInput extends ValidationComponent {
             <div className={`rb-upload-toolbar rb-radius-${this.props.toolbarPosition}`}>
                 <Checkbox className="pull-left toolbar-chekbox"
                           checked={selectAllChecked}
-                          onClick={this.onSelectAll}>
+                          onClick={this.selectAll}>
                     Select All
                 </Checkbox>
                 <FaIcon code="fa-download pull-right " size="fa-sm" onClick={this.downloadSelectAll}/>
@@ -238,9 +241,15 @@ export default class FileUploadInput extends ValidationComponent {
         if (!files || files.length === 0) return;
         // Files dropped.
         let droppedFiles = Files.getDroppedFiles(files);
-
         if (this.props.autoUpload) { // if autoUpload true then call upload and break method.
-            this.upload(droppedFiles);
+            for (let i = 0; i < droppedFiles.length; i++) {
+                droppedFiles[i].loading = true;
+            }
+            this.setState({
+                files: this.mergeFiles(droppedFiles)
+            }, () => {
+                this.upload(droppedFiles);
+            });
             return;
         }
         // if autoUpload is false then add files and change state.
@@ -283,7 +292,7 @@ export default class FileUploadInput extends ValidationComponent {
             file = Objects.mergeClone(file, previousFile);
             file.key = file.id;
             file.isUploaded = true;
-            file.uploading = false;
+            file.loading = false;
             delete this.state.files[previousFile.key];
             this.state.files[file.key] = file;
             this.__value[this.__value.length] = file.id
@@ -362,8 +371,6 @@ export default class FileUploadInput extends ValidationComponent {
                 <FaIcon code="fa-upload" size="fa-sm"
                         onClick={this.uploadFile.bind(undefined, file)}/> : null;
 
-            let selectIcon = selected ? "fa-check-square-o" : "fa-square-o";
-
             file.uploading = file.uploading !== undefined ? file.uploading : this.props.autoUpload;
 
             let loading = file.isUploaded ? !file.isUploaded : file.uploading;
@@ -376,8 +383,8 @@ export default class FileUploadInput extends ValidationComponent {
                     key={file.key}>
                     <div className={"rb-thumbnail-toolbar"}>
                         <div className="rb-thumbnail-toolbar-item select">
-                            <FaIcon code={selectIcon} size="fa-sm"
-                                    onClick={this.onSelect.bind(undefined, file)}/>
+                            <FaIcon code={selected ? "fa-check-square-o" : "fa-square-o"} size="fa-sm"
+                                    onClick={this.selectFile.bind(undefined, file)}/>
                         </div>
                         <div className="rb-thumbnail-toolbar-item remove">
                             <FaIcon code="fa-trash" size="fa-sm"
@@ -450,10 +457,10 @@ export default class FileUploadInput extends ValidationComponent {
     }
 
     downloadFile(file) {
-        window.open("files/" + file.key);
+        window.open(this.props.remote.url + "/" + file.key);
     }
 
-    onSelect(file) {
+    selectFile(file) {
         let selectedFiles = this.state.selectedFiles;
         let isExist = Arrays.isExistByKey(selectedFiles, "key", file);
         if (isExist) {
@@ -461,13 +468,14 @@ export default class FileUploadInput extends ValidationComponent {
         } else {
             selectedFiles.push(file);
         }
+        this.state.upload = false;
         this.setState({
-            changed: !this.state.changed,
+            upload: true,
             selectedFiles: selectedFiles
         });
     }
 
-    onSelectAll() {
+    selectAll() {
         let state = {selectedFiles: []};
 
         Maps.forEach(this.state.files, (file, key) => {

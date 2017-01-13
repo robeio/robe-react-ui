@@ -10,7 +10,6 @@ export default class ClassName {
      * @public
      */
     static merge(...classNames: string[]): string {
-        console.log(classNames);
         if(!classNames || classNames.length < 0 ) return "";
         classNames = Strings.stringsToArray(classNames);
         return classNames.join(" ");
@@ -59,6 +58,28 @@ export default class ClassName {
             let names = Strings.stringsToArray(classNames);
             let from  =element.className.split(" ");
             names = Arrays.removeAllForNativeType(from, names);
+            element.className = names.join(" ");
+        }
+        return element.className || "";
+    }
+
+    /**
+     * Replace the given classNames from the given `element` if exist and then return it's existed classNames.
+     * @param {Element} element
+     * @param {string} remove className
+     * @param {string} add classNames
+     * @return {string}
+     * @public
+     */
+    static replace(element: Element,removeName:string,addName:string): string {
+        let removeNameArray=[];
+        removeNameArray.push(removeName);
+        let addNameArray=[];
+        addNameArray.push(addName);
+        if(element.className && element.className !== ""){
+            let from  =element.className.split(" ");
+            let names = Arrays.removeAllForNativeType(from, [removeName]);
+            names = Arrays.mergeArraysForNativeType(names, [addName]);
             element.className = names.join(" ");
         }
         return element.className || "";

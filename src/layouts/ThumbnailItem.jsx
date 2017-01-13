@@ -2,6 +2,7 @@ import React from "react";
 import {Glyphicon} from "react-bootstrap";
 import {ShallowComponent} from "robe-react-commons";
 import ProgressBar from "../progress/ProgressBar"
+import ClassName from "../util/css/ClassName";
 
 export default class ThumbnailItem extends ShallowComponent {
     /**
@@ -33,18 +34,19 @@ export default class ThumbnailItem extends ShallowComponent {
     }
 
     render():Object {
-        let className = "center-block ";
+        let progressBar = {className: "center-block "};
+
         if (this.props.className) {
-            className += this.props.className;
+            ClassName.add(progressBar, this.props.className);
         }
         if (this.props.focused) {
-            className += " rb-focused";
+            ClassName.add(progressBar, "rb-focused");
         }
         if (this.props.selected) {
-            className += " rb-selected";
+            ClassName.add(progressBar, "rb-selected");
         }
         return (
-            <div className={className} style={this.props.style}>
+            <div className={progressBar.className} style={this.props.style}>
                 <ProgressBar loading={this.props.loading}/>
                 {this.props.children}
             </div>
