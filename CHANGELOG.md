@@ -1,5 +1,7 @@
 # Change Log
-## 1.1.16 -- Developing...
+## 1.1.17 -- Developing...
+
+## 1.1.16
 * Added new Toast
 * Navbar click bugs in the Showcase #36
 * Showcase refresh bug fixed.0
