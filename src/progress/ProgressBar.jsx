@@ -6,22 +6,29 @@ import "./ProgressBar.css"
 export default class ProgressBar extends ShallowComponent {
     /**
      * Properties of the component
-     *
      * @static
      */
     static propTypes:Map = {
+        /**
+         *  Classname for use progress.
+         */
         className: React.PropTypes.string,
+        /**
+         * Custom style to the progress.
+         */
         style: React.PropTypes.object,
+        /**
+         * Specifies status for progress.
+         */
         loading: React.PropTypes.bool
     };
 
     /**
      * Default properties of the component
-     *
      * @static
      */
     static defaultProps = {
-        show: true
+        loading: true
     };
 
     constructor(props:Object) {
@@ -40,7 +47,7 @@ export default class ProgressBar extends ShallowComponent {
             ClassName.add(bar, "rb-progress-bar-finish");
             ClassName.add(progress, "rb-progress-finish");
         }
-        
+
         return (
             <div className={this.props.className} style={this.props.style}>
                 <div className={progress.className}>

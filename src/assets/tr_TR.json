@@ -1,62 +1,65 @@
 {
-    "datagrid.DataGrid": {
-        "create": "Yeni",
-        "edit": "Değiştir",
-        "delete": "Sil",
-        "deleteQuestion": "Emin misiniz ?",
-        "deleteMessage": "Seçili kayıt silinecek. Bu geri alınamaz bir işlem.",
-        "deleteOk": "Evet",
-        "deleteCancel": "Hayır",
-        "filterClear": "Sil",
-        "filterClearAll": "Hepsini Sil",
-        "paginationEmpty": "Veri yok.",
-        "paginationDisplay": "Gösterilen: ${start} - ${end} Toplam: ${total}",
-        "search": "Ara"
-    },
-    "form.ModalConfirm": {
-        "ok": "Evet",
-        "cancel": "Hayır"
-    },
-    "form.ModalDataForm": {
-        "header": "Detaylar",
-        "invalidField": "Lütfen bütün gerekli alanların geçerliliğini kontrol edin.",
-        "ok": "Kaydet",
-        "cancel": "İptal"
-    },
-    "googlemap.SearchBox": {
-        "placeholder": "Ara"
-    },
-    "googlemap.GoogleMap": {
-        "language": "tr"
-    },
-    "recaptcha.ReCaptcha": {
-        "language": "tr"
-    },
-    "inputs.upload.FileUploadInput": {
-        "placeholder": "Dosyaları buraya sürükleyip bırakın."
-    },
-    "inputs.DateInput": {
-        "locale": "tr"
-    },
-    "inputs.SelectInput": {
-        "placeholder": "Seçiniz",
-        "noResult": "Kayıt Yok"
-    },
-    "notification.Notification": {
-        "title": "Bildirimler",
-        "details": "Hepsini gör",
-        "noContent": "Bildiriminiz yok."
-    },
-    "validation.InputValidations": {
-        "required": "Bu alan zorunlu.",
-        "minValue": "En küçük değer ${minValue} olabilir",
-        "maxValue": "En büyük değer ${maxValue} olabilir",
-        "minLength": "En az ${min} karakter olabilir.",
-        "maxLength": "En çok ${max} karakter olabilir."
-    },
-    "wizard.Wizard": {
-        "next": "İleri",
-        "previous": "Geri",
-        "complete": "Tamamla"
-    }
+  "datagrid.DataGrid": {
+    "create": "Yeni",
+    "edit": "Değiştir",
+    "delete": "Sil",
+    "deleteQuestion": "Emin misiniz ?",
+    "deleteMessage": "Seçili kayıt silinecek. Bu geri alınamaz bir işlem.",
+    "deleteOk": "Evet",
+    "deleteCancel": "Hayır",
+    "filterClear": "Sil",
+    "filterClearAll": "Hepsini Sil",
+    "paginationEmpty": "Veri yok.",
+    "paginationDisplay": "Gösterilen: ${start} - ${end} Toplam: ${total}",
+    "search": "Ara"
+  },
+  "form.ModalConfirm": {
+    "ok": "Evet",
+    "cancel": "Hayır"
+  },
+  "form.ModalDataForm": {
+    "header": "Detaylar",
+    "invalidField": "Lütfen bütün gerekli alanların geçerliliğini kontrol edin.",
+    "ok": "Kaydet",
+    "cancel": "İptal"
+  },
+  "googlemap.SearchBox": {
+    "placeholder": "Ara"
+  },
+  "googlemap.GoogleMap": {
+    "language": "tr"
+  },
+  "recaptcha.ReCaptcha": {
+    "language": "tr"
+  },
+  "inputs.upload.FileUploadInput": {
+    "placeholder": "Dosyaları buraya sürükleyip bırakın."
+  },
+  "inputs.DateInput": {
+    "locale": "tr"
+  },
+  "inputs.SelectInput": {
+    "placeholder": "Seçiniz",
+    "noResult": "Kayıt Yok"
+  },
+  "notification.Notification": {
+    "title": "Bildirimler",
+    "details": "Hepsini gör",
+    "noContent": "Bildiriminiz yok."
+  },
+  "validation.InputValidations": {
+    "required": "Bu alan zorunlu.",
+    "minValue": "En küçük değer ${minValue} olabilir",
+    "maxValue": "En büyük değer ${maxValue} olabilir",
+    "minLength": "En az ${min} karakter olabilir.",
+    "maxLength": "En çok ${max} karakter olabilir."
+  },
+  "wizard.Wizard": {
+    "next": "İleri",
+    "previous": "Geri",
+    "complete": "Tamamla"
+  },
+  "progress.ProgressBar": {
+    "description": "Kendi yaptığıınız bileşeniniz"
+  }
 }

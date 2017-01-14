@@ -203,6 +203,7 @@ class ComponentList {
         components.complex.push({
             header: "ProgressBar",
             desc: " is an indicator component for the heavy ajax loaded sites.",
+            json: require("./jsons/progress/ProgressBar.json"),
             sample: require("./samples/progress/ProgressBarSample"),
             code: require("./samples/progress/ProgressBarSample.txt")
         });
@@ -214,7 +215,7 @@ class ComponentList {
             sample: require("./samples/notification/NotificationSample"),
             code: require("./samples/notification/NotificationSample.txt")
         });
-        
+
 
         components.complex.push({
             header: "Toast",

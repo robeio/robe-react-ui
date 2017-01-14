@@ -1,5 +1,5 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {ShallowComponent, Application} from "robe-react-commons";
 import ProgressBar from "robe-react-ui/lib/progress/ProgressBar";
 import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 import {Button, ButtonGroup, Checkbox} from "react-bootstrap";
@@ -32,7 +32,7 @@ export default class ProgressBarSample extends ShallowComponent {
             <div>
                 <div className="center-block" style={{ paddingTop: 20,maxWidth:220 }}>
                     <div style={this.__exampleStyle}>
-                        <span>Your Component</span>
+                        <span>{Application.i18n("progress.ProgressBar", "description")}</span>
                         <ProgressBar loading={this.state.loading}/>
                     </div>
                     <div style={{textAlign: "center"}}>

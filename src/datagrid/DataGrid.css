@@ -6,9 +6,11 @@
     width: 100%;
     background: white;
 }
-.datagrid tbody tr td{
+
+.datagrid tbody tr td {
     vertical-align: middle;
 }
+
 .datagrid-header-row {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -71,7 +73,7 @@
     margin-bottom: 0 !important;
 }
 
-.datagrid-table th{
+.datagrid-table th {
     color: #444;
 }
 
@@ -79,4 +81,12 @@
     .datagrid > .table-responsive {
         margin-bottom: 0 !important;
     }
+}
+
+.datagrid-table > thead > tr > td, .datagrid-table > thead > tr > th {
+    border-bottom-width: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
 }

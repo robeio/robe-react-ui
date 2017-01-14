@@ -5,7 +5,6 @@ import ClassName from "../util/css/ClassName";
 import "./Toast.css"
 
 const Constants = {
-    CHANGE: 'change',
     INFO: 'info-item',
     SUCCESS: 'success-item',
     WARNING: 'warning-item',
@@ -30,7 +29,6 @@ class Toast extends ShallowComponent {
     __removeAction = true;
     __queueList = [];
     numMaxVisible = 5;
-
 
     static propTypes = {
         /**
@@ -137,12 +135,12 @@ class Toast extends ShallowComponent {
 
     __addToast(toast) {
         let list = this.state.listToast.slice(0);
+        let item = this.state.listToast[this.state.listToast.length - 1];
+        toast.zIndex = item ? item.zIndex - 1 : this.numMaxVisible;
         if (this.state.position === "top-right" || this.state.position === "top-left") {
-            toast.zIndex = toast.timeOut + list.length;
             list.push(toast);
         }
         else {
-            toast.zIndex = toast.timeOut + list.length;
             list.unshift(toast)
         }
         this.setState({
