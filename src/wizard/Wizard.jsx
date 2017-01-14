@@ -3,7 +3,7 @@ import { ShallowComponent, Application } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import PageItem from "react-bootstrap/lib/PageItem";
-import NotificationManager from "react-notifications/lib/NotificationManager";
+import Toast from "../toast/Toast";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
@@ -174,7 +174,7 @@ export default class Wizard extends ShallowComponent {
 
         let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
         if (!result) {
-            NotificationManager.error(result.message);
+            Toast.error(result.message);
             return false;
         }
         return true;

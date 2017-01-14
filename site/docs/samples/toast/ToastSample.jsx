@@ -1,22 +1,42 @@
 import React from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-import { ShallowComponent } from "robe-react-commons";
-import { ToastContainer, Toast } from "robe-react-ui/lib/toast";
+import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import Toast from "robe-react-ui/lib/toast/Toast";
+import {Button, ButtonToolbar, Checkbox} from "react-bootstrap";
+import RadioInput from "robe-react-ui/lib/inputs/RadioInput";
 import NumericInput from "robe-react-ui/lib/inputs/NumericInput";
 import Highlight from "react-highlight";
 import Snippet1 from "./Snippet1.txt";
 import Snippet2 from "./Snippet2.txt";
 
-class ToastSample extends ShallowComponent {
+const positions = [
+    {
+        key: "top-right",
+        value: "Top and Right"
+    },
+    {
+        key: "top-left",
+        value: "Top and Left"
+    },
+    {
+        key: "bottom-right",
+        value: "Bottom and Right"
+    },
+    {
+        key: "bottom-left",
+        value: "Bottom and Left"
+    }
+];
 
+export default class ToastSample extends ShallowComponent {
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         this.state = {
-            numMaxVisible: ""
-        };
+            position: Toast.getPosition(),
+            numMaxVisible: Toast.getNumMaxVisible()
+        }
     }
-    
+
     toastMessage = (type) => {
         return () => {
             switch (type) {
@@ -40,9 +60,32 @@ class ToastSample extends ShallowComponent {
         };
     };
 
-    render() {
+    toastConfiguration(property, value) {
+        switch (property) {
+            case "position":
+                Toast.configuration({position: value});
+                break;
+            case "numMaxVisible":
+                Toast.configuration({numMaxVisible: value});
+                break;
+            default:
+                throw new Error("Unknown Message");
+        }
+    }
+
+    render():Object {
         return (
             <div>
+                <RadioInput
+                    label="Positions"
+                    name="position"
+                    items={positions}
+                    value={this.state.position}
+                    textField="value"
+                    valueField="key"
+                    onChange={this.__handleChange}
+                />
+
                 <p><code>Toast</code> have success,info,warning and error functions.</p>
                 <Highlight className="javascript">{Snippet1}</Highlight>
                 <ButtonToolbar>
@@ -70,27 +113,16 @@ class ToastSample extends ShallowComponent {
                     <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
                 </ButtonToolbar>
                 <br />
-                <p><code>NotificationContainer</code> wrapped as <code>ToastContainer</code>,</p>
-                <p><code>NotificationManager</code> wrapped as <code>Toast</code>.</p>
-                <a rel="noopener noreferrer" target="_blank" href="https://github.com/minhtranite/react-notifications">Read More About Toast</a>
-                
-                <ToastContainer />
             </div>
+
         );
     }
 
-    __handleChange(e: Object) {
+    __handleChange(e:Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;
-
-        if (value) {
-            Toast.configure(value);
-        } else {
-            Toast.configure(Number.MAX_SAFE_INTEGER);
-        }
+        this.toastConfiguration(e.target.name, value);
         this.setState(state);
     }
 }
-
-export default ToastSample;

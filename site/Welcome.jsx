@@ -57,7 +57,7 @@ export default class Welcome extends ShallowComponent {
 
                 </Grid>
 
-            </div >
+            </div>
         );
     }
 }

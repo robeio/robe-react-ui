@@ -204,7 +204,7 @@ class ComponentList {
             header: "ProgressBar",
             desc: " is an indicator component for the heavy ajax loaded sites.",
             sample: require("./samples/progress/ProgressBarSample"),
-            code: require("./samples/progress/ProgressBarSample.txt"),
+            code: require("./samples/progress/ProgressBarSample.txt")
         });
 
         components.complex.push({

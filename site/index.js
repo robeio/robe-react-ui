@@ -79,7 +79,6 @@ class Site extends ShallowComponent {
                                 <MenuItem eventKey="en_US">English</MenuItem>
                                 <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
                             </NavDropdown>
-
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

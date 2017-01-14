@@ -2,8 +2,6 @@ import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Renderer from "./Renderer";
 import {Grid, Col, ListGroup, ListGroupItem, InputGroup} from "react-bootstrap";
-import "react-notifications/lib/notifications.css";
-import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import DocList from "./DocList";
 import Progress from "progress/Progress";
 import TextInput from "inputs/TextInput";
@@ -53,7 +51,6 @@ export default class Docs extends ShallowComponent {
         }
         return (
             <Grid>
-                <NotificationContainer />
                 <h2>Docs</h2>
                 <h5>Here you can find documentation on the components.</h5>
                 <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid",paddingLeft:0 }}>

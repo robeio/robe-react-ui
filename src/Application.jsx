@@ -54,6 +54,9 @@ export default class Application extends ShallowComponent {
 
 
     componentWillReceiveProps(props: Object) {
+        if (props.language === this.props.language) {
+            return;
+        }
         Cookies.put("language", props.language);
         window.location.reload();
     }

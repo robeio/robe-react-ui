@@ -103,6 +103,6 @@
     "react-router": "4.0.0-2",
     "react-select": "0.9.1",
     "recharts": "0.20.2",
-    "robe-react-commons": "1.0.79"
+    "robe-react-commons": "1.0.80"
   }
 }

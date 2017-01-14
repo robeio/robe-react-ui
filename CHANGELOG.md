@@ -2,6 +2,7 @@
 ## 1.1.16 -- Developing...
 * Added new Toast
 * Navbar click bugs in the Showcase #36
+* Showcase refresh bug fixed.0
 
 ## 1.1.15
 * Showcase refresh bug fixed.0
