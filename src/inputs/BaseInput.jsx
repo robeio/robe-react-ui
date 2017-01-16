@@ -94,7 +94,7 @@ export default class BaseInput extends ValidationComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            bsStyle: this.props.bsStyle ? this.props.bsStyle : undefined
+            bsStyle: props.bsStyle ? props.bsStyle : undefined
         };
     }
     /**

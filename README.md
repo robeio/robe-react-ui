@@ -10,7 +10,9 @@
 #### Browsers support (will be updated)
 | <img src="./static/edge.png" alt="IE / Edge" width="16px" height="16px" /></br>IE / Edge | <img src="./static/firefox.png" alt="Firefox" width="16px" height="16px" /></br>Firefox | <img src="./static/chrome.png" alt="Chrome" width="16px" height="16px" /></br>Chrome | <img src="./static/safari.png" alt="Safari" width="16px" height="16px" /></br>Safari | <img src="./static/opera.png" alt="Opera" width="16px" height="16px" /></br>Opera |
 | :---------: | :---------: | :---------: | :---------: | :---------: |
-| 13+ | 29+| 45+ | 9.1+ | 32+ |
+| 11+ | 15+| 20+ | 5.1+ | 25+ |
+
+**Note:** You need include [es5-shim](https://github.com/es-shims/es5-shim) and [es6-shim](https://github.com/paulmillr/es6-shim).
 
  ## [CHANGE LOG](./CHANGELOG.md)
  
