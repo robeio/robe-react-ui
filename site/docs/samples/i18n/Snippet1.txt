@@ -8,9 +8,9 @@ import template from "es6-template-strings";
 Application.loadI18n(validationMessages);
 
 // Use it.
-console.log(Application.i18n("validation").required);
+console.log(Application.i18n(undefined, "validation", "required");
 
 //Use it with parameters.
-console.log( template(Application.i18n("validation").minValue), { minValue: 3 } );
+console.log( template(Application.i18n(undefined, "validation", "minValue"), { minValue: 3 } );
 
 
