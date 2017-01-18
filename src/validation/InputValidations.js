@@ -4,7 +4,7 @@ class InputValidations {
     constructor() {
     }
     required = (value: any, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "required");
+        let message = Application.i18n(undefined, "validation.InputValidations", "required");
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || value.length === 0) ?
             template(message, {
@@ -13,7 +13,7 @@ class InputValidations {
             }) : undefined;
     }
     htmlRequired = (value: any, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "required");
+        let message = Application.i18n(undefined, "validation.InputValidations", "required");
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value === "" || String(value) === "<div><br></div>") ?
             template(message, {
@@ -22,7 +22,7 @@ class InputValidations {
             }) : undefined;
     }
     minValue = (minValue: number, value: number, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "minValue");
+        let message = Application.i18n(undefined, "validation.InputValidations", "minValue");
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value < minValue) ?
             template(message, {
@@ -32,7 +32,7 @@ class InputValidations {
             }) : undefined;
     }
     maxValue = (maxValue: number, value: number, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "maxValue");
+        let message = Application.i18n(undefined, "validation.InputValidations", "maxValue");
 
         /* eslint-disable no-eval */
         return (value === undefined || value === null || value > maxValue) ?
@@ -43,7 +43,7 @@ class InputValidations {
             }) : undefined;
     }
     minLength = (min: number, value: string, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "minLength");
+        let message = Application.i18n(undefined, "validation.InputValidations", "minLength");
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */
         return (valueLength < min) ?
@@ -54,7 +54,7 @@ class InputValidations {
             }) : undefined;
     }
     maxLength = (max: number, value: string, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "maxLength");
+        let message = Application.i18n(undefined, "validation.InputValidations", "maxLength");
         let valueLength = (value === undefined || value === null) ? 0 : value.length;
         /* eslint-disable no-eval */
         let result = (valueLength > max) ?
@@ -66,7 +66,7 @@ class InputValidations {
         return result;
     }
     regex = (regex: string, value: any, code: string): string => {
-        let message = Application.i18n("validation.InputValidations", "regex");
+        let message = Application.i18n(undefined, "validation.InputValidations", "regex");
         /* eslint-disable no-eval */
         return !(new RegExp(regex).test(value)) ?
             template(message, {

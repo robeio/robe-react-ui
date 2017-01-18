@@ -13,7 +13,7 @@ export default class SearchBox extends ShallowComponent {
     };
 
     static defaultProps = {
-        placeholder: Application.i18n("googlemap.SearchBox","placeholder")
+        placeholder: Application.i18n(SearchBox, "googlemap.SearchBox", "placeholder")
     };
 
     constructor(props: Object) {

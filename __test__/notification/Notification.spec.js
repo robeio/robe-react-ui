@@ -56,7 +56,7 @@ describe("notification/Notification", () => {
         chai.assert.equal(wrapper.find(Notification).length, 1);
 
 
-        wrapper = mount(getComponent({ data: [], notificationDetailClick: notificationDetailClick }));
+        wrapper = mount(getComponent({ data: [], detailsClick: notificationDetailClick }));
 
         let footer = wrapper.find("div.notification-footer");
         chai.assert.equal(footer.length, 1);

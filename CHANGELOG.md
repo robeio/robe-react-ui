@@ -1,5 +1,10 @@
 # Change Log
-## 1.1.17 -- Developing...
+## 1.1.18 -- Developing...
+
+## 1.1.17
+* Dependencies updated.
+* Multi-lang changed. Now it can change default props on the fly. #38
+* Application mounts &unmounts after language change. #38
 
 ## 1.1.16
 * Added new Toast

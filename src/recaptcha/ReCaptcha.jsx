@@ -18,7 +18,7 @@ export default class ReCaptcha extends ShallowComponent {
 
     static defaultProps = {
         ...Recaptcha.defaultProps,
-        language: Application.i18n("recaptcha.ReCaptcha", "language")
+        language: Application.i18n(ReCaptcha, "recaptcha.ReCaptcha", "language")
 
     };
 

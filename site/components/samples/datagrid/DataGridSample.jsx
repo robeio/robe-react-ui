@@ -92,7 +92,7 @@ export default class DataGridSample extends ShallowComponent {
                     propsOfFields={propsOfFields}
                     store={this.state.store1}
                     ref="table1"
-                    toolbar={[{ name: "create", text: "Add"},{ name: "edit", text: "Edit"},{ name: "delete", text: "Delete"}]}
+                    toolbar={[{ name: "create"},{ name: "edit"},{ name: "delete"}]}
                     onNewClick={this.__add}
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}

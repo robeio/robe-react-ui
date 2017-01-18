@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom";
 import {
     ShallowComponent,
     Assertions,
@@ -29,23 +29,19 @@ export default class Application extends ShallowComponent {
 
     constructor(props: Object) {
         super(props);
-        let language = Cookies.get("language", "./assets/en_US.json");
-        if (Assertions.isString(language)) {
-            try {
-                CA.loadI18n(require(language));
-            } catch (error) {
-                console.error(error);
-                Cookies.remove("language");
-                CA.loadI18n(require("./assets/en_US.json"));
-            }
-        } else {
-            CA.loadI18n(language);
-        }
+        this.state = {
+            upgrade: false
+        };
+        let language = Cookies.get("language", props.language);
+        this.loadLanguage(language);
     }
 
     //TODO: Commondaki methodların buradan ulaşılabilmesi.
 
     render() {
+        if (this.state.upgrade) {
+            return <span />
+        }
         let {language, ...newProps} = this.props;
         return (<div {...newProps}>
             {this.props.children}
@@ -54,10 +50,31 @@ export default class Application extends ShallowComponent {
 
 
     componentWillReceiveProps(props: Object) {
-        if (props.language === this.props.language) {
-            return;
-        }
         Cookies.put("language", props.language);
-        window.location.reload();
+        this.loadLanguage(props.language);
+        this.state = {
+            upgrade: true
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.upgrade) {
+            this.setState({
+                upgrade: false
+            });
+        }
+    }
+
+    loadLanguage(language: string) {
+        if (Assertions.isString(language)) {
+            try {
+                CA.loadI18n(require(language));
+            } catch (error) {
+                console.error(error);
+                CA.loadI18n(require("./assets/en_US.json"));
+            }
+        } else {
+            CA.loadI18n(language);
+        }
     }
 }

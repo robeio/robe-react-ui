@@ -26,11 +26,11 @@ export default class Notification extends ShallowComponent {
          * Click event for the notification details.
          * Footer link will be rendered according to this property.
          */
-        notificationDetailClick: React.PropTypes.func,
+        detailsClick: React.PropTypes.func,
         /**
          * Text for the notification details link.
          */
-        notificationDetailLabel: React.PropTypes.string,
+        detailsText: React.PropTypes.string,
         /**
          * Title for the notification popup.
          */
@@ -38,8 +38,8 @@ export default class Notification extends ShallowComponent {
     };
 
     static defaultProps = {
-        title: Application.i18n("notification.Notification", "title"),
-        notificationDetailLabel: Application.i18n("notification.Notification", "details")
+        title: Application.i18n(Notification, "notification.Notification", "title"),
+        detailsText: Application.i18n(Notification, "notification.Notification", "detailsText")
     };
 
 
@@ -71,7 +71,7 @@ export default class Notification extends ShallowComponent {
     }
 
     __renderFooter(): Object {
-        if (this.props.notificationDetailClick === undefined) {
+        if (this.props.detailsClick === undefined) {
             return undefined;
         }
         return (
@@ -80,9 +80,9 @@ export default class Notification extends ShallowComponent {
                 <div className="notification-footer">
                     <i
                         className="menu-title pull-right"
-                        onClick={this.__notificationDetailClick}
+                        onClick={this.__detailsClick}
                         >
-                        {this.props.notificationDetailLabel}
+                        {this.props.detailsText}
                         <FaIcon code="fa-arrow-circle-right" size="fa-lg" />
                     </i>
                 </div>
@@ -110,7 +110,7 @@ export default class Notification extends ShallowComponent {
         return (
             <Col>
                 <span style={{ padding: "10px" }} >
-                    {Application.i18n("notification.Notification", "noContent")}
+                    {Application.i18n(undefined, "notification.Notification", "noContent")}
                 </span>
             </Col>);
     }

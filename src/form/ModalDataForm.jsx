@@ -44,8 +44,8 @@ export default class ModalDataForm extends ShallowComponent {
         show: React.PropTypes.bool,
         onSubmit: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func,
-        cancelButtonText: React.PropTypes.string,
-        submitButtonText: React.PropTypes.string,
+        cancel: React.PropTypes.string,
+        ok: React.PropTypes.string,
         showCancelButton: React.PropTypes.bool,
         showSaveButton: React.PropTypes.bool,
         /**
@@ -60,10 +60,10 @@ export default class ModalDataForm extends ShallowComponent {
      */
     static defaultProps = {
         show: false,
-        header: Application.i18n("form.ModalDataForm", "header"),
-        invalidText: [Application.i18n("form.ModalDataForm", "invalidField")],
-        cancelButtonText: Application.i18n("form.ModalDataForm", "cancel"),
-        submitButtonText: Application.i18n("form.ModalDataForm", "ok"),
+        header: Application.i18n(ModalDataForm, "form.ModalDataForm", "header"),
+        invalidField: [Application.i18n(ModalDataForm, "form.ModalDataForm", "invalidField")],
+        cancel: Application.i18n(ModalDataForm, "form.ModalDataForm", "cancel"),
+        ok: Application.i18n(ModalDataForm, "form.ModalDataForm", "ok"),
         showCancelButton: true,
         showSaveButton: true,
         validationDisplay: "block"
@@ -101,9 +101,9 @@ export default class ModalDataForm extends ShallowComponent {
 
     __renderFooterButtons = (): Modal.Footer => {
         let showCancelButton = ((this.props.showCancelButton) ?
-            <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button> : null);
+            <Button onClick={this.props.onCancel}>{this.props.cancel}</Button> : null);
         let showSaveButton = ((this.props.showSaveButton) ?
-            <Button bsStyle="primary" ref={(component: Object) => { this.__submitButtonComponent = component; } } onClickAsync={this.__submitForm}>{this.props.submitButtonText}</Button> : null);
+            <Button bsStyle="primary" ref={(component: Object) => { this.__submitButtonComponent = component; } } onClickAsync={this.__submitForm}>{this.props.ok}</Button> : null);
 
         return (
             <Modal.Footer>
@@ -120,8 +120,8 @@ export default class ModalDataForm extends ShallowComponent {
 
         let errors = [];
 
-        for (let i = 0; i < this.state.invalidText.length; i++) {
-            let error = this.state.invalidText[i];
+        for (let i = 0; i < this.state.invalidField.length; i++) {
+            let error = this.state.invalidField[i];
             errors.push(<p key={i}>{error}</p>);
         }
         return (<Alert bsStyle="danger" className="input-alert">{errors}</Alert>);
@@ -170,7 +170,7 @@ export default class ModalDataForm extends ShallowComponent {
         this.state = {
             valid: true,
             show: nextProps.show,
-            invalidText: nextProps.invalidText
+            invalidField: nextProps.invalidField
         };
     }
 

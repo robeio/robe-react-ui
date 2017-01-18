@@ -1,16 +1,24 @@
 {
   "datagrid.DataGrid": {
-    "create": "New",
-    "edit": "Edit",
-    "delete": "Delete",
-    "deleteQuestion": "Are you sure ?",
-    "deleteMessage": "The selected entry will be deleted. This can not be undone.",
-    "deleteOk": "Yes",
-    "deleteCancel": "No",
-    "filterClear": "Clear",
-    "filterClearAll": "Clear All",
-    "paginationEmpty": "No data to display.",
-    "paginationDisplay": "Showing ${start} to ${end} of ${total} entries.",
+    "toolbar": {
+      "create": "New",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "modalConfirm": {
+      "header": "Are you sure ?",
+      "message": "The selected entry will be deleted. This can not be undone.",
+      "ok": "Yes",
+      "cancel": "No"
+    },
+    "filter": {
+      "clear": "Clear",
+      "clearAll": "Clear All"
+    },
+    "pagination": {
+      "empty": "No data to display.",
+      "display": "Showing ${start} to ${end} of ${total} entries."
+    },
     "search": "Search"
   },
   "form.ModalConfirm": {
@@ -44,7 +52,7 @@
   },
   "notification.Notification": {
     "title": "Notifications",
-    "details": "See All",
+    "detailsText": "See All",
     "noContent": "You don't have any notification."
   },
   "validation.InputValidations": {
@@ -58,8 +66,5 @@
     "next": "Next",
     "previous": "Previous",
     "complete": "Complete"
-  },
-  "progress.ProgressBar": {
-    "description": "Your Component"
   }
 }

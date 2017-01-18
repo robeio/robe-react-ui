@@ -64,7 +64,7 @@ export default class SelectInput extends ValidationComponent {
         /**
          * presented message if any result not shown.
          */
-        noResultsText: React.PropTypes.string,
+        noResult: React.PropTypes.string,
         /**
          *  whether to enable searching feature or not
          */
@@ -89,8 +89,8 @@ export default class SelectInput extends ValidationComponent {
 
     static defaultProps = {
         items: [],
-        placeholder: Application.i18n("inputs.SelectInput", "placeholder"),
-        noResultsText: Application.i18n("inputs.SelectInput", "noResult"),
+        placeholder: Application.i18n(SelectInput,"inputs.SelectInput", "placeholder"),
+        noResult: Application.i18n(SelectInput,"inputs.SelectInput", "noResult"),
         textField: "text",
         valueField: "value",
         multi: false,
@@ -135,7 +135,7 @@ export default class SelectInput extends ValidationComponent {
                     valueKey={this.props.valueField}
                     labelKey={this.props.textField}
                     multi={this.props.multi}
-                    noResultsText={this.props.noResultsText}
+                    noResultsText={this.props.noResult}
                     disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
                     searchable={this.props.searchable}

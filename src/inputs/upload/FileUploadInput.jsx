@@ -1,7 +1,7 @@
 import React from "react";
-import {findDOMNode} from "react-dom";
-import {Generator, Application, Objects, Maps, Arrays} from "robe-react-commons";
-import {FormGroup, FormControl, ControlLabel, Glyphicon, Checkbox, OverlayTrigger, Tooltip} from "react-bootstrap";
+import { findDOMNode } from "react-dom";
+import { Generator, Application, Objects, Maps, Arrays } from "robe-react-commons";
+import { FormGroup, FormControl, ControlLabel, Glyphicon, Checkbox, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ValidationComponent from "../../validation/ValidationComponent";
 import Files from "../../util/Files";
 import FileManager from "../../util/FileManager";
@@ -103,7 +103,7 @@ export default class FileUploadInput extends ValidationComponent {
     static defaultProps = {
         multiple: true,
         itemStyle: {},
-        placeholder: Application.i18n("inputs.upload.FileUploadInput","placeholder"),
+        placeholder: Application.i18n(FileUploadInput, "inputs.upload.FileUploadInput", "placeholder"),
         maxFileSize: 1000,
         toolbarPosition: "top",
         autoUpload: false,
@@ -167,7 +167,7 @@ export default class FileUploadInput extends ValidationComponent {
         let attributes = {
             type: "file",
             name: this.props.name,
-            style: {display: "none"},
+            style: { display: "none" },
             multiple: this.props.multiple,
             ref: el => this.__fileInputEl = findDOMNode(el),
             onChange: this.onFileSelect
@@ -181,17 +181,17 @@ export default class FileUploadInput extends ValidationComponent {
                 {label}
                 <FormControl
                     {...attributes}
-                />
+                    />
                 <DragDropLayout
                     ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el) } }
                     onDrop={this.onDrop}
                     onClick={this.browse}
-                >
+                    >
                     {this.createToolbar("top")}
                     <ThumbnailGroup
                         placeholder={this.props.placeholder}
                         id={this.__componentId}
-                    >
+                        >
                         {this.renderItems(this.state.files)}
                     </ThumbnailGroup>
                 </DragDropLayout>
@@ -216,13 +216,13 @@ export default class FileUploadInput extends ValidationComponent {
         return (
             <div className={`rb-upload-toolbar rb-radius-${this.props.toolbarPosition}`}>
                 <Checkbox className="pull-left toolbar-chekbox"
-                          checked={selectAllChecked}
-                          onClick={this.selectAll}>
+                    checked={selectAllChecked}
+                    onClick={this.selectAll}>
                     Select All
                 </Checkbox>
-                <FaIcon code="fa-download pull-right " size="fa-sm" onClick={this.downloadSelectAll}/>
-                <FaIcon code="fa-upload pull-right " size="fa-sm" onClick={this.uploadSelectAll}/>
-                <FaIcon code="fa-trash pull-right " size="fa-sm" onClick={this.deleteSelectAll}/>
+                <FaIcon code="fa-download pull-right " size="fa-sm" onClick={this.downloadSelectAll} />
+                <FaIcon code="fa-upload pull-right " size="fa-sm" onClick={this.uploadSelectAll} />
+                <FaIcon code="fa-trash pull-right " size="fa-sm" onClick={this.deleteSelectAll} />
             </div>
         );
     }
@@ -366,10 +366,10 @@ export default class FileUploadInput extends ValidationComponent {
 
             let downloadIcon = file.isUploaded ?
                 <FaIcon code="fa-download" size="fa-sm"
-                        onClick={this.downloadFile.bind(undefined, file)}/> : null;
+                    onClick={this.downloadFile.bind(undefined, file)} /> : null;
             let uploadIcon = !file.isUploaded ?
                 <FaIcon code="fa-upload" size="fa-sm"
-                        onClick={this.uploadFile.bind(undefined, file)}/> : null;
+                    onClick={this.uploadFile.bind(undefined, file)} /> : null;
 
             file.uploading = file.uploading !== undefined ? file.uploading : this.props.autoUpload;
 
@@ -384,11 +384,11 @@ export default class FileUploadInput extends ValidationComponent {
                     <div className={"rb-thumbnail-toolbar"}>
                         <div className="rb-thumbnail-toolbar-item select">
                             <FaIcon code={selected ? "fa-check-square-o" : "fa-square-o"} size="fa-sm"
-                                    onClick={this.selectFile.bind(undefined, file)}/>
+                                onClick={this.selectFile.bind(undefined, file)} />
                         </div>
                         <div className="rb-thumbnail-toolbar-item remove">
                             <FaIcon code="fa-trash" size="fa-sm"
-                                    onClick={this.deleteFile.bind(undefined, file)}/>
+                                onClick={this.deleteFile.bind(undefined, file)} />
                         </div>
                         <div className="rb-thumbnail-toolbar-item upload">
                             {uploadIcon}
@@ -428,7 +428,7 @@ export default class FileUploadInput extends ValidationComponent {
             <div className="rb-upload-image">
                 <div className="rb-upload-extension">{extension}</div>
                 <div className="rb-upload-icon">
-                    <FaIcon code="fa-file-o"/>
+                    <FaIcon code="fa-file-o" />
                 </div>
             </div>,
             <OverlayTrigger placement="bottom" overlay={this.toolTip(file)}>
@@ -476,7 +476,7 @@ export default class FileUploadInput extends ValidationComponent {
     }
 
     selectAll() {
-        let state = {selectedFiles: []};
+        let state = { selectedFiles: [] };
 
         Maps.forEach(this.state.files, (file, key) => {
             state.selectedFiles.push(file);

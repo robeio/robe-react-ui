@@ -12,7 +12,6 @@ export default class ProgressBarSample extends ShallowComponent {
             loading: true
         };
     }
-
     __exampleStyle = {
         position: "relative",
         height: 100,
@@ -32,7 +31,7 @@ export default class ProgressBarSample extends ShallowComponent {
             <div>
                 <div className="center-block" style={{ paddingTop: 20,maxWidth:220 }}>
                     <div style={this.__exampleStyle}>
-                        <span>{Application.i18n("progress.ProgressBar", "description")}</span>
+                        <span>Container Component</span>
                         <ProgressBar loading={this.state.loading}/>
                     </div>
                     <div style={{textAlign: "center"}}>
@@ -47,7 +46,6 @@ export default class ProgressBarSample extends ShallowComponent {
                     </div>
                 </div>
             </div>
-
         );
     }
 }

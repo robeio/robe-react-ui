@@ -1,16 +1,24 @@
 {
   "datagrid.DataGrid": {
-    "create": "Yeni",
-    "edit": "Değiştir",
-    "delete": "Sil",
-    "deleteQuestion": "Emin misiniz ?",
-    "deleteMessage": "Seçili kayıt silinecek. Bu geri alınamaz bir işlem.",
-    "deleteOk": "Evet",
-    "deleteCancel": "Hayır",
-    "filterClear": "Sil",
-    "filterClearAll": "Hepsini Sil",
-    "paginationEmpty": "Veri yok.",
-    "paginationDisplay": "Gösterilen: ${start} - ${end} Toplam: ${total}",
+    "toolbar": {
+      "create": "Yeni",
+      "edit": "Değiştir",
+      "delete": "Sil"
+    },
+    "modalConfirm": {
+      "header": "Emin misiniz ?",
+      "message": "Seçili kayıt silinecek. Bu geri alınamaz bir işlem.",
+      "ok": "Evet",
+      "cancel": "Hayır"
+    },
+    "filter": {
+      "clear": "Sil",
+      "clearAll": "Hepsini Sil"
+    },
+    "pagination": {
+      "empty": "Veri yok.",
+      "display": "Gösterilen: ${start} - ${end} Toplam: ${total}"
+    },
     "search": "Ara"
   },
   "form.ModalConfirm": {
@@ -44,7 +52,7 @@
   },
   "notification.Notification": {
     "title": "Bildirimler",
-    "details": "Hepsini gör",
+    "detailsText": "Hepsini Gör",
     "noContent": "Bildiriminiz yok."
   },
   "validation.InputValidations": {
@@ -58,8 +66,5 @@
     "next": "İleri",
     "previous": "Geri",
     "complete": "Tamamla"
-  },
-  "progress.ProgressBar": {
-    "description": "Kendi yaptığıınız bileşeniniz"
   }
 }

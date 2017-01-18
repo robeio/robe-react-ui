@@ -14,14 +14,14 @@ export default class ModalConfirm extends ShallowComponent {
         header: React.PropTypes.string,
         message: React.PropTypes.string,
         show: React.PropTypes.bool,
-        okButtonText: React.PropTypes.string,
-        cancelButtonText: React.PropTypes.string,
+        ok: React.PropTypes.string,
+        cancel: React.PropTypes.string,
     };
 
 
     static defaultProps = {
-        okButtonText: Application.i18n("form.ModalConfirm", "ok"),
-        cancelButtonText: Application.i18n("form.ModalConfirm", "cancel"),
+        ok: Application.i18n(ModalConfirm, "form.ModalConfirm", "ok"),
+        cancel: Application.i18n(ModalConfirm, "form.ModalConfirm", "cancel"),
     };
 
     render(): Object {
@@ -34,8 +34,8 @@ export default class ModalConfirm extends ShallowComponent {
                     {this.props.message}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.onCancelClick}>{this.props.cancelButtonText}</Button>
-                    <Button bsStyle="danger" onClick={this.props.onOkClick}>{this.props.okButtonText}</Button>
+                    <Button onClick={this.props.onCancelClick}>{this.props.cancel}</Button>
+                    <Button bsStyle="danger" onClick={this.props.onOkClick}>{this.props.ok}</Button>
                 </Modal.Footer>
             </Modal>
         );

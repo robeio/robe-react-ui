@@ -22,22 +22,22 @@ export default class Wizard extends ShallowComponent {
         /**
          * Text for the next button.
          */
-        nextButtonText: React.PropTypes.string,
+        next: React.PropTypes.string,
         /**
          * Text for the previous button.
          */
-        preButtonText: React.PropTypes.string,
+        previous: React.PropTypes.string,
         /**
          * Text for the complete button.
          */
-        completeButtonText: React.PropTypes.string
+        complete: React.PropTypes.string
     };
 
     static defaultProps = {
         currentStep: 0,
-        nextButtonText: Application.i18n("wizard.Wizard", "next"),
-        preButtonText: Application.i18n("wizard.Wizard", "previous"),
-        completeButtonText: Application.i18n("wizard.Wizard", "complete")
+        next: Application.i18n(Wizard, "wizard.Wizard", "next"),
+        previous: Application.i18n(Wizard, "wizard.Wizard", "previous"),
+        complete: Application.i18n(Wizard, "wizard.Wizard", "complete")
     };
     __stepValidInfo = [];
     __content = undefined;
@@ -135,7 +135,7 @@ export default class Wizard extends ShallowComponent {
                         onClick={this.props.onCompleteClick}
                         >
                         <FaIcon code="fa-check-circle" />
-                        {this.props.completeButtonText}
+                        {this.props.complete}
                     </Button>
                 </Col>
             );
@@ -146,7 +146,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                     >
-                    {this.props.nextButtonText} <FaIcon code="fa-arrow-right" />
+                    {this.props.next} <FaIcon code="fa-arrow-right" />
                 </Pager.Item>
             );
         }
@@ -157,7 +157,7 @@ export default class Wizard extends ShallowComponent {
                     disabled={this.state.currentStep === 0}
                     onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
                     >
-                    <FaIcon code="fa-arrow-left" />{this.props.preButtonText}
+                    <FaIcon code="fa-arrow-left" />{this.props.previous}
                 </Pager.Item>
                 {nextButton}
             </Pager>
