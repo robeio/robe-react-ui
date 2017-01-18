@@ -29,6 +29,7 @@ class Site extends ShallowComponent {
         this.state = {
             activeKey: path
         };
+        this.__onSelect = this.__onSelect.bind(this);
     }
 
     render():Object {
