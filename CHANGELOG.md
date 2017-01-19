@@ -4,6 +4,7 @@
 ## 1.1.18
 * upgrade robe-react-commons library. 
     - fixed 'js-criteria' module not found problem in LocalEndPoint.js class.
+* removed js-criteria from robe-react-ui ( Reason: js-criteria is defined in robe-react-commons library ) .
 
 ## 1.1.17
 * Dependencies updated.
