@@ -48,8 +48,8 @@ export default class DataGridSample extends ShallowComponent {
         super(props);
 
         const data =[
-            { id: 1, name: "John", surname: "Doe", password:"123123", job:"sd", gender:"male", email:"johndoe@example.com" }, 
-            { id: 2, name: "Jane", surname: "Roe", password:"123123", job:"sa", gender:"female", email:"janeroe@example.com" }
+            { id: 1, name: "John", surname: "Doe", password:"123123", job:"sd", gender:"male", email:"johndoe@example.com", birthdate:"1995-12-25"}, 
+            { id: 2, name: "Jane", surname: "Roe", password:"123123", job:"sa", gender:"female", email:"janeroe@example.com", birthdate:"1995-12-30"}
         ];
 
         let store1 = new Store({

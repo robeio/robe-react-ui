@@ -34,6 +34,9 @@ class ComponentManager {
             date: {
                 component: Input.DateInput,
                 displayAsText: (field: Object, value: string): Object => {
+
+                    if(!value)
+                        return "";
                     let format = field.format ? field.format : "DD/MM/YYYY";
                     /**
                      * TODO check locale this again
