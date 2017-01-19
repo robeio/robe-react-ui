@@ -60,7 +60,8 @@
     "minValue": "En küçük değer ${minValue} olabilir",
     "maxValue": "En büyük değer ${maxValue} olabilir",
     "minLength": "En az ${min} karakter olabilir.",
-    "maxLength": "En çok ${max} karakter olabilir."
+    "maxLength": "En çok ${max} karakter olabilir.",
+    "regex": "'Değer ${regex}' kuralı ile uyuşmalı."
   },
   "wizard.Wizard": {
     "next": "İleri",
