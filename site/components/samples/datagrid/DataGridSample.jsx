@@ -30,11 +30,11 @@ const propsOfFields = {
         items: [
             {
                 value: "male",
-                text: "Erkek"
+                text: "Male"
             },
             {
                 value: "female",
-                text: "Kadın"
+                text: "Female"
             }
         ]
     }
@@ -47,9 +47,14 @@ export default class DataGridSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
 
+        const data =[
+            { id: 1, name: "John", surname: "Doe", password:"123123", job:"sd", gender:"male", email:"johndoe@example.com" }, 
+            { id: 2, name: "Jane", surname: "Roe", password:"123123", job:"sa", gender:"female", email:"janeroe@example.com" }
+        ];
+
         let store1 = new Store({
             endPoint: new LocalEndPoint({
-                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
+                data: data,
                 idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
@@ -57,8 +62,8 @@ export default class DataGridSample extends ShallowComponent {
         });
         let store2 = new Store({
             endPoint: new LocalEndPoint({
-                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
-                idField: DataGridSample.idField
+                 data: data,
+                 idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
             autoLoad: true
@@ -66,7 +71,7 @@ export default class DataGridSample extends ShallowComponent {
 
         let store3 = new Store({
             endPoint: new LocalEndPoint({
-                data: [{ id: 1, name: "John", surname: "Doe" }, { name: "Jane", surname: "Roe", id: 2 }],
+                data: data,
                 idField: DataGridSample.idField
             }),
             idField: DataGridSample.idField,
@@ -104,7 +109,7 @@ export default class DataGridSample extends ShallowComponent {
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
                     store={this.state.store2}
-                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university" }]}
+                    toolbar={[{ name: "custom", text: "Custom", icon: "fa-university",onClick:()=>{ alert("Custom button clicked");} }]}
                     onNewClick={this.__add}
                     onEditClick={this.__edit}
                     onDeleteClick={this.__remove}
