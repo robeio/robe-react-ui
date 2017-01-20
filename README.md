@@ -18,6 +18,8 @@
  
  ## [CONTRIBUTION](./CONTRIBUTION.md)
 
+ ## [ISSUE TEMPLATE](./ISSUE_TEMPLATE.md)
+
  Please take a look at [Project Site](http://robeio.github.io/robe-react-ui/)
 
 RRU = Robe-React-UI
