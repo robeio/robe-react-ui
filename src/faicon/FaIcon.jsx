@@ -43,7 +43,7 @@ export default class FaIcon extends ShallowComponent {
         const { fixed, code, size, ...props } = this.props; // eslint-disable-line no-unused-vars
 
         return (
-            <i className={className} style={this.props.style} {...props} aria-hidden="true" />
+            <i {...props} className={className} style={this.props.style} aria-hidden="true" />
         );
     }
 }

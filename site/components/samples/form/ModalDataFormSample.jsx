@@ -46,7 +46,9 @@ export default class ModalDataFormSample extends ShallowComponent {
                             remote: remote
                         }
                     }}
-                />
+                    validationDisplay={"overlay"}
+
+                    />
                 <Button onClick={this.toggle}>Show Modal</Button>
             </div>
         );

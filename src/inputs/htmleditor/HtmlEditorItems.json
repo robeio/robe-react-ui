@@ -346,5 +346,9 @@
                 "label": "List"
             }
         ]
+    },
+    {
+        "label": "Source",
+        "type": "source"
     }
 ]

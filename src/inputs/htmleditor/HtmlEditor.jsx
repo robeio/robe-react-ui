@@ -6,6 +6,9 @@ import ValidationComponent from "../../validation/ValidationComponent";
 import "./quill.snow.css";
 import "./HtmlEditor.css";
 import HtmlEditorItems from "./HtmlEditorItems.json";
+import Input from "../BaseInput";
+import FaIcon from "../../faicon/FaIcon";
+
 
 export default class HtmlEditor extends ValidationComponent {
 
@@ -58,7 +61,12 @@ export default class HtmlEditor extends ValidationComponent {
         /**
        *Defines the display style of the Validation message.
        */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+
+        /**
+         *Defines the view mode of the editor.
+         */
+        sourceView: React.PropTypes.bool
     };
 
     /**
@@ -71,31 +79,60 @@ export default class HtmlEditor extends ValidationComponent {
         readOnly: false,
         hidden: false,
         autoResize: false,
-        validationDisplay: "block"
+        validationDisplay: "block",
+        sourceView: false
     };
 
     static refName = "editor";
     static toolbarRefName = "toolbar";
 
+    quill;
+    innerComponent;
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            sourceView: this.props.sourceView
+        }
+    }
 
     render(): Object {
+        let editor = this.state.sourceView ?
+            (<div className="quill">
+                <div style={{ minHeight: "41px", color: "#0063CF" }} className="quill-toolbar ql-toolbar ql-snow">
+                    <span className="ql-format-button ql-source pull-right">
+                    </span>
+                </div>
+                <Input
+                    {...this.props}
+                    className="quill-transparent-editor"
+                    label={undefined}
+                    onChange={this.__onChange}
+                    type="textarea"
+                    style={{ height: this.props.height, minHeight: this.props.height }}
+                    onKeyUp={this.props.autoResize ? this.__resize : undefined}
+                    componentClass="textarea"
+                    ref={(component: Object) => { this.innerComponent = component } }
+                    />
+            </div>) :
+            (<ReactQuill {...this.props} theme="snow" onChange={this.__onChange} ref={(component) => this.quill = component}>
+                <ReactQuill.Toolbar
+                    key="toolbar"
+                    ref={HtmlEditor.toolbarRefName}
+                    items={HtmlEditorItems}
+                    />
+                <Col
+                    key="editor"
+                    ref={HtmlEditor.refName}
+                    onKeyUp={this.props.autoResize ? this.__resize : undefined}
+                    style={{ height: this.props.height, minHeight: this.props.height }}
+                    className="quill-contents"
+                    />
+            </ReactQuill>);
         return super.wrapComponent(
             <FormGroup hidden={this.props.hidden}>
                 <ControlLabel><span>{this.props.label}</span></ControlLabel>
-                <ReactQuill {...this.props} theme="snow" onChange={this.__onChange}>
-                    <ReactQuill.Toolbar
-                        key="toolbar"
-                        ref={HtmlEditor.toolbarRefName}
-                        items={HtmlEditorItems}
-                        />
-                    <Col
-                        key="editor"
-                        ref={HtmlEditor.refName}
-                        onKeyUp={this.props.autoResize ? this.__resize : undefined}
-                        style={{ height: this.props.height, minHeight: this.props.height }}
-                        className="quill-contents"
-                        />
-                </ReactQuill>
+                {editor}
             </FormGroup>
         );
     }
@@ -117,12 +154,42 @@ export default class HtmlEditor extends ValidationComponent {
     }
 
     __onChange(value: string) {
-        const e = {};
-        e.target = { name: this.props.name };
-        e.target.parsedValue = value;
+        if (this.state.sourceView) {
+            let e = value;
+            let result = true;
+            if (this.props.onChange) {
+                result = this.props.onChange(e);
+            }
+            if (!result) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            return result;
+        } else {
+            const e = {};
+            e.target = { name: this.props.name };
+            e.target.parsedValue = value;
 
-        if (this.props.onChange) {
-            this.props.onChange(e);
+            if (this.props.onChange) {
+                this.props.onChange(e);
+            }
         }
+    }
+
+    componentDidUpdate() {
+        let parent = findDOMNode(this);
+        let srcBtn = parent.getElementsByClassName("ql-source")[0];
+        srcBtn.addEventListener("click", this.__onSourceClick);
+        console.log(srcBtn)
+    }
+
+    __onSourceClick(e) {
+        if (this.state.sourceView)
+            console.log(this.innerComponent.props.value);
+        else
+            console.log(this.quill.getEditorContents());
+        this.setState({
+            sourceView: !this.state.sourceView,
+        });
     }
 }
