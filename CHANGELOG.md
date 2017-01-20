@@ -2,6 +2,9 @@
 
 ## 1.1.19 -- Developing...
 * Code preview for the HtmlEditor.
+* Toast
+    - Refactored
+    - Now supports multi-line #45
 
 ## 1.1.18
 * upgrade robe-react-commons library. 
