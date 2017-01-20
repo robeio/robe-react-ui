@@ -34,3 +34,10 @@ div.quill {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.quill-toolbar .ql-toolbar .ql-snow {
+transition-property: display;
+    transition-duration: 2s;
+    transition-timing-function: linear;
+    transition-delay: 1s;
+}

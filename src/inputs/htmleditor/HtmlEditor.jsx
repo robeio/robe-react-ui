@@ -1,7 +1,7 @@
 import React from "react";
 import { findDOMNode } from "react-dom";
 import ReactQuill from "react-quill";
-import { FormGroup, ControlLabel, Col } from "react-bootstrap";
+import { FormGroup, ControlLabel, Col, FormControl } from "react-bootstrap";
 import ValidationComponent from "../../validation/ValidationComponent";
 import "./quill.snow.css";
 import "./HtmlEditor.css";
@@ -97,14 +97,17 @@ export default class HtmlEditor extends ValidationComponent {
     }
 
     render(): Object {
+        let { tooltip, inputGroupLeft, inputGroupRight, validations, validationDisplay,sourceView,autoResize, ...newProps } = this.props; // eslint-disable-line no-unused-vars
+
         let editor = this.state.sourceView ?
             (<div className="quill">
-                <div style={{ minHeight: "41px", color: "#0063CF" }} className="quill-toolbar ql-toolbar ql-snow">
+                <div style={{ minHeight: "41px", color: "#0063CF",}} className="quill-toolbar ql-toolbar ql-snow">
                     <span className="ql-format-button ql-source pull-right">
                     </span>
                 </div>
-                <Input
-                    {...this.props}
+                <FormControl
+                    {...newProps}
+                    ref={(component: Object) => { this.innerComponent = component } }
                     className="quill-transparent-editor"
                     label={undefined}
                     onChange={this.__onChange}
@@ -180,14 +183,9 @@ export default class HtmlEditor extends ValidationComponent {
         let parent = findDOMNode(this);
         let srcBtn = parent.getElementsByClassName("ql-source")[0];
         srcBtn.addEventListener("click", this.__onSourceClick);
-        console.log(srcBtn)
     }
 
     __onSourceClick(e) {
-        if (this.state.sourceView)
-            console.log(this.innerComponent.props.value);
-        else
-            console.log(this.quill.getEditorContents());
         this.setState({
             sourceView: !this.state.sourceView,
         });
