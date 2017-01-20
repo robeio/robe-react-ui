@@ -5,6 +5,7 @@
 * Toast
     - Refactored
     - Now supports multi-line #45
+* TextInput onChange-focus bug fixed.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 
