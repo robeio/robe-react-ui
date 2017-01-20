@@ -117,7 +117,7 @@ export default class TextInput extends ShallowComponent {
             e.preventDefault();
             e.stopPropagation();
         }
-        this.innerComponent.focus = true;
+        this.innerComponent.focus();
         return result;
     }
 }
