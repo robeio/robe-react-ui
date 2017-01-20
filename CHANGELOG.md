@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.19 -- Developing...
+* Code preview for the HtmlEditor.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

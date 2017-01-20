@@ -86,12 +86,9 @@
     "font-awesome": "4.7.0",
     "google-map-react": "0.22.3",
     "is-js": "0.1.1",
-<<<<<<< HEAD
     "js-criteria": "1.0.4",
     "moment": "2.17.1",
     "nprogress": "0.2.0",
-=======
->>>>>>> 661c6d2e305c07530aec97156137d71768c813be
     "react": "15.4.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-addons-shallow-compare": "15.4.2",
@@ -105,11 +102,7 @@
     "react-select": "0.9.1",
     "react-tinymce": "^0.5.1",
     "recharts": "0.20.5",
-<<<<<<< HEAD
     "robe-ajax": "1.0.1",
-    "robe-react-commons": "1.0.81"
-=======
     "robe-react-commons": "1.0.84"
->>>>>>> 661c6d2e305c07530aec97156137d71768c813be
   }
 }
