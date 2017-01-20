@@ -1,21 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
+import { ShallowComponent, Generator, Class, Arrays, Maps } from "robe-react-commons";
 import ClassName from "../util/css/ClassName";
 import "./Toast.css"
 
+const TIMEOUTS = {
+    REMOVE: 500,
+    RETRY: 500,
+    SHOW: 5000
+}
 const Constants = {
-    INFO: 'info-item',
-    SUCCESS: 'success-item',
-    WARNING: 'warning-item',
-    ERROR: 'error-item'
+    INFO: "toast-item-info",
+    SUCCESS: "toast-item-success",
+    WARNING: "toast-item-warning",
+    ERROR: "toast-item-error"
 };
 
 const Positions = {
-    TOP_RIGHT: 'top-right',
-    TOP_LEFT: 'top-left',
-    BOTTOM_RIGHT: 'bottom-right',
-    BOTTOM_LEFT: 'bottom-left'
+    TOP_RIGHT: "top-right",
+    TOP_LEFT: "top-left",
+    BOTTOM_RIGHT: "bottom-right",
+    BOTTOM_LEFT: "bottom-left"
 };
 
 const getTime = () => {
@@ -28,18 +33,17 @@ class Toast extends ShallowComponent {
     static componentId = Generator.guid();
     __removeAction = true;
     __queueList = [];
-    numMaxVisible = 5;
 
     static propTypes = {
         /**
          * Desired position of toast to be shown on screen
-         * { 'top-right', 'top-left', 'bottom-right', 'bottom-left' }
+         * { "top-right", "top-left", "bottom-right", "bottom-left" }
          */
-        position: React.PropTypes.oneOf(['top-right', 'top-left', 'bottom-right', 'bottom-left']),
+        position: React.PropTypes.oneOf(["top-right", "top-left", "bottom-right", "bottom-left"]).isRequired,
         /**
-         * Maximum available number of visible
+         * Maximum available number of visible toasts
          */
-        numMaxVisible: React.PropTypes.number,
+        maxVisible: React.PropTypes.number,
         /**
          *  Message to be shown on Toast
          */
@@ -59,9 +63,9 @@ class Toast extends ShallowComponent {
     };
 
     static defaultProps = {
-        position: 'top-right',
-        timeOut: 5000,
-        numMaxVisible: 5
+        position: "top-right",
+        timeOut: TIMEOUTS.SHOW,
+        maxVisible: 5
     };
 
     /**
@@ -69,23 +73,20 @@ class Toast extends ShallowComponent {
      */
     constructor(props) {
         super(props);
-        Toast.info = this.info;
-        Toast.success = this.success;
-        Toast.warning = this.warning;
-        Toast.error = this.error;
-        Toast.getPosition = this.getPosition;
-        Toast.getNumMaxVisible = this.getNumMaxVisible;
-        Toast.configuration = this.configuration;
 
         this.state = {
             listToast: [],
-            position: "top-right"
         }
+
+        Toast.success = this.success;
+        Toast.info = this.info;
+        Toast.warning = this.warning;
+        Toast.error = this.error;
     }
 
     render() {
         return (
-            <div className={"toast "+this.state.position}>
+            <div className={`toast toast-${this.props.position}`}>
                 {this.__renderItems()}
             </div>
         )
@@ -100,18 +101,18 @@ class Toast extends ShallowComponent {
                 <div
                     key={item.id}
                     id={item.id}
-                    className={"toast-item toast-item-open "+ item.type}
-                    style={{zIndex:item.zIndex}}
+                    className={"toast-item toast-item-open " + item.type}
+                    style={{ zIndex: item.zIndex }}
                     onClick={item.onClick}>
                     <div
                         className="toast-item-title"
-                        style={{padding: item.message ? "12px 12px 6px 12px" : "20px"}}>
-                        {item.title ? (item.title.substr(0, 24) + (item.title.length > 24 ? ".." : "")) : ""}
+                        style={{ padding: item.message ? "12px 12px 6px 12px" : "20px" }}>
+                        {item.title}
                     </div>
                     <div
                         className="toast-item-content"
-                        style={{padding: item.title ? "0px 12px 12px 12px" : "20px"}}>
-                        {item.message ? (item.message.substr(0, maxLength) + (item.message.length > maxLength ? ".." : "")) : ""}
+                        style={{ padding: item.title ? "0px 12px 12px 12px" : "20px" }}>
+                        {item.message}
                     </div>
                 </div>)
         }
@@ -119,13 +120,13 @@ class Toast extends ShallowComponent {
     }
 
     __addQueue(toast) {
-        if (this.state.listToast.length >= this.numMaxVisible || (this.__queueList[0] && this.__queueList[0].id != toast.id)) {
+        if (this.state.listToast.length >= this.props.maxVisible || (this.__queueList[0] && this.__queueList[0].id != toast.id)) {
             if (!Arrays.isExistByKey(this.__queueList, "id", toast)) {
                 this.__queueList.push(toast);
             }
-            setTimeout(()=> {
+            setTimeout(() => {
                 this.__addQueue(toast);
-            }, 1000);
+            }, TIMEOUTS.RETRY);
             return;
         }
         Arrays.removeByKey(this.__queueList, "id", toast);
@@ -136,8 +137,8 @@ class Toast extends ShallowComponent {
     __addToast(toast) {
         let list = this.state.listToast.slice(0);
         let item = this.state.listToast[this.state.listToast.length - 1];
-        toast.zIndex = item ? item.zIndex - 1 : this.numMaxVisible;
-        if (this.state.position === "top-right" || this.state.position === "top-left") {
+        toast.zIndex = item ? item.zIndex - 1 : this.props.maxVisible;
+        if (this.props.position === "top-right" || this.props.position === "top-left") {
             list.push(toast);
         }
         else {
@@ -154,22 +155,22 @@ class Toast extends ShallowComponent {
             return;
         }
         if (!this.__removeAction) {
-            setTimeout(()=> {
+            setTimeout(() => {
                 this.__removeToast(toast);
-            }, 1000);
+            }, TIMEOUTS.REMOVE);
             return;
         }
-        setTimeout(()=> {
+        setTimeout(() => {
             this.__removeAction = true;
-        }, 1000);
+        }, TIMEOUTS.REMOVE);
         this.__removeAction = false;
-        setTimeout(()=> {
+        setTimeout(() => {
             ClassName.replace(element, "toast-item-open", "toast-item-close");
-            setTimeout(()=> {
+            setTimeout(() => {
                 let arr = this.state.listToast.slice(0);
                 Arrays.removeByKey(arr, "id", toast);
-                this.setState({listToast: arr});
-            }, 1000);
+                this.setState({ listToast: arr });
+            }, TIMEOUTS.REMOVE);
         }, toast.timeOut);
     }
 
@@ -186,7 +187,7 @@ class Toast extends ShallowComponent {
             type: Constants.INFO,
             message: message,
             title: title,
-            timeOut: timeOut || 5000,
+            timeOut: timeOut || this.props.timeOut,
             onClick: onClick
         });
     }
@@ -204,7 +205,7 @@ class Toast extends ShallowComponent {
             type: Constants.SUCCESS,
             message: message,
             title: title,
-            timeOut: timeOut || 5000,
+            timeOut: timeOut || this.props.timeOut,
             onClick: onClick
         });
     }
@@ -222,7 +223,7 @@ class Toast extends ShallowComponent {
             type: Constants.WARNING,
             message: message,
             title: title,
-            timeOut: timeOut || 5000,
+            timeOut: timeOut || this.props.timeOut,
             onClick: onClick
         });
     }
@@ -234,71 +235,26 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    error(message:string, title:string, timeOut:number, onClick:func) {
+    error(message: string, title: string, timeOut: number, onClick: func) {
         this.__addQueue({
             id: getTime(),
             type: Constants.ERROR,
             message: message,
             title: title,
-            timeOut: timeOut || 5000,
+            timeOut: timeOut || this.props.timeOut,
             onClick: onClick
         });
-
     }
+    static configuration(props) {
+        ReactDOM.render(<Toast {...props} />, this.containerNode);
 
-    /**
-     *  Toast.configure({position:string})
-     * @param config
-     */
-    configuration(config:Object) {
-        if (config.numMaxVisible) {
-            this.numMaxVisible = config.numMaxVisible;
-        }
-        if (!config.position) {
-            return;
-        }
-        switch (config.position) {
-            case "top-right":
-                this.setState({position: Positions.TOP_RIGHT});
-                break;
-            case "top-left":
-                this.setState({position: Positions.TOP_LEFT});
-                break;
-            case "bottom-right":
-                this.setState({position: Positions.BOTTOM_RIGHT});
-                break;
-            case "bottom-left":
-                this.setState({position: Positions.BOTTOM_LEFT});
-                break;
-            default:
-                this.setState({position: Positions.TOP_RIGHT});
-                break;
-        }
-    }
-
-    /**
-     * Toast.getPosition()
-     * Return current position
-     * @returns {string}
-     */
-    getPosition():String {
-        return this.state.position;
-    }
-
-    /**
-     * Toast.getMaxVisible()
-     * Return maximum available number of visible
-     * @returns {number}
-     */
-    getNumMaxVisible():Number {
-        return this.numMaxVisible;
     }
 }
 
-let element = document.createElement('div');
+
+let element = document.createElement("div");
 element.setAttribute("id", Toast.componentId);
 document.body.appendChild(element);
 Toast.containerNode = document.getElementById(Toast.componentId);
-ReactDOM.render(<Toast />, Toast.containerNode);
-
+Toast.configuration();
 export default Toast;

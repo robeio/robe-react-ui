@@ -6,22 +6,22 @@
     opacity: 0.95;
 }
 
-.top-right {
+.toast-top-right {
     top: 0;
     right: 0;
 }
 
-.top-left {
+.toast-top-left {
     top: 0;
     left: 0;
 }
 
-.bottom-right {
+.toast-bottom-right {
     bottom: 0;
     right: 0;
 }
 
-.bottom-left {
+.toast-bottom-left {
     bottom: 0;
     left: 0;
 }
@@ -30,7 +30,6 @@
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    max-height: 76px;
     z-index: 10000;
     margin-top: 10px;
     border-radius: 4px;
@@ -48,21 +47,21 @@
     display: inherit;
 }
 
-.top-right .toast-item-open,
-.bottom-right .toast-item-open {
+.toast-top-right .toast-item-open,
+.toast-bottom-right .toast-item-open {
     right: 0;
-    -webkit-animation: right-open .5s ease;
-    animation: right-open .5s ease;
+    -webkit-animation: toast-right-open .5s ease;
+    animation: toast-right-open .5s ease;
 }
 
-.top-left .toast-item-open,
-.bottom-left .toast-item-open {
+.toast-top-left .toast-item-open,
+.toast-bottom-left .toast-item-open {
     left: 0;
-    -webkit-animation: left-open .5s ease;
-    animation: left-open .5s ease;
+    -webkit-animation: toast-left-open .5s ease;
+    animation: toast-left-open .5s ease;
 }
 
-@keyframes right-open {
+@keyframes toast-right-open {
     0% {
         right: -250px;
     }
@@ -71,7 +70,7 @@
     }
 }
 
-@keyframes left-open {
+@keyframes toast-left-open {
     0% {
         left: -250px;
     }
@@ -89,25 +88,25 @@
     margin-top: 0;
 }
 
-.top-right .toast-item-close,
-.top-left .toast-item-close {
+.toast-top-right .toast-item-close,
+.toast-top-left .toast-item-close {
     top: inherit;
     right: 0;
     left: 0;
-    -webkit-animation: top-close .5s ease;
-    animation: top-close .5s ease;
+    -webkit-animation: toast-top-close .5s ease;
+    animation: toast-top-close .5s ease;
 }
 
-.bottom-right .toast-item-close,
-.bottom-left .toast-item-close {
+.toast-bottom-right .toast-item-close,
+.toast-bottom-left .toast-item-close {
     bottom: inherit;
     right: 0;
     left: 0;
-    -webkit-animation: bottom-close .5s ease;
-    animation: bottom-close .5s ease;
+    -webkit-animation: toast-bottom-close .5s ease;
+    animation: toast-bottom-close .5s ease;
 }
 
-@keyframes top-close {
+@keyframes toast-top-close {
     0% {
         display: block;
         opacity: 1;
@@ -127,7 +126,7 @@
     }
 }
 
-@keyframes bottom-close {
+@keyframes toast-bottom-close {
     0% {
         display: block;
         opacity: 1;
@@ -147,25 +146,25 @@
     }
 }
 
-.success-item {
+.toast-item-success {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
 }
 
-.warning-item {
+.toast-item-warning {
     color: #fff;
     background-color: #f0ad4e;
     border-color: #eea236;
 }
 
-.error-item {
+.toast-item-error {
     color: #fff;
     background-color: #d9534f;
     border-color: #d43f3a;
 }
 
-.info-item {
+.toast-item-info {
     color: #fff;
     background-color: #5bc0de;
     border-color: #46b8da;
