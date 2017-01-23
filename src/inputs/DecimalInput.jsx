@@ -1,6 +1,8 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {InputGroup} from "react-bootstrap";
 import Input from "./BaseInput";
+import FaIcon from "../faicon/FaIcon";
 
 /**
  * DecimalInput is a component decimal inputs.
@@ -29,6 +31,10 @@ export default class DecimalInput extends ShallowComponent {
          * Value of the component
          */
         value: React.PropTypes.any,
+        /**
+         * increment and decrement number
+         */
+        step: React.PropTypes.number,
         /**
          * onChange event for the component
          */
@@ -70,6 +76,7 @@ export default class DecimalInput extends ShallowComponent {
     static defaultProps = {
         decimalSeparator: ".",
         value: "",
+        step:1,
         disabled: false,
         readOnly: false,
         hidden: false,
@@ -91,6 +98,19 @@ export default class DecimalInput extends ShallowComponent {
                 step={this.props.step}
                 value={this.props.value}
                 onChange={this.__numericFilter}
+                onKeyDown={this.__handleKeyPress}
+                inputGroupRight={<InputGroup.Addon style={{padding:0}}><div className="col-sm-12">
+                    <div className="col-sm-6">
+                        <span style={{cursor:"pointer"}} onClick ={(e)=>{
+                            this.__valueIncAndDec(e,"inc");
+                        }} >&#x25B2;</span>
+                    </div>
+                    <div className="col-sm-6">
+                       <span style={{cursor:"pointer"}} onClick ={(e)=>{
+                            this.__valueIncAndDec(e,"dec");
+                        }} >&#x25BC;</span>
+                    </div>
+                </div></InputGroup.Addon>}
             />
         );
     }
@@ -144,12 +164,34 @@ export default class DecimalInput extends ShallowComponent {
         return result;
     }
 
+    __handleKeyPress = (event) => {
+        if(event.key==="ArrowUp"){
+            this.__valueIncAndDec(event,"inc");
+        }else if(event.key==="ArrowDown"){
+            this.__valueIncAndDec(event,"dec");
+        }
+    }
+
     __isFloat = (input: string): boolean => {
         if (input === null || input === undefined) {
             return false;
         }
         let found = input.match(`^[0-9]{1,6}((\\${this.props.decimalSeparator})|(\\${this.props.decimalSeparator}\\d{1,2}))?$`);
         return found !== undefined && found !== null;
+    }
+    __valueIncAndDec(e,type){
+        e.target = {};
+        e.target.name=this.props.name;
+
+        let currentValue = parseFloat(this.props.value,10);
+
+        if(type=="inc"){
+            e.target.value = currentValue?(currentValue+this.props.step):(this.props.step);
+        }else {
+            e.target.value = currentValue?(currentValue-this.props.step):"";
+        }
+        e.target.value=parseFloat(e.target.value)+"";
+        this.__numericFilter(e);
     }
 
     componentDidUpdate() {

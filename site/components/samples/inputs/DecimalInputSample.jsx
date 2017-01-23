@@ -8,7 +8,8 @@ export default class DecimalInputSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            DecimalInputNormal: 42.01
+            DecimalInputNormal: 42.01,
+            DecimalInputCustomStep: 10
         };
     }
 
@@ -31,6 +32,14 @@ export default class DecimalInputSample extends ShallowComponent {
                         required: true
                     }}
                 />
+
+                <DecimalInput
+                    label="With Custom Step"
+                    name="DecimalInputCustomStep"
+                    step={2}
+                    value={this.state.DecimalInputCustomStep}
+                    onChange={this.__handleChange}
+                />
             </div>
         );
     }
@@ -39,5 +48,6 @@ export default class DecimalInputSample extends ShallowComponent {
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;
         this.setState(state);
+        return true;
     }
 }
