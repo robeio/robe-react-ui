@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import is from "is-js";
 import {
     Application,
@@ -555,10 +556,24 @@ export default class DataGrid extends StoreComponent {
     }
 
     componentWillMount() {
+        document.body.addEventListener('click', this.__handleClick,false);
         if (this.props.pagination !== undefined && this.props.pagination.pageSize !== undefined) {
             this.pageSize = this.props.pagination.pageSize;
         }
     }
+
+    componentWillUnmount() {
+        // remember to remove all events to avoid memory leaks
+        document.body.removeEventListener('click', this.__handleClick,false);
+   }
+
+    __handleClick = (e)=> {
+
+        if (ReactDOM.findDOMNode(this).contains(e.target))
+            return;
+
+        this.__clearSelection();
+    };
 
     componentDidMount() {
         super.componentDidMount();
