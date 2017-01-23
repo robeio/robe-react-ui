@@ -190,7 +190,7 @@ export default class DecimalInput extends ShallowComponent {
         }else {
             e.target.value = currentValue?(currentValue-this.props.step):"";
         }
-        e.target.value=parseFloat(e.target.value)+"";
+        e.target.value+="";
         this.__numericFilter(e);
     }
 
