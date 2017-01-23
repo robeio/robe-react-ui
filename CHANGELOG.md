@@ -6,6 +6,7 @@
     - Refactored
     - Now supports multi-line #45
 * TextInput onChange-focus bug fixed.
+* Toast close on click
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

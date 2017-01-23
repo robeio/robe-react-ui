@@ -173,6 +173,18 @@ class Toast extends ShallowComponent {
             }, TIMEOUTS.REMOVE);
         }, toast.timeOut);
     }
+    closeOnClick(e) {
+        let id = e.target.getAttribute("id");
+        let element = e.target;
+        if (!id) {
+            id = e.target.parentNode.getAttribute("id");
+            element = e.target.parentNode;
+        }
+        ClassName.replace(element, "toast-item-open", "toast-item-close");
+        let arr = this.state.listToast.slice(0);
+        Arrays.removeByKey(arr, "id", { id });
+        this.setState({ listToast: arr });
+    }
 
     /**
      * Toast.info(message, title, timeOut, callback)
@@ -188,7 +200,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick
+            onClick: onClick || this.closeOnClick
         });
     }
 
@@ -206,7 +218,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick
+            onClick: onClick || this.closeOnClick
         });
     }
 
@@ -224,7 +236,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick
+            onClick: onClick || this.closeOnClick
         });
     }
 
@@ -242,7 +254,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick
+            onClick: onClick || this.closeOnClick
         });
     }
     static configuration(props) {
