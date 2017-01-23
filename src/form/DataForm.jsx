@@ -112,13 +112,21 @@ export default class DataForm extends ShallowComponent {
     }
     render(): Object {
         let form = (
-            <Form>
+            <Form onKeyPress={this.noenter}>
                 <Row>
                     {this.__createForm(this.props.fields)}
                 </Row>
             </Form>
         );
         return form;
+    }
+
+    noenter(e) {
+        if (e.key == "Enter" && this.visibleFields === 1) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        return false;
     }
 
     /**
@@ -130,6 +138,7 @@ export default class DataForm extends ShallowComponent {
      */
     __createForm = (fields: Array<Map>): Array => {
         let items = [];
+        this.visibleFields = 0;
         for (let i = 0; i < fields.length; i++) {
             let field = fields[i];
             if (!field.name) {
@@ -151,6 +160,7 @@ export default class DataForm extends ShallowComponent {
         if (field.visible === false) {
             return null;
         }
+        this.visibleFields++;
         let name = field.name;
         let props = this.__props[name];
         let Component = ComponentManager.getComponent(field.type);
