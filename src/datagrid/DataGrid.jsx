@@ -453,6 +453,7 @@ export default class DataGrid extends StoreComponent {
                 if (this.props.editButton && this.props.onEditClick) {
                     this.props.onEditClick();
                 }
+                this.__triggerSelection();
                 return;
             }
             this.selection.setState({
@@ -468,6 +469,10 @@ export default class DataGrid extends StoreComponent {
             hasSelection: true
         });
 
+        this.__triggerSelection();
+    }
+
+    __triggerSelection(){
         if (this.props.onSelection) {
             this.props.onSelection(this.selection.props.data);
         }
