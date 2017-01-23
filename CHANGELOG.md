@@ -7,6 +7,7 @@
     - Now supports multi-line #45
 * TextInput onChange-focus bug fixed.
 * Toast close on click
+* Added new SelectInput component
 
 ## 1.1.18
 * upgrade robe-react-commons library. 
