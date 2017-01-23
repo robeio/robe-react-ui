@@ -13,7 +13,6 @@ export default class DateInputSample extends ShallowComponent {
         ;
     }
 
-
     render():Object {
         return (
             <div>
