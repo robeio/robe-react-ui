@@ -8,6 +8,7 @@
 * TextInput onChange-focus bug fixed.
 * Toast close on click
 * DataForm 1 field enter reload bug fixed.
+* Added new SelectInput component
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

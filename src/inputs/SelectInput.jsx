@@ -1,10 +1,10 @@
 import React from "react";
-import Select from "react-select";
-import { FormGroup, ControlLabel } from "react-bootstrap";
-import "react-select/dist/react-select.css";
-import { Application } from "robe-react-commons";
+import ReactDOM from "react-dom";
+import {FormGroup, FormControl, ControlLabel, Col} from "react-bootstrap";
+import {Application, Arrays} from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import "./SelectInput.css";
+import FaIcon from "../faicon/FaIcon"
 
 
 /**
@@ -34,7 +34,7 @@ export default class SelectInput extends ValidationComponent {
          * Selected value or values
          */
         value: React.PropTypes.oneOfType([
-            React.PropTypes.bool,
+            React.PropTypes.string,
             React.PropTypes.array
         ]),
         /**
@@ -74,23 +74,19 @@ export default class SelectInput extends ValidationComponent {
          */
         disabled: React.PropTypes.bool,
         /**
-         * it specifies that an input field is read-only
-         */
-        readOnly: React.PropTypes.bool,
-        /**
          * it specifies that an input field is hidden or visible
          */
         hidden: React.PropTypes.bool,
         /**
-        *Defines the display style of the Validation message.
-        */
+         *Defines the display style of the Validation message.
+         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
     static defaultProps = {
         items: [],
-        placeholder: Application.i18n(SelectInput,"inputs.SelectInput", "placeholder"),
-        noResult: Application.i18n(SelectInput,"inputs.SelectInput", "noResult"),
+        placeholder: Application.i18n(SelectInput, "inputs.SelectInput", "placeholder"),
+        noResult: Application.i18n(SelectInput, "inputs.SelectInput", "noResult"),
         textField: "text",
         valueField: "value",
         multi: false,
@@ -101,149 +97,264 @@ export default class SelectInput extends ValidationComponent {
         validationDisplay: "block"
     };
 
-    __delimiter = ",";
-    _value = "";
-    _onChange;
-    __checkSelection;
+    __inputRef;
 
     /**
      *
      * @param {Object} props
      */
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
-        this.componentWillReceiveProps(props);
+        this.state = {
+            searchValue: "",
+            searchItems: this.__extractValues(props.items, props.value, props.valueField),
+            dropdown: false,
+            value: props.value || []
+        };
+
     }
 
-    componentWillReceiveProps(props: Object) {
-        if (!this.props.items) {
-            this.items = [];
-        }
-        this._value = props.value;
-        if (!this._value) {
-            this._value = props.multi ? [] : "";
-        }
-        this._onChange = (props.multi ? this.__onChangeMulti : this.__onChangeSingle);
-        this.__checkSelection = props.multi ? this.__checkMultiSelection : this.__checkSingleSelection;
+    componentWillReceiveProps(props:Object) {
+        this.setState({
+            searchValue: "",
+            searchItems: this.__extractValues(props.items, props.value, props.valueField),
+            dropdown: false,
+            value: props.value || []
+        })
     }
-    render(): Object {
+
+    render():Object {
+        let select;
+        if (this.props.multi) {
+            select = this.__renderMultiSelect();
+        }
+        else {
+            select = this.__renderSingleSelect();
+        }
+
         return super.wrapComponent(
-            <FormGroup hidden={this.props.hidden} style={this.props.style}>
+            <FormGroup
+                hidden={this.props.hidden}
+                style={this.props.style}>
                 <ControlLabel> {this.props.label} </ControlLabel>
-                <Select
-                    options={this.props.items}
-                    valueKey={this.props.valueField}
-                    labelKey={this.props.textField}
-                    multi={this.props.multi}
-                    noResultsText={this.props.noResult}
-                    disabled={this.props.disabled}
-                    placeholder={this.props.placeholder}
-                    searchable={this.props.searchable}
-                    value={this.props.value}
-                    onChange={this._onChange}
-                    delimiter={this.__delimiter}
-                    />
-                {this.__createRawSelect(this.props.items)}
+                {select}
             </FormGroup>
         );
     }
 
-    /**
-     *
-     * @param item
-     * @returns {boolean}
-     * @private
-     */
-    __checkSingleSelection(item: Map): boolean {
-        return this._value === item[this.props.valueField];
-    }
-
-    /**
-     *
-     * @param item
-     * @returns {boolean}
-     * @private
-     */
-    __checkMultiSelection(item: Map): boolean {
-        return this._value.indexOf(item[this.props.valueField]) !== -1;
-    }
-
-    __createRawSelect(items: Array): Object {
-        const options = [];
-
+    __renderSingleSelect() {
+        let items = this.props.items;
+        let options = [];
+        options.push(
+            <option
+                style={{color:"#999"}}
+                key="placeholder"
+                value="placeholder">
+                {this.props.placeholder}
+            </option>);
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
-            options[i] = <option key={i} value={item[this.props.valueField]}>{item[this.props.textField]}</option>;
+            options.push(
+                <option
+                    key={item[this.props.valueField]}
+                    value={item[this.props.valueField]}>
+                    {item[this.props.textField]}
+                </option>);
         }
         return (
-            <select hidden={true} name={this.props.name} multiple={this.props.multi} value={this._value} onChange={this._onChange}>
+            <FormControl
+                componentClass="select"
+                disabled={this.props.disabled}
+                value={this.props.value}
+                onChange={this.__onSelectSingleItem}>
                 {options}
-            </select>
-        );
+            </FormControl>);
+    }
+
+    __renderMultiSelect() {
+        let className = "multiple-select";
+        if (this.props.disabled) {
+            className += " multiple-select-disabled";
+        }
+        return (
+            <div>
+                <div className={className}
+                     onClick={this.__onClickMultiSelectLayout}>
+                    <div className="multiple-select-tool">
+                        <FaIcon code="fa-caret-down" fixed={false}/>
+                    </div>
+                    {this.__renderMultiValues(this.state.value)}
+                    <input className="multiple-select-input"
+                           type={this.props.searchable?"textarea":"hidden"}
+                           value={this.state.searchValue}
+                           ref={(component: Object) => { this.__inputRef = component }}
+                           onChange={this.__onSearchChange}
+                           onKeyDown={this.__onKeyDown}/>
+                </div>
+                <div className="multiple-select-dropdown" style={{display:this.state.dropdown?"inherit":"none"}}>
+                    <div id={this.props.noResult} className="multiple-select-dropdown-layout">
+                        {this.__renderMultiItems(this.state.searchItems)}
+                    </div>
+                </div>
+            </div>);
+    }
+
+    __renderMultiValues(values) {
+        let valueList = [];
+        for (let i in values) {
+            let value = values[i];
+            let item = Arrays.getValueByKey(this.props.items, this.props.valueField, value);
+            if (item !== undefined) {
+                valueList.push(
+                    <div key={item[this.props.valueField]} className="multiple-select-item">
+                        <span className="multiple-select-icon" id={item[this.props.valueField]}
+                              onClick={this.__onRemoveMultiValue}>x</span>
+                        <span className="multiple-select-label"> {item[this.props.textField]}</span>
+                    </div>
+                );
+            }
+        }
+        if (valueList.length == 0 && !this.state.searchValue) {
+            valueList.push(
+                <div key="multiple-select-placeholder" className="multiple-select-placeholder">
+                    {this.props.placeholder}
+                </div>
+            )
+        }
+        return valueList;
+    }
+
+    __renderMultiItems(items) {
+        let itemsList = [];
+        for (let i in items) {
+            let item = items[i];
+            itemsList.push(
+                <div key={item[this.props.valueField]}
+                     id={item[this.props.valueField]}
+                     onClick={this.__onSelectMultiItem}>
+                    {item[this.props.textField]}
+                </div>);
+        }
+        return itemsList;
     }
 
     /**
-     * This method has two difference calls.
-     * 1 - call without parameter returns true if at least one of the values is checked.
-     * 2 - call with key parameter returns true if the given key is in checked list.
-     * @param {string} value
-     * @returns {boolean}
-     */
-    isChecked = (value: string): boolean => {
-        if (typeof value !== "undefined") {
-            return this.props.multi ?
-                this._value.indexOf(value) !== -1 : this._value === value;
-        }
-        return !(!this._value) && (this.props.multi ? this._value.length > 0 : (this._value !== null && this._value !== ""));
-    };
-    /**
-     * returns checked values as string
-     * @returns {string}
-     */
-    getValue(): string {
-        return this._value;
-    }
-
-    /**
-     * Internal onClick event for Single Select Input. It is triggered every time.
-     * @param {string} value
-     * @return {boolean}
-     */
-    __onChangeSingle(value: string): boolean {
-        if (!value || value === "") {
-            value = undefined;
-        }
-
-        let result = this.__callOnChange(value, this._value);
-        if (result) {
-            this._value = value;
-        }
-        return result;
-    }
-    /**
-     * Splits given string by delimiter and return result as Array.
-     * @param value
-     * @returns {Array}
+     *
+     * @param e
      * @private
      */
-    __split(value: string): Array {
-        if (value && value.length > 0) {
-            return value.split(this.__delimiter);
+    __onRemoveMultiValue(e) {
+        let key = e.target.id;
+        let value = this.state.value.slice(0);
+        let removed = Arrays.remove(value, key);
+        if (removed) {
+            this.__callOnChange(value, this.state.value);
         }
-        return [];
     }
+
     /**
-     * Internal onClick event for multi Select Input. It is triggered every time.
-     * @param {string} value
-     * @return {boolean}
+     *
+     * @param e
+     * @private
      */
-    __onChangeMulti(value: string): boolean {
-        let newValue = this.__split(value);
-        let result = this.__callOnChange(newValue, this._value);
-        if (result) {
-            this._value = newValue;
+    __onSelectMultiItem(e) {
+        let key = e.target.id;
+        let value = this.state.value.slice(0);
+        if (Arrays.indexOf(value, key) === -1) {
+            value.push(key);
         }
-        return result;
+        this.__callOnChange(value, this.state.value);
+    }
+
+    /**
+     *
+     * @param e
+     * @private
+     */
+    __onKeyDown(e) {
+        e.target.style.width = ((e.target.value.length + 1) * 7) + '%';
+        if (e.key === "Backspace" && e.target.value.length <= 0 && this.state.value.length > 0) {
+            let value = this.state.value.slice(0);
+            let removed = Arrays.remove(value, value[value.length - 1]);
+            if (removed) {
+                this.__callOnChange(value, this.state.value);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param e
+     * @private
+     */
+    __onSelectSingleItem(e) {
+        let value = e.target.selectedOptions[0].value;
+        if (value === "placeholder") {
+            value = "";
+        }
+        this.__callOnChange(value, this.state.value);
+    }
+
+    /**
+     *
+     * @param e
+     * @private
+     */
+    __onClickMultiSelectLayout(e) {
+        if (!e.target.id) {
+            this.setState({dropdown: true});
+            let node = ReactDOM.findDOMNode(this.__inputRef);
+            node.focus();
+        }
+    }
+
+    /**
+     *
+     * @param e
+     * @private
+     */
+    __onSearchChange(e) {
+        let searchValue = e.target.value;
+        let items = this.state.searchItems.slice(0);
+        let searchItems = [];
+        if (!searchValue) {
+            searchItems = this.__extractValues(this.props.items, this.state.value, this.props.valueField);
+        }
+        else {
+            for (let i in items) {
+                let item = items[i];
+                let value = item[this.props.textField];
+                value = value.toLowerCase();
+                if (value.includes(searchValue.toLowerCase())) {
+                    searchItems.push(item)
+                }
+            }
+        }
+        this.setState({searchValue: searchValue, searchItems: searchItems, dropdown: true});
+    }
+
+    /**
+     *
+     * @param items
+     * @param values
+     * @param valueField
+     * @returns {*}
+     * @private
+     */
+    __extractValues(items, values, valueField) {
+        let arr = [];
+
+        if (!values || values.length <= 0) {
+            return items;
+        }
+
+        for (let i in items) {
+            let item = items[i];
+            if (Arrays.indexOf(values, item[valueField]) === -1) {
+                arr.push(item);
+            }
+        }
+        return arr;
     }
 
     /**
@@ -252,9 +363,8 @@ export default class SelectInput extends ValidationComponent {
      * @returns {boolean}
      * @private
      */
-    __callOnChange(value: any, oldValue: any): boolean {
+    __callOnChange(value:any, oldValue:any):boolean {
         let result = true;
-        this.focused = true;
         if (this.props.onChange) {
             let e = {
                 target: {
@@ -268,4 +378,28 @@ export default class SelectInput extends ValidationComponent {
         }
         return result;
     }
+
+    /**
+     * This method has two difference calls.
+     * 1 - call without parameter returns true if at least one of the values is checked.
+     * 2 - call with key parameter returns true if the given key is in checked list.
+     * @param {string} value
+     * @returns {boolean}
+     */
+    isChecked = (value:string):boolean => {
+        if (typeof value !== "undefined") {
+            return this.props.multi ?
+            this.state.value.indexOf(value) !== -1 : this.state.value === value;
+        }
+        return !(!this.state.value) && (this.props.multi ? this.state.value.length > 0 : (this.state.value !== null && this.state.value !== ""));
+    };
+
+    /**
+     * returns checked values as string
+     * @returns {string}
+     */
+    getValue():string {
+        return this.state.value;
+    }
+
 }

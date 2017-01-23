@@ -18,23 +18,25 @@ const langs = [
 ];
 export default class SelectInputSample extends ShallowComponent {
 
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         this.state = {
-            MultiSelect: ["en", "tr"]
+            MultiSelect: ["en", "tr"],
+            SingleSelect: "tr"
         };
     }
 
-    render(): Object {
+    render():Object {
         return (
             <div>
                 <SelectInput
                     label="Select Input Single"
-                    name="Select"
+                    name="SingleSelect"
                     items={langs}
                     textField="value"
                     valueField="key"
-                    value={this.state.Select}
+                    readOnly={true}
+                    value={this.state.SingleSelect}
                     onChange={this.__handleChange}
                 />
                 <SelectInput
@@ -54,7 +56,7 @@ export default class SelectInputSample extends ShallowComponent {
         );
     }
 
-    __handleChange(e: Object) {
+    __handleChange(e:Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;
