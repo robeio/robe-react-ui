@@ -217,12 +217,13 @@ export default class DecimalInput extends ShallowComponent {
         for (let i = length; i > 0; i--) {
             padArr.push("0");
         }
-        return parseInt(value.toString().replace(this.props.decimalSeparator,"") + padArr.join(""));
+        return parseInt(value.toString().replace(this.props.decimalSeparator, "") + padArr.join(""));
     }
-    __fixedDiv(value, length) {     
+    __fixedDiv(value, length) {
         let valS = value.toString();
         let decSPos = valS.length - length;
-        valS = valS.slice(0, decSPos) + this.props.decimalSeparator + valS.slice(decSPos);
+        if (length !== 0)
+            valS = valS.slice(0, decSPos) + this.props.decimalSeparator + valS.slice(decSPos);
         return valS;
     }
 
