@@ -1,6 +1,7 @@
 ![Showcase](./showcase.gif)
 # Robe-React-UI
 #### UI library built on top of <code>React-Bootstrap</code>
+[![NPM](https://nodei.co/npm/robe-react-ui.png?downloads=true)](https://nodei.co/npm/robe-react-ui/)
 
 [![npm package](https://badge.fury.io/js/robe-react-ui.svg)](https://badge.fury.io/js/robe-react-ui)
 [![Build Status](https://travis-ci.org/robeio/robe-react-ui.svg?branch=master)](https://travis-ci.org/robeio/robe-react-ui)
