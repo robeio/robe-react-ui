@@ -14,7 +14,7 @@ Re: #00
 
 - [ ] Tests 
 - [ ] Documentation
-- ....
+- [ ] ....
 
 ---
 
