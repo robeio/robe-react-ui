@@ -163,9 +163,11 @@ export default class DecimalInput extends ShallowComponent {
 
     __handleKeyPress = (event) => {
         if (event.key === "ArrowUp") {
-            this.__valueIncAndDec(event, "inc");
+            event.target.name = "increment";
+            this.__valueIncAndDec(event);
         } else if (event.key === "ArrowDown") {
-            this.__valueIncAndDec(event, "dec");
+            event.target.name = "decrement";
+            this.__valueIncAndDec(event);
         }
     }
 
@@ -183,12 +185,45 @@ export default class DecimalInput extends ShallowComponent {
         let currentValue = parseFloat(this.props.value, 10);
 
         if (type == "increment") {
-            e.target.value = currentValue ? (currentValue + this.props.step) : (this.props.step);
+            e.target.value = currentValue ? this.__fixedFloatOp(currentValue, true) : (this.props.step);
         } else {
-            e.target.value = currentValue ? (currentValue - this.props.step) : "";
+            e.target.value = currentValue ? this.__fixedFloatOp(currentValue, false) : "";
         }
         e.target.value += "";
         this.__numericFilter(e);
+    }
+
+    __fixedFloatOp(cFloat: float, isSum: boolean) {
+        let currentSt = cFloat.toString().split(this.props.decimalSeparator);
+        let stepSt = this.props.step.toString().split(this.props.decimalSeparator);
+        let c2p = currentSt.length === 2;
+        let s2p = stepSt.length === 2;
+        let cMul = c2p ? currentSt[1].length : 0;
+        let sMul = s2p ? stepSt[1].length : 0;
+        let maxMul = Math.max(cMul, sMul);
+
+        let cInt = this.__fixedMul(cFloat, maxMul - cMul);
+        let sInt = this.__fixedMul(this.props.step, maxMul - sMul);
+        if (isSum)
+            cInt += sInt;
+        else
+            cInt -= sInt
+
+        return this.__fixedDiv(cInt, maxMul);
+    }
+
+    __fixedMul(value, length) {
+        let padArr = [];
+        for (let i = length; i > 0; i--) {
+            padArr.push("0");
+        }
+        return parseInt(value.toString().replace(this.props.decimalSeparator,"") + padArr.join(""));
+    }
+    __fixedDiv(value, length) {     
+        let valS = value.toString();
+        let decSPos = valS.length - length;
+        valS = valS.slice(0, decSPos) + this.props.decimalSeparator + valS.slice(decSPos);
+        return valS;
     }
 
     componentDidUpdate() {
