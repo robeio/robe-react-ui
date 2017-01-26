@@ -9,6 +9,7 @@
 * Toast close on click
 * DataForm 1 field enter reload bug fixed.
 * Added new SelectInput component
+* An error fixed in the name of the prop in the sample code at ReCaptcha.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

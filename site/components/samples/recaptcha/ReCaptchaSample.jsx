@@ -11,7 +11,7 @@ export default class ReCaptchaSample extends ShallowComponent {
                     <ReCaptcha
                         sitekey="6LckQA8TAAAAAKf4TxLtciRBYphKF5Uq4jRrImJD"
                         render="explicit"
-                        lang="en"
+                        language="en"
                         onloadCallback={() => {
                             console.log("loaded.");
                         }}
