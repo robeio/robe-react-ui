@@ -25,10 +25,26 @@ export default class LazyImage extends ShallowComponent {
          * Width of the image
          */
         width: React.PropTypes.string.isRequired,
+
         /**
-         * applies custom style to the image.
+         * Applies custom style to the image.
          */
         style: React.PropTypes.object,
+
+        /**
+         *Sets image shape as circle
+        */
+        circle: React.PropTypes.bool,
+
+        /** Sets image as responsive image */
+        responsive: React.PropTypes.bool,
+
+        /** Sets image shape as rounded */
+        rounded: React.PropTypes.bool,
+
+        /** Sets image shape as thumbnail */
+        thumbnail: React.PropTypes.bool,
+
     };
 
     /**
@@ -39,7 +55,11 @@ export default class LazyImage extends ShallowComponent {
      * @memberOf LazyImage
      */
     static defaultProps = {
-        style: {}
+        style: {},
+        circle: false,
+        responsive: false,
+        rounded: false,
+        thumbnail: false
     };
 
     /**
@@ -66,19 +86,13 @@ export default class LazyImage extends ShallowComponent {
      * @memberOf LazyImage
      */
     render(): Object {
-        let style = this.props.style;
         let className = "lazyimage-placeholder";
         if (!this.state.loaded) {
             className += "-loading"
         }
         return (
             <div>
-                <BImage className={className} src={this.state.src} ref={this.__setInnerComponent}
-                    height={this.props.height}
-                    width={this.props.width}
-                    style={this.style}
-                    aria-hidden="true"
-                    />
+                <BImage {...this.props} className={className} src={this.state.src} ref={this.__setInnerComponent} />
             </div>
         );
 

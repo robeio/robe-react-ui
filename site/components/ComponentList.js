@@ -5,8 +5,8 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getList():Array {
-        let components = {inputs: [], complex: [], charts: []};
+    getList(): Array {
+        let components = { inputs: [], complex: [], charts: [] };
         /* eslint-disable global-require */
         components.inputs.push({
             header: "TextInput",
@@ -186,6 +186,13 @@ class ComponentList {
             sample: require("./samples/faicon/FaIconSample"),
             code: require("./samples/faicon/FaIconSample.txt")
         });
+        components.complex.push({
+            header: "LazyImage",
+            desc: "is a component for loading images via AJAX.",
+            json: require("./jsons/image/LazyImage"),
+            sample: require("./samples/image/LazyImageSample"),
+            code: require("./samples/image/LazyImageSample.txt")
+        });
 
         components.complex.push({
             header: "Progress",
@@ -194,9 +201,9 @@ class ComponentList {
             code: require("./samples/progress/ProgressSample.txt"),
             json: {
                 methods: [
-                    {name: "start", description: "Starts the progress indicator on top of the page"},
-                    {name: "done", description: "Completes the progress indicator on top of the page"},
-                    {name: "configure", description: "Configure the indicator"}]
+                    { name: "start", description: "Starts the progress indicator on top of the page" },
+                    { name: "done", description: "Completes the progress indicator on top of the page" },
+                    { name: "configure", description: "Configure the indicator" }]
             }
         });
 
