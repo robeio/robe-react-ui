@@ -1,8 +1,8 @@
 import React from "react";
-import { ShallowComponent, Application } from "robe-react-commons";
+import {ShallowComponent, Application} from "robe-react-commons";
 import momentjs from "moment";
 import is from "is-js";
-import { Popover, Overlay, InputGroup } from "react-bootstrap";
+import {Popover, Overlay, InputGroup} from "react-bootstrap";
 import Input from "./BaseInput";
 import DatePicker from "./datepicker/DatePicker";
 import FaIcon from "../faicon/FaIcon";
@@ -22,7 +22,7 @@ export default class DateInput extends ShallowComponent {
      *
      * @static
      */
-    static propTypes: Map = {
+    static propTypes:Map = {
         /**
          * Label for the form control.
          */
@@ -144,7 +144,7 @@ export default class DateInput extends ShallowComponent {
         }
         else if (momentjs(value).isValid()) {
             parsedValue = momentjs(value).format(this.props.format);
-            overlayValue = momentjs(value, this.props.format).valueOf();
+            overlayValue = momentjs(value).valueOf();
         }
 
         let {format, locale, minDate, maxDate, ...newProps} = this.props;
@@ -254,7 +254,7 @@ export default class DateInput extends ShallowComponent {
      * Returns the validity of the value.
      * @return true - value is valid, false - invalid
      */
-    isValid(): boolean {
+    isValid():boolean {
         return this.innerComponent.isValid();
     }
 
