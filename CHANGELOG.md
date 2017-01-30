@@ -12,6 +12,7 @@
 * An error fixed in the name of the prop in the sample code at ReCaptcha.
 * LazyImage added.
 * DateInput bugs fixed
+* FileInput validation fixed.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 
