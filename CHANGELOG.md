@@ -13,6 +13,7 @@
 * LazyImage added.
 * DateInput bugs fixed
 * FileInput validation fixed.
+* Delay for server requests in search and filtering at DataGrid Component. Search animation added.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

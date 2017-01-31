@@ -118,6 +118,10 @@ export default class DataGrid extends StoreComponent {
             clearButtonText: React.PropTypes.string,
             clearAllButtonText: React.PropTypes.string
         }),
+        /**
+         *Delay between last keystroke and requests.
+         */
+        delay: React.PropTypes.number
     };
     /**
      * static props
@@ -152,7 +156,8 @@ export default class DataGrid extends StoreComponent {
         filter: {
             clear: Application.i18n(DataGrid, "datagrid.DataGrid", "filter", "clear"),
             clearAll: Application.i18n(DataGrid, "datagrid.DataGrid", "filter", "clearAll")
-        }
+        },
+        delay: 1000
     };
 
     activePage = 1;
@@ -203,6 +208,7 @@ export default class DataGrid extends StoreComponent {
                             onChange={this.__onSearchChanged}
                             value={this.state.qfilter}
                             visible={this.props.searchable}
+                            delay={this.props.delay}
                             placeholder={Application.i18n(DataGrid, "datagrid.DataGrid", "search")}
                             />
                     </Col>
@@ -217,6 +223,7 @@ export default class DataGrid extends StoreComponent {
                 <Filters
                     ref={(component: Object) => { this.__filterComponent = component; } }
                     fields={this.__fields}
+                    delay={this.props.delay}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
                     idCount={this.getObjectId()}
@@ -244,8 +251,8 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                        emptyText={Application.i18n(DataGrid, "datagrid.DataGrid","pagination" ,"empty")}
-                        displayText={Application.i18n(DataGrid, "datagrid.DataGrid","pagination", "display")}
+                        emptyText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "empty")}
+                        displayText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "display")}
                         />)
                 }
                 {this.__renderModalConfirm()}
@@ -472,7 +479,7 @@ export default class DataGrid extends StoreComponent {
         this.__triggerSelection();
     }
 
-    __triggerSelection(){
+    __triggerSelection() {
         if (this.props.onSelection) {
             this.props.onSelection(this.selection.props.data);
         }
