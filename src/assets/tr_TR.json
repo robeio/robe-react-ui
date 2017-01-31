@@ -11,6 +11,9 @@
       "ok": "Evet",
       "cancel": "Hayır"
     },
+    "deleteClick":{
+      "hasSelected":"Silme işlemi için önce seçim yapmalısınız."
+    },
     "filter": {
       "clear": "Sil",
       "clearAll": "Hepsini Sil"
