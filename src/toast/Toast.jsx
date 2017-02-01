@@ -8,19 +8,12 @@ const TIMEOUTS = {
     REMOVE: 500,
     RETRY: 500,
     SHOW: 5000
-}
+};
 const Constants = {
     INFO: "toast-item-info",
     SUCCESS: "toast-item-success",
     WARNING: "toast-item-warning",
     ERROR: "toast-item-error"
-};
-
-const Positions = {
-    TOP_RIGHT: "top-right",
-    TOP_LEFT: "top-left",
-    BOTTOM_RIGHT: "bottom-right",
-    BOTTOM_LEFT: "bottom-left"
 };
 
 const getTime = () => {
@@ -75,7 +68,7 @@ class Toast extends ShallowComponent {
         super(props);
 
         this.state = {
-            listToast: [],
+            listToast: []
         }
 
         Toast.success = this.success;
@@ -96,7 +89,6 @@ class Toast extends ShallowComponent {
         let arr = [];
         for (let index in this.state.listToast) {
             let item = this.state.listToast[index];
-            let maxLength = item.title ? 24 : 48;
             arr.push(
                 <div
                     key={item.id}
@@ -173,7 +165,8 @@ class Toast extends ShallowComponent {
             }, TIMEOUTS.REMOVE);
         }, toast.timeOut);
     }
-    closeOnClick(e) {
+    
+    __closeOnClick(e) {
         let id = e.target.getAttribute("id");
         let element = e.target;
         if (!id) {
@@ -200,7 +193,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick || this.closeOnClick
+            onClick: onClick || this.__closeOnClick
         });
     }
 
@@ -218,7 +211,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick || this.closeOnClick
+            onClick: onClick || this.__closeOnClick
         });
     }
 
@@ -236,7 +229,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick || this.closeOnClick
+            onClick: onClick || this.__closeOnClick
         });
     }
 
@@ -254,7 +247,7 @@ class Toast extends ShallowComponent {
             message: message,
             title: title,
             timeOut: timeOut || this.props.timeOut,
-            onClick: onClick || this.closeOnClick
+            onClick: onClick || this.__closeOnClick
         });
     }
     static configuration(props) {

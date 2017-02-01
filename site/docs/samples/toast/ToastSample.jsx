@@ -32,8 +32,8 @@ export default class ToastSample extends ShallowComponent {
     constructor(props:Object) {
         super(props);
         this.state = {
-            position: Toast.getPosition(),
-            numMaxVisible: Toast.getNumMaxVisible()
+            position: "top-right",
+            numMaxVisible: 5
         }
     }
 
@@ -66,7 +66,7 @@ export default class ToastSample extends ShallowComponent {
                 Toast.configuration({position: value});
                 break;
             case "numMaxVisible":
-                Toast.configuration({numMaxVisible: value});
+                Toast.configuration({maxVisible: value});
                 break;
             default:
                 throw new Error("Unknown Message");
@@ -102,8 +102,6 @@ export default class ToastSample extends ShallowComponent {
                     label={"Max Visible Count ( Default is max safe integer )"}
                     name="numMaxVisible"
                     value={this.state.numMaxVisible}
-                    thousandSeparator=","
-                    decimalSeparator="."
                     onChange={this.__handleChange}
                 />
                 <ButtonToolbar>
