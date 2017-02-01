@@ -102,6 +102,6 @@
     "react-tinymce": "0.5.1",
     "recharts": "0.20.5",
     "robe-ajax": "1.0.1",
-    "robe-react-commons": "1.0.84"
+    "robe-react-commons": "1.0.85"
   }
 }

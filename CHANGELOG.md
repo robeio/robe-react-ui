@@ -14,6 +14,7 @@
 * DateInput bugs fixed
 * FileInput validation fixed.
 * Delay for server requests in search and filtering at DataGrid Component. Search animation added.
+* Countdown component added.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

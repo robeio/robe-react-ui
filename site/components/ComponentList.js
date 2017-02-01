@@ -206,6 +206,14 @@ class ComponentList {
                     { name: "configure", description: "Configure the indicator" }]
             }
         });
+        components.complex.push({
+            header: "Countdown",
+            desc: " is a component for counting down from the given value",
+            sample: require("./samples/countdown/CountdownSample"),
+            code: require("./samples/countdown/CountdownSample.txt"),
+            json: require("./jsons/countdown/Countdown"),
+
+        });
 
         components.complex.push({
             header: "ProgressBar",

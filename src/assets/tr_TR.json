@@ -67,5 +67,19 @@
     "next": "İleri",
     "previous": "Geri",
     "complete": "Tamamla"
+  },
+  "countdown.Countdown":{
+    "days":{
+      "label":"Gün"
+    },
+    "hours":{
+      "label":"Saat"
+    },
+    "minutes":{
+      "label":"Dk"
+    },
+    "seconds":{
+      "label":"Sn"
+    }
   }
 }

@@ -67,5 +67,19 @@
     "next": "Next",
     "previous": "Previous",
     "complete": "Complete"
+  },
+  "countdown.Countdown":{
+    "days":{
+      "label":"Days"
+    },
+    "hours":{
+      "label":"Hours"
+    },
+    "minutes":{
+      "label":"Mins"
+    },
+    "seconds":{
+      "label":"Secs"
+    }
   }
 }
