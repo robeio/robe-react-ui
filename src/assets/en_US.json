@@ -1,4 +1,155 @@
 {
+  "site.index":{
+    "components":"Components",
+    "docs":"Docs",
+    "samples":"Samples",
+    "about":"About",
+    "languageTitle":"Language"
+  },
+  "sampleprojects.SampleProjects":{
+    "title":"Samples",
+    "header":"Here is the list of sample appications developed with robe-react-ui."
+  },
+  "addon.InputAddon":{
+    "paragraphOne":" You can use \"addons\" property to show additional components within your inputs.All components which wraps \"BaseInput\" will take properties \"inputGroupLeft\" and \"inputGroupRight\" properties.You can find detailed usage from ",
+    "textOne":"Example 1 (Text Left)",
+    "textOneSub":"Text Left",
+    "textTwo":"Example 2 (Text Right)",
+    "textTwoSub":"Text Right",
+    "textThree":"Example 3 (Icon Left)",
+    "textFour":"Example 4 (Icon Right)",
+    "desc":"You can add whatever you want by wrapping your component with \"InputGroup.Addon \" or with an equivalent component."
+  },
+  "store.StoreSample":{
+    "spanOne":"PropTypes",
+    "spanTwo":"Default props.",
+    "spanThree":"You can perform with same settings for \"create, read, update, delete\".",
+    "spanFour":"The \"create\" method must be called to perform a the create request.",
+    "spanFive":"The \"read\"  method must be called to perform a the read request.",
+    "spanSix":"The \"update\" method must be called to perform a the update request.",
+    "spanSeven":"The \"delete\" method must be called to perform a the delete request."
+  },
+  "endpoint.RemoteEndPointSample":{
+    "spanOne":" You can perform with same settings for \"create, read, update, delete\".",
+    "spanTwo":"The ajax options can be specified separately for \"create, read, update, delete\".",
+    "spanThree":"The \"create\" method must be called to perform a the create request.",
+    "spanFour":"The \"read\" method must be called to perform a the read request.",
+    "spanFive":"The \"update\" method must be called to perform a the update request.",
+    "spanSix":"The \"delete\" method must be called to perform a the delete request.",
+    "spanSeven":" Call current url."
+  },
+  "ajaxrequest.AjaxRequestSample":{
+    "spanOne":"You can define \"Ajax Request\" as follows",
+    "spanTwo":"All settings are optional. A default can be set to an option. The default options are as follows.",
+    "spanThree":"The \"call\" method must be called to perform a request.",
+    "spanFour":"You can inflate the following \"example\""
+  },
+  "validation.ValidationSample":{
+    "exampleOneBlock":"Example 1 (Block Display)",
+    "exampleTwoOverlay":"Example 2 (Overlay Display)",
+    "requireMessage":"This a custom required message.",
+    "magicMessage": "\"Please\" use the magic word.",
+    "exampleOneDesc":" You can use \"validation\" property to give your validation functions.All components which extends \"ValidationComponent\" will automatically take and execute them on each run.Either our pre-defined validations at \"InputValidations\" or your brand new validation functions can be used.",
+    "exampleWwoDesc":"We support two type of option for displaying the validation messages. This is determined by \"validationDisplay\" property.You can provide validationDisplay property via input field or via \"DataForm\" (will forward this property to all inputs).",
+    "descOne":"As you can see from the source code validation property takes a map of validations. It also supports parametric validation functions with custom message templates. For ex.\"minLength\" is an object with pre-defined function (\"InputValidations\"). We used \"minLength.args\" for passing desired parameters which is the minimum length at this case. Also you can define custom message templates with \"minLength.message.args\". You can give your validation function directly via \"minLength.func\" parameter, for an example take a look at please please :)",
+    "descTwo":"\"InputValidations\" is a singleton class which holds pre-defined validations and a registery for new functions. Registering a validation is essential for reusing functions and makes it accessible from everywhere. Also you should know that \"DataForm\" uses these \"InputValidations\" to lookup validation names from the given \"DataModel\" json."
+  },
+  "model.ModelSapmle":{
+    "paragraphOne":"You can use models both for representing your data via \"DataGrid\" or \"DataForm\". This page will define the usage of the component.",
+    "paragraphTwo":"Model is a \"json\" representation of our datum. Types, props column names all details will be defined inside of the json.It will need some reserved fields to identify your datum, all remaining fields will be forwarded to your selected component as props.If you look at our examples you can see that models defined as a json file and loaded via \"import\"'s.",
+    "typesStrong":"Types",
+    "paragraphThree":"Model supports various of types which are listed at the table below.",
+    "type":"Type",
+    "component":"Component",
+    "exampleOne":"Example 1",
+    "exampleParagraph":"Here you can find an example model below.",
+    "exampleDesc":"It is basicly an array of the fields that you want to see. \"type\"  is essential to define which component to use. Other fields as \"name\",\"label\",\"validations\"... are input component \"props\"."
+  },
+  "docs.DocList": {
+    "validationDesc":"Validation is a built-in utility which can be used directly or via DataForm model",
+    "modelDesc":"Models are a data definition mechanism  which is used by DataGrid and Dataform",
+    "ajaxDesc":"Perform an AJAX request. (Yeah, that's all)",
+    "remoteEndPointDesc":"Call APIs easly via AJAX requests under one roof. Simple configuration and usage.",
+    "storeDesc":"Store is the easiest way to handle resources(JSON Data). Supports required operations for data manipulation. You can always extend for more.",
+    "inputAddOnDesc":"Adding additional components (icons,texts etc.) to your inputs.",
+    "i18nDesc":"Supporting multiple languages",
+    "toastDesc":"Toast is a message showing utility. Helps developer to show toast messages easly and in a standardized way. ",
+    "onChangeDesc":"This page will explain the details of the onChange method of input components"
+  },
+  "docs.Docs": {
+    "title":"Docs",
+    "header":"Here you can find documentation on the components.",
+    "search":"Search"
+  },
+  "components.ComponentList": {
+    "textInputDesc": " is the default input field to collect one line text data from form.",
+    "textAreaDesc": " is the large input field to collect multi line text data from form.",
+    "passwordInputDesc": " is the default input field to collect password data from form.",
+    "decimalInputDesc": " is the input field for collecting decimal data.",
+    "numericInputDesc": " is the input field for collecting numeric data.",
+    "moneyInputDesc": " is the input field for collecting money data.",
+    "selectInputDesc": " is the input field to provide selection items from given array items",
+    "checkInputDesc": " is the input field to provide check given item",
+    "radioInputDesc": " is the input field to provide check given item.You can not multi check.",
+    "dateInputDesc": " is the input field for collecting date data",
+    "datePickerDesc": "is the input field for collecting date data",
+    "htmlEditorDesc": " is the input field for collecting html (rich text) data.",
+    "fileUploadInputDesc": " is a File Upload Component",
+    "button": " is a smart button component which prevents multiple clicks on ajax call",
+    "dataGridDesc": " is a smart grid with filter, sort, search capabilities.",
+    "dataFormDesc": " is a form component which is generated from model to create or edit data",
+    "modalDataFormDesc": " is an modal component which opens a DataForm inside.",
+    "wizardDesc": " is a multipage wizard component. You can use this component to navigate user through long forms/processes step by step. It collects all data from the steps and gives you at finish stage.",
+    "checkTreeDesc": " is a recursive component which generates a tree of CheckInput's from the given item.",
+    "sideMenuDesc": " is a menu component which will be placed at the righten side of viewport",
+    "stackLayoutDesc": " is a layout component which supports list and thumbnail view.",
+    "dragDropLayoutDesc": " is a layout component which provides drag and drop also click events on layer.",
+    "faIconDesc": " is a wrapper component for font-awesome icons.",
+    "progressDesc": " is an indicator component for the heavy ajax loaded site",
+    "progressSubStartDesc": "Starts the progress indicator on top of the page",
+    "progressSubCompleteDesc": "Completes the progress indicator on top of the page",
+    "progressSubConfigureDesc": "Configure the indicator",
+    "progressBarDesc": " is an indicator component for the heavy ajax loaded site",
+    "notificationDesc": " is a notification component with total count and popup list",
+    "toastDesc": " is a toaster message showing utility. Helps developer to show toaster messages easly and in a standardized way",
+    "reCaptchaDesc": "is a CAPTCHA-like system designed to establish that a computer user is human (normally in order to protect websites from bots) and, at the same time, assist in the digitization of books",
+    "googleMapDesc": " is a wrapper component for GoogleMaps API",
+    "areaChartDesc": " displays graphically quantitative data. It is based on the line chart. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares with an area chart two or more quantities.",
+    "barChartDesc": " a bar chart or bar graph is a chart or graph that presents grouped data with rectangle|rectangular bars with lengths proportional to the values that they represen",
+    "composedChartDesc": " is a layout for area, bar and line chart together",
+    "lineChartDesc": " a line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segment",
+    "pieChartDesc": " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportio",
+    "radarChartDesc": " a radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same poin",
+    "radialBarChartDesc": " is a layout chart",
+    "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data"
+
+  },
+  "components.Components": {
+    "title": "Components",
+    "description": "Here you can find the samples and usages of the components.",
+    "search":"Search",
+    "complex":"Complex",
+    "inputs":"Inputs",
+    "charts":"Charts"
+  },
+  "components.Renderer": {
+    "example": "Examples",
+    "propsBlockHeader":"Props",
+    "methodBlockHeader":"Methods",
+    "propsTableFieldOne":"Name",
+    "propsTableFieldTwo":"Type",
+    "propsTableFieldThree":"Default",
+    "propsTableFieldFour":"Required",
+    "propsTableFieldFive":"Description",
+    "methodsTableFieldOne":"Name",
+    "methodsTableFieldTwo":"Returns",
+    "methodsTableFieldThree":"Description"
+  },
+  "datagrid.DataGridSample": {
+    "gridOne": "DataGrid (CRUD Toolbar)",
+    "gridTwo": "DataGrid (Custom Toolbar and Pagination)",
+    "gridThree": "DataGrid (Custom Cell Renderer)"
+  },
   "datagrid.DataGrid": {
     "toolbar": {
       "create": "New",
@@ -11,8 +162,8 @@
       "ok": "Yes",
       "cancel": "No"
     },
-    "deleteClick":{
-      "hasSelected":"You must make a selection before deleting."
+    "deleteClick": {
+      "hasSelected": "You must make a selection before deleting."
     },
     "filter": {
       "clear": "Clear",
@@ -64,7 +215,7 @@
     "maxValue": "Value must be less or equal to ${maxValue}",
     "minLength": "Input cannot be less than ${min} characters.",
     "maxLength": "Input cannot be more than ${max} characters.",
-    "regex":"Input must match '${regex}'"
+    "regex": "Input must match '${regex}'"
   },
   "wizard.Wizard": {
     "next": "Next",

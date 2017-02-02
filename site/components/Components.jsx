@@ -1,7 +1,8 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {Application} from "robe-react-commons";
 import Renderer from "./Renderer";
-import { Grid, Col, Collapse, ListGroup, ListGroupItem, InputGroup, Nav, NavItem } from "react-bootstrap";
+import {Grid, Col, Collapse, ListGroup, ListGroupItem, InputGroup, Nav, NavItem} from "react-bootstrap";
 import ComponentList from "./ComponentList";
 import Progress from "progress/Progress";
 import TextInput from "inputs/TextInput";
@@ -36,7 +37,7 @@ export default class Components extends ShallowComponent {
                         key={`#${item.header}`}
                         onClick={this.__onComponenListClick}
                         active={active}
-                        >
+                    >
                         {item.header}
                     </ListGroupItem>);
                 if (active) {
@@ -48,25 +49,25 @@ export default class Components extends ShallowComponent {
                             json={item.json}
                             sample={item.sample}
                             code={item.code}
-                            />);
+                        />);
                 }
             }
         }
         return (
             <Grid>
-                <h2>Components</h2>
-                <h5>Here you can find the samples and usages of the components.</h5>
+                <h2>{Application.i18n(Components, "components.Components", "title")}</h2>
+                <h5>{Application.i18n(Components, "components.Components", "description")}</h5>
                 <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid", paddingLeft: 0 }}>
                     <TextInput
                         inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
-                        placeholder="Search"
-                        />
+                        placeholder={Application.i18n(Components, "components.Components", "search")}
+                    />
                     <ListGroup className="parent">
                         <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "complex")}>
-                            <FaIcon code="fa-cubes" fixed={false} />&nbsp;
-                            Complex
+                            <FaIcon code="fa-cubes" fixed={false}/>&nbsp;
+                            {Application.i18n(Components, "components.Components", "complex")}
                         </ListGroupItem>
                         <Collapse in={selectedGroup === "complex"}>
                             <div>
@@ -74,8 +75,8 @@ export default class Components extends ShallowComponent {
                             </div>
                         </Collapse>
                         <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "inputs")}>
-                            <FaIcon code="fa-terminal" fixed={false} />&nbsp;
-                            Inputs
+                            <FaIcon code="fa-terminal" fixed={false}/>&nbsp;
+                            {Application.i18n(Components, "components.Components", "inputs")}
                         </ListGroupItem>
                         <Collapse in={selectedGroup === "inputs"}>
                             <div>
@@ -83,8 +84,8 @@ export default class Components extends ShallowComponent {
                             </div>
                         </Collapse>
                         <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "charts")}>
-                            <FaIcon code="fa-line-chart" fixed={false} />&nbsp;
-                            Charts
+                            <FaIcon code="fa-line-chart" fixed={false}/>&nbsp;
+                            {Application.i18n(Components, "components.Components", "charts")}
                         </ListGroupItem>
                         <Collapse in={selectedGroup === "charts"}>
                             <div>
@@ -104,20 +105,17 @@ export default class Components extends ShallowComponent {
     __onGroupChange = (selectedKey: string) => {
         let selectedComponent;
         switch (selectedKey) {
-            case "complex":
-                {
-                    selectedComponent = "DataGrid";
-                }
+            case "complex": {
+                selectedComponent = "DataGrid";
+            }
                 break;
-            case "inputs":
-                {
-                    selectedComponent = "TextInput";
-                }
+            case "inputs": {
+                selectedComponent = "TextInput";
+            }
                 break;
-            case "charts":
-                {
-                    selectedComponent = "AreaChart";
-                }
+            case "charts": {
+                selectedComponent = "AreaChart";
+            }
                 break;
             default:
         }

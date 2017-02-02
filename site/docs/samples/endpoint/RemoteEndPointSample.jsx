@@ -4,6 +4,7 @@ import {
     Table
 } from "react-bootstrap";
 import {
+    Application,
     ShallowComponent
 } from "robe-react-commons";
 import Highlight from "react-highlight";
@@ -25,31 +26,31 @@ export default class RemoteEndpointSample extends ShallowComponent {
         return (
             <div>
                 <span>
-                    You can perform with same settings for <code>create, read, update, delete</code>.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanOne")}
                 </span>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <span>
-                    The ajax options can be specified separately for <code>create, read, update, delete</code>.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanTwo")}
                 </span>
                 <Highlight className="javascript">{ex2}</Highlight>
                 <span>
-                    The <code>create</code> method must be called to perform a the create request.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanThree")}
                 </span>
                 <Highlight className="javascript">{ex3}</Highlight>
                 <span>
-                    The <code>read</code> method must be called to perform a the read request.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanFour")}
                 </span>
                 <Highlight className="javascript">{ex4}</Highlight>
                 <span>
-                    The <code>update</code> method must be called to perform a the update request.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanFive")}
                 </span>
                 <Highlight className="javascript">{ex5}</Highlight>
                 <span>
-                    The <code>delete</code> method must be called to perform a the delete request.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanSix")}
                 </span>
                 <Highlight className="javascript">{ex6}</Highlight>
                 <span>
-                    Call current url.
+                    {Application.i18n(RemoteEndpointSample,"endpoint.RemoteEndPointSample","spanSeven")}
                 </span>
                 <Highlight className="javascript">{ex7}</Highlight>
             </div>);

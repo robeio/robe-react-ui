@@ -1,4 +1,5 @@
 import InputValidations from "validation/InputValidations";
+import {Application} from "robe-react-commons";
 
 class DocList {
 
@@ -8,52 +9,52 @@ class DocList {
 
         components.push({
             header: "Validation",
-            desc: "Validation is a built-in utility which can be used directly or via DataForm model.",
+            desc: Application.i18n(DocList,"docs.DocList","validationDesc"),
             sample: require("./samples/validation/ValidationSample")
         });
 
         components.push({
             header: "Model (for DataForm & DataGrid)",
-            desc: "Models are a data definition mechanism  which is used by DataGrid and Dataform.",
+            desc: Application.i18n(DocList,"docs.DocList","modelDesc"),
             sample: require("./samples/model/ModelSample")
         });
 
         components.push({
             header: "Ajax Request",
-            desc: "Perform an AJAX request. (Yeah, that's all)",
+            desc: Application.i18n(DocList,"docs.DocList","ajaxDesc"),
             sample: require("./samples/ajaxrequest/AjaxRequestSample")
         });
 
         components.push({
             header: "Remote Endpoint",
-            desc: "Call APIs easly via AJAX requests under one roof. Simple configuration and usage.",
+            desc: Application.i18n(DocList,"docs.DocList","remoteEndPointDesc"),
             sample: require("./samples/endpoint/RemoteEndpointSample")
         });
         
         components.push({
             header: "Store",
-            desc: "Store is the easiest way to handle resources(JSON Data). Supports required operations for data manipulation. You can always extend for more.",
+            desc: Application.i18n(DocList,"docs.DocList","storeDesc"),
             sample: require("./samples/store/StoreSample")
         });
         components.push({
             header: "Input Addons",
-            desc: "Adding additional components (icons,texts etc.) to your inputs.",
+            desc: Application.i18n(DocList,"docs.DocList","inputAddOnDesc"),
             sample: require("./samples/addon/InputAddon")
         });
         components.push({
             header: "i18n",
-            desc: "Supporting multiple languages.",
+            desc: Application.i18n(DocList,"docs.DocList","i18nDesc"),
             sample: require("./samples/i18n/I18n")
         });
         components.push({
             header: "Toast",
-            desc: "Toast is a message showing utility. Helps developer to show toast messages easly and in a standardized way. ",
+            desc: Application.i18n(DocList,"docs.DocList","toastDesc"),
             sample: require("./samples/toast/ToastSample")
         });
 
         components.push({
             header: "'onChange' Method Usage",
-            desc: "This page will explain the details of the onChange method of input components",
+            desc: Application.i18n(DocList,"docs.DocList","onChangeDesc"),
             sample: require("./samples/inputs/InputsSample")
         });
 

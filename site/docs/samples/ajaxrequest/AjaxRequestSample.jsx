@@ -4,6 +4,7 @@ import {
     Table
 } from "react-bootstrap";
 import {
+    Application,
     ShallowComponent
 } from "robe-react-commons";
 import Highlight from "react-highlight";
@@ -22,19 +23,19 @@ export default class AjaxRequestSample extends ShallowComponent {
         return (
             <div>
                 <span>
-                    You can define <code>Ajax Request</code> as follows.
+                    {Application.i18n(AjaxRequestSample,"ajaxrequest.AjaxRequestSample","spanOne")}
                 </span>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <span>
-                    All settings are optional. A default can be set to an option. The default options are as follows.
+                    {Application.i18n(AjaxRequestSample,"ajaxrequest.AjaxRequestSample","spanTwo")}
                 </span>
                 <Highlight className="javascript">{ex2}</Highlight>
                 <span>
-                    The <code>call</code> method must be called to perform a request.
+                    {Application.i18n(AjaxRequestSample,"ajaxrequest.AjaxRequestSample","spanThree")}
                 </span>
                 <Highlight className="javascript">{ex3}</Highlight>
                 <span>
-                    You can inflate the following <code>example</code>.
+                   {Application.i18n(AjaxRequestSample,"ajaxrequest.AjaxRequestSample","spanFour")}
                 </span>
                 <Highlight className="javascript">{ex4}</Highlight>
 

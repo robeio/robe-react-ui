@@ -1,4 +1,5 @@
 import React from "react";
+import { Application } from "robe-react-commons";
 import { Grid, Thumbnail, Row, Col, Label } from "react-bootstrap";
 import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
@@ -11,8 +12,8 @@ export default class SampleProjects extends React.Component {
         return (
             <Grid>
                 <Row>
-                    <h2>Samples</h2>
-                    <h5>Here is the list of sample appications developed with robe-react-ui.</h5>
+                    <h2>{Application.i18n(SampleProjects, "sampleprojects.SampleProjects", "title")}</h2>
+                    <h5>{Application.i18n(SampleProjects, "sampleprojects.SampleProjects", "header")}</h5>
                 </Row>
                 {this.renderProjects()}
             </Grid>

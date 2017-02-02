@@ -2,6 +2,7 @@ import React from "react";
 import {
     ShallowComponent,
     Store,
+    Application,
     RemoteEndPoint,
     Assertions,
     LocalEndPoint
@@ -48,7 +49,7 @@ export default class DataGridSample extends ShallowComponent {
         super(props);
 
         const data =[
-            { id: 1, name: "John", surname: "Doe", password:"123123", job:"sd", gender:"male", email:"johndoe@example.com", birthdate:"1995-12-25"}, 
+            { id: 1, name: "John", surname: "Doe", password:"123123", job:"sd", gender:"male", email:"johndoe@example.com", birthdate:"1995-12-25"},
             { id: 2, name: "Jane", surname: "Roe", password:"123123", job:"sa", gender:"female", email:"janeroe@example.com", birthdate:"1995-12-30"}
         ];
 
@@ -91,7 +92,7 @@ export default class DataGridSample extends ShallowComponent {
     render(): Object {
         return (
             <span>
-                <ControlLabel>DataGrid (CRUD Toolbar)</ControlLabel>
+                <ControlLabel>{Application.i18n(DataGridSample, "datagrid.DataGridSample", "gridOne")}</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -104,7 +105,7 @@ export default class DataGridSample extends ShallowComponent {
                     exportButton={true}
                     editable={true}
                 />
-                <ControlLabel>DataGrid (Custom Toolbar and Pagination)</ControlLabel>
+                <ControlLabel>{Application.i18n(DataGridSample, "datagrid.DataGridSample", "gridTwo")}</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}
@@ -119,7 +120,7 @@ export default class DataGridSample extends ShallowComponent {
                     pagination={{ pageSize: 1 }}
                     pageSizeButtons={["1", "2", "3"]}
                 />
-                <ControlLabel>DataGrid (Custom Cell Renderer)</ControlLabel>
+                <ControlLabel>{Application.i18n(DataGridSample, "datagrid.DataGridSample", "gridThree")}</ControlLabel>
                 <DataGrid
                     fields={this.state.fields}
                     propsOfFields={propsOfFields}

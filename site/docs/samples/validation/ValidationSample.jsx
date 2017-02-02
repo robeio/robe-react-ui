@@ -3,7 +3,7 @@ import {
     Well
 } from "react-bootstrap";
 import {
-    ShallowComponent
+    ShallowComponent,Application
 } from "robe-react-commons";
 import TextInput from "robe-react-ui/lib/inputs/TextInput";
 import InputValidations from "robe-react-ui/lib/validation/InputValidations";
@@ -26,17 +26,15 @@ export default class ValidationSample extends ShallowComponent {
         return (
             <div>
                 <p>
-                    You can use <code>validation</code> property to give your validation functions.
-                    All components which extends <code>ValidationComponent</code> will automatically take and execute them on each run.
-                    Either our pre-defined validations at <code>InputValidations</code> or your brand new validation functions can be used.
+                    {Application.i18n(ValidationSample,"validation.ValidationSample","exampleOneDesc")}
                 </p>
                 <TextInput
-                    label="Example 1 (Block Display)"
+                    label={Application.i18n(ValidationSample,"validation.ValidationSample","exampleOneBlock")}
                     value={this.state.example1}
                     onChange={this.__handleChangeEx1}
                     validations={{
                         required: {
-                            message: "This a custom required message."
+                            message: Application.i18n(ValidationSample,"validation.ValidationSample","requireMessage")
                         },
                         minLength: {
                             args: [3]
@@ -44,7 +42,7 @@ export default class ValidationSample extends ShallowComponent {
                         please: {
                             func: (value: String): String => {
                                 if (value.indexOf("please") === -1 && value.indexOf("Please") === -1) {
-                                    return "\"Please\" use the magic word.";
+                                    return Application.i18n(ValidationSample,"validation.ValidationSample","magicMessage");
                                 }
                                 return undefined;
                             }
@@ -52,13 +50,13 @@ export default class ValidationSample extends ShallowComponent {
                     }}
                 />
                 <TextInput
-                    label="Example 2 (Overlay Display)"
+                    label={Application.i18n(ValidationSample,"validation.ValidationSample","exampleTwoOverlay")}
                     value={this.state.example1}
                     onChange={this.__handleChangeEx1}
                     validationDisplay="overlay"
                     validations={{
                         required: {
-                            message: "This a custom required message."
+                            message: Application.i18n(ValidationSample,"validation.ValidationSample","requireMessage")
                         },
                         minLength: {
                             args: [3]
@@ -66,21 +64,13 @@ export default class ValidationSample extends ShallowComponent {
                     }}
                 />
                 <p>
-                    We support two type of option for displaying the validation messages. This is determined by <code>validationDisplay</code> property.
-                    You can provide validationDisplay property via input field or via <code>DataForm</code> (will forward this property to all inputs).
+                    {Application.i18n(ValidationSample,"validation.ValidationSample","exampleWwoDesc")}
                 </p>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <Well>
-                    As you can see from the source code validation property takes a map of validations.
-                    It also supports parametric validation functions with custom message templates.
-                    For ex.<code>minLength</code> is an object with pre-defined function (<code>InputValidations</code>).
-                    We used <code>minLength.args</code> for passing desired parameters which is the minimum length at this case.
-                    Also you can define custom message templates with <code>minLength.message</code>.
-                    You can give your validation function directly via <code>minLength.func</code> parameter, for an example take a look at <code>please</code> please :).
+                    {Application.i18n(ValidationSample,"validation.ValidationSample","descOne")}
                 </Well>
-                <code>InputValidations</code> is a singleton class which holds pre-defined validations and a registery for new functions.
-                Registering a validation is essential for reusing functions and makes it accessible from everywhere.
-                Also you should know that <code>DataForm</code> uses these <code>InputValidations</code> to lookup validation names from the given <code>DataModel</code> json.
+                {Application.i18n(ValidationSample,"validation.ValidationSample","descTwo")}
                 <Highlight className="json">{ex2}</Highlight>
             </div>
         );

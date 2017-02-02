@@ -4,6 +4,7 @@ import {
     InputGroup
 } from "react-bootstrap";
 import {
+    Application,
     ShallowComponent
 } from "robe-react-commons";
 import TextInput from "robe-react-ui/lib/inputs/TextInput";
@@ -22,33 +23,31 @@ export default class InputAddon extends ShallowComponent {
         return (
             <div>
                 <p>
-                    You can use <code>addons</code> property to show additional components within your inputs.
-                    All components which wraps <code>BaseInput</code> will take properties <code>inputGroupLeft</code> and <code>inputGroupRight</code> properties.
-                    You can find detailed usage from <a href="https://react-bootstrap.github.io/components.html#forms-input-groups" target="_blank">react-bootstrap docs</a>.
+                    {Application.i18n(InputAddon,"addon.InputAddon","paragraphOne")} <a href="https://react-bootstrap.github.io/components.html#forms-input-groups" target="_blank">react-bootstrap docs</a>.
                 </p>
                 <TextInput
-                    label="Example 1 (Text Left)"
+                    label={Application.i18n(InputAddon,"addon.InputAddon","textOne")}
                     value=""
-                    inputGroupLeft={<InputGroup.Addon > Text to left</InputGroup.Addon>}
+                    inputGroupLeft={<InputGroup.Addon >{Application.i18n(InputAddon,"addon.InputAddon","textOneSub")}</InputGroup.Addon>}
                     />
                 <TextInput
-                    label="Example 2 (Text Right)"
+                    label={Application.i18n(InputAddon,"addon.InputAddon","textTwo")}
                     value=""
-                    inputGroupRight={<InputGroup.Addon > or to right</InputGroup.Addon>}
+                    inputGroupRight={<InputGroup.Addon >{Application.i18n(InputAddon,"addon.InputAddon","textTwoSub")}</InputGroup.Addon>}
                     />
                 <TextInput
-                    label="Example 3 (Icon Left)"
+                    label={Application.i18n(InputAddon,"addon.InputAddon","textThree")}
                     value=""
                     inputGroupLeft={<InputGroup.Addon > <FaIcon code="fa-user-circle-o" /></InputGroup.Addon>}
                     />
                 <TextInput
-                    label="Example 4 (Icon Right)"
+                    label={Application.i18n(InputAddon,"addon.InputAddon","textFour")}
                     value=""
                     inputGroupRight={<InputGroup.Addon > <FaIcon code="fa-unlock-alt" /></InputGroup.Addon>}
                     />
                 <Highlight className="javascript">{ex1}</Highlight>
                 <Well>
-                    You can add whatever you want by wrapping your component with <code>InputGroup.Addon</code> or with an equivalent component.
+                    {Application.i18n(InputAddon,"addon.InputAddon","desc")}
                 </Well>
             </div>
         );
