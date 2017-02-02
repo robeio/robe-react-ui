@@ -115,6 +115,9 @@
     "spanSix": "\"Silme\" isteğini gerçekleştirmek için \"delete\" yöntemi çağrılmalıdır.",
     "spanSeven": "Geçerli URL 'i çağır."
   },
+  "error.NotFound":{
+    "message":"Sayfa bulunamadı."
+  },
   "ajaxrequest.AjaxRequestSample": {
     "spanOne": "\"Ajax Request\"'i aşağıdaki gibi tanımlayabilirsiniz.",
     "spanTwo": "Tüm ayarlar isteğe bağlıdır. Varsayılan değer, bir seçenek olarak ayarlanabilir. Varsayılan seçenekler şunlardır.",
@@ -125,7 +128,7 @@
     "exampleOneBlock": "1.Örnek (Sabit Görünümlü)",
     "exampleTwoOverlay": "2.Örnek (Üstüne gelince açılan)",
     "requireMessage": "Bu özel bir zorunluluk mesajıdır.",
-    "magicMessage": "\"Lütfen\" sihirli bir harf kullanın.",
+    "magicMessage": "\"Please\" sihirli bir kelime kullanın.",
     "exampleOneDesc": "Doğrulama işlevlerini vermek için \"validation\" özelliğini kullanabilirsiniz.\"ValidationComponent\" 'den türetilen tüm bileşenler, her seferinde otomatik olarak çalıştırılır.\"InputValidations\"'daki önceden tanımlanmış doğrulamalarımız ya da amacınızın yeni doğrulama işlevleri kullanılabilir.",
     "exampleWwoDesc": "Doğrulama mesajlarını görüntülemek için iki tür seçeneği destekliyoruz.Bu, \"validationDisplay\" özelliği tarafından belirlenir.Bu özelliği giriş alanı veya DataForm (bu özelliği tüm girdilere iletir) aracılığıyla sağlayabilirsiniz.",
     "descOne": "Kaynak kodu doğrulama özelliklerinden de görebileceğiniz gibi doğrulama haritasını alır. Ayrıca, özel mesaj şablonlarıyla parametrik doğrulama işlevlerini destekler.Örneğin, \"minLength\" önceden tanımlanmış bir işlevi olan bir nesnedir (\"InputValidations\"). Bu durumda minimum uzunluğu olan istenen parametreleri iletmek için \"minLength\" kullandık. Ayrıca, \"minLength.message\" ile özel ileti şablonlarını tanımlayabilirsiniz. Doğrulama işlevinizi \"minLength.func\" parametresiyle doğrudan verebilirsiniz, bir örnek için göz atın lütfen :)",

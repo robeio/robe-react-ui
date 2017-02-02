@@ -1,6 +1,6 @@
 import React from "react";
 import FaIcon from "faicon/FaIcon";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { Application,ShallowComponent } from "robe-react-commons";
 import { Image } from "react-bootstrap";
 
 export default class NotFound extends ShallowComponent {
@@ -13,7 +13,7 @@ export default class NotFound extends ShallowComponent {
     render() {
         return (<div style={NotFound.style}>
             <Image src="./notfound.gif" rounded />
-            <h1>404 page not found.</h1>
+            <h1>{Application.i18n(NotFound,"error.NotFound","message")}</h1>
         </div>);
     }
 

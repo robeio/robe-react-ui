@@ -115,6 +115,9 @@
     "spanSix":"The \"delete\" method must be called to perform a the delete request.",
     "spanSeven":" Call current url."
   },
+  "error.NotFound":{
+    "message":"404 page not found."
+  },
   "ajaxrequest.AjaxRequestSample":{
     "spanOne":"You can define \"Ajax Request\" as follows",
     "spanTwo":"All settings are optional. A default can be set to an option. The default options are as follows.",
