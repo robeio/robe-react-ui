@@ -100,10 +100,6 @@ class Site extends ShallowComponent {
             window.open("https://react-bootstrap.github.io/components.html");
             return;
         }
-        if (key === "Recharts") {
-            window.open("http://recharts.org/");
-            return;
-        }
         if (key === "en_US") {
             this.setState({
                 language: undefined

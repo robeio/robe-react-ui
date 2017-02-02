@@ -40,13 +40,9 @@ export default class Welcome extends ShallowComponent {
                                 </Col>
                     </Row>
                     <Row className="well" >
-                        <Col sm={6}>
+                        <Col sm={12}>
                             <h4>Bootstrap Support</h4>
                                    We support bootstrap components by wrapping <a href="https://react-bootstrap.github.io/components.html"><code>React Bootstrap</code></a>.
-                        </Col>
-                        <Col sm={6}>
-                            <h4>Charting Support</h4>
-                                   We support Area, Bar, Line, Pie, Radar and another chart components by wrapping <a href="http://recharts.org/"><code>Recharts</code></a>.
                         </Col>
                     </Row>
                     <Row>
