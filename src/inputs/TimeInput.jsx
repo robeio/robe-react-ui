@@ -67,7 +67,7 @@ export default class TimeInput extends ShallowComponent {
         /**
          * time format of the component
          */
-        format: React.PropTypes.oneOf(["HH:mm:ss", "HH", "mm", "ss", "HH:mm"]),
+        format: React.PropTypes.oneOf(["HH:mm:ss", "HH:mm"]),
         /**
          * it specifies that an input field is hidden or visible
          */
@@ -161,18 +161,6 @@ export default class TimeInput extends ShallowComponent {
                     {minutesArea}
                     {secondsArea}
                 </div>);
-            case "HH":
-                return (<div className="timeArea">
-                    {hoursArea}
-                </div>);
-            case "mm":
-                return (<div className="timeArea">
-                    {minutesArea}
-                </div>);
-            case "ss":
-                return (<div className="timeArea">
-                    {secondsArea}
-                </div>);
             default:
                 return (<div className="timeArea">
                     {hoursArea}
@@ -225,7 +213,7 @@ export default class TimeInput extends ShallowComponent {
 
     __onClickTimes(time:string, type:string) {
         this[type] = time;
-        let newTime = momentjs().set({'hour': this.hour, 'minute': this.minute, 'second': this.second});
+        let newTime = momentjs().set({'hour': this.hour || "00", 'minute': this.minute || "00", 'second': this.second || "00"});
         this.__onChange(undefined, newTime);
     }
 
