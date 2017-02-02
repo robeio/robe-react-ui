@@ -1,5 +1,7 @@
 # Change Log
 
+## 1.1.20 -- Developing...
+
 ## 1.1.19 -- Developing...
 * Code preview for the HtmlEditor.
 * Toast
