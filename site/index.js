@@ -73,9 +73,6 @@ class Site extends ShallowComponent {
                                 /> React
                                 Bootstrap
                             </NavItem>
-                            <NavItem eventKey="Recharts" className="re-charts">
-                                {"<Recharts />"}
-                            </NavItem>
                             <NavDropdown title="Language" id="nav-dropdown" style={{ display: "inline" }}>
                                 <MenuItem eventKey="en_US">English</MenuItem>
                                 <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
