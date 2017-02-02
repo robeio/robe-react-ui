@@ -1,4 +1,13 @@
 {
+  "site.index": {
+    "components": "Komponentler",
+    "docs": "Dökümanlar",
+    "samples": "Örnekler",
+    "about": "Hakkımızda",
+    "languageTitle": "Dil",
+    "languageItemEnglish":"İngilizce",
+    "languageItemTurkish":"Türkçe"
+  },
   "site.Welcome": {
     "headerText":"Arayüz bileşenleri ",
     "welcome":"Hoşgeldiniz",
@@ -20,6 +29,12 @@
     "title": "Örnekler",
     "header": "Burası robe-react-ui ile geliştirilen örnek uygulamaların listesi."
   },
+  "buttons.ButtonSample": {
+    "buttonNormal": "Buton (normal davranış)",
+    "async":"Asenkron",
+    "buttonAsync": "Button (asenkron davranış)",
+    "forMoreLink":" React-Bootstrap Buton hakkında daha fazlası"
+  },
   "inputs.InputSample": {
     "descOne":" Her şeyden önce \"Neden bu gibi bir belge?\", Çünkü \"onChange \" hakkında açıklanması gereken 3 önemli şey var.",
     "listItemOne":"\"name\" geri dönüş olayının bir alanıdır.",
@@ -36,6 +51,14 @@
     "tableHeaderThree":"Ayrıştırılmış Değer"
   },
   "toast.ToastSample": {
+    "infoMessage":"Bilgi Mesajı",
+    "successMessage":"Başarılı Mesaj",
+    "successTitle":"Başlık Yeri",
+    "warningMessage":"Uyarı Mesajı",
+    "warningDesc":"3sn sonra kapanacak",
+    "errorMessage":"Hata Mesajı",
+    "errorTitle":"Beni Tıkla !",
+    "callback":"Geri Bildirim",
     "topRight": "Sağ üst",
     "topLeft": "Sol üst",
     "bottomRight": "Sağ alt",

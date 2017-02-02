@@ -1,28 +1,9 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { Application,ShallowComponent } from "robe-react-commons";
 import Toast from "robe-react-ui/lib/toast/Toast";
 import { Button, ButtonToolbar, Checkbox } from "react-bootstrap";
 import RadioInput from "robe-react-ui/lib/inputs/RadioInput";
 import NumericInput from "robe-react-ui/lib/inputs/NumericInput";
-
-const positions = [
-    {
-        key: "top-right",
-        value: "Top and Right"
-    },
-    {
-        key: "top-left",
-        value: "Top and Left"
-    },
-    {
-        key: "bottom-right",
-        value: "Bottom and Right"
-    },
-    {
-        key: "bottom-left",
-        value: "Bottom and Left"
-    }
-];
 
 export default class ToastSample extends ShallowComponent {
 
@@ -38,16 +19,16 @@ export default class ToastSample extends ShallowComponent {
         return () => {
             switch (type) {
                 case "info":
-                    Toast.info("Info message");
+                    Toast.info(Application.i18n(ToastSample,"toast.ToastSample","infoMessage"));
                     break;
                 case "success":
-                    Toast.success("Success message", "Title here");
+                    Toast.success(Application.i18n(ToastSample,"toast.ToastSample","successMessage"), Application.i18n(ToastSample,"toast.ToastSample","successTitle"));
                     break;
                 case "warning":
-                    Toast.warning("Warning message", "Close after 3000ms", 3000);
+                    Toast.warning(Application.i18n(ToastSample,"toast.ToastSample","warningMessage"), Application.i18n(ToastSample,"toast.ToastSample","warningDesc"), 3000);
                     break;
                 case "error":
-                    Toast.error("Error message", "Click me!", 5000, () => {
+                    Toast.error(Application.i18n(ToastSample,"toast.ToastSample","errorMessage"), Application.i18n(ToastSample,"toast.ToastSample","errorTitle"), 5000, () => {
                         alert("callback");
                     });
                     break;
@@ -69,7 +50,24 @@ export default class ToastSample extends ShallowComponent {
                 <RadioInput
                     label="Positions"
                     name="position"
-                    items={positions}
+                    items={[
+                            {
+                                key: "top-right",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","topRight")
+                            },
+                            {
+                                key: "top-left",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","topLeft")
+                            },
+                            {
+                                key: "bottom-right",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomRight")
+                            },
+                            {
+                                key: "bottom-left",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomLeft")
+                            }
+                        ]}
                     value={this.state.position}
                     textField="value"
                     valueField="key"
@@ -82,10 +80,10 @@ export default class ToastSample extends ShallowComponent {
                     onChange={this.__handleChange}
                     />
                 <ButtonToolbar>
-                    <Button bsStyle="success" onClick={this.toastMessage("success")}>Success</Button>
-                    <Button bsStyle="info" onClick={this.toastMessage("info")}>Info</Button>
-                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>Warning</Button>
-                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
+                    <Button bsStyle="success" onClick={this.toastMessage("success")}>{Application.i18n(ToastSample, "toast.ToastSample", "success")}</Button>
+                    <Button bsStyle="info" onClick={this.toastMessage("info")}>{Application.i18n(ToastSample, "toast.ToastSample", "info")}</Button>
+                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>{Application.i18n(ToastSample, "toast.ToastSample", "warning")}</Button>
+                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>{Application.i18n(ToastSample, "toast.ToastSample", "error")}</Button>
                 </ButtonToolbar>
                 <br />
                 <br />

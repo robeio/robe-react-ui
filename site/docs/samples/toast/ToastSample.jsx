@@ -22,17 +22,17 @@ export default class ToastSample extends ShallowComponent {
         return () => {
             switch (type) {
                 case "info":
-                    Toast.info("Info message");
+                    Toast.info(Application.i18n(ToastSample,"toast.ToastSample","infoMessage"));
                     break;
                 case "success":
-                    Toast.success("Success message", "Title here");
+                    Toast.success(Application.i18n(ToastSample,"toast.ToastSample","successMessage"), Application.i18n(ToastSample,"toast.ToastSample","successTitle"));
                     break;
                 case "warning":
-                    Toast.warning("Warning message", "Close after 3000ms", 3000);
+                    Toast.warning(Application.i18n(ToastSample,"toast.ToastSample","warningMessage"), Application.i18n(ToastSample,"toast.ToastSample","warningDesc"), 3000);
                     break;
                 case "error":
-                    Toast.error("Error message", "Click me!", 5000, () => {
-                        alert("callback");
+                    Toast.error(Application.i18n(ToastSample,"toast.ToastSample","errorMessage"), Application.i18n(ToastSample,"toast.ToastSample","errorTitle"), 5000, () => {
+                        alert(Application.i18n(ToastSample,"toast.ToastSample","callback"));
                     });
                     break;
                 default:
@@ -40,6 +40,7 @@ export default class ToastSample extends ShallowComponent {
             }
         };
     };
+
 
     toastConfiguration(property, value) {
         switch (property) {

@@ -1,4 +1,13 @@
 {
+  "site.index":{
+    "components":"Components",
+    "docs":"Docs",
+    "samples":"Samples",
+    "about":"About",
+    "languageTitle":"Language",
+    "languageItemEnglish":"English",
+    "languageItemTurkish":"Turkish"
+  },
   "site.Welcome": {
     "headerText":"UI components built on top of",
     "welcome":"Welcome",
@@ -20,6 +29,12 @@
     "title":"Samples",
     "header":"Here is the list of sample appications developed with robe-react-ui."
   },
+  "buttons.ButtonSample": {
+    "buttonNormal": "Button (with normal behavior)",
+    "async":"Async",
+    "buttonAsync": "Button (with async behavior)",
+    "forMoreLink":" For more React-Bootstrap Button"
+  },
   "inputs.InputSample": {
     "descOne":" First of all \"Why a document like this ?\" because we have 3 important things to explain about \"onChange\".",
     "listItemOne":"\"name\" field of the event",
@@ -36,6 +51,14 @@
     "tableHeaderThree":"parsedValue"
   },
   "toast.ToastSample": {
+    "infoMessage":"Info message",
+    "successMessage":"Success message",
+    "successTitle":"Title here",
+    "warningMessage":"Warning message",
+    "warningDesc":"Close after 3000ms",
+    "errorMessage":"Error message",
+    "errorTitle":"Click me!",
+    "callback":"Callback",
     "topRight": "Top and Right",
     "topLeft": "Top and Left",
     "bottomRight": "Bottom and Right",
