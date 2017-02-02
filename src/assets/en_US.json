@@ -11,7 +11,7 @@
   "site.Welcome": {
     "headerText":"UI components built on top of",
     "welcome":"Welcome",
-    "welcomeText":" Burası \"robe-react-ui\"  dökümantasyon sayfasıdır.Burada Örnek kodları, JSDocs ve proje ile ilgili genel bilgileri içeren bileşenler bulabilirsiniz.",
+    "welcomeText":"This is the documentation page for robe-react-ui. You can find Components with sample codes, JSDocs and general information about the project.",
     "dataGrid":"DataGrid with Model support",
     "dataGridText":" Models with dynamic validation support, makes it very easy to develop screens for CRUD operations and more.Filters, sorting, form generation from models and more.",
     "standartUsage":"Standardized usage",
