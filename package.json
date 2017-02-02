@@ -14,7 +14,7 @@
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
     "build": "node ./config/prebuild.js ./lib & babel ./src --out-dir ./lib  --copy-files",
     "site": "node ./config/prebuild.js ./docs & webpack --config config/webpack.config.site.js  --progress --profile --colors",
-    "start": "webpack-dev-server --config config/webpack.site.dev.js --colors"
+    "start": "webpack-dev-server --config config/webpack.site.dev.js --colors --port 8090"
   },
   "docs": "./nreact-highlightode_modules/.bin/esdoc -c esdoc.json",
   "keywords": [

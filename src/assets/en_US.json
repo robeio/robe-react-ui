@@ -10,6 +10,21 @@
     "title":"Samples",
     "header":"Here is the list of sample appications developed with robe-react-ui."
   },
+  "i18n.I18n":{
+    "mainDesc":" Robe projects supports \"i18n\" by a simple api. This page will describe how to use it and give a simple sample.You can translate default texts from the library or define your own texts.First of all create an i18n file. An \"i18n\"file is a basic \"json\"file with the correct keys.These keys will override the default texts or create a new entry. There are \"2\"<strong></strong> types of usage",
+    "headerOne":"1.\"robe-react-commons/lib/application/Application\"",
+    "descOne":"This is the core usage of the api. So after loading our i18n file to the \"Application\" it will be usable.From now on you can acces all your texts with \"Application.i18n(<Class>,<code>...)\".This will give you a string.If you are using i18n at the defaultProps of a class you should always give \"Class\" and \"codes\" must have same structure and naming with the defaultProps",
+    "descOnePlus":"To use parameterized texts you can define your texts like  \"${minValue}\" and then it will be replacable by  \"es6-template-strings\" library.",
+    "descOnePlusSub":"As you can see from the code it will first print \"This field is required.\"",
+    "descOnePlusSubSub":"Than it will print \"Value must be greater or equal to 3\"",
+    "headerTwo":"2. \"robe-react-ui/lib/Application\"",
+    "descTwo":"This is the easy way to use the api.If you wrap your Outermost component with \"<Application language=...>\" language will be available via \"language\" prop.This props will be stored at the cookies in case of page refresh.When you change the prop it will cause a series of operations.",
+    "descTwoListOne":"It will accept both JSON or path.",
+    "descTwoListTwo":"It will load the data and set it to the Application from commons.",
+    "descTwoListThree":"All defaultProps of the components will be scanned and replaced.",
+    "descTwoListFour":"\"Application\" will remount itself to make changes visible.",
+    "descTwoPlus":"From now on you can acces all your texts with \"Application.i18n(<Class>,<code>...)\".This will give you a string."
+  },
   "addon.InputAddon":{
     "paragraphOne":" You can use \"addons\" property to show additional components within your inputs.All components which wraps \"BaseInput\" will take properties \"inputGroupLeft\" and \"inputGroupRight\" properties.You can find detailed usage from ",
     "textOne":"Example 1 (Text Left)",

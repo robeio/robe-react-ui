@@ -1,85 +1,100 @@
 {
-  "site.index":{
-    "components":"Komponentler",
-    "docs":"Dökümanlar",
-    "samples":"Örnekler",
-    "about":"Hakkımızda",
-    "languageTitle":"Dil"
+  "site.index": {
+    "components": "Komponentler",
+    "docs": "Dökümanlar",
+    "samples": "Örnekler",
+    "about": "Hakkımızda",
+    "languageTitle": "Dil"
   },
-  "sampleprojects.SampleProjects":{
-    "title":"Örnekler",
-    "header":"Burası robe-react-ui ile geliştirilen örnek uygulamaların listesi."
+  "sampleprojects.SampleProjects": {
+    "title": "Örnekler",
+    "header": "Burası robe-react-ui ile geliştirilen örnek uygulamaların listesi."
   },
-  "addon.InputAddon":{
-    "paragraphOne":"\"Addons\" özelliklerini, girişlerinizde ek bileşenleri göstermek için kullanabilirsiniz.\"BaseInput\"'u saran tüm bileşenleri, \"inputGroupLeft\" ve \"inputGroupRight\" özellikleri alırlar.Ayrıntılı kullanımı için bakabilirsiniz ",
-    "textOne":"Örnek 1 (Metin Solda)",
-    "textOneSub":"Metin Solda",
-    "textTwo":"Örnek 2 (Metin Sağda)",
-    "textTwoSub":"Metin Sağda",
-    "textThree":"Örnek 3 (İfade Solda)",
-    "textFour":"Örnek 4 (İfade Sağda)",
-    "desc":"İstediğiniz şeyi, bileşeninizi \"InputGroup.Addon\" ile sarmalayarak veya eşdeğer bir bileşenle ekleyebilirsiniz."
+  "i18n.I18n": {
+    "mainDesc": " Robe projeleri, basit bir api olan \"i18n\" yi destekler. Bu sayfada bunun nasıl kullanılacağı ve basit bir örnek ile açıklanacaktır.Varsayılan metinleri kütüphaneden çevirebilir veya kendi metinlerinizi tanımlayabilirsiniz.",
+    "headerOne": "1.\"robe-react-commons/lib/application/Application\"",
+    "descOne": "Bu api'nin esas kullanımıdır. Böylece,\"i18n \" dosyamızı \"Application \" ya yükledikten sonra kullanılıyor olacaktır.Bundan sonra, tüm metinlerinize \"Application.i18n (<Class>, <code> ...) \" ile erişebilirsiniz.Bu, size bir dize verecektir. Eğer bir sınıfın \"defaultProps\" öğesinde \"i18n\" kullanıyorsanız, her zaman \"Class\" ve \"code\" lar vermelisiniz ve aynı yapıya ve \"defaultProps\" ile adlandırma yapmalısınız.",
+    "descOnePlus": "Parametreli metinleri kullanmak için, \"$ {minValue} \" gibi metinlerinizi tanımlayabilirsiniz.Sonrasında \"es6-template-strings \" kütüphanesi ile değiştilicektir.",
+    "descOnePlusSub": "Koddan görebileceğiniz gibi ilk önce \"Bu alan gereklidir. \" yazdıracaktır.",
+    "descOnePlusSubSub": "\"Değeri 3'ten büyük olmalı veya eşit olmalı \" yazıyor",
+    "headerTwo": "2. \"robe-react-ui/lib/Application\"",
+    "descTwo": "Bu, api'yi kullanmanın kolay bir yoludur. En Dıştaki bileşeninizi \"<Application language = ...> \" ile sararsanız, dil \"language \" paketi aracılığıyla erişilebilir olur. Bu çerezlerde saklanır.Sayfa yenileme durumunda bir dizi işlem gerçekleşir.",
+    "descTwoListOne": "Hem JSON hem de url yolu kabul eder.",
+    "descTwoListTwo": "Verileri yükleyecek ve ortak kullanımlardan uygulamaya ayarlayacaktır.",
+    "descTwoListThree": "Bileşenlerin tüm defaultProp'ları taranır ve değiştirilir.",
+    "descTwoListFour": " \"Application \" değişiklikleri görünür hale getirmek için kendisini yeniden yükler.",
+    "descTwoPlus": "Artık tüm metinlerinize \"Application.i18n (<Class>, <code> ...) \" ile erişebilirsiniz.Bu size bir dize verecektir."
   },
-  "store.StoreSample":{
-    "spanOne":"Özellik Tipleri",
-    "spanTwo":"Varsayılanlar",
-    "spanThree":"\"create, read, update, delete\" işlemlerini aynı ayarlarla gerçekleştirebilirsiniz..",
-    "spanFour":"\"Oluşturma\" isteğini gerçekleştirmek için \"create\" yöntemi çağrılmalıdır.",
-    "spanFive":"\"Okuma\" isteğini gerçekleştirmek için \"read\" yöntemi çağrılmalıdır.",
-    "spanSix":"\"Güncelleme\" isteğini gerçekleştirmek için \"update\" yöntemi çağrılmalıdır.",
-    "spanSeven":"\"Silme\" isteğini gerçekleştirmek için \"delete\" yöntemi çağrılmalıdır."
+  "addon.InputAddon": {
+    "paragraphOne": "\"Addons\" özelliklerini, girişlerinizde ek bileşenleri göstermek için kullanabilirsiniz.\"BaseInput\"'u saran tüm bileşenleri, \"inputGroupLeft\" ve \"inputGroupRight\" özellikleri alırlar.Ayrıntılı kullanımı için bakabilirsiniz ",
+    "textOne": "Örnek 1 (Metin Solda)",
+    "textOneSub": "Metin Solda",
+    "textTwo": "Örnek 2 (Metin Sağda)",
+    "textTwoSub": "Metin Sağda",
+    "textThree": "Örnek 3 (İfade Solda)",
+    "textFour": "Örnek 4 (İfade Sağda)",
+    "desc": "İstediğiniz şeyi, bileşeninizi \"InputGroup.Addon\" ile sarmalayarak veya eşdeğer bir bileşenle ekleyebilirsiniz."
   },
-  "endpoint.RemoteEndPointSample":{
-    "spanOne":"\"Oluşturma\",\"okuma\",\"güncelleme\",\"silme\" için aynı ayarlarla gerçekleştirebilirsiniz.",
-    "spanTwo":"Ajax seçenekleri \"oluşturma\",\"okuma\",\"güncelleme\",\"silme\" için ayrıca belirtilebilir.",
-    "spanThree":"\"Oluşturma\" isteğini gerçekleştirmek için \"create\" yöntemi çağrılmalıdır.",
-    "spanFour":"\"Okuma\" isteğini gerçekleştirmek için \"read\" yöntemi çağrılmalıdır.",
-    "spanFive":"\"Güncelleme\" isteğini gerçekleştirmek için \"update\" yöntemi çağrılmalıdır.",
-    "spanSix":"\"Silme\" isteğini gerçekleştirmek için \"delete\" yöntemi çağrılmalıdır.",
-    "spanSeven":"Geçerli URL 'i çağır."
+  "store.StoreSample": {
+    "spanOne": "Özellik Tipleri",
+    "spanTwo": "Varsayılanlar",
+    "spanThree": "\"create, read, update, delete\" işlemlerini aynı ayarlarla gerçekleştirebilirsiniz..",
+    "spanFour": "\"Oluşturma\" isteğini gerçekleştirmek için \"create\" yöntemi çağrılmalıdır.",
+    "spanFive": "\"Okuma\" isteğini gerçekleştirmek için \"read\" yöntemi çağrılmalıdır.",
+    "spanSix": "\"Güncelleme\" isteğini gerçekleştirmek için \"update\" yöntemi çağrılmalıdır.",
+    "spanSeven": "\"Silme\" isteğini gerçekleştirmek için \"delete\" yöntemi çağrılmalıdır."
   },
-  "ajaxrequest.AjaxRequestSample":{
-    "spanOne":"\"Ajax Request\"'i aşağıdaki gibi tanımlayabilirsiniz.",
-    "spanTwo":"Tüm ayarlar isteğe bağlıdır. Varsayılan değer, bir seçenek olarak ayarlanabilir. Varsayılan seçenekler şunlardır.",
-    "spanThree":"\"call\" metodu istek yapmak için çağırılmalıdır.",
-    "spanFour":"Aşağıdaki gibi çoğaltabilirsin."
+  "endpoint.RemoteEndPointSample": {
+    "spanOne": "\"Oluşturma\",\"okuma\",\"güncelleme\",\"silme\" için aynı ayarlarla gerçekleştirebilirsiniz.",
+    "spanTwo": "Ajax seçenekleri \"oluşturma\",\"okuma\",\"güncelleme\",\"silme\" için ayrıca belirtilebilir.",
+    "spanThree": "\"Oluşturma\" isteğini gerçekleştirmek için \"create\" yöntemi çağrılmalıdır.",
+    "spanFour": "\"Okuma\" isteğini gerçekleştirmek için \"read\" yöntemi çağrılmalıdır.",
+    "spanFive": "\"Güncelleme\" isteğini gerçekleştirmek için \"update\" yöntemi çağrılmalıdır.",
+    "spanSix": "\"Silme\" isteğini gerçekleştirmek için \"delete\" yöntemi çağrılmalıdır.",
+    "spanSeven": "Geçerli URL 'i çağır."
   },
-  "validation.ValidationSample":{
-    "exampleOneBlock":"1.Örnek (Sabit Görünümlü)",
-    "exampleTwoOverlay":"2.Örnek (Üstüne gelince açılan)",
-    "requireMessage":"Bu özel bir zorunluluk mesajıdır.",
-    "magicMessage":"\"Lütfen\" sihirli bir harf kullanın.",
-    "exampleOneDesc":"Doğrulama işlevlerini vermek için \"validation\" özelliğini kullanabilirsiniz.\"ValidationComponent\" 'den türetilen tüm bileşenler, her seferinde otomatik olarak çalıştırılır.\"InputValidations\"'daki önceden tanımlanmış doğrulamalarımız ya da amacınızın yeni doğrulama işlevleri kullanılabilir.",
-    "exampleWwoDesc":"Doğrulama mesajlarını görüntülemek için iki tür seçeneği destekliyoruz.Bu, \"validationDisplay\" özelliği tarafından belirlenir.Bu özelliği giriş alanı veya DataForm (bu özelliği tüm girdilere iletir) aracılığıyla sağlayabilirsiniz.",
-    "descOne":"Kaynak kodu doğrulama özelliklerinden de görebileceğiniz gibi doğrulama haritasını alır. Ayrıca, özel mesaj şablonlarıyla parametrik doğrulama işlevlerini destekler.Örneğin, \"minLength\" önceden tanımlanmış bir işlevi olan bir nesnedir (\"InputValidations\"). Bu durumda minimum uzunluğu olan istenen parametreleri iletmek için \"minLength\" kullandık. Ayrıca, \"minLength.message\" ile özel ileti şablonlarını tanımlayabilirsiniz. Doğrulama işlevinizi \"minLength.func\" parametresiyle doğrudan verebilirsiniz, bir örnek için göz atın lütfen :)",
-    "descTwo":"\"InputValidations\", önceden tanımlanmış doğrulamaları ve yeni işlevler için kayıt olan tek sınıftır. Bir doğrulama kaydetmek, işlevleri tekrar kullanmak için gereklidir ve her yerde erişilebilir olmasını sağlar. Ayrıca,\"DataForm\" , verilen \"DataModel\" json'dan doğrulama adlarını aramak için bu \"InputValidations\"'ı kullandığını bilmelisiniz."
+  "ajaxrequest.AjaxRequestSample": {
+    "spanOne": "\"Ajax Request\"'i aşağıdaki gibi tanımlayabilirsiniz.",
+    "spanTwo": "Tüm ayarlar isteğe bağlıdır. Varsayılan değer, bir seçenek olarak ayarlanabilir. Varsayılan seçenekler şunlardır.",
+    "spanThree": "\"call\" metodu istek yapmak için çağırılmalıdır.",
+    "spanFour": "Aşağıdaki gibi çoğaltabilirsin."
   },
-  "model.ModelSapmle":{
-    "paragraphOne":"\"DataGrid\" veya \"DataForm\" ile verilerinizi temsil etmek için modeller kullanabilirsiniz. Bu sayfada bileşenin kullanımı tanımlanacaktır.",
-    "paragraphTwo":"\"json\" bizim referans noktamızdır.Tipler, özellikler, kolon isimleri json içinde tanımlanabilir.Referansınızı belirlemek için bazı ayrılmış alanlara ihtiyacınız olacak.Örneklerimize bakarsanız, bu modellerin bir json dosyası olarak tanımlandığını ve \"içe aktarma\" yoluyla yüklendiğini görebilirsiniz.",
-    "typesStrong":"Tipler",
-    "paragraphThree":"Model, aşağıdaki tabloda listelenen türleri desteklemektedir.",
-    "type":"Tip",
-    "component":"Bileşen",
-    "exampleOne":"Örnek 1",
-    "exampleParagraph":"Aşağıda örnek bir model bulabilirsiniz.",
-    "exampleDesc":"Temelde görmek istediğiniz alanların bir dizisidir. \"type\"  hangi bileşen kullanılacağını tanımlamak için gereklidir..\"name\",\"label\",\"validations\"... gibi diğer alanlar girdi bileşen özellikleridir."
+  "validation.ValidationSample": {
+    "exampleOneBlock": "1.Örnek (Sabit Görünümlü)",
+    "exampleTwoOverlay": "2.Örnek (Üstüne gelince açılan)",
+    "requireMessage": "Bu özel bir zorunluluk mesajıdır.",
+    "magicMessage": "\"Lütfen\" sihirli bir harf kullanın.",
+    "exampleOneDesc": "Doğrulama işlevlerini vermek için \"validation\" özelliğini kullanabilirsiniz.\"ValidationComponent\" 'den türetilen tüm bileşenler, her seferinde otomatik olarak çalıştırılır.\"InputValidations\"'daki önceden tanımlanmış doğrulamalarımız ya da amacınızın yeni doğrulama işlevleri kullanılabilir.",
+    "exampleWwoDesc": "Doğrulama mesajlarını görüntülemek için iki tür seçeneği destekliyoruz.Bu, \"validationDisplay\" özelliği tarafından belirlenir.Bu özelliği giriş alanı veya DataForm (bu özelliği tüm girdilere iletir) aracılığıyla sağlayabilirsiniz.",
+    "descOne": "Kaynak kodu doğrulama özelliklerinden de görebileceğiniz gibi doğrulama haritasını alır. Ayrıca, özel mesaj şablonlarıyla parametrik doğrulama işlevlerini destekler.Örneğin, \"minLength\" önceden tanımlanmış bir işlevi olan bir nesnedir (\"InputValidations\"). Bu durumda minimum uzunluğu olan istenen parametreleri iletmek için \"minLength\" kullandık. Ayrıca, \"minLength.message\" ile özel ileti şablonlarını tanımlayabilirsiniz. Doğrulama işlevinizi \"minLength.func\" parametresiyle doğrudan verebilirsiniz, bir örnek için göz atın lütfen :)",
+    "descTwo": "\"InputValidations\", önceden tanımlanmış doğrulamaları ve yeni işlevler için kayıt olan tek sınıftır. Bir doğrulama kaydetmek, işlevleri tekrar kullanmak için gereklidir ve her yerde erişilebilir olmasını sağlar. Ayrıca,\"DataForm\" , verilen \"DataModel\" json'dan doğrulama adlarını aramak için bu \"InputValidations\"'ı kullandığını bilmelisiniz."
+  },
+  "model.ModelSapmle": {
+    "paragraphOne": "\"DataGrid\" veya \"DataForm\" ile verilerinizi temsil etmek için modeller kullanabilirsiniz. Bu sayfada bileşenin kullanımı tanımlanacaktır.",
+    "paragraphTwo": "\"json\" bizim referans noktamızdır.Tipler, özellikler, kolon isimleri json içinde tanımlanabilir.Referansınızı belirlemek için bazı ayrılmış alanlara ihtiyacınız olacak.Örneklerimize bakarsanız, bu modellerin bir json dosyası olarak tanımlandığını ve \"içe aktarma\" yoluyla yüklendiğini görebilirsiniz.",
+    "typesStrong": "Tipler",
+    "paragraphThree": "Model, aşağıdaki tabloda listelenen türleri desteklemektedir.",
+    "type": "Tip",
+    "component": "Bileşen",
+    "exampleOne": "Örnek 1",
+    "exampleParagraph": "Aşağıda örnek bir model bulabilirsiniz.",
+    "exampleDesc": "Temelde görmek istediğiniz alanların bir dizisidir. \"type\"  hangi bileşen kullanılacağını tanımlamak için gereklidir..\"name\",\"label\",\"validations\"... gibi diğer alanlar girdi bileşen özellikleridir."
   },
   "docs.DocList": {
-    "validationDesc":"Doğrulama, doğrudan veya DataForm modeli ile kullanılabilen yerleşik bir yardımcı yapıdır",
-    "modelDesc":"Modeller, DataGrid ve Dataform tarafından kullanılan bir veri tanımlama mekanizmasıdır.",
-    "ajaxDesc":"Bir AJAX isteği yapın. (Evet, hepsi bu kadar :) )",
-    "remoteEndPointDesc":"API'leri tek bir çatı altında AJAX istekleri ile kolayca arayın. Basit yapılandırma ve kullanım.",
-    "storeDesc":"Store, kaynakları yönetmenin en kolay yoludur (JSON Veri). Veri manipülasyonu için gerekli işlemleri destekler. Her zaman daha fazlasını elde etmek için uzatabilirsiniz.",
-    "inputAddOnDesc":"Girdilerinize ek bileşenler (simgeler, metinler vb.) Ekleme.",
-    "i18nDesc":"Birden fazla dil desteği ekleme",
-    "toastDesc":"Geliştiricinin uyarı mesajlarını kolay ve standart bir şekilde göstermesine yardımcı olur.",
-    "onChangeDesc":"Bu sayfada girdi bileşenlerinin onChange yönteminin ayrıntıları açıklanacaktır"
+    "validationDesc": "Doğrulama, doğrudan veya DataForm modeli ile kullanılabilen yerleşik bir yardımcı yapıdır",
+    "modelDesc": "Modeller, DataGrid ve Dataform tarafından kullanılan bir veri tanımlama mekanizmasıdır.",
+    "ajaxDesc": "Bir AJAX isteği yapın. (Evet, hepsi bu kadar :) )",
+    "remoteEndPointDesc": "API'leri tek bir çatı altında AJAX istekleri ile kolayca arayın. Basit yapılandırma ve kullanım.",
+    "storeDesc": "Store, kaynakları yönetmenin en kolay yoludur (JSON Veri). Veri manipülasyonu için gerekli işlemleri destekler. Her zaman daha fazlasını elde etmek için uzatabilirsiniz.",
+    "inputAddOnDesc": "Girdilerinize ek bileşenler (simgeler, metinler vb.) Ekleme.",
+    "i18nDesc": "Birden fazla dil desteği ekleme",
+    "toastDesc": "Geliştiricinin uyarı mesajlarını kolay ve standart bir şekilde göstermesine yardımcı olur.",
+    "onChangeDesc": "Bu sayfada girdi bileşenlerinin onChange yönteminin ayrıntıları açıklanacaktır"
   },
   "docs.Docs": {
-    "title":"Dökümanlar",
-    "header":"Burada bileşenlerin dökümanlarını bulabilirsiniz.",
-    "search":"Ara"
+    "title": "Dökümanlar",
+    "header": "Burada bileşenlerin dökümanlarını bulabilirsiniz.",
+    "search": "Ara"
   },
   "components.ComponentList": {
     "textInputDesc": " formdan veri almak için varsayılan girdi alanıdır",
@@ -122,28 +137,27 @@
     "radarChartDesc": " bir radar grafiği, çok eğrili veriyi, aynı poinenden başlayarak eksenler üzerinde temsil edilen üç veya daha fazla nicel değişkenin iki boyutlu bir grafiği biçiminde görüntülemenin grafiksel bir bileşendir.",
     "radialBarChartDesc": " grafik bileşenidir.",
     "scatterChartDesc": " bir dağılım grafiği (dağılım grafiği, dağılım grafiği, dağılım grafiği veya dağılım diyagramı olarak da adlandırılır), bir veri kümesi için genellikle iki değişken için değerleri görüntülemek için Kartezyen koordinatları kullanan bir arsa veya matematiksel bileşendir."
-
   },
   "components.Components": {
     "title": "Bileşenler",
     "description": "Burada bileşenlerin örneklerini ve kullanımlarını bulabilirsiniz",
-    "search":"Ara",
-    "complex":"Karmaşık",
-    "inputs":"Girdiler",
-    "charts":"Şekiller"
+    "search": "Ara",
+    "complex": "Karmaşık",
+    "inputs": "Girdiler",
+    "charts": "Şekiller"
   },
   "components.Renderer": {
     "example": "Örnekler",
-    "propsBlockHeader":"Aldığı parametreler",
-    "methodBlockHeader":"Metotları",
-    "propsTableFieldOne":"Adı",
-    "propsTableFieldTwo":"Tipi",
-    "propsTableFieldThree":"Varsayılan",
-    "propsTableFieldFour":"Zorunluluk Durumu",
-    "propsTableFieldFive":"Açıklaması",
-    "methodsTableFieldOne":"Adı",
-    "methodsTableFieldTwo":"Döndüğü Değer",
-    "methodsTableFieldThree":"Açıklaması"
+    "propsBlockHeader": "Aldığı parametreler",
+    "methodBlockHeader": "Metotları",
+    "propsTableFieldOne": "Adı",
+    "propsTableFieldTwo": "Tipi",
+    "propsTableFieldThree": "Varsayılan",
+    "propsTableFieldFour": "Zorunluluk Durumu",
+    "propsTableFieldFive": "Açıklaması",
+    "methodsTableFieldOne": "Adı",
+    "methodsTableFieldTwo": "Döndüğü Değer",
+    "methodsTableFieldThree": "Açıklaması"
   },
   "datagrid.DataGridSample": {
     "gridOne": "DataGrid (Standart işlem araçları)",
