@@ -101,6 +101,14 @@ class ComponentList {
         });
 
         components.inputs.push({
+            header: "TimePicker",
+            desc: "is the input field for collecting time data.",
+            // json: require("./jsons/inputs/TimePicker"),
+            sample: require("./samples/inputs/TimePickerSample"),
+            code: require("./samples/inputs/TimePickerSample.txt")
+        });
+
+        components.inputs.push({
             header: "HtmlEditor",
             desc: "is the input field for collecting html (rich text) data.",
             json: require("./jsons/inputs/htmleditor/HtmlEditor"),

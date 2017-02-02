@@ -1,0 +1,74 @@
+.time-picker {
+    border: 1px solid #eeeeee;
+    min-height: 300px;
+}
+
+.time-picker-label {
+    width: 100%;
+    padding: 5px 0;
+    color: #2C3E50;
+    text-align: center;
+}
+
+.time-picker-label > * {
+    padding: 4px;
+    background-color: #d4d8dc;
+    transition: .3s;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.time-picker-label > *:nth-child(2n+1):hover {
+    background-color: #959ea7;
+    color: white;
+}
+
+.time-picker svg {
+}
+
+.time-zone {
+    fill: #2C3E50;
+    stroke: #2C3E50;
+    stroke-width: 1px;
+    transition: .3s;
+    cursor: pointer;
+    r: 14;
+}
+
+.time-zone:hover {
+    stroke: #ECF0F1;
+    r: 15;
+}
+
+.time-zone-selected {
+    fill: #ECF0F1;
+    stroke: #BDC3C7;
+    stroke-width: 1px;
+    transition: .3s;
+    cursor: pointer;
+    r: 14;
+}
+
+.time-zone-selected:hover {
+    r: 15;
+}
+
+.time-zone-text {
+    pointer-events: none;
+    cursor: pointer;
+    stroke: white;
+    font-size: 14px;
+}
+
+.time-zone-text-selected {
+    pointer-events: none;
+    cursor: pointer;
+    stroke: #2C3E50;
+    font-size: 14px;
+
+}
+
+.time-stick {
+    transition: .3s;
+    stroke: #ccc;
+}
