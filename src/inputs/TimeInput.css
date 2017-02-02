@@ -1,0 +1,75 @@
+#time-popover > .popover-content {
+    padding: 0px !important;
+    border: none;
+}
+
+#time-popover > .popover {
+    padding: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px -1px 20px 1px rgba(0, 0, 0, 0.12);
+}
+
+.timeArea {
+    color: black;
+    font-weight: 500;
+}
+
+.timeZone {
+    float: left;
+    max-height: 170px;
+    width: 56px;
+    box-sizing: content-box;
+}
+
+.timeList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 170px;
+    height: 170px;
+    overflow-y: hidden;
+    border-top: 1px solid #ccc;
+}
+
+.timeList:hover {
+    overflow-y: auto;
+}
+
+.timeListBorder {
+    border-left: 1px solid #ccc;
+}
+
+.timeListLi {
+    padding-left: 12px;
+    line-height: 24px;
+}
+
+.timeListLi:hover {
+    background-color: #9af0ff;
+    cursor: pointer;
+}
+
+.timeListLi-disabled {
+    padding-left: 12px;
+    line-height: 24px;
+    cursor: no-drop;
+    opacity: 0.4;
+}
+
+.timeListLi-selected {
+    padding: 0 0 0 12px;
+    margin: 0;
+    line-height: 24px;
+    background-color: #9af0ff;
+}
+
+.showFullTime {
+    padding: 10px;
+    margin: -8px;
+    font-size: x-large;
+    color: #008ca5;
+    text-align: center;
+    min-height: 56px;
+}

@@ -62,6 +62,12 @@ class ComponentManager {
                     return value;
                 }
             },
+            time: {
+                component: Input.TimeInput,
+                displayAsText: (field: Object, value: string): Object => {
+                    return value;
+                }
+            },
             radio: {
                 component: Input.RadioInput,
                 displayAsText: (field: Object, value: string): Object => {

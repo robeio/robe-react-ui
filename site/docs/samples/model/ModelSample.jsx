@@ -39,6 +39,7 @@ export default class ModelSample extends ShallowComponent {
                         <tr><td>number</td><td>NumericInput</td></tr>
                         <tr><td>decimal</td><td>DecimalInput</td></tr>
                         <tr><td>date</td><td>DateInput</td></tr>
+                        <tr><td>time</td><td>TimeInput</td></tr>
                         <tr><td>password</td><td>PasswordInput</td></tr>
                         <tr><td>money</td><td>MoneyInput</td></tr>
                         <tr><td>radio</td><td>RadioInput</td></tr>

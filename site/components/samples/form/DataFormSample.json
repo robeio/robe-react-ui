@@ -62,6 +62,14 @@
     }
   },
   {
+    "label": "Time Input",
+    "name": "clock",
+    "type": "time",
+    "validations": {
+      "required": true
+    }
+  },
+  {
     "label": "Radio Input",
     "name": "gender",
     "type": "radio",

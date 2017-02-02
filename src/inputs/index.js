@@ -1,6 +1,7 @@
 export { default as BaseInput } from "./BaseInput";
 export { default as TextInput } from "./TextInput";
 export { default as TextArea } from "./TextArea";
+export { default as TimeInput } from "./TimeInput";
 export { default as MoneyInput } from "./MoneyInput";
 export { default as CheckInput } from "./CheckInput";
 export { default as RadioInput } from "./RadioInput";
