@@ -1,17 +1,56 @@
 {
-  "site.index":{
-    "components":"Components",
-    "docs":"Docs",
-    "samples":"Samples",
-    "about":"About",
-    "languageTitle":"Language"
+  "site.Welcome": {
+    "headerText":"UI components built on top of",
+    "welcome":"Welcome",
+    "welcomeText":" Burası \"robe-react-ui\"  dökümantasyon sayfasıdır.Burada Örnek kodları, JSDocs ve proje ile ilgili genel bilgileri içeren bileşenler bulabilirsiniz.",
+    "dataGrid":"DataGrid with Model support",
+    "dataGridText":" Models with dynamic validation support, makes it very easy to develop screens for CRUD operations and more.Filters, sorting, form generation from models and more.",
+    "standartUsage":"Standardized usage",
+    "standartUsageText":"It is important to provide a complete and easy to learn component set.Harmonic usage of different components wrapped together with a single naming and one way of usage.",
+    "readyForComplexNeeds":"Ready for complex needs",
+    "readyForComplexNeedstext":" We develop real-life projects with this library, so we add components and samples continuously.Complex task will be easier to execute with samples from real applications.",
+    "bootstrapSupport":"Bootstrap Support",
+    "bootstrapSupportText":" We support bootstrap components by wrapping",
+    "chartingSupport":"Charting Support",
+    "chartingSupportText":"We support Area, Bar, Line, Pie, Radar and another chart components by wrapping ",
+    "footer":"This project is at beta state, may contain bugs."
+
   },
   "sampleprojects.SampleProjects":{
     "title":"Samples",
     "header":"Here is the list of sample appications developed with robe-react-ui."
   },
+  "inputs.InputSample": {
+    "descOne":" First of all \"Why a document like this ?\" because we have 3 important things to explain about \"onChange\".",
+    "listItemOne":"\"name\" field of the event",
+    "listItemTwo":"\"value\" field of the event",
+    "listItemThree":"\"parsedValue\" field of the event",
+    "descTwo":"This is a field setted for performance in mind. Every input field sets \"name\" prop (from component props) to \"onChange\" events. \"DataForm\" does this automatically by using \"name\" field of the model json.",
+    "descSubOne":"If developer wants a single change method, he/she should bind the method to all input fields in constructor/render in order to identify the source of the change event.",
+    "descSubTwo":"As you see \"this.onChange.bind(undefined, \"TextInput1\")\" brings a runtime overhead. This could also be done at \"constructor\" it is better but not enough",
+    "descSubThree":" So, by assigning \"name\" prop we can write the best solution. All written input fields will forward this property to the event. It will be accessible via \"e.target.name\".",
+    "descThree":"This field always carrries the string representation of the inputs value. That's why we usually get the value by",
+    "tableTitle":"For a quick example please take a look at following table.",
+    "tableHeaderOne":"Component",
+    "tableHeaderTwo":"value",
+    "tableHeaderThree":"parsedValue"
+  },
+  "toast.ToastSample": {
+    "topRight": "Top and Right",
+    "topLeft": "Top and Left",
+    "bottomRight": "Bottom and Right",
+    "bottomLeft": "Bottom and Left",
+    "paragraph":"\"Toast\" have success,info,warning and error functions.",
+    "paragraphTwo":"Also you can configure maximum visible notifications count. ",
+    "numericLabel":"Max Visible Count ( Default is max safe integer )",
+    "radioLabel":"Positions",
+    "success":"Success",
+    "info":"Info",
+    "warning":"Warning",
+    "error":"Error"
+  },
   "i18n.I18n":{
-    "mainDesc":" Robe projects supports \"i18n\" by a simple api. This page will describe how to use it and give a simple sample.You can translate default texts from the library or define your own texts.First of all create an i18n file. An \"i18n\"file is a basic \"json\"file with the correct keys.These keys will override the default texts or create a new entry. There are \"2\"<strong></strong> types of usage",
+    "mainDesc":" Robe projects supports \"i18n\" by a simple api. This page will describe how to use it and give a simple sample.You can translate default texts from the library or define your own texts.First of all create an i18n file. An \"i18n\"file is a basic \"json\"file with the correct keys.These keys will override the default texts or create a new entry. There are \"2\" types of usage",
     "headerOne":"1.\"robe-react-commons/lib/application/Application\"",
     "descOne":"This is the core usage of the api. So after loading our i18n file to the \"Application\" it will be usable.From now on you can acces all your texts with \"Application.i18n(<Class>,<code>...)\".This will give you a string.If you are using i18n at the defaultProps of a class you should always give \"Class\" and \"codes\" must have same structure and naming with the defaultProps",
     "descOnePlus":"To use parameterized texts you can define your texts like  \"${minValue}\" and then it will be replacable by  \"es6-template-strings\" library.",

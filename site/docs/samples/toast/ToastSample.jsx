@@ -1,5 +1,5 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {Application, ShallowComponent} from "robe-react-commons";
 import Toast from "robe-react-ui/lib/toast/Toast";
 import {Button, ButtonToolbar, Checkbox} from "react-bootstrap";
 import RadioInput from "robe-react-ui/lib/inputs/RadioInput";
@@ -8,32 +8,13 @@ import Highlight from "react-highlight";
 import Snippet1 from "./Snippet1.txt";
 import Snippet2 from "./Snippet2.txt";
 
-const positions = [
-    {
-        key: "top-right",
-        value: "Top and Right"
-    },
-    {
-        key: "top-left",
-        value: "Top and Left"
-    },
-    {
-        key: "bottom-right",
-        value: "Bottom and Right"
-    },
-    {
-        key: "bottom-left",
-        value: "Bottom and Left"
-    }
-];
-
 export default class ToastSample extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
-            position: Toast.getPosition(),
-            numMaxVisible: Toast.getNumMaxVisible()
+            position: "top-right",
+            numMaxVisible: 5
         }
     }
 
@@ -66,51 +47,68 @@ export default class ToastSample extends ShallowComponent {
                 Toast.configuration({position: value});
                 break;
             case "numMaxVisible":
-                Toast.configuration({numMaxVisible: value});
+                Toast.configuration({maxVisible: value});
                 break;
             default:
                 throw new Error("Unknown Message");
         }
     }
 
-    render():Object {
+    radioInput = null;
+
+    render(): Object {
         return (
             <div>
                 <RadioInput
-                    label="Positions"
+                    label={Application.i18n(ToastSample,"toast.ToastSample","radioLabel")}
                     name="position"
-                    items={positions}
+                    items={[
+                            {
+                                key: "top-right",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","topRight")
+                            },
+                            {
+                                key: "top-left",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","topLeft")
+                            },
+                            {
+                                key: "bottom-right",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomRight")
+                            },
+                            {
+                                key: "bottom-left",
+                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomLeft")
+                            }
+                        ]}
                     value={this.state.position}
                     textField="value"
                     valueField="key"
                     onChange={this.__handleChange}
                 />
 
-                <p><code>Toast</code> have success,info,warning and error functions.</p>
+                <p>{Application.i18n(ToastSample, "toast.ToastSample", "radioLabel")}</p>
                 <Highlight className="javascript">{Snippet1}</Highlight>
                 <ButtonToolbar>
-                    <Button bsStyle="success" onClick={this.toastMessage("success")}>Success</Button>
-                    <Button bsStyle="info" onClick={this.toastMessage("info")}>Info</Button>
-                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>Warning</Button>
-                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
+                    <Button bsStyle="success" onClick={this.toastMessage("success")}>{Application.i18n(ToastSample, "toast.ToastSample", "success")}</Button>
+                    <Button bsStyle="info" onClick={this.toastMessage("info")}>{Application.i18n(ToastSample, "toast.ToastSample", "info")}</Button>
+                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>{Application.i18n(ToastSample, "toast.ToastSample", "warning")}</Button>
+                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>{Application.i18n(ToastSample, "toast.ToastSample", "error")}</Button>
                 </ButtonToolbar>
                 <br />
                 <br />
-                <p>Also you can configure maximum visible notifications count. </p>
+                <p>{Application.i18n(ToastSample, "toast.ToastSample", "paragraphTwo")}</p>
                 <Highlight className="javascript">{Snippet2}</Highlight>
                 <NumericInput
-                    label={"Max Visible Count ( Default is max safe integer )"}
+                    label={Application.i18n(ToastSample,"toast.ToastSample","numericLabel")}
                     name="numMaxVisible"
                     value={this.state.numMaxVisible}
-                    thousandSeparator=","
-                    decimalSeparator="."
                     onChange={this.__handleChange}
                 />
                 <ButtonToolbar>
-                    <Button bsStyle="success" onClick={this.toastMessage("success")}>Success</Button>
-                    <Button bsStyle="info" onClick={this.toastMessage("info")}>Info</Button>
-                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>Warning</Button>
-                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>Error</Button>
+                    <Button bsStyle="success" onClick={this.toastMessage("success")}>{Application.i18n(ToastSample, "toast.ToastSample", "success")}</Button>
+                    <Button bsStyle="info" onClick={this.toastMessage("info")}>{Application.i18n(ToastSample, "toast.ToastSample", "info")}</Button>
+                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>{Application.i18n(ToastSample, "toast.ToastSample", "warning")}</Button>
+                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>{Application.i18n(ToastSample, "toast.ToastSample", "error")}</Button>
                 </ButtonToolbar>
                 <br />
             </div>
@@ -118,11 +116,12 @@ export default class ToastSample extends ShallowComponent {
         );
     }
 
-    __handleChange(e:Object) {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;
         this.toastConfiguration(e.target.name, value);
         this.setState(state);
     }
+
 }

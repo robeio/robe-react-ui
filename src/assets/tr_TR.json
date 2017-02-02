@@ -1,14 +1,53 @@
 {
-  "site.index": {
-    "components": "Komponentler",
-    "docs": "Dökümanlar",
-    "samples": "Örnekler",
-    "about": "Hakkımızda",
-    "languageTitle": "Dil"
+  "site.Welcome": {
+    "headerText":"Arayüz bileşenleri ",
+    "welcome":"Hoşgeldiniz",
+    "welcomeText":" Burası \"robe-react-ui\"  dökümantasyon sayfasıdır.Burada Örnek kodları, JSDocs ve proje ile ilgili genel bilgileri içeren bileşenler bulabilirsiniz.",
+    "dataGrid":"Model desteği ile DataGrid",
+    "dataGridText":"Dinamik doğrulama desteği olan modeller, CRUD işlemleri ve daha fazlası için ekranlar geliştirmeyi kolaylaştırır. Filtreler, sıralama, modellerden form üretimi ve daha fazlası.",
+    "standartUsage":"Standart Kullanım",
+    "standartUsageText":"Öğrenmek için eksiksiz ve öğrenmesi kolay bir bileşen seti sağlamak önemlidir. Farklı bileşenlerin harmonik kullanımı, tek bir adlandırma ve bir kullanım şekli ile birlikte sarılır.",
+    "readyForComplexNeeds":"Karmaşık ihtiyaçlara hazır",
+    "readyForComplexNeedstext":"Bu kütüphaneyle gerçek hayatta projeler geliştiriyoruz, bu yüzden bileşenleri ve örnekleri sürekli olarak ekliyoruz. Kompleks görev, gerçek uygulamalardan örnekler ile daha kolay yürütülecektir.",
+    "bootstrapSupport":"Bootstrap desteği",
+    "bootstrapSupportText":" Biz bootstrap bileşenlerine destek veriyoruz",
+    "chartingSupport":"Grafik Destek",
+    "chartingSupportText":"Alan, Çubuk, Çizgi, Pasta, Radar ve başka bir grafik bileşenlerini sararak destekliyoruz",
+    "footer":"Bu proje beta durumdadır, hata içerebilir."
+
   },
   "sampleprojects.SampleProjects": {
     "title": "Örnekler",
     "header": "Burası robe-react-ui ile geliştirilen örnek uygulamaların listesi."
+  },
+  "inputs.InputSample": {
+    "descOne":" Her şeyden önce \"Neden bu gibi bir belge?\", Çünkü \"onChange \" hakkında açıklanması gereken 3 önemli şey var.",
+    "listItemOne":"\"name\" geri dönüş olayının bir alanıdır.",
+    "listItemTwo":"\"value\" geri dönüş olayının bir alanıdır.",
+    "listItemThree":"\"parsedValue\" geri dönüş olayının bir alanıdır.",
+    "descTwo":"Bu, performans için akılda tutulması gereken bir alan. Her girdi alanı, \"name \" özelliğini  \"onChange \" olaylarına ayarlar. \"DataForm \" bunu otomatik olarak json modelinin \"name \" alanını kullanarak yapar.",
+    "descSubOne":"Geliştirici tek bir değişim yöntemi istiyorsa, değişme olayının kaynağını tanımlamak için yöntemi constructor/render 'da tüm giriş alanlarına bağlamalıdır.",
+    "descSubTwo":" \"this.onChange.bind (undefined, \" TextInput1 \") bir çalışma zamanı yükü getiriyor. Bu ayrıca \"constructor \" da yapılabilir, daha iyi olur, ancak yeterli değildir.",
+    "descSubThree":"Böylece, \"name \" özelliğini atayarak en iyi çözümü yazabiliriz. Tüm yazılı girdi alanları, bu özelliği olaya iletir. \"e.target.name \" yoluyla erişilebilir olacak.",
+    "descThree":"Bu alan her zaman girdi değerinin dize gösterimini taşır. Bu yüzden genellikle değeri şu şekilde alırız;",
+    "tableTitle":"Hızlı bir örnek için lütfen aşağıdaki tabloya göz atın.",
+    "tableHeaderOne":"Bileşen",
+    "tableHeaderTwo":"Değer",
+    "tableHeaderThree":"Ayrıştırılmış Değer"
+  },
+  "toast.ToastSample": {
+    "topRight": "Sağ üst",
+    "topLeft": "Sol üst",
+    "bottomRight": "Sağ alt",
+    "bottomLeft": "Sol alt",
+    "paragraph":"\"Toast\" başarılı, bilgi, uyarı ve hata işlevlerine göre uyarı özelliklerine sahiptir.",
+    "paragraphTwo":"Ayrıca, maksimum görünür bildirim sayısını yapılandırabilirsiniz.",
+    "numericLabel":"Maks Görülebilir Sayısı (Varsayılan değer, maksimum tam sayıdır)",
+    "radioLabel":"Pozisyonlar",
+    "success":"Başarılı",
+    "info":"Bilgi",
+    "warning":"Uyarı",
+    "error":"Hata"
   },
   "i18n.I18n": {
     "mainDesc": " Robe projeleri, basit bir api olan \"i18n\" yi destekler. Bu sayfada bunun nasıl kullanılacağı ve basit bir örnek ile açıklanacaktır.Varsayılan metinleri kütüphaneden çevirebilir veya kendi metinlerinizi tanımlayabilirsiniz.",

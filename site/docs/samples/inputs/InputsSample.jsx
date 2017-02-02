@@ -4,6 +4,7 @@ import {
     Table
 } from "react-bootstrap";
 import {
+    Application,
     ShallowComponent
 } from "robe-react-commons";
 import Highlight from "react-highlight";
@@ -16,38 +17,38 @@ export default class InputSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                First of all "Why a document like this ?" because we have 3 important things to explain about <code>onChange</code>.
+                {Application.i18n(InputSample,"inputs.InputSample","descOne")}
                 <ul>
-                    <li><strong>name</strong> field of the event</li>
-                    <li><strong>value</strong> field of the event</li>
-                    <li><strong>parsedValue</strong> field of the event</li>
+                    <li>{Application.i18n(InputSample,"inputs.InputSample","listItemOne")}</li>
+                    <li>{Application.i18n(InputSample,"inputs.InputSample","listItemTwo")}</li>
+                    <li>{Application.i18n(InputSample,"inputs.InputSample","listItemThree")}</li>
                 </ul>
                 <p>
                     <h4>name</h4>
-                    This is a field setted for performance in mind. Every input field sets <code>name</code> prop (from component props) to <code>onChange</code> events. <code>DataForm</code> does this automatically by using <code>name</code> field of the model json.
+                    {Application.i18n(InputSample,"inputs.InputSample","descTwo")}
                     <p>
-                        <Well>If developer wants a single change method, he/she should bind the method to all input fields in constructor/render in order to identify the source of the change event.</Well>
+                        <Well>{Application.i18n(InputSample,"inputs.InputSample","descSubOne")}</Well>
                         <Highlight className="javascript">{bindUsage}</Highlight>
-                        <Well>As you see <code>this.onChange.bind(undefined, "TextInput1")</code> brings a runtime overhead. This could also be done at <code>constructor</code> it is better but not enough</Well>
+                        <Well>{Application.i18n(InputSample,"inputs.InputSample","descSubTwo")}</Well>
                         <Highlight className="javascript">{constructorUsage}</Highlight>
                     </p>
 
                     <Well>
-                        So, by assigning <code>name</code> prop we can write the best solution. All written input fields will forward this property to the event. It will be accessible via <code>e.target.name</code>.
+                        {Application.i18n(InputSample,"inputs.InputSample","descSubThree")}
                     </Well>
                     <Highlight className="javascript">{nameUsage}</Highlight>
                 </p>
                 <p>
                     <h4>value & parsedValue</h4>
-                    This field always carrries the string representation of the inputs value. That's why we usually get the value by
+                    {Application.i18n(InputSample,"inputs.InputSample","descThree")}
                     <p><code>let value = e.target.parsedValue || e.target.value;</code></p>
-                    For a quick example please take a look at following table.
+                    {Application.i18n(InputSample,"inputs.InputSample","tableTitle")}
                     <Table>
                         <thead>
                             <tr>
-                                <th>Component</th>
-                                <th>value</th>
-                                <th>parsedValue</th>
+                                <th>{Application.i18n(InputSample,"inputs.InputSample","tableHeaderOne")}</th>
+                                <th>{Application.i18n(InputSample,"inputs.InputSample","tableHeaderTwo")}</th>
+                                <th>{Application.i18n(InputSample,"inputs.InputSample","tableHeaderThree")}</th>
                             </tr>
                         </thead>
                         <tbody>

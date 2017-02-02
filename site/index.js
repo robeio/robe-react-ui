@@ -8,7 +8,7 @@ import {
     Button,
     MenuItem
 } from "react-bootstrap";
-import {ShallowComponent, Application} from "robe-react-commons";
+import {ShallowComponent} from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
@@ -16,14 +16,14 @@ import Welcome from "./Welcome";
 import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
 import {NotFound} from "./error";
-import MyApplication from "robe-react-ui/lib/Application";
+import Application from "robe-react-ui/lib/Application";
 
 
 const app = document.getElementById("app");
 
 
 class Site extends ShallowComponent {
-    constructor(props: Object) {
+    constructor(props:Object) {
         super(props);
         let path = window.location.hash.substring(1).split("/")[0];
         this.state = {
@@ -32,10 +32,10 @@ class Site extends ShallowComponent {
         this.__onSelect = this.__onSelect.bind(this);
     }
 
-    render(): Object {
+    render():Object {
         let activePage = Site.getActivePage(this.state.activeKey);
         return (
-            <MyApplication language={this.state.language}>
+            <Application language={this.state.language}>
                 <Navbar inverse collapseOnSelect>
                     <a href="https://github.com/robeio/robe-react-ui" target="_blank">
                         <img
@@ -61,10 +61,10 @@ class Site extends ShallowComponent {
                             activeKey={this.state.activeKey}
                             onSelect={this.__onSelect}
                         >
-                            <NavItem eventKey="Components">{Application.i18n(Site, "site.index", "components")}</NavItem>
-                            <NavItem eventKey="Docs">{Application.i18n(Site, "site.index", "docs")}</NavItem>
-                            <NavItem eventKey="Samples">{Application.i18n(Site, "site.index", "samples")}</NavItem>
-                            <NavItem eventKey="About">{Application.i18n(Site, "site.index", "about")}</NavItem>
+                            <NavItem eventKey="Components">Components</NavItem>
+                            <NavItem eventKey="Docs">Docs</NavItem>
+                            <NavItem eventKey="Samples">Samples</NavItem>
+                            <NavItem eventKey="About">About</NavItem>
                             <NavItem eventKey="React-Bootstrap">
                                 <img
                                     src="https://react-bootstrap.github.io/assets/logo.png"
@@ -76,7 +76,7 @@ class Site extends ShallowComponent {
                             <NavItem eventKey="Recharts" className="re-charts">
                                 {"<Recharts />"}
                             </NavItem>
-                            <NavDropdown title={Application.i18n(Site, "site.index", "languageTitle")} id="nav-dropdown" style={{ display: "inline" }}>
+                            <NavDropdown title="Language" id="nav-dropdown" style={{ display: "inline" }}>
                                 <MenuItem eventKey="en_US">English</MenuItem>
                                 <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
                             </NavDropdown>
@@ -89,7 +89,7 @@ class Site extends ShallowComponent {
                 >
                     {activePage}
                 </div>
-            </MyApplication>
+            </Application>
         );
     }
 
@@ -97,7 +97,7 @@ class Site extends ShallowComponent {
         this.__onSelect("Welcome");
     }
 
-    __onSelect(key: string) {
+    __onSelect(key:string) {
         Progress.start();
         if (key === "React-Bootstrap") {
             window.open("https://react-bootstrap.github.io/components.html");
@@ -130,7 +130,7 @@ class Site extends ShallowComponent {
         });
     }
 
-    static getActivePage(path: string): Object {
+    static getActivePage(path:string):Object {
         switch (path) {
             case "Components":
                 return <Components />;
@@ -152,10 +152,6 @@ class Site extends ShallowComponent {
 
     componentDidUpdate() {
         Progress.done();
-    }
-
-    componentDidMount() {
-        this.setState({language: undefined});
     }
 }
 
