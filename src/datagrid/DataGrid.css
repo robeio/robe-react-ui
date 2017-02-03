@@ -21,31 +21,34 @@
 .datagrid-header-col {
     text-align: left;
     padding-left: 6px;
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 .datagrid-body-row {
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: solid whitesmoke 1px;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     height: 30px;
     cursor: pointer;
+    transition: .3s;
 }
 
 .datagrid-body-row:hover {
-    background: #cfe6f9 !important;
+    background: #ebf6ff !important;
+    border-bottom: solid #ebf6ff 1px;
 }
 
 .datagrid-body-row-selected {
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: solid whitesmoke 1px;
-    margin-left: 0px;
-    margin-right: 0px;
+    border-bottom: solid #cee8ff 1px;
+    margin-left: 0;
+    margin-right: 0;
     height: 30px;
-    background: #9ed2ff !important;
+    background: #cee8ff !important;
+    transition: .3s;
     cursor: pointer;
     color: black;
 }
@@ -89,4 +92,5 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: top;
+    font-weight: 400;
 }

@@ -73,9 +73,6 @@ class Site extends ShallowComponent {
                                 /> React
                                 Bootstrap
                             </NavItem>
-                            <NavItem eventKey="Recharts" className="re-charts">
-                                {"<Recharts />"}
-                            </NavItem>
                             <NavDropdown title="Language" id="nav-dropdown" style={{ display: "inline" }}>
                                 <MenuItem eventKey="en_US">English</MenuItem>
                                 <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
@@ -101,10 +98,6 @@ class Site extends ShallowComponent {
         Progress.start();
         if (key === "React-Bootstrap") {
             window.open("https://react-bootstrap.github.io/components.html");
-            return;
-        }
-        if (key === "Recharts") {
-            window.open("http://recharts.org/");
             return;
         }
         if (key === "en_US") {

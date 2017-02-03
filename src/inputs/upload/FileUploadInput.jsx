@@ -176,28 +176,29 @@ export default class FileUploadInput extends ValidationComponent {
         let label = (this.props.label === undefined) ? undefined : (
             <ControlLabel> {this.props.label} </ControlLabel>
         );
-        return (
-            <FormGroup hidden={this.props.hidden}>
-                {label}
-                <FormControl
-                    {...attributes}
-                    />
-                <DragDropLayout
-                    ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el) } }
-                    onDrop={this.onDrop}
-                    onClick={this.browse}
-                    >
-                    {this.createToolbar("top")}
-                    <ThumbnailGroup
-                        placeholder={this.props.placeholder}
-                        id={this.__componentId}
+        return super.wrapComponent(
+            (
+                <FormGroup hidden={this.props.hidden}>
+                    {label}
+                    <FormControl
+                        {...attributes}
+                        />
+                    <DragDropLayout
+                        ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el) } }
+                        onDrop={this.onDrop}
+                        onClick={this.browse}
                         >
-                        {this.renderItems(this.state.files)}
-                    </ThumbnailGroup>
-                </DragDropLayout>
-                {this.createToolbar("bottom")}
-            </FormGroup>
-        )
+                        {this.createToolbar("top")}
+                        <ThumbnailGroup
+                            placeholder={this.props.placeholder}
+                            id={this.__componentId}
+                            >
+                            {this.renderItems(this.state.files)}
+                        </ThumbnailGroup>
+                    </DragDropLayout>
+                    {this.createToolbar("bottom")}
+                </FormGroup>
+            ));
     }
 
     createToolbar(position) {
@@ -228,7 +229,8 @@ export default class FileUploadInput extends ValidationComponent {
     }
 
     onFileSelect(e) {
-        const target = e.dataTransfer ? e.dataTransfer : e.target;
+        let target = e.dataTransfer ? e.dataTransfer : e.target;
+        target.name = this.props.name;
         this.onDrop({
             action: "browse",
             target
@@ -241,6 +243,11 @@ export default class FileUploadInput extends ValidationComponent {
         if (!files || files.length === 0) return;
         // Files dropped.
         let droppedFiles = Files.getDroppedFiles(files);
+
+        if (this.props.onChange) {
+            this.props.onChange(e);
+        }
+
         if (this.props.autoUpload) { // if autoUpload true then call upload and break method.
             for (let i = 0; i < droppedFiles.length; i++) {
                 droppedFiles[i].loading = true;
@@ -334,6 +341,16 @@ export default class FileUploadInput extends ValidationComponent {
             isDeleted: true,
             deletedFile: file
         });
+        if (this.props.onChange) {
+            let e = { target: {}};
+            e.target.name = this.props.name;
+            if (this.props.multiple) {
+                e.target.value = this.__value;
+            } else {
+                e.target.value = undefined;
+            }
+            this.props.onChange(e);
+        }
     }
 
     /**

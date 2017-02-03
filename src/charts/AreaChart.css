@@ -1,0 +1,155 @@
+.rb-area-chart {
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.rb-area-chart-svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    display: block;
+    z-index: 1;
+    overflow: hidden;
+
+    -webkit-transform: rotateX(-180deg);
+    -moz-transform: rotateX(-180deg);
+    -o-transform: rotateX(-180deg);
+    -ms-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+
+    -webkit-animation: area-animation 2s ease;;
+    -moz-animation: area-animation 2s ease;;
+    -o-animation: area-animation 2s ease;;
+    -ms-animation: area-animation 2s ease;;
+    animation: area-animation 2s ease;
+}
+
+@keyframes area-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-ms-keyframes area-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-o-keyframes area-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-moz-keyframes area-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes area-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.rb-area-chart-svg g {
+    position: relative;
+    float: left;
+    display: flex;
+    height: 100%;
+}
+
+.rb-area-chart-svg g > * {
+    opacity: .7;
+}
+
+.rb-area-chart-axis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    display: block;
+    z-index: 0;
+}
+
+.rb-area-chart-axis > * {
+    position: relative;
+    float: left;
+    display: flex;
+
+}
+
+.rb-area-y-axis {
+    width: 100%;
+    border-top: 1px dotted #dddddd;
+}
+
+.rb-area-y-axis:before {
+    content: attr(id);
+    top: -8px;
+    left: -46px;
+    text-align: right;
+    position: relative;
+    width: 40px;
+    display: block;
+}
+
+.rb-area-x-axis {
+    height: 100%;
+    border-right: 1px solid #dddddd;
+}
+
+.rb-area-x-axis:before {
+    content: attr(data);
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    left: -50%;
+    text-align: center;
+}
+
+.rb-area-x-axis:last-child:after {
+    content: attr(name);
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    right: -50%;
+    text-align: center;
+}
+
+.rb-area-chart .tooltip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 2;
+    border-radius: 2px;
+    visibility: hidden;
+    white-space: pre;
+    padding: 4px;
+    color: white;
+    border: 2px solid #ffffff;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

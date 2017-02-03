@@ -1,5 +1,7 @@
 # Change Log
 
+## 1.1.20 -- Developing...
+
 ## 1.1.19 -- Developing...
 * Code preview for the HtmlEditor.
 * Toast
@@ -10,6 +12,12 @@
 * DataForm 1 field enter reload bug fixed.
 * Added new SelectInput component
 * An error fixed in the name of the prop in the sample code at ReCaptcha.
+* LazyImage added.
+* DateInput bugs fixed
+* FileInput validation fixed.
+* Delay for server requests in search and filtering at DataGrid Component. Search animation added.
+* Countdown component added.
+* Chart components added.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

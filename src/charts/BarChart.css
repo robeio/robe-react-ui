@@ -1,0 +1,128 @@
+.rb-bar-chart {
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.rb-bar-chart-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    -webkit-transform: rotateX(-180deg);
+    -moz-transform: rotateX(-180deg);
+    -o-transform: rotateX(-180deg);
+    -ms-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+}
+
+.rb-bar-chart-svg g {
+    position: relative;
+    float: left;
+    display: flex;
+    height: 100%;
+}
+
+.rb-bar-chart-svg g > * {
+    opacity: .7;
+    transition: all .3s;
+    -webkit-animation: bar-animation 1s ease;
+    -moz-animation: bar-animation 1s ease;
+    -o-animation: bar-animation 1s ease;
+    -ms-animation: bar-animation 1s ease;
+    animation: bar-animation 1s ease;
+}
+
+@keyframes bar-animation {
+    0% {
+        height: 0;
+    }
+}
+
+@-webkit-keyframes bar-animation {
+    0% {
+        height: 0;
+    }
+}
+
+@-moz-keyframes bar-animation {
+    0% {
+        height: 0;
+    }
+}
+
+@-o-keyframes bar-animation {
+    0% {
+        height: 0;
+    }
+}
+
+@-ms-keyframes bar-animation {
+    0% {
+        height: 0;
+    }
+}
+
+.rb-bar-chart-svg g > *:hover {
+    opacity: 1;
+}
+
+.rb-bar-chart-axis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.rb-bar-chart-axis > * {
+    position: relative;
+    float: left;
+    display: flex;
+}
+
+.rb-bar-y-axis {
+    width: 100%;
+    border-top: 1px dotted #dddddd;
+}
+
+.rb-bar-y-axis:before {
+    content: attr(id);
+    top: -8px;
+    left: -46px;
+    text-align: right;
+    position: relative;
+    width: 40px;
+    display: block;
+}
+
+.rb-bar-x-axis {
+    height: 100%;
+    border-right: 1px solid #dddddd;
+}
+
+.rb-bar-x-axis:before {
+    content: attr(name);
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    text-align: center;
+}
+
+.rb-bar-chart .tooltip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 2;
+    border-radius: 2px;
+    visibility: hidden;
+    white-space: pre;
+    padding: 4px;
+    color: white;
+    border: 2px solid #ffffff;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
