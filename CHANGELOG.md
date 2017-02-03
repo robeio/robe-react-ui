@@ -18,6 +18,9 @@
 * Delay for server requests in search and filtering at DataGrid Component. Search animation added.
 * Countdown component added.
 * Chart components added.
+* #54 fixed.
+* #50 fixed.
+* #46 fixed.
 
 ## 1.1.18
 * upgrade robe-react-commons library. 

@@ -168,6 +168,7 @@ export default class DataGrid extends StoreComponent {
     __fields = [];
     __sorts = {};
     __filterComponent;
+    __actionButtonsComponent;
 
     constructor(props: Object) {
         super(props);
@@ -210,18 +211,19 @@ export default class DataGrid extends StoreComponent {
                             visible={this.props.searchable}
                             delay={this.props.delay}
                             placeholder={Application.i18n(DataGrid, "datagrid.DataGrid", "search")}
-                            />
+                        />
                     </Col>
                     <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
                         <ActionButtons
+                            ref={(componet: Object) => { this.__actionButtonsComponent = componet; }}
                             visible={this.props.editable}
                             items={this.__getToolbarConfig()}
-                            />
+                        />
                     </Col>
 
                 </Row>
                 <Filters
-                    ref={(component: Object) => { this.__filterComponent = component; } }
+                    ref={(component: Object) => { this.__filterComponent = component; }}
                     fields={this.__fields}
                     delay={this.props.delay}
                     visiblePopups={this.state.visiblePopups}
@@ -229,7 +231,7 @@ export default class DataGrid extends StoreComponent {
                     idCount={this.getObjectId()}
                     clearButtonText={this.props.filter.clear}
                     clearAllButtonText={this.props.filter.clearAll}
-                    />
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -253,7 +255,7 @@ export default class DataGrid extends StoreComponent {
                         totalCount={this.state.totalCount}
                         emptyText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "empty")}
                         displayText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "display")}
-                        />)
+                    />)
                 }
                 {this.__renderModalConfirm()}
             </Col>
@@ -311,7 +313,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
@@ -349,7 +351,7 @@ export default class DataGrid extends StoreComponent {
                         onSortClick={this.__onSortClick}
                         filter={this.__filterComponent !== undefined ? this.__filterComponent.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
-                        />
+                    />
                 );
             }
         }
@@ -427,7 +429,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                        />);
+                    />);
             }
         }
         return rowsArr;
@@ -440,6 +442,11 @@ export default class DataGrid extends StoreComponent {
     }
 
     __clearSelection() {
+
+        if (this.__actionButtonsComponent) {
+            this.__actionButtonsComponent.setState({ disabled: true });
+        }
+
         if (this.selection !== undefined) {
             this.selection.setState({
                 selected: false
@@ -455,6 +462,11 @@ export default class DataGrid extends StoreComponent {
     }
 
     __onSelection(selection: Object) {
+
+        if (this.__actionButtonsComponent) {
+            this.__actionButtonsComponent.setState({ disabled: false });
+        }
+
         if (this.selection !== undefined) {
             if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
