@@ -112,6 +112,8 @@ narbar = null;
             this.setState({
                 language: undefined
             });
+            Application.loadI18n(require("../src/assets/en_US.json"));
+            this.forceUpdate();
             return;
         }
         if (key === "tr_TR") {
@@ -119,6 +121,8 @@ narbar = null;
             this.setState({
                 language: lang
             });
+            Application.loadI18n(require("../src/assets/tr_TR.json"));
+            this.forceUpdate();
             return;
         }
         window.location.hash = `#${key}`;
