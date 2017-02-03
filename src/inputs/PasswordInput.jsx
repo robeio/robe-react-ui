@@ -1,5 +1,7 @@
 import React from "react";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import { ShallowComponent, Application } from "robe-react-commons";
+import { InputGroup } from "react-bootstrap";
+import zxcvbn from 'zxcvbn';
 import Input from "./BaseInput";
 
 /**
@@ -51,14 +53,24 @@ export default class PasswordInput extends ShallowComponent {
         /**
        * Left Input Addon
        */
-        inputGroupLeft: React.PropTypes.object,
+        inputGroupLeft: React.PropTypes.any,
         /**
         * Right Input Addon
         */
-        inputGroupRight: React.PropTypes.object
+        inputGroupRight: React.PropTypes.any,
+        /**
+        * it specifies that a password strength is hidden or visible
+        */
+        strength: React.PropTypes.bool
     };
 
     innerComponent;
+    strengthMessages;
+
+    constructor(props: Object) {
+        super(props);
+        this.strengthMessages = Application.i18n(PasswordInput, "inputs.PasswordInput", "strength");
+    }
     /**
      * defaultProps
      * @static
@@ -67,6 +79,8 @@ export default class PasswordInput extends ShallowComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
+        strength: false,
+        autoFocus: false,
         value: "",
         validationDisplay: "block"
     };
@@ -76,12 +90,32 @@ export default class PasswordInput extends ShallowComponent {
      * @returns
      */
     render(): Object {
+
+        let {strength, inputGroupRight, autoFocus, ...newProps} = this.props;
+
+        if (strength) {
+            let value = this.props.value;
+            let result = zxcvbn(value);
+            let resultScore = this.strengthMessages[result.score];
+            let inputGroupRightStrength = <InputGroup.Addon key="password-strength-addon">{resultScore}</InputGroup.Addon>;
+
+            if (inputGroupRight) {
+                inputGroupRight = [inputGroupRightStrength,inputGroupRight];
+            } else {
+                inputGroupRight = inputGroupRightStrength;
+            }
+
+            autoFocus = true;
+        }
+
         return (
             <Input
-                {...this.props}
+                {...newProps}
+                autoFocus={autoFocus}
                 onChange={this.__onChange}
                 type="password"
-                ref={(component: Object) => { this.innerComponent = component } }
+                ref={(component: Object) => { this.innerComponent = component }}
+                inputGroupRight={inputGroupRight}
             />
         );
     }

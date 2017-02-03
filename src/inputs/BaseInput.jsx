@@ -44,13 +44,13 @@ export default class BaseInput extends ValidationComponent {
          */
         componentClass: React.PropTypes.string,
         /**
-         * Component class of the BaseInput. (select, textarea)
-         */
-        inputGroupLeft: React.PropTypes.object,
+        * Left Input Addon
+        */
+        inputGroupLeft: React.PropTypes.any,
         /**
-         * Component class of the BaseInput. (select, textarea)
-         */
-        inputGroupRight: React.PropTypes.object,
+        * Right Input Addon
+        */
+        inputGroupRight: React.PropTypes.any,
         /**
          * Disable input
          */
