@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.1.20 -- Developing...
+* Chart and Toast components test rewrited, Charts props updated
+
 ## 1.1.19 -- Developing...
 * Code preview for the HtmlEditor.
 * Toast

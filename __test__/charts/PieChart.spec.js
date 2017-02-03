@@ -1,6 +1,8 @@
-import React from "react";
-import {ShallowComponent} from "robe-react-commons";
-import PieChart from "robe-react-ui/lib/charts/PieChart";
+import React from "react"; // eslint-disable-line
+import chai from "chai";// eslint-disable-line
+import {PieChart as Chart, Pie} from "recharts";
+import {mount} from "enzyme";// eslint-disable-line
+import PieChart from "charts/PieChart";// eslint-disable-line
 
 let data = [
     {
@@ -12,8 +14,7 @@ let data = [
             {
                 value: 1000,
                 label: "A1",
-                key: "01",
-                unit: "ms"
+                key: "01"
             },
             {
                 value: 2000,
@@ -32,8 +33,7 @@ let data = [
             {
                 value: 1000,
                 label: "B1",
-                key: "11",
-                unit: "ms"
+                key: "11"
             },
             {
                 value: 4000,
@@ -44,8 +44,7 @@ let data = [
             {
                 value: 2000,
                 label: "B3",
-                key: "13",
-                unit: "ms"
+                key: "13"
             }
         ]
     },
@@ -83,17 +82,19 @@ let data = [
     }
 ];
 
-
-export default class PieChartSample extends ShallowComponent {
-
-    render():Object {
+describe("charts/PieChart", () => {
+    const getComponent = (props:Object):Object => {
         return (
-            <div>
-                <div className="form-group">
-                    <PieChart size={250} data={data}/>
-                </div>
-            </div>
+            <PieChart {...props} />// eslint-disable-line
         );
-    }
-}
+    };
 
+    it("render", () => {
+        let props = {
+            size: 250,
+            data: data
+        };
+        let wrapper = mount(getComponent(props));
+        chai.assert.equal(wrapper.find(PieChart).length, 1);
+    });
+});

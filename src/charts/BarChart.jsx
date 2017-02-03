@@ -6,17 +6,29 @@ import Legend from "./Legend";
 export default class BarChart extends ShallowComponent {
 
     static propTypes = {
+        /**
+         * Width for chart as px
+         */
         width: React.PropTypes.number,
+        /**
+         * Height for chart as px
+         */
         height: React.PropTypes.number,
+        /**
+         * Data to be plotted on the chart
+         */
         data: React.PropTypes.array,
-        bars: React.PropTypes.array
+        /**
+         * Change to be made for the given data
+         */
+        meta: React.PropTypes.array
     };
 
     static defaultProps = {
         width: 500,
         height: 300,
         data: [],
-        bars: []
+        meta: []
     };
 
     legends = [];
@@ -31,7 +43,7 @@ export default class BarChart extends ShallowComponent {
                 <div className="rb-bar-chart"
                      style={{width:this.props.width,height:this.props.height}}>
                     <svg className="rb-bar-chart-svg">
-                        {this.__renderBars(this.props.data, this.props.bars)}
+                        {this.__renderBars(this.props.data, this.props.meta)}
                     </svg>
                     <div className="tooltip" id="tooltip"></div>
                     <div className="rb-bar-chart-axis">
@@ -46,8 +58,8 @@ export default class BarChart extends ShallowComponent {
         )
     }
 
-    __renderBars(data, bars) {
-        let barsArr = [];
+    __renderBars(data, meta) {
+        let metaArr = [];
         let xAxisWidth = this.__xAxisWidth();
         let sumXAxisWidth = 0;
 
@@ -64,7 +76,7 @@ export default class BarChart extends ShallowComponent {
                 let key = fields[j].key,
                     value = fields[j].value;
 
-                let properties = Arrays.getValueByKey(bars, "dataKey", key);
+                let properties = Arrays.getValueByKey(meta, "dataKey", key);
                 properties = properties === undefined ? {} : properties;
 
                 let tooltip = item.name + "\n" + (properties.name || key) + " : " + value + " " + (properties.unit || "") + "\n";
@@ -89,12 +101,12 @@ export default class BarChart extends ShallowComponent {
 
                 pointX += barWidth;
             }
-            barsArr.push(
+            metaArr.push(
                 <g key={i} id={i}>
                     {itemArr}
                 </g>)
         }
-        return barsArr;
+        return metaArr;
     }
 
 

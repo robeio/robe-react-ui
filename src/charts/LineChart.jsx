@@ -6,17 +6,29 @@ import Legend from "./Legend";
 export default class AreaChart extends ShallowComponent {
 
     static propTypes = {
+        /**
+         * Width for chart as px
+         */
         width: React.PropTypes.number,
+        /**
+         * Height for chart as px
+         */
         height: React.PropTypes.number,
+        /**
+         * Data to be plotted on the chart
+         */
         data: React.PropTypes.array,
-        lines: React.PropTypes.array
+        /**
+         * Change to be made for the given data
+         */
+        meta: React.PropTypes.array
     };
 
     static defaultProps = {
         width: 500,
         height: 300,
         data: [],
-        lines: []
+        meta: []
     };
 
     legends = [];
@@ -30,7 +42,7 @@ export default class AreaChart extends ShallowComponent {
             <div id="line" style={{marginLeft:40}}>
                 <div className="rb-line-chart" style={{width:this.props.width,height:this.props.height}}>
                     <svg className="rb-line-chart-svg">
-                        {this.__renderLines(this.props.data, this.props.lines)}
+                        {this.__renderLines(this.props.data, this.props.meta)}
                     </svg>
                     <div className="tooltip" id="tooltip">Tooltip</div>
                     <div className="rb-line-chart-axis">
@@ -45,8 +57,8 @@ export default class AreaChart extends ShallowComponent {
         )
     }
 
-    __renderLines(data, lines) {
-        let linesArr = [];
+    __renderLines(data, meta) {
+        let metaArr = [];
         let xAxisWidth = this.__xAxisWidth();
         let sumXAxisWidth = 0;
 
@@ -71,7 +83,7 @@ export default class AreaChart extends ShallowComponent {
                     nexValue = nexItem[key];
                 }
 
-                let properties = Arrays.getValueByKey(lines, "dataKey", key);
+                let properties = Arrays.getValueByKey(meta, "dataKey", key);
                 properties = properties === undefined ? {} : properties;
 
                 let tooltip = item.name + "\n" + (properties.name || key) + " : " + value + " " + (properties.unit || "") + "\n",
@@ -108,12 +120,12 @@ export default class AreaChart extends ShallowComponent {
 
             sumXAxisWidth += xAxisWidth;
 
-            linesArr.push(
+            metaArr.push(
                 <g key={i}>
                     {itemArr}
                 </g>)
         }
-        return linesArr;
+        return metaArr;
     }
 
 

@@ -3,16 +3,15 @@ import {ShallowComponent} from "robe-react-commons";
 import BarChart from "robe-react-ui/lib/charts/BarChart";
 
 let data = [
-    {name: "Page A", pb: 4900, pr: 1398, pv: 2210},
-    {name: "Page B", pb: 3000, pr: 1398, pv: 2210},
-    {name: "Page C", pb: 2000, pr: 4500, pv: 2290},
-    {name: "Page D", pb: 2780, pr: 3908, pv: 2000},
+    {name: "A", public: 4000, private: 2400, protected: 2400},
+    {name: "B", public: 3000, private: 1398, protected: 2210},
+    {name: "C", public: 2000, private: 7000, protected: 2290},
+    {name: "D", public: 2780, private: 3908, protected: 2000}
 ];
-
-let bars = [
-    {dataKey: "pb", name: "Public", unit: "piece"},
-    {dataKey: "pr", name: "Protected", unit: "piece"},
-    {dataKey: "pv", name: "Private", unit: "piece"}
+let meta = [
+    {dataKey: "public", name: "Public", unit: "piece"},
+    {dataKey: "private", name: "Protected", unit: "piece"},
+    {dataKey: "protected", name: "Private", unit: "piece"}
 ];
 
 export default class BarChartSample extends ShallowComponent {
@@ -21,7 +20,7 @@ export default class BarChartSample extends ShallowComponent {
         return (
             <div>
                 <div className="form-group">
-                    <BarChart data={data} width={400} height={250} bars={bars}/>
+                    <BarChart data={data} width={400} height={250} meta={meta}/>
                 </div>
             </div>
         );

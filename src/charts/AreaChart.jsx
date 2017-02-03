@@ -6,17 +6,29 @@ import Legend from "./Legend";
 export default class AreaChart extends ShallowComponent {
 
     static propTypes = {
+        /**
+         * Width for chart as px
+         */
         width: React.PropTypes.number,
+        /**
+         * Height for chart as px
+         */
         height: React.PropTypes.number,
+        /**
+         * Data to be plotted on the chart
+         */
         data: React.PropTypes.array,
-        areas: React.PropTypes.array
+        /**
+         * Change to be made for the given data
+         */
+        meta: React.PropTypes.array
     };
 
     static defaultProps = {
         width: 500,
         height: 300,
         data: [],
-        areas: []
+        meta: []
     };
 
     legends = [];
@@ -30,7 +42,7 @@ export default class AreaChart extends ShallowComponent {
             <div style={{marginLeft:40}}>
                 <div className="rb-area-chart" style={{width:this.props.width,height:this.props.height}}>
                     <svg className="rb-area-chart-svg">
-                        {this.__renderAreas(this.props.data, this.props.areas)}
+                        {this.__renderAreas(this.props.data, this.props.meta)}
                     </svg>
                     <div className="tooltip" id="tooltip">Tooltip</div>
                     <div className="rb-area-chart-axis">
@@ -45,8 +57,8 @@ export default class AreaChart extends ShallowComponent {
         )
     }
 
-    __renderAreas(data, areas) {
-        let areasArr = [];
+    __renderAreas(data, meta) {
+        let metaArr = [];
         let xAxisWidth = this.__xAxisWidth();
         let sumXAxisWidth = 0;
 
@@ -71,7 +83,7 @@ export default class AreaChart extends ShallowComponent {
                     nextValue = nexItem[key];
                 }
 
-                let properties = Arrays.getValueByKey(areas, "dataKey", key);
+                let properties = Arrays.getValueByKey(meta, "dataKey", key);
                 properties = properties === undefined ? {} : properties;
                 let fill = properties.fill || this.__randColor(j);
                 this.legends[properties.name || key] = {fill: fill, label: properties.name || key};
@@ -98,12 +110,12 @@ export default class AreaChart extends ShallowComponent {
             }
             sumXAxisWidth += xAxisWidth;
 
-            areasArr.push(
+            metaArr.push(
                 <g key={i}>
                     {itemArr}
                 </g>)
         }
-        return areasArr;
+        return metaArr;
     }
 
 
@@ -139,7 +151,7 @@ export default class AreaChart extends ShallowComponent {
         }
         return axisArr;
     }
-    
+
     __maxYAxis() {
         let data = this.props.data;
         let maxYAxis = 0;
@@ -212,7 +224,9 @@ export default class AreaChart extends ShallowComponent {
         if (index !== undefined) {
             return colors[index % colors.length];
         }
-        return colors[Math.floor(Math.random() * (colors.length - 1))];
+        else {
+            return colors[Math.floor(Math.random() * (colors.length - 1))];
+        }
     }
 
 }
