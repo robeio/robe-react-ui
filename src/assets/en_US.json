@@ -1,12 +1,13 @@
 {
-  "site.index":{
+  "site.main":{
     "components":"Components",
     "docs":"Docs",
     "samples":"Samples",
     "about":"About",
     "languageTitle":"Language",
     "languageItemEnglish":"English",
-    "languageItemTurkish":"Turkish"
+    "languageItemTurkish":"Turkish",
+    "languageItemRussian":"Russian"
   },
   "site.Welcome": {
     "headerText":"UI components built on top of",

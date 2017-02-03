@@ -1,12 +1,13 @@
 {
-  "site.index": {
+  "site.main": {
     "components": "Komponentler",
     "docs": "Dökümanlar",
     "samples": "Örnekler",
     "about": "Hakkımızda",
     "languageTitle": "Dil",
     "languageItemEnglish":"İngilizce",
-    "languageItemTurkish":"Türkçe"
+    "languageItemTurkish":"Türkçe",
+    "languageItemRussian":"Rusça"
   },
   "site.Welcome": {
     "headerText":"Arayüz bileşenleri ",

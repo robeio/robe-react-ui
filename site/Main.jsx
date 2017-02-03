@@ -57,10 +57,10 @@ export default class Main extends ShallowComponent {
                             activeKey={this.state.activeKey}
                             onSelect={this.__onSelect}
                         >
-                            <NavItem eventKey="Components">{Application.i18n(Main, "site.index", "components")}</NavItem>
-                            <NavItem eventKey="Docs">{Application.i18n(Main, "site.index", "docs")}</NavItem>
-                            <NavItem eventKey="Samples">{Application.i18n(Main, "site.index", "samples")}</NavItem>
-                            <NavItem eventKey="About">{Application.i18n(Main, "site.index", "about")}</NavItem>
+                            <NavItem eventKey="Components">{Application.i18n(Main, "site.main", "components")}</NavItem>
+                            <NavItem eventKey="Docs">{Application.i18n(Main, "site.main", "docs")}</NavItem>
+                            <NavItem eventKey="Samples">{Application.i18n(Main, "site.main", "samples")}</NavItem>
+                            <NavItem eventKey="About">{Application.i18n(Main, "site.main", "about")}</NavItem>
                             <NavItem eventKey="React-Bootstrap">
                                 <img
                                     src="https://react-bootstrap.github.io/assets/logo.png"
@@ -72,9 +72,10 @@ export default class Main extends ShallowComponent {
                             <NavItem eventKey="Recharts" className="re-charts">
                                 {"<Recharts />"}
                             </NavItem>
-                            <NavDropdown title={Application.i18n(Main, "site.index", "languageTitle")} id="nav-dropdown" style={{ display: "inline" }}>
-                                <MenuItem eventKey="en_US">{Application.i18n(Main, "site.index", "languageItemEnglish")}</MenuItem>
-                                <MenuItem eventKey="tr_TR">{Application.i18n(Main, "site.index", "languageItemTurkish")}</MenuItem>
+                            <NavDropdown title={Application.i18n(Main, "site.main", "languageTitle")} id="nav-dropdown" style={{ display: "inline" }}>
+                                <MenuItem eventKey="en_US">{Application.i18n(Main, "site.main", "languageItemEnglish")}</MenuItem>
+                                <MenuItem eventKey="tr_TR">{Application.i18n(Main, "site.main", "languageItemTurkish")}</MenuItem>
+                                <MenuItem eventKey="ru_RU">{Application.i18n(Main, "site.main", "languageItemRussian")}</MenuItem>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
@@ -120,6 +121,15 @@ export default class Main extends ShallowComponent {
             this.forceUpdate();
             return;
         }
+        if (key === "ru_RU") {
+            let lang = "./assets/ru_RU.json";
+            if(this.props.changeLanguage){
+                this.props.changeLanguage(lang);
+            }
+            Application.loadI18n(require("../src/assets/ru_RU.json"));
+            this.forceUpdate();
+            return;
+        }
         window.location.hash = `#${key}`;
 
         let element = document.getElementById("activePage");
@@ -151,7 +161,7 @@ export default class Main extends ShallowComponent {
         }
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         Progress.done();
     }
 
