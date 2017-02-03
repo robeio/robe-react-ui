@@ -301,5 +301,28 @@
     "next": "Next",
     "previous": "Previous",
     "complete": "Complete"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "Worst",
+      "1": "Bad",
+      "2": "Weak",
+      "3": "Good",
+      "4": "Strong"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "Days"
+    },
+    "hours": {
+      "label": "Hours"
+    },
+    "minutes": {
+      "label": "Mins"
+    },
+    "seconds": {
+      "label": "Secs"
+    }
   }
 }

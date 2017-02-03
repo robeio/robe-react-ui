@@ -26,7 +26,7 @@ export default class ThumbnailItem extends ShallowComponent {
     static defaultProps = {
         focused: false,
         selected: false,
-        loading: false
+        loading: undefined
     };
 
     constructor(props:Object) {
@@ -45,9 +45,11 @@ export default class ThumbnailItem extends ShallowComponent {
         if (this.props.selected) {
             ClassName.add(progressBar, "rb-selected");
         }
+
+        let progress = this.props.loading !== undefined ? <ProgressBar loading={this.props.loading}/> : null;
         return (
             <div className={progressBar.className} style={this.props.style}>
-                <ProgressBar loading={this.props.loading}/>
+                {progress}
                 {this.props.children}
             </div>
         );

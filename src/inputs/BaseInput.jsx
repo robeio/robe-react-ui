@@ -44,13 +44,13 @@ export default class BaseInput extends ValidationComponent {
          */
         componentClass: React.PropTypes.string,
         /**
-         * Component class of the BaseInput. (select, textarea)
-         */
-        inputGroupLeft: React.PropTypes.object,
+        * Left Input Addon
+        */
+        inputGroupLeft: React.PropTypes.any,
         /**
-         * Component class of the BaseInput. (select, textarea)
-         */
-        inputGroupRight: React.PropTypes.object,
+        * Right Input Addon
+        */
+        inputGroupRight: React.PropTypes.any,
         /**
          * Disable input
          */
@@ -106,14 +106,14 @@ export default class BaseInput extends ValidationComponent {
             <ControlLabel>{this.props.label}</ControlLabel>
         );
 
-        let { tooltip, inputGroupLeft, inputGroupRight, validations, validationDisplay, ...newProps } = this.props; // eslint-disable-line no-unused-vars
+        let { tooltip, inputGroupLeft, inputGroupRight, validations, validationDisplay, sort, range, ...newProps } = this.props; // eslint-disable-line no-unused-vars
 
         let component = (
             <FormControl
                 {...newProps}
-                ref={(component: Object) => { this.innerComponent = component } }
+                ref={(component: Object) => { this.innerComponent = component }}
                 value={this.props.value}
-                />
+            />
         );
 
         if (inputGroupLeft !== undefined || inputGroupRight !== undefined) {

@@ -1,0 +1,33 @@
+.countdown {
+    display: inline-block;
+    border: black 1px solid;
+    background: #333;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin: 1px;
+}
+
+.countdown-animate {
+    -webkit-animation: countdown-flash .3s linear normal;
+    -moz-animation: countdown-flash .3s linear normal;
+    -ms-animation: countdown-flash .3s linear normal;
+    -o-animation: countdown-flash .3s linear normal;
+    animation: countdown-flash .3s linear normal;
+    /*animation: slide .6s linear normal 3s;*/
+}
+
+@keyframes countdown-flash {
+    0% {
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+        color: rgba(0, 0, 0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+        color: white;
+        opacity: 1;
+    }
+}

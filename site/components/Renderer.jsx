@@ -217,4 +217,8 @@ export default class Renderer extends ShallowComponent {
     componentDidUpdate() {
         Progress.done();
     }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({showCode: false})
+    }
 }

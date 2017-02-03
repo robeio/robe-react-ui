@@ -90,12 +90,18 @@ export default class GoogleMapSample extends ShallowComponent {
                                       lng={28.86640521630852}
                                       description={"Sample Text With TextArea Input"}
                                       inputType="textArea"
+                                      inputStyle={{border: 0}}
+                                      onChange={this.__popoverInputChange}
                                       overlay
                                       overlayPlacement="left"
         />);
 
         return markersArr;
     };
+
+    __popoverInputChange(e){
+        console.log(e);
+    }
 
     __onMarkerClick(index:any, callback:Object) {
         console.log(index, callback);
