@@ -78,7 +78,7 @@
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
-    "webpack-dev-server": "1.16.2",
+    "webpack-dev-server": "1.16.3",
     "webpack-file-changer": "1.0.0"
   },
   "dependencies": {
@@ -102,6 +102,6 @@
     "react-tinymce": "0.5.1",
     "robe-ajax": "1.0.1",
     "robe-react-commons": "1.0.85",
-    "zxcvbn": "^4.4.1"
+    "zxcvbn": "4.4.1"
   }
 }

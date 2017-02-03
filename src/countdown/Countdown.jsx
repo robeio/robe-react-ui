@@ -95,10 +95,7 @@ export default class Countdown extends ShallowComponent {
     }
 
     render(): Object {
-        let days = this.props.days.visible ? Math.floor(this.state.value / Countdown.UNITS_IN_MS.DAY) : 0;
-        let hours = this.props.hours.visible ? Math.floor(this.state.value % Countdown.UNITS_IN_MS.DAY / Countdown.UNITS_IN_MS.HOUR) : 0;
-        let minutes = this.props.minutes.visible ? Math.floor(this.state.value % Countdown.UNITS_IN_MS.HOUR / Countdown.UNITS_IN_MS.MINUTE) : 0;
-        let seconds = this.props.seconds.visible ? Math.floor(this.state.value % Countdown.UNITS_IN_MS.MINUTE / Countdown.UNITS_IN_MS.SECOND) : 0;
+        let { days, hours, minutes, seconds } = this.__parseLong(this.state.value);
         let counter = (
             <div style={this.props.style}>
                 {this.renderCell(this.props.days, days, this.pre.days)}
@@ -134,6 +131,14 @@ export default class Countdown extends ShallowComponent {
      */
     __addLeftZero(value: number): string {
         return value.toString().length < 2 ? "0" + value.toString() : value.toString();
+    }
+
+    __parseLong(value) {
+        let days = this.props.days.visible ? Math.floor(value / Countdown.UNITS_IN_MS.DAY) : 0;
+        let hours = this.props.hours.visible ? Math.floor(value % Countdown.UNITS_IN_MS.DAY / Countdown.UNITS_IN_MS.HOUR) : 0;
+        let minutes = this.props.minutes.visible ? Math.floor(value % Countdown.UNITS_IN_MS.HOUR / Countdown.UNITS_IN_MS.MINUTE) : 0;
+        let seconds = this.props.seconds.visible ? Math.floor(value % Countdown.UNITS_IN_MS.MINUTE / Countdown.UNITS_IN_MS.SECOND) : 0;
+        return { days, hours, minutes, seconds };
     }
 
     /**
