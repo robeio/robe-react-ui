@@ -1,6 +1,6 @@
 {
   "name": "robe-react-ui",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "description": "Robe React UI Components",
   "main": "lib/index.js",
   "engines": {
@@ -100,8 +100,8 @@
     "react-recaptcha": "2.2.6",
     "react-router": "4.0.0-2",
     "react-tinymce": "0.5.1",
-    "recharts": "0.20.5",
     "robe-ajax": "1.0.1",
-    "robe-react-commons": "1.0.85"
+    "robe-react-commons": "1.0.85",
+    "zxcvbn": "^4.4.1"
   }
 }

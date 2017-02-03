@@ -61,25 +61,34 @@
     "maxValue": "Value must be less or equal to ${maxValue}",
     "minLength": "Input cannot be less than ${min} characters.",
     "maxLength": "Input cannot be more than ${max} characters.",
-    "regex":"Input must match '${regex}'"
+    "regex": "Input must match '${regex}'"
   },
   "wizard.Wizard": {
     "next": "Next",
     "previous": "Previous",
     "complete": "Complete"
   },
-  "countdown.Countdown":{
-    "days":{
-      "label":"Days"
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "Worst",
+      "1": "Bad",
+      "2": "Weak",
+      "3": "Good",
+      "4": "Strong"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "Days"
     },
-    "hours":{
-      "label":"Hours"
+    "hours": {
+      "label": "Hours"
     },
-    "minutes":{
-      "label":"Mins"
+    "minutes": {
+      "label": "Mins"
     },
-    "seconds":{
-      "label":"Secs"
+    "seconds": {
+      "label": "Secs"
     }
   }
 }

@@ -1,0 +1,152 @@
+.rb-line-chart {
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.rb-line-chart-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+    overflow: hidden;
+
+    -webkit-transform: rotateX(-180deg);
+    -moz-transform: rotateX(-180deg);
+    -o-transform: rotateX(-180deg);
+    -ms-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+
+    -webkit-animation: line-animation 2s ease;;
+    -moz-animation: line-animation 2s ease;;
+    -o-animation: line-animation 2s ease;;
+    -ms-animation: line-animation 2s ease;;
+    animation: line-animation 2s ease;
+}
+
+@keyframes line-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-ms-keyframes line-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-o-keyframes line-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-moz-keyframes line-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes line-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.rb-line-chart-svg g {
+    position: relative;
+    float: left;
+    display: flex;
+    height: 100%;
+}
+
+.rb-line-chart-svg g > * {
+    opacity: .7;
+}
+
+.rb-line-chart-axis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+}
+
+.rb-line-chart-axis > * {
+    position: relative;
+    float: left;
+    display: flex;
+}
+
+.rb-line-y-axis {
+    width: 100%;
+    border-top: 1px dotted #dddddd;
+}
+
+.rb-line-y-axis:before {
+    content: attr(id);
+    top: -8px;
+    left: -46px;
+    text-align: right;
+    position: relative;
+    width: 40px;
+    display: block;
+}
+
+.rb-line-x-axis {
+    height: 100%;
+    border-right: 1px solid #dddddd;
+}
+
+.rb-line-x-axis:before {
+    content: attr(data);
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    left: -50%;
+    text-align: center;
+}
+
+.rb-line-x-axis:last-child:after {
+    content: attr(name);
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    right: -50%;
+    text-align: center;
+}
+
+.rb-line-chart .tooltip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 2;
+    border-radius: 2px;
+    visibility: hidden;
+    white-space: pre;
+    padding: 4px;
+    color: white;
+    border: 2px solid #ffffff;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
