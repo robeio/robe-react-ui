@@ -56,15 +56,14 @@ export default class TimePicker extends ShallowComponent {
         maxWidth: 250,
         className: "center-block"
     };
-
-    radius = 10;
-
+    
     constructor(props:Object) {
         super(props);
         this.state = {
             moment: this.props.value,
             hour: "12",
-            minute: "00"
+            minute: "00",
+            second: "00"
         };
     }
 
@@ -74,7 +73,6 @@ export default class TimePicker extends ShallowComponent {
             className += this.props.className;
         }
         let label = this.props.label != undefined ? <ControlLabel>{this.props.label}</ControlLabel> : undefined;
-
         let origin = this.props.maxWidth / 2;
         return (
             <div className={className} style={{maxWidth:this.props.maxWidth}}>
@@ -87,12 +85,16 @@ export default class TimePicker extends ShallowComponent {
                     <span>
                         {this.state.minute.length === 1 ? "0" + this.state.minute : this.state.minute}
                     </span>
+                    <span>:</span>
+                    <span>
+                        {this.state.second.length === 1 ? "0" + this.state.second : this.state.second}
+                    </span>
                 </div>
                 <svg height={this.props.maxWidth} width={this.props.maxWidth}>
                     <circle
                         cx={origin}
                         cy={origin}
-                        r={origin-this.radius}
+                        r={origin-10}
                         fill="#34495E"
                         stroke="#2C3E50"/>
                     <circle
@@ -110,8 +112,8 @@ export default class TimePicker extends ShallowComponent {
         let arr = [],
             angle = 0,
             origin = this.props.maxWidth / 2,
-            radius = origin - this.radius - 15,
-            select = {X: origin, Y: this.radius};
+            radius = origin - 25,
+            select = {X: origin, Y: 10};
 
 
         for (let i = 1, a = 0; i <= 12; i++, a++) {
@@ -172,7 +174,6 @@ export default class TimePicker extends ShallowComponent {
         let name = e.target.getAttribute("name");
         let data = e.target.getAttribute("data");
         state[name] = data;
-        console.log(state)
         this.setState(state)
     }
 

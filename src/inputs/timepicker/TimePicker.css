@@ -23,6 +23,10 @@
     color: white;
 }
 
+.time-picker-label > *:nth-child(2n) {
+    padding: 0px;
+}
+
 .time-picker svg {
 }
 
