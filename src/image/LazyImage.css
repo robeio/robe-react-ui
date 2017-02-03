@@ -1,0 +1,28 @@
+.lazyimage-placeholder{
+    -webkit-transition: opacity .4s ease ;
+    -moz-transition: opacity .4s ease ;
+    -o-transition: opacity .4s ease ;
+    -ms-transition: opacity .4s ease ;
+    transition: opacity .4s ease ;
+    opacity:1;
+}
+.lazyimage-placeholder-loading{
+    background-color: #FFFFFF;
+  opacity: .5;
+  animation: lazyimage-pulse 3s ease infinite;
+  -webkit-box-shadow: inset 0px 0px 30px -10px #999999;
+  -moz-box-shadow: inset 0px 0px 30px -10px #999999;
+  box-shadow: inset 0px 0px 30px -10px #999999;
+}
+
+@keyframes lazyimage-pulse {
+  0% {
+    background-color: #FFFFFF;
+  }
+  60% {
+    background-color: #CCCCCC;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}

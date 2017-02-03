@@ -1,14 +1,15 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import PasswordInput from "robe-react-ui/lib/inputs/PasswordInput";
-
+import { InputGroup } from "react-bootstrap";
 
 export default class PasswordInputSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
             PasswordInputNormal: "",
-            PasswordInputValidations: ""
+            PasswordInputValidations: "",
+            PasswordInputStrength:""
         };
     }
 
@@ -29,6 +30,13 @@ export default class PasswordInputSample extends ShallowComponent {
                     validations={{
                         required: true
                     }}
+                />
+                <PasswordInput
+                    label="With Password Strength"
+                    name="PasswordInputStrength"
+                    strength
+                    value={this.state.PasswordInputStrength}
+                    onChange={this.__handleChange}
                 />
             </div>
         );

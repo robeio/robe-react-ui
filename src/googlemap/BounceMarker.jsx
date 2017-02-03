@@ -47,7 +47,7 @@ export default class BounceMarker extends ShallowComponent {
                 ref={(component: Object) => { this.trigger = component } }
                 trigger="click" rootClose
                 placement={this.props.overlayPlacement}
-                overlay={<Popover id="popover-trigger-click-root-close"
+                overlay={<Popover id="popover-trigger-click-root-close" className="googleMapPopover"
                     style={this.props.overlayStyle}>
                     {this.props.inputType == "textArea" ? <TextArea style={this.props.inputStyle}
                         name="description"

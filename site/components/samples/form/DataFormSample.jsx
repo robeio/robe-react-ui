@@ -184,7 +184,7 @@ export default class DataFormSample extends ShallowComponent {
 
     static appliedChangesToObject(obj: any, e){
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        if(obj[e.target.name]) {
+        if(!obj[e.target.name]) {
             obj[e.target.name] = {};
         }
         obj[e.target.name].value = value;

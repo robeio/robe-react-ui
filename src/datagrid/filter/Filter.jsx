@@ -13,10 +13,21 @@ export default class Filter extends ShallowComponent {
         /**
          *Value of the filter
          */
-        value: React.PropTypes.any
+        value: React.PropTypes.any,
+        /**
+        *Delay between last keystroke and filter request.
+        */
+        delay: React.PropTypes.number
     }
 
     __refMap = {};
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.value
+        };
+    }
 
     render(): Object {
         let field = Objects.deepCopy(this.props.field);
@@ -39,7 +50,7 @@ export default class Filter extends ShallowComponent {
                 <Component
                     {...field}
                     style={style}
-                    value={this.props.value}
+                    value={this.state.value}
                     onChange={this.__handleChange}
                     />);
         }
@@ -51,7 +62,7 @@ export default class Filter extends ShallowComponent {
         fieldMax.name += "-max";
         let minOnChange = this.__handleRangeChange.bind(undefined, fieldMin.name);
         let maxOnChange = this.__handleRangeChange.bind(undefined, fieldMax.name);
-        let value = this.props.value === undefined ? [] : this.props.value;
+        let value = this.state.value === undefined ? [] : this.state.value;
         return (
             <div>
                 <Component
@@ -113,7 +124,7 @@ export default class Filter extends ShallowComponent {
                     return true;
             }
         }
-        this.props.onChange(name, value, filter);
+        this.__propsOnChange(name, value, filter);
         return true;
     }
 
@@ -150,7 +161,23 @@ export default class Filter extends ShallowComponent {
             default:
                 return true;
         }
-        this.props.onChange(field.name, valueArr, filter);
+        this.__propsOnChange(field.name, valueArr, filter);
         return true;
+    }
+
+    __propsOnChange(name, value, filter) {
+        clearTimeout(this.searchOnChange);
+        this.setState({
+            value
+        });
+        this.searchOnChange = setTimeout(function () {
+            this.props.onChange(name, value, filter);
+        }.bind(this), this.props.delay);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: nextProps.value
+        });
     }
 }

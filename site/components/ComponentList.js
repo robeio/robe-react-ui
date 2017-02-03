@@ -187,6 +187,13 @@ class ComponentList {
             sample: require("./samples/faicon/FaIconSample"),
             code: require("./samples/faicon/FaIconSample.txt")
         });
+        components.complex.push({
+            header: "LazyImage",
+            desc: "is a component for loading images via AJAX.",
+            json: require("./jsons/image/LazyImage"),
+            sample: require("./samples/image/LazyImageSample"),
+            code: require("./samples/image/LazyImageSample.txt")
+        });
 
         components.complex.push({
             header: "Progress",
@@ -199,6 +206,14 @@ class ComponentList {
                     {name: "done", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubCompleteDesc")},
                     {name: "configure", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubConfigureDesc")}]
             }
+        });
+        components.complex.push({
+            header: "Countdown",
+            desc: " is a component for counting down from the given value",
+            sample: require("./samples/countdown/CountdownSample"),
+            code: require("./samples/countdown/CountdownSample.txt"),
+            json: require("./jsons/countdown/Countdown"),
+
         });
 
         components.complex.push({
@@ -243,7 +258,7 @@ class ComponentList {
         components.charts.push({
             header: "AreaChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "areaChartDesc"),
-            // json: require("./jsons/charts/AreaChart.json"),
+            json: require("./jsons/charts/AreaChart.json"),
             sample: require("./samples/charts/AreaChartSample"),
             code: require("./samples/charts/AreaChartSample.txt")
         });
@@ -251,7 +266,7 @@ class ComponentList {
         components.charts.push({
             header: "BarChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "barChartDesc"),
-            // json: require("./jsons/charts/BarChart.json"),
+            json: require("./jsons/charts/BarChart.json"),
             sample: require("./samples/charts/BarChartSample"),
             code: require("./samples/charts/BarChartSample.txt")
         });
@@ -267,7 +282,7 @@ class ComponentList {
         components.charts.push({
             header: "LineChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "lineChartDesc"),
-            // json: require("./jsons/charts/LineChart.json"),
+            json: require("./jsons/charts/LineChart.json"),
             sample: require("./samples/charts/LineChartSample"),
             code: require("./samples/charts/LineChartSample.txt")
         });
@@ -275,7 +290,7 @@ class ComponentList {
         components.charts.push({
             header: "PieChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "pieChartDesc"),
-            // json: require("./jsons/charts/PieChart.json"),
+            json: require("./jsons/charts/PieChart.json"),
             sample: require("./samples/charts/PieChartSample"),
             code: require("./samples/charts/PieChartSample.txt")
         });
@@ -299,7 +314,7 @@ class ComponentList {
         components.charts.push({
             header: "ScatterChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "scatterChartDesc"),
-            // json: require("./jsons/charts/RobeScatterChart.json"),
+            json: require("./jsons/charts/ScatterChart.json"),
             sample: require("./samples/charts/ScatterChartSample"),
             code: require("./samples/charts/ScatterChartSample.txt")
         });

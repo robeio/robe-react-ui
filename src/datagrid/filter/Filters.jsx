@@ -30,7 +30,11 @@ export default class Filters extends ShallowComponent {
         /**
          *The event to trigger on every filter value update.
          */
-        onChange: React.PropTypes.func.isRequired
+        onChange: React.PropTypes.func.isRequired,
+        /**
+         *Delay between last keystroke and filter request.
+         */
+        delay: React.PropTypes.number
     }
 
 
@@ -69,7 +73,7 @@ export default class Filters extends ShallowComponent {
                 filterField = (
                     <Overlay show={show} placement="top" target={getColID} >
                         <Popover id="popover" placement="top" >
-                            <Filter field={field} value={this.state[field.name]} onChange={this.__onChange} />
+                            <Filter field={field} value={this.state[field.name]} onChange={this.__onChange} delay={this.props.delay} />
                             <ButtonGroup bsSize="xsmall" className="pull-right" style={{ marginBottom: "15px" }}>
                                 <Button bsStyle="danger" onClick={onClear}>{this.props.clearButtonText}</Button>
                                 <Button bsStyle="danger" onClick={this.__onClearAll}>{this.props.clearAllButtonText}</Button>

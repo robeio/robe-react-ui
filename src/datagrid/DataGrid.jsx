@@ -119,6 +119,10 @@ export default class DataGrid extends StoreComponent {
             clearButtonText: React.PropTypes.string,
             clearAllButtonText: React.PropTypes.string
         }),
+        /**
+         *Delay between last keystroke and requests.
+         */
+        delay: React.PropTypes.number
     };
     /**
      * static props
@@ -153,7 +157,8 @@ export default class DataGrid extends StoreComponent {
         filter: {
             clear: Application.i18n(DataGrid, "datagrid.DataGrid", "filter", "clear"),
             clearAll: Application.i18n(DataGrid, "datagrid.DataGrid", "filter", "clearAll")
-        }
+        },
+        delay: 1000
     };
 
     activePage = 1;
@@ -164,6 +169,7 @@ export default class DataGrid extends StoreComponent {
     __fields = [];
     __sorts = {};
     __filterComponent;
+    __actionButtonsComponent;
 
     constructor(props: Object) {
         super(props);
@@ -204,26 +210,29 @@ export default class DataGrid extends StoreComponent {
                             onChange={this.__onSearchChanged}
                             value={this.state.qfilter}
                             visible={this.props.searchable}
+                            delay={this.props.delay}
                             placeholder={Application.i18n(DataGrid, "datagrid.DataGrid", "search")}
-                            />
+                        />
                     </Col>
                     <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
                         <ActionButtons
+                            ref={(componet: Object) => { this.__actionButtonsComponent = componet; }}
                             visible={this.props.editable}
                             items={this.__getToolbarConfig()}
-                            />
+                        />
                     </Col>
 
                 </Row>
                 <Filters
-                    ref={(component: Object) => { this.__filterComponent = component; } }
+                    ref={(component: Object) => { this.__filterComponent = component; }}
                     fields={this.__fields}
+                    delay={this.props.delay}
                     visiblePopups={this.state.visiblePopups}
                     onChange={this.__onFilterChanged}
                     idCount={this.getObjectId()}
                     clearButtonText={this.props.filter.clear}
                     clearAllButtonText={this.props.filter.clearAll}
-                    />
+                />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
                         <tr>
@@ -245,9 +254,9 @@ export default class DataGrid extends StoreComponent {
                         refreshable={this.props.refreshable}
                         onRefresh={this.__readData}
                         totalCount={this.state.totalCount}
-                        emptyText={Application.i18n(DataGrid, "datagrid.DataGrid","pagination" ,"empty")}
-                        displayText={Application.i18n(DataGrid, "datagrid.DataGrid","pagination", "display")}
-                        />)
+                        emptyText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "empty")}
+                        displayText={Application.i18n(DataGrid, "datagrid.DataGrid", "pagination", "display")}
+                    />)
                 }
                 {this.__renderModalConfirm()}
             </Col>
@@ -305,7 +314,7 @@ export default class DataGrid extends StoreComponent {
                 onOkClick={this.__onDeleteConfirm}
                 onCancelClick={this.__hideDeleteConfirm}
                 show={this.state.modalDeleteConfirm}
-                />);
+            />);
     }
 
     /**
@@ -343,7 +352,7 @@ export default class DataGrid extends StoreComponent {
                         onSortClick={this.__onSortClick}
                         filter={this.__filterComponent !== undefined ? this.__filterComponent.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
-                        />
+                    />
                 );
             }
         }
@@ -421,7 +430,7 @@ export default class DataGrid extends StoreComponent {
                         onClick={this.props.onClick}
                         rowRenderer={this.props.rowRenderer}
                         cellRenderer={this.props.cellRenderer}
-                        />);
+                    />);
             }
         }
         return rowsArr;
@@ -434,6 +443,11 @@ export default class DataGrid extends StoreComponent {
     }
 
     __clearSelection() {
+
+        if (this.__actionButtonsComponent) {
+            this.__actionButtonsComponent.setState({ disabled: true });
+        }
+
         if (this.selection !== undefined) {
             this.selection.setState({
                 selected: false
@@ -449,6 +463,11 @@ export default class DataGrid extends StoreComponent {
     }
 
     __onSelection(selection: Object) {
+
+        if (this.__actionButtonsComponent) {
+            this.__actionButtonsComponent.setState({ disabled: false });
+        }
+
         if (this.selection !== undefined) {
             if (this.selection.props === selection.props) {
                 if (this.props.editButton && this.props.onEditClick) {
@@ -473,7 +492,7 @@ export default class DataGrid extends StoreComponent {
         this.__triggerSelection();
     }
 
-    __triggerSelection(){
+    __triggerSelection() {
         if (this.props.onSelection) {
             this.props.onSelection(this.selection.props.data);
         }

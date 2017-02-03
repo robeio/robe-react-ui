@@ -301,5 +301,28 @@
     "next": "İleri",
     "previous": "Geri",
     "complete": "Tamamla"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "Çok Kötü",
+      "1": "Kötü",
+      "2": "Zayıf",
+      "3": "İyi",
+      "4": "Güçlü"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "Gün"
+    },
+    "hours": {
+      "label": "Saat"
+    },
+    "minutes": {
+      "label": "Dk"
+    },
+    "seconds": {
+      "label": "Sn"
+    }
   }
 }
