@@ -34,28 +34,17 @@ export default class GoogleMap extends ShallowComponent {
                 className="searchbox-container">
                 <SearchBox
                     apiParams={this.props.searchBox.apiParams}
-                    onPlacesChanged={this.__onSearchBoxPlaceChange}
+                    onPlacesChanged={this.props.searchBox.onPlacesChanged}
                     placeholder={this.props.searchBox.placeholder}
-                    onChange={this.__onInputChange}
-                    />
+                    onChange={this.props.searchBox.onInputChange}
+                />
             </Col>);
         }
         else if (this.props.searchBox && !this.props.bootstrapURLKeys.libraries) {
-            console.warn("please add 'libraries=places' parameter in bootstrapURLKeys to use SearchBox");
+            console.warn("Please add 'libraries=places' parameter in bootstrapURLKeys to use SearchBox");
             return;
         }
         else
             return;
     };
-
-    __onSearchBoxPlaceChange(places: Object) {
-        if (this.props.searchBox.onPlacesChanged)
-            this.props.searchBox.onPlacesChanged(places);
-    };
-
-    __onInputChange(state: Object) {
-        if (this.props.searchBox.onInputChange)
-            this.props.searchBox.onInputChange(state);
-    };
-
 }
