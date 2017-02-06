@@ -295,12 +295,12 @@ export default class FileUploadInput extends ValidationComponent {
         for (let i = 0; i < uploadedFiles.length; i++) {
             let previousKey = droppedFiles[i].key;
             let previousFile = this.state.files[previousKey];
+            delete this.state.files[previousFile.key];
             let file = uploadedFiles[i];
             file = Objects.mergeClone(file, previousFile);
             file.key = file.id;
             file.isUploaded = true;
             file.loading = false;
-            delete this.state.files[previousFile.key];
             this.state.files[file.key] = file;
             this.__value[this.__value.length] = file.id
         }

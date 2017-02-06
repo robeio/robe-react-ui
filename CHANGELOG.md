@@ -5,6 +5,7 @@
 ## 1.1.20
 * Chart and Toast components test rewrited, Charts props updated
 * Chart bug fixed.
+* [#51](https://github.com/robeio/robe-react-ui/issues/51) fixed.
 
 ## 1.1.19
 * Code preview for the HtmlEditor.
