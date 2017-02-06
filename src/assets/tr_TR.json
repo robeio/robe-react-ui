@@ -1,6 +1,6 @@
 {
   "site.main": {
-    "components": "Komponentler",
+    "components": "Bileşenler",
     "docs": "Dökümanlar",
     "samples": "Örnekler",
     "about": "Hakkımızda",
@@ -197,11 +197,8 @@
     "googleMapDesc": " GoogleMaps API'si için bir paket bileşendir.",
     "areaChartDesc": " sayısal verileri grafik olarak görüntüler. Çizgi grafiğine dayanmaktadır. Eksen ve çizgi arasındaki alan genellikle renkler, dokular ve kulelerle vurgulanır. Genellikle bir alan grafiği ile iki veya daha fazla miktar karşılaştırılan bileşemdir.",
     "barChartDesc": " temsil ettiği değerlerle orantılı uzunluklar olan dikdörtgen çubuklarla gruplanmış verileri temsil eden bir grafik bileşenidir.",
-    "composedChartDesc": " alan, çubuk ve çizgi grafikleri için birlikte düzenlenen bir bileşendir.",
     "lineChartDesc": " çizgi çizelgesi veya çizgi grafiği, bilgileri düz çizgi segmentiyle bağlı 'işaretleyiciler' olarak adlandırılan bir dizi veri noktası olarak görüntüleyen bir grafik türü olan bileşendir.",
     "pieChartDesc": " pasta grafiği (veya daire grafiği), sayısal orantıyı göstermek için dilimlere bölünen dairesel bir istatistiksel grafik olan bileşendir",
-    "radarChartDesc": " bir radar grafiği, çok eğrili veriyi, aynı poinenden başlayarak eksenler üzerinde temsil edilen üç veya daha fazla nicel değişkenin iki boyutlu bir grafiği biçiminde görüntülemenin grafiksel bir bileşendir.",
-    "radialBarChartDesc": " grafik bileşenidir.",
     "scatterChartDesc": " bir dağılım grafiği (dağılım grafiği, dağılım grafiği, dağılım grafiği veya dağılım diyagramı olarak da adlandırılır), bir veri kümesi için genellikle iki değişken için değerleri görüntülemek için Kartezyen koordinatları kullanan bir arsa veya matematiksel bileşendir."
   },
   "components.Components": {

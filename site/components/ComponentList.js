@@ -272,14 +272,6 @@ class ComponentList {
         });
 
         components.charts.push({
-            header: "ComposedChart",
-            desc: Application.i18n(ComponentList, "components.ComponentList", "composedChartDesc"),
-            // json: require("./jsons/charts/ComposedChart.json"),
-            sample: require("./samples/charts/ComposedChartSample"),
-            code: require("./samples/charts/ComposedChartSample.txt")
-        });
-
-        components.charts.push({
             header: "LineChart",
             desc: Application.i18n(ComponentList, "components.ComponentList", "lineChartDesc"),
             json: require("./jsons/charts/LineChart.json"),
@@ -293,22 +285,6 @@ class ComponentList {
             json: require("./jsons/charts/PieChart.json"),
             sample: require("./samples/charts/PieChartSample"),
             code: require("./samples/charts/PieChartSample.txt")
-        });
-
-        components.charts.push({
-            header: "RadarChart",
-            desc: Application.i18n(ComponentList, "components.ComponentList", "radarChartDesc"),
-            // json: require("./jsons/charts/RadarChart.json"),
-            sample: require("./samples/charts/RadarChartSample"),
-            code: require("./samples/charts/RadarChartSample.txt")
-        });
-
-        components.charts.push({
-            header: "RadialBarChart",
-            desc: Application.i18n(ComponentList, "components.ComponentList", "radialBarChartDesc"),
-            // json: require("./jsons/charts/RadialBarChart.json"),
-            sample: require("./samples/charts/RadialBarChartSample"),
-            code: require("./samples/charts/RadialBarChartSample.txt")
         });
 
         components.charts.push({

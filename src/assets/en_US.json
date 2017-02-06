@@ -197,11 +197,8 @@
     "googleMapDesc": " is a wrapper component for GoogleMaps API",
     "areaChartDesc": " displays graphically quantitative data. It is based on the line chart. The area between axis and line are commonly emphasized with colors, textures and hatchings. Commonly one compares with an area chart two or more quantities.",
     "barChartDesc": " a bar chart or bar graph is a chart or graph that presents grouped data with rectangle|rectangular bars with lengths proportional to the values that they represen",
-    "composedChartDesc": " is a layout for area, bar and line chart together",
     "lineChartDesc": " a line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segment",
     "pieChartDesc": " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportio",
-    "radarChartDesc": " a radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same poin",
-    "radialBarChartDesc": " is a layout chart",
     "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data"
 
   },
