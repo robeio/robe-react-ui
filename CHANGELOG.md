@@ -2,6 +2,7 @@
 
 ## 1.1.20 -- Developing...
 * Chart and Toast components test rewrited, Charts props updated
+* Chart bug fixed.
 
 ## 1.1.19 -- Developing...
 * Code preview for the HtmlEditor.
