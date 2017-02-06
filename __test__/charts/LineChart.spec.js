@@ -1,6 +1,5 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import {LineChart as Chart, Line} from "recharts";
 import {mount} from "enzyme";// eslint-disable-line
 import LineChart from "charts/LineChart";// eslint-disable-line
 
