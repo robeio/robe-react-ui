@@ -12,7 +12,7 @@ import "./style.css"
 
 export default class Components extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             componentSelection: window.location.hash.substring(1) === "Components" ? "Components/complex/DataGrid" : window.location.hash.substring(1),
@@ -21,7 +21,7 @@ export default class Components extends ShallowComponent {
         };
     }
 
-    render():Object {
+    render(): Object {
         let componentDetail;
         let componentMenu = [];
         let selectedGroup = window.location.hash.split("/")[1] || this.state.selectedGroup;
@@ -102,7 +102,7 @@ export default class Components extends ShallowComponent {
         );
     }
 
-    __onGroupChange = (selectedKey:string) => {
+    __onGroupChange = (selectedKey: string) => {
         let selectedComponent;
         switch (selectedKey) {
             case "complex": {
@@ -114,8 +114,6 @@ export default class Components extends ShallowComponent {
             }
                 break;
             case "charts": {
-          
-            case "charts":{
                 selectedComponent = "AreaChart";
             }
                 break;
@@ -128,13 +126,13 @@ export default class Components extends ShallowComponent {
         });
     };
 
-    __onFilterChange = (e:Object) => {
+    __onFilterChange = (e: Object) => {
         this.setState({
             filter: e.target.value
         });
     };
 
-    __onComponenListClick = (e:Object) => {
+    __onComponenListClick = (e: Object) => {
         this.setState({
             componentSelection: `Components/${this.state.selectedGroup}/${e.target.text}`
         });

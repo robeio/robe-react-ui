@@ -73,7 +73,7 @@ export default class FileUploadInput extends ValidationComponent {
         /**
          * File Input Form Control Place Holder
          */
-        placeholder: FormControl.propTypes.placeholder,
+        placeholder: React.PropTypes.string,
         /**
          * it specifies that an input field is hidden or visible
          */
