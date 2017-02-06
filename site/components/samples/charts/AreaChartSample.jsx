@@ -11,10 +11,11 @@ let data = [
     {name: "F", public: 2390, private: 3800, protected: 2500},
     {name: "G", public: 3490, private: 4300, protected: 2100}
 ];
+
 let meta = [
     {dataKey: "public", name: "Public", unit: "piece"},
-    {dataKey: "private", name: "Protected", unit: "piece"},
-    {dataKey: "protected", name: "Private", unit: "piece"}
+    {dataKey: "private", name: "Private", unit: "piece"},
+    {dataKey: "protected", name: "Protected", unit: "piece"}
 ];
 
 export default class AreaChartSample extends ShallowComponent {

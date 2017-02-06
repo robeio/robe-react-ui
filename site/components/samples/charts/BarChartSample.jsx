@@ -10,8 +10,8 @@ let data = [
 ];
 let meta = [
     {dataKey: "public", name: "Public", unit: "piece"},
-    {dataKey: "private", name: "Protected", unit: "piece"},
-    {dataKey: "protected", name: "Private", unit: "piece"}
+    {dataKey: "private", name: "Private", unit: "piece"},
+    {dataKey: "protected", name: "Protected", unit: "piece"}
 ];
 
 export default class BarChartSample extends ShallowComponent {
