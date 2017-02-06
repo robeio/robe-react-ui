@@ -1,6 +1,5 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import {PieChart as Chart, Pie} from "recharts";
 import {mount} from "enzyme";// eslint-disable-line
 import PieChart from "charts/PieChart";// eslint-disable-line
 

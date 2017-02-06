@@ -1,6 +1,5 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import {BarChart as Chart, Bar} from "recharts";
 import {mount} from "enzyme";// eslint-disable-line
 import BarChart from "charts/BarChart";// eslint-disable-line
 

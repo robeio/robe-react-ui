@@ -1,6 +1,5 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
-import {AreaChart as Chart, Area} from "recharts";
 import {mount} from "enzyme";// eslint-disable-line
 import AreaChart from "charts/AreaChart";// eslint-disable-line
 
