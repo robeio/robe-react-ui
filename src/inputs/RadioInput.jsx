@@ -158,7 +158,7 @@ export default class RadioInput extends ValidationComponent {
             />
         ) : undefined;
 
-        let onClick = this.__onClick.bind(this, value);
+        let onClick = this.__onChange.bind(this, value);
         return (
             <div style={{ cursor: "pointer" }} className={`radio ${disabled}`} onClick={onClick} key={value}>
                 <label
@@ -190,7 +190,7 @@ export default class RadioInput extends ValidationComponent {
      * Internal onClick event. It is triggered every time.
      * @param e event
      */
-    __onClick(value:Object):Object {
+    __onChange(value:Object):Object {
         let result = true;
         if (this.props.onChange) {
             let e = {target: {value: value, name: this.props.name}};

@@ -82,7 +82,7 @@ export default class NumericInput extends ShallowComponent {
                 value={this.props.value}
                 type="text"
                 ref={(component: Object) => { this.innerComponent = component } }
-                onChange={this.__numericFilter}
+                onChange={this.__onChange}
             />
         );
     }
@@ -108,7 +108,7 @@ export default class NumericInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object): boolean {
+    __onChange(e: Object): boolean {
         let result = true;
         let value = e.target.value;
         if (value && !is.numeric(value)) {

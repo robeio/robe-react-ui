@@ -90,7 +90,7 @@ export default class MoneyInput extends ShallowComponent {
                 {...newProps}
                 type="text"
                 label={this.props.label}
-                onChange={this.__numericFilter}
+                onChange={this.__onChange}
                 onKeyPress={this.__focus2Fraction}
                 value={this.props.value}
                 ref={(component: Object) => { this.innerComponent = component } }
@@ -120,7 +120,7 @@ export default class MoneyInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object): boolean {
+    __onChange(e: Object): boolean {
         this.caretPosition = this.innerComponent.getCaretPosition();
         let value = e.target.value;
 

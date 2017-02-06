@@ -13,110 +13,112 @@ describe("datagrid/filter/Filters", () => {
         },
         value: "Test"
     };
-    it("render - text", () => {
+    let createOnChange = (expected, done) => {
+        return (name, value, filter) => {
+            chai.assert.equal(name, "name");
+            value = value.target ? value.target.value : value;
+            chai.assert.equal(value, expected);
+            done();
+        };
+    }
+    let testRendering = (props) => {
         props.field.range = false;
-        props.field.type = "text";
         let wrapper = TestUtils.mount(props, Filter, props);
         let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One TextArea must be rendered.");
+        chai.assert.equal(wrapper.find(Component).length, 1, "One " + Component.name + " must be rendered.");
         wrapper.unmount();
+    }
+    let testRangeRendering = (props) => {
+        props.field.range = true;
+        let wrapper = TestUtils.mount(props, Filter, props);
+        let Component = ComponentManager.getComponent(props.field.type);
+        chai.assert.equal(wrapper.find(Component).length, 2, "Two " + Component.name + " must be rendered.");
+        wrapper.unmount();
+    }
+
+    let testHandleChange = (props, done, newValue) => {
+        props.onChange = createOnChange(newValue, done);
+        let wrapper = TestUtils.mount(props, Filter, props);
+        let Component = ComponentManager.getComponent(props.field.type);
+        let instance = wrapper.find(Component).node;
+        let onChange = instance.__onChange || instance.__onClickSingle || instance.__callOnChange;
+        onChange({ target: { name: "name", value: newValue } });
+        wrapper.unmount();
+    }
+
+    it("render - text", () => {
+        props.field.type = "text";
+        testRendering(props);
     });
     it("render - number", () => {
-        props.field.range = false;
         props.field.type = "number";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One NumberInput must be rendered.");
-        wrapper.unmount();
-
-        props.field.range = true;
-        wrapper = TestUtils.mount(props, Filter, props);
-        chai.assert.equal(wrapper.find(Component).length, 2, "Two NumberInput must be rendered for range.");
-        wrapper.unmount();
+        testRendering(props);
+        testRangeRendering(props);
     });
     it("render - decimal", () => {
-        props.field.range = false;
         props.field.type = "decimal";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One DecimalInput must be rendered.");
-        wrapper.unmount();
-
-        props.field.range = true;
-        wrapper = TestUtils.mount(props, Filter, props);
-        chai.assert.equal(wrapper.find(Component).length, 2, "Two DecimalInput must be rendered for range.");
-        wrapper.unmount();
+        testRendering(props);
+        testRangeRendering(props);
     });
     it("render - date", () => {
-        props.field.range = false;
         props.field.type = "date";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One DateInput must be rendered.");
-        wrapper.unmount();
-
-        props.field.range = true;
-        wrapper = TestUtils.mount(props, Filter, props);
-        chai.assert.equal(wrapper.find(Component).length, 2, "Two DateInput must be rendered for range.");
-        wrapper.unmount();
+        testRendering(props);
+        testRangeRendering(props);
     });
     it("render - password", () => {
-        props.field.range = false;
         props.field.type = "password";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One PasswordInput must be rendered.");
-        wrapper.unmount();
+        testRendering(props);
     });
     it("render - money", () => {
-        props.field.range = false;
         props.field.type = "money";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One MoneyInput must be rendered.");
-        wrapper.unmount();
-
-        props.field.range = true;
-        wrapper = TestUtils.mount(props, Filter, props);
-        chai.assert.equal(wrapper.find(Component).length, 2, "Two MoneyInput must be rendered for range.");
-        wrapper.unmount();
+        testRendering(props);
+        testRangeRendering(props);
     });
     it("render - radio", () => {
-        props.field.range = false;
         props.field.type = "radio";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One RadioInput must be rendered.");
-        wrapper.unmount();
+        testRendering(props);
     });
     it("render - select", () => {
-        props.field.range = false;
         props.field.type = "select";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One SelectInput must be rendered.");
-        wrapper.unmount();
+        testRendering(props);
     });
     it("render - check", () => {
-        props.field.range = false;
         props.field.type = "check";
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        chai.assert.equal(wrapper.find(Component).length, 1, "One CheckInput must be rendered.");
-        wrapper.unmount();
+        testRendering(props);
     });
 
     it("handleChange", (done) => {
         props.field.type = "string";
-        props.onChange = (name, value, filter) => {
-            chai.assert.equal(name, "name");
-            chai.assert.equal(value, "Test2");
-            done();
-        };
-        let wrapper = TestUtils.mount(props, Filter, props);
-        let Component = ComponentManager.getComponent(props.field.type);
-        wrapper.find(Component).node.__onChange({ target: { name: "name", value: "Test2" } })
-        wrapper.unmount();
+        testHandleChange(props, done, "123");
+
+        props.field.type = "text";
+        testHandleChange(props, done, "123");
+
+        props.field.type = "number";
+        testHandleChange(props, done, "2");
+
+        props.field.type = "decimal";
+        testHandleChange(props, done, "2");
+
+        props.field.type = "date";
+        
+        // testHandleChange(props, done, "12/12/1985");
+
+        props.field.type = "password";
+        testHandleChange(props, done, "123");
+
+        props.field.type = "money";
+        testHandleChange(props, done, "12.2");
+
+        props.field.type = "radio";
+        testHandleChange(props, done, "a");
+
+        props.field.type = "select";
+        testHandleChange(props, done, "a");
+
+        props.field.type = "check";
+        testHandleChange(props, done, false);
+        
     });
     it("handleChangeRange-min", (done) => {
         props.field.type = "number";
@@ -129,7 +131,7 @@ describe("datagrid/filter/Filters", () => {
         };
         let wrapper = TestUtils.mount(props, Filter, props);
         let Component = ComponentManager.getComponent(props.field.type);
-        wrapper.find(Component).nodes[0].__numericFilter({ target: { name: "name-min", value: 1 } })
+        wrapper.find(Component).nodes[0].__onChange({ target: { name: "name-min", value: 1 } })
         wrapper.unmount();
     });
     it("handleChangeRange-max", (done) => {
@@ -143,10 +145,11 @@ describe("datagrid/filter/Filters", () => {
         };
         let wrapper = TestUtils.mount(props, Filter, props);
         let Component = ComponentManager.getComponent(props.field.type);
-        wrapper.find(Component).nodes[1].__numericFilter({ target: { name: "name-max", value: 3 } })
+        wrapper.find(Component).nodes[1].__onChange({ target: { name: "name-max", value: 3 } })
         wrapper.unmount();
     });
-    it("null props", (done) => {
+
+    it("null value -min", (done) => {
         props.field.type = "number";
         props.field.range = true;
         props.value = undefined;
@@ -157,7 +160,21 @@ describe("datagrid/filter/Filters", () => {
         };
         let wrapper = TestUtils.mount(props, Filter, props);
         let Component = ComponentManager.getComponent(props.field.type);
-        wrapper.find(Component).nodes[1].__numericFilter({ target: { name: "name-max", value: 3 } })
+        wrapper.find(Component).nodes[1].__onChange({ target: { name: "name-max", value: 3 } });
         wrapper.unmount();
     });
+    it("null value max", (done) => {
+        props.field.type = "number";
+        props.field.range = true;
+        props.value = undefined;
+        props.onChange = (name, value, filter) => {
+            chai.assert.equal(name, "name");
+            chai.assert.deepEqual(value, [1, undefined]);
+            done();
+        };
+        let wrapper = TestUtils.mount(props, Filter, props);
+        let Component = ComponentManager.getComponent(props.field.type);
+        wrapper.find(Component).nodes[0].__onChange({ target: { name: "name-min", value: 1 } });
+        wrapper.unmount();
+    })
 });

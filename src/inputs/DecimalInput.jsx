@@ -97,7 +97,7 @@ export default class DecimalInput extends ShallowComponent {
                 ref={(component: Object) => { this.innerComponent = component } }
                 step={this.props.step}
                 value={this.props.value}
-                onChange={this.__numericFilter}
+                onChange={this.__onChange}
                 onKeyDown={this.__handleKeyPress}
                 inputGroupRight={<InputGroup.Addon style={{ padding: 0 }}>
                     <div style={{ width: "42px" }}>
@@ -133,7 +133,7 @@ export default class DecimalInput extends ShallowComponent {
     /**
      * Internal onchange handler for filtering numerics.
      */
-    __numericFilter(e: Object): boolean {
+    __onChange(e: Object): boolean {
         let value = e.target.value;
         if (value !== null && value !== undefined) {
             this.__caretPosition = this.innerComponent.getCaretPosition();

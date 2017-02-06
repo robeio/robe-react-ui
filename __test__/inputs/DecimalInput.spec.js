@@ -33,7 +33,7 @@ describe("inputs/DecimalInput", () => {
         chai.assert.isNotOk(componentNode.instance().isValid(), "Empty string must be invalid");
     });
 
-    it("'__numericFilter", (done: Function) => {
+    it("'__onChange", (done: Function) => {
         let componentNode = TestUtils.mount({ onChange: (): boolean => { return true; } }, DecimalInput, props);
         let e = {
             target: {
@@ -47,13 +47,13 @@ describe("inputs/DecimalInput", () => {
             }
         };
         /* eslint-disable no-underscore-dangle */
-        componentNode.instance().__numericFilter(e);
+        componentNode.instance().__onChange(e);
         e.target.value = "12.2";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12.2' failed");
             done("Input value '12.2' failed");
         };
-        componentNode.instance().__numericFilter(e);
+        componentNode.instance().__onChange(e);
 
         componentNode = TestUtils.mount({
             onChange: () => {
@@ -65,10 +65,10 @@ describe("inputs/DecimalInput", () => {
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
-        componentNode.instance().__numericFilter(e);
+        componentNode.instance().__onChange(e);
 
         e.target.value = null;
-        componentNode.instance().__numericFilter(e);
+        componentNode.instance().__onChange(e);
         done();
     });
 });
