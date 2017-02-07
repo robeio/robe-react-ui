@@ -6,17 +6,29 @@ import Legend from "./Legend";
 export default class ScatterChart extends ShallowComponent {
 
     static propTypes = {
+        /**
+         * Width for chart as px
+         */
         width: React.PropTypes.number,
+        /**
+         * Height for chart as px
+         */
         height: React.PropTypes.number,
+        /**
+         * Data to be plotted on the chart
+         */
         data: React.PropTypes.array,
-        scatters: React.PropTypes.array
+        /**
+         * Change to be made for the given data
+         */
+        meta: React.PropTypes.array
     };
 
     static defaultProps = {
         width: 500,
         height: 300,
         data: [],
-        scatters: []
+        meta: []
     };
 
     legends = [];
@@ -30,7 +42,7 @@ export default class ScatterChart extends ShallowComponent {
             <div id="scatter" style={{marginLeft:40}}>
                 <div className="rb-scatter-chart" style={{width:this.props.width,height:this.props.height}}>
                     <svg className="rb-scatter-chart-svg">
-                        {this.__renderScatters(this.props.data, this.props.scatters)}
+                        {this.__renderScatters(this.props.data, this.props.meta)}
                     </svg>
                     <div className="tooltip" id="tooltip"></div>
                     <div className="rb-scatter-chart-axis">
@@ -45,8 +57,8 @@ export default class ScatterChart extends ShallowComponent {
         )
     }
 
-    __renderScatters(data, scatters) {
-        let itemArr = [];
+    __renderScatters(data, meta) {
+        let metaArr = [];
         for (let i in data) {
             let item = data[i];
             for (let j in item.data) {
@@ -60,13 +72,13 @@ export default class ScatterChart extends ShallowComponent {
                 for (let f in fields) {
                     let key = fields[f].key,
                         value = fields[f].value,
-                        properties = Arrays.getValueByKey(scatters, "dataKey", key);
+                        properties = Arrays.getValueByKey(meta, "dataKey", key);
 
                     properties = properties === undefined ? {} : properties;
                     tooltip += (properties.name || key) + " : " + value + " " + (properties.unit || "") + "\n";
                 }
                 this.legends[i] = {fill: fill, label: item.name};
-                itemArr.push(
+                metaArr.push(
                     <circle
                         key={i+" "+j}
                         cx={cx}
@@ -80,7 +92,7 @@ export default class ScatterChart extends ShallowComponent {
 
             }
         }
-        return itemArr;
+        return metaArr;
     }
 
 

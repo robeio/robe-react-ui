@@ -2,12 +2,18 @@ import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import "./PieChart.css"
 import Legend from "./Legend";
-import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
+import FaIcon from "../faicon/FaIcon";
 
 export default class PieChart extends ShallowComponent {
 
     static propTypes = {
+        /**
+         * Data to be plotted on the chart
+         */
         data: React.PropTypes.array,
+        /**
+         * Size of chart as px
+         */
         size: React.PropTypes.number
     };
 
@@ -93,12 +99,14 @@ export default class PieChart extends ShallowComponent {
                 X = mPercentage <= 180 ? origin + x : origin - x,
                 arcSweep = mPercentage <= 180 ? 0 : 1,
                 V = origin - mRadius,
-                fill = item.fill || this.__randColor(mRotation),
-                tooltip = item.label + "  " + value + " " + (item.unit || "") + "\n";
+                fill = item.fill || this.__randColor(X + mRotation),
+                tooltip = item.label + "  " + value + " " + (item.unit || "") + "\n",
+                cursor = "default";
 
             item.fill = fill;
             if (depthIndex === (depth - 1)) {
                 this.legends[item.key || item.label] = {fill: fill, label: item.label};
+                cursor = "pointer";
             }
             if (circle)
                 sectors.push(
@@ -127,6 +135,7 @@ export default class PieChart extends ShallowComponent {
                         onMouseOver={this.__showTooltip}
                         onMouseOut={this.__hideTooltip}
                         onMouseMove={this.__moveTooltip}
+                        style={{cursor:cursor}}
                         onClick={this.__onClick.bind(undefined,item)}>
                         <animateTransform
                             attributeName="transform"
@@ -147,7 +156,10 @@ export default class PieChart extends ShallowComponent {
     __onClick(data) {
         let arr = [];
         arr.push(data);
-        this.setState({data: arr, clicked: true})
+        let depth = this.__depthTree(arr);
+        if (depth > 1) {
+            this.setState({data: arr, clicked: true});
+        }
     }
 
     __onClickReset() {
@@ -155,15 +167,14 @@ export default class PieChart extends ShallowComponent {
     }
 
     __depthTree(data) {
-        if (!data || data.length <= 0)
+        if (!data || data.length <= 0) {
             return 0;
-
-        let count = 1;
-        let childCount = 0;
-        for (let i = 0; i < data.length; i++) {
-            childCount = Math.max(childCount, this.__depthTree(data[i].children));
         }
-        return count + childCount;
+        let depth = 0;
+        for (let i = 0; i < data.length; i++) {
+            depth = Math.max(depth, this.__depthTree(data[i].children));
+        }
+        return 1 + depth;
     }
 
     __sumValues(data) {
@@ -203,7 +214,7 @@ export default class PieChart extends ShallowComponent {
     }
 
     __randColor(index) {
-        let colors = ["#009688", "#4CAF50", "#3F51B5", "#FF9800", "#F44336", "#9C27B0", "#673AB7", "#FFC107", "#2196F3", "#FF5722", "#00796B"];
+        let colors = ["#2196F3", "#009688", "#9C27B0", "#4CAF50", "#3F51B5", "#FF9800", "#F44336", "#9C27B0", "#673AB7", "#FFC107", "#2196F3", "#FF5722", "#00796B"];
         if (index !== undefined) {
             return colors[parseInt(Math.abs(index)) % (colors.length)];
         }

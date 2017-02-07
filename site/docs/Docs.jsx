@@ -28,10 +28,11 @@ export default class Docs extends ShallowComponent {
             let item = components[i];
             let active = this.state.componentSelection === `Docs/${item.header}`;
             if (item.header.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1) {
+                let href = item.header.split(' ').join('+');
                 componentMenu.push(
                     <ListGroupItem
-                        href={`#Docs/${item.header}`}
-                        key={`#${item.header}`}
+                        href={`#Docs/${href}`}
+                        key={`#${href}`}
                         onClick={this.__onComponenListClick}
                         active={active}
                     >

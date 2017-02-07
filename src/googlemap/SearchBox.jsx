@@ -55,9 +55,9 @@ export default class SearchBox extends ShallowComponent {
         if (this.props.apiParams) {
             var input = document.getElementById("searchBoxInput");
             this.searchBox = new this.props.apiParams.maps.places.SearchBox(input);
-            this.searchBox.addListener('places_changed', this.onPlacesChanged);
+            this.searchBox.addListener("places_changed", this.onPlacesChanged);
         }
         else
-            console.warn("please be sure that apiParams prop is a not undefined")
+            console.warn("Please be sure that apiParams prop is a not undefined")
     }
 }

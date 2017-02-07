@@ -182,17 +182,17 @@ export default class FileUploadInput extends ValidationComponent {
                     {label}
                     <FormControl
                         {...attributes}
-                        />
+                    />
                     <DragDropLayout
-                        ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el) } }
+                        ref={(el) => { this.__dragDropLayoutDom = findDOMNode(el) }}
                         onDrop={this.onDrop}
                         onClick={this.browse}
-                        >
+                    >
                         {this.createToolbar("top")}
                         <ThumbnailGroup
                             placeholder={this.props.placeholder}
                             id={this.__componentId}
-                            >
+                        >
                             {this.renderItems(this.state.files)}
                         </ThumbnailGroup>
                     </DragDropLayout>
@@ -295,12 +295,12 @@ export default class FileUploadInput extends ValidationComponent {
         for (let i = 0; i < uploadedFiles.length; i++) {
             let previousKey = droppedFiles[i].key;
             let previousFile = this.state.files[previousKey];
+            delete this.state.files[previousFile.key];
             let file = uploadedFiles[i];
             file = Objects.mergeClone(file, previousFile);
             file.key = file.id;
             file.isUploaded = true;
             file.loading = false;
-            delete this.state.files[previousFile.key];
             this.state.files[file.key] = file;
             this.__value[this.__value.length] = file.id
         }
@@ -342,7 +342,7 @@ export default class FileUploadInput extends ValidationComponent {
             deletedFile: file
         });
         if (this.props.onChange) {
-            let e = { target: {}};
+            let e = { target: {} };
             e.target.name = this.props.name;
             if (this.props.multiple) {
                 e.target.value = this.__value;
@@ -442,13 +442,13 @@ export default class FileUploadInput extends ValidationComponent {
         }
         extension = extension ? extension.toUpperCase() : "FILE";
         return [
-            <div className="rb-upload-image">
+            <div key={file.key + "rb_upload_image"} className="rb-upload-image">
                 <div className="rb-upload-extension">{extension}</div>
                 <div className="rb-upload-icon">
                     <FaIcon code="fa-file-o" />
                 </div>
             </div>,
-            <OverlayTrigger placement="bottom" overlay={this.toolTip(file)}>
+            <OverlayTrigger key={file.key + "_overlay_trigger"} placement="bottom" overlay={this.toolTip(file)}>
                 <div className="rb-upload-name">
                     <div>
                         {file.name}

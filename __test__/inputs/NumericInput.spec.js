@@ -37,7 +37,7 @@ describe("inputs/NumericInput", () => {
         chai.assert.isNotOk(componentNode.isValid(), "Empty string must be invalid");
     });
 
-    it("'__numericFilter", (done: Function) => {
+    it("'__onChange", (done: Function) => {
         let componentNode = TestUtils.renderIntoDocument(getComponent({ onChange: (): Object => { return true; } }));
         let e = {
             target: {
@@ -51,13 +51,13 @@ describe("inputs/NumericInput", () => {
             }
         };
         /* eslint-disable no-underscore-dangle */
-        componentNode.__numericFilter(e);
+        componentNode.__onChange(e);
         e.target.value = "12.2";
         e.preventDefault = () => {
             chai.assert.isOk(false, "Input value '12.2' failed");
             done("Input value '12.2' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.__onChange(e);
 
         componentNode = TestUtils.renderIntoDocument(getComponent({
             onChange: () => {
@@ -69,11 +69,11 @@ describe("inputs/NumericInput", () => {
         e.preventDefault = () => {
             chai.assert.isOk(true, "Input value '12q2' failed");
         };
-        componentNode.__numericFilter(e);
+        componentNode.__onChange(e);
 
         componentNode = TestUtils.renderIntoDocument(getComponent({}));
         e.target.value = undefined;
-        componentNode.__numericFilter(e);
+        componentNode.__onChange(e);
 
 
         componentNode = TestUtils.renderIntoDocument(getComponent({
@@ -81,7 +81,7 @@ describe("inputs/NumericInput", () => {
             }
         }));
         e.target.value = undefined;
-        componentNode.__numericFilter(e);
+        componentNode.__onChange(e);
 
         done();
     });

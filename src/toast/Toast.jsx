@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ShallowComponent, Generator, Class, Arrays, Maps } from "robe-react-commons";
+import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import ClassName from "../util/css/ClassName";
 import "./Toast.css"
 
@@ -14,11 +14,6 @@ const Constants = {
     SUCCESS: "toast-item-success",
     WARNING: "toast-item-warning",
     ERROR: "toast-item-error"
-};
-
-const getTime = () => {
-    let d = new Date();
-    return d.getTime();
 };
 
 class Toast extends ShallowComponent {
@@ -69,7 +64,7 @@ class Toast extends ShallowComponent {
 
         this.state = {
             listToast: []
-        }
+        };
 
         Toast.success = this.success;
         Toast.info = this.info;
@@ -161,11 +156,11 @@ class Toast extends ShallowComponent {
             setTimeout(() => {
                 let arr = this.state.listToast.slice(0);
                 Arrays.removeByKey(arr, "id", toast);
-                this.setState({ listToast: arr });
+                this.setState({listToast: arr});
             }, TIMEOUTS.REMOVE);
         }, toast.timeOut);
     }
-    
+
     __closeOnClick(e) {
         let id = e.target.getAttribute("id");
         let element = e.target;
@@ -175,9 +170,14 @@ class Toast extends ShallowComponent {
         }
         ClassName.replace(element, "toast-item-open", "toast-item-close");
         let arr = this.state.listToast.slice(0);
-        Arrays.removeByKey(arr, "id", { id });
-        this.setState({ listToast: arr });
+        Arrays.removeByKey(arr, "id", {id});
+        this.setState({listToast: arr});
     }
+
+    __getTime() {
+        let d = new Date();
+        return d.getTime();
+    };
 
     /**
      * Toast.info(message, title, timeOut, callback)
@@ -188,7 +188,7 @@ class Toast extends ShallowComponent {
      */
     info(message, title, timeOut, onClick) {
         this.__addQueue({
-            id: getTime(),
+            id: this.__getTime(),
             type: Constants.INFO,
             message: message,
             title: title,
@@ -206,7 +206,7 @@ class Toast extends ShallowComponent {
      */
     success(message, title, timeOut, onClick) {
         this.__addQueue({
-            id: getTime(),
+            id: this.__getTime(),
             type: Constants.SUCCESS,
             message: message,
             title: title,
@@ -224,7 +224,7 @@ class Toast extends ShallowComponent {
      */
     warning(message, title, timeOut, onClick) {
         this.__addQueue({
-            id: getTime(),
+            id: this.__getTime(),
             type: Constants.WARNING,
             message: message,
             title: title,
@@ -240,9 +240,9 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    error(message: string, title: string, timeOut: number, onClick: func) {
+    error(message:string, title:string, timeOut:number, onClick:func) {
         this.__addQueue({
-            id: getTime(),
+            id: this.__getTime(),
             type: Constants.ERROR,
             message: message,
             title: title,
@@ -250,6 +250,11 @@ class Toast extends ShallowComponent {
             onClick: onClick || this.__closeOnClick
         });
     }
+
+    /**
+     * Toast.configuration({maxVisible:5,position:"top-right"})
+     * @param props
+     */
     static configuration(props) {
         ReactDOM.render(<Toast {...props} />, this.containerNode);
 

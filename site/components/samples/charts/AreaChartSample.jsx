@@ -3,18 +3,19 @@ import {ShallowComponent} from "robe-react-commons";
 import AreaChart from "robe-react-ui/lib/charts/AreaChart";
 
 let data = [
-    {name: "A", pb: 4000, pv: 2400, pr: 2400},
-    {name: "B", pb: 3000, pv: 1398, pr: 2210},
-    {name: "C", pb: 2000, pv: 9800, pr: 2290},
-    {name: "D", pb: 2780, pv: 3908, pr: 2000},
-    {name: "E", pb: 1890, pv: 4800, pr: 2181},
-    {name: "F", pb: 2390, pv: 3800, pr: 2500},
-    {name: "G", pb: 3490, pv: 4300, pr: 2100}
+    {name: "A", public: 4000, private: 2400, protected: 2400},
+    {name: "B", public: 3000, private: 1398, protected: 2210},
+    {name: "C", public: 2000, private: 9800, protected: 2290},
+    {name: "D", public: 2780, private: 3908, protected: 2000},
+    {name: "E", public: 1890, private: 4800, protected: 2181},
+    {name: "F", public: 2390, private: 3800, protected: 2500},
+    {name: "G", public: 3490, private: 4300, protected: 2100}
 ];
-let areas = [
-    {dataKey: "pb", name: "Public", unit: "piece"},
-    {dataKey: "pr", name: "Protected", unit: "piece"},
-    {dataKey: "pv", name: "Private", unit: "piece"}
+
+let meta = [
+    {dataKey: "public", name: "Public", unit: "piece"},
+    {dataKey: "private", name: "Private", unit: "piece"},
+    {dataKey: "protected", name: "Protected", unit: "piece"}
 ];
 
 export default class AreaChartSample extends ShallowComponent {
@@ -23,7 +24,7 @@ export default class AreaChartSample extends ShallowComponent {
         return (
             <div>
                 <div className="form-group">
-                    <AreaChart data={data} width={400} height={250} areas={areas}/>
+                    <AreaChart data={data} width={400} height={250} meta={meta}/>
                 </div>
             </div>
         );
