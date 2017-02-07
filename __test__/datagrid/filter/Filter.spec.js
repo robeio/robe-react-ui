@@ -4,7 +4,7 @@ import Filter from "datagrid/filter/Filter";
 import ComponentManager from "form/ComponentManager";
 
 
-describe("datagrid/filter/Filters", () => {
+describe("datagrid/filter/Filter", () => {
     let props = {
         field: {
             "label": "Name",
