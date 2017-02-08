@@ -29,7 +29,7 @@ export default class TextInputSample extends ShallowComponent {
                                     language="tr_TR"
                                     showOnMobile
                                     languageText="Türkçe Q"
-                                    onClick={this.__onClickTextKeyboard}
+                                    onChange={this.__onChangeTextKeyboard}
                     />
                 </div>
 
@@ -43,30 +43,30 @@ export default class TextInputSample extends ShallowComponent {
                     />
                     <ScreenKeyboard inputId="screenKeyboardSample1"
                                     language="numeric"
-                                    onClick={this.__onClickNumericKeyboard}
+                                    onChange={this.__onChangeNumericKeyboard}
                     />
                 </div>
 
                 <div style={{marginBottom:230}}>
                     <label>Can Use Without Input (Returns Only Clicked Key)</label><br/>
                     <span>Clicked Key : <label>{this.state.screenKeyboardDefault}</label></span>
-                   <ScreenKeyboard onClick={this.__onClickDefaultKeyboard} languageText="English -- Draggable Area --"/>
+                   <ScreenKeyboard onChange={this.__onChangeDefaultKeyboard} languageText="English -- Draggable Area --"/>
                 </div>
             </span>
         );
     }
 
-    __onClickTextKeyboard(value:string, key:string) {
+    __onChangeTextKeyboard(value:string, key:string) {
         this.setState({screenKeyboardValue: value});
         console.log(value, key);
     };
 
-    __onClickNumericKeyboard(value:string, key:string) {
+    __onChangeNumericKeyboard(value:string, key:string) {
         this.setState({screenKeyboardValueWithNumeric: value});
         console.log(value, key);
     };
 
-    __onClickDefaultKeyboard(value:string, key:string) {
+    __onChangeDefaultKeyboard(value:string, key:string) {
         this.setState({screenKeyboardDefault: key});
     };
 
