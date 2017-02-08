@@ -10,7 +10,7 @@ import QKeyboardWithSpecial_tr_TR from "./qKeyboardWithSpecial_tr_TR.json";
 import QKeyboardWithSpecial_en_US from "./qKeyboardWithSpecial_en_US.json";
 import KeyboardWithSpecial_ru_RU from "./keyboardWithSpecial_ru_RU.json";
 import NumericKeyboard from "./NumericKeyboard.json";
-import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
+import FaIcon from "../../faicon/FaIcon";
 import "./ScreenKeyboard.css";
 
 export default class ScreenKeyboard extends ShallowComponent {
