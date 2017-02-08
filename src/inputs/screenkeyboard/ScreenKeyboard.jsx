@@ -192,11 +192,6 @@ export default class ScreenKeyboard extends ShallowComponent {
             if (this.props.changeValueAutomatically)
                 element.value = nextValue;
 
-            this.setState({
-                upperCase: this.state.capsLock,
-                keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
-            });
-
             if (this.props.onChange)
                 this.props.onChange(nextValue, "BACKSPACE");
 
@@ -208,6 +203,11 @@ export default class ScreenKeyboard extends ShallowComponent {
             if (this.props.onChange)
                 this.props.onChange(undefined, "BACKSPACE");
         }
+
+        this.setState({
+            upperCase: this.state.capsLock,
+            keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
+        });
     };
 
     __handleButtonClick(key:string) {
@@ -226,11 +226,6 @@ export default class ScreenKeyboard extends ShallowComponent {
             if (this.props.changeValueAutomatically)
                 element.value = nextValue;
 
-            this.setState({
-                upperCase: this.state.capsLock,
-                keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
-            });
-
             if (this.props.onChange)
                 this.props.onChange(nextValue, key);
 
@@ -244,6 +239,10 @@ export default class ScreenKeyboard extends ShallowComponent {
                 this.props.onChange(undefined, key);
         }
 
+        this.setState({
+            upperCase: this.state.capsLock,
+            keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
+        });
     }
 
     __handleShiftClick() {

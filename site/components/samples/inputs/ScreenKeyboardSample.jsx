@@ -50,7 +50,9 @@ export default class TextInputSample extends ShallowComponent {
                 <div style={{marginBottom:230}}>
                     <label>Can Use Without Input (Returns Only Clicked Key)</label><br/>
                     <span>Clicked Key : <label>{this.state.screenKeyboardDefault}</label></span>
-                   <ScreenKeyboard onChange={this.__onChangeDefaultKeyboard} languageText="English -- Draggable Area --"/>
+                   <ScreenKeyboard onChange={this.__onChangeDefaultKeyboard}
+                                   languageText="English -- Draggable Area --"
+                   />
                 </div>
             </span>
         );
