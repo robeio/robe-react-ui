@@ -27,7 +27,7 @@ export default class ScreenKeyboard extends ShallowComponent {
             "en_US", "tr_TR", "ru_RU", "numeric"
         ]),
         /**
-         * Click event for the component
+         * Change event for the component
          */
         onChange: React.PropTypes.func,
         /**
@@ -38,6 +38,10 @@ export default class ScreenKeyboard extends ShallowComponent {
          * Displays your text top of Keyboard component
          */
         languageText: React.PropTypes.string,
+        /**
+         * Changes inputs value automatically
+         */
+        changeValueAutomatically: React.PropTypes.bool,
         /**
          * Style of Keyboard container
          */
@@ -54,7 +58,8 @@ export default class ScreenKeyboard extends ShallowComponent {
      */
     static defaultProps = {
         language: "en_US",
-        defaultShow: true
+        defaultShow: true,
+        changeValueAutomatically: false
     };
 
     x_pos = 0;
@@ -110,29 +115,30 @@ export default class ScreenKeyboard extends ShallowComponent {
             let className = value === "" ? "buttons letterButtons emptyButton" : "buttons letterButtons";
             if (key.key === "14")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons backspaceButton"
-                                 onClick={this.__handleBackspaceClick}><FaIcon
+                                            onClick={this.__handleBackspaceClick}><FaIcon
                     code="fa-long-arrow-left"/></Button>);
             else if (key.key === "15")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons qButton"
-                                 onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
             else if (key.key === "28")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons capsLockButton"
-                                 onClick={this.__handleCapsLockClick}><FaIcon code="fa-chevron-up"/></Button>);
+                                            onClick={this.__handleCapsLockClick}><FaIcon
+                    code="fa-chevron-up"/></Button>);
             else if (key.key === "40")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons shiftButton"
-                                 onClick={this.__handleShiftClick}>{value}</Button>);
+                                            onClick={this.__handleShiftClick}>{value}</Button>);
             else if (key.key === "51")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="rightShiftButton"
-                                 onClick={this.__handleShiftClick}>{value}</Button>);
+                                            onClick={this.__handleShiftClick}>{value}</Button>);
             else if (key.key === "52" || key.key === "54")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons"
-                                 onClick={this.__handleControlClick}>{value}</Button>);
+                                            onClick={this.__handleControlClick}>{value}</Button>);
             else if (key.key === "53")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons spaceButton"
-                                 onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
             else
                 buttonSetArray.push(<Button key={i} bsSize="sm" className={className}
-                                 onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
         }
 
         return buttonSetArray;
@@ -147,14 +153,14 @@ export default class ScreenKeyboard extends ShallowComponent {
 
             if (key.key === "14")
                 buttonSetArray.push(<Button key="backspace" bsSize="sm" className="numericKeyboardBackSpace"
-                                 onClick={this.__handleBackspaceClick}><FaIcon
+                                            onClick={this.__handleBackspaceClick}><FaIcon
                     code="fa-long-arrow-left"/></Button>);
             else {
                 if (key.key === "4" || key.key === "7" || key.key === "10")
                     buttonSetArray.push(<br key={"br" + i}/>);
 
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="numericKeyboardNums"
-                                 onClick={()=>{this.__handleButtonClick(key.value)}}>{key.value}</Button>);
+                                            onClick={()=>{this.__handleButtonClick(key.value)}}>{key.value}</Button>);
             }
         }
 
@@ -183,7 +189,8 @@ export default class ScreenKeyboard extends ShallowComponent {
             }
             nextPosition = (nextPosition > 0) ? nextPosition : 0;
 
-            element.value = nextValue;
+            if (this.props.changeValueAutomatically)
+                element.value = nextValue;
 
             this.setState({
                 upperCase: this.state.capsLock,
@@ -215,7 +222,9 @@ export default class ScreenKeyboard extends ShallowComponent {
             let selectionEnd = element.selectionEnd;
 
             const nextValue = value.substring(0, selectionStart) + key + value.substring(selectionEnd);
-            element.value = nextValue;
+
+            if (this.props.changeValueAutomatically)
+                element.value = nextValue;
 
             this.setState({
                 upperCase: this.state.capsLock,
