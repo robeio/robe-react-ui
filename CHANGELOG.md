@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.21 -- Developing...
+* Screen Keyboard component added.
 
 ## 1.1.20
 * Chart and Toast components test rewrited, Charts props updated

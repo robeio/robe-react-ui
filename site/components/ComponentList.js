@@ -91,6 +91,14 @@ class ComponentList {
             sample: require("./samples/inputs/DatePickerSample"),
             code: require("./samples/inputs/DatePickerSample.txt")
         });
+        
+        components.inputs.push({
+            header: "ScreenKeyboard",
+            desc: "is an application which provides a visual keyboard on your display.",
+            json: require("./jsons/inputs/screenkeyboard/ScreenKeyboard"),
+            sample: require("./samples/inputs/ScreenKeyboardSample"),
+            code: require("./samples/inputs/ScreenKeyboardSample.txt")
+        });
 
         components.inputs.push({
             header: "HtmlEditor",
