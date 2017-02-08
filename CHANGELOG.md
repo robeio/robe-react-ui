@@ -7,6 +7,7 @@
 * Chart bug fixed.
 * [#51](https://github.com/robeio/robe-react-ui/issues/51) fixed.
 * [#57](https://github.com/robeio/robe-react-ui/issues/57) fixed.
+* [#55](https://github.com/robeio/robe-react-ui/issues/55) fixed.
 
 ## 1.1.19
 * Code preview for the HtmlEditor.
