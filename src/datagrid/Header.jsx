@@ -75,7 +75,7 @@ export default class Header extends ShallowComponent {
         ) : null;
 
         return (
-            <th key={field.name} >
+            <th style={{fontWeight:"bold"}} key={field.name} >
                 {field.label}
                 {filterBtn}
                 {sortBtn}

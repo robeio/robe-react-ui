@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table } from "react-bootstrap";
+import {Button, ButtonGroup, Panel, Table, Collapse} from "react-bootstrap";
 import { Maps,Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
