@@ -58,18 +58,18 @@ export default class TextInputSample extends ShallowComponent {
         );
     }
 
-    __onChangeTextKeyboard(value:string, key:string) {
-        this.setState({screenKeyboardValue: value});
-        console.log(value, key);
+    __onChangeTextKeyboard(e:Object, currentValue:string) {
+        this.setState({screenKeyboardValue: currentValue});
+        console.log(e.target.value, currentValue);
     };
 
-    __onChangeNumericKeyboard(value:string, key:string) {
-        this.setState({screenKeyboardValueWithNumeric: value});
-        console.log(value, key);
+    __onChangeNumericKeyboard(e:Object, currentValue:string) {
+        this.setState({screenKeyboardValueWithNumeric: currentValue});
+        console.log(e.target.value, currentValue);
     };
 
-    __onChangeDefaultKeyboard(value:string, key:string) {
-        this.setState({screenKeyboardDefault: key});
+    __onChangeDefaultKeyboard(e:Object) {
+        this.setState({screenKeyboardDefault: e.target.value});
     };
 
     __handleChange(e:Object) {

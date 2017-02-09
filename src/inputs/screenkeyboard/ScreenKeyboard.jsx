@@ -12,6 +12,7 @@ import KeyboardWithSpecial_ru_RU from "./keyboardWithSpecial_ru_RU.json";
 import NumericKeyboard from "./NumericKeyboard.json";
 import FaIcon from "../../faicon/FaIcon";
 import "./ScreenKeyboard.css";
+import is from "is-js";
 
 export default class ScreenKeyboard extends ShallowComponent {
 
@@ -27,7 +28,7 @@ export default class ScreenKeyboard extends ShallowComponent {
             "en_US", "tr_TR", "ru_RU", "numeric"
         ]),
         /**
-         * Change event for the component
+         * Change event for the component (Returns (e, currentValue))
          */
         onChange: React.PropTypes.func,
         /**
@@ -118,8 +119,8 @@ export default class ScreenKeyboard extends ShallowComponent {
                                             onClick={this.__handleBackspaceClick}><FaIcon
                     code="fa-long-arrow-left"/></Button>);
             else if (key.key === "15")
-                buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons qButton"
-                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                buttonSetArray.push(<Button name="q" value={value} key={i} bsSize="sm" className="buttons qButton"
+                                            onClick={this.__handleButtonClick}>{value}</Button>);
             else if (key.key === "28")
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons capsLockButton"
                                             onClick={this.__handleCapsLockClick}><FaIcon
@@ -134,11 +135,11 @@ export default class ScreenKeyboard extends ShallowComponent {
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons"
                                             onClick={this.__handleControlClick}>{value}</Button>);
             else if (key.key === "53")
-                buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons spaceButton"
-                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                buttonSetArray.push(<Button name="space" value={value} key={i} bsSize="sm" className="buttons spaceButton"
+                                            onClick={this.__handleButtonClick}>{value}</Button>);
             else
-                buttonSetArray.push(<Button key={i} bsSize="sm" className={className}
-                                            onClick={()=>{this.__handleButtonClick(value)}}>{value}</Button>);
+                buttonSetArray.push(<Button name={i + "key" + i} value={value} key={i} bsSize="sm" className={className}
+                                            onClick={this.__handleButtonClick}>{value}</Button>);
         }
 
         return buttonSetArray;
@@ -159,15 +160,15 @@ export default class ScreenKeyboard extends ShallowComponent {
                 if (key.key === "4" || key.key === "7" || key.key === "10")
                     buttonSetArray.push(<br key={"br" + i}/>);
 
-                buttonSetArray.push(<Button key={i} bsSize="sm" className="numericKeyboardNums"
-                                            onClick={()=>{this.__handleButtonClick(key.value)}}>{key.value}</Button>);
+                buttonSetArray.push(<Button name={i + "num" + i} value={key.value} key={i} bsSize="sm" className="numericKeyboardNums"
+                                            onClick={this.__handleButtonClick}>{key.value}</Button>);
             }
         }
 
         return buttonSetArray;
     };
 
-    __handleBackspaceClick() {
+    __handleBackspaceClick(e:Object) {
         if (this.props.inputId) {
             let element = document.getElementById(this.props.inputId);
             if (element === undefined || element === null) {
@@ -192,16 +193,20 @@ export default class ScreenKeyboard extends ShallowComponent {
             if (this.props.changeValueAutomatically)
                 element.value = nextValue;
 
+            e.target.parsedValue = "BACKSPACE";
+            e.target.value = "BACKSPACE";
             if (this.props.onChange)
-                this.props.onChange(nextValue, "BACKSPACE");
+                this.props.onChange(e, nextValue);
 
             setTimeout(() => {
                 element.focus();
                 element.setSelectionRange(nextPosition, nextPosition);
             }, 0);
         } else {
+            e.target.parsedValue = "BACKSPACE";
+            e.target.value = "BACKSPACE";
             if (this.props.onChange)
-                this.props.onChange(undefined, "BACKSPACE");
+                this.props.onChange(e, undefined);
         }
 
         this.setState({
@@ -210,7 +215,7 @@ export default class ScreenKeyboard extends ShallowComponent {
         });
     };
 
-    __handleButtonClick(key:string) {
+    __handleButtonClick(e:Object) {
         if (this.props.inputId) {
             let element = document.getElementById(this.props.inputId);
             if (element === undefined || element === null) {
@@ -221,13 +226,14 @@ export default class ScreenKeyboard extends ShallowComponent {
             let selectionStart = element.selectionStart;
             let selectionEnd = element.selectionEnd;
 
-            const nextValue = value.substring(0, selectionStart) + key + value.substring(selectionEnd);
+            const nextValue = value.substring(0, selectionStart) + e.target.value + value.substring(selectionEnd);
 
             if (this.props.changeValueAutomatically)
                 element.value = nextValue;
 
+            e.target.parsedValue = is.numeric(e.target.value) ? parseInt(e.target.value) : e.target.value;
             if (this.props.onChange)
-                this.props.onChange(nextValue, key);
+                this.props.onChange(e, nextValue);
 
             setTimeout(() => {
                 element.focus();
@@ -235,8 +241,9 @@ export default class ScreenKeyboard extends ShallowComponent {
             }, 0);
         }
         else {
+            e.target.parsedValue = is.numeric(e.target.value) ? parseInt(e.target.value) : e.target.value;
             if (this.props.onChange)
-                this.props.onChange(undefined, key);
+                this.props.onChange(e, undefined);
         }
 
         this.setState({

@@ -78,7 +78,7 @@ describe("Screen Keyboard", () => {
         
         try {
             let wrapper = TestUtils.mount(props, ScreenKeyboard, props);
-            wrapper.instance().__handleButtonClick("c");
+            wrapper.instance().__handleButtonClick();
             wrapper.unmount();
         } catch (error) {
             chai.assert.equal(error.message, "please use same or right ID field for your input.");
