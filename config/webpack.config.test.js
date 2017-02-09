@@ -1,7 +1,18 @@
-/**
- * import common webpack settings
- */
-const commonSettings = require("./webpack.config.common.js")("/src", "/build", "__test__");
+const path = require("path");
+
+const babelOptions = {
+    presets: [
+        "react",
+        "es2015",
+        "stage-0"
+    ]
+};
+
+const settings = require("./webpack.config.common.js")("/src", "/build", "__test__", undefined, babelOptions);
+
+settings.webpack.cache = true;
+settings.webpack.devtool = "eval";
+
 
 /**
  * Json Server
@@ -9,52 +20,23 @@ const commonSettings = require("./webpack.config.common.js")("/src", "/build", "
  */
 const JsonServer = require("./server/JsonServer");
 
-/**
- * @link https://webpack.github.io/docs/configuration.html#cache
- * Cache generated modules and chunks to improve performance for multiple incremental builds.
- This is enabled by default in watch mode.
- * @type {boolean}
- */
-commonSettings.cache = true;
-
-/**
- * @link https://webpack.github.io/docs/configuration.html#debug
- * Switch loaders to debug mode.
- * @type {boolean}
- */
-commonSettings.debug = false;
-
-/**
- * @link https://webpack.github.io/docs/configuration.html#devtool
- * Choose a developer tool to enhance debugging.
- * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
- * @type {string}
- */
-/**
- * @link https://webpack.github.io/docs/configuration.html#devtool
- * Choose a developer tool to enhance debugging.
- * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
- * @type {string}
- */
-commonSettings.devtool = "eval";
-
-commonSettings.module.loaders.push({
+settings.webpack.module.rules.push({
+    enforce: 'pre',
     test: /\.jsx?$/,
     exclude: /(__test__|node_modules|bower_components)\//,
-    loader: "isparta"
+    loader: "isparta-loader",
+    options: {
+        embedSource: true,
+        noAutoWrap: true,
+        // these babel options will be passed only to isparta and not to babel-loader
+        babel: {
+            presets: ["es2015", "stage-0", "react"]
+        }
+    }
 });
 
-// *optional* isparta options: istanbul behind isparta will use it
-commonSettings.isparta = {
-    embedSource: true,
-    noAutoWrap: true,
-    // these babel options will be passed only to isparta and not to babel-loader
-    babel: {
-        presets: ["es2015", "stage-0", "react"]
-    }
-};
 
-commonSettings.externals = {
+settings.webpack.externals = {
     "cheerio": "window",
     "react/addons": true, // important!!
     "react/lib/ExecutionEnvironment": true,
@@ -93,10 +75,9 @@ module.exports = function configure(config) {
             "__test__/**/*.spec.js"
         ],
         preprocessors: {
-            "__test__/**/*.spec.js": ["webpack"],
-            "src/**/*.js": ["webpack"]
+            "__test__/**/*.spec.js": ["webpack"]
         },
-        webpack: commonSettings,
+        webpack: settings.webpack,
         webpackServer: {
             colors: true,
             hash: false,

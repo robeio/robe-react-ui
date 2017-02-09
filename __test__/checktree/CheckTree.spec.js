@@ -1,6 +1,6 @@
 import chai from "chai";
 import React from "react";
-import TestUtils from "react-addons-test-utils";
+import TestUtils from "../TestUtils";
 import CheckTree from "checktree/CheckTree";
 import CheckInput from "inputs/CheckInput";
 import { mount } from "enzyme";

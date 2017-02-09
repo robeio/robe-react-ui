@@ -1,6 +1,6 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
-import DatePicker from "inputs/datepicker/DatePicker";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
+import DatePicker from "inputs/datepicker/DatePicker";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("inputs/datepicker/DatePicker", () => {
     const assert = chai.assert;

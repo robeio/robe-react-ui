@@ -14,7 +14,8 @@
     "codecov": "NODE_ENV=codecov cat coverage/*/lcov.info | codecov",
     "build": "node ./config/prebuild.js ./lib & babel ./src --out-dir ./lib  --copy-files",
     "site": "node ./config/prebuild.js ./docs & webpack --config config/webpack.config.site.js  --progress --profile --colors",
-    "start": "webpack-dev-server --config config/webpack.site.dev.js --colors"
+    "start": "webpack-dev-server --config config/webpack.site.dev.js --colors",
+    "prod": "node ./config/server/start.js 3000 & http-server ./docs"
   },
   "docs": "./nreact-highlightode_modules/.bin/esdoc -c esdoc.json",
   "keywords": [
@@ -57,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.9.0",
     "file-loader": "0.10.0",
+    "http-server": "^0.9.0",
     "isparta-loader": "2.0.0",
     "json-loader": "0.5.4",
     "karma": "1.4.1",
@@ -77,8 +79,8 @@
     "robe-json-server": "0.8.19",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "1.14.0",
-    "webpack-dev-server": "1.16.3",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0",
     "webpack-file-changer": "1.0.0"
   },
   "dependencies": {

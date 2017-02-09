@@ -3,6 +3,8 @@
 ## 1.1.21 -- Developing...
 * Screen Keyboard component added.
 * Wizard component redeveloped.
+* changed version of webpack from 1 to 2 beta.
+* changed all configuration by webpack 2 beta.
 
 ## 1.1.20
 * Chart and Toast components test rewrited, Charts props updated

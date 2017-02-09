@@ -1,7 +1,7 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react"; // eslint-disable-line no-unused-vars
-import InputValidations from "validation/InputValidations"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import Application from "robe-react-commons/lib/application/Application";
+import InputValidations from "validation/InputValidations"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("validation/InputValidations", () => {
     function resetValidationMessage() {

@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+
 import {
     ShallowComponent,
     Assertions,
@@ -23,17 +23,19 @@ export default class Application extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        language: "./assets/en_US.json"
+        language: Cookies.get("language", "assets/en_US.json")
     };
 
-
+    isLoaded = false;
     constructor(props: Object) {
         super(props);
+        this.componentWillReceiveProps(props);
+    }
+    previousLang;
+    componentWillReceiveProps(props: Object) {
         this.state = {
-            upgrade: false
+            upgrade: this.previousLang !== props.language
         };
-        let language = Cookies.get("language", props.language);
-        this.loadLanguage(language);
     }
 
     //TODO: Commondaki methodların buradan ulaşılabilmesi.
@@ -48,33 +50,37 @@ export default class Application extends ShallowComponent {
         </div>);
     }
 
-
-    componentWillReceiveProps(props: Object) {
-        Cookies.put("language", props.language);
-        this.loadLanguage(props.language);
-        this.state = {
-            upgrade: true
-        }
-    }
-
     componentDidUpdate() {
-        if (this.state.upgrade) {
-            this.setState({
-                upgrade: false
-            });
-        }
+       this.upgradeIfNeeded();
     }
 
-    loadLanguage(language: string) {
-        if (Assertions.isString(language)) {
-            try {
-                CA.loadI18n(require(language));
-            } catch (error) {
-                console.error(error);
-                CA.loadI18n(require("./assets/en_US.json"));
+    componentDidMount(){
+       this.upgradeIfNeeded()
+    }
+
+    upgradeIfNeeded() {
+        if (this.state.upgrade) {
+            if(Assertions.isString(this.props.language)) {
+                System.import("./" + this.props.language).then((langMap) => {
+                        CA.loadI18n(langMap);
+                        this.isLoaded = true;
+                        this.setState({
+                            upgrade: false
+                        });
+                        Cookies.put("language", this.props.language);
+                    })
+                    .catch((err) => {
+                        throw err;
+                });
+            } else {
+                CA.loadI18n(this.props.language);
+                this.setState({
+                    upgrade: false
+                });
             }
-        } else {
-            CA.loadI18n(language);
         }
     }
 }
+
+
+

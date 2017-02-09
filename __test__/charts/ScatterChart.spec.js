@@ -1,6 +1,7 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
 import {mount} from "enzyme";// eslint-disable-line
+import TestUtils from "../TestUtils";
 import ScatterChart from "charts/ScatterChart";// eslint-disable-line
 
 

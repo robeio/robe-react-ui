@@ -5,7 +5,6 @@ import {
     Nav,
     NavItem,
     NavDropdown,
-    Button,
     MenuItem
 } from "react-bootstrap";
 import {ShallowComponent} from "robe-react-commons";
@@ -100,18 +99,14 @@ class Site extends ShallowComponent {
             window.open("https://react-bootstrap.github.io/components.html");
             return;
         }
-        if (key === "en_US") {
-            this.setState({
-                language: undefined
-            });
-            return;
-        }
-        if (key === "tr_TR") {
-            let lang = "./assets/tr_TR.json";
-            this.setState({
-                language: lang
-            });
-            return;
+
+        switch (key) {
+            case "en_US":
+            case "tr_TR":
+                this.setState({
+                    language: `assets/${key}.json`
+                });
+                return;
         }
         window.location.hash = `#${key}`;
 

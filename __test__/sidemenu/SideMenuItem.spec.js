@@ -1,6 +1,7 @@
 import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
-import SideMenuItem from "sidemenu/SideMenuItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
+import SideMenuItem from "sidemenu/SideMenuItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
+
 import {
     Collapse
 } from "react-bootstrap";

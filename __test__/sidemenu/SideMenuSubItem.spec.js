@@ -1,6 +1,6 @@
 import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
-import SideMenuSubItem from "sidemenu/SideMenuSubItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
+import SideMenuSubItem from "sidemenu/SideMenuSubItem";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("sidemenu/SideMenuSubItem", () => {
     const props = {

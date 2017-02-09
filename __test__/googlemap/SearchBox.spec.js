@@ -1,7 +1,6 @@
 import React from "react"; // eslint-disable-line
 import chai from "chai";// eslint-disable-line
 import TestUtils from "../TestUtils";
-import GoogleMap from "googlemap/GoogleMap";// eslint-disable-line
 import SearchBox from "googlemap/SearchBox";// eslint-disable-line
 
 let apiKey = "AIzaSyAY1o0OVVUKBFoVX84PQW5FuAkolw6kNeU";

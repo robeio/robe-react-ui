@@ -1,5 +1,6 @@
 import React from "react";
 import chai from "chai";
+import TestUtils from "../TestUtils";
 import CheckInput from "inputs/CheckInput";
 import {mount} from "enzyme";
 
