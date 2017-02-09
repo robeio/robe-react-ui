@@ -32,12 +32,12 @@ commonSettings.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
  * https://github.com/webpack/docs/wiki/optimization#chunks
  * @type LimitChunkCountPlugin
  */
-commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}));
+commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }));
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#chunks
  * @type MinChunkSizePlugin
  */
-commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000}));
+commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 10000 }));
 
 /**
  *
@@ -87,7 +87,7 @@ commonSettings.plugins.push(fileChanger);
 /* Use production parameter for hiding warnings which are coming from React library. */
 commonSettings.plugins.push(new webpack.DefinePlugin({
     "process.env": {
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify("production")
     }
 }));
 
