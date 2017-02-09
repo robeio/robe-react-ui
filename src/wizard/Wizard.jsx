@@ -64,8 +64,7 @@ export default class Wizard extends ShallowComponent {
     componentWillReceiveProps(nextProps) {
         this.state = {
             currentKey: this.props.currentKey,
-            stateOfSteps: {},
-            valid: true
+            stateOfSteps: {}
         };
         this.__initSteps(nextProps);
     }
