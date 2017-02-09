@@ -99,7 +99,6 @@
     "react-quill": "0.4.1",
     "react-recaptcha": "2.2.6",
     "react-router": "4.0.0-2",
-    "react-tinymce": "0.5.1",
     "robe-ajax": "1.0.1",
     "robe-react-commons": "1.0.85",
     "zxcvbn": "4.4.1"
