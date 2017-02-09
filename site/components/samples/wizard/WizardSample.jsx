@@ -43,11 +43,113 @@ const fields = [
     }
 ];
 
-
-export default class WizardSample extends ShallowComponent {
+class InfoStep extends ShallowComponent {
     constructor(props) {
         super(props);
-        this.state = {finish: false, stateOfSteps: {}};
+        this.state = {
+            name: "",
+            gender: "",
+            approve: ""
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <hr style={{marginTop:0}}/>
+                <div><label style={{color:"#4380db"}}>Name: </label> {this.state.name}</div>
+                <div><label style={{color:"#4380db"}}>Gender: </label> {this.state.gender}</div>
+                <hr style={{marginTop:0}}/>
+
+                <CheckInput
+                    name="approve"
+                    item={{key: "approve",value: "I approve."}}
+                    textField="value"
+                    valueField="key"
+                    value={this.state.approve}
+                    formControl={false}
+                    onChange={this.__handleChange}
+                />
+            </div>
+        );
+    }
+
+    __handleChange(e) {
+        let state = {};
+        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
+        state[e.target.name] = value;
+        this.setState(state);
+        return true;
+    }
+
+    isValid() {
+        let result = {message: "", status: true};
+        if (!this.state.approve) {
+            result.message = "Please confirm your information.";
+            result.status = false;
+        }
+        return result;
+    }
+
+    stateOfSteps(steps) {
+        var state = {};
+        state.name = steps.formStep.name;
+        state.gender = steps.formStep.gender;
+        this.setState(state);
+    }
+}
+
+class CompleteStep extends ShallowComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            gender: "",
+            approve: ""
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <h4 style={{color:"#4380db"}}>Successful!</h4>
+                <hr style={{marginTop:0}}/>
+                <div><label>Name: </label> {this.state.name}</div>
+                <div><label>Gender: </label> {this.state.gender}</div>
+                <hr style={{marginTop:0}}/>
+
+                <CheckInput
+                    name="approve"
+                    item={{key: "approve",value: "I approve."}}
+                    textField="value"
+                    valueField="key"
+                    disabled
+                    value={this.state.approve}
+                    formControl={false}/>
+            </div>
+        );
+    }
+
+    isValid() {
+        let result = {message: "Finish", type: "success"};
+
+        return result;
+    }
+
+    stateOfSteps(steps) {
+        var state = {};
+        state.name = steps.infoStep.name;
+        state.gender = steps.infoStep.gender;
+        state.approve = steps.infoStep.approve;
+        this.setState(state);
+    }
+}
+
+export default class WizardSample extends ShallowComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {stepFinish: false, stateOfSteps: {}};
     }
 
     render() {
@@ -58,10 +160,13 @@ export default class WizardSample extends ShallowComponent {
                         <DataForm fields={fields}/>
                     </Step>
                     <Step title="Info" stepKey="infoStep">
-                        <div>Info Step</div>
+                        <InfoStep/>
+                    </Step>
+                    <Step title="Complete" stepKey="completeStep">
+                        <CompleteStep/>
                     </Step>
                 </Wizard>
-                <Collapse in={this.state.finish}>
+                <Collapse in={this.state.stepFinish}>
                     <div>
                         <h4 style={{color:"#4380db"}}>Result</h4>
                         <hr style={{marginTop:0}}/>
@@ -75,7 +180,7 @@ export default class WizardSample extends ShallowComponent {
     }
 
     __onCompleteClick(steps) {
-        this.setState({stateOfSteps: steps, finish: true});
+        this.setState({stateOfSteps: steps, stepFinish: true});
     }
 
 }
