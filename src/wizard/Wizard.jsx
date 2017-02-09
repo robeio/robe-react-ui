@@ -64,8 +64,7 @@ export default class Wizard extends ShallowComponent {
     componentWillReceiveProps(nextProps) {
         this.state = {
             currentKey: this.props.currentKey,
-            stateOfSteps: {},
-            valid: true
+            stateOfSteps: {}
         };
         this.__initSteps(nextProps);
     }
@@ -144,7 +143,6 @@ export default class Wizard extends ShallowComponent {
             nextButton = (
                 <Pager.Item
                     next
-                    disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
                 >
                     {this.props.next} <FaIcon code="fa-arrow-right"/>
