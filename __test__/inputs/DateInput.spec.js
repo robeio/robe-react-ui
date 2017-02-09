@@ -25,7 +25,6 @@ describe("inputs/DateInput", () => {
             label: "label",
             onChange: (e) => {
                 assert.equal(e.target.value, "12/12/1985");
-                assert.equal(e.target.parsedValue, 503182800000);
             }
         };
         let wrapper = TestUtils.mount(props, DateInput);
