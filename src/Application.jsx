@@ -58,24 +58,28 @@ export default class Application extends ShallowComponent {
         this.upgradeIfNeeded();
     }
 
-    upgradeIfNeeded() {
+    upgradeIfNeeded(lang) {
+        let language = lang || this.props.language;
         if (this.state.upgrade) {
-            if (Assertions.isString(this.props.language)) {
+            if (Assertions.isString(language)) {
                 try {
-                    System.import("./" + this.props.language).then((langMap) => {
+                    System.import("./" + language).then((langMap) => {
                         CA.loadI18n(langMap);
                         this.isLoaded = true;
                         this.setState({
                             upgrade: false
                         });
-                        Cookies.put("language", this.props.language);
+                        Cookies.put("language", language);
                     })
                         .catch((err) => {
-                            throw err;
+                            if (lang) {
+                                throw err;
+                            }
+                            Cookies.remove("language");
+                            this.upgradeIfNeeded(Cookies.get("language", "assets/en_US.json"));
                         });
                 } catch (error) {
                     Cookies.remove("language");
-                    console.warn(error);
                 }
             } else {
                 CA.loadI18n(this.props.language);
