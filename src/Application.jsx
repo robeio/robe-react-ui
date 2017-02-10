@@ -51,17 +51,18 @@ export default class Application extends ShallowComponent {
     }
 
     componentDidUpdate() {
-       this.upgradeIfNeeded();
+        this.upgradeIfNeeded();
     }
 
-    componentDidMount(){
-       this.upgradeIfNeeded()
+    componentDidMount() {
+        this.upgradeIfNeeded();
     }
 
     upgradeIfNeeded() {
         if (this.state.upgrade) {
-            if(Assertions.isString(this.props.language)) {
-                System.import("./" + this.props.language).then((langMap) => {
+            if (Assertions.isString(this.props.language)) {
+                try {
+                    System.import("./" + this.props.language).then((langMap) => {
                         CA.loadI18n(langMap);
                         this.isLoaded = true;
                         this.setState({
@@ -69,9 +70,13 @@ export default class Application extends ShallowComponent {
                         });
                         Cookies.put("language", this.props.language);
                     })
-                    .catch((err) => {
-                        throw err;
-                });
+                        .catch((err) => {
+                            throw err;
+                        });
+                } catch (error) {
+                    Cookies.remove("language");
+                    console.warn(error);
+                }
             } else {
                 CA.loadI18n(this.props.language);
                 this.setState({

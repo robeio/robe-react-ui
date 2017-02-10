@@ -45,20 +45,20 @@
     "chai": "3.5.0",
     "codecov.io": "0.1.6",
     "colors": "1.1.2",
-    "copy-webpack-plugin": "3.0.1",
+    "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.26.1",
     "enzyme": "2.7.1",
     "escape-string-regexp": "1.0.5",
-    "eslint": "3.14.1",
-    "eslint-config-airbnb": "14.0.0",
+    "eslint": "3.15.0",
+    "eslint-config-airbnb": "14.1.0",
     "eslint-import-resolver-webpack": "0.8.1",
     "eslint-loader": "1.6.1",
     "eslint-plugin-flowtype": "2.30.0",
     "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.9.0",
     "file-loader": "0.10.0",
-    "http-server": "^0.9.0",
+    "http-server": "0.9.0",
     "isparta-loader": "2.0.0",
     "json-loader": "0.5.4",
     "karma": "1.4.1",
@@ -79,8 +79,8 @@
     "robe-json-server": "0.8.19",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "2.2.0",
     "webpack-file-changer": "1.0.0"
   },
   "dependencies": {
@@ -103,6 +103,6 @@
     "react-router": "4.0.0-2",
     "robe-ajax": "1.0.1",
     "robe-react-commons": "1.0.85",
-    "zxcvbn": "4.4.1"
+    "zxcvbn": "4.4.2"
   }
 }
