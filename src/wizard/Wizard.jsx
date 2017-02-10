@@ -109,7 +109,9 @@ export default class Wizard extends ShallowComponent {
             let isPrevious = currentStep.index >= step.index;
             className += isPrevious ? "btn-primary" : "";
             layouts.push(
-                <li className={isPrevious ? "step-active" : "step-passive"}>
+                <li
+                    key={step.index}
+                    className={isPrevious ? "step-active" : "step-passive"}>
                     <a className={className} onClick={() => this.__onChange(step)}>
                         {step.index + 1}
                     </a>

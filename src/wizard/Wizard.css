@@ -36,6 +36,17 @@
     font-weight: 400;
 }
 
+.wizard:after {
+    content: '';
+    position: absolute;
+    background-color: #efefef;
+    height: 3px;
+    width: 100%;
+    left: 0;
+    top: 15px;
+    z-index: 0;
+}
+
 .wizard .step-active:after {
     content: '';
     position: absolute;
