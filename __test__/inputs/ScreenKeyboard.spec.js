@@ -1,8 +1,8 @@
 import chai from "chai";
 import TestUtils from "../TestUtils";
 import ScreenKeyboard from "inputs/screenkeyboard/ScreenKeyboard";
-import QKeyboard_tr_TR from "inputs/screenkeyboard/QKeyboard_tr_TR.json";
-import KeyboardWithSpecial_ru_RU from "inputs/screenkeyboard/KeyboardWithSpecial_ru_RU.json";
+import QKeyboard_tr_TR from "inputs/screenkeyboard/QKeyboard_tr_TR11.json";
+import KeyboardWithSpecial_ru_RU from "inputs/screenkeyboard/KeyboardWithSpecial_ru_RU11.json";
 
 let inputId = "id";
 let language = "tr_TR";
