@@ -122,7 +122,15 @@
     background-color: #fbfafa;
 }
 
+.decimalKeyboardBackSpace {
+    padding-right: 6px;
+    padding-left: 6px;
+    margin-bottom: 2px;
+    background-color: #fbfafa;
+}
+
 .numericKeyboardNums {
+    min-width: 29px;
     margin-right: 2px;
     margin-bottom: 2px;
     background-color: #fbfafa;

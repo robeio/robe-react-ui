@@ -1,15 +1,16 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Button from "react-bootstrap/lib/Button";
-import QKeyboard_en_US from "./qKeyboard_en_US.json";
-import Keyboard_ru_RU from "./keyboard_ru_RU.json";
-import QKeyboard_tr_TR from "./qKeyboard_tr_TR.json";
-import QKeyboardWithControl_tr_TR from "./qKeyboardWithControl_tr_TR.json";
-import KeyboardWithControl_ru_RU from "./keyboardWithControl_ru_RU.json";
-import QKeyboardWithSpecial_tr_TR from "./qKeyboardWithSpecial_tr_TR.json";
-import QKeyboardWithSpecial_en_US from "./qKeyboardWithSpecial_en_US.json";
-import KeyboardWithSpecial_ru_RU from "./keyboardWithSpecial_ru_RU.json";
+import QKeyboard_en_US from "./QKeyboard_en_US.json";
+import Keyboard_ru_RU from "./Keyboard_ru_RU.json";
+import QKeyboard_tr_TR from "./QKeyboard_tr_TR.json";
+import QKeyboardWithControl_tr_TR from "./QKeyboardWithControl_tr_TR.json";
+import KeyboardWithControl_ru_RU from "./KeyboardWithControl_ru_RU.json";
+import QKeyboardWithSpecial_tr_TR from "./QKeyboardWithSpecial_tr_TR.json";
+import QKeyboardWithSpecial_en_US from "./QKeyboardWithSpecial_en_US.json";
+import KeyboardWithSpecial_ru_RU from "./KeyboardWithSpecial_ru_RU.json";
 import NumericKeyboard from "./NumericKeyboard.json";
+import DecimalKeyboard from "./DecimalKeyboard.json";
 import FaIcon from "../../faicon/FaIcon";
 import "./ScreenKeyboard.css";
 import is from "is-js";
@@ -25,7 +26,7 @@ export default class ScreenKeyboard extends ShallowComponent {
          * Keyboard buttons language. Possible values "en_US", "tr_TR", "ru_RU", "numeric".
          */
         language: React.PropTypes.oneOf([
-            "en_US", "tr_TR", "ru_RU", "numeric"
+            "en_US", "tr_TR", "ru_RU", "numeric", "decimal"
         ]),
         /**
          * Change event for the component (Returns (e, currentValue))
@@ -39,6 +40,12 @@ export default class ScreenKeyboard extends ShallowComponent {
          * Displays your text top of Keyboard component
          */
         languageText: React.PropTypes.string,
+        /**
+         * Decimal seperator for DecimalInput (Works only with decimal keyboard)
+         */
+        decimalSeperator: React.PropTypes.oneOf([
+            ",", "."
+        ]),
         /**
          * Changes inputs value automatically (But it does not reflect the situation)
          */
@@ -60,7 +67,8 @@ export default class ScreenKeyboard extends ShallowComponent {
     static defaultProps = {
         language: "en_US",
         defaultShow: true,
-        changeValueAutomatically: false
+        changeValueAutomatically: false,
+        decimalSeperator: ","
     };
 
     x_pos = 0;
@@ -89,7 +97,7 @@ export default class ScreenKeyboard extends ShallowComponent {
                 return null;
         }
 
-        let keyboardArea = this.props.language !== "numeric" ? "keyboardArea" : "keyboardAreaNumeric";
+        let keyboardArea = this.props.language === "numeric" || this.props.language === "decimal" ? "keyboardAreaNumeric" : "keyboardArea";
         if (this.state.show || !this.props.inputId)
             return (<div id={this.keyboardAreaId} className={keyboardArea} style={this.props.style}>
                 <div id={this.languageAreaId} className="languageTextArea">{this.__convertLanguageText()}
@@ -135,7 +143,8 @@ export default class ScreenKeyboard extends ShallowComponent {
                 buttonSetArray.push(<Button key={i} bsSize="sm" className="buttons"
                                             onClick={this.__handleControlClick}>{value}</Button>);
             else if (key.key === "53")
-                buttonSetArray.push(<Button name="space" data={value} key={i} bsSize="sm" className="buttons spaceButton"
+                buttonSetArray.push(<Button name="space" data={value} key={i} bsSize="sm"
+                                            className="buttons spaceButton"
                                             onClick={this.__handleButtonClick}>{value}</Button>);
             else
                 buttonSetArray.push(<Button name={i + "key" + i} data={value} key={i} bsSize="sm" className={className}
@@ -145,22 +154,24 @@ export default class ScreenKeyboard extends ShallowComponent {
         return buttonSetArray;
     };
 
-    __renderNumericKeyboard() {
+    __renderDigitalKeyboard() {
         let buttonSetArray = [];
         let keySet = this.state.keySet;
+        let className = this.props.language === "numeric" ? "numericKeyboardBackSpace" : "decimalKeyboardBackSpace";
 
         for (let i = 0; i < keySet.length; i++) {
             let key = keySet[i];
 
             if (key.key === "14")
-                buttonSetArray.push(<Button key="backspace" bsSize="sm" className="numericKeyboardBackSpace"
+                buttonSetArray.push(<Button key="backspace" bsSize="sm" className={className}
                                             onClick={this.__handleBackspaceClick}><FaIcon
                     code="fa-long-arrow-left"/></Button>);
             else {
-                if (key.key === "4" || key.key === "7" || key.key === "10")
-                    buttonSetArray.push(<br key={"br" + i}/>);
+                if (key.value !== this.props.decimalSeperator && key.key === "11")
+                    continue;
 
-                buttonSetArray.push(<Button name={i + "num" + i} data={key.value} key={i} bsSize="sm" className="numericKeyboardNums"
+                buttonSetArray.push(<Button name={i + "decNum" + i} data={key.value} key={i} bsSize="sm"
+                                            className="numericKeyboardNums"
                                             onClick={this.__handleButtonClick}>{key.value}</Button>);
             }
         }
@@ -211,7 +222,7 @@ export default class ScreenKeyboard extends ShallowComponent {
 
         this.setState({
             upperCase: this.state.capsLock,
-            keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
+            keySet: this.state.keySet !== NumericKeyboard || this.state.keySet !== DecimalKeyboard ? this.__decideLanguage(this.props.language) : this.state.keySet === NumericKeyboard ? NumericKeyboard : DecimalKeyboard
         });
     };
 
@@ -253,7 +264,7 @@ export default class ScreenKeyboard extends ShallowComponent {
 
         this.setState({
             upperCase: this.state.capsLock,
-            keySet: this.state.keySet !== NumericKeyboard ? this.__decideLanguage(this.props.language) : NumericKeyboard
+            keySet: this.state.keySet !== NumericKeyboard || this.state.keySet !== DecimalKeyboard ? this.__decideLanguage(this.props.language) : this.state.keySet === NumericKeyboard ? NumericKeyboard : DecimalKeyboard
         });
     }
 
@@ -278,7 +289,9 @@ export default class ScreenKeyboard extends ShallowComponent {
         if (language === "en_US" || language === "tr_TR" || language === "ru_RU")
             return this.__renderQKeyboard();
         else if (language === "numeric")
-            return this.__renderNumericKeyboard();
+            return this.__renderDigitalKeyboard();
+        else if (language === "decimal")
+            return this.__renderDigitalKeyboard();
         else
             return this.__renderQKeyboard();
     };
@@ -292,6 +305,8 @@ export default class ScreenKeyboard extends ShallowComponent {
             return Keyboard_ru_RU;
         else if (language === "numeric")
             return NumericKeyboard;
+        else if (language === "decimal")
+            return DecimalKeyboard;
         else
             return QKeyboard_en_US;
     };
@@ -305,6 +320,8 @@ export default class ScreenKeyboard extends ShallowComponent {
             return KeyboardWithSpecial_ru_RU;
         else if (language === "numeric")
             return NumericKeyboard;
+        else if (language === "decimal")
+            return DecimalKeyboard;
         else
             return QKeyboardWithSpecial_en_US;
     };
@@ -328,6 +345,8 @@ export default class ScreenKeyboard extends ShallowComponent {
             return this.props.languageText || "русский";
         else if (language === "numeric")
             return this.props.languageText || "Num";
+        else if (language === "decimal")
+            return this.props.languageText || "Dec";
     };
 
     __hideKeyboard(e:Object) {
