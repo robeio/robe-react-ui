@@ -56,7 +56,7 @@ describe("Screen Keyboard", () => {
         props = {language: "numeric"};
 
         wrapper = TestUtils.mount(props, ScreenKeyboard, props);
-        chai.assert.equal(14, wrapper.instance().__renderNumericKeyboard().length);
+        chai.assert.equal(13, wrapper.instance().__renderDigitalKeyboard().length);
         wrapper.unmount();
     });
 
