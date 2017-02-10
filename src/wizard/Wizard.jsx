@@ -1,24 +1,28 @@
 import React from "react";
-import { ShallowComponent, Application } from "robe-react-commons";
+import {ShallowComponent, Application, Arrays} from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
-import PageItem from "react-bootstrap/lib/PageItem";
 import Toast from "../toast/Toast";
+import Step from "./Step";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
 export default class Wizard extends ShallowComponent {
     /**
-    * PropTypes of the component.
-    *
-    * @static
-    */
+     * PropTypes of the component.
+     *
+     * @static
+     */
     static propTypes = {
         /**
          * Current page index to render.
          */
-        currentStep: React.PropTypes.number,
+        currentKey: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+        /**
+         * provides to wizard change own state.
+         */
+        changeState: React.PropTypes.bool,
         /**
          * Text for the next button.
          */
@@ -30,123 +34,137 @@ export default class Wizard extends ShallowComponent {
         /**
          * Text for the complete button.
          */
-        complete: React.PropTypes.string
+        complete: React.PropTypes.string,
+        /**
+         *
+         */
+        onComplete: React.PropTypes.func,
+        /**
+         *
+         */
+        onChange: React.PropTypes.func
+
     };
 
     static defaultProps = {
-        currentStep: 0,
+        currentKey: undefined,
+        changeState: true,
         next: Application.i18n(Wizard, "wizard.Wizard", "next"),
         previous: Application.i18n(Wizard, "wizard.Wizard", "previous"),
         complete: Application.i18n(Wizard, "wizard.Wizard", "complete")
     };
-    __stepValidInfo = [];
-    __content = undefined;
-
+    __steps = [];
+    __refs = {};
 
     constructor(props: Object) {
         super(props);
         this.state = {
-            currentStep: this.props.currentStep,
-            valid: true
+            currentKey: props.currentKey,
+            stateOfSteps: {}
         };
     }
 
+
     render(): Object {
+        this.__steps = [];
+        let components = React.Children.map(this.props.children,
+            (child, idx) => {
+                if (child.type === Step) {
+                    let step = {};
+                    step.title = child.props.title || "";
+                    step.stepKey = child.props.stepKey || ("step" + (idx + 1));
+                    step.index = idx;
+                    if (this.state.currentKey === undefined) {
+                        this.state.currentKey = step.stepKey;
+                    }
+                    this.__steps.push(step);
+                    return React.cloneElement(child, {
+                        title: step.title,
+                        stepKey: step.stepKey,
+                        index: step.index,
+                        ref: (step) => {
+                            if (step) {
+                                this.__refs[step.props.stepKey] = step;
+                            }
+                        }
+                    });
+                }
+            });
+
         return (
-            <div>
-                <Col className="wizard">
-                    <Col className="wizard-row setup-panel">
-                        {this.__renderSteps()}
-                    </Col>
-                </Col>
-                {this.__renderContent()}
+            <div id="wizard">
+                {this.__renderStepLayout(this.__steps)}
+                {this.__renderSteps(components)}
                 {this.__renderPager()}
             </div>
         );
     }
 
-    __renderSteps(): Array {
-        let steps = [];
-        for (let i = 0; i < this.props.steps.length; i++) {
-            let item = this.props.steps[i];
-            let styleClass = (this.state.currentStep === i) ? "btn-primary" : "btn-default";
-            let step = (
-                <Col key={i} className="wizard-step">
-                    <a
-                        onClick={() => { this.__onClickStepButton(i); } }
-                        className={`btn btn-circle ${styleClass}`}
-                        >
-                        {i + 1}
+    __renderStepLayout(steps): Array {
+        let layouts = [];
+        let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined) {
+            return layouts;
+        }
+        steps.map((step) => {
+            let className = "step btn btn-default ";
+            let isPrevious = currentStep.index >= step.index;
+            className += isPrevious ? "btn-primary" : "";
+            layouts.push(
+                <li className={isPrevious ? "step-active" : "step-passive"}>
+                    <a className={className} onClick={() => this.__onChange(step)}>
+                        {step.index + 1}
                     </a>
-                    <p>{item.title}</p>
-                </Col>);
-            steps.push(step);
-        }
-        return steps;
+                    <div className="label">{step.title}</div>
+                </li>)
+        });
+        return (
+            <ul className="wizard">
+                {layouts}
+            </ul>);
     }
 
-    __onClickStepButton(index: number) {
-        if (this.state.currentStep === index) {
-            return;
-        }
-        this.__stepValidInfo[this.state.currentStep] = this.isValid();
-
-        let state = {};
-        if (this.state.currentStep < index) {
-            if (this.__areStepsValid(this.state.currentStep, index)) {
-                state.currentStep = index;
-                this.setState(state);
-            }
-        } else if (this.state.currentStep > index) {
-            state.currentStep = index;
-            this.setState(state);
-        }
-    }
-
-    __areStepsValid(start: number, end: number): boolean {
-        for (start; start < end; start++) {
-            if (!this.__stepValidInfo[start]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    __renderContent(): Object {
-        this.__content = this.props.steps[this.state.currentStep].component;
-        return this.__content;
-    }
-
-    __handleNextButtonClick() {
-        this.__onClickStepButton(this.state.currentStep + 1);
-    }
-
-    __handlePreviousButtonClick() {
-        this.__onClickStepButton(this.state.currentStep - 1);
+    __renderSteps(components): Array {
+        let componentArr = [];
+        components.map((child) => {
+            let display = this.state.currentKey === child.props.stepKey ? "inherit" : "none";
+            componentArr.push(
+                <div
+                    key={child.props.stepKey}
+                    style={{display}}>
+                    {child}
+                </div>)
+        });
+        return componentArr;
     }
 
     __renderPager(): Object {
+        let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined) {
+            return [];
+        }
         let nextButton = null;
-        if (this.state.currentStep === this.props.steps.length - 1) {
-            nextButton = (
-                <Col className="pull-right">
-                    <Button
-                        bsStyle="primary"
-                        onClick={this.props.onCompleteClick}
+        if (currentStep.index === this.__steps.length - 1) {
+            if (this.props.onComplete) {
+                nextButton = (
+                    <Col className="pull-right">
+                        <Button
+                            bsStyle="primary"
+                            onClick={this.__onComplete}
                         >
-                        <FaIcon code="fa-check-circle" />
-                        {this.props.complete}
-                    </Button>
-                </Col>
-            );
+                            <FaIcon code="fa-check-circle"/>
+                            {this.props.complete}
+                        </Button>
+                    </Col>
+                );
+            }
         } else {
             nextButton = (
                 <Pager.Item
                     next
-                    disabled={!this.state.valid}
                     onClick={this.__handleNextButtonClick}
-                    >
-                    {this.props.next} <FaIcon code="fa-arrow-right" />
+                >
+                    {this.props.next} <FaIcon code="fa-arrow-right"/>
                 </Pager.Item>
             );
         }
@@ -154,29 +172,126 @@ export default class Wizard extends ShallowComponent {
             <Pager>
                 <Pager.Item
                     previous
-                    disabled={this.state.currentStep === 0}
-                    onClick={this.state.currentStep === 0 ? null : this.__handlePreviousButtonClick}
-                    >
-                    <FaIcon code="fa-arrow-left" />{this.props.previous}
+                    style={{display: currentStep.index == 0 ? "none" : "inherit"}}
+                    onClick={this.__handlePreviousButtonClick}
+                >
+                    <FaIcon code="fa-arrow-left"/>{this.props.previous}
                 </Pager.Item>
                 {nextButton}
             </Pager>
         );
     }
 
-    isValid(): boolean {
-        if (this.__content === undefined) {
-            return false;
+    __handleNextButtonClick() {
+        let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined) {
+            return;
         }
-        if (!this.__content._owner) { // eslint-disable-line no-underscore-dangle
-            return true;
+        let nextStep = this.__steps[currentStep.index + 1];
+        if (nextStep === undefined) {
+            return;
+        }
+        this.__onChange(nextStep);
+    }
+
+    __handlePreviousButtonClick() {
+        let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined) {
+            return;
+        }
+        let previousStep = this.__steps[currentStep.index - 1];
+        if (previousStep === undefined) {
+            return;
+        }
+        this.__onChange(previousStep);
+    }
+
+    __getCurrentStep(): Object {
+        return Arrays.getValueByKey(this.__steps, "stepKey", this.state.currentKey);
+    }
+
+
+    __onComplete() {
+        if (this.props.onComplete) {
+            let currentStep = this.__getCurrentStep();
+            if (currentStep === undefined) {
+                return;
+            }
+            let currentStepRef = this.__refs[currentStep.stepKey];
+            if (currentStepRef === undefined) {
+                return;
+            }
+            let result = currentStepRef.isValid();
+            if (result.message) {
+                this.__showToast(result.type, result.message);
+            }
+            if (!result.status) {
+                return;
+            }
+
+            let stateOfSteps = this.state.stateOfSteps;
+            stateOfSteps[currentStep.stepKey] = currentStepRef.__getStateOfStep();
+            this.props.onComplete(stateOfSteps)
+        }
+    }
+
+    __onChange(step: Object) {
+        let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined || currentStep.stepKey === step.stepKey) {
+            return;
+        }
+        let nextStep = step.index > currentStep.index + 1 ? this.__steps[currentStep.index + 1] : step;
+
+        let nextStepRef = this.__refs[nextStep.stepKey];
+        let currentStepRef = this.__refs[currentStep.stepKey];
+
+        if (currentStepRef === undefined || nextStepRef === undefined) {
+            return;
         }
 
-        let result = this.__content._owner._instance.refs.step.isValid(); // eslint-disable-line no-underscore-dangle
-        if (!result) {
-            Toast.error(result.message);
-            return false;
+        if (step.index > currentStep.index) {
+            let result = currentStepRef.isValid();
+            if (result.message) {
+                this.__showToast(result.type, result.message);
+            }
+            if (!result.status) {
+                return;
+            }
         }
-        return true;
+
+        if (this.props.changeState) {
+            let state = {currentKey: nextStep.stepKey};
+            let stateOfSteps = this.state.stateOfSteps;
+            stateOfSteps[currentStep.stepKey] = currentStepRef.__getStateOfStep();
+            this.setState(state, () => {
+                nextStepRef.__stateOfSteps(stateOfSteps)
+            });
+        }
+
+        if (this.props.onChange) {
+            this.props.onChange({
+                target: nextStep
+            });
+        }
+    }
+
+    __showToast(type: String, message: String) {
+        switch (type) {
+            case "error":
+                Toast.error(message);
+                break;
+            case "info":
+                Toast.info(message);
+                break;
+            case "success":
+                Toast.success(message);
+                break;
+            case "warning":
+                Toast.warning(message);
+                break;
+            default:
+                Toast.error(message);
+                break;
+        }
     }
 }

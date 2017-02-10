@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CachePlugin = require("webpack/lib/CachePlugin");
+const Utility = require("./util/Utility");
 const JsonServer = require("./server/JsonServer");
 
 
@@ -13,26 +14,25 @@ const babelOptions = {
     plugins: ["doc-gen"]
 };
 
-const webPackConfig = require("./webpack.config.common.js")("/site", "/build", "__test__", "/src", babelOptions);
+const settings = require("./webpack.config.common.js")("/site", "/build", undefined, "/src", babelOptions);
 
-webPackConfig.cache = true;
-webPackConfig.debug = true;
-webPackConfig.devtool = "source-map";
-webPackConfig.entry = {
-    app: [webPackConfig.paths.app]
+settings.webpack.cache = true;
+settings.webpack.devtool = "source-map";
+settings.webpack.entry = {
+    app: [settings.paths.app]
 };
+
 
 // webPackConfig.module.preLoaders.push({ test: /.jsx?$/, loader: "eslint", exclude: /node_modules/ });
 
-webPackConfig.resolve.alias = {
-    "robe-react-ui/lib": webPackConfig.paths.lib,
-    "robe-react-ui": webPackConfig.paths.lib + "/index"
+settings.webpack.resolve.alias = {
+    "robe-react-ui/lib": settings.paths.lib,
+    "robe-react-ui": settings.paths.lib + "/index"
 };
 
-webPackConfig.devServer = {
+settings.webpack.devServer = {
     historyApiFallback: true,
     hot: true,
-    progress: true,
     inline: true,
 
     // display only errors to reduce the amount of output
@@ -46,7 +46,8 @@ webPackConfig.devServer = {
 };
 
 
-webPackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+settings.webpack.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 /* Use production parameter for hiding warnings which are coming from React library. */
 /* webPackConfig.plugins.push(new webpack.DefinePlugin({
@@ -56,16 +57,16 @@ webPackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 }));
 */
 
-webPackConfig.plugins.push(new CopyWebpackPlugin([
+settings.webpack.plugins.push(new CopyWebpackPlugin([
     {
         from: "../static"
     }
 ]));
 
-webPackConfig.plugins.push(new CachePlugin({}));
+settings.webpack.plugins.push(new CachePlugin({}));
 
 
 const server = new JsonServer(3000, "/application");
 server.route("config/data/db.json").upload("/files", "config/data/upload", "files").start();
 
-module.exports = webPackConfig;
+module.exports = settings.webpack;

@@ -1,6 +1,7 @@
 import chai from "chai";
 import React from "react";
 import {mount} from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
+import TestUtils from "../TestUtils";
 import Toast from "toast/Toast"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("toast/Toast", () => {

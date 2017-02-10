@@ -1,6 +1,6 @@
 import chai from "chai";// eslint-disable-line import/no-extraneous-dependencies
+import TestUtils from "../TestUtils";
 import DecimalInput from "inputs/DecimalInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
-import TestUtils from "../TestUtils";// eslint-disable-line import/no-extraneous-dependencies
 
 describe("inputs/DecimalInput", () => {
     const props = {

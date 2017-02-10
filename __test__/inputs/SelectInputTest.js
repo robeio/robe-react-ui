@@ -1,5 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import TestUtils from "../TestUtils";
 import SelectInput from "inputs/SelectInput";
 import InputValidations from "validation/InputValidations";
 

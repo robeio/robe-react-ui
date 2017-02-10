@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { mount, shallow } from "enzyme";
 import { Maps, Class, AjaxRequest } from "robe-react-commons";
 import ReactTestUtils from "react-addons-test-utils";
-
+const langJSON = require("assets/en_US.json");
 import CA from "robe-react-commons/lib/application/Application";
-CA.loadI18n(require("assets/en_US.json"));
+CA.loadI18n(langJSON);
 
 const url = "http://localhost:3001";
 

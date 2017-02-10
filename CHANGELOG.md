@@ -1,11 +1,19 @@
 # Change Log
 
 ## 1.1.21 -- Developing...
+* Screen Keyboard component added.
+* Wizard component redeveloped.
+* changed version of webpack from 1 to 2 beta.
+* changed all configuration by webpack 2 beta.
+* PieChat bug fixed.
+* Wizard bug fixed.
 
 ## 1.1.20
 * Chart and Toast components test rewrited, Charts props updated
 * Chart bug fixed.
 * [#51](https://github.com/robeio/robe-react-ui/issues/51) fixed.
+* [#57](https://github.com/robeio/robe-react-ui/issues/57) fixed.
+* [#55](https://github.com/robeio/robe-react-ui/issues/55) fixed.
 
 ## 1.1.19
 * Code preview for the HtmlEditor.

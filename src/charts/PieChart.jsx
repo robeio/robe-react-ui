@@ -81,15 +81,12 @@ export default class PieChart extends ShallowComponent {
             mRadius = radius,
             origin = this.props.size / 2,
             mRotation = rotaion,
-            max = this.__sumValues(data),
-            circle = false;
-
-        if (data.length <= 1)
-            circle = true;
+            max = this.__sumValues(data);
 
         data.map(function (item, key) {
             let value = item.value,
                 mPercentage = (percentage * value) / max,
+                circle = max === value,
                 aCalc = ( mPercentage > 180 ) ? 360 - mPercentage : mPercentage,
                 aRad = aCalc * Math.PI / 180,
                 z = Math.sqrt(2 * mRadius * mRadius - ( 2 * mRadius * mRadius * Math.cos(aRad) )),
@@ -99,8 +96,8 @@ export default class PieChart extends ShallowComponent {
                 X = mPercentage <= 180 ? origin + x : origin - x,
                 arcSweep = mPercentage <= 180 ? 0 : 1,
                 V = origin - mRadius,
-                fill = item.fill || this.__randColor(X + mRotation),
-                tooltip = item.label + "  " + value + " " + (item.unit || "") + "\n",
+                fill = item.fill || this.__randColor(key + z),
+                tooltip = item.label + "  " + value + " " + (item.unit || "") + "\n" + " " + (((mPercentage * 100) / 360).toFixed(2) + " %"),
                 cursor = "default";
 
             item.fill = fill;
@@ -145,7 +142,6 @@ export default class PieChart extends ShallowComponent {
                             dur="1s"
                             fill="freeze"
                         />
-
                     </path>);
             }
             mRotation = mRotation + mPercentage;
@@ -214,9 +210,9 @@ export default class PieChart extends ShallowComponent {
     }
 
     __randColor(index) {
-        let colors = ["#2196F3", "#009688", "#9C27B0", "#4CAF50", "#3F51B5", "#FF9800", "#F44336", "#9C27B0", "#673AB7", "#FFC107", "#2196F3", "#FF5722", "#00796B"];
+        let colors = ["#F44336", "#2196F3", "#E91E63", "#00BCD4", "#673AB7", "#009688", "#3F51B5", "#4CAF50", "#FF9800", "#FF5722", "#FFC107"];
         if (index !== undefined) {
-            return colors[parseInt(Math.abs(index)) % (colors.length)];
+            return colors[parseInt(Math.abs(index % colors.length)) % (colors.length)];
         }
         return colors[Math.floor(Math.random() * (colors.length - 1))];
     }

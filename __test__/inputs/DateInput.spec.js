@@ -1,6 +1,6 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
-import DateInput from "inputs/DateInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import TestUtils from "../TestUtils";
+import DateInput from "inputs/DateInput";// eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 
 describe("inputs/DateInput", () => {
     const assert = chai.assert;
@@ -8,8 +8,6 @@ describe("inputs/DateInput", () => {
 
     it("render", () => {
         let wrapper = TestUtils.mount({ label: "label" }, DateInput);
-
-
         let value = new Date().getTime();
         wrapper.setProps({ value: value });
         assert.equal(wrapper.props().value, value);
@@ -23,6 +21,15 @@ describe("inputs/DateInput", () => {
     });
 
     it("onChange", () => {
-
+        let props = {
+            label: "label",
+            onChange: (e) => {
+                assert.equal(e.target.value, "12/12/1985");
+            }
+        };
+        let wrapper = TestUtils.mount(props, DateInput);
+        let value = new Date().getTime();
+        wrapper.instance().__onChange({ target: { value: "12/12/1985" }, preventDefault: () => { }, stopPropagation: () => { } });
     });
+
 });

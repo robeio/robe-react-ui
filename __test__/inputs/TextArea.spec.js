@@ -1,7 +1,7 @@
 import chai from "chai"; // eslint-disable-line import/no-extraneous-dependencies
 import React from "react";
 import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils"; // eslint-disable-line import/no-extraneous-dependencies
+import TestUtils from "../TestUtils";
 import TextArea from "inputs/TextArea"; // eslint-disable-line import/no-extraneous-dependencies,import/no-unresolved
 import { mount } from "enzyme"; // eslint-disable-line import/no-extraneous-dependencies
 

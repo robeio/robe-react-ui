@@ -97,7 +97,11 @@ export default class FileUploadInput extends ValidationComponent {
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        /**
+         * Define file input accept extensions
+         */
+        accept: React.PropTypes.string
     };
 
     static defaultProps = {
@@ -107,7 +111,8 @@ export default class FileUploadInput extends ValidationComponent {
         maxFileSize: 1000,
         toolbarPosition: "top",
         autoUpload: false,
-        validationDisplay: "block"
+        validationDisplay: "block",
+        accept: null
     };
 
     __maxSizeOfWillUploaded;
@@ -166,6 +171,7 @@ export default class FileUploadInput extends ValidationComponent {
     render() {
         let attributes = {
             type: "file",
+            accept: this.props.accept,
             name: this.props.name,
             style: { display: "none" },
             multiple: this.props.multiple,

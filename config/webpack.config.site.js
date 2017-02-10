@@ -10,40 +10,34 @@ const package = require("../package.json");
 /**
  * import common webpack settings
  */
-const commonSettings = require("./webpack.config.common.js")("/site", "/docs", "__test__", "/src");
-
+const settings = require("./webpack.config.common.js")("/site", "/docs", undefined , "/src");
 
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#deduplication
  * @type DedupePlugin
  */
-commonSettings.plugins.push(new webpack.optimize.DedupePlugin());
-/**
- * @link https://github.com/webpack/docs/wiki/optimization#deduplication
- * @type DedupePlugin
- */
-commonSettings.plugins.push(new webpack.optimize.UglifyJsPlugin());
+settings.webpack.plugins.push(new webpack.optimize.UglifyJsPlugin());
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#minimize
  * @type OccurenceOrderPlugin
  */
-commonSettings.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+settings.webpack.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
 /**
  * https://github.com/webpack/docs/wiki/optimization#chunks
  * @type LimitChunkCountPlugin
  */
-commonSettings.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }));
+settings.webpack.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }));
 /**
  * @link https://github.com/webpack/docs/wiki/optimization#chunks
  * @type MinChunkSizePlugin
  */
-commonSettings.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 10000 }));
+settings.webpack.plugins.push(new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 10000 }));
 
 /**
  *
  * @type {{root: *[]}}
  */
-commonSettings.entry = {
+settings.webpack.entry = {
     site: "../site/index.js"
 };
 
@@ -53,18 +47,18 @@ commonSettings.entry = {
  * source-map - A SourceMap is emitted. See also output.sourceMapFilename.
  * @type {string}
  */
-commonSettings.devtool = "source-map";
+settings.webpack.devtool = "source-map";
 
-commonSettings.output = {
-    path: commonSettings.paths.build,
+settings.webpack.output = {
+    path: settings.paths.build,
     filename: "bundle.[hash].js"
     // chunkFilename: "[id].bundle.js"
 };
 
-commonSettings.resolve.alias = {
-    "robe-react-ui/lib": commonSettings.paths.lib,
-    "robe-react-ui": commonSettings.paths.lib + "/index"
-}
+settings.webpack.resolve.alias = {
+    "robe-react-ui/lib": settings.paths.lib,
+    "robe-react-ui": settings.paths.lib + "/index"
+};
 
 const fileChanger = new FileChanger({
     move: [{
@@ -82,14 +76,14 @@ const fileChanger = new FileChanger({
     }
     ]
 });
-commonSettings.plugins.push(fileChanger);
+settings.webpack.plugins.push(fileChanger);
 
 /* Use production parameter for hiding warnings which are coming from React library. */
-commonSettings.plugins.push(new webpack.DefinePlugin({
+settings.webpack.plugins.push(new webpack.DefinePlugin({
     "process.env": {
         NODE_ENV: JSON.stringify("production")
     }
 }));
 
 
-module.exports = commonSettings;
+module.exports = settings.webpack;

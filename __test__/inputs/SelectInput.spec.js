@@ -1,9 +1,9 @@
 import React from "react";
 import chai from "chai";
+import TestUtils from "../TestUtils";
 import SelectInput from "inputs/SelectInput";
 import Validations from "validation/InputValidations";
 import SelectInputTest from "./SelectInputTest";
-import TestUtils from "../TestUtils";
 
 const langs = [
     {

@@ -4,12 +4,6 @@ import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
 import Filter from "./Filter";
 
 export default class Filters extends ShallowComponent {
-    static booleanData = [
-        { text: "All", value: "all" },
-        { text: "Yes", value: "true" },
-        { text: "No", value: "false" }
-    ];
-
     static propTypes: Map = {
         /**
          * Fields Configurations to show style on view.
@@ -86,7 +80,7 @@ export default class Filters extends ShallowComponent {
                 <span
                     key={field.name}
                     style={{ verticalAlign: "bottom", border: "0px" }}
-                    >
+                >
                     {filterField}
                 </span>
             );

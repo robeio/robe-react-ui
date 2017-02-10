@@ -190,7 +190,7 @@ export default class DecimalInput extends ShallowComponent {
             e.target.value = currentValue ? this.__fixedFloatOp(currentValue, false) : "";
         }
         e.target.value += "";
-        this.__numericFilter(e);
+        this.__onChange(e);
     }
 
     __fixedFloatOp(cFloat: float, isSum: boolean) {

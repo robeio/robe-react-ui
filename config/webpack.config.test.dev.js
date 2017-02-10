@@ -2,52 +2,26 @@ const path = require('path');
 const JsonServer = require("./server/JsonServer");
 const Utility = require("./util/Utility");
 
-const paths = {
-    src: path.join(Utility.projectDir, 'src')
+const babelOptions = {
+    presets: [
+        "react",
+        "es2015",
+        "stage-0"
+    ]
 };
 
-const webpackConfig = {
-    resolve: {
-        extensions: ['', '.js', '.jsx'],
-        root: paths.src,
-    },
-    devtool: 'inline-source-map',
-    module: {
-        loaders: [
-            {
-                test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.s?css$/,
-                loader: "style-loader!css-loader"
-            },
-            {
-                /**
-                 * @link https://github.com/webpack/json-loader
-                 * npm install json-loader --save-dev
-                 */
-                test: /\.json$/,
-                loader: "json-loader"
-            },
-            {
-                /**
-                 * @link https://github.com/webpack/url-loader
-                 * npm install url-loader --save-dev
-                 */
-                test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-                loader: "url?limit=100000&name=[name].[ext]"
-            }
-        ]
-    },
-    externals: {
-        cheerio: "window",
-        "react/addons": true, // important!!
-        "react/lib/ExecutionEnvironment": true,
-        "react/lib/ReactContext": true
-    }
-};
 
+const settings = require("./webpack.config.common.js")("/src", "/build", "__test__", undefined, babelOptions);
+
+settings.webpack.cache = true;
+settings.webpack.devtool = 'source-map';
+
+settings.webpack.externals = {
+    "cheerio": "window",
+    "react/addons": true, // important!!
+    "react/lib/ExecutionEnvironment": true,
+    "react/lib/ReactContext": true
+};
 
 const server = new JsonServer(3001, "/application");
 server.route("config/data/testdb.json").upload("/files", "config/data/upload", "files").start();
@@ -72,7 +46,7 @@ module.exports = function (config) {
             'karma-coverage',
             "karma-sourcemap-loader"
         ],
-        webpack: webpackConfig,
+        webpack: settings.webpack,
         webpackServer: {
             colors: true,
             hash: false,
@@ -103,7 +77,7 @@ module.exports = function (config) {
     };
     var filePattern = Utility.getTestPattern(process.argv, "__test__/**/*.spec.js");
     conf.files = [
-        filePattern
+        filePattern,
     ];
     conf.preprocessors = {};
     conf.preprocessors[filePattern] = ['webpack'];
