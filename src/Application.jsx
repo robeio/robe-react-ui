@@ -23,7 +23,7 @@ export default class Application extends ShallowComponent {
      * @static
      */
     static defaultProps = {
-        language: Cookies.get("language", "assets/en_US.json")
+        language: Cookies.get("language", "en_US.json")
     };
 
     isLoaded = false;
@@ -63,7 +63,7 @@ export default class Application extends ShallowComponent {
         if (this.state.upgrade) {
             if (Assertions.isString(language)) {
                 try {
-                    System.import("./" + language).then((langMap) => {
+                    System.import("./assets/" + language).then((langMap) => {
                         CA.loadI18n(langMap);
                         this.isLoaded = true;
                         this.setState({
@@ -76,7 +76,7 @@ export default class Application extends ShallowComponent {
                                 throw err;
                             }
                             Cookies.remove("language");
-                            this.upgradeIfNeeded(Cookies.get("language", "assets/en_US.json"));
+                            this.upgradeIfNeeded(Cookies.get("language", "en_US.json"));
                         });
                 } catch (error) {
                     Cookies.remove("language");

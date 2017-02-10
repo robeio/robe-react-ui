@@ -1,5 +1,5 @@
 import React from "react";
-import {render} from "react-dom";
+import { render } from "react-dom";
 import {
     Navbar,
     Nav,
@@ -8,14 +8,14 @@ import {
     Button,
     MenuItem
 } from "react-bootstrap";
-import {ShallowComponent, Application} from "robe-react-commons";
+import { ShallowComponent, Application } from "robe-react-commons";
 import Progress from "progress/Progress";
 import Components from "./components/Components";
 import Docs from "./docs/Docs";
 import Welcome from "./Welcome";
 import SampleProjects from "./sampleprojects/SampleProjects";
 import "./style.css";
-import {NotFound} from "./error";
+import { NotFound } from "./error";
 
 
 export default class Main extends ShallowComponent {
@@ -41,8 +41,8 @@ export default class Main extends ShallowComponent {
                         />
                     </a>
                     <Navbar.Header>
-                        <Navbar.Toggle style={{ float: "left", marginLeft: 10 }}/>
-                        <img src="./avatar.png" alt="logo"/>
+                        <Navbar.Toggle style={{ float: "left", marginLeft: 10 }} />
+                        <img src="./avatar.png" alt="logo" />
                         <Navbar.Brand>
                             <a
                                 href="#Welcome"
@@ -69,13 +69,10 @@ export default class Main extends ShallowComponent {
                                 /> React
                                 Bootstrap
                             </NavItem>
-                            <NavItem eventKey="Recharts" className="re-charts">
-                                {"<Recharts />"}
-                            </NavItem>
                             <NavDropdown title={Application.i18n(Main, "site.main", "languageTitle")} id="nav-dropdown" style={{ display: "inline" }}>
-                                <MenuItem eventKey="en_US">{Application.i18n(Main, "site.main", "languageItemEnglish")}</MenuItem>
-                                <MenuItem eventKey="tr_TR">{Application.i18n(Main, "site.main", "languageItemTurkish")}</MenuItem>
-                                <MenuItem eventKey="ru_RU">{Application.i18n(Main, "site.main", "languageItemRussian")}</MenuItem>
+                                <MenuItem eventKey="en_US">English</MenuItem>
+                                <MenuItem eventKey="tr_TR">Türkçe</MenuItem>
+                                <MenuItem eventKey="ru_RU">Pусский</MenuItem>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
@@ -100,34 +97,11 @@ export default class Main extends ShallowComponent {
             window.open("https://react-bootstrap.github.io/components.html");
             return;
         }
-        if (key === "Recharts") {
-            window.open("http://recharts.org/");
-            return;
-        }
-        if (key === "en_US") {
-            if(this.props.changeLanguage){
-                this.props.changeLanguage(undefined);
+
+        if (key === "en_US" || key === "tr_TR" || key === "ru_RU") {
+            if (this.props.changeLanguage) {
+                this.props.changeLanguage(`${key}.json`);
             }
-            Application.loadI18n(require("../src/assets/en_US.json"));
-            this.forceUpdate();
-            return;
-        }
-        if (key === "tr_TR") {
-            let lang = "./assets/tr_TR.json";
-            if(this.props.changeLanguage){
-                this.props.changeLanguage(lang);
-            }
-            Application.loadI18n(require("../src/assets/tr_TR.json"));
-            this.forceUpdate();
-            return;
-        }
-        if (key === "ru_RU") {
-            let lang = "./assets/ru_RU.json";
-            if(this.props.changeLanguage){
-                this.props.changeLanguage(lang);
-            }
-            Application.loadI18n(require("../src/assets/ru_RU.json"));
-            this.forceUpdate();
             return;
         }
         window.location.hash = `#${key}`;
@@ -147,9 +121,6 @@ export default class Main extends ShallowComponent {
                 return <Components />;
             case "Docs":
                 return <Docs />;
-
-            case "JSDocs":
-                return <JSDocs />;
 
             case "About":
                 return <NotFound />;
