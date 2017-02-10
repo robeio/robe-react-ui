@@ -1,4 +1,4 @@
-import {Application } from "robe-react-commons";
+import { Application } from "robe-react-commons";
 import InputValidations from "validation/InputValidations";
 
 class ComponentList {
@@ -6,8 +6,8 @@ class ComponentList {
     minValue = InputValidations.minValue.bind(undefined, 2);
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
-    getList():Array {
-        let components = {inputs: [], complex: [], charts: []};
+    getList(): Array {
+        let components = { inputs: [], complex: [], charts: [] };
         /* eslint-disable global-require */
         components.inputs.push({
             header: "TextInput",
@@ -92,7 +92,7 @@ class ComponentList {
             sample: require("./samples/inputs/DatePickerSample"),
             code: require("./samples/inputs/DatePickerSample.txt")
         });
-        
+
         components.inputs.push({
             header: "ScreenKeyboard",
             desc: "is an application which provides a visual keyboard on your display.",
@@ -210,9 +210,9 @@ class ComponentList {
             code: require("./samples/progress/ProgressSample.txt"),
             json: {
                 methods: [
-                    {name: "start", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubStartDesc")},
-                    {name: "done", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubCompleteDesc")},
-                    {name: "configure", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubConfigureDesc")}]
+                    { name: "start", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubStartDesc") },
+                    { name: "done", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubCompleteDesc") },
+                    { name: "configure", description: Application.i18n(ComponentList, "components.ComponentList", "progressSubConfigureDesc") }]
             }
         });
         components.complex.push({

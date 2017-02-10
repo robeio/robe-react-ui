@@ -19,29 +19,29 @@ export default class I18n extends ShallowComponent {
         return (
             <div>
                 <p>
-                    {Application.i18n(I18n,"i18n.I18n","mainDesc")}
+                    {Application.i18n(I18n, "i18n.I18n", "mainDesc")}
                 </p>
 
                 <Highlight className="javascript">{jsonI18n}</Highlight>
 
-                <h4> {Application.i18n(I18n,"i18n.I18n","headerOne")}</h4>
-                <p> {Application.i18n(I18n,"i18n.I18n","descOne")}</p>
+                <h4> {Application.i18n(I18n, "i18n.I18n", "headerOne")}</h4>
+                <p> {Application.i18n(I18n, "i18n.I18n", "descOne")}</p>
                 <Highlight className="javascript">{ex1}</Highlight>
-                <p> {Application.i18n(I18n,"i18n.I18n","descOnePlus")}</p>
+                <p> {Application.i18n(I18n, "i18n.I18n", "descOnePlus")}</p>
                 <Well>
-                    <p> {Application.i18n(I18n,"i18n.I18n","descOnePlusSub")}</p>
-                    <p> {Application.i18n(I18n,"i18n.I18n","descOnePlusSubSub")}</p>
+                    <p> {Application.i18n(I18n, "i18n.I18n", "descOnePlusSub")}</p>
+                    <p> {Application.i18n(I18n, "i18n.I18n", "descOnePlusSubSub")}</p>
                 </Well>
 
-                <h4> {Application.i18n(I18n,"i18n.I18n","headerTwo")}</h4>
-                <p> {Application.i18n(I18n,"i18n.I18n","descTwo")}</p>
+                <h4> {Application.i18n(I18n, "i18n.I18n", "headerTwo")}</h4>
+                <p> {Application.i18n(I18n, "i18n.I18n", "descTwo")}</p>
                 <ol>
-                    <li> {Application.i18n(I18n,"i18n.I18n","descTwoListOne")}</li>
-                    <li> {Application.i18n(I18n,"i18n.I18n","descTwoListTwo")}</li>
-                    <li> {Application.i18n(I18n,"i18n.I18n","descTwoListThree")}</li>
-                    <li> {Application.i18n(I18n,"i18n.I18n","descTwoListFour")}</li>
+                    <li> {Application.i18n(I18n, "i18n.I18n", "descTwoListOne")}</li>
+                    <li> {Application.i18n(I18n, "i18n.I18n", "descTwoListTwo")}</li>
+                    <li> {Application.i18n(I18n, "i18n.I18n", "descTwoListThree")}</li>
+                    <li> {Application.i18n(I18n, "i18n.I18n", "descTwoListFour")}</li>
                 </ol>
-                <p> {Application.i18n(I18n,"i18n.I18n","descTwoPlus")}</p>
+                <p> {Application.i18n(I18n, "i18n.I18n", "descTwoPlus")}</p>
                 <Highlight className="javascript">{ex2}</Highlight>
             </div >
         );
