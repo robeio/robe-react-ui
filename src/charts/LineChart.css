@@ -150,3 +150,9 @@
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.rb-line-chart:not(:hover) .tooltip,
+.rb-line-chart:not(:focus) .tooltip,
+.rb-line-chart:not(:active) .tooltip {
+    visibility: hidden;
+}

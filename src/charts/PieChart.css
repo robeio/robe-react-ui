@@ -66,3 +66,9 @@
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.rb-pie-chart:not(:hover) .tooltip,
+.rb-pie-chart:not(:focus) .tooltip,
+.rb-pie-chart:not(:active) .tooltip {
+    visibility: hidden;
+}
