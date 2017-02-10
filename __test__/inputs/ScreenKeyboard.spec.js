@@ -1,8 +1,8 @@
 import chai from "chai";
 import TestUtils from "../TestUtils";
 import ScreenKeyboard from "inputs/screenkeyboard/ScreenKeyboard";
-import QKeyboard_tr_TR from "inputs/screenkeyboard/qKeyboard_tr_TR.json";
-import KeyboardWithSpecial_ru_RU from "inputs/screenkeyboard/keyboardWithSpecial_ru_RU.json";
+import QKeyboard_tr_TR from "inputs/screenkeyboard/QKeyboard_tr_TR.json";
+import KeyboardWithSpecial_ru_RU from "inputs/screenkeyboard/KeyboardWithSpecial_ru_RU.json";
 
 let inputId = "id";
 let language = "tr_TR";
@@ -56,7 +56,7 @@ describe("Screen Keyboard", () => {
         props = {language: "numeric"};
 
         wrapper = TestUtils.mount(props, ScreenKeyboard, props);
-        chai.assert.equal(13, wrapper.instance().__renderDigitalKeyboard().length);
+        chai.assert.equal(11, wrapper.instance().__renderDigitalKeyboard().length);
         wrapper.unmount();
     });
 

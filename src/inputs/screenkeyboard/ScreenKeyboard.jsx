@@ -1,14 +1,14 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Button from "react-bootstrap/lib/Button";
-import QKeyboard_en_US from "./qKeyboard_en_US.json";
-import Keyboard_ru_RU from "./keyboard_ru_RU.json";
-import QKeyboard_tr_TR from "./qKeyboard_tr_TR.json";
-import QKeyboardWithControl_tr_TR from "./qKeyboardWithControl_tr_TR.json";
-import KeyboardWithControl_ru_RU from "./keyboardWithControl_ru_RU.json";
-import QKeyboardWithSpecial_tr_TR from "./qKeyboardWithSpecial_tr_TR.json";
-import QKeyboardWithSpecial_en_US from "./qKeyboardWithSpecial_en_US.json";
-import KeyboardWithSpecial_ru_RU from "./keyboardWithSpecial_ru_RU.json";
+import QKeyboard_en_US from "./QKeyboard_en_US.json";
+import Keyboard_ru_RU from "./Keyboard_ru_RU.json";
+import QKeyboard_tr_TR from "./QKeyboard_tr_TR.json";
+import QKeyboardWithControl_tr_TR from "./QKeyboardWithControl_tr_TR.json";
+import KeyboardWithControl_ru_RU from "./KeyboardWithControl_ru_RU.json";
+import QKeyboardWithSpecial_tr_TR from "./QKeyboardWithSpecial_tr_TR.json";
+import QKeyboardWithSpecial_en_US from "./QKeyboardWithSpecial_en_US.json";
+import KeyboardWithSpecial_ru_RU from "./KeyboardWithSpecial_ru_RU.json";
 import NumericKeyboard from "./NumericKeyboard.json";
 import DecimalKeyboard from "./DecimalKeyboard.json";
 import FaIcon from "../../faicon/FaIcon";
@@ -97,7 +97,7 @@ export default class ScreenKeyboard extends ShallowComponent {
                 return null;
         }
 
-        let keyboardArea = this.props.language === "numeric" || this.props.language === "decimal" ? "keyboardAreaNumeric" : "keyboardArea";
+        let keyboardArea = this.props.language === "numeric" || this.props.language === "decimal" ? "keyboardAreaNumeric" : "keyboardArea";
         if (this.state.show || !this.props.inputId)
             return (<div id={this.keyboardAreaId} className={keyboardArea} style={this.props.style}>
                 <div id={this.languageAreaId} className="languageTextArea">{this.__convertLanguageText()}
@@ -167,13 +167,8 @@ export default class ScreenKeyboard extends ShallowComponent {
                                             onClick={this.__handleBackspaceClick}><FaIcon
                     code="fa-long-arrow-left"/></Button>);
             else {
-
-                if (key.key === "4" || key.key === "7")
-                    buttonSetArray.push(<br key={"br" + i}/>);
-
-                if(key.value !== this.props.decimalSeperator && key.key === "11"){
+                if (key.value !== this.props.decimalSeperator && key.key === "11")
                     continue;
-                }
 
                 buttonSetArray.push(<Button name={i + "decNum" + i} data={key.value} key={i} bsSize="sm"
                                             className="numericKeyboardNums"
