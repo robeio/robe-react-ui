@@ -3,6 +3,7 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import TextInput from "robe-react-ui/lib/inputs/TextInput";
 import NumericInput from "robe-react-ui/lib/inputs/NumericInput";
 import ScreenKeyboard from "robe-react-ui/lib/inputs/screenkeyboard/ScreenKeyboard";
+import { ControlLabel } from "react-bootstrap";
 
 export default class TextInputSample extends ShallowComponent {
     constructor(props:Object) {
@@ -48,8 +49,9 @@ export default class TextInputSample extends ShallowComponent {
                 </div>
 
                 <div style={{marginBottom:230}}>
-                    <label>Can Use Without Input (Returns Only Clicked Key)</label><br/>
-                    <span>Clicked Key : <label>{this.state.screenKeyboardDefault}</label></span>
+                    <ControlLabel>Can Use Without Input (Returns Only Clicked Key)</ControlLabel><br/>
+                    <span>Clicked Key : </span>
+                    <ControlLabel>{this.state.screenKeyboardDefault}</ControlLabel>
                    <ScreenKeyboard onChange={this.__onChangeDefaultKeyboard}
                                    languageText="English -- Draggable Area --"
                    />
