@@ -4,6 +4,7 @@ import {
     Table
 } from "react-bootstrap";
 import {
+    Application,
     ShallowComponent
 } from "robe-react-commons";
 import Highlight from "react-highlight";
@@ -25,31 +26,31 @@ export default class StoreSample extends ShallowComponent {
         return (
             <div>
                 <span>
-                    PropTypes
+                    {Application.i18n(StoreSample,"store.StoreSample","spanOne")}
                 </span>
                 <Highlight className="javascript">{ex1}</Highlight>
                 <span>
-                    Default props.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanTwo")}
                 </span>
                 <Highlight className="javascript">{ex2}</Highlight>
                 <span>
-                    You can perform with same settings for <code>create, read, update, delete</code>.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanThree")}
                 </span>
                 <Highlight className="javascript">{ex3}</Highlight>
                 <span>
-                    The <code>create</code> method must be called to perform a the create request.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanFour")}
                 </span>
                 <Highlight className="javascript">{ex4}</Highlight>
                 <span>
-                    The <code>read</code> method must be called to perform a the read request.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanFive")}
                 </span>
                 <Highlight className="javascript">{ex5}</Highlight>
                 <span>
-                    The <code>update</code> method must be called to perform a the update request.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanSix")}
                 </span>
                 <Highlight className="javascript">{ex6}</Highlight>
                 <span>
-                    The <code>delete</code> method must be called to perform a the delete request.
+                    {Application.i18n(StoreSample,"store.StoreSample","spanSeven")}
                 </span>
                 <Highlight className="javascript">{ex7}</Highlight>
             </div>);

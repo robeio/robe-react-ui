@@ -1,5 +1,5 @@
 import React from "react";
-import { ShallowComponent } from "robe-react-commons";
+import { Application,ShallowComponent } from "robe-react-commons";
 import Button from "robe-react-ui/lib/buttons/Button";
 import Toast from "robe-react-ui/lib/toast/Toast";
 import {ControlLabel} from "react-bootstrap";
@@ -10,16 +10,16 @@ export default class ButtonSample extends ShallowComponent {
     render():Object {
         return (
             <div>
-                <ControlLabel>Button (with normal behavior)</ControlLabel>
+                <ControlLabel>{Application.i18n(ButtonSample,"buttons.ButtonSample","buttonNormal")}</ControlLabel>
                 <div className="form-group">
                     <Button bsStyle="primary" onClick={ButtonSample.onClick}>Normal</Button>
                 </div>
-                <ControlLabel>Button (with async behavior)</ControlLabel>
+                <ControlLabel>{Application.i18n(ButtonSample,"buttons.ButtonSample","buttonAsync")}</ControlLabel>
                 <div className="form-group">
-                    <Button bsStyle="warning" onClickAsync={this.onClickAsync}>Async</Button>
+                    <Button bsStyle="warning" onClickAsync={this.onClickAsync}>{Application.i18n(ButtonSample,"buttons.ButtonSample","async")}</Button>
                 </div>
                 <a href="https://react-bootstrap.github.io/components.html#buttons" rel="noopener noreferrer"
-                   target="_blank"> For more React-Bootstrap Button</a>
+                   target="_blank">{Application.i18n(ButtonSample,"buttons.ButtonSample","forMoreLink")}</a>
             </div>
         );
     }

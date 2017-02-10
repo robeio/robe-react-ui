@@ -115,7 +115,6 @@ export default class HtmlEditor extends ValidationComponent {
                     style={{ height: this.props.height, minHeight: this.props.height }}
                     onKeyUp={this.props.autoResize ? this.__resize : undefined}
                     componentClass="textarea"
-                    ref={(component: Object) => { this.innerComponent = component } }
                     />
             </div>) :
             (<ReactQuill {...this.props} theme="snow" onChange={this.__onChange} ref={(component) => this.quill = component}>

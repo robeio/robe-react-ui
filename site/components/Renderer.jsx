@@ -1,11 +1,12 @@
 import React from "react";
 import {Button, ButtonGroup, Panel, Table, Collapse} from "react-bootstrap";
-import {Maps} from "robe-react-commons";
+import { Maps,Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
 import Progress from "progress/Progress";
 import FaIcon from "faicon/FaIcon";
 import Toast from "toast/Toast";
+
 
 
 export default class Renderer extends ShallowComponent {
@@ -103,13 +104,15 @@ export default class Renderer extends ShallowComponent {
             <div>
                 <h3>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
-                <h4>Examples</h4>
+                <h4>{Application.i18n(Renderer, "components.Renderer", "example")}</h4>
                 <Panel>
                     <this.props.sample.default />
                     {codeSection}
                 </Panel>
+                <h4>{this.props.json.props ? Application.i18n(Renderer, "components.Renderer", "propsBlockHeader") : ""}</h4>
                 {this.__renderPropsTable(this.props.json.props)}
-                {this.__renderMethodsTable(this.props.json.methods)}
+                <h4>{this.props.json.methods ? Application.i18n(Renderer, "components.Renderer", "methodBlockHeader") : ""}</h4>
+                {this.__renderPropsTable(this.props.json.props)}
             </div >);
     }
 
@@ -170,11 +173,11 @@ export default class Renderer extends ShallowComponent {
                 <Table responsive striped bordered condensed>
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Required</th>
-                        <th>Description</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldTwo")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldThree")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFour")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFive")}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -213,9 +216,9 @@ export default class Renderer extends ShallowComponent {
                 <Table responsive striped bordered condensed>
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Returns</th>
-                        <th>Description</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldTwo")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldThree")}</th>
                     </tr>
                     </thead>
                     <tbody>

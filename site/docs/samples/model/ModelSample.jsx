@@ -3,7 +3,7 @@ import {
     Well,
     Table
 } from "react-bootstrap";
-import {
+import {Application,
     ShallowComponent
 } from "robe-react-commons";
 import Highlight from "react-highlight";
@@ -15,22 +15,21 @@ export default class ModelSample extends ShallowComponent {
         return (
             <div>
                 <p>
-                    You can use models both for representing your data via <code>DataGrid</code> or <code>DataForm</code>. This page will define the usage of the component.
+                    {Application.i18n(ModelSample,"model.ModelSapmle","paragraphOne")}
                 </p>
                 <p >
-                    Model is a <code>json</code> representation of our datum. Types, props column names all details will be defined inside of the json.
-                    It will need some reserved fields to identify your datum, all remaining fields will be forwarded to your selected component as props.
-                    If you look at our examples you can see that models defined as a json file and loaded via <code>import</code>'s.
+                    {Application.i18n(ModelSample,"model.ModelSapmle","paragraphTwo")}
                 </p>
-                <strong>Types</strong>
+                <strong>{Application.i18n(ModelSample,"model.ModelSapmle","typesStrong")}</strong>
                 <p>
-                    Model supports various of types which are listed at the table below.
+                    {Application.i18n(ModelSample,"model.ModelSapmle","paragraphThree")}
                 </p>
                 <Table responsive striped bordered condensed>
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Component</th>
+
+                            <th>{Application.i18n(ModelSample,"model.ModelSapmle","type")}</th>
+                            <th>{Application.i18n(ModelSample,"model.ModelSapmle","component")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,12 +47,11 @@ export default class ModelSample extends ShallowComponent {
                         <tr><td>file</td><td>FileUploadInput</td></tr>
                     </tbody>
                 </Table>
-                <strong>Example 1</strong>
-                <p>Here you can find an example model below.</p>
+                <strong>{Application.i18n(ModelSample,"model.ModelSapmle","exampleOne")}</strong>
+                <p>{Application.i18n(ModelSample,"model.ModelSapmle","exampleParagraph")}</p>
                 <Highlight className="json">{ex1}</Highlight>
                 <Well>
-                    It is basicly an array of the fields that you want to see. <code>type</code> is essential to define which component to use.
-                    Other fields as <code>name, label, validations...</code> are input component <code>props</code>.
+                    {Application.i18n(ModelSample,"model.ModelSapmle","exampleDesc")}
                 </Well>
             </div>
         );

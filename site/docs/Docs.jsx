@@ -1,5 +1,6 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
+import {Application} from "robe-react-commons"
 import Renderer from "./Renderer";
 import {Grid, Col, ListGroup, ListGroupItem, InputGroup} from "react-bootstrap";
 import DocList from "./DocList";
@@ -52,14 +53,14 @@ export default class Docs extends ShallowComponent {
         }
         return (
             <Grid>
-                <h2>Docs</h2>
-                <h5>Here you can find documentation on the components.</h5>
+                <h2>{Application.i18n(Docs,"docs.Docs","title")}</h2>
+                <h5>{Application.i18n(Docs,"docs.Docs","header")}</h5>
                 <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid",paddingLeft:0 }}>
                     <TextInput
                         inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
-                        placeholder="Search"
+                        placeholder={Application.i18n(Docs,"docs.Docs","search")}
                     />
                     <ListGroup>{componentMenu}</ListGroup>
                 </Col>

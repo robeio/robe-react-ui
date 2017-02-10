@@ -29,7 +29,7 @@ export default class NumericInput extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.any.isRequired,
+        value: React.PropTypes.any,
         /**
          * onChange event for the component
          */
