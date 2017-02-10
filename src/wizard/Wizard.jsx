@@ -1,10 +1,8 @@
 import React from "react";
 import {ShallowComponent, Application, Arrays} from "robe-react-commons";
-import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import Toast from "../toast/Toast";
 import Step from "./Step";
-import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
 
@@ -143,31 +141,10 @@ export default class Wizard extends ShallowComponent {
         if (currentStep === undefined) {
             return [];
         }
-        let nextButton = null;
-        if (currentStep.index === this.__steps.length - 1) {
-            if (this.props.onComplete) {
-                nextButton = (
-                    <Col className="pull-right">
-                        <Button
-                            bsStyle="primary"
-                            onClick={this.__onComplete}
-                        >
-                            <FaIcon code="fa-check-circle"/>
-                            {this.props.complete}
-                        </Button>
-                    </Col>
-                );
-            }
-        } else {
-            nextButton = (
-                <Pager.Item
-                    next
-                    onClick={this.__handleNextButtonClick}
-                >
-                    {this.props.next} <FaIcon code="fa-arrow-right"/>
-                </Pager.Item>
-            );
-        }
+        let isComplete = currentStep.index === this.__steps.length - 1;
+        let rightOnClick = isComplete ? this.__onComplete : this.__handleNextButtonClick;
+        let rightIcon = isComplete ? "fa-check-circle" : "fa-arrow-right";
+        let rightText = isComplete ? this.props.complete : this.props.next;
         return (
             <Pager>
                 <Pager.Item
@@ -177,7 +154,12 @@ export default class Wizard extends ShallowComponent {
                 >
                     <FaIcon code="fa-arrow-left"/>{this.props.previous}
                 </Pager.Item>
-                {nextButton}
+                <Pager.Item
+                    next
+                    onClick={rightOnClick}
+                >
+                    {rightText}<FaIcon code={rightIcon}/>
+                </Pager.Item>
             </Pager>
         );
     }
@@ -209,7 +191,6 @@ export default class Wizard extends ShallowComponent {
     __getCurrentStep(): Object {
         return Arrays.getValueByKey(this.__steps, "stepKey", this.state.currentKey);
     }
-
 
     __onComplete() {
         if (this.props.onComplete) {
