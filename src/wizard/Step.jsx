@@ -23,20 +23,61 @@ export default class Step extends ShallowComponent {
         index: 0
     };
 
-    __components = [];
     __refs = {};
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
-        this.componentWillReceiveProps(props);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.__initComponents(nextProps);
+    render(): Object {
+        let components = React.Children.map(this.props.children,
+            (child, idx) => {
+                return React.cloneElement(child, {
+                    ref: this.__setRef(idx, child.ref)
+                });
+            });
+
+        return (<div>{components}</div>);
     }
 
-    render():Object {
-        return <div>{this.__components}</div>
+    __getRef(idx) {
+        return this.refs[idx];
+    }
+
+    __setRef(idx, ref) {
+        if (!ref) {
+            this.__refs[idx] = idx;
+            return idx;
+        }
+        if (Assertions.isString(ref)) {
+            this.__refs[idx] = ref;
+            return ref;
+        } else if (Assertions.isFunction(ref)) {
+            return (el) => {
+                ref(el);
+                this.__refs[idx] = el
+            };
+        }
+    }
+
+
+    __getStateOfStep() {
+        let stateOfStep = {};
+        for (let i in this.__refs) {
+            let ref = this.__getRef(this.__refs[i]);
+            let state = ref.state ? ref.state : {};
+            stateOfStep = Maps.mergeDeep(stateOfStep, state)
+        }
+        return stateOfStep;
+    }
+
+    __stateOfSteps(stateOfSteps) {
+        for (let i in this.__refs) {
+            let ref = this.__getRef(this.__refs[i]);
+            if (ref && ref.stateOfSteps) {
+                ref.stateOfSteps(stateOfSteps);
+            }
+        }
     }
 
     isValid() {
@@ -63,53 +104,5 @@ export default class Step extends ShallowComponent {
             }
         }
         return result;
-    }
-
-    __getStateOfStep() {
-        let stateOfStep = {};
-        for (let i in this.__refs) {
-            let ref = this.__getRef(this.__refs[i]);
-            let state = ref.state ? ref.state : {};
-            stateOfStep = Maps.mergeDeep(stateOfStep, state)
-        }
-        return stateOfStep;
-    }
-
-    __stateOfSteps(stateOfSteps) {
-        for (let i in this.__refs) {
-            let ref = this.__getRef(this.__refs[i]);
-            if (ref && ref.stateOfSteps) {
-                ref.stateOfSteps(stateOfSteps);
-            }
-        }
-    }
-
-    __initComponents(props) {
-        this.__components = React.Children.map(props.children,
-            (child, idx) => {
-                return React.cloneElement(child, {
-                    ref: this.__setRef(idx, child.ref)
-                });
-            });
-    }
-
-    __getRef(idx) {
-        return this.refs[idx];
-    }
-
-    __setRef(idx, ref) {
-        if (!ref) {
-            this.__refs[idx] = idx;
-            return idx;
-        }
-        if (Assertions.isString(ref)) {
-            this.__refs[idx] = ref;
-            return ref;
-        } else if (Assertions.isFunction(ref)) {
-            return (el) => {
-                ref(el);
-                this.__refs[idx] = el
-            };
-        }
     }
 }

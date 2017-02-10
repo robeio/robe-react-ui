@@ -1,9 +1,9 @@
 import React from "react";
-import {ShallowComponent, Application} from "robe-react-commons";
+import {ShallowComponent, Application, Arrays} from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import Pager from "react-bootstrap/lib/Pager";
 import Toast from "../toast/Toast";
-import Step from "./Step"
+import Step from "./Step";
 import Button from "react-bootstrap/lib/Button";
 import FaIcon from "../faicon/FaIcon";
 import "./Wizard.css";
@@ -38,7 +38,7 @@ export default class Wizard extends ShallowComponent {
         /**
          *
          */
-        onCompleteClick: React.PropTypes.func,
+        onComplete: React.PropTypes.func,
         /**
          *
          */
@@ -56,82 +56,101 @@ export default class Wizard extends ShallowComponent {
     __steps = [];
     __refs = {};
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
-        this.componentWillReceiveProps(props);
-    }
-
-    componentWillReceiveProps(nextProps) {
         this.state = {
-            currentKey: this.props.currentKey,
+            currentKey: props.currentKey,
             stateOfSteps: {}
         };
-        this.__initSteps(nextProps);
     }
 
-    render():Object {
+
+    render(): Object {
+        this.__steps = [];
+        let components = React.Children.map(this.props.children,
+            (child, idx) => {
+                if (child.type === Step) {
+                    let step = {};
+                    step.title = child.props.title || "";
+                    step.stepKey = child.props.stepKey || ("step" + (idx + 1));
+                    step.index = idx;
+                    if (this.state.currentKey === undefined) {
+                        this.state.currentKey = step.stepKey;
+                    }
+                    this.__steps.push(step);
+                    return React.cloneElement(child, {
+                        title: step.title,
+                        stepKey: step.stepKey,
+                        index: step.index,
+                        ref: (step) => {
+                            if (step) {
+                                this.__refs[step.props.stepKey] = step;
+                            }
+                        }
+                    });
+                }
+            });
+
         return (
             <div id="wizard">
-                {this.__renderStepLayout()}
-                {this.__renderSteps()}
+                {this.__renderStepLayout(this.__steps)}
+                {this.__renderSteps(components)}
                 {this.__renderPager()}
             </div>
         );
     }
 
-    __renderStepLayout() {
-        let steps = [];
+    __renderStepLayout(steps): Array {
+        let layouts = [];
         let currentStep = this.__getCurrentStep();
-        this.__steps.map((child, idx)=> {
-            let previous = currentStep.index >= idx ? "previous-step" : "";
-            steps.push(
-                <div
-                    key={child.props.stepKey}
-                    className={`wizard-step ${previous}`}>
-                    <button
-                        id={(idx+1)}
-                        onClick={()=>this.__onChange(child.props)}
-                        className="wizard-step-button">
-                    </button>
-                    <br/>
-                    {child.props.title}
-                </div>)
+        if (currentStep === undefined) {
+            return layouts;
+        }
+        steps.map((step) => {
+            let className = "step btn btn-default ";
+            let isPrevious = currentStep.index >= step.index;
+            className += isPrevious ? "btn-primary" : "";
+            layouts.push(
+                <li className={isPrevious ? "step-active" : "step-passive"}>
+                    <a className={className} onClick={() => this.__onChange(step)}>
+                        {step.index + 1}
+                    </a>
+                    <div className="label">{step.title}</div>
+                </li>)
         });
         return (
-            <div className="wizard">
-                <div className="wizard-row">
-                    {steps}
-                </div>
-            </div>);
+            <ul className="wizard">
+                {layouts}
+            </ul>);
     }
 
-    __renderSteps() {
-        let childArr = [];
-        this.__steps.map((child)=> {
+    __renderSteps(components): Array {
+        let componentArr = [];
+        components.map((child) => {
             let display = this.state.currentKey === child.props.stepKey ? "inherit" : "none";
-            childArr.push(
+            componentArr.push(
                 <div
                     key={child.props.stepKey}
-                    style={{ display }}>
+                    style={{display}}>
                     {child}
                 </div>)
         });
-        return childArr;
+        return componentArr;
     }
 
-    __renderPager():Object {
-        if (this.__steps.length <= 0) {
-            return;
-        }
+    __renderPager(): Object {
         let currentStep = this.__getCurrentStep();
+        if (currentStep === undefined) {
+            return [];
+        }
         let nextButton = null;
         if (currentStep.index === this.__steps.length - 1) {
-            if (this.props.onCompleteClick) {
+            if (this.props.onComplete) {
                 nextButton = (
                     <Col className="pull-right">
                         <Button
                             bsStyle="primary"
-                            onClick={this.__onCompleteClick}
+                            onClick={this.__onComplete}
                         >
                             <FaIcon code="fa-check-circle"/>
                             {this.props.complete}
@@ -153,7 +172,7 @@ export default class Wizard extends ShallowComponent {
             <Pager>
                 <Pager.Item
                     previous
-                    style={{display:currentStep.index==0?"none":"inherit"}}
+                    style={{display: currentStep.index == 0 ? "none" : "inherit"}}
                     onClick={this.__handlePreviousButtonClick}
                 >
                     <FaIcon code="fa-arrow-left"/>{this.props.previous}
@@ -165,51 +184,43 @@ export default class Wizard extends ShallowComponent {
 
     __handleNextButtonClick() {
         let currentStep = this.__getCurrentStep();
-        this.__onChange(this.__steps[currentStep.index + 1].props);
+        if (currentStep === undefined) {
+            return;
+        }
+        let nextStep = this.__steps[currentStep.index + 1];
+        if (nextStep === undefined) {
+            return;
+        }
+        this.__onChange(nextStep);
     }
 
     __handlePreviousButtonClick() {
         let currentStep = this.__getCurrentStep();
-        this.__onChange(this.__steps[currentStep.index - 1].props);
-    }
-
-    __getCurrentStep() {
-        let currentStep = this.__steps[0] ? this.__steps[0].props : undefined;
-        this.__steps.map((child)=> {
-            if (child.props.stepKey === this.state.currentKey) {
-                currentStep = child.props;
-            }
-        });
-        return currentStep;
-    }
-
-    __initSteps(props) {
-        this.__steps = React.Children.map(props.children,
-            (child, idx) => {
-                if (child.type === Step) {
-                    return React.cloneElement(child, {
-                        title: child.props.title || "",
-                        stepKey: child.props.stepKey || ("step" + (idx + 1)),
-                        index: idx,
-                        ref: (step)=> {
-                            if (step) {
-                                this.__refs[step.props.stepKey] = step;
-                            }
-                        }
-                    });
-                }
-            });
-        this.__steps = this.__steps ? this.__steps : [];
-        if (this.state.currentKey === undefined) {
-            this.state.currentKey = this.__steps[0].props.stepKey;
+        if (currentStep === undefined) {
+            return;
         }
+        let previousStep = this.__steps[currentStep.index - 1];
+        if (previousStep === undefined) {
+            return;
+        }
+        this.__onChange(previousStep);
     }
 
-    __onCompleteClick() {
-        if (this.props.onCompleteClick) {
-            let currentStep = this.__getCurrentStep();
-            let currentStepRef = this.__refs[currentStep.stepKey];
+    __getCurrentStep(): Object {
+        return Arrays.getValueByKey(this.__steps, "stepKey", this.state.currentKey);
+    }
 
+
+    __onComplete() {
+        if (this.props.onComplete) {
+            let currentStep = this.__getCurrentStep();
+            if (currentStep === undefined) {
+                return;
+            }
+            let currentStepRef = this.__refs[currentStep.stepKey];
+            if (currentStepRef === undefined) {
+                return;
+            }
             let result = currentStepRef.isValid();
             if (result.message) {
                 this.__showToast(result.type, result.message);
@@ -220,20 +231,26 @@ export default class Wizard extends ShallowComponent {
 
             let stateOfSteps = this.state.stateOfSteps;
             stateOfSteps[currentStep.stepKey] = currentStepRef.__getStateOfStep();
-            this.props.onCompleteClick(stateOfSteps)
+            this.props.onComplete(stateOfSteps)
         }
     }
 
-    __onChange(step) {
+    __onChange(step: Object) {
         let currentStep = this.__getCurrentStep();
-        if (currentStep.stepKey === step.stepKey) {
+        if (currentStep === undefined || currentStep.stepKey === step.stepKey) {
             return;
         }
-        let isNext = step.index > currentStep.index;
-        let nextStep = isNext ? this.__steps[currentStep.index + 1].props : step;
+        let nextStep = step.index > currentStep.index + 1 ? this.__steps[currentStep.index + 1] : step;
 
-        if (isNext) {
-            let result = this.__refs[currentStep.stepKey].isValid();
+        let nextStepRef = this.__refs[nextStep.stepKey];
+        let currentStepRef = this.__refs[currentStep.stepKey];
+
+        if (currentStepRef === undefined || nextStepRef === undefined) {
+            return;
+        }
+
+        if (step.index > currentStep.index) {
+            let result = currentStepRef.isValid();
             if (result.message) {
                 this.__showToast(result.type, result.message);
             }
@@ -243,14 +260,10 @@ export default class Wizard extends ShallowComponent {
         }
 
         if (this.props.changeState) {
-            let currentStepRef = this.__refs[currentStep.stepKey];
-            let nextStepRef = this.__refs[nextStep.stepKey];
-
             let state = {currentKey: nextStep.stepKey};
             let stateOfSteps = this.state.stateOfSteps;
             stateOfSteps[currentStep.stepKey] = currentStepRef.__getStateOfStep();
-
-            this.setState(state, ()=> {
+            this.setState(state, () => {
                 nextStepRef.__stateOfSteps(stateOfSteps)
             });
         }
@@ -262,7 +275,7 @@ export default class Wizard extends ShallowComponent {
         }
     }
 
-    __showToast(type, message) {
+    __showToast(type: String, message: String) {
         switch (type) {
             case "error":
                 Toast.error(message);

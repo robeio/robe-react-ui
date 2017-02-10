@@ -3,96 +3,32 @@ import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent
 import Wizard from "robe-react-ui/lib/wizard/Wizard";
 import Step from "robe-react-ui/lib/wizard/Step";
 import DataForm from "robe-react-ui/lib/form/DataForm";
-import CheckInput from "robe-react-ui/lib/inputs/CheckInput";
 import Highlight from "react-highlight";
 import {Alert, Jumbotron, Collapse} from "react-bootstrap";
-
-const fields = [
-    {
-        label: "Name",
-        name: "name",
-        type: "string",
-        validations: {
-            regex: {
-                message: "Only letter",
-                args: [
-                    "^[a-zA-Z\\s\\ç\\Ç\\ö\\Ö\\ş\\Ş\\ı\\İ\\ğ\\Ğ\\ü\\Ü]+$"
-                ]
-            },
-            required: true
-        }
-    },
-    {
-        label: "Gender",
-        name: "gender",
-        type: "radio",
-        horizontal: true,
-        validations: {
-            required: true
-        },
-        items: [
-            {
-                value: "Male",
-                text: "Bay"
-            },
-            {
-                value: "Female",
-                text: "Bayan"
-            }
-        ]
-    }
-];
+import DataFormModel from "./DataFormModel.json";
 
 class InfoStep extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
             name: "",
-            gender: "",
-            approve: ""
+            gender: ""
         };
     }
 
     render() {
+        let gender = this.state.gender === "male" ? "Mr." : "Mrs.";
         return (
-            <div>
-                <hr style={{marginTop:0}}/>
-                <div><label style={{color:"#4380db"}}>Name: </label> {this.state.name}</div>
-                <div><label style={{color:"#4380db"}}>Gender: </label> {this.state.gender}</div>
-                <hr style={{marginTop:0}}/>
-
-                <CheckInput
-                    name="approve"
-                    item={{key: "approve",value: "I approve."}}
-                    textField="value"
-                    valueField="key"
-                    value={this.state.approve}
-                    formControl={false}
-                    onChange={this.__handleChange}
-                />
+            <div style={{textAlign: "center", margin: "40px 0px", fontSize: 24}}>
+                <hr/>
+                Hi, {gender + " " + this.state.name + " !"}
+                <hr/>
             </div>
         );
     }
 
-    __handleChange(e) {
-        let state = {};
-        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
-        state[e.target.name] = value;
-        this.setState(state);
-        return true;
-    }
-
-    isValid() {
-        let result = {message: "", status: true};
-        if (!this.state.approve) {
-            result.message = "Please confirm your information.";
-            result.status = false;
-        }
-        return result;
-    }
-
     stateOfSteps(steps) {
-        var state = {};
+        let state = {};
         state.name = steps.formStep.name;
         state.gender = steps.formStep.gender;
         this.setState(state);
@@ -103,44 +39,28 @@ class CompleteStep extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            gender: "",
-            approve: ""
+            name: ""
         };
     }
 
     render() {
         return (
-            <div>
-                <h4 style={{color:"#4380db"}}>Successful!</h4>
-                <hr style={{marginTop:0}}/>
-                <div><label>Name: </label> {this.state.name}</div>
-                <div><label>Gender: </label> {this.state.gender}</div>
-                <hr style={{marginTop:0}}/>
-
-                <CheckInput
-                    name="approve"
-                    item={{key: "approve",value: "I approve."}}
-                    textField="value"
-                    valueField="key"
-                    disabled
-                    value={this.state.approve}
-                    formControl={false}/>
+            <div style={{textAlign: "center", margin: "40px 0px", fontSize: 24}}>
+                <hr/>
+                Goodbye, {this.state.name + " !"}
+                <hr/>
             </div>
         );
     }
 
     isValid() {
-        let result = {message: "Finish", type: "success"};
-
+        let result = {message: "Good Bye.", type: "success"};
         return result;
     }
 
     stateOfSteps(steps) {
-        var state = {};
+        let state = {};
         state.name = steps.infoStep.name;
-        state.gender = steps.infoStep.gender;
-        state.approve = steps.infoStep.approve;
         this.setState(state);
     }
 }
@@ -155,9 +75,9 @@ export default class WizardSample extends ShallowComponent {
     render() {
         return (
             <div>
-                <Wizard onCompleteClick={this.__onCompleteClick}>
+                <Wizard onComplete={this.__onComplete}>
                     <Step title="Form" stepKey="formStep">
-                        <DataForm fields={fields}/>
+                        <DataForm fields={DataFormModel}/>
                     </Step>
                     <Step title="Info" stepKey="infoStep">
                         <InfoStep/>
@@ -168,8 +88,8 @@ export default class WizardSample extends ShallowComponent {
                 </Wizard>
                 <Collapse in={this.state.stepFinish}>
                     <div>
-                        <h4 style={{color:"#4380db"}}>Result</h4>
-                        <hr style={{marginTop:0}}/>
+                        <h4 style={{color: "#4380db"}}>Result</h4>
+                        <hr style={{marginTop: 0}}/>
                         <Highlight className="json">
                             {JSON.stringify(this.state.stateOfSteps)}
                         </Highlight>
@@ -179,7 +99,7 @@ export default class WizardSample extends ShallowComponent {
         );
     }
 
-    __onCompleteClick(steps) {
+    __onComplete(steps) {
         this.setState({stateOfSteps: steps, stepFinish: true});
     }
 
