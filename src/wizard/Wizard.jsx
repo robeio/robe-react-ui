@@ -126,6 +126,9 @@ export default class Wizard extends ShallowComponent {
 
     __renderSteps(components): Array {
         let componentArr = [];
+        if (!components) {
+            return componentArr;
+        }
         components.map((child) => {
             let display = this.state.currentKey === child.props.stepKey ? "inherit" : "none";
             componentArr.push(
