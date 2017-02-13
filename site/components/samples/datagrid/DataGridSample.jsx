@@ -79,11 +79,21 @@ export default class DataGridSample extends ShallowComponent {
             autoLoad: true
         });
 
+        let store4 = new Store({
+            endPoint: new LocalEndPoint({
+                data: data,
+                idField: DataGridSample.idField
+            }),
+            idField: DataGridSample.idField,
+            autoLoad: true
+        });
+
         this.state = {
             fields: DataGridModel.fields,
             store1: store1,
             store2: store2,
             store3: store3,
+            store4: store4,
             showModal: false,
             item: {}
         };
@@ -127,6 +137,14 @@ export default class DataGridSample extends ShallowComponent {
                     store={this.state.store3}
                     exportButton={true}
                     cellRenderer={DataGridSample.cellRenderer}
+                />
+                <ControlLabel>DataGrid (DataFilter)</ControlLabel>
+                <DataGrid
+                    fields={this.state.fields}
+                    propsOfFields={propsOfFields}
+                    store={this.state.store4}
+                    searchable={false}
+                    datafilter={true}
                 />
                 <ModalDataForm
                     show={this.state.showModal}

@@ -131,13 +131,19 @@ class ComponentList {
             sample: require("./samples/datagrid/DataGridSample"),
             code: require("./samples/datagrid/DataGridSample.txt")
         });
-
         components.complex.push({
             header: "DataForm",
             desc: Application.i18n(ComponentList, "components.ComponentList", "dataFormDesc"),
             json: require("./jsons/form/DataForm"),
             sample: require("./samples/form/DataFormSample"),
             code: require("./samples/form/DataFormSample.txt")
+        });
+        components.complex.push({
+            header: "DataFilter",
+            desc: " is a filtering component that uses model to create filters",
+            json: require("./jsons/datafilter/DataFilter.json"),
+            sample: require("./samples/datafilter/DataFilterSample"),
+            code: require("./samples/datafilter/DataFilterSample.txt")
         });
         components.complex.push({
             header: "ModalDataForm",

@@ -21,8 +21,12 @@ export default class Header extends ShallowComponent {
         /**
          * OnClick event for the filter button.
          * */
-        onFilterClick: React.PropTypes.func.isRequired
+        onFilterClick: React.PropTypes.func.isRequired,
 
+        /**
+         * Filterable or not
+         * */
+        filterable: React.PropTypes.bool
 
     }
 
@@ -64,7 +68,7 @@ export default class Header extends ShallowComponent {
                 style={sortStyle}
                 />
         ) : null;
-        let filterBtn = field.filter === true ? (
+        let filterBtn = field.filter === true && this.props.filterable === true ? (
             <i
                 id={this.props.name}
                 className="fa fa-filter pull-right"
