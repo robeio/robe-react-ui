@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse } from "react-bootstrap";
+import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab } from "react-bootstrap";
 import { Maps, Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
@@ -94,15 +94,16 @@ export default class Renderer extends ShallowComponent {
             <div>
                 <h3>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
-                <h4>{Application.i18n(Renderer, "components.Renderer", "example")}</h4>
-                <Panel>
-                    <this.props.sample.default />
-                    {codeSection}
-                </Panel>
-                <h4>{this.props.json.props ? Application.i18n(Renderer, "components.Renderer", "propsBlockHeader") : ""}</h4>
-                {this.__renderPropsTable(this.props.json.props)}
-                <h4>{this.props.json.methods ? Application.i18n(Renderer, "components.Renderer", "methodBlockHeader") : ""}</h4>
-                {this.__renderMethodsTable(this.props.json.methods)}
+                <Tabs defaultActiveKey="sample">
+                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample">
+                        <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
+                            <this.props.sample.default />
+                            {codeSection}
+                        </Panel>
+                    </Tab>
+                    {this.__renderPropsTable(this.props.json.props)}
+                    {this.__renderMethodsTable(this.props.json.methods)}
+                </Tabs>
             </div >);
     }
 
@@ -158,8 +159,8 @@ export default class Renderer extends ShallowComponent {
         }
 
         return (
-            <div>
-                <Table responsive striped bordered condensed>
+            <Tab title={Application.i18n(Renderer, "components.Renderer", "propsBlockHeader")} eventKey="properties">
+                <Table responsive striped condensed>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
@@ -173,7 +174,7 @@ export default class Renderer extends ShallowComponent {
                         {rows}
                     </tbody>
                 </Table>
-            </div>
+            </Tab>
         );
     }
 
@@ -200,8 +201,8 @@ export default class Renderer extends ShallowComponent {
         }
 
         return (
-            <div>
-                <Table responsive striped bordered condensed>
+            <Tab title={Application.i18n(Renderer, "components.Renderer", "methodBlockHeader")} eventKey="methods">
+                <Table responsive striped condensed>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
@@ -213,7 +214,7 @@ export default class Renderer extends ShallowComponent {
                         {rows}
                     </tbody>
                 </Table>
-            </div>
+            </Tab>
         );
     }
 

@@ -207,16 +207,16 @@
   },
   "components.Renderer": {
     "example": "Örnekler",
-    "propsBlockHeader": "Aldığı parametreler",
-    "methodBlockHeader": "Metotları",
-    "propsTableFieldOne": "Adı",
-    "propsTableFieldTwo": "Tipi",
+    "propsBlockHeader": "Parametreler",
+    "methodBlockHeader": "Metotlar",
+    "propsTableFieldOne": "Ad",
+    "propsTableFieldTwo": "Tip",
     "propsTableFieldThree": "Varsayılan",
-    "propsTableFieldFour": "Zorunluluk Durumu",
-    "propsTableFieldFive": "Açıklaması",
-    "methodsTableFieldOne": "Adı",
+    "propsTableFieldFour": "Zorunluluk",
+    "propsTableFieldFive": "Açıklama",
+    "methodsTableFieldOne": "Ad",
     "methodsTableFieldTwo": "Döndüğü Değer",
-    "methodsTableFieldThree": "Açıklaması"
+    "methodsTableFieldThree": "Açıklama"
   },
   "datagrid.DataGridSample": {
     "gridOne": "DataGrid (Standart işlem araçları)",
