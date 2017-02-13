@@ -1,2 +1,2 @@
 export {default, default as Wizard} from "./Wizard";
-export {default as Wizard} from "./Step";
+export {default as Step} from "./Step";
