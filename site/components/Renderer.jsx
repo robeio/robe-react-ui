@@ -95,8 +95,8 @@ export default class Renderer extends ShallowComponent {
             <div>
                 <h3>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
-                <Tabs defaultActiveKey="sample">
-                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample">
+                <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
+                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
                         <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
                             <this.props.sample.default />
                             {codeSection}
@@ -150,7 +150,7 @@ export default class Renderer extends ShallowComponent {
                     <div>
                         <Button bsStyle="link" name={key} onClick={this.__onDetailClick}>See Json</Button>
                         <Modal show={this.state.dialogs[key]} keyboard backdrop onHide={this.__onDetailClick}>
-                            <Modal.Header><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
+                            <Modal.Header closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
                             <Modal.Body>
                                 <Highlight> {defaultVal} </Highlight>
                             </Modal.Body>
@@ -234,7 +234,7 @@ export default class Renderer extends ShallowComponent {
 
     __onDetailClick(e) {
         let dialogs = this.state.dialogs;
-        if (e === undefined) {
+        if (e === undefined || e.target === undefined || e.target.name === undefined) {
             Maps.forEach(dialogs, (value: any, key: string) => {
                 dialogs[key] = false;
             });
@@ -246,12 +246,15 @@ export default class Renderer extends ShallowComponent {
         });
         this.forceUpdate();
     }
+    __onTabSelect(activeKey) {
+        this.setState({ activeTab: activeKey });
+    }
 
     componentDidUpdate() {
         Progress.done();
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ showCode: false });
+        this.setState({ showCode: false, activeTab: "sample" });
     }
 }
