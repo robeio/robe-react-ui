@@ -226,5 +226,8 @@
     "gridOne": "DataGrid (CRUD панель инструментов)",
     "gridTwo": "DataGrid (пользовательской панели инструментов и Pagination)",
     "gridThree": "DataGrid (Пользовательские Cell Renderer)"
+  },
+  "datafilter.DataFilterSample": {
+    "output":"выходной массив"
   }
 }

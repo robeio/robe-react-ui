@@ -226,5 +226,8 @@
     "gridOne": "DataGrid (CRUD Toolbar)",
     "gridTwo": "DataGrid (Custom Toolbar and Pagination)",
     "gridThree": "DataGrid (Custom Cell Renderer)"
+  },
+  "datafilter.DataFilterSample": {
+    "output":"Output Array"
   }
 }

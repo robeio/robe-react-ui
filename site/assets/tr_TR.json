@@ -226,5 +226,8 @@
     "gridOne": "DataGrid (Standart işlem araçları)",
     "gridTwo": "DataGrid (Özelleştirilmiş işlem araçları ve sayfalama)",
     "gridThree": "DataGrid (Özelleştirilmiş satır görünümü)"
+  },
+  "datafilter.DataFilterSample": {
+    "output":"Çıktı Dizisi"
   }
 }
