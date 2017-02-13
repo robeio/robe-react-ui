@@ -134,7 +134,7 @@ export default class DataFilter extends ShallowComponent {
     }
 
     __onChange(e) {
-        if (!e.target.value.startsWith(this.__generateFilterValue())) return false;
+        if (!e.target.value.match("^"+this.__generateFilterValue())) return false;
         if (this.phase == 0) {
             this.setState({
                 displayValue: e.target.value
@@ -346,7 +346,7 @@ export default class DataFilter extends ShallowComponent {
             filter.push(this.filters[i].filterValue || this.filters[i].filter);
             filters.push(filter);
         }
-        if (this.props.onChange) this.props.onChange(filters);
+        if (this.props.onChange !== undefined) this.props.onChange(filters);
     }
 
     __generateFilterValue() {
