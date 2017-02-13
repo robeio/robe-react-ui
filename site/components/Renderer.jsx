@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab } from "react-bootstrap";
+import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal } from "react-bootstrap";
 import { Maps, Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
@@ -59,7 +59,8 @@ export default class Renderer extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            showCode: false
+            showCode: false,
+            dialogs: {}
         };
     }
 
@@ -94,8 +95,8 @@ export default class Renderer extends ShallowComponent {
             <div>
                 <h3>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
-                <Tabs defaultActiveKey="sample">
-                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample">
+                <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
+                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
                         <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
                             <this.props.sample.default />
                             {codeSection}
@@ -144,6 +145,19 @@ export default class Renderer extends ShallowComponent {
         Maps.forEach(data, (value: any, key: string) => {
             let type = value.type !== undefined ? value.type.name : "";
             let defaultVal = value.defaultValue !== undefined ? value.defaultValue.value : "";
+            if (defaultVal !== "" && (type === "object" || type === "shape" || type === "array")) {
+                defaultVal = (
+                    <div>
+                        <Button bsStyle="link" name={key} onClick={this.__onDetailClick}>See Json</Button>
+                        <Modal show={this.state.dialogs[key]} keyboard backdrop onHide={this.__onDetailClick}>
+                            <Modal.Header closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
+                            <Modal.Body>
+                                <Highlight> {defaultVal} </Highlight>
+                            </Modal.Body>
+                        </Modal>
+                    </div >
+                );
+            }
             rows.push(<tr key={key}>
                 <td>{key}</td>
                 <td>{type}</td>
@@ -218,11 +232,29 @@ export default class Renderer extends ShallowComponent {
         );
     }
 
+    __onDetailClick(e) {
+        let dialogs = this.state.dialogs;
+        if (e === undefined || e.target === undefined || e.target.name === undefined) {
+            Maps.forEach(dialogs, (value: any, key: string) => {
+                dialogs[key] = false;
+            });
+        } else {
+            dialogs[e.target.name] = !dialogs[e.target.name];
+        }
+        this.setState({
+            dialogs
+        });
+        this.forceUpdate();
+    }
+    __onTabSelect(activeKey) {
+        this.setState({ activeTab: activeKey });
+    }
+
     componentDidUpdate() {
         Progress.done();
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ showCode: false });
+        this.setState({ showCode: false, activeTab: "sample" });
     }
 }
