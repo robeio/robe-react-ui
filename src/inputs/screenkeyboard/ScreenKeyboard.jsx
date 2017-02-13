@@ -23,7 +23,7 @@ export default class ScreenKeyboard extends ShallowComponent {
          */
         inputId: React.PropTypes.string,
         /**
-         * Keyboard buttons language. Possible values "en_US", "tr_TR", "ru_RU", "numeric".
+         * Keyboard buttons language. Possible values "en_US", "tr_TR", "ru_RU", "numeric, decimal".
          */
         language: React.PropTypes.oneOf([
             "en_US", "tr_TR", "ru_RU", "numeric", "decimal"
@@ -100,11 +100,13 @@ export default class ScreenKeyboard extends ShallowComponent {
         let keyboardArea = this.props.language === "numeric" || this.props.language === "decimal" ? "keyboardAreaNumeric" : "keyboardArea";
         if (this.state.show || !this.props.inputId)
             return (<div id={this.keyboardAreaId} className={keyboardArea} style={this.props.style}>
-                <div id={this.languageAreaId} className="languageTextArea">{this.__convertLanguageText()}
-                    {this.props.inputId ? <FaIcon
-                        style={{cursor:"pointer"}}
-                        className="pull-right"
-                        code="fa-close" onClick={()=> this.setState({show:false})}/> : null}
+                <div id={this.languageAreaId} className="languageTextArea">
+                    <div>{this.__convertLanguageText()}
+                        {this.props.inputId ? <FaIcon
+                            style={{cursor:"pointer"}}
+                            className="pull-right"
+                            code="fa-close" onClick={()=> this.setState({show:false})}/> : null}
+                    </div>
                 </div>
                 <div id="keySet">
                     {this.__decideKeyboardType(this.props.language)}
