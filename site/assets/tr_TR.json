@@ -227,6 +227,12 @@
     "gridTwo": "DataGrid (Özelleştirilmiş işlem araçları ve sayfalama)",
     "gridThree": "DataGrid (Özelleştirilmiş satır görünümü)"
   },
+  "inputs.ScreenKeyboardSample": {
+    "keyboardOne": "Dil Desteğiyle Kullanılan Ekran Klavyesi",
+    "keyboardTwo": "Sayısal Klavye Desteğiyle Kullanılan Ekran Klavyesi",
+    "keyboardThree": "Girdi Alanı Olmadan Kullanılabilir (Yalnızca Tıklanan Tuşu Döndürür)",
+    "clickedKey": "Tıklanan Tuş : "
+  },
   "datafilter.DataFilterSample": {
     "output":"Çıktı Dizisi"
   }
