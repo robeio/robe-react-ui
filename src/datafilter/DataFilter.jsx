@@ -37,7 +37,16 @@ export default class DataFilter extends ShallowComponent {
         visible: true
     };
 
-    operators = ["= equal", "!= not equal", "< less", "<= less or equal", "> greater", ">= greater or equal", "~= like", "|= in (separator:|)"];
+    operators = [
+        "= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "="),
+        "!= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "!="),
+        "< " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "<"),
+        "<= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "<="),
+        "> " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", ">"),
+        ">= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", ">="),
+        "~= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "~="),
+        "|= " + Application.i18n(DataFilter, "datafilter.DataFilter", "operators", "|=")
+    ];
     phase = 0;
     filters = [];
     filter = {};
@@ -197,7 +206,7 @@ export default class DataFilter extends ShallowComponent {
                 if (this.state.nav.length == 1) this.__onDecideKey(this.refs.dataFilterSelect.getNextActiveChild().key - 1);
                 e.preventDefault();
             }
-            else if (this.phase == 2 && code != 32) {
+            else if (this.phase == 2 && (code != 32 || this.filter.subject.type == "number")) {
                 if (this.state.showSelect && this.state.nav.length == 1) this.__onDecideKey(this.refs.dataFilterSelect.getNextActiveChild().key - 1);
                 else if (!this.state.showSelect) this.__onDecideKey();
                 e.preventDefault();
@@ -359,6 +368,7 @@ export default class DataFilter extends ShallowComponent {
     __hideIfOut = (e) => {
         if (( document.activeElement !== ReactDOM.findDOMNode(this.inputRef) ) && (this.state.showSelect || this.state.showDatePicker)) {
             if (this.state.showDatePicker) {
+                if(e != undefined && e.target.tagName.toLowerCase() == "select") return;
                 this.setState({showSelect: false, showDatePicker: false});
                 this.__onDecideKey();
                 this.inputRef.focus();

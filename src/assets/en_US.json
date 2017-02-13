@@ -1,4 +1,16 @@
 {
+  "datafilter.DataFilter": {
+    "operators": {
+      "=": "equal",
+      "!=": "not equal",
+      "<": "less",
+      "<=": "less or equal",
+      ">": "greater",
+      ">=": "greater or equal",
+      "~=": "like",
+      "|=": "in (use | to seperate)"
+    }
+  },
   "datagrid.DataGrid": {
     "toolbar": {
       "create": "New",

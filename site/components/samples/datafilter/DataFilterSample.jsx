@@ -4,6 +4,7 @@ import {
     Store,
     RemoteEndPoint,
     Assertions,
+    Application,
     LocalEndPoint,
     Maps
 } from "robe-react-commons";
@@ -11,7 +12,6 @@ import DataFilter from "robe-react-ui/lib/datafilter/DataFilter";
 import DataFilterModel from "./DataFilterModel.json";
 import { ControlLabel } from "react-bootstrap";
 import Highlight from "react-highlight";
-
 
 const propsOfFields = {
     job: {
@@ -66,7 +66,7 @@ export default class DataFilterSample extends ShallowComponent {
                     ref="datafilter"
                 />
                 <br/>
-                <ControlLabel>Output Array</ControlLabel>
+                <ControlLabel>{Application.i18n(DataFilterSample,"datafilter.DataFilterSample", "output")}</ControlLabel>
                 <Highlight className="json">
                     {JSON.stringify(this.state.filter)}
                 </Highlight>
