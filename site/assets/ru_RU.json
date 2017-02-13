@@ -226,5 +226,11 @@
     "gridOne": "DataGrid (CRUD панель инструментов)",
     "gridTwo": "DataGrid (пользовательской панели инструментов и Pagination)",
     "gridThree": "DataGrid (Пользовательские Cell Renderer)"
+  },
+  "inputs.ScreenKeyboardSample": {
+    "keyboardOne": "Экранная клавиатура с языком клавиатуры",
+    "keyboardTwo": "Клавиатура с цифровой клавиатурой",
+    "keyboardThree": "Можно использовать без ввода данных (возврат только Щелкнул ключ)",
+    "clickedKey": "Щелкнул ключ : "
   }
 }
