@@ -153,6 +153,7 @@ export default class Wizard extends ShallowComponent {
         return (
             <Pager>
                 <Pager.Item
+                    id="previous"
                     previous
                     style={{display: currentStep.index == 0 ? "none" : "inherit"}}
                     onClick={this.__handlePreviousButtonClick}
@@ -160,6 +161,7 @@ export default class Wizard extends ShallowComponent {
                     <FaIcon code="fa-arrow-left"/>{this.props.previous}
                 </Pager.Item>
                 <Pager.Item
+                    id={isComplete ? "complete" : "next"}
                     next
                     onClick={rightOnClick}
                 >
