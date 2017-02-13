@@ -368,7 +368,7 @@ export default class DataFilter extends ShallowComponent {
     __hideIfOut = (e) => {
         if (( document.activeElement !== ReactDOM.findDOMNode(this.inputRef) ) && (this.state.showSelect || this.state.showDatePicker)) {
             if (this.state.showDatePicker) {
-                if(e.target.tagName.toLowerCase() == "select") return;
+                if(e != undefined && e.target.tagName.toLowerCase() == "select") return;
                 this.setState({showSelect: false, showDatePicker: false});
                 this.__onDecideKey();
                 this.inputRef.focus();
