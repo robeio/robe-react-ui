@@ -67,7 +67,7 @@ export default class Step extends ShallowComponent {
         let stateOfStep = {};
         for (let i in this.__refs) {
             let ref = this.__getRef(this.__refs[i]);
-            if (!ref && !ref.state) {
+            if (!ref || !ref.state) {
                 continue;
             }
             stateOfStep = Maps.mergeDeep(stateOfStep, ref.state || {})
