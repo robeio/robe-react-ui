@@ -141,6 +141,17 @@ describe("Screen Keyboard", () => {
 
             wrapper.instance().__handleBackspaceClick({target:{value: "fa"}});
             chai.assert.equal(document.getElementById("keyboardId").value, "f", "Input text wrong");
+
+            wrapper.instance().__handleButtonClick({
+                target: {
+                    data: "t", selectionStart: 0, getAttribute: function () {
+                        return "t";
+                    }
+                }
+            });
+
+            chai.assert.equal(document.getElementById("keyboardId").value, "ft", "Input text wrong");
+
             wrapper.unmount();
         } catch (error) {
             chai.assert.equal(error.message, "please use same or right ID field for your input.");

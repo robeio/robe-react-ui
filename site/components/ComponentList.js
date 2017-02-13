@@ -95,7 +95,7 @@ class ComponentList {
 
         components.inputs.push({
             header: "ScreenKeyboard",
-            desc: "is an application which provides a visual keyboard on your display.",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "screenKeyboardDesc"),
             json: require("./jsons/inputs/screenkeyboard/ScreenKeyboard"),
             sample: require("./samples/inputs/ScreenKeyboardSample"),
             code: require("./samples/inputs/ScreenKeyboardSample.txt")
@@ -140,7 +140,7 @@ class ComponentList {
         });
         components.complex.push({
             header: "DataFilter",
-            desc: " is a filtering component that uses model to create filters",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "dataFilterDesc"),
             json: require("./jsons/datafilter/DataFilter.json"),
             sample: require("./samples/datafilter/DataFilterSample"),
             code: require("./samples/datafilter/DataFilterSample.txt")
@@ -203,7 +203,7 @@ class ComponentList {
         });
         components.complex.push({
             header: "LazyImage",
-            desc: "is a component for loading images via AJAX.",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "lazyImageDesc"),
             json: require("./jsons/image/LazyImage"),
             sample: require("./samples/image/LazyImageSample"),
             code: require("./samples/image/LazyImageSample.txt")
@@ -223,7 +223,7 @@ class ComponentList {
         });
         components.complex.push({
             header: "Countdown",
-            desc: " is a component for counting down from the given value",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "countDownDesc"),
             sample: require("./samples/countdown/CountdownSample"),
             code: require("./samples/countdown/CountdownSample.txt"),
             json: require("./jsons/countdown/Countdown"),
