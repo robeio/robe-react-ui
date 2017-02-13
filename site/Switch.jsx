@@ -4,6 +4,7 @@ import Main from "./Main";
 import MyApplication from "robe-react-ui/lib/Application";
 import Module from "./Module";
 import {
+    Application,
     ShallowComponent,
     Cookies
 } from "robe-react-commons";
@@ -25,9 +26,12 @@ export default class Switch extends ShallowComponent {
     __changeLanguage(lang) {
         Module(lang)
             .then(
-            (language) => {
-                this.setState({ language });
-                Cookies.put("language", lang);
+            (siteMap) => {
+                System.import("../src/assets/" + lang).then((compMap) => {
+                    Application.loadI18n(compMap);
+                    this.setState({ language: siteMap });
+                    Cookies.put("language", lang);
+                });
             });
     }
 }

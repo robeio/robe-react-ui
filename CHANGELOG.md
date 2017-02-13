@@ -1,6 +1,9 @@
 # Change Log
 
-## 1.1.21 -- Developing...
+## 1.1.22 -- Developing...
+
+
+## 1.1.21
 * Screen Keyboard component added.
 * Wizard component redeveloped.
 * changed version of webpack from 1 to 2 beta.
