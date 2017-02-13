@@ -70,5 +70,28 @@
     "next": "следующий",
     "previous": "предыдущий",
     "complete": "полный"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "ужасный",
+      "1": "плохой",
+      "2": "слабый",
+      "3": "хорошо",
+      "4": "сильный"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "день"
+    },
+    "hours": {
+      "label": "час"
+    },
+    "minutes": {
+      "label": "минут"
+    },
+    "seconds": {
+      "label": "второй"
+    }
   }
 }
