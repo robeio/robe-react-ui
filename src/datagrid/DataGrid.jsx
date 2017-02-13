@@ -18,6 +18,7 @@ import DataTableBodyRow from "./DataGridBodyRow";
 import ModalConfirm from "../form/ModalConfirm";
 import Filters from "./filter/Filters";
 import SearchField from "./toolbar/SearchField";
+import DataFilter from "../datafilter/DataFilter";
 import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
 import Header from "./Header";
@@ -90,6 +91,10 @@ export default class DataGrid extends StoreComponent {
          * enable/disable searchable
          */
         searchable: React.PropTypes.bool,
+        /**
+         * enable/disable DataFilter
+         */
+        datafilter: React.PropTypes.bool,
 
         /**
          * show/hide refresh button
@@ -131,6 +136,7 @@ export default class DataGrid extends StoreComponent {
     static defaultProps = {
         editable: true,
         searchable: true,
+        datafilter: false,
         refreshable: false,
         toolbar: [
             {
@@ -204,6 +210,15 @@ export default class DataGrid extends StoreComponent {
     render(): Object {
         return (
             <Col className="datagrid">
+                <Row>
+                    <Col xs={12} sm={12} lg={12}>
+                        <DataFilter
+                            onChange={this.__onDataFilterChanged}
+                            visible={this.props.datafilter}
+                            fields={this.__fields}
+                        />
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs={5} sm={5} lg={4}>
                         <SearchField
@@ -352,6 +367,7 @@ export default class DataGrid extends StoreComponent {
                         onSortClick={this.__onSortClick}
                         filter={this.__filterComponent !== undefined ? this.__filterComponent.state.filters[column.name] : undefined}
                         sort={this.__sorts[column.name] !== undefined ? this.__sorts[column.name] : column.sort}
+                        filterable={!this.props.datafilter}
                     />
                 );
             }
@@ -439,6 +455,11 @@ export default class DataGrid extends StoreComponent {
     __onSearchChanged = (event: Object) => {
         this.state.qfilter = event.target.value;
         this.activePage = 1;
+        this.__readData();
+    }
+
+    __onDataFilterChanged(filter) {
+        this.__filters = filter;
         this.__readData();
     }
 

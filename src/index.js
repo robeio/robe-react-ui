@@ -1,6 +1,7 @@
 export { default as Wizard } from "./wizard";
 export { default as CheckBoxTree } from "./checktree/CheckTree";
 export { default as DataGrid } from "./datagrid";
+export { default as DataFilter } from "./datafilter";
 export { default as Faicon } from "./faicon";
 export { default as Form } from "./form";
 export { default as Input } from "./inputs";
