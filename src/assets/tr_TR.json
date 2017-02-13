@@ -1,4 +1,16 @@
 {
+  "datafilter.DataFilter": {
+    "operators": {
+      "=": "eşit",
+      "!=": "eşit değil",
+      "<": "küçük",
+      "<=": "küçük veya eşit",
+      ">": "büyük",
+      ">=": "büyük veya eşit",
+      "~=": "benzer",
+      "|=": "içerir (ayraç \"|\")"
+    }
+  },
   "datagrid.DataGrid": {
     "toolbar": {
       "create": "Yeni",

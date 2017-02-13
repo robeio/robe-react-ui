@@ -49,13 +49,15 @@ export default class Step extends ShallowComponent {
             this.__refs[idx] = idx;
             return idx;
         }
-        if (Assertions.isString(ref)) {
+        else if (Assertions.isString(ref)) {
             this.__refs[idx] = ref;
             return ref;
         } else if (Assertions.isFunction(ref)) {
             return (el) => {
-                ref(el);
-                this.__refs[idx] = el
+                if (el) {
+                    ref(el);
+                    this.__refs[idx] = el
+                }
             };
         }
     }
@@ -65,8 +67,10 @@ export default class Step extends ShallowComponent {
         let stateOfStep = {};
         for (let i in this.__refs) {
             let ref = this.__getRef(this.__refs[i]);
-            let state = ref.state ? ref.state : {};
-            stateOfStep = Maps.mergeDeep(stateOfStep, state)
+            if (!ref && !ref.state) {
+                continue;
+            }
+            stateOfStep = Maps.mergeDeep(stateOfStep, ref.state || {})
         }
         return stateOfStep;
     }

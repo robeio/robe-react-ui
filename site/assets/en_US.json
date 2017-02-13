@@ -232,5 +232,8 @@
     "keyboardTwo": "Screen Keyboard With Numeric Keyboard Support",
     "keyboardThree": "Can Use Without Input (Returns Only Clicked Key)",
     "clickedKey": "Clicked Key : "
+  },
+  "datafilter.DataFilterSample": {
+    "output":"Output Array"
   }
 }
