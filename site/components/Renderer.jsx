@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab } from "react-bootstrap";
+import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Maps, Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
@@ -59,7 +59,8 @@ export default class Renderer extends ShallowComponent {
     constructor(props) {
         super(props);
         this.state = {
-            showCode: false
+            showCode: false,
+            dialogs: {}
         };
     }
 
@@ -94,8 +95,8 @@ export default class Renderer extends ShallowComponent {
             <div>
                 <h3>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
-                <Tabs defaultActiveKey="sample">
-                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample">
+                <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
+                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
                         <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
                             <this.props.sample.default />
                             {codeSection}
@@ -144,12 +145,37 @@ export default class Renderer extends ShallowComponent {
         Maps.forEach(data, (value: any, key: string) => {
             let type = value.type !== undefined ? value.type.name : "";
             let defaultVal = value.defaultValue !== undefined ? value.defaultValue.value : "";
+            let desc = value.description;
+            let enumVals = "";
+            if (defaultVal !== "" && (type === "object" || type === "shape" || type === "array")) {
+                defaultVal = (
+                    <div>
+                        <a name={key} onClick={this.__onDetailClick}>JSON</a>
+                        <Modal show={this.state.dialogs[key]} keyboard backdrop onHide={this.__onDetailClick}>
+                            <Modal.Header closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
+                            <Modal.Body>
+                                <Highlight> {defaultVal} </Highlight>
+                            </Modal.Body>
+                        </Modal>
+                    </div >
+                );
+            } else if (type === "enum") {
+                let enumValues = [];
+                for (let i = 0; i < value.type.value.length; i++) {
+                    enumValues.push(value.type.value[i].value);
+                }
+                enumVals += `Possible Values: ${enumValues.join()}.`;
+            }
+            let required = value.required ? (
+                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">{Application.i18n(Renderer, "components.Renderer", "required")}</Tooltip>}>
+                    <FaIcon style={{ color: "red" }} code={"fa-exclamation"} />
+                </OverlayTrigger>
+            ) : undefined;
             rows.push(<tr key={key}>
-                <td>{key}</td>
+                <td>{key}{required}</td>
                 <td>{type}</td>
                 <td>{defaultVal}</td>
-                <td>{value.required ? "Yes" : "No"}</td>
-                <td>{value.description}</td>
+                <td>{desc}<br/>{enumVals}</td>
             </tr>);
         });
 
@@ -160,13 +186,12 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "propsBlockHeader")} eventKey="properties">
-                <Table responsive striped condensed>
+                <Table responsive striped condensed bordered>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldTwo")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldThree")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFour")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFive")}</th>
                         </tr>
                     </thead>
@@ -202,7 +227,7 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "methodBlockHeader")} eventKey="methods">
-                <Table responsive striped condensed>
+                <Table responsive striped condensed bordered>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
@@ -218,11 +243,29 @@ export default class Renderer extends ShallowComponent {
         );
     }
 
+    __onDetailClick(e) {
+        let dialogs = this.state.dialogs;
+        if (e === undefined || e.target === undefined || e.target.name === undefined) {
+            Maps.forEach(dialogs, (value: any, key: string) => {
+                dialogs[key] = false;
+            });
+        } else {
+            dialogs[e.target.name] = !dialogs[e.target.name];
+        }
+        this.setState({
+            dialogs
+        });
+        this.forceUpdate();
+    }
+    __onTabSelect(activeKey) {
+        this.setState({ activeTab: activeKey });
+    }
+
     componentDidUpdate() {
         Progress.done();
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ showCode: false });
+        this.setState({ showCode: false, activeTab: "sample" });
     }
 }

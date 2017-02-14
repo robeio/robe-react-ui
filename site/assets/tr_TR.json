@@ -220,7 +220,8 @@
     "propsTableFieldFive": "Açıklama",
     "methodsTableFieldOne": "Ad",
     "methodsTableFieldTwo": "Döndüğü Değer",
-    "methodsTableFieldThree": "Açıklama"
+    "methodsTableFieldThree": "Açıklama",
+    "required": "Zorunlu"
   },
   "datagrid.DataGridSample": {
     "gridOne": "DataGrid (Standart işlem araçları)",
@@ -234,6 +235,6 @@
     "clickedKey": "Tıklanan Tuş : "
   },
   "datafilter.DataFilterSample": {
-    "output":"Çıktı Dizisi"
+    "output": "Çıktı Dizisi"
   }
 }
