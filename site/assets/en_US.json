@@ -113,7 +113,7 @@
     "spanSeven": " Call current url."
   },
   "error.NotFound": {
-    "message": "404 page not found."
+    "message": "404 Page not found."
   },
   "ajaxrequest.AjaxRequestSample": {
     "spanOne": "You can define \"Ajax Request\" as follows",

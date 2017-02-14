@@ -61,7 +61,7 @@ export default class ModalDataForm extends ShallowComponent {
     static defaultProps = {
         show: false,
         header: Application.i18n(ModalDataForm, "form.ModalDataForm", "header"),
-        invalidField: [Application.i18n(ModalDataForm, "form.ModalDataForm", "invalidField")],
+        invalidField: Application.i18n(ModalDataForm, "form.ModalDataForm", "invalidField"),
         cancel: Application.i18n(ModalDataForm, "form.ModalDataForm", "cancel"),
         ok: Application.i18n(ModalDataForm, "form.ModalDataForm", "ok"),
         showCancelButton: true,
@@ -120,10 +120,14 @@ export default class ModalDataForm extends ShallowComponent {
 
         let errors = [];
 
-        for (let i = 0; i < this.state.invalidField.length; i++) {
-            let error = this.state.invalidField[i];
-            errors.push(<p key={i}>{error}</p>);
+        if (Array.isArray(this.state.invalidField)) {
+            for (let i = 0; i < this.state.invalidField.length; i++) {
+                let error = this.state.invalidField[i];
+                errors.push(<p key={i}>{error}</p>);
+            }
         }
+        else errors.push(<p key="invalidField">{this.state.invalidField}</p>);
+
         return (<Alert bsStyle="danger" className="input-alert">{errors}</Alert>);
     };
 
@@ -134,7 +138,7 @@ export default class ModalDataForm extends ShallowComponent {
         } else {
             this.setState({
                 valid: false,
-                invalidText: this.props.invalidText
+                invalidField: this.props.invalidField
             });
             this.__done();
         }
@@ -150,7 +154,7 @@ export default class ModalDataForm extends ShallowComponent {
             }
             this.setState({
                 valid: false,
-                invalidText: message
+                invalidField: message
             });
         }
         this.__done();

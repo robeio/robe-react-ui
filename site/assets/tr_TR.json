@@ -113,7 +113,7 @@
     "spanSeven": "Geçerli URL 'i çağır."
   },
   "error.NotFound": {
-    "message": "Sayfa bulunamadı."
+    "message": "404 Sayfa bulunamadı."
   },
   "ajaxrequest.AjaxRequestSample": {
     "spanOne": "\"Ajax Request\"'i aşağıdaki gibi tanımlayabilirsiniz.",

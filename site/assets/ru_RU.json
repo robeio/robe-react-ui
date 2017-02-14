@@ -113,7 +113,7 @@
     "spanSeven": "Вызов текущего URL."
   },
   "error.NotFound": {
-    "message": "Страница не найдена"
+    "message": "404 Страница не найдена"
   },
   "ajaxrequest.AjaxRequestSample": {
     "spanOne": "Вы можете определить \"Ajax запроса \" следующим образом",
