@@ -1,13 +1,13 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip, ControlLabel } from "react-bootstrap";
 import { Maps, Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
 import Progress from "progress/Progress";
 import FaIcon from "faicon/FaIcon";
 import Toast from "toast/Toast";
-
-
+import Playground from "../live/ReactPlayground";
+import ReactDOM from "react-dom";
 
 export default class Renderer extends ShallowComponent {
 
@@ -70,10 +70,12 @@ export default class Renderer extends ShallowComponent {
                 <div>
                     <div className="pull-right">
                         <ButtonGroup
-                            style={Renderer.clipboardStyle}>
+                            style={Renderer.clipboardStyle}
+                        >
                             <Button
                                 bsSize="xsmall"
-                                onClick={this.__copyToClipboard}>
+                                onClick={this.__copyToClipboard}
+                            >
                                 <FaIcon code="fa-clipboard" />
                             </Button>
                         </ButtonGroup>
@@ -88,8 +90,10 @@ export default class Renderer extends ShallowComponent {
         let codeSection = this.props.code ?
             (<div>
                 {highlight}
-                <Button bsStyle="link" bsSize="xsmall" className="pull-right"
-                    onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
+                <Button
+                    bsStyle="link" bsSize="xsmall" className="pull-right"
+                    onClick={this.__toogleCode}
+                >{`${this.state.showCode ? "Hide" : "Show"} Code`}</Button>
             </div>) : undefined;
         return (
             <div>
@@ -98,8 +102,7 @@ export default class Renderer extends ShallowComponent {
                 <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
                     <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
                         <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
-                            <this.props.sample.default />
-                            {codeSection}
+                            <Playground codeText={this.props.code} scope={{ ReactDOM, React, ShallowComponent, Button, ControlLabel, Application, Toast }} noRender={false} collapsableCode initiallyExpanded={true} />
                         </Panel>
                     </Tab>
                     {this.__renderPropsTable(this.props.json.props)}
@@ -175,7 +178,7 @@ export default class Renderer extends ShallowComponent {
                 <td>{key}{required}</td>
                 <td>{type}</td>
                 <td>{defaultVal}</td>
-                <td>{desc}<br/>{enumVals}</td>
+                <td>{desc}<br />{enumVals}</td>
             </tr>);
         });
 
