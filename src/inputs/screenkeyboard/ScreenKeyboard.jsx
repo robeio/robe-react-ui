@@ -23,7 +23,7 @@ export default class ScreenKeyboard extends ShallowComponent {
          */
         inputId: React.PropTypes.string,
         /**
-         * Keyboard buttons language. Possible values "en_US", "tr_TR", "ru_RU", "numeric, decimal".
+         * Keyboard buttons language.
          */
         language: React.PropTypes.oneOf([
             "en_US", "tr_TR", "ru_RU", "numeric", "decimal"
