@@ -175,7 +175,10 @@ export default class DataFilter extends ShallowComponent {
                     this.__filterChange();
                     this.phase = 2;
                     this.__makeSelect();
-                    this.__setValue(this.__generateFilterValue() + this.filter.filter);
+                    if(this.filter.subject.items)
+                        this.__setValue(this.__generateFilterValue());
+                    else
+                        this.__setValue(this.__generateFilterValue() + this.filter.filter);
                     e.preventDefault();
                 }
             }
@@ -203,13 +206,17 @@ export default class DataFilter extends ShallowComponent {
         }
         else if (code == 13 || code == 222 || code == 32) {
             if (this.phase == 0 || this.phase == 1) {
-                if (this.state.nav.length == 1) this.__onDecideKey(this.refs.dataFilterSelect.getNextActiveChild().key - 1);
-                e.preventDefault();
+                if (this.state.nav.length == 1) {
+                    this.state.nav[0].props.onClick();
+                    e.preventDefault();
+                }
             }
-            else if (this.phase == 2 && (code != 32 || this.filter.subject.type == "number")) {
-                if (this.state.showSelect && this.state.nav.length == 1) this.__onDecideKey(this.refs.dataFilterSelect.getNextActiveChild().key - 1);
+            else if (this.phase == 2 && (code != 32 || this.filter.subject.type == "number" || this.filter.subject.items)) {
+                if (this.state.showSelect && this.state.nav.length == 1) {
+                    this.state.nav[0].props.onClick();
+                    e.preventDefault();
+                }
                 else if (!this.state.showSelect) this.__onDecideKey();
-                e.preventDefault();
             }
         }
         else if (code == 9) this.setState({showSelect: false});
@@ -259,9 +266,10 @@ export default class DataFilter extends ShallowComponent {
                 item = fields[i];
                 if (item.filter == false) continue;
                 if (item.type == "string" || item.type == "number" || item.type == "date" || item.type == "select" || item.type == "radio") {
-                    if (!filter || filter == "" || item.label.toLowerCase().indexOf(filter.toLowerCase()) != -1)
+                    if (!filter || filter == "" || item.label.toLowerCase().match("^"+filter.toLowerCase())) {
                         nav.push(<NavItem key={i+1} eventKey={i+1}
                                           onClick={this.__onDecideKey.bind(undefined,i)}>{item.label}</NavItem>);
+                    }
                 }
             }
             this.setState({
@@ -273,9 +281,10 @@ export default class DataFilter extends ShallowComponent {
         else if (this.phase == 1) {
             let nav = [];
             for (let i = 0; i < this.operators.length; i++) {
-                if (!filter || filter == "" || this.operators[i].toLowerCase().indexOf(filter.toLowerCase()) != -1)
+                if (!filter || filter == "" || this.operators[i].toLowerCase().match("^"+filter.toLowerCase())) {
                     nav.push(<NavItem key={i+1} eventKey={i+1}
                                       onClick={this.__onDecideKey.bind(undefined,i)}>{this.operators[i]}</NavItem>);
+                }
             }
             this.setState({
                 nav: nav,
@@ -294,9 +303,10 @@ export default class DataFilter extends ShallowComponent {
                 let nav = [];
                 let items = this.filter.subject.items;
                 for (let i = 0; i < items.length; i++) {
-                    if (!filter || filter == "" || items[i].text.toLowerCase().indexOf(filter.toLowerCase()) != -1)
+                    if (!filter || filter == "" || items[i].text.toLowerCase().match("^"+filter.toLowerCase())) {
                         nav.push(<NavItem key={i+1} eventKey={i+1}
                                           onClick={this.__onDecideKey.bind(undefined,i)}>{items[i].text}</NavItem>);
+                    }
                 }
                 this.setState({
                     nav: nav,
