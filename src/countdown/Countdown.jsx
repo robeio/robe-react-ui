@@ -35,6 +35,44 @@ export default class Countdown extends ShallowComponent {
          * value as parameter.
          */
         onChange: React.PropTypes.func,
+
+        /**
+         * Style of the counter.
+         */
+        style: React.PropTypes.object,
+
+        /**
+         * Props for days cell.
+         */
+        days: React.PropTypes.shape({
+            visible: React.PropTypes.boolean,
+            label: React.PropTypes.string,
+            style: React.PropTypes.object
+        }),
+        /**
+         * Props for hours cell.
+         */
+        hours: React.PropTypes.shape({
+            visible: React.PropTypes.boolean,
+            label: React.PropTypes.string,
+            style: React.PropTypes.object
+        }),
+        /**
+         * Props for minutes cell.
+         */
+        minutes: React.PropTypes.shape({
+            visible: React.PropTypes.boolean,
+            label: React.PropTypes.string,
+            style: React.PropTypes.object
+        }),
+        /**
+         * Props for seconds cell.
+         */
+        seconds: React.PropTypes.shape({
+            visible: React.PropTypes.boolean,
+            label: React.PropTypes.string,
+            style: React.PropTypes.object
+        }),
     }
 
     static defaultProps: Map = {
