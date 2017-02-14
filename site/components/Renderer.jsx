@@ -145,6 +145,8 @@ export default class Renderer extends ShallowComponent {
         Maps.forEach(data, (value: any, key: string) => {
             let type = value.type !== undefined ? value.type.name : "";
             let defaultVal = value.defaultValue !== undefined ? value.defaultValue.value : "";
+            let desc = value.description;
+            let enumVals = "";
             if (defaultVal !== "" && (type === "object" || type === "shape" || type === "array")) {
                 defaultVal = (
                     <div>
@@ -157,6 +159,12 @@ export default class Renderer extends ShallowComponent {
                         </Modal>
                     </div >
                 );
+            } else if (type === "enum") {
+                let enumValues = [];
+                for (let i = 0; i < value.type.value.length; i++) {
+                    enumValues.push(value.type.value[i].value);
+                }
+                enumVals += `Possible Values: ${enumValues.join()}.`;
             }
             let required = value.required ? (
                 <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">{Application.i18n(Renderer, "components.Renderer", "required")}</Tooltip>}>
@@ -167,7 +175,7 @@ export default class Renderer extends ShallowComponent {
                 <td>{key}{required}</td>
                 <td>{type}</td>
                 <td>{defaultVal}</td>
-                <td>{value.description}</td>
+                <td>{desc}<br/>{enumVals}</td>
             </tr>);
         });
 
