@@ -220,7 +220,8 @@
     "propsTableFieldFive": "Описание",
     "methodsTableFieldOne": "имя",
     "methodsTableFieldTwo": "Возвращает",
-    "methodsTableFieldThree": "Описание"
+    "methodsTableFieldThree": "Описание",
+    "required": "необходимые"
   },
   "datagrid.DataGridSample": {
     "gridOne": "DataGrid (CRUD панель инструментов)",
@@ -234,6 +235,6 @@
     "clickedKey": "Щелкнул ключ : "
   },
   "datafilter.DataFilterSample": {
-    "output":"выходной массив"
+    "output": "выходной массив"
   }
 }

@@ -44,11 +44,7 @@ body {
     color: white !important;
 }
 
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn:active:focus,
-.btn:focus {
+.btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
     outline: 0px;
     outline-offset: -2px;
 }
@@ -61,16 +57,13 @@ body {
     border-bottom: 3px solid transparent;
 }
 
-.navbar-inverse .navbar-nav > .active > a,
-.navbar-inverse .navbar-nav > .active > a:focus,
-.navbar-inverse .navbar-nav > .active > a:hover {
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
     color: #fff;
     background-color: #080808;
     border-bottom: 4px solid #87CEFA;
 }
 
-.navbar-inverse .navbar-nav > li > a:focus,
-.navbar-inverse .navbar-nav > li > a:hover {
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
     color: #fff;
     background-color: #333;
 }
@@ -89,7 +82,12 @@ pre code {
         border-radius: 0px;
     }
 }
+
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     background-color: transparent;
     border-left: 4px solid #87CEFA !important;
+}
+
+a:hover {
+    cursor: pointer;
 }

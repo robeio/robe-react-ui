@@ -220,7 +220,8 @@
     "propsTableFieldFive": "Description",
     "methodsTableFieldOne": "Name",
     "methodsTableFieldTwo": "Returns",
-    "methodsTableFieldThree": "Description"
+    "methodsTableFieldThree": "Description",
+    "required": "Required"
   },
   "datagrid.DataGridSample": {
     "gridOne": "DataGrid (CRUD Toolbar)",
@@ -234,6 +235,6 @@
     "clickedKey": "Clicked Key : "
   },
   "datafilter.DataFilterSample": {
-    "output":"Output Array"
+    "output": "Output Array"
   }
 }

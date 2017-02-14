@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal } from "react-bootstrap";
+import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Maps, Application } from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
@@ -148,7 +148,7 @@ export default class Renderer extends ShallowComponent {
             if (defaultVal !== "" && (type === "object" || type === "shape" || type === "array")) {
                 defaultVal = (
                     <div>
-                        <Button bsStyle="link" name={key} onClick={this.__onDetailClick}>See Json</Button>
+                        <a name={key} onClick={this.__onDetailClick}>JSON</a>
                         <Modal show={this.state.dialogs[key]} keyboard backdrop onHide={this.__onDetailClick}>
                             <Modal.Header closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
                             <Modal.Body>
@@ -158,11 +158,15 @@ export default class Renderer extends ShallowComponent {
                     </div >
                 );
             }
+            let required = value.required ? (
+                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">{Application.i18n(Renderer, "components.Renderer", "required")}</Tooltip>}>
+                    <FaIcon style={{ color: "red" }} code={"fa-exclamation"} />
+                </OverlayTrigger>
+            ) : undefined;
             rows.push(<tr key={key}>
-                <td>{key}</td>
+                <td>{key}{required}</td>
                 <td>{type}</td>
                 <td>{defaultVal}</td>
-                <td>{value.required ? "Yes" : "No"}</td>
                 <td>{value.description}</td>
             </tr>);
         });
@@ -174,13 +178,12 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "propsBlockHeader")} eventKey="properties">
-                <Table responsive striped condensed>
+                <Table responsive striped condensed bordered>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldTwo")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldThree")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFour")}</th>
                             <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFive")}</th>
                         </tr>
                     </thead>
@@ -216,7 +219,7 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "methodBlockHeader")} eventKey="methods">
-                <Table responsive striped condensed>
+                <Table responsive striped condensed bordered>
                     <thead>
                         <tr>
                             <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
