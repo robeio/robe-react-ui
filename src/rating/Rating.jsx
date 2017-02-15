@@ -105,7 +105,9 @@ export default class Rating extends ShallowComponent {
 
     __onMouseOver(e:Object) {
         let key = e.target.getAttribute("data");
-        this.setState({hoveredKey: key});
+        if(this.state.selectedKey === "")
+            this.setState({hoveredKey: key});
+
         if (this.props.onMouseOver)
             this.props.onMouseOver(key);
     };
