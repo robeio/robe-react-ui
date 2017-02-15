@@ -241,7 +241,7 @@
     "output": "Output Array"
   },
   "rating.RatingSample": {
-    "ratingOne": "With Custom Size And Current Value",
+    "ratingOne": "With Default Size And Current Value",
     "ratingTwo": "With Different Size And Disabled",
     "ratingThree": "Love Is In The Air",
     "ratingFour": "Default Sample"

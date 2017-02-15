@@ -241,7 +241,7 @@
     "output": "Çıktı Dizisi"
   },
   "rating.RatingSample": {
-    "ratingOne": "Özel Boyut Ve Geçerli Değer İle",
+    "ratingOne": "Varsayılan Boyut Ve Geçerli Değer İle",
     "ratingTwo": "Farklı Boyutta Ve Değişime Kapalı",
     "ratingThree": "Farklı Simgelerle",
     "ratingFour": "Varsayılan Örnek"
