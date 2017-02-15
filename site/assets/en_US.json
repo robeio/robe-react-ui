@@ -184,6 +184,7 @@
     "stackLayoutDesc": " is a layout component which supports list and thumbnail view.",
     "dragDropLayoutDesc": " is a layout component which provides drag and drop also click events on layer.",
     "faIconDesc": " is a wrapper component for font-awesome icons.",
+    "ratingDesc": " a composition that offers rating with font-awesome icons.",
     "lazyImageDesc": " is a component for loading images via AJAX.",
     "progressDesc": " is an indicator component for the heavy ajax loaded site",
     "progressSubStartDesc": "Starts the progress indicator on top of the page",

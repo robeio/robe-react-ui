@@ -1,7 +1,7 @@
 # Change Log
 
 ## 1.1.23 -- Developing...
-
+* Rating component added.
 
 ## 1.1.22
 * Wizard and Step bug fixed.

@@ -202,6 +202,13 @@ class ComponentList {
             code: require("./samples/faicon/FaIconSample.txt")
         });
         components.complex.push({
+            header: "Rating",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "ratingDesc"),
+            json: require("./jsons/rating/Rating"),
+            sample: require("./samples/rating/RatingSample"),
+            code: require("./samples/rating/RatingSample.txt")
+        });
+        components.complex.push({
             header: "LazyImage",
             desc: Application.i18n(ComponentList, "components.ComponentList", "lazyImageDesc"),
             json: require("./jsons/image/LazyImage"),

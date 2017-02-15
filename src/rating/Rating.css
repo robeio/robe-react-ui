@@ -1,0 +1,12 @@
+.iconWidth {
+    padding-right: 1px;
+    cursor: pointer;
+}
+
+.iconWidthDisabled {
+    padding-right: 1px;
+}
+
+.selectedStar {
+    color: #efef03;
+}
