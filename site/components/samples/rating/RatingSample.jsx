@@ -14,14 +14,18 @@ export default class RatingSample extends ShallowComponent {
         return (
             <span>
                 <div style={{marginBottom: 10}}>
-                    <ControlLabel>{Application.i18n(RatingSample, "rating.RatingSample", "ratingOne")}</ControlLabel><br/>
+                    <ControlLabel>
+                        {Application.i18n(RatingSample, "rating.RatingSample", "ratingOne")}
+                    </ControlLabel><br/>
                     <Rating currentValue={8}
                             onChange={this.__handleChange} 
                             onMouseOver={this.__handleMouseOver}
                     />
                  </div>
                 <div style={{marginBottom: 10}}>
-                    <ControlLabel>{Application.i18n(RatingSample, "rating.RatingSample", "ratingTwo")}</ControlLabel><br/>
+                    <ControlLabel>
+                        {Application.i18n(RatingSample, "rating.RatingSample", "ratingTwo")}
+                    </ControlLabel><br/>
                     <Rating size={2} 
                             currentValue={4.5}
                             onChange={this.__handleChange}
@@ -29,7 +33,9 @@ export default class RatingSample extends ShallowComponent {
                     />
                 </div>
                 <div style={{marginBottom: 10}}>
-                    <ControlLabel>{Application.i18n(RatingSample, "rating.RatingSample", "ratingThree")}</ControlLabel><br/>
+                    <ControlLabel>
+                        {Application.i18n(RatingSample, "rating.RatingSample", "ratingThree")}
+                    </ControlLabel><br/>
                     <Rating size={1}
                             iconCount={5}
                             initialIcon="fa-heart-o" 
@@ -39,7 +45,9 @@ export default class RatingSample extends ShallowComponent {
                     />
                 </div>
                 <div style={{marginBottom: 10}}>
-                    <ControlLabel>{Application.i18n(RatingSample, "rating.RatingSample", "ratingFour")}</ControlLabel><br/>
+                    <ControlLabel>
+                        {Application.i18n(RatingSample, "rating.RatingSample", "ratingFour")}
+                    </ControlLabel><br/>
                     <Rating/>
                 </div>
             </span>
