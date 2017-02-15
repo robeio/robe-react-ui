@@ -1,25 +1,26 @@
 import React from "react";
-import { Application,ShallowComponent } from "robe-react-commons";
-import Button from "robe-react-ui/lib/buttons/Button";
-import Toast from "robe-react-ui/lib/toast/Toast";
-import {ControlLabel} from "react-bootstrap";
+import { Application, ShallowComponent } from "robe-react-commons";
+import { Button, Toast } from "robe-react-ui";
+import { ControlLabel } from "react-bootstrap";
 
 
 export default class ButtonSample extends ShallowComponent {
 
-    render():Object {
+    render(): Object {
         return (
             <div>
-                <ControlLabel>{Application.i18n(ButtonSample,"buttons.ButtonSample","buttonNormal")}</ControlLabel>
+                <ControlLabel>{Application.i18n(ButtonSample, "buttons.ButtonSample", "buttonNormal")}</ControlLabel>
                 <div className="form-group">
                     <Button bsStyle="primary" onClick={ButtonSample.onClick}>Normal</Button>
                 </div>
-                <ControlLabel>{Application.i18n(ButtonSample,"buttons.ButtonSample","buttonAsync")}</ControlLabel>
+                <ControlLabel>{Application.i18n(ButtonSample, "buttons.ButtonSample", "buttonAsync")}</ControlLabel>
                 <div className="form-group">
-                    <Button bsStyle="warning" onClickAsync={this.onClickAsync}>{Application.i18n(ButtonSample,"buttons.ButtonSample","async")}</Button>
+                    <Button bsStyle="warning" onClickAsync={this.onClickAsync}>{Application.i18n(ButtonSample, "buttons.ButtonSample", "async")}</Button>
                 </div>
-                <a href="https://react-bootstrap.github.io/components.html#buttons" rel="noopener noreferrer"
-                   target="_blank">{Application.i18n(ButtonSample,"buttons.ButtonSample","forMoreLink")}</a>
+                <a
+                    href="https://react-bootstrap.github.io/components.html#buttons" rel="noopener noreferrer"
+                    target="_blank"
+                >{Application.i18n(ButtonSample, "buttons.ButtonSample", "forMoreLink")}</a>
             </div>
         );
     }
@@ -30,7 +31,7 @@ export default class ButtonSample extends ShallowComponent {
     onClickAsync(e: Object, done: Function) {
         let me = this;
         // We used setTimeout to simulate an AJAX call.
-        setTimeout(function () {
+        setTimeout(() => {
             me.onResponse(done);
         }, 1000);
     }

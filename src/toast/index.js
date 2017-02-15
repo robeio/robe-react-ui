@@ -1,1 +1,1 @@
-export {default, default as Toaster} from "./Toast";
+export default from "./Toast";

@@ -5,19 +5,15 @@ import * as Babel from "babel-standalone";
 
 class Preview extends Component {
 
-    static defaultProps = {
-        previewComponent: "div"
-    };
     static propTypes = {
-        code: PropTypes.string.isRequired,
-        previewComponent: PropTypes.node
+        code: PropTypes.string.isRequired
     };
 
     state = {
         error: null
     };
 
-    _compileCode = () => {
+    _compileCode = (): Object => {
         let { code } = this.props;
 
 
@@ -34,6 +30,7 @@ class Preview extends Component {
                 ] = _.tail(/import\s+([\w]+)?(?:\s*,\s*)?({[\s\w,]+})?\s+from\s+['"](?:.*\/)?([\w\-_]+)['"]/.exec(l));
                 const module = _.snakeCase(_module).toUpperCase();
                 const constStatements = [];
+
                 if (defaultImport) constStatements.push(`const ${defaultImport} = ${module}`);
                 if (destructuredImports) constStatements.push(`const ${destructuredImports} = ${module}`);
                 // constStatements.push(";");
@@ -53,13 +50,18 @@ class Preview extends Component {
 
         const IIFE = `(function() {\n${imports}${body}return ${defaultExport}\n}())`;
         const babelConfig = {
-            presets: ["es2015", "react", "stage-0"],
+            presets: ["es2015", "react", "stage-0"]
         };
 
         const REACT = require("react");
         const ROBE_REACT_COMMONS = require("robe-react-commons");
         const ROBE_REACT_UI = require("robe-react-ui");
         const REACT_BOOTSTRAP = require("react-bootstrap");
+
+        let { Button } = ROBE_REACT_UI;
+        console.log(ROBE_REACT_UI);
+        console.log({ Button });
+        
         try {
             const { code } = Babel.transform(IIFE, babelConfig);
             const Example = eval(code); // eslint-disable-line no-eval
@@ -101,9 +103,8 @@ class Preview extends Component {
         }
     };
 
-    render() {
+    render(): Object {
         const { error, compiledCode } = this.state;
-        console.log({ error });
         return (
             <div>
                 {compiledCode}
