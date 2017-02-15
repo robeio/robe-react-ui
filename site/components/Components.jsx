@@ -15,9 +15,9 @@ export default class Components extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/complex/DataGrid" : window.location.hash.substring(1),
+            componentSelection: window.location.hash.substring(1) === "Components" ? "Components/functional/Button" : window.location.hash.substring(1),
             filter: "",
-            selectedGroup: window.location.hash.substring(1) === "Components" ? "complex" : window.location.hash.split("/")[1]
+            selectedGroup: window.location.hash.substring(1) === "Components" ? "functional" : window.location.hash.split("/")[1]
         };
     }
 
@@ -65,17 +65,26 @@ export default class Components extends ShallowComponent {
                         placeholder={Application.i18n(Components, "components.Components", "search")}
                     />
                     <ListGroup className="parent">
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "complex")}>
-                            <FaIcon code="fa-cubes" fixed={false}/>&nbsp;
-                            {Application.i18n(Components, "components.Components", "complex")}
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "functional")}>
+                            <FaIcon code="fa-cubes" fixed={true}/>&nbsp;&nbsp;
+                            {Application.i18n(Components, "components.Components", "functional")}
                         </ListGroupItem>
-                        <Collapse in={selectedGroup === "complex"}>
+                        <Collapse in={selectedGroup === "functional"}>
+                            <div>
+                                {componentMenu}
+                            </div>
+                        </Collapse>
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "layout")}>
+                            <FaIcon code="fa-sliders" fixed={true}/>&nbsp;&nbsp;
+                            {Application.i18n(Components, "components.Components", "layout")}
+                        </ListGroupItem>
+                        <Collapse in={selectedGroup === "layout"}>
                             <div>
                                 {componentMenu}
                             </div>
                         </Collapse>
                         <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "inputs")}>
-                            <FaIcon code="fa-terminal" fixed={false}/>&nbsp;
+                            <FaIcon code="fa-terminal" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "inputs")}
                         </ListGroupItem>
                         <Collapse in={selectedGroup === "inputs"}>
@@ -84,10 +93,19 @@ export default class Components extends ShallowComponent {
                             </div>
                         </Collapse>
                         <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "charts")}>
-                            <FaIcon code="fa-line-chart" fixed={false}/>&nbsp;
+                            <FaIcon code="fa-pie-chart" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "charts")}
                         </ListGroupItem>
                         <Collapse in={selectedGroup === "charts"}>
+                            <div>
+                                {componentMenu}
+                            </div>
+                        </Collapse>
+                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "extras")}>
+                            <FaIcon code="fa-ambulance" fixed={true}/>&nbsp;&nbsp;
+                            {Application.i18n(Components, "components.Components", "extras")}
+                        </ListGroupItem>
+                        <Collapse in={selectedGroup === "extras"}>
                             <div>
                                 {componentMenu}
                             </div>
@@ -105,16 +123,24 @@ export default class Components extends ShallowComponent {
     __onGroupChange = (selectedKey: string) => {
         let selectedComponent;
         switch (selectedKey) {
-            case "complex": {
-                selectedComponent = "DataGrid";
+            case "functional": {
+                selectedComponent = "Button";
+            }
+                break;
+            case "layout": {
+                selectedComponent = "DragDropLayout";
             }
                 break;
             case "inputs": {
-                selectedComponent = "TextInput";
+                selectedComponent = "CheckInput";
             }
                 break;
             case "charts": {
                 selectedComponent = "AreaChart";
+            }
+                break;
+            case "extras": {
+                selectedComponent = "Countdown";
             }
                 break;
             default:

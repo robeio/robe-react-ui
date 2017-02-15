@@ -206,9 +206,11 @@
     "title": "Components",
     "description": "Here you can find the samples and usages of the components.",
     "search": "Search",
-    "complex": "Complex",
+    "functional": "Functional Components",
+    "layout": "Layout Components",
     "inputs": "Inputs",
-    "charts": "Charts"
+    "charts": "Charts",
+    "extras": "Tools"
   },
   "components.Renderer": {
     "example": "Examples",

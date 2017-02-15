@@ -206,9 +206,11 @@
     "title": "Bileşenler",
     "description": "Burada bileşenlerin örneklerini ve kullanımlarını bulabilirsiniz",
     "search": "Ara",
-    "complex": "Karmaşık",
-    "inputs": "Girdiler",
-    "charts": "Şekiller"
+    "functional": "Fonksiyonel Bileşenler",
+    "layout": "Sayfa Düzeni",
+    "inputs": "Giriş Bileşenleri",
+    "charts": "Grafikler",
+    "extras": "Ekstralar"
   },
   "components.Renderer": {
     "example": "Örnekler",
