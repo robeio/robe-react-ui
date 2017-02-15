@@ -7,10 +7,6 @@ export default class Rating extends ShallowComponent {
 
     static propTypes:Map = {
         /**
-         * Style of Rating icons
-         */
-        style: React.PropTypes.object,
-        /**
          * Size of Rating icons
          */
         size: React.PropTypes.oneOf([
@@ -43,8 +39,15 @@ export default class Rating extends ShallowComponent {
         /**
          * MouseOver event for the component (Returns (hoveredKey))
          */
-        onMouseOver: React.PropTypes.func
-
+        onMouseOver: React.PropTypes.func,
+        /**
+         * Style of Rating icons
+         */
+        style: React.PropTypes.object,
+        /**
+         * Label for Rating component
+         */
+        label: React.PropTypes.string
     };
 
     /**
@@ -81,17 +84,26 @@ export default class Rating extends ShallowComponent {
             let className = this.__convertClickedIconToText(i);
             let style = this.props.selectedIcon === "fa-star" ? " selectedStar" : "";
             let iconWidth = this.props.disabled ? "iconWidthDisabled" : "iconWidth";
-            starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i className={"fa " + className}
-                                                                                         onMouseOver={!this.props.disabled ? this.__onMouseOver : null}
-                                                                                         onMouseLeave={!this.props.disabled ? this.__onMouseLeave : null}
-                                                                                         aria-hidden="true" data={i}
-                                                                                         onClick={!this.props.disabled ? this.__handleClick : null}/></span>);
+            if (this.__checkFloatInterval() && (parseInt(this.props.currentValue) === i - 1)) {
+                starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i
+                    className={"fa fa-star-half-o " + this.__convertSizeToText()}
+                    aria-hidden="true" data={i}/>
+                </span>);
+            }
+            else {
+                starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i
+                    className={"fa " + className}
+                    onMouseOver={!this.props.disabled ? this.__onMouseOver : null}
+                    onMouseLeave={!this.props.disabled ? this.__onMouseLeave : null}
+                    aria-hidden="true" data={i}
+                    onClick={!this.props.disabled ? this.__handleClick : null}/></span>);
+            }
         }
 
         return starArr;
     };
 
-    __onMouseOver(e) {
+    __onMouseOver(e:Object) {
         let key = e.target.getAttribute("data");
         this.setState({hoveredKey: key});
         if (this.props.onMouseOver)
@@ -105,12 +117,30 @@ export default class Rating extends ShallowComponent {
             this.setState({hoveredKey: this.state.selectedKey});
     };
 
-    __handleClick(e) {
+    __handleClick(e:Object) {
         let key = e.target.getAttribute("data");
         this.setState({selectedKey: key, hoveredKey: key});
 
         if (this.props.onChange)
             this.props.onChange(key);
+    };
+
+    __checkFloatInterval() {
+        let check = false;
+        let value = this.props.currentValue;
+        let disabled = this.props.disabled;
+        let icon = this.props.selectedIcon === "fa-star";
+        if (this.__isFloat(value) && disabled && icon) {
+            let splittedValue = value.toFixed(2).split(".")[1];
+            if (parseInt(splittedValue) >= 25 && parseInt(splittedValue) <= 99)
+                check = true;
+        }
+
+        return check;
+    };
+
+    __isFloat(n):boolean {
+        return Number(n) === n && n % 1 !== 0;
     };
 
     __convertClickedIconToText(i:number):string {
@@ -129,7 +159,7 @@ export default class Rating extends ShallowComponent {
         }
     };
 
-    __convertSizeToText() {
+    __convertSizeToText():string {
         let size = this.props.size;
         switch (size) {
             case 0:

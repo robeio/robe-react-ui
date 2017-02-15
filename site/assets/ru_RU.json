@@ -237,5 +237,11 @@
   },
   "datafilter.DataFilterSample": {
     "output": "выходной массив"
+  },
+  "rating.RatingSample": {
+    "ratingOne": "При использовании пользовательского размера и текущего значения",
+    "ratingTwo": "с различными размерами и инвалидов",
+    "ratingThree": "с различными значками",
+    "ratingFour": "образец по умолчанию"
   }
 }
