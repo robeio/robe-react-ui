@@ -210,7 +210,7 @@
     "layout": "Layout Components",
     "inputs": "Inputs",
     "charts": "Charts",
-    "extras": "Tools"
+    "extras": "Extras"
   },
   "components.Renderer": {
     "example": "Examples",
