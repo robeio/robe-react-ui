@@ -53,7 +53,6 @@ export default class Iconizer extends ShallowComponent {
         if(link.toLowerCase().indexOf("hacker-news.com/") != -1) return "fa-hacker-news";
         if(link.toLowerCase().indexOf("jsfiddle.com/") != -1) return "fa-jsfiddle";
         if(link.toLowerCase().indexOf("paypal.com/") != -1) return "fa-paypal";
-        if(link.toLowerCase().indexOf("snapchat.com/") != -1) return "fa-snapchat";
         if(link.toLowerCase().indexOf("pinterest.com/") != -1) return "fa-pinterest-square";
         if(link.toLowerCase().indexOf("quora.com/") != -1) return "fa-quora";
         if(link.toLowerCase().indexOf("reddit.com/") != -1) return "fa-reddit-square";
