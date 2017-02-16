@@ -200,7 +200,8 @@
     "barChartDesc": " temsil ettiği değerlerle orantılı uzunluklar olan dikdörtgen çubuklarla gruplanmış verileri temsil eden bir grafik bileşenidir.",
     "lineChartDesc": " çizgi çizelgesi veya çizgi grafiği, bilgileri düz çizgi segmentiyle bağlı 'işaretleyiciler' olarak adlandırılan bir dizi veri noktası olarak görüntüleyen bir grafik türü olan bileşendir.",
     "pieChartDesc": " pasta grafiği (veya daire grafiği), sayısal orantıyı göstermek için dilimlere bölünen dairesel bir istatistiksel grafik olan bileşendir",
-    "scatterChartDesc": " bir dağılım grafiği (dağılım grafiği, dağılım grafiği, dağılım grafiği veya dağılım diyagramı olarak da adlandırılır), bir veri kümesi için genellikle iki değişken için değerleri görüntülemek için Kartezyen koordinatları kullanan bir arsa veya matematiksel bileşendir."
+    "scatterChartDesc": " bir dağılım grafiği (dağılım grafiği, dağılım grafiği, dağılım grafiği veya dağılım diyagramı olarak da adlandırılır), bir veri kümesi için genellikle iki değişken için değerleri görüntülemek için Kartezyen koordinatları kullanan bir arsa veya matematiksel bileşendir.",
+    "iconizerDesc": " verilen linkleri ikonlu hale getirir"
   },
   "components.Components": {
     "title": "Bileşenler",
@@ -245,5 +246,8 @@
     "ratingTwo": "Farklı Boyutta Ve Değişime Kapalı",
     "ratingThree": "Farklı Simgelerle",
     "ratingFour": "Varsayılan Örnek"
+  },
+  "extras.Iconizer": {
+    "supports": "Destekler"
   }
 }

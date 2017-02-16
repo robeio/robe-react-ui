@@ -313,6 +313,14 @@ class ComponentList {
         });
 
         components.extras.push({
+            header: "Iconizer",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "iconizerDesc"),
+            json: require("./jsons/extras/Iconizer"),
+            sample: require("./samples/extras/IconizerSample"),
+            code: require("./samples/extras/IconizerSample.txt")
+        });
+
+        components.extras.push({
             header: "ReCaptcha",
             desc: Application.i18n(ComponentList, "components.ComponentList", "reCaptchaDesc"),
             sample: require("./samples/recaptcha/ReCaptchaSample"),

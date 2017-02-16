@@ -1,5 +1,5 @@
 {
-  "name": "DataGridModel",
+  "name": "DataFilterModel",
   "fields": [
     {
       "label": "Id",

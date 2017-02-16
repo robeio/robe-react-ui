@@ -200,7 +200,8 @@
     "barChartDesc": " a bar chart or bar graph is a chart or graph that presents grouped data with rectangle|rectangular bars with lengths proportional to the values that they represen",
     "lineChartDesc": " a line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segment",
     "pieChartDesc": " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportio",
-    "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data"
+    "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data",
+    "iconizerDesc": " converts given links array into links with icons"
   },
   "components.Components": {
     "title": "Components",
@@ -245,5 +246,8 @@
     "ratingTwo": "With Different Size And Disabled",
     "ratingThree": "Love Is In The Air",
     "ratingFour": "Default Sample"
+  },
+  "extras.Iconizer": {
+    "supports": "Supports"
   }
 }
