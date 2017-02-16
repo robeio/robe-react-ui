@@ -6,8 +6,7 @@ import {Application, ShallowComponent} from "robe-react-commons";
 export default class RatingSample extends ShallowComponent {
     constructor(props:Object) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     render():Object {
@@ -18,7 +17,7 @@ export default class RatingSample extends ShallowComponent {
                         {Application.i18n(RatingSample, "rating.RatingSample", "ratingOne")}
                     </ControlLabel><br/>
                     <Rating currentValue={8}
-                            onChange={this.__handleChange} 
+                            onChange={this.__handleChange}
                             onMouseOver={this.__handleMouseOver}
                     />
                  </div>
@@ -26,7 +25,7 @@ export default class RatingSample extends ShallowComponent {
                     <ControlLabel>
                         {Application.i18n(RatingSample, "rating.RatingSample", "ratingTwo")}
                     </ControlLabel><br/>
-                    <Rating size={2} 
+                    <Rating size={2}
                             currentValue={4.5}
                             onChange={this.__handleChange}
                             disabled
@@ -38,7 +37,7 @@ export default class RatingSample extends ShallowComponent {
                     </ControlLabel><br/>
                     <Rating size={1}
                             iconCount={5}
-                            initialIcon="fa-heart-o" 
+                            initialIcon="fa-heart-o"
                             selectedIcon="fa-heart"
                             style={{color: "red"}}
                             onChange={this.__handleChange}
@@ -54,11 +53,11 @@ export default class RatingSample extends ShallowComponent {
         );
     }
 
-    __handleMouseOver(hoveredKey) {
-        console.log(hoveredKey);
+    __handleMouseOver(e) {
+        console.log(e.target.value, e.target.parsedValue);
     }
 
-    __handleChange(clickedKey) {
-        console.log(clickedKey);
+    __handleChange(e) {
+        console.log(e.target.value, e.target.parsedValue);
     };
 }

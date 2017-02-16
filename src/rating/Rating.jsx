@@ -78,30 +78,29 @@ export default class Rating extends ShallowComponent {
     render():Object {
         return (<span id={this.id}>
             {this.props.label ? <span><ControlLabel>{this.props.label}</ControlLabel><br/></span> : null}
-            {this.__renderStars()}
+            {this.__renderIcons()}
         </span>);
     }
 
-    __renderStars() {
+    __renderIcons() {
         let starArr = [];
+        let style = this.props.selectedIcon === "fa-star" ? " selectedStar" : "";
+        let iconsInterval = this.props.disabled ? "iconsIntervalDisabled" : "iconsInterval";
 
         for (let i = 1; i < this.props.iconCount + 1; i++) {
             let className = this.__convertClickedIconToText(i);
-            let style = this.props.selectedIcon === "fa-star" ? " selectedStar" : "";
-            let iconWidth = this.props.disabled ? "iconWidthDisabled" : "iconWidth";
             if (this.__checkFloatInterval() && (parseInt(this.state.selectedKey) === i - 1)) {
-                starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i
-                    className={"fa fa-star-half-o " + this.__convertSizeToText()}
-                    aria-hidden="true" data={i}/>
+                starArr.push(<span key={i} className={iconsInterval + style} style={this.props.style}>
+                    <i className={"fa fa-star-half-o " + this.__convertSizeToText()} aria-hidden="true" data={i}/>
                 </span>);
             }
             else {
-                starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i
-                    className={"fa " + className}
-                    onMouseOver={!this.props.disabled ? this.__onMouseOver : null}
-                    onMouseLeave={!this.props.disabled ? this.__onMouseLeave : null}
-                    aria-hidden="true" data={i}
-                    onClick={!this.props.disabled ? this.__handleClick : null}/></span>);
+                starArr.push(<span key={i} className={iconsInterval + style} style={this.props.style}>
+                    <i className={"fa " + className}
+                       onMouseOver={!this.props.disabled ? this.__onMouseOver : null}
+                       onMouseLeave={!this.props.disabled ? this.__onMouseLeave : null}
+                       aria-hidden="true" data={i}
+                       onClick={!this.props.disabled ? this.__handleClick : null}/></span>);
             }
         }
 
@@ -110,11 +109,13 @@ export default class Rating extends ShallowComponent {
 
     __onMouseOver(e:Object) {
         let key = e.target.getAttribute("data");
-        if(this.state.selectedKey === "")
+        e.target.value = key;
+        e.target.parsedValue = parseInt(key);
+        if (this.state.selectedKey === "")
             this.setState({hoveredKey: key});
 
         if (this.props.onMouseOver)
-            this.props.onMouseOver(key);
+            this.props.onMouseOver(e);
     };
 
     __onMouseLeave() {
@@ -126,10 +127,12 @@ export default class Rating extends ShallowComponent {
 
     __handleClick(e:Object) {
         let key = e.target.getAttribute("data");
+        e.target.value = key;
+        e.target.parsedValue = parseInt(key);
         this.setState({selectedKey: key, hoveredKey: key});
 
         if (this.props.onChange)
-            this.props.onChange(key);
+            this.props.onChange(e);
     };
 
     __checkFloatInterval() {
@@ -151,7 +154,7 @@ export default class Rating extends ShallowComponent {
     };
 
     __convertClickedIconToText(i:number):string {
-        let key = this.state.hoveredKey || "";
+        let key = this.state.hoveredKey || "";
         let initialIcon = this.props.initialIcon;
         let selectedIcon = this.props.selectedIcon;
         let sizeText = this.__convertSizeToText();
@@ -186,11 +189,8 @@ export default class Rating extends ShallowComponent {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            size: nextProps.size,
             selectedKey: nextProps.currentValue,
-            hoveredKey: nextProps.currentValue,
-            iconCount: nextProps.iconCount,
-            disabled: nextProps.disabled
+            hoveredKey: nextProps.currentValue
         });
     };
 }
