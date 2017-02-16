@@ -62,8 +62,13 @@ export default class Rating extends ShallowComponent {
         disabled: false
     };
 
+    static idCounter = 1;
+    id;
+
     constructor(props:Object) {
         super(props);
+        this.id = `Rating-${Rating.idCounter}`;
+        Rating.idCounter++;
         this.state = {
             selectedKey: this.props.currentValue || "",
             hoveredKey: this.props.currentValue || ""
@@ -71,7 +76,7 @@ export default class Rating extends ShallowComponent {
     }
 
     render():Object {
-        return (<span>
+        return (<span id={this.id}>
             {this.props.label ? <span><ControlLabel>{this.props.label}</ControlLabel><br/></span> : null}
             {this.__renderStars()}
         </span>);
@@ -84,7 +89,7 @@ export default class Rating extends ShallowComponent {
             let className = this.__convertClickedIconToText(i);
             let style = this.props.selectedIcon === "fa-star" ? " selectedStar" : "";
             let iconWidth = this.props.disabled ? "iconWidthDisabled" : "iconWidth";
-            if (this.__checkFloatInterval() && (parseInt(this.props.currentValue) === i - 1)) {
+            if (this.__checkFloatInterval() && (parseInt(this.state.selectedKey) === i - 1)) {
                 starArr.push(<span key={i} className={iconWidth + style} style={this.props.style}><i
                     className={"fa fa-star-half-o " + this.__convertSizeToText()}
                     aria-hidden="true" data={i}/>
@@ -129,7 +134,7 @@ export default class Rating extends ShallowComponent {
 
     __checkFloatInterval() {
         let check = false;
-        let value = this.props.currentValue;
+        let value = this.state.selectedKey;
         let disabled = this.props.disabled;
         let icon = this.props.selectedIcon === "fa-star";
         if (this.__isFloat(value) && disabled && icon) {
@@ -146,7 +151,7 @@ export default class Rating extends ShallowComponent {
     };
 
     __convertClickedIconToText(i:number):string {
-        let key = this.state.hoveredKey;
+        let key = this.state.hoveredKey || "";
         let initialIcon = this.props.initialIcon;
         let selectedIcon = this.props.selectedIcon;
         let sizeText = this.__convertSizeToText();
