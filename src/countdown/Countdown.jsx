@@ -1,19 +1,19 @@
 import React from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import {Grid, Row, Col} from "react-bootstrap";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Application from "robe-react-commons/lib/application/Application";
 import "./Countdown.css";
 
 /**
- * 
- * 
+ *
+ *
  * @export
  * @class Countdown
  * @extends {ShallowComponent}
  */
 export default class Countdown extends ShallowComponent {
 
-    static UNITS_IN_MS = { DAY: 86400000, HOUR: 3600000, MINUTE: 60000, SECOND: 1000 }
+    static UNITS_IN_MS = {DAY: 86400000, HOUR: 3600000, MINUTE: 60000, SECOND: 1000}
 
 
     static propTypes: Map = {
@@ -27,7 +27,7 @@ export default class Countdown extends ShallowComponent {
         value: React.PropTypes.number,
         /**
          * Will fire when the counter finishes countdown. ( 0 )
-         * No parameters. 
+         * No parameters.
          */
         onComplete: React.PropTypes.func,
         /**
@@ -84,22 +84,22 @@ export default class Countdown extends ShallowComponent {
         days: {
             visible: true,
             label: Application.i18n(Countdown, "countdown.Countdown", "days", "label"),
-            style: { fontSize: "12px", display: "block" }
+            style: {fontSize: "12px", display: "block"}
         },
         hours: {
             visible: true,
             label: Application.i18n(Countdown, "countdown.Countdown", "hours", "label"),
-            style: { fontSize: "12px", display: "block" }
+            style: {fontSize: "12px", display: "block"}
         },
         minutes: {
             visible: true,
             label: Application.i18n(Countdown, "countdown.Countdown", "minutes", "label"),
-            style: { fontSize: "12px", display: "block" }
+            style: {fontSize: "12px", display: "block"}
         },
         seconds: {
             visible: true,
             label: Application.i18n(Countdown, "countdown.Countdown", "seconds", "label"),
-            style: { fontSize: "12px", display: "block" }
+            style: {fontSize: "12px", display: "block"}
         }
     }
 
@@ -133,7 +133,7 @@ export default class Countdown extends ShallowComponent {
     }
 
     render(): Object {
-        let { days, hours, minutes, seconds } = this.__parseLong(this.state.value);
+        let {days, hours, minutes, seconds} = this.__parseLong(this.state.value);
         let counter = (
             <div style={this.props.style}>
                 {this.renderCell(this.props.days, days, this.pre.days)}
@@ -142,7 +142,7 @@ export default class Countdown extends ShallowComponent {
                 {this.renderCell(this.props.seconds, seconds, this.pre.seconds)}
             </div>
         );
-        this.pre = { days, hours, minutes, seconds };
+        this.pre = {days, hours, minutes, seconds};
         return counter;
     }
 
@@ -150,7 +150,7 @@ export default class Countdown extends ShallowComponent {
         let className = (value === preValue || !this.ticking) ? "countdown" : "countdown countdown-animate";
         if (props.visible) {
             return (
-                <div className={className} >
+                <div className={className}>
                     <label style={props.style}>{props.label}</label>
                     {this.__addLeftZero(value)}
                 </div>
@@ -160,11 +160,11 @@ export default class Countdown extends ShallowComponent {
     }
 
     /**
-     * 
+     *
      * Adds 0 to the left side of the integer and converts to a string.
      * @param {number} value
      * @returns
-     * 
+     *
      * @memberOf Countdown
      */
     __addLeftZero(value: number): string {
@@ -176,7 +176,7 @@ export default class Countdown extends ShallowComponent {
         let hours = this.props.hours.visible ? Math.floor(value % Countdown.UNITS_IN_MS.DAY / Countdown.UNITS_IN_MS.HOUR) : 0;
         let minutes = this.props.minutes.visible ? Math.floor(value % Countdown.UNITS_IN_MS.HOUR / Countdown.UNITS_IN_MS.MINUTE) : 0;
         let seconds = this.props.seconds.visible ? Math.floor(value % Countdown.UNITS_IN_MS.MINUTE / Countdown.UNITS_IN_MS.SECOND) : 0;
-        return { days, hours, minutes, seconds };
+        return {days, hours, minutes, seconds};
     }
 
     /**
@@ -208,6 +208,7 @@ export default class Countdown extends ShallowComponent {
             this.__tick();
         }.bind(this), this.props.interval);
     }
+
     /**
      * Resets the values of the counter to the initial values.
      * @memberOf Countdown
@@ -240,6 +241,7 @@ export default class Countdown extends ShallowComponent {
             this.__tick();
         }.bind(this), this.props.interval);
     }
+
     /**
      * Stops counter.
      * @memberOf Countdown
@@ -250,12 +252,16 @@ export default class Countdown extends ShallowComponent {
     }
 
     /**
-     * 
+     *
      * Returns the current status of the component.
      * @returns {boolean} true - started / false stopped
      * @memberOf Countdown
      */
     isTicking(): boolean {
         return this.ticking;
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
     }
 }
