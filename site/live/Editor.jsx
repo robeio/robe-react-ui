@@ -58,14 +58,14 @@ class Editor extends Component {
 
         return (
             <Codemirror
-              ref="editor"
-              className={className}
-              external={external}
-              options={options}
-              style={style}
-              value={codeText}
-              onChange={this.updateCode}
-          />
+                ref="editor"
+                className={className}
+                external={external}
+                options={options}
+                style={style}
+                value={codeText}
+                onChange={this.updateCode}
+            />
         );
     }
 
