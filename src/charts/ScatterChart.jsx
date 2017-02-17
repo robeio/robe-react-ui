@@ -1,11 +1,11 @@
 import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
-import "./ScatterChart.css"
+import "./ScatterChart.css";
 import Legend from "./Legend";
 
 export default class ScatterChart extends ShallowComponent {
 
-    static propTypes = {
+    static propTypes: Map = {
         /**
          * Width for chart as px
          */
@@ -33,14 +33,14 @@ export default class ScatterChart extends ShallowComponent {
 
     legends = [];
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props)
     }
 
     render() {
         return (
-            <div id="scatter" style={{marginLeft:40}}>
-                <div className="rb-scatter-chart" style={{width:this.props.width,height:this.props.height}}>
+            <div id="scatter" style={{marginLeft: 40}}>
+                <div className="rb-scatter-chart" style={{width: this.props.width, height: this.props.height}}>
                     <svg className="rb-scatter-chart-svg">
                         {this.__renderScatters(this.props.data, this.props.meta)}
                     </svg>
@@ -57,7 +57,7 @@ export default class ScatterChart extends ShallowComponent {
         )
     }
 
-    __renderScatters(data, meta) {
+    __renderScatters(data: Array, meta: Array) {
         let metaArr = [];
         for (let i in data) {
             let item = data[i];
@@ -80,7 +80,7 @@ export default class ScatterChart extends ShallowComponent {
                 this.legends[i] = {fill: fill, label: item.name};
                 metaArr.push(
                     <circle
-                        key={i+" "+j}
+                        key={i + " " + j}
                         cx={cx}
                         cy={cy}
                         r={8}
@@ -103,9 +103,9 @@ export default class ScatterChart extends ShallowComponent {
         for (let i = 0; i < 4; i++) {
             axisArr.push(
                 <div key={i}
-                     id={parseInt((max.y/4)*(4-i))}
+                     id={parseInt((max.y / 4) * (4 - i))}
                      className="rb-scatter-y-axis"
-                     style={{height:height}}>
+                     style={{height: height}}>
                 </div>);
         }
         return axisArr;
@@ -118,9 +118,9 @@ export default class ScatterChart extends ShallowComponent {
         for (let i = 0; i < 5; i++) {
             axisArr.push(
                 <div key={i}
-                     id={parseInt((max.x/5)*(i+1))}
+                     id={parseInt((max.x / 5) * (i + 1))}
                      className="rb-scatter-x-axis"
-                     style={{width :width}}>
+                     style={{width: width}}>
                 </div>);
         }
         return axisArr;
@@ -154,17 +154,17 @@ export default class ScatterChart extends ShallowComponent {
         return max;
     }
 
-    __pointY(value) {
+    __pointY(value: Number) {
         let max = this.__maxAxis();
         return this.props.height - ((this.props.height * ((value * 100) / max.y)) / 100);
     }
 
-    __pointX(value) {
+    __pointX(value: Number) {
         let max = this.__maxAxis();
         return ((this.props.width * ((value * 100) / max.x)) / 100);
     }
 
-    __getFields(data) {
+    __getFields(data: Object) {
         let arr = [];
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -180,34 +180,34 @@ export default class ScatterChart extends ShallowComponent {
         return arr;
     }
 
-    __showTooltip(evt) {
+    __showTooltip(e: Object) {
         if (this.tooltip === undefined) {
             this.tooltip = document.getElementById("tooltip");
         }
         this.tooltip.style.visibility = "visible";
 
-        let tooltipText = evt.target.getAttribute("data");
-        let fill = evt.target.getAttribute("fill");
+        let tooltipText = e.target.getAttribute("data");
+        let fill = e.target.getAttribute("fill");
 
         this.tooltip.innerHTML = tooltipText;
         this.tooltip.style.backgroundColor = fill;
     }
 
-    __hideTooltip(evt) {
+    __hideTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
         this.tooltip.style.visibility = "hidden";
     }
 
-    __moveTooltip(evt) {
+    __moveTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
 
-        this.tooltip.style.left = (evt.clientX + 10) + "px";
-        this.tooltip.style.top = (evt.clientY + 10) + "px";
+        this.tooltip.style.left = (e.clientX + 10) + "px";
+        this.tooltip.style.top = (e.clientY + 10) + "px";
     }
 
-    __randColor(index) {
+    __randColor(index: Number) {
         let colors = ["#F44336", "#FF9800", "#FF5722", "#9C27B0", "#673AB7", "#2196F3", "#FFC107", "#4CAF50", "#00796B", "#009688", "#3F51B5"];
         if (index !== undefined) {
             return colors[index % colors.length];

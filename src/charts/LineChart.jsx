@@ -1,11 +1,11 @@
 import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
-import "./LineChart.css"
+import "./LineChart.css";
 import Legend from "./Legend";
 
 export default class AreaChart extends ShallowComponent {
 
-    static propTypes = {
+    static propTypes: Map = {
         /**
          * Width for chart as px
          */
@@ -33,14 +33,14 @@ export default class AreaChart extends ShallowComponent {
 
     legends = [];
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props)
     }
 
     render() {
         return (
-            <div id="line" style={{marginLeft:40}}>
-                <div className="rb-line-chart" style={{width:this.props.width,height:this.props.height}}>
+            <div id="line" style={{marginLeft: 40}}>
+                <div className="rb-line-chart" style={{width: this.props.width, height: this.props.height}}>
                     <svg className="rb-line-chart-svg">
                         {this.__renderLines(this.props.data, this.props.meta)}
                     </svg>
@@ -57,7 +57,7 @@ export default class AreaChart extends ShallowComponent {
         )
     }
 
-    __renderLines(data, meta) {
+    __renderLines(data: Array, meta: Array) {
         let metaArr = [];
         let xAxisWidth = this.__xAxisWidth();
         let sumXAxisWidth = 0;
@@ -107,7 +107,7 @@ export default class AreaChart extends ShallowComponent {
                         y1={y1}
                         x2={x2}
                         y2={y2}
-                        data={tooltip+tooltipNext}
+                        data={tooltip + tooltipNext}
                         onMouseOver={this.__showTooltip}
                         onMouseOut={this.__hideTooltip}
                         onMouseMove={this.__moveTooltip}
@@ -136,9 +136,9 @@ export default class AreaChart extends ShallowComponent {
         for (let i = 0; i < 4; i++) {
             axisArr.push(
                 <div key={i}
-                     id={parseInt((maxYAxis/4)*(4-i))}
+                     id={parseInt((maxYAxis / 4) * (4 - i))}
                      className="rb-line-y-axis"
-                     style={{height:height}}>
+                     style={{height: height}}>
                 </div>);
         }
         return axisArr;
@@ -156,7 +156,7 @@ export default class AreaChart extends ShallowComponent {
                      className="rb-line-x-axis"
                      data={item.name}
                      name={nextItem.name}
-                     style={{width : width}}>
+                     style={{width: width}}>
                 </div>);
         }
         return axisArr;
@@ -181,12 +181,12 @@ export default class AreaChart extends ShallowComponent {
         return (this.props.width - 1) / (this.props.data.length - 1);
     }
 
-    __pointY(value) {
+    __pointY(value: Number) {
         let maxYAxis = this.__maxYAxis();
         return ((this.props.height * ((value * 100) / maxYAxis)) / 100);
     }
 
-    __getFields(data) {
+    __getFields(data: Object) {
         let arr = [];
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -202,34 +202,34 @@ export default class AreaChart extends ShallowComponent {
         return arr;
     }
 
-    __showTooltip(evt) {
+    __showTooltip(e: Object) {
         if (this.tooltip === undefined) {
             this.tooltip = document.getElementById("tooltip");
         }
         this.tooltip.style.visibility = "visible";
 
-        let tooltipText = evt.target.getAttribute("data");
-        let fill = evt.target.getAttribute("stroke");
+        let tooltipText = e.target.getAttribute("data");
+        let fill = e.target.getAttribute("stroke");
 
         this.tooltip.innerHTML = tooltipText;
         this.tooltip.style.backgroundColor = fill;
     }
 
-    __hideTooltip(evt) {
+    __hideTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
         this.tooltip.style.visibility = "hidden";
     }
 
-    __moveTooltip(evt) {
+    __moveTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
 
-        this.tooltip.style.left = (evt.clientX + 10) + "px";
-        this.tooltip.style.top = (evt.clientY + 10) + "px";
+        this.tooltip.style.left = (e.clientX + 10) + "px";
+        this.tooltip.style.top = (e.clientY + 10) + "px";
     }
 
-    __randColor(index) {
+    __randColor(index: Number) {
         let colors = ["#F44336", "#673AB7", "#2196F3", "#FF5722", "#9C27B0", "#FFC107", "#FF9800", "#4CAF50", "#00796B", "#009688", "#3F51B5"];
         if (index !== undefined) {
             return colors[index % colors.length];

@@ -6,7 +6,7 @@ import FaIcon from "../faicon/FaIcon";
 
 export default class PieChart extends ShallowComponent {
 
-    static propTypes = {
+    static propTypes: Map = {
         /**
          * Data to be plotted on the chart
          */
@@ -24,7 +24,7 @@ export default class PieChart extends ShallowComponent {
 
     legends = [];
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             data: this.props.data,
@@ -32,7 +32,7 @@ export default class PieChart extends ShallowComponent {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Object) {
         this.setState({data: nextProps.data})
     }
 
@@ -45,8 +45,8 @@ export default class PieChart extends ShallowComponent {
         let mRadius = (((this.props.size - 1) / 2) / c) * ( c - depth - 1);
 
         return (
-            <div className="rb-pie-chart" style={{width:this.props.size,height:this.props.size}}>
-                <div className="rb-pie-chart-back-tool" style={{display:this.state.clicked?"inherit":"none"}}>
+            <div className="rb-pie-chart" style={{width: this.props.size, height: this.props.size}}>
+                <div className="rb-pie-chart-back-tool" style={{display: this.state.clicked ? "inherit" : "none"}}>
                     <FaIcon code="fa-undo" onClick={this.__onClickReset}/>
                 </div>
                 <svg className="rb-pie-chart-svg">
@@ -63,7 +63,7 @@ export default class PieChart extends ShallowComponent {
         )
     }
 
-    __renderPies(data, percentage, rotation, depth, depthIndex) {
+    __renderPies(data: Array, percentage: Number, rotation: Number, depth: Number, depthIndex: Number) {
         if (!data || data.length <= 0)
             return [];
 
@@ -84,7 +84,7 @@ export default class PieChart extends ShallowComponent {
         return piesArr;
     }
 
-    __createPath(data, radius, percentage, rotaion, depth, depthIndex) {
+    __createPath(data: Array, radius: Number, percentage: Number, rotaion: Number, depth: Number, depthIndex: Number) {
         let sectors = [],
             mRadius = radius,
             origin = this.props.size / 2,
@@ -94,7 +94,7 @@ export default class PieChart extends ShallowComponent {
         data.map(function (item, key) {
             let value = item.value,
                 mPercentage = (percentage * value) / max,
-                circle = max === value,
+                isCircle = max === value,
                 aCalc = ( mPercentage > 180 ) ? 360 - mPercentage : mPercentage,
                 aRad = aCalc * Math.PI / 180,
                 z = Math.sqrt(2 * mRadius * mRadius - ( 2 * mRadius * mRadius * Math.cos(aRad) )),
@@ -113,10 +113,10 @@ export default class PieChart extends ShallowComponent {
                 this.legends[item.key || item.label] = {fill: fill, label: item.label};
                 cursor = "pointer";
             }
-            if (circle)
+            if (isCircle)
                 sectors.push(
                     <circle
-                        key={item.key+key+mPercentage}
+                        key={item.key + key + mPercentage}
                         id={item.key}
                         fill={fill}
                         cx={origin}
@@ -126,22 +126,22 @@ export default class PieChart extends ShallowComponent {
                         onMouseOver={this.__showTooltip}
                         onMouseOut={this.__hideTooltip}
                         onMouseMove={this.__moveTooltip}
-                        onClick={this.__onClick.bind(undefined,item)}/>);
+                        onClick={this.__onClick.bind(undefined, item)}/>);
 
             else {
                 sectors.push(
                     <path
-                        key={item.key+key+mPercentage}
+                        key={item.key + key + mPercentage}
                         id={item.key}
                         transform={'rotate(' + mRotation + ', ' + origin + ', ' + origin + ')'}
-                        d={'M ' + origin + ' ' + origin + ' V ' + V + ' A ' + mRadius + ' ' + mRadius + ' 1 ' + arcSweep + ' 1 ' + X + '  ' + Y +" z"}
+                        d={'M ' + origin + ' ' + origin + ' V ' + V + ' A ' + mRadius + ' ' + mRadius + ' 1 ' + arcSweep + ' 1 ' + X + '  ' + Y + " z"}
                         fill={fill}
                         data={tooltip}
                         onMouseOver={this.__showTooltip}
                         onMouseOut={this.__hideTooltip}
                         onMouseMove={this.__moveTooltip}
-                        style={{cursor:cursor}}
-                        onClick={this.__onClick.bind(undefined,item)}>
+                        style={{cursor: cursor}}
+                        onClick={this.__onClick.bind(undefined, item)}>
                         <animateTransform
                             attributeName="transform"
                             type="rotate"
@@ -157,7 +157,7 @@ export default class PieChart extends ShallowComponent {
         return sectors
     }
 
-    __onClick(data) {
+    __onClick(data: Object) {
         let arr = [];
         arr.push(data);
         let depth = this.__depthTree(arr);
@@ -170,7 +170,7 @@ export default class PieChart extends ShallowComponent {
         this.setState({data: this.props.data, clicked: false})
     }
 
-    __depthTree(data) {
+    __depthTree(data: Array) {
         if (!data || data.length <= 0) {
             return 0;
         }
@@ -181,7 +181,7 @@ export default class PieChart extends ShallowComponent {
         return 1 + depth;
     }
 
-    __sumValues(data) {
+    __sumValues(data: Array) {
         let max = 0;
         data.map(function (item, key) {
             let value = item.value;
@@ -190,34 +190,34 @@ export default class PieChart extends ShallowComponent {
         return max;
     }
 
-    __showTooltip(evt) {
+    __showTooltip(e: Object) {
         if (this.tooltip === undefined) {
             this.tooltip = document.getElementById("tooltip");
         }
         this.tooltip.style.visibility = "visible";
 
-        let tooltipText = evt.target.getAttribute("data");
-        let fill = evt.target.getAttribute("fill");
+        let tooltipText = e.target.getAttribute("data");
+        let fill = e.target.getAttribute("fill");
 
         this.tooltip.innerHTML = tooltipText;
         this.tooltip.style.backgroundColor = fill;
     }
 
-    __hideTooltip(evt) {
+    __hideTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
         this.tooltip.style.visibility = "hidden";
     }
 
-    __moveTooltip(evt) {
+    __moveTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
 
-        this.tooltip.style.left = (evt.clientX + 10) + "px";
-        this.tooltip.style.top = (evt.clientY + 10) + "px";
+        this.tooltip.style.left = (e.clientX + 10) + "px";
+        this.tooltip.style.top = (e.clientY + 10) + "px";
     }
 
-    __randColor(index) {
+    __randColor(index: Number) {
         let colors = ["#F44336", "#2196F3", "#E91E63", "#00BCD4", "#673AB7", "#009688", "#3F51B5", "#4CAF50", "#FF9800", "#FF5722", "#FFC107"];
         if (index !== undefined) {
             return colors[parseInt(Math.abs(index % colors.length)) % (colors.length)];

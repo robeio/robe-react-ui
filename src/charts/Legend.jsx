@@ -1,12 +1,12 @@
 import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
-import "./Legend.css"
+import "./Legend.css";
 import ThumbnailGroup from "../layouts/ThumbnailGroup";
 import ThumbnailItem from "../layouts/ThumbnailItem";
 
 export default class Legend extends ShallowComponent {
 
-    static propTypes = {
+    static propTypes: Map = {
         className: React.PropTypes.string,
         width: React.PropTypes.number,
     };
@@ -15,7 +15,7 @@ export default class Legend extends ShallowComponent {
         width: 500
     };
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props)
     }
 
@@ -23,7 +23,7 @@ export default class Legend extends ShallowComponent {
         return (
             <div
                 className={this.props.className}
-                style={{width:this.props.width,marginTop:20}}>
+                style={{width: this.props.width, marginTop: 20}}>
                 <ThumbnailGroup>
                     {this.__renderLegend()}
                 </ThumbnailGroup>
@@ -41,7 +41,7 @@ export default class Legend extends ShallowComponent {
                     <ThumbnailItem
                         key={key}
                         className="legend-item">
-                        <div style={{borderColor:lengend.fill,color:lengend.fill}}>
+                        <div style={{borderColor: lengend.fill, color: lengend.fill}}>
                             {lengend.label}
                         </div>
                     </ThumbnailItem>)

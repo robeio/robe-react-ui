@@ -1,11 +1,11 @@
 import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
-import "./BarChart.css"
+import "./BarChart.css";
 import Legend from "./Legend";
 
 export default class BarChart extends ShallowComponent {
 
-    static propTypes = {
+    static propTypes: Map = {
         /**
          * Width for chart as px
          */
@@ -33,15 +33,15 @@ export default class BarChart extends ShallowComponent {
 
     legends = [];
 
-    constructor(props) {
+    constructor(props: Object) {
         super(props)
     }
 
     render() {
         return (
-            <div id="bar" style={{marginLeft:40,width:this.props.width}}>
+            <div id="bar" style={{marginLeft: 40, width: this.props.width}}>
                 <div className="rb-bar-chart"
-                     style={{width:this.props.width,height:this.props.height}}>
+                     style={{width: this.props.width, height: this.props.height}}>
                     <svg className="rb-bar-chart-svg">
                         {this.__renderBars(this.props.data, this.props.meta)}
                     </svg>
@@ -58,7 +58,7 @@ export default class BarChart extends ShallowComponent {
         )
     }
 
-    __renderBars(data, meta) {
+    __renderBars(data: Array, meta: Array) {
         let metaArr = [];
         let xAxisWidth = this.__xAxisWidth();
         let sumXAxisWidth = 0;
@@ -116,9 +116,9 @@ export default class BarChart extends ShallowComponent {
         for (let i = 0; i < 4; i++) {
             axisArr.push(
                 <div key={i}
-                     id={parseInt((maxYAxis/4)*(4-i))}
+                     id={parseInt((maxYAxis / 4) * (4 - i))}
                      className="rb-bar-y-axis"
-                     style={{height:(this.props.height/4)}}>
+                     style={{height: (this.props.height / 4)}}>
                 </div>);
         }
         return axisArr;
@@ -133,12 +133,12 @@ export default class BarChart extends ShallowComponent {
                 <div key={i}
                      className="rb-bar-x-axis"
                      name={data[i].name}
-                     style={{width : maxYAxis}}>
+                     style={{width: maxYAxis}}>
                 </div>);
         }
         return axisArr;
     }
-    
+
     __maxYAxis() {
         let data = this.props.data,
             maxYAxis = 0;
@@ -158,18 +158,18 @@ export default class BarChart extends ShallowComponent {
         return (this.props.width - 1) / this.props.data.length;
     }
 
-    __barHeight(value) {
+    __barHeight(value: Number) {
         let maxYAxis = this.__maxYAxis();
         return ((this.props.height * ((value * 100) / maxYAxis)) / 100);
     }
 
-    __barWidth(data) {
+    __barWidth(data: Object) {
         let fields = this.__getFields(data),
             minWidth = this.__xAxisWidth() / fields.length;
         return minWidth < 30 ? minWidth : 30;
     }
 
-    __getFields(data) {
+    __getFields(data: Object) {
         let arr = [];
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -185,34 +185,34 @@ export default class BarChart extends ShallowComponent {
         return arr;
     }
 
-    __showTooltip(evt) {
+    __showTooltip(e: Object) {
         if (this.tooltip === undefined) {
             this.tooltip = document.getElementById("tooltip");
         }
         this.tooltip.style.visibility = "visible";
 
-        let tooltipText = evt.target.getAttribute("data");
-        let fill = evt.target.getAttribute("fill");
+        let tooltipText = e.target.getAttribute("data");
+        let fill = e.target.getAttribute("fill");
 
         this.tooltip.innerHTML = tooltipText;
         this.tooltip.style.backgroundColor = fill;
     }
 
-    __hideTooltip(evt) {
+    __hideTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
         this.tooltip.style.visibility = "hidden";
     }
 
-    __moveTooltip(evt) {
+    __moveTooltip(e: Object) {
         if (this.tooltip === undefined)
             this.tooltip = document.getElementById("tooltip");
 
-        this.tooltip.style.left = (evt.clientX + 10) + "px";
-        this.tooltip.style.top = (evt.clientY + 10) + "px";
+        this.tooltip.style.left = (e.clientX + 10) + "px";
+        this.tooltip.style.top = (e.clientY + 10) + "px";
     }
 
-    __randColor(index) {
+    __randColor(index: Number) {
         let colors = ["#F44336", "#673AB7", "#2196F3", "#FF5722", "#9C27B0", "#FFC107", "#FF9800", "#4CAF50", "#00796B", "#009688", "#3F51B5"];
         if (index !== undefined) {
             return colors[index % colors.length];
