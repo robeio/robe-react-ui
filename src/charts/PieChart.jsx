@@ -1,6 +1,6 @@
 import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
-import "./PieChart.css"
+import "./PieChart.css";
 import Legend from "./Legend";
 import FaIcon from "../faicon/FaIcon";
 
@@ -41,6 +41,9 @@ export default class PieChart extends ShallowComponent {
         let depth = this.__depthTree(data);
         this.legends = [];
 
+        let c = 2 * depth + 1;
+        let mRadius = (((this.props.size - 1) / 2) / c) * ( c - depth - 1);
+
         return (
             <div className="rb-pie-chart" style={{width:this.props.size,height:this.props.size}}>
                 <div className="rb-pie-chart-back-tool" style={{display:this.state.clicked?"inherit":"none"}}>
@@ -48,6 +51,11 @@ export default class PieChart extends ShallowComponent {
                 </div>
                 <svg className="rb-pie-chart-svg">
                     {this.__renderPies(data, 360, 0, depth, depth - 1)}
+                    <circle
+                        fill="white"
+                        cx={this.props.size / 2}
+                        cy={this.props.size / 2}
+                        r={mRadius}/>
                 </svg>
                 <div className="tooltip" id="tooltip"></div>
                 <Legend data={this.legends} width={this.props.size}/>
