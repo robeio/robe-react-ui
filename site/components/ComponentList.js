@@ -129,6 +129,14 @@ class ComponentList {
         });
 
         components.layout.push({
+            header: "SidePanel",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "sidePanelDesc"),
+            json: require("./jsons/sidepanel/SidePanel.json"),
+            sample: require("./samples/sidepanel/SidePanelSample"),
+            code: require("./samples/sidepanel/SidePanelSample.txt")
+        });
+
+        components.layout.push({
             header: "StackLayout",
             desc: Application.i18n(ComponentList, "components.ComponentList", "stackLayoutDesc"),
             json: require("./jsons/layouts/StackLayout.json"),

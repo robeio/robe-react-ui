@@ -201,7 +201,8 @@
     "lineChartDesc": " a line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segment",
     "pieChartDesc": " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportio",
     "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data",
-    "iconizerDesc": " converts given links array into links with icons"
+    "iconizerDesc": " converts given links array into links with icons",
+    "sidePanelDesc": " left or right panel that slides in/out"
   },
   "components.Components": {
     "title": "Components",
@@ -249,5 +250,9 @@
   },
   "extras.Iconizer": {
     "supports": "Supports"
+  },
+  "layout.SidePanel": {
+    "toggleLeft": "Toogle Left Panel",
+    "toggleRight": "Toogle Right Panel"
   }
 }

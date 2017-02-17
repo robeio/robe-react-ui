@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import {Application} from "robe-react-commons";
+import {ShallowComponent, Application} from "robe-react-commons";
 import {Nav, NavItem, InputGroup, Overlay, Popover} from "react-bootstrap";
 import DatePicker from "../inputs/datepicker/DatePicker"
 import FaIcon from "../faicon/FaIcon"

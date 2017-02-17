@@ -20,21 +20,21 @@ export default class IconizerSample extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <Iconizer key="1" links={this.links}/>
-                <br/>
-                <br/>
-                <Iconizer key="2" links={this.links} size="lg"/>
-                <br/>
-                <br/>
-                <Iconizer key="3" links={this.links} size="2x"/>
-                <br/>
-                <br/>
-                <Iconizer key="4" links={this.links} size="3x"/>
-                <br/>
-                <br/>
-                <Iconizer key="5" links={this.links} size="4x"/>
-                <br/>
-                <br/>
+                <p>
+                    <Iconizer links={this.links}/>
+                </p>
+                <p>
+                    <Iconizer links={this.links} size="lg"/>
+                </p>
+                <p>
+                    <Iconizer links={this.links} size="2x"/>
+                </p>
+                <p>
+                    <Iconizer links={this.links} size="3x"/>
+                </p>
+                <p>
+                    <Iconizer links={this.links} size="4x"/>
+                </p>
                 <strong>{Application.i18n(IconizerSample,"extras.Iconizer", "supports")}: </strong>
                 facebook, twitter, linkedin, google+, youtube, instagram, tumblr,
                 snapchat, flickr, git, github, hacker-news, jsfiddle, paypal, snapchat,
