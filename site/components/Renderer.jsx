@@ -65,36 +65,6 @@ export default class Renderer extends ShallowComponent {
     }
 
     render(): Object {
-        let highlight = (
-            <Collapse in={this.state.showCode}>
-                <div>
-                    <div className="pull-right">
-                        <ButtonGroup
-                            style={Renderer.clipboardStyle}
-                        >
-                            <Button
-                                bsSize="xsmall"
-                                onClick={this.__copyToClipboard}
-                            >
-                                <FaIcon code="fa-clipboard" />
-                            </Button>
-                        </ButtonGroup>
-                    </div>
-                    <Highlight className="javascript">
-                        {this.props.code}
-                    </Highlight>
-                </div>
-            </Collapse>
-        );
-
-        let codeSection = this.props.code ?
-            (<div>
-                {highlight}
-                <Button
-                    bsStyle="link" bsSize="xsmall" className="pull-right"
-                    onClick={this.__toogleCode}
-                >{`${this.state.showCode ? "Hide" : "Show"} Code`}</Button>
-            </div>) : undefined;
         return (
             <div>
                 <h3>{this.props.header}</h3>
@@ -102,7 +72,7 @@ export default class Renderer extends ShallowComponent {
                 <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
                     <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
                         <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
-                            <Playground codeText={this.props.code} scope={{ ReactDOM, React, ShallowComponent, Button, ControlLabel, Application, Toast }} noRender={false} collapsableCode initiallyExpanded={true} />
+                            <Playground codeText={this.props.code} collapsableCode initiallyExpanded={true} />
                         </Panel>
                     </Tab>
                     {this.__renderPropsTable(this.props.json.props)}
