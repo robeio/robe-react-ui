@@ -1,0 +1,39 @@
+{
+  "rootDir": "../../",
+  "automock": false,
+  "bail": true,
+  "transform":  {
+    "^.+\\.(jsx?)$": "<rootDir>/config/test/preprocessor.js"
+  },
+  "testRegex": "/__test/.*\\.spec\\.jsx?$",
+  "testRunner": "jasmine2",
+  "setupTestFrameworkScriptFile": "<rootDir>/config/test/setup.js",
+  "collectCoverage": true,
+  "moduleNameMapper": {
+    "^.*[.](css|CSS)$": "<rootDir>/config/test/styleMock.js",
+    "^.*[.](gif|ttf|eot|svg)$": "<rootDir>/config/test/fileMock.js",
+    "^robe-react-ui\\/lib\\/(.*)$" : "<rootDir>/src/$1",
+    "^robe-react-ui$" : "<rootDir>/src/index"
+  },
+  "modulePaths": [
+    "src"
+  ],
+  "modulePathIgnorePatterns": [
+    "\/config\/",
+    "__test__",
+    "test_backup"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "bower_components"
+  ],
+  "coveragePathIgnorePatterns": [
+    "TestUtils.js",
+    "__test",
+    "jest.setup.jasmine.js"
+  ]
+}

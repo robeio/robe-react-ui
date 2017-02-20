@@ -1,0 +1,6 @@
+{
+  "rootDir": "./",
+  "modules": [
+    "src"
+  ]
+}

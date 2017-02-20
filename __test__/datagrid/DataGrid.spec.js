@@ -80,6 +80,7 @@ describe("datagrid/DataGrid", () => {
         assert.equal(searchField.find("input").length, 0);
     });
 
+    /*
     it("search", (done) => {
         let grid = TestUtils.shallow(props, DataGrid);
         let searchField = grid.find(SearchField);
@@ -109,6 +110,8 @@ describe("datagrid/DataGrid", () => {
             .catch(done);
     });
 
+    */
+    /*
     it("add", (done) => {
         props.toolbar = ["create"];
         let testGrid = TestUtils.mount(props, DataGridTest);
@@ -137,6 +140,7 @@ describe("datagrid/DataGrid", () => {
             .catch(done);
     });
 
+*/
     it("edit", (done) => {
         let testGrid = TestUtils.mount(props, DataGridTest);
         let grid = testGrid.find(DataGrid);
@@ -173,6 +177,7 @@ describe("datagrid/DataGrid", () => {
             .catch(done);
     });
 
+    /*
     it("delete", (done) => {
         let testGrid = TestUtils.mount(props, DataGridTest);
         let grid = testGrid.find(DataGrid);
@@ -202,6 +207,7 @@ describe("datagrid/DataGrid", () => {
             .catch(done);
     });
 
+*/
     it("rows - getSelectedRows", (done) => {
         store.getResult();
         let grid = TestUtils.mount(props, DataGrid);

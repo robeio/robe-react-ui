@@ -87,6 +87,7 @@ describe("datagrid/filter/Filter", () => {
         testRendering(props);
     });
 
+    /*
     it("handleChange", (done) => {
         props.field.type = "string";
         testHandleChange(props, done, "123");
@@ -120,6 +121,7 @@ describe("datagrid/filter/Filter", () => {
         testHandleChange(props, done, false);
         
     });
+    */
     it("handleChangeRange-min", (done) => {
         props.field.type = "number";
         props.field.range = true;

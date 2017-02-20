@@ -1,7 +1,10 @@
 # Change Log
 
-## 1.1.23 -- Developing...
+## 1.1.24 -- Developing...
+
+## 1.1.23
 * Rating component added.
+* Changed test tools as mocha & electron-mocha
 
 ## 1.1.22
 * Wizard and Step bug fixed.

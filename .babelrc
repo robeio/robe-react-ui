@@ -3,5 +3,12 @@
      "react",
      "es2015",
      "stage-0"
-  ]
+  ],
+  "retainLines": true,
+  "env": {
+    "coverage": {
+      "plugins": [  [ "__coverage__", { "only": "src/" }]],
+      "retainLines": false
+    }
+  }
 }
