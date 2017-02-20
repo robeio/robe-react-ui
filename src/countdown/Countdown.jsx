@@ -262,6 +262,9 @@ export default class Countdown extends ShallowComponent {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer);
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+        }
     }
 }
