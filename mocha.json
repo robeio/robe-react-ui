@@ -1,0 +1,13 @@
+{
+  "testRootDir": "__test__",
+  "opts": {
+    "renderer": true,
+    "recursive": "**/*.spec.js",
+    "require": [
+      "tools/test/babelhook",
+      "tools/test/mockCss",
+      "tools/test/helpers.js"
+    ],
+    "timeout": 5000
+  }
+}
