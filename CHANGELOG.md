@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.24 -- Developing...
+* Updating the datagrid when the props are updated
 
 ## 1.1.23
 * Rating component added.
@@ -8,7 +9,7 @@
 
 ## 1.1.22
 * Wizard and Step bug fixed.
-
+*
 ## 1.1.21
 * Screen Keyboard component added.
 * Wizard component redeveloped.

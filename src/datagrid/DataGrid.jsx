@@ -173,7 +173,6 @@ export default class DataGrid extends StoreComponent {
             modalDeleteConfirm: false,
             visiblePopups: {},
             counter: 0,
-            changed: false
         };
 
         this.activePage = 1;
@@ -529,8 +528,7 @@ export default class DataGrid extends StoreComponent {
             sort: this.__map2Array(this.__sorts)
         };
         if (this.props.pagination) {
-            let start = (this.pageSize * (this.activePage - 1));
-            queryParams.offset = start;
+            queryParams.offset = (this.pageSize * (this.activePage - 1));
             queryParams.limit = this.pageSize;
         }
         this.props.store.read(

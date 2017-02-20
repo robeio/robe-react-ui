@@ -1,10 +1,7 @@
 import chai from "chai";
 import React from "react";
-import {
-    Store,
-    RemoteEndPoint,
-} from "robe-react-commons";
-import Promise from "bluebird"
+import {Store, RemoteEndPoint} from "robe-react-commons";
+import Promise from "bluebird";
 import TestUtils from "../TestUtils";
 import DataGrid from "datagrid/DataGrid";
 import DataGridBodyRow from "datagrid/DataGridBodyRow";
@@ -33,8 +30,9 @@ describe("datagrid/DataGrid", () => {
         props = {
             fields: model.fields,
             store: store,
-            pagination: { pageSize: 1 },
-            onClick: () => { }
+            pagination: {pageSize: 1},
+            onClick: () => {
+            }
         };
     });
 
@@ -81,66 +79,66 @@ describe("datagrid/DataGrid", () => {
     });
 
     /*
-    it("search", (done) => {
-        let grid = TestUtils.shallow(props, DataGrid);
-        let searchField = grid.find(SearchField);
+     it("search", (done) => {
+     let grid = TestUtils.shallow(props, DataGrid);
+     let searchField = grid.find(SearchField);
 
-        let search = () => {
-            return new Promise((ok) => {
-                searchField.first().simulate("change", { target: { value: "Seray" } });
-                ok();
-            });
-        };
+     let search = () => {
+     return new Promise((ok) => {
+     searchField.first().simulate("change", { target: { value: "Seray" } });
+     ok();
+     });
+     };
 
-        let checkChangedState = () => {
-            return new Promise((ok) => {
-                let data = grid.instance().getStore().getResult().data;
-                console.log("DataGrid Result: ", data);
-                assert.equal(data.length, 1);
-                assert.equal(data[0].name, "Seray");
-                searchField.first().simulate("change", { target: { value: "" } });
-                ok([grid, done]);
-            });
-        };
+     let checkChangedState = () => {
+     return new Promise((ok) => {
+     let data = grid.instance().getStore().getResult().data;
+     console.log("DataGrid Result: ", data);
+     assert.equal(data.length, 1);
+     assert.equal(data[0].name, "Seray");
+     searchField.first().simulate("change", { target: { value: "" } });
+     ok([grid, done]);
+     });
+     };
 
-        start().delay(1000)
-            .then(search).delay(1000)
-            .then(checkChangedState)
-            .spread(finish)
-            .catch(done);
-    });
+     start().delay(1000)
+     .then(search).delay(1000)
+     .then(checkChangedState)
+     .spread(finish)
+     .catch(done);
+     });
 
-    */
+     */
     /*
-    it("add", (done) => {
-        props.toolbar = ["create"];
-        let testGrid = TestUtils.mount(props, DataGridTest);
-        let grid = testGrid.find(DataGrid);
+     it("add", (done) => {
+     props.toolbar = ["create"];
+     let testGrid = TestUtils.mount(props, DataGridTest);
+     let grid = testGrid.find(DataGrid);
 
-        let add = () => {
-            return new Promise((ok) => {
-                let modal = testGrid.find(ModalDataForm);
-                modal.props().onSubmit({ name: "Mehmet", surname: "Güreli" });
-                ok();
-            });
-        };
+     let add = () => {
+     return new Promise((ok) => {
+     let modal = testGrid.find(ModalDataForm);
+     modal.props().onSubmit({ name: "Mehmet", surname: "Güreli" });
+     ok();
+     });
+     };
 
-        let testIfAdded = () => {
-            return new Promise((ok) => {
-                let rows = grid.find(DataGridBodyRow);
-                assert.equal(rows.length, ++rowCount);
-                ok([testGrid, done]);
-            });
-        };
+     let testIfAdded = () => {
+     return new Promise((ok) => {
+     let rows = grid.find(DataGridBodyRow);
+     assert.equal(rows.length, ++rowCount);
+     ok([testGrid, done]);
+     });
+     };
 
-        start().delay(500)
-            .then(add).delay(500)
-            .then(testIfAdded)
-            .spread(finish)
-            .catch(done);
-    });
+     start().delay(500)
+     .then(add).delay(500)
+     .then(testIfAdded)
+     .spread(finish)
+     .catch(done);
+     });
 
-*/
+     */
     it("edit", (done) => {
         let testGrid = TestUtils.mount(props, DataGridTest);
         let grid = testGrid.find(DataGrid);
@@ -151,7 +149,7 @@ describe("datagrid/DataGrid", () => {
                 let firstRow = grid.find(DataGridBodyRow).first();
                 let data = firstRow.node.props.data;
                 oldName = data.name + "";
-                data.name = "İsmail";
+                data.name = "Hasan";
                 let modal = testGrid.find(ModalDataForm);
                 modal.props().onSubmit(data);
                 ok();
@@ -162,7 +160,7 @@ describe("datagrid/DataGrid", () => {
             return new Promise((ok) => {
                 let firstRow = grid.find(DataGridBodyRow).first();
                 let data = firstRow.node.props.data;
-                assert.equal(data.name, "İsmail");
+                assert.equal(data.name, "Hasan");
                 data.name = oldName;
                 let modal = testGrid.find(ModalDataForm);
                 modal.props().onSubmit(data);
@@ -178,36 +176,36 @@ describe("datagrid/DataGrid", () => {
     });
 
     /*
-    it("delete", (done) => {
-        let testGrid = TestUtils.mount(props, DataGridTest);
-        let grid = testGrid.find(DataGrid);
+     it("delete", (done) => {
+     let testGrid = TestUtils.mount(props, DataGridTest);
+     let grid = testGrid.find(DataGrid);
 
-        let deleteRow = () => {
-            return new Promise((ok) => {
-                let rows = grid.find(DataGridBodyRow);
-                rows.last().simulate("click");
-                grid.get(0).__showDeleteConfirm();
-                grid.get(0).__onDeleteConfirm();
-                ok();
-            });
-        };
+     let deleteRow = () => {
+     return new Promise((ok) => {
+     let rows = grid.find(DataGridBodyRow);
+     rows.last().simulate("click");
+     grid.get(0).__showDeleteConfirm();
+     grid.get(0).__onDeleteConfirm();
+     ok();
+     });
+     };
 
-        let checkIfDeleted = () => {
-            return new Promise((ok) => {
-                let rows = grid.find(DataGridBodyRow);
-                assert.equal(rows.length, --rowCount);
-                ok([testGrid, done]);
-            });
-        };
+     let checkIfDeleted = () => {
+     return new Promise((ok) => {
+     let rows = grid.find(DataGridBodyRow);
+     assert.equal(rows.length, --rowCount);
+     ok([testGrid, done]);
+     });
+     };
 
-        start().delay(500)
-            .then(deleteRow).delay(500)
-            .then(checkIfDeleted)
-            .spread(finish)
-            .catch(done);
-    });
+     start().delay(500)
+     .then(deleteRow).delay(500)
+     .then(checkIfDeleted)
+     .spread(finish)
+     .catch(done);
+     });
 
-*/
+     */
     it("rows - getSelectedRows", (done) => {
         store.getResult();
         let grid = TestUtils.mount(props, DataGrid);
