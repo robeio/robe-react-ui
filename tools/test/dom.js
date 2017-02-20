@@ -1,0 +1,1 @@
+global.defaultBody = window.innerHTML;

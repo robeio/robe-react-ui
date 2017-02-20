@@ -76,12 +76,12 @@ export default class ClassName {
         removeNameArray.push(removeName);
         let addNameArray=[];
         addNameArray.push(addName);
-        if(element.className && element.className !== ""){
+        if(element && element.className && element.className !== ""){
             let from  =element.className.split(" ");
             let names = Arrays.removeAllForNativeType(from, [removeName]);
             names = Arrays.mergeArraysForNativeType(names, [addName]);
             element.className = names.join(" ");
         }
-        return element.className || "";
+        return element ? element.className || "": "";
     }
 }
