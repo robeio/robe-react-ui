@@ -1,19 +1,7 @@
 import React from "react";
 import is from "is-js";
-import {
-    Application,
-    Store,
-    StoreComponent,
-    Maps,
-    Assertions
-} from "robe-react-commons";
-
-import {
-    Row,
-    Col,
-    Table
-} from "react-bootstrap";
-
+import {Application, Store, StoreComponent, Maps, Assertions} from "robe-react-commons";
+import {Row, Col, Table} from "react-bootstrap";
 import DataTableBodyRow from "./DataGridBodyRow";
 import ModalConfirm from "../form/ModalConfirm";
 import Filters from "./filter/Filters";
@@ -23,7 +11,6 @@ import ActionButtons from "./toolbar/ActionButtons";
 import Pagination from "./Pagination";
 import Header from "./Header";
 import Toast from "../toast/Toast";
-
 import "./DataGrid.css";
 
 export default class DataGrid extends StoreComponent {
@@ -185,7 +172,8 @@ export default class DataGrid extends StoreComponent {
             hasSelection: false,
             modalDeleteConfirm: false,
             visiblePopups: {},
-            counter: 0
+            counter: 0,
+            changed: false
         };
 
         this.activePage = 1;
@@ -229,9 +217,11 @@ export default class DataGrid extends StoreComponent {
                             placeholder={Application.i18n(DataGrid, "datagrid.DataGrid", "search")}
                         />
                     </Col>
-                    <Col xs={7} sm={7} lg={8} style={{ marginBottom: 15 }}>
+                    <Col xs={7} sm={7} lg={8} style={{marginBottom: 15}}>
                         <ActionButtons
-                            ref={(componet: Object) => { this.__actionButtonsComponent = componet; }}
+                            ref={(componet: Object) => {
+                                this.__actionButtonsComponent = componet;
+                            }}
                             visible={this.props.editable}
                             items={this.__getToolbarConfig()}
                         />
@@ -239,7 +229,9 @@ export default class DataGrid extends StoreComponent {
 
                 </Row>
                 <Filters
-                    ref={(component: Object) => { this.__filterComponent = component; }}
+                    ref={(component: Object) => {
+                        this.__filterComponent = component;
+                    }}
                     fields={this.__fields}
                     delay={this.props.delay}
                     visiblePopups={this.state.visiblePopups}
@@ -250,12 +242,12 @@ export default class DataGrid extends StoreComponent {
                 />
                 <Table responsive bordered condensed className="datagrid-table">
                     <thead>
-                        <tr>
-                            {this.__generateHeader(this.props.fields)}
-                        </tr>
+                    <tr>
+                        {this.__generateHeader(this.props.fields)}
+                    </tr>
                     </thead>
                     <tbody>
-                        {this.__generateRows(this.__fields, this.state.rows)}
+                    {this.__generateRows(this.__fields, this.state.rows)}
                     </tbody>
                 </Table>
                 {this.props.pagination === undefined ? undefined :
@@ -466,7 +458,7 @@ export default class DataGrid extends StoreComponent {
     __clearSelection() {
 
         if (this.__actionButtonsComponent) {
-            this.__actionButtonsComponent.setState({ disabled: true });
+            this.__actionButtonsComponent.setState({disabled: true});
         }
 
         if (this.selection !== undefined) {
@@ -486,7 +478,7 @@ export default class DataGrid extends StoreComponent {
     __onSelection(selection: Object) {
 
         if (this.__actionButtonsComponent) {
-            this.__actionButtonsComponent.setState({ disabled: false });
+            this.__actionButtonsComponent.setState({disabled: false});
         }
 
         if (this.selection !== undefined) {
@@ -540,16 +532,14 @@ export default class DataGrid extends StoreComponent {
             let start = (this.pageSize * (this.activePage - 1));
             queryParams.offset = start;
             queryParams.limit = this.pageSize;
-            this.props.store.read(
-                (response: Object) => {
-                    this.setState({
-                        rows: response.data,
-                        totalCount: response.totalCount
-                    });
-                }, undefined, queryParams);
-        } else {
-            this.props.store.read(undefined, undefined, queryParams);
         }
+        this.props.store.read(
+            (response: Object) => {
+                this.setState({
+                    rows: response.data,
+                    totalCount: response.totalCount
+                });
+            }, undefined, queryParams);
     }
 
     __getModalConfirmConfig(): Object {
@@ -600,6 +590,10 @@ export default class DataGrid extends StoreComponent {
         return config;
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.__readData();
+    }
+
     componentWillMount() {
         if (this.props.pagination !== undefined && this.props.pagination.pageSize !== undefined) {
             this.pageSize = this.props.pagination.pageSize;
@@ -610,6 +604,7 @@ export default class DataGrid extends StoreComponent {
         super.componentDidMount();
         this.__readData();
     }
+
     /**
      * Do not implement
      * @param store
