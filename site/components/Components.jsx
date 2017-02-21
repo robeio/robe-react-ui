@@ -7,7 +7,7 @@ import ComponentList from "./ComponentList";
 import Progress from "progress/Progress";
 import TextInput from "inputs/TextInput";
 import FaIcon from "faicon/FaIcon";
-import "./style.css"
+import "./style.css";
 
 
 export default class Components extends ShallowComponent {
@@ -57,9 +57,10 @@ export default class Components extends ShallowComponent {
             <Grid>
                 <h2>{Application.i18n(Components, "components.Components", "title")}</h2>
                 <h5>{Application.i18n(Components, "components.Components", "description")}</h5>
-                <Col xs={12} sm={3} style={{ borderRight: "lightgray 1px solid", paddingLeft: 0 }}>
+
+                <Col xs={12} sm={3} style={{paddingLeft: 0, marginTop: 10}}>
                     <TextInput
-                        inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
+                        inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm"/> </InputGroup.Addon>}
                         onChange={this.__onFilterChange}
                         value={this.state.filter}
                         placeholder={Application.i18n(Components, "components.Components", "search")}
@@ -113,7 +114,7 @@ export default class Components extends ShallowComponent {
                     </ListGroup>
 
                 </Col>
-                <Col xs={12} sm={9}>
+                <Col xs={12} sm={9} style={{padding: 0, marginTop: 6}}>
                     {componentDetail}
                 </Col>
             </Grid>

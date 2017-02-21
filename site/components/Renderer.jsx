@@ -1,12 +1,11 @@
 import React from "react";
-import { Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Maps, Application } from "robe-react-commons";
+import {Button, ButtonGroup, Panel, Table, Collapse, Tabs, Tab, Modal, OverlayTrigger, Tooltip} from "react-bootstrap";
+import {Maps, Application} from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Highlight from "react-highlight";
 import Progress from "progress/Progress";
 import FaIcon from "faicon/FaIcon";
 import Toast from "toast/Toast";
-
 
 
 export default class Renderer extends ShallowComponent {
@@ -93,7 +92,7 @@ export default class Renderer extends ShallowComponent {
             </div>) : undefined;
         return (
             <div>
-                <h3>{this.props.header}</h3>
+                <h3 style={{marginTop: 0}}>{this.props.header}</h3>
                 <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
                 <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
                     <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >

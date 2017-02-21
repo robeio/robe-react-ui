@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Panel, Table } from "react-bootstrap";
-import { Maps } from "robe-react-commons";
+import {Button, Panel, Table} from "react-bootstrap";
+import {Maps} from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import Highlight from "react-highlight";
 import Progress from "progress/Progress";
 
 
@@ -54,7 +53,7 @@ export default class Renderer extends ShallowComponent {
     render(): Object {
         return (
             <div>
-                <h3>{this.props.header}</h3>
+                <h3 style={{marginTop: 0}}>{this.props.header}</h3>
                 <h5>{this.props.desc}</h5>
                 <Panel>
                     <this.props.sample.default />

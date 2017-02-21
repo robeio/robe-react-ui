@@ -1,4 +1,4 @@
-import { Application } from "robe-react-commons";
+import {Application} from "robe-react-commons";
 import InputValidations from "validation/InputValidations";
 
 class ComponentList {
@@ -7,9 +7,17 @@ class ComponentList {
     maxValue = InputValidations.maxValue.bind(undefined, 3);
 
     getList(): Array {
-        let components = { functional: [], layout: [], inputs: [], charts: [], extras: [] };
+        let components = {functional: [], layout: [], inputs: [], charts: [], extras: []};
 
         /* eslint-disable global-require */
+
+        components.functional.push({
+            header: "Test",
+            desc: "Test",
+            // json: require("./jsons/buttons/Button.json"),
+            sample: require("./samples/mytest/MyTestSample"),
+            code: require("./samples/mytest/MyTestSample.txt")
+        });
 
         components.functional.push({
             header: "Button",
