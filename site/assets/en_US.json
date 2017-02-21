@@ -185,6 +185,7 @@
     "dragDropLayoutDesc": " is a layout component which provides drag and drop also click events on layer.",
     "faIconDesc": " is a wrapper component for font-awesome icons.",
     "ratingDesc": " a composition that offers rating with font-awesome icons.",
+    "sliderDesc": " is a component which select the value range or single value by sliding.",
     "lazyImageDesc": " is a component for loading images via AJAX.",
     "progressDesc": " is an indicator component for the heavy ajax loaded site",
     "progressSubStartDesc": "Starts the progress indicator on top of the page",
@@ -247,6 +248,16 @@
     "ratingTwo": "With Different Size And Disabled",
     "ratingThree": "Love Is In The Air",
     "ratingFour": "Default Sample"
+  },
+  "slider.SliderSample": {
+    "sliderOne": "With Default Value",
+    "sliderTwo": "With Min-Max Value And Step",
+    "sliderThree": "With Float Step",
+    "sliderFour": "With Disabled",
+    "sliderFive": "With Range",
+    "sliderSix": "With Range And Step",
+    "sliderSeven": "With Range And Float Step",
+    "sliderEight": "With Range And Disabled"
   },
   "extras.Iconizer": {
     "supports": "Supports"

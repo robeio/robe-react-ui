@@ -185,6 +185,7 @@
     "dragDropLayoutDesc": " ekran üzerindeki olayları sürükleyip bırakmayı sağlayan bir düzen bileşenidir.",
     "faIconDesc": " Font-awesome ikonları için bir paket bileşenidir.",
     "ratingDesc": " Font-awesome ikonlarıyla derecelendirme imkanı sunan bir bileşendir.",
+    "sliderDesc": " kaydırma ile değer aralığını veya tek değeri seçen bir bileşendir.",
     "lazyImageDesc": "AJAX ile resim yüklemek için kullanılan bir bileşendir.",
     "progressDesc": " ağır ajax yükü olan durumlarda bir gösterge bileşenidir.",
     "progressSubStartDesc": "Sayfanın üst kısmında ilerleme göstergesini başlatır.",
@@ -247,6 +248,16 @@
     "ratingTwo": "Farklı Boyutta Ve Değişime Kapalı",
     "ratingThree": "Farklı Simgelerle",
     "ratingFour": "Varsayılan Örnek"
+  },
+  "slider.SliderSample": {
+    "sliderOne": "Varsayılan Değer İle",
+    "sliderTwo": "Minimum-Maksimum Değer Ve Adım İle",
+    "sliderThree": "Virgüllü Adım Değerleri İle",
+    "sliderFour": "Değişime Kapalı",
+    "sliderFive": "Aralık Değeri İle",
+    "sliderSix": "Aralık Ve Adım Ddeğeri İle",
+    "sliderSeven": "Virgüllü Adım Değeri Ve Aralık İle",
+    "sliderEight": "Aralık Değeri Ve Değişime Kapalı"
   },
   "extras.Iconizer": {
     "supports": "Destekler"

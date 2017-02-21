@@ -76,6 +76,14 @@ class ComponentList {
         });
 
         components.functional.push({
+            header: "Slider",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "sliderDesc"),
+            json: require("./jsons/slider/Slider"),
+            sample: require("./samples/slider/SliderSample"),
+            code: require("./samples/slider/SliderSample.txt")
+        });
+
+        components.functional.push({
             header: "Toast",
             desc: Application.i18n(ComponentList, "components.ComponentList", "toastDesc"),
             sample: require("./samples/toast/ToastSample"),

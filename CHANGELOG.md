@@ -2,6 +2,7 @@
 
 ## 1.1.24 -- Developing...
 * Updating the datagrid when the props are updated
+* Slider component added.
 
 ## 1.1.23
 * Rating component added.
