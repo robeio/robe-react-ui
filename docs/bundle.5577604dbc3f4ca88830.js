@@ -22,7 +22,7 @@
         if (0 === r[e])return Promise.resolve();
         if (r[e])return r[e][2];
         var n = document.getElementsByTagName("head")[0], i = document.createElement("script");
-        i.type = "text/javascript", i.charset = "utf-8", i.async = !0, i.timeout = 12e4, t.nc && i.setAttribute("nonce", t.nc), i.src = t.p + "" + e + ".bundle.307e5e7aab3e46086a60.js";
+        i.type = "text/javascript", i.charset = "utf-8", i.async = !0, i.timeout = 12e4, t.nc && i.setAttribute("nonce", t.nc), i.src = t.p + "" + e + ".bundle.5577604dbc3f4ca88830.js";
         var o = setTimeout(a, 12e4);
         i.onerror = i.onload = a;
         var s = new Promise(function (t, a) {
@@ -25958,6 +25958,7 @@
                     defaultValue: 30,
                     minLabel: "0 °C",
                     maxLabel: "100 °C",
+                    unit: "°C",
                     onChange: this.handleChange
                 })), c.default.createElement(m.Col, {style: {paddingBottom: 50}}, c.default.createElement(m.ControlLabel, {style: {marginBottom: 12}}, p.Application.i18n(t, "slider.SliderSample", "sliderTwo")), c.default.createElement(d.default, {
                     minValue: 25e3,
@@ -26150,7 +26151,9 @@
         }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t)
     }
 
-    Object.defineProperty(t, "__esModule", {value: !0});
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
     var s = function () {
         function e(e, t) {
             for (var a = 0; a < t.length; a++) {
@@ -31016,12 +31019,12 @@
                     placement: "top",
                     container: document.getElementById(this.circleDivMax),
                     target: document.getElementById(this.circleDivMax)
-                }, u.default.createElement(m.Tooltip, {id: "sliderPopover"}, this.state.valueMax)), u.default.createElement(m.Overlay, {
+                }, u.default.createElement(m.Tooltip, {id: "sliderPopover"}, this.state.valueMax + " " + this.props.unit)), u.default.createElement(m.Overlay, {
                     show: this.state.openMinDesc,
                     placement: "top",
                     container: document.getElementById(this.circleDivMin),
                     target: document.getElementById(this.circleDivMin)
-                }, u.default.createElement(m.Tooltip, {id: "sliderPopover"}, this.state.valueMin)), u.default.createElement("div", {className: "sliderContainer"}, u.default.createElement("div", {
+                }, u.default.createElement(m.Tooltip, {id: "sliderPopover"}, this.state.valueMin + " " + this.props.unit)), u.default.createElement("div", {className: "sliderContainer"}, u.default.createElement("div", {
                     id: this.selectedDiv,
                     className: t,
                     style: {left: i, width: o},
@@ -31109,7 +31112,7 @@
             }
         }, {
             key: "__layerClick", value: function (e) {
-                this.click = !0, this.props.range ? this.props.range && this.__calculateStylesWithRange(e) : this.__calculateStyles(e)
+                e.preventDefault(), this.click = !0, this.props.range ? this.props.range && this.__calculateStylesWithRange(e) : this.__calculateStyles(e)
             }
         }, {
             key: "__circleDivMove", value: function (e) {
@@ -31125,7 +31128,7 @@
             }
         }, {
             key: "__mouseDown", value: function (e) {
-                document.addEventListener(this.moveEvent, this.__circleDivMove, !0), this.id = e.target.id
+                e.preventDefault(), document.addEventListener(this.moveEvent, this.__circleDivMove, !0), this.id = e.target.id
             }
         }, {
             key: "componentDidMount", value: function () {
@@ -31151,8 +31154,15 @@
         onChange: u.default.PropTypes.func,
         closeLabel: u.default.PropTypes.bool,
         maxLabel: u.default.PropTypes.string,
-        minLabel: u.default.PropTypes.string
-    }, h.defaultProps = {maxValue: 100, minValue: 0, disabled: !1, closeLabel: !1}, h.idCounter = 1, t.default = h
+        minLabel: u.default.PropTypes.string,
+        unit: u.default.PropTypes.string
+    }, h.defaultProps = {
+        maxValue: 100,
+        minValue: 0,
+        disabled: !1,
+        closeLabel: !1,
+        unit: ""
+    }, h.idCounter = 1, t.default = h
 }, function (e, t, a) {
     "use strict";
     function n(e) {
@@ -31247,7 +31257,7 @@
     }
 
     function r(e, t) {
-        if (!(e instanceof t))throw new TypeError("Cannot call a class as a function");
+        if (!(e instanceof t))throw new TypeError("Cannot call a class as a function")
     }
 
     function i(e, t) {
@@ -32110,7 +32120,7 @@
 }, function (e, t, a) {
     t = e.exports = a(13)(), t.push([e.i, ".side-panel-left {\n    position: fixed;\n    height: 100%;\n    z-index: 998;\n    top: 0;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    transition: 0.5s;\n    background-color: white;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    padding: 10px;\n}\n\n.side-panel-right {\n    position: fixed;\n    height: 100%;\n    z-index: 998;\n    top: 0;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    transition: 0.5s;\n    background-color: white;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    padding: 10px;\n}", ""])
 }, function (e, t, a) {
-    t = e.exports = a(13)(), t.push([e.i, ".sliderContainer {\n    position: relative;\n    width: 100%;\n}\n\n.sliderLayer {\n    width: 100%;\n    position: absolute;\n    height: 6px;\n    background: #ebeff3;\n    z-index: 1;\n    left: 0;\n    cursor: pointer;\n}\n\n.sliderLayerDisabled {\n    width: 100%;\n    position: absolute;\n    height: 6px;\n    background: #ebeff3;\n    z-index: 1;\n    left: 0;\n    cursor: no-drop;\n}\n\n.sliderButton {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    border-radius: 50%;\n    border: 2px solid #b4b4f9;\n    background-color: white;\n    z-index: 3;\n    transition: transform .3s;\n}\n\n.sliderButton:hover,\n.sliderButton:focus,\n.sliderButton:active {\n    transform: scale(1.2);\n}\n\n.sliderButtonMin {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    border-radius: 50%;\n    border: 2px solid #b4b4f9;\n    background-color: white;\n    z-index: 2;\n}\n\n.sliderButtonMin:hover,\n.sliderButtonMin:focus,\n.sliderButtonMin:active {\n    transform: scale(1.2);\n}\n\n.sliderButtonDisabled {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: no-drop;\n    border-radius: 50%;\n    border: 2px solid #c7d1ce;\n    background-color: white;\n    z-index: 3;\n}\n\n.sliderButtonMinDisabled {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: no-drop;\n    border-radius: 50%;\n    border: 2px solid #c7d1ce;\n    background-color: white;\n    z-index: 2;\n}\n\n.sliderSelectedArea {\n    visibility: visible;\n    position: absolute;\n    height: 6px;\n    border-radius: 4px;\n    background-color: #b4b4f9;\n    z-index: 2;\n    cursor: pointer;\n\n}\n\n.sliderSelectedAreaDisabled {\n    visibility: visible;\n    position: absolute;\n    height: 6px;\n    border-radius: 4px;\n    background-color: #c7d1ce;\n    z-index: 2;\n    cursor: no-drop;\n}\n\n#sliderPopover {\n    top: -43px !important;\n    left: -3px !important;\n}\n\n#sliderPopover .tooltip-inner {\n    background-color: #504a4a;\n    color: white;\n    user-select: none;\n}\n\n#sliderPopover .tooltip-arrow {\n    border-top-color: #504a4a;\n}\n\n.sliderLabel {\n    margin-top: 10px;\n    opacity: 0.6;\n}", ""])
+    t = e.exports = a(13)(), t.push([e.i, ".sliderContainer {\n    position: relative;\n    width: 100%;\n}\n\n.sliderLayer {\n    width: 100%;\n    position: absolute;\n    height: 6px;\n    background: #ebeff3;\n    z-index: 1;\n    left: 0;\n    cursor: pointer;\n}\n\n.sliderLayerDisabled {\n    width: 100%;\n    position: absolute;\n    height: 6px;\n    background: #ebeff3;\n    z-index: 1;\n    left: 0;\n    cursor: no-drop;\n}\n\n.sliderButton {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    border-radius: 50%;\n    border: 2px solid #b4b4f9;\n    background-color: white;\n    z-index: 3;\n    transition: transform .3s;\n}\n\n.sliderButton:hover,\n.sliderButton:focus,\n.sliderButton:active {\n    transform: scale(1.2);\n}\n\n.sliderButtonMin {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    border-radius: 50%;\n    border: 2px solid #b4b4f9;\n    background-color: white;\n    z-index: 2;\n    transition: transform .3s;\n}\n\n.sliderButtonMin:hover,\n.sliderButtonMin:focus,\n.sliderButtonMin:active {\n    transform: scale(1.2);\n}\n\n.sliderButtonDisabled {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: no-drop;\n    border-radius: 50%;\n    border: 2px solid #c7d1ce;\n    background-color: white;\n    z-index: 3;\n}\n\n.sliderButtonMinDisabled {\n    position: absolute;\n    margin-left: -3px;\n    margin-top: -5px;\n    width: 14px;\n    height: 14px;\n    cursor: no-drop;\n    border-radius: 50%;\n    border: 2px solid #c7d1ce;\n    background-color: white;\n    z-index: 2;\n}\n\n.sliderSelectedArea {\n    visibility: visible;\n    position: absolute;\n    height: 6px;\n    border-radius: 4px;\n    background-color: #b4b4f9;\n    z-index: 2;\n    cursor: pointer;\n\n}\n\n.sliderSelectedAreaDisabled {\n    visibility: visible;\n    position: absolute;\n    height: 6px;\n    border-radius: 4px;\n    background-color: #c7d1ce;\n    z-index: 2;\n    cursor: no-drop;\n}\n\n#sliderPopover {\n    top: -43px !important;\n    left: -3px !important;\n    white-space: nowrap;\n}\n\n#sliderPopover .tooltip-inner {\n    background-color: #504a4a;\n    color: white;\n    user-select: none;\n}\n\n#sliderPopover .tooltip-arrow {\n    border-top-color: #504a4a;\n}\n\n.sliderLabel {\n    margin-top: 10px;\n    opacity: 0.6;\n}", ""])
 }, function (e, t, a) {
     t = e.exports = a(13)(), t.push([e.i, ".toast {\n    position: fixed;\n    width: 250px;\n    z-index: 10000;\n    margin: 10px;\n    opacity: 0.95;\n}\n\n.toast-top-right {\n    top: 0;\n    right: 0;\n}\n\n.toast-top-left {\n    top: 0;\n    left: 0;\n}\n\n.toast-bottom-right {\n    bottom: 0;\n    right: 0;\n}\n\n.toast-bottom-left {\n    bottom: 0;\n    left: 0;\n}\n\n.toast-item {\n    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n    position: relative;\n    z-index: 10000;\n    margin-top: 10px;\n    border-radius: 4px;\n    opacity: 0;\n    display: none;\n    transition: max-height 1s ease 0s;\n    width: 250px;\n    cursor: pointer;\n    overflow-x: hidden;\n    overflow-y: hidden;\n}\n\n.toast-item-open {\n    opacity: 1;\n    display: inherit;\n}\n\n.toast-top-right .toast-item-open,\n.toast-bottom-right .toast-item-open {\n    right: 0;\n    -webkit-animation: toast-right-open .5s ease;\n    animation: toast-right-open .5s ease;\n}\n\n.toast-top-left .toast-item-open,\n.toast-bottom-left .toast-item-open {\n    left: 0;\n    -webkit-animation: toast-left-open .5s ease;\n    animation: toast-left-open .5s ease;\n}\n\n@keyframes toast-right-open {\n    0% {\n        right: -250px;\n    }\n    100% {\n        right: 0;\n    }\n}\n\n@keyframes toast-left-open {\n    0% {\n        left: -250px;\n    }\n    100% {\n        left: 0;\n    }\n}\n\n.toast-item-close {\n    opacity: 1;\n    display: block;\n    right: 0;\n    top: inherit;\n    max-height: 0;\n    margin-top: 0;\n}\n\n.toast-top-right .toast-item-close,\n.toast-top-left .toast-item-close {\n    top: inherit;\n    right: 0;\n    left: 0;\n    -webkit-animation: toast-top-close .5s ease;\n    animation: toast-top-close .5s ease;\n}\n\n.toast-bottom-right .toast-item-close,\n.toast-bottom-left .toast-item-close {\n    bottom: inherit;\n    right: 0;\n    left: 0;\n    -webkit-animation: toast-bottom-close .5s ease;\n    animation: toast-bottom-close .5s ease;\n}\n\n@keyframes toast-top-close {\n    0% {\n        display: block;\n        opacity: 1;\n        top: inherit;\n        max-height: 76px;\n        margin-top: 10px;\n    }\n    60% {\n        opacity: 0;\n    }\n    100% {\n        top: -86px;\n        display: none;\n        max-height: 0;\n        margin-top: 0;\n        opacity: 0;\n    }\n}\n\n@keyframes toast-bottom-close {\n    0% {\n        display: block;\n        opacity: 1;\n        bottom: inherit;\n        max-height: 76px;\n        margin-top: 10px;\n    }\n    60% {\n        opacity: 0;\n    }\n    100% {\n        bottom: -86px;\n        display: none;\n        max-height: 0;\n        margin-top: 0;\n        opacity: 0;\n    }\n}\n\n.toast-item-success {\n    color: #fff;\n    background-color: #5cb85c;\n    border-color: #4cae4c;\n}\n\n.toast-item-warning {\n    color: #fff;\n    background-color: #f0ad4e;\n    border-color: #eea236;\n}\n\n.toast-item-error {\n    color: #fff;\n    background-color: #d9534f;\n    border-color: #d43f3a;\n}\n\n.toast-item-info {\n    color: #fff;\n    background-color: #5bc0de;\n    border-color: #46b8da;\n}\n\n.toast-item-title {\n    color: white;\n    width: 100%;\n    font-size: 1em;\n    font-weight: bold;\n    line-height: 1;\n    letter-spacing: 1px;\n}\n\n.toast-item-title:empty {\n    display: none;\n}\n\n.toast-item-content {\n    color: white;\n    width: 100%;\n    font-weight: 400;\n    line-height: 1.2;\n    letter-spacing: 1px;\n\n}\n\n.toast-item-content:empty {\n    display: none;\n}", ""])
 }, function (e, t, a) {
@@ -32293,9 +32303,9 @@
             for (g = e.length, t && (f = new t), a = 0, h = 0; a < g; ++a)_ = e[a], a + 1 < g && (b = _.charCodeAt(0), b >= 55296 && b <= 56319 && (_ += e[++a])), _ = w ? d.call(w, x, _, h) : _, t ? (p.value = _, m(f, h, p)) : f[h] = _, ++h;
             g = h
         }
-        if (void 0 === g)for (g = o(e.length), t && (f = new t(g)), a = 0; a < g; ++a)_ = w ? d.call(w, x, e[a], a) : e[a], t ? (p.value = _, m(f, a, p)) : f[a] = _;
-        return t && (p.value = null, f.length = g),
-            f
+        if (void 0 === g)for (g = o(e.length), t && (f = new t(g)), a = 0; a < g; ++a)_ = w ? d.call(w, x, e[a], a) : e[a], t ? (p.value = _,
+                m(f, a, p)) : f[a] = _;
+        return t && (p.value = null, f.length = g), f
     }
 }, function (e, t, a) {
     "use strict";
@@ -32927,18 +32937,14 @@
 
     function l() {
         return {
-            overviewMapControl: !1,
-            streetViewControl: !1,
-            rotateControl: !0,
-            mapTypeControl: !1,
-            styles: [{featureType: "poi", elementType: "labels", stylers: [{visibility: "off"}]}],
-            minZoom: Q
+            overviewMapControl: !1, streetViewControl: !1, rotateControl: !0, mapTypeControl: !1, styles: [{
+                featureType: "poi", elementType: "labels",
+                stylers: [{visibility: "off"}]
+            }], minZoom: Q
         }
     }
 
-    Object.defineProperty(t, "__esModule", {
-        value: !0
-    });
+    Object.defineProperty(t, "__esModule", {value: !0});
     var c = Object.assign || function (e) {
             for (var t = 1; t < arguments.length; t++) {
                 var a = arguments[t];
@@ -33908,7 +33914,8 @@
         return t ? t(e) : window.setTimeout(e, 1e3 / 60)
     }
 
-    Object.defineProperty(t, "__esModule", {value: !0}), t.default = n
+    Object.defineProperty(t, "__esModule", {value: !0}),
+        t.default = n
 }, function (e, t, a) {
     !function (e) {
         "object" == typeof window && window || "object" == typeof self && self;
@@ -34516,14 +34523,8 @@
                 begin: "\\b(adc|(qd?|sh?|u[qh]?)?add(8|16)?|usada?8|(q|sh?|u[qh]?)?(as|sa)x|and|adrl?|sbc|rs[bc]|asr|b[lx]?|blx|bxj|cbn?z|tb[bh]|bic|bfc|bfi|[su]bfx|bkpt|cdp2?|clz|clrex|cmp|cmn|cpsi[ed]|cps|setend|dbg|dmb|dsb|eor|isb|it[te]{0,3}|lsl|lsr|ror|rrx|ldm(([id][ab])|f[ds])?|ldr((s|ex)?[bhd])?|movt?|mvn|mra|mar|mul|[us]mull|smul[bwt][bt]|smu[as]d|smmul|smmla|mla|umlaal|smlal?([wbt][bt]|d)|mls|smlsl?[ds]|smc|svc|sev|mia([bt]{2}|ph)?|mrr?c2?|mcrr2?|mrs|msr|orr|orn|pkh(tb|bt)|rbit|rev(16|sh)?|sel|[su]sat(16)?|nop|pop|push|rfe([id][ab])?|stm([id][ab])?|str(ex)?[bhd]?|(qd?)?sub|(sh?|q|u[qh]?)?sub(8|16)|[su]xt(a?h|a?b(16)?)|srs([id][ab])?|swpb?|swi|smi|tst|teq|wfe|wfi|yield)(eq|ne|cs|cc|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al|hs|lo)?[sptrx]?",
                 end: "\\s"
             }, e.COMMENT("[;@]", "$", {relevance: 0}), e.C_BLOCK_COMMENT_MODE, e.QUOTE_STRING_MODE, {
-                className: "string",
-                begin: "'",
-                end: "[^\\\\]'",
-                relevance: 0
-            }, {
-                className: "title",
-                begin: "\\|", end: "\\|", illegal: "\\n", relevance: 0
-            }, {
+                className: "string", begin: "'", end: "[^\\\\]'", relevance: 0
+            }, {className: "title", begin: "\\|", end: "\\|", illegal: "\\n", relevance: 0}, {
                 className: "number",
                 variants: [{begin: "[#$=]?0x[0-9a-f]+"}, {begin: "[#$=]?0b[01]+"}, {begin: "[#$=]\\d+"}, {begin: "\\b\\d+"}],
                 relevance: 0
@@ -43911,7 +43912,7 @@
 }, function (e, t) {
     e.exports = 'import React from "react";\nimport {ShallowComponent,Application} from "robe-react-commons";\nimport {Button} from "react-bootstrap";\nimport SidePanel from "robe-react-ui/lib/sidepanel/SidePanel";\nimport SideMenuSample from "../sidemenu/SideMenuSample";\n\nexport default class SidePanelSample extends ShallowComponent {\n\n    constructor(props: Object) {\n        super(props);\n\n        this.state = {\n            leftPanelState: false,\n            rightPanelState: false\n        };\n    }\n\n    render(): Object {\n        return (\n            <span>\n                <Button onClick={()=>{this.setState({leftPanelState:!this.state.leftPanelState})}}>\n                    {Application.i18n(SideMenuSample,"layout.SidePanel", "toggleLeft")}\n                </Button>&nbsp;&nbsp;\n                <Button onClick={()=>{this.setState({rightPanelState:!this.state.rightPanelState})}}>\n                    {Application.i18n(SideMenuSample,"layout.SidePanel", "toggleRight")}\n                </Button>\n                <SidePanel visible={this.state.leftPanelState} position="left">\n                    <SideMenuSample/>\n                </SidePanel>\n                <SidePanel visible={this.state.rightPanelState} position="right">\n                    <SideMenuSample/>\n                </SidePanel>\n            </span>\n        );\n    }\n}'
 }, function (e, t) {
-    e.exports = 'import React from "react";\nimport Slider from "robe-react-ui/lib/slider/Slider";\nimport {Application, ShallowComponent} from "robe-react-commons";\nimport {ControlLabel, Col} from "react-bootstrap";\n\nexport default class SliderSample extends ShallowComponent {\n    constructor(props:Object) {\n        super(props);\n        this.state = {};\n    }\n\n    render():Object {\n        return (<span>\n                <Col sm={6}>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderOne")}\n                       </ControlLabel>\n                       <Slider defaultValue={30}\n                               minLabel="0 °C"\n                               maxLabel="100 °C"\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderTwo")}\n                       </ControlLabel>\n                       <Slider minValue={25000} \n                               maxValue={50000} \n                               step={5000}\n                               minLabel="25000 €"\n                               maxLabel="50000 €"\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderThree")}\n                       </ControlLabel>\n                       <Slider step={0.01}\n                               minValue={0} \n                               maxValue={1}\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderFour")}\n                       </ControlLabel>\n                       <Slider defaultValue={50} \n                               disabled/>\n                   </Col>\n                </Col>\n                <Col sm={6}>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderFive")}\n                       </ControlLabel>\n                       <Slider range\n                               defaultValue={[40,90]}\n                               minValue={20} \n                               maxValue={120} \n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderSix")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[0,100]} \n                               step={10} \n                               onChange={this.handleChange}/>\n                   </Col>\n                    <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderSeven")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[0,1]} \n                               step={0.01} \n                               minValue={0} \n                               maxValue={1} \n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderEight")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[40,90]} \n                               disabled/>\n                   </Col>\n                </Col>\n            </span>\n        );\n    }\n\n    handleChange(value) {\n        console.log(value);\n    };\n\n}\n'
+    e.exports = 'import React from "react";\nimport Slider from "robe-react-ui/lib/slider/Slider";\nimport {Application, ShallowComponent} from "robe-react-commons";\nimport {ControlLabel, Col} from "react-bootstrap";\n\nexport default class SliderSample extends ShallowComponent {\n    constructor(props:Object) {\n        super(props);\n        this.state = {};\n    }\n\n    render():Object {\n        return (<span>\n                <Col sm={6}>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderOne")}\n                       </ControlLabel>\n                       <Slider defaultValue={30}\n                               minLabel="0 °C"\n                               maxLabel="100 °C"\n                               unit="°C"\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderTwo")}\n                       </ControlLabel>\n                       <Slider minValue={25000} \n                               maxValue={50000} \n                               step={5000}\n                               minLabel="25000 €"\n                               maxLabel="50000 €"\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderThree")}\n                       </ControlLabel>\n                       <Slider step={0.01}\n                               minValue={0} \n                               maxValue={1}\n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderFour")}\n                       </ControlLabel>\n                       <Slider defaultValue={50} \n                               disabled/>\n                   </Col>\n                </Col>\n                <Col sm={6}>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderFive")}\n                       </ControlLabel>\n                       <Slider range\n                               defaultValue={[40,90]}\n                               minValue={20} \n                               maxValue={120} \n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderSix")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[0,100]} \n                               step={10} \n                               onChange={this.handleChange}/>\n                   </Col>\n                    <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderSeven")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[0,1]} \n                               step={0.01} \n                               minValue={0} \n                               maxValue={1} \n                               onChange={this.handleChange}/>\n                   </Col>\n                   <Col style={{paddingBottom:50}}>\n                       <ControlLabel style={{marginBottom: 12}}>\n                           {Application.i18n(SliderSample, "slider.SliderSample", "sliderEight")}\n                       </ControlLabel>\n                       <Slider range \n                               defaultValue={[40,90]} \n                               disabled/>\n                   </Col>\n                </Col>\n            </span>\n        );\n    }\n\n    handleChange(value) {\n        console.log(value);\n    };\n\n}\n'
 }, function (e, t) {
     e.exports = 'import React from "react";\nimport { Application,ShallowComponent } from "robe-react-commons";\nimport Toast from "robe-react-ui/lib/toast/Toast";\nimport { Button, ButtonToolbar, Checkbox } from "react-bootstrap";\nimport RadioInput from "robe-react-ui/lib/inputs/RadioInput";\nimport NumericInput from "robe-react-ui/lib/inputs/NumericInput";\n\nexport default class ToastSample extends ShallowComponent {\n\n    constructor(props: Object) {\n        super(props);\n        this.state = {\n            position: "top-right",\n            maxVisible: 5\n        }\n    }\n\n    toastMessage = (type) => {\n        return () => {\n            switch (type) {\n                case "info":\n                    Toast.info(Application.i18n(ToastSample,"toast.ToastSample","infoMessage"));\n                    break;\n                case "success":\n                    Toast.success(Application.i18n(ToastSample,"toast.ToastSample","successMessage"), Application.i18n(ToastSample,"toast.ToastSample","successTitle"));\n                    break;\n                case "warning":\n                    Toast.warning(Application.i18n(ToastSample,"toast.ToastSample","warningMessage"), Application.i18n(ToastSample,"toast.ToastSample","warningDesc"), 3000);\n                    break;\n                case "error":\n                    Toast.error(Application.i18n(ToastSample,"toast.ToastSample","errorMessage"), Application.i18n(ToastSample,"toast.ToastSample","errorTitle"), 5000, () => {\n                        alert("callback");\n                    });\n                    break;\n                default:\n                    throw new Error("Unknown Message");\n            }\n        };\n    };\n\n    toastConfiguration(property, value) {\n        let conf = {};\n        conf[property] = value;\n        Toast.configuration(conf);\n    }\n\n    render(): Object {\n        return (\n            <div>\n                <RadioInput\n                    label="Positions"\n                    name="position"\n                    items={[\n                            {\n                                key: "top-right",\n                                value: Application.i18n(ToastSample,"toast.ToastSample","topRight")\n                            },\n                            {\n                                key: "top-left",\n                                value: Application.i18n(ToastSample,"toast.ToastSample","topLeft")\n                            },\n                            {\n                                key: "bottom-right",\n                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomRight")\n                            },\n                            {\n                                key: "bottom-left",\n                                value: Application.i18n(ToastSample,"toast.ToastSample","bottomLeft")\n                            }\n                        ]}\n                    value={this.state.position}\n                    textField="value"\n                    valueField="key"\n                    onChange={this.__handleChange}\n                    />\n                <NumericInput\n                    label="Max Visible Count ( Default is max safe integer )"\n                    name="maxVisible"\n                    value={this.state.maxVisible}\n                    onChange={this.__handleChange}\n                    />\n                <ButtonToolbar>\n                    <Button bsStyle="success" onClick={this.toastMessage("success")}>{Application.i18n(ToastSample, "toast.ToastSample", "success")}</Button>\n                    <Button bsStyle="info" onClick={this.toastMessage("info")}>{Application.i18n(ToastSample, "toast.ToastSample", "info")}</Button>\n                    <Button bsStyle="warning" onClick={this.toastMessage("warning")}>{Application.i18n(ToastSample, "toast.ToastSample", "warning")}</Button>\n                    <Button bsStyle="danger" onClick={this.toastMessage("error")}>{Application.i18n(ToastSample, "toast.ToastSample", "error")}</Button>\n                </ButtonToolbar>\n                <br />\n                <br />\n            </div>\n\n        );\n    }\n\n    __handleChange(e: Object) {\n        let state = {};\n        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;\n        state[e.target.name] = value;\n        this.toastConfiguration(e.target.name, value);\n        this.setState(state);\n    }\n}\n'
 }, function (e, t) {
@@ -56519,8 +56520,14 @@
                 description: "Close of min-max labels.",
                 defaultValue: {value: "false", computed: !1}
             },
-            maxLabel: {type: {name: "string"}, required: !1, description: "Label of maximum value"},
-            minLabel: {type: {name: "string"}, required: !1, description: "Label of minimum value"}
+            maxLabel: {type: {name: "string"}, required: !1, description: "Label of maximum value."},
+            minLabel: {type: {name: "string"}, required: !1, description: "Label of minimum value."},
+            unit: {
+                type: {name: "string"},
+                required: !1,
+                description: "Unit of popover content.",
+                defaultValue: {value: '""', computed: !1}
+            }
         }
     }
 }, function (e, t) {
