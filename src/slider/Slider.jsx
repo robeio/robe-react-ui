@@ -328,10 +328,6 @@ export default class Slider extends ShallowComponent {
             this.__calculateStylesWithRange(e);
     };
 
-    __isInt(n:number):boolean {
-        return Number(n) === n && n % 1 === 0;
-    }
-
     __isFloat(n:number):boolean {
         return Number(n) === n && n % 1 !== 0;
     }
