@@ -76,14 +76,6 @@ class ComponentList {
         });
 
         components.functional.push({
-            header: "SideMenu",
-            desc: Application.i18n(ComponentList, "components.ComponentList", "sideMenuDesc"),
-            json: require("./jsons/sidemenu/SideMenu.json"),
-            sample: require("./samples/sidemenu/SideMenuSample"),
-            code: require("./samples/sidemenu/SideMenuSample.txt")
-        });
-
-        components.functional.push({
             header: "Toast",
             desc: Application.i18n(ComponentList, "components.ComponentList", "toastDesc"),
             sample: require("./samples/toast/ToastSample"),
@@ -126,6 +118,14 @@ class ComponentList {
             json: require("./jsons/progress/ProgressBar.json"),
             sample: require("./samples/progress/ProgressBarSample"),
             code: require("./samples/progress/ProgressBarSample.txt")
+        });
+
+        components.layout.push({
+            header: "SideMenu",
+            desc: Application.i18n(ComponentList, "components.ComponentList", "sideMenuDesc"),
+            json: require("./jsons/sidemenu/SideMenu.json"),
+            sample: require("./samples/sidemenu/SideMenuSample"),
+            code: require("./samples/sidemenu/SideMenuSample.txt")
         });
 
         components.layout.push({

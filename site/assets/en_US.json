@@ -202,7 +202,7 @@
     "pieChartDesc": " a pie chart (or a circle chart) is a circular statistical graphic which is divided into slices to illustrate numerical proportio",
     "scatterChartDesc": " a scatter chart (also called a scatter graph, scatter plot, scattergram, or scatter diagram) is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data",
     "iconizerDesc": " converts given links array into links with icons",
-    "sidePanelDesc": " left or right panel that slides in/out"
+    "sidePanelDesc": " is left or right panel that slides in/out"
   },
   "components.Components": {
     "title": "Components",
