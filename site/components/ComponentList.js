@@ -12,14 +12,6 @@ class ComponentList {
         /* eslint-disable global-require */
 
         components.functional.push({
-            header: "Test",
-            desc: "Test",
-            // json: require("./jsons/buttons/Button.json"),
-            sample: require("./samples/mytest/MyTestSample"),
-            code: require("./samples/mytest/MyTestSample.txt")
-        });
-
-        components.functional.push({
             header: "Button",
             desc: Application.i18n(ComponentList, "components.ComponentList", "button"),
             json: require("./jsons/buttons/Button.json"),
