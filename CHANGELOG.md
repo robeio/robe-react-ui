@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.25 -- Developing...
+* New prop "unit" added to Slider component.
 
 ## 1.1.24
 * Updating the datagrid when the props are updated

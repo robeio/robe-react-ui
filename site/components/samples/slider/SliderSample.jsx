@@ -19,6 +19,7 @@ export default class SliderSample extends ShallowComponent {
                        <Slider defaultValue={30}
                                minLabel="0 °C"
                                maxLabel="100 °C"
+                               unit="°C"
                                onChange={this.handleChange}/>
                    </Col>
                    <Col style={{paddingBottom:50}}>

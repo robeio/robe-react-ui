@@ -39,13 +39,17 @@ export default class Slider extends ShallowComponent {
          */
         closeLabel: React.PropTypes.bool,
         /**
-         * Label of maximum value
+         * Label of maximum value.
          */
         maxLabel: React.PropTypes.string,
         /**
-         * Label of minimum value
+         * Label of minimum value.
          */
-        minLabel: React.PropTypes.string
+        minLabel: React.PropTypes.string,
+        /**
+         * Unit of popover content.
+         */
+        unit: React.PropTypes.string
     };
 
     /**
@@ -56,7 +60,8 @@ export default class Slider extends ShallowComponent {
         maxValue: 100,
         minValue: 0,
         disabled: false,
-        closeLabel: false
+        closeLabel: false,
+        unit: ""
     };
 
     static idCounter = 1;
@@ -103,13 +108,13 @@ export default class Slider extends ShallowComponent {
                      placement="top"
                      container={document.getElementById(this.circleDivMax)}
                      target={document.getElementById(this.circleDivMax)}>
-          <Tooltip id="sliderPopover">{this.state.valueMax}</Tooltip>
+          <Tooltip id="sliderPopover">{this.state.valueMax + " " + this.props.unit}</Tooltip>
         </Overlay>
             <Overlay show={this.state.openMinDesc}
                      placement="top"
                      container={document.getElementById(this.circleDivMin)}
                      target={document.getElementById(this.circleDivMin)}>
-          <Tooltip id="sliderPopover">{this.state.valueMin}</Tooltip>
+          <Tooltip id="sliderPopover">{this.state.valueMin + " " + this.props.unit}</Tooltip>
         </Overlay>
             <div className="sliderContainer">
             <div id={this.selectedDiv} className={classNameSelected}
@@ -313,6 +318,7 @@ export default class Slider extends ShallowComponent {
     };
 
     __layerClick(e:Object) {
+        e.preventDefault();
         this.click = true;
         if (!this.props.range)
             this.__calculateStyles(e);
@@ -337,6 +343,7 @@ export default class Slider extends ShallowComponent {
     };
 
     __mouseDown(e:Object) {
+        e.preventDefault();
         document.addEventListener(this.moveEvent, this.__circleDivMove, true);
         this.id = e.target.id;
     };

@@ -54,6 +54,7 @@
     border: 2px solid #b4b4f9;
     background-color: white;
     z-index: 2;
+    transition: transform .3s;
 }
 
 .sliderButtonMin:hover,
@@ -112,6 +113,7 @@
 #sliderPopover {
     top: -43px !important;
     left: -3px !important;
+    white-space: nowrap;
 }
 
 #sliderPopover .tooltip-inner {
