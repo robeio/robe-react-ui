@@ -23,7 +23,7 @@
     cursor: no-drop;
 }
 
-.sliderButton {
+.sliderButtonMax {
     position: absolute;
     margin-left: -3px;
     margin-top: -5px;
@@ -37,9 +37,9 @@
     transition: transform .3s;
 }
 
-.sliderButton:hover,
-.sliderButton:focus,
-.sliderButton:active {
+.sliderButtonMax:hover,
+.sliderButtonMax:focus,
+.sliderButtonMax:active {
     transform: scale(1.2);
 }
 
@@ -63,7 +63,7 @@
     transform: scale(1.2);
 }
 
-.sliderButtonDisabled {
+.sliderButtonMaxDisabled {
     position: absolute;
     margin-left: -3px;
     margin-top: -5px;
@@ -97,7 +97,6 @@
     background-color: #b4b4f9;
     z-index: 2;
     cursor: pointer;
-
 }
 
 .sliderSelectedAreaDisabled {

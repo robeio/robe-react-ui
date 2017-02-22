@@ -31,13 +31,14 @@ export default class SliderSample extends ShallowComponent {
                                step={5000}
                                minLabel="25000 €"
                                maxLabel="50000 €"
+                               unit="€"
                                onChange={this.handleChange}/>
                    </Col>
                    <Col style={{paddingBottom:50}}>
                        <ControlLabel style={{marginBottom: 12}}>
                            {Application.i18n(SliderSample, "slider.SliderSample", "sliderThree")}
                        </ControlLabel>
-                       <Slider step={0.01}
+                       <Slider step={0.05}
                                minValue={0} 
                                maxValue={1}
                                onChange={this.handleChange}/>
@@ -57,7 +58,7 @@ export default class SliderSample extends ShallowComponent {
                        </ControlLabel>
                        <Slider range
                                defaultValue={[40,90]}
-                               minValue={20} 
+                               minValue={20}
                                maxValue={120} 
                                onChange={this.handleChange}/>
                    </Col>
@@ -66,7 +67,7 @@ export default class SliderSample extends ShallowComponent {
                            {Application.i18n(SliderSample, "slider.SliderSample", "sliderSix")}
                        </ControlLabel>
                        <Slider range 
-                               defaultValue={[0,100]} 
+                               defaultValue={[0,100]}
                                step={10} 
                                onChange={this.handleChange}/>
                    </Col>
@@ -75,10 +76,10 @@ export default class SliderSample extends ShallowComponent {
                            {Application.i18n(SliderSample, "slider.SliderSample", "sliderSeven")}
                        </ControlLabel>
                        <Slider range 
-                               defaultValue={[0,1]} 
+                               defaultValue={[0,1]}
                                step={0.01} 
-                               minValue={0} 
-                               maxValue={1} 
+                               minValue={0}
+                               maxValue={1}
                                onChange={this.handleChange}/>
                    </Col>
                    <Col style={{paddingBottom:50}}>
@@ -94,8 +95,8 @@ export default class SliderSample extends ShallowComponent {
         );
     }
 
-    handleChange(value) {
-        console.log(value);
+    handleChange(e) {
+        console.log(e.target.value);
     };
 
 }

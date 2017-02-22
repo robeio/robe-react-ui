@@ -2,6 +2,8 @@
 
 ## 1.1.25 -- Developing...
 * New prop "unit" added to Slider component.
+* Slider "resize" problem fixed.
+* Slider now returns "event" in the onChange function.
 
 ## 1.1.24
 * Updating the datagrid when the props are updated
