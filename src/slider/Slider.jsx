@@ -73,7 +73,7 @@ export default class Slider extends ShallowComponent {
     layerDiv;
     circleDivMax;
     circleDivMin;
-    id;
+    currentId;
 
     constructor(props:Object) {
         super(props);
@@ -85,8 +85,8 @@ export default class Slider extends ShallowComponent {
         this.state = {
             valueMax: this.props.range ? this.props.defaultValue ? this.props.defaultValue[1] : this.props.minValue : this.props.defaultValue || this.props.minValue,
             valueMin: this.props.range ? this.props.defaultValue ? this.props.defaultValue[0] : this.props.minValue : this.props.defaultValue || this.props.minValue,
-            defaultValueMax: 0,
-            defaultValueMin: 0,
+            defaultMaxPx: 0,
+            defaultMinPx: 0,
             openMaxDesc: false,
             openMinDesc: false,
             disabled: this.props.disabled
@@ -100,8 +100,8 @@ export default class Slider extends ShallowComponent {
         let classNameCircleMin = !this.state.disabled ? "sliderButtonMin" : "sliderButtonMinDisabled";
         let classNameLayer = !this.state.disabled ? "sliderLayer" : "sliderLayerDisabled";
 
-        let styleLeft = this.props.range ? parseFloat(this.state.defaultValueMin) : 0;
-        let styleWidth = this.props.range ? parseFloat(this.state.defaultValueMax) - parseFloat(this.state.defaultValueMin) : parseFloat(this.state.defaultValueMax);
+        let styleLeft = this.props.range ? parseFloat(this.state.defaultMinPx) : 0;
+        let styleWidth = this.props.range ? parseFloat(this.state.defaultMaxPx) - parseFloat(this.state.defaultMinPx) : parseFloat(this.state.defaultMaxPx);
 
         return (<span>
             <Overlay show={this.state.openMaxDesc}
@@ -123,22 +123,24 @@ export default class Slider extends ShallowComponent {
             <div id={this.layerDiv} className={classNameLayer}
                  onClick={!this.state.disabled ? this.__layerClick : null}></div>
             <div id={this.circleDivMax} className={classNameCircle}
-                 style={{left: parseFloat(this.state.defaultValueMax)}}
+                 style={{left: parseFloat(this.state.defaultMaxPx)}}
                  onMouseOver={()=> this.setState({openMaxDesc: true, openMinDesc: false})}
                  onMouseDown={()=> this.setState({openMaxDesc: true, openMinDesc: false})}
                  onMouseUp={()=> this.setState({openMaxDesc: false, openMinDesc: false})}>
             </div>
                 {this.props.range ?
                     <div id={this.circleDivMin} className={classNameCircleMin}
-                         style={{left: this.state.defaultValueMin}}
+                         style={{left: this.state.defaultMinPx}}
                          onMouseOver={()=> this.setState({openMinDesc: true, openMaxDesc: false})}
                          onMouseDown={()=> this.setState({openMinDesc: true, openMaxDesc: false})}
                          onMouseUp={()=> this.setState({openMinDesc: false, openMaxDesc: false})}>
                     </div> : null}
                 {!this.props.closeLabel ?
                     <span>
-                        <span className="pull-left sliderLabel">{this.props.minLabel ? this.props.minLabel : this.props.minValue}</span>
-                        <span className="pull-right sliderLabel">{this.props.maxLabel ? this.props.maxLabel : this.props.maxValue}</span>
+                        <span
+                            className="pull-left sliderLabel">{this.props.minLabel ? this.props.minLabel : this.props.minValue}</span>
+                        <span
+                            className="pull-right sliderLabel">{this.props.maxLabel ? this.props.maxLabel : this.props.maxValue}</span>
                     </span> : null}
         </div>
         </span>);
@@ -183,7 +185,7 @@ export default class Slider extends ShallowComponent {
         if (!this.props.step) {
             if (calculatedPosition >= 0 && calculatedPosition <= layer.offsetWidth) {
 
-                if (this.id.startsWith("SliderCircleDivMin")) {
+                if (this.currentId.startsWith("SliderCircleDivMin")) {
                     circleMin.style.left = calculatedPosition + 'px';
                     if (parseInt(circleMin.style.left) >= parseInt(circleMax.style.left)) {
                         selected.style.left = parseFloat(circleMax.style.left) + 'px';
@@ -206,7 +208,7 @@ export default class Slider extends ShallowComponent {
 
                     this.setState({valueMin: lastValue});
                 }
-                if (this.id.startsWith("SliderCircleDivMax")) {
+                if (this.currentId.startsWith("SliderCircleDivMax")) {
                     circleMax.style.left = (calculatedPosition) + 'px';
                     if (parseInt(circleMin.style.left) <= parseInt(circleMax.style.left)) {
                         selected.style.left = parseFloat(circleMin.style.left) + 'px';
@@ -237,7 +239,7 @@ export default class Slider extends ShallowComponent {
                 let halfOfSteps = steps / 2;
                 for (let i = 0; i <= parseInt(layer.offsetWidth); i += steps) {
                     let halfOfStep = i + halfOfSteps;
-                    if (this.id.startsWith("SliderCircleDivMin")) {
+                    if (this.currentId.startsWith("SliderCircleDivMin")) {
                         if (calculatedPosition >= i && calculatedPosition <= i + steps) {
                             if (calculatedPosition < halfOfStep) {
                                 circleMin.style.left = i + 'px';
@@ -254,7 +256,7 @@ export default class Slider extends ShallowComponent {
                             }
                         }
                     }
-                    if (this.id.startsWith("SliderCircleDivMax")) {
+                    if (this.currentId.startsWith("SliderCircleDivMax")) {
                         if (calculatedPosition >= i && calculatedPosition <= i + steps) {
                             if (calculatedPosition < halfOfStep) {
                                 circleMax.style.left = i + 'px';
@@ -311,10 +313,12 @@ export default class Slider extends ShallowComponent {
 
     __calculateDefault(type:string) {
         let range = type === "min" ? 0 : 1;
-        let defaultValue = this.props.range ? this.props.defaultValue ? this.props.defaultValue[range] : this.props.minValue : this.props.defaultValue ? this.props.defaultValue : (this.props.minValue || 0);
+        let defaultValue = this.props.range ? this.props.defaultValue ? this.props.defaultValue[range] : this.props.minValue : this.props.defaultValue ? this.props.defaultValue : (this.props.minValue || 0);
         var layer = document.getElementById(this.layerDiv);
-        let calculatePosition = Math.round(parseFloat((((layer.offsetWidth * defaultValue) / (this.props.maxValue - this.props.minValue)) - ((layer.offsetWidth / (this.props.maxValue - this.props.minValue)) * this.props.minValue)).toFixed(2)));
-        return calculatePosition + "px";
+        if (layer !== undefined && layer !== null) {
+            let calculatePosition = Math.round(parseFloat((((layer.offsetWidth * defaultValue) / (this.props.maxValue - this.props.minValue)) - ((layer.offsetWidth / (this.props.maxValue - this.props.minValue)) * this.props.minValue)).toFixed(2)));
+            return calculatePosition + "px";
+        }
     };
 
     __layerClick(e:Object) {
@@ -345,7 +349,14 @@ export default class Slider extends ShallowComponent {
     __mouseDown(e:Object) {
         e.preventDefault();
         document.addEventListener(this.moveEvent, this.__circleDivMove, true);
-        this.id = e.target.id;
+        this.currentId = e.target.id;
+    };
+
+    __resize() {
+        this.setState({
+            defaultMaxPx: this.__calculateDefault("max"),
+            defaultMinPx: this.__calculateDefault("min")
+        });
     };
 
     componentDidMount() {
@@ -362,14 +373,16 @@ export default class Slider extends ShallowComponent {
             circleDivMax.addEventListener(this.downEvent, this.__mouseDown, false);
             if (this.props.range) {
                 circleDivMin.addEventListener(this.downEvent, this.__mouseDown, false);
-                this.id = this.circleDivMin;
+                this.currentId = this.circleDivMin;
             }
             document.addEventListener(this.upEvent, this.__mouseUp, false);
         }
 
+        window.addEventListener("resize", this.__resize, true);
+
         this.setState({
-            defaultValueMax: this.__calculateDefault("max"),
-            defaultValueMin: this.__calculateDefault("min")
+            defaultMaxPx: this.__calculateDefault("max"),
+            defaultMinPx: this.__calculateDefault("min")
         });
     };
 
