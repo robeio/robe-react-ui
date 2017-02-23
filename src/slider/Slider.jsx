@@ -347,6 +347,11 @@ export default class Slider extends ShallowComponent {
             this.__calculateStyles(e);
         else if (this.props.range)
             this.__calculateStylesWithRange(e);
+
+        if (!this.props.range)
+            this.setState({openMaxDesc: true});
+        else
+            this.setState({openMinDesc: true, openMaxDesc: true});
     };
 
     __circleDivMove(e:Object) {
