@@ -50,7 +50,11 @@ export default class Slider extends ShallowComponent {
         /**
          * Unit of popover content.
          */
-        unit: React.PropTypes.string
+        unit: React.PropTypes.string,
+        /**
+         * Tooltip support for component.
+         */
+        closeTooltip: React.PropTypes.bool
     };
 
     /**
@@ -62,7 +66,8 @@ export default class Slider extends ShallowComponent {
         minValue: 0,
         disabled: false,
         closeLabel: false,
-        unit: ""
+        unit: "",
+        closeTooltip: false
     };
 
     static counter = 1;
@@ -106,10 +111,11 @@ export default class Slider extends ShallowComponent {
         let styleWidth = this.props.range ? parseFloat(this.state.defaultMaxPx) - parseFloat(this.state.defaultMinPx) : parseFloat(this.state.defaultMaxPx);
 
         return (<span>
-            <Overlay show={this.state.openMaxDesc}
-                     placement="top"
-                     container={this.circleMaxDOM}
-                     target={this.circleMaxDOM}>
+            {this.props.closeTooltip ? null :
+                <span><Overlay show={this.state.openMaxDesc}
+                               placement="top"
+                               container={this.circleMaxDOM}
+                               target={this.circleMaxDOM}>
           <Tooltip id="sliderPopover">{this.state.valueMax + " " + this.state.unit}</Tooltip>
         </Overlay>
             <Overlay show={this.state.openMinDesc}
@@ -117,7 +123,7 @@ export default class Slider extends ShallowComponent {
                      container={this.circleMinDOM}
                      target={this.circleMinDOM}>
           <Tooltip id="sliderPopover">{this.state.valueMin + " " + this.state.unit}</Tooltip>
-        </Overlay>
+        </Overlay></span>}
             <Col className="sliderContainer">
             <Col ref={this.selectedDivRef} className={classNameSelected}
                  style={{left: styleLeft, width: styleWidth}}
@@ -439,7 +445,7 @@ export default class Slider extends ShallowComponent {
         });
     };
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         window.removeEventListener("resize", this.__resize, true);
     };
 }
