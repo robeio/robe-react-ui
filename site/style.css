@@ -9,13 +9,13 @@ body {
 }
 
 .banner {
-    background: #333;
-    color: white;
+    background: white;
+    color: #333;
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 20px
+    margin-top: 8px
 }
 
 .footer {
@@ -32,6 +32,14 @@ body {
     border: none;
 }
 
+.navbar {
+    background-color: #FFFFFF;
+    border: 1px solid #dddddd;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 10px;
+}
+
 .navbar-header img {
     float: left !important;
     margin-top: 5px;
@@ -41,7 +49,7 @@ body {
 }
 
 .navbar-header a {
-    color: white !important;
+    color: #2c3e50 !important;
 }
 
 .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
@@ -53,19 +61,23 @@ body {
     border-bottom: 3px solid transparent;
 }
 
-.navbar-inverse .navbar-nav > li > a {
+.navbar .navbar-nav > li > a {
     border-bottom: 3px solid transparent;
+    color: #2c3e50;
 }
 
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
-    color: #fff;
-    background-color: #080808;
-    border-bottom: 4px solid #87CEFA;
+.navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:focus, .navbar .navbar-nav > .active > a:hover {
+    color: #2c3e50 !important;
+    background-color: transparent !important;
 }
 
-.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
-    color: #fff;
-    background-color: #333;
+.navbar .navbar-nav > li > a:focus, .navbar .navbar-nav > li > a:hover {
+    color: #2c3e50 !important;
+    background-color: transparent !important;
+}
+
+.navbar .navbar-collapse, .navbar .navbar-form {
+    border-color: transparent;
 }
 
 pre {
@@ -81,11 +93,6 @@ pre code {
     .navbar {
         border-radius: 0px;
     }
-}
-
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-    background-color: transparent;
-    border-left: 4px solid #87CEFA !important;
 }
 
 a:hover {

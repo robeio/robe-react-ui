@@ -73,7 +73,7 @@ export default class Renderer extends ShallowComponent {
                             <Button
                                 bsSize="xsmall"
                                 onClick={this.__copyToClipboard}>
-                                <FaIcon code="fa-clipboard" />
+                                <FaIcon code="fa-clipboard"/>
                             </Button>
                         </ButtonGroup>
                     </div>
@@ -88,22 +88,25 @@ export default class Renderer extends ShallowComponent {
             (<div>
                 {highlight}
                 <Button bsStyle="link" bsSize="xsmall" className="pull-right"
-                    onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
+                        onClick={this.__toogleCode}>{(this.state.showCode ? "Hide" : "Show") + " Code"}</Button>
             </div>) : undefined;
         return (
             <div>
                 <h3 style={{marginTop: 0}}>{this.props.header}</h3>
-                <h5><code>{`<${this.props.header}>`}</code> {this.props.desc}</h5>
+                <p><code>{`<${this.props.header}>`}</code> {this.props.desc}</p>
+                <br/>
                 <Tabs defaultActiveKey="sample" activeKey={this.state.activeTab} onSelect={this.__onTabSelect}>
-                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample" >
-                        <Panel style={{ borderRadius: "0px", borderTop: "0px" }} >
-                            <this.props.sample.default />
-                            {codeSection}
-                        </Panel>
+                    <Tab title={Application.i18n(Renderer, "components.Renderer", "example")} eventKey="sample">
+                        <br/>
+                        <this.props.sample.default />
+                        {codeSection}
                     </Tab>
                     {this.__renderPropsTable(this.props.json.props)}
                     {this.__renderMethodsTable(this.props.json.methods)}
                 </Tabs>
+                <br/>
+                <br/>
+                <br/>
             </div >);
     }
 
@@ -151,7 +154,8 @@ export default class Renderer extends ShallowComponent {
                     <div>
                         <a name={key} onClick={this.__onDetailClick}>JSON</a>
                         <Modal show={this.state.dialogs[key]} keyboard backdrop onHide={this.__onDetailClick}>
-                            <Modal.Header closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
+                            <Modal.Header
+                                closeButton={true}><Modal.Title>{`${key} - defaultValue`}</Modal.Title></Modal.Header>
                             <Modal.Body>
                                 <Highlight> {defaultVal} </Highlight>
                             </Modal.Body>
@@ -166,10 +170,11 @@ export default class Renderer extends ShallowComponent {
                 enumVals += `Possible Values: ${enumValues.join()}.`;
             }
             let required = value.required ? (
-                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">{Application.i18n(Renderer, "components.Renderer", "required")}</Tooltip>}>
-                    <FaIcon style={{ color: "red" }} code={"fa-exclamation"} />
-                </OverlayTrigger>
-            ) : undefined;
+                    <OverlayTrigger placement="right" overlay={<Tooltip
+                        id="tooltip">{Application.i18n(Renderer, "components.Renderer", "required")}</Tooltip>}>
+                        <FaIcon style={{color: "red"}} code={"fa-exclamation"}/>
+                    </OverlayTrigger>
+                ) : undefined;
             rows.push(<tr key={key}>
                 <td>{key}{required}</td>
                 <td>{type}</td>
@@ -185,17 +190,18 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "propsBlockHeader")} eventKey="properties">
+                <br/>
                 <Table responsive striped condensed bordered>
                     <thead>
-                        <tr>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldTwo")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldThree")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFive")}</th>
-                        </tr>
+                    <tr>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldOne")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldTwo")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldThree")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "propsTableFieldFive")}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {rows}
+                    {rows}
                     </tbody>
                 </Table>
             </Tab>
@@ -226,16 +232,17 @@ export default class Renderer extends ShallowComponent {
 
         return (
             <Tab title={Application.i18n(Renderer, "components.Renderer", "methodBlockHeader")} eventKey="methods">
+                <br/>
                 <Table responsive striped condensed bordered>
                     <thead>
-                        <tr>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldTwo")}</th>
-                            <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldThree")}</th>
-                        </tr>
+                    <tr>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldOne")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldTwo")}</th>
+                        <th>{Application.i18n(Renderer, "components.Renderer", "methodsTableFieldThree")}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {rows}
+                    {rows}
                     </tbody>
                 </Table>
             </Tab>
@@ -256,8 +263,9 @@ export default class Renderer extends ShallowComponent {
         });
         this.forceUpdate();
     }
+
     __onTabSelect(activeKey) {
-        this.setState({ activeTab: activeKey });
+        this.setState({activeTab: activeKey});
     }
 
     componentDidUpdate() {
@@ -265,6 +273,6 @@ export default class Renderer extends ShallowComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ showCode: false, activeTab: "sample" });
+        this.setState({showCode: false, activeTab: "sample"});
     }
 }

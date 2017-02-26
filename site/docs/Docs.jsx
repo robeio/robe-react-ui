@@ -5,13 +5,12 @@ import Renderer from "./Renderer";
 import {Grid, Col, ListGroup, ListGroupItem, InputGroup} from "react-bootstrap";
 import DocList from "./DocList";
 import Progress from "progress/Progress";
-import TextInput from "inputs/TextInput";
-import FaIcon from "faicon/FaIcon";
+import "./style.css";
 
 
 export default class Docs extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             componentSelection: window.location.hash.substring(1) === "Docs" ? "Docs/Validation" : window.location.hash.substring(1),
@@ -19,7 +18,7 @@ export default class Docs extends ShallowComponent {
         };
     }
 
-    render():Object {
+    render(): Object {
         let componentDetail;
         let componentMenu = [];
         let components = DocList.getList(this.state, this.__handleChange);
@@ -53,31 +52,25 @@ export default class Docs extends ShallowComponent {
         }
         return (
             <Grid>
-                <h2>{Application.i18n(Docs, "docs.Docs", "title")}</h2>
-                <h5>{Application.i18n(Docs, "docs.Docs", "header")}</h5>
-                <Col xs={12} sm={3} style={{paddingLeft: 0, marginTop: 10}}>
-                    <TextInput
-                        inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm" /> </InputGroup.Addon>}
-                        onChange={this.__onFilterChange}
-                        value={this.state.filter}
-                        placeholder={Application.i18n(Docs,"docs.Docs","search")}
-                    />
-                    <ListGroup>{componentMenu}</ListGroup>
+                <Col xs={12} sm={3} style={{paddingLeft: 0, marginTop: 25}}>
+                    <ListGroup className="side-menu">
+                        {componentMenu}
+                    </ListGroup>
                 </Col>
-                <Col xs={12} sm={9} ref="componentView">
+                <Col xs={12} sm={9} ref="componentView" style={{padding: 0, marginTop: 25}}>
                     {componentDetail}
                 </Col>
             </Grid>
         );
     }
 
-    __onFilterChange = (e:Object) => {
+    __onFilterChange = (e: Object) => {
         this.setState({
             filter: e.target.value
         });
     };
 
-    __onComponenListClick = (e:Object) => {
+    __onComponenListClick = (e: Object) => {
         this.setState({
             componentSelection: `Docs/${e.target.text}`
         });

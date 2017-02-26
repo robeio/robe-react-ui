@@ -1,0 +1,28 @@
+.rb-card {
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 5px;
+    height: auto;
+    border-radius: 2px;
+    border: 1px solid #dddddd;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.rb-no-border {
+    border-radius: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.rb-no-margin {
+    margin: 0;
+}
+
+.rb-card h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}

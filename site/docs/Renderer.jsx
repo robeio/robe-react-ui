@@ -4,7 +4,6 @@ import {Maps} from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Progress from "progress/Progress";
 
-
 export default class Renderer extends ShallowComponent {
 
     /**
@@ -54,10 +53,12 @@ export default class Renderer extends ShallowComponent {
         return (
             <div>
                 <h3 style={{marginTop: 0}}>{this.props.header}</h3>
-                <h5>{this.props.desc}</h5>
-                <Panel>
-                    <this.props.sample.default />
-                </Panel>
+                <p>{this.props.desc}</p>
+                <br/>
+                <this.props.sample.default />
+                <br/>
+                <br/>
+                <br/>
             </div >);
     }
 

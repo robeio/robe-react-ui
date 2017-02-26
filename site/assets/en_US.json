@@ -209,8 +209,8 @@
     "title": "Components",
     "description": "Here you can find the samples and usages of the components.",
     "search": "Search",
-    "functional": "Functional Components",
-    "layout": "Layout Components",
+    "functional": "Functional",
+    "layout": "Layout",
     "inputs": "Inputs",
     "charts": "Charts",
     "extras": "Extras"

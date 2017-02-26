@@ -5,7 +5,6 @@ import Renderer from "./Renderer";
 import {Grid, Col, Collapse, ListGroup, ListGroupItem, InputGroup, Nav, NavItem} from "react-bootstrap";
 import ComponentList from "./ComponentList";
 import Progress from "progress/Progress";
-import TextInput from "inputs/TextInput";
 import FaIcon from "faicon/FaIcon";
 import "./style.css";
 
@@ -55,18 +54,11 @@ export default class Components extends ShallowComponent {
         }
         return (
             <Grid>
-                <h2>{Application.i18n(Components, "components.Components", "title")}</h2>
-                <h5>{Application.i18n(Components, "components.Components", "description")}</h5>
-
-                <Col xs={12} sm={3} style={{paddingLeft: 0, marginTop: 10}}>
-                    <TextInput
-                        inputGroupRight={<InputGroup.Addon> <FaIcon code="fa-search" size="fa-sm"/> </InputGroup.Addon>}
-                        onChange={this.__onFilterChange}
-                        value={this.state.filter}
-                        placeholder={Application.i18n(Components, "components.Components", "search")}
-                    />
-                    <ListGroup className="parent">
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "functional")}>
+                <Col xs={12} sm={3} style={{paddingLeft: 0, marginTop: 25}}>
+                    <ListGroup className="side-menu">
+                        <ListGroupItem
+                            active={selectedGroup === "functional"}
+                            onClick={this.__onGroupChange.bind(undefined, "functional")}>
                             <FaIcon code="fa-cubes" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "functional")}
                         </ListGroupItem>
@@ -75,7 +67,9 @@ export default class Components extends ShallowComponent {
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "layout")}>
+                        <ListGroupItem
+                            active={selectedGroup === "layout"}
+                            onClick={this.__onGroupChange.bind(undefined, "layout")}>
                             <FaIcon code="fa-sliders" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "layout")}
                         </ListGroupItem>
@@ -84,7 +78,9 @@ export default class Components extends ShallowComponent {
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "inputs")}>
+                        <ListGroupItem
+                            active={selectedGroup === "inputs"}
+                            onClick={this.__onGroupChange.bind(undefined, "inputs")}>
                             <FaIcon code="fa-terminal" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "inputs")}
                         </ListGroupItem>
@@ -93,7 +89,9 @@ export default class Components extends ShallowComponent {
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "charts")}>
+                        <ListGroupItem
+                            active={selectedGroup === "charts"}
+                            onClick={this.__onGroupChange.bind(undefined, "charts")}>
                             <FaIcon code="fa-pie-chart" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "charts")}
                         </ListGroupItem>
@@ -102,7 +100,9 @@ export default class Components extends ShallowComponent {
                                 {componentMenu}
                             </div>
                         </Collapse>
-                        <ListGroupItem onClick={this.__onGroupChange.bind(undefined, "extras")}>
+                        <ListGroupItem
+                            active={selectedGroup === "extras"}
+                            onClick={this.__onGroupChange.bind(undefined, "extras")}>
                             <FaIcon code="fa-ambulance" fixed={true}/>&nbsp;&nbsp;
                             {Application.i18n(Components, "components.Components", "extras")}
                         </ListGroupItem>
@@ -114,7 +114,7 @@ export default class Components extends ShallowComponent {
                     </ListGroup>
 
                 </Col>
-                <Col xs={12} sm={9} style={{padding: 0, marginTop: 6}}>
+                <Col xs={12} sm={9} style={{padding: 0, marginTop: 25}}>
                     {componentDetail}
                 </Col>
             </Grid>
