@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.25 -- Developing...
+## 1.1.26 -- Developing...
+
+## 1.1.25
 * New prop "unit" added to Slider component.
 * Slider "resize" problem fixed.
 * Slider now returns "event" in the onChange function.
