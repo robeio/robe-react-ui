@@ -2,7 +2,7 @@ import React from "react";
 import {ShallowComponent} from "robe-react-commons";
 import PieChart from "robe-react-ui/lib/charts/PieChart";
 
-let data = [
+let data1 = [
     {
         value: 1500,
         label: "A",
@@ -83,14 +83,36 @@ let data = [
     }
 ];
 
+let data2 = [
+    {
+        value: 1500,
+        label: "A",
+        key: "0",
+        unit: "ms"
+    },
+    {
+        value: 2500,
+        label: "B",
+        key: "1",
+        unit: "ms"
+    },
+    {
+        value: 3000,
+        label: "C",
+        key: "3",
+        unit: "ms"
+    }
+];
+
 
 export default class PieChartSample extends ShallowComponent {
 
-    render():Object {
+    render(): Object {
         return (
             <div>
                 <div className="form-group">
-                    <PieChart size={250} data={data}/>
+                    <PieChart size={200} data={data1}/>
+                    <PieChart size={200} data={data2}/>
                 </div>
             </div>
         );

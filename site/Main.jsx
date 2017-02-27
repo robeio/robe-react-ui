@@ -29,8 +29,7 @@ export default class Main extends ShallowComponent {
             <span>
                 <Navbar collapseOnSelect>
                     <Navbar.Header>
-                        <Navbar.Toggle style={{float: "left", marginLeft: 10}}/>
-                        <img src="./avatar.png" alt="logo"/>
+                        <img className="hidden-xs" src="./avatar.png" alt="logo"/>
                         <Navbar.Brand>
                             <a
                                 href="#Welcome"
@@ -38,6 +37,7 @@ export default class Main extends ShallowComponent {
                                 onClick={this.__goWelcome}
                             >Robe React UI</a>
                         </Navbar.Brand>
+                        <Navbar.Toggle/>
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav

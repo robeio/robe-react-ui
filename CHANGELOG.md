@@ -4,6 +4,7 @@
 * New prop "unit" added to Slider component.
 * Slider "resize" problem fixed.
 * Slider now returns "event" in the onChange function.
+* In PieChart, if the depth is greater than 1, the center round is added
 
 ## 1.1.24
 * Updating the datagrid when the props are updated
