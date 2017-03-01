@@ -19,16 +19,20 @@ class Editor extends Component {
         className: PropTypes.string
     };
 
-    componentDidMount = () => {
-        const editor = this.refs.editor.getCodeMirror();
-        this.highlightSelectedLines(editor, this.props.selectedLines);
-    };
+    constructor(props) {
+        super(props);
+    }
 
-    highlightSelectedLines = (editor, selectedLines) => {
+    componentDidMount() {
+        const editor = this.refs.editor.getCodeMirror();
+        Editor.highlightSelectedLines(editor, this.props.selectedLines);
+    }
+
+    static highlightSelectedLines(editor, selectedLines) {
         if (Array.isArray(selectedLines)) {
             selectedLines.forEach((lineNumber) => { return editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background"); });
         }
-    };
+    }
 
     updateCode = (code) => {
         if (!this.props.readOnly && this.props.onChange) {

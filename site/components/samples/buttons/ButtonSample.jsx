@@ -15,7 +15,7 @@ export default class ButtonSample extends ShallowComponent {
                 </div>
                 <ControlLabel>{Application.i18n(ButtonSample, "buttons.ButtonSample", "buttonAsync")}</ControlLabel>
                 <div className="form-group">
-                    <Button bsStyle="warning" onClickAsync={this.onClickAsync}>{Application.i18n(ButtonSample, "buttons.ButtonSample", "async")}</Button>
+                    <Button bsStyle="warning" onClickAsync={ButtonSample.onClickAsync}>{Application.i18n(ButtonSample, "buttons.ButtonSample", "async")}</Button>
                 </div>
                 <a
                     href="https://react-bootstrap.github.io/components.html#buttons" rel="noopener noreferrer"
@@ -28,15 +28,14 @@ export default class ButtonSample extends ShallowComponent {
         Toast.info(`Button Click: ${e.target.innerText}`);
     }
 
-    onClickAsync(e: Object, done: Function) {
-        let me = this;
+    static onClickAsync(e: Object, done: Function) {
         // We used setTimeout to simulate an AJAX call.
         setTimeout(() => {
-            me.onResponse(done);
+            ButtonSample.onResponse(done);
         }, 1000);
     }
 
-    onResponse(done: Function) {
+    static onResponse(done: Function) {
         Toast.warning("Button Click: Async");
         // done method is important
         // Call this after all operations are done (at the end of AJAX)

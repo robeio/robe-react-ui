@@ -37,18 +37,21 @@ class ReactPlayground extends Component {
             external: true,
             error: null
         };
+        this._resetCode = this._resetCode.bind(this);
+        this._copyToClipboard = this._copyToClipboard.bind(this);
+        this._toggleCode = this._toggleCode.bind(this);
     }
 
     render(): Object {
         const { codeText, external, expandedCode, exampleElement, error } = this.state;
         const { collapsableCode, noRender, previewComponent, scope, selectedLines, theme } = this.props;
 
-        let bsStyle = (error == null ? "transparent" : "#ebccd1");
+        let backgroundColor = (error == null ? "transparent" : "#ebccd1");
         return (
-            <Panel style={{ borderRadius: "0px", borderColor: "transparent", backgroundColor: bsStyle }}>
+            <Panel style={{ borderRadius: "0px", borderColor: "transparent", backgroundColor }}>
                 <div className={`playground${collapsableCode ? " collapsableCode" : ""}`}>
                     <div className="playgroundPreview">
-                        {error == null ? exampleElement : null}
+                        {exampleElement}
                     </div>
                     <div className={`playgroundCode${expandedCode ? " expandedCode" : ""}`}>
                         <Editor
@@ -138,15 +141,14 @@ class ReactPlayground extends Component {
             } else {
                 // immediately render a null error
                 // but also ensure the last debounced error call is a null error
-
                 const error = null;
+                this.renderError(error);
                 this.setState({
                     error,
                     exampleElement
                 });
             }
         } catch (err) {
-            console.log({ err });
             this.renderError(err.message);
         }
     }, 500);
@@ -162,13 +164,13 @@ class ReactPlayground extends Component {
         }, this._compileCode());
     };
 
-    _toggleCode = () => {
+    _toggleCode() {
         this.setState({
             expandedCode: !this.state.expandedCode
         });
-    };
+    }
 
-    _copyToClipboard = () => {
+    _copyToClipboard() {
         let textField = document.createElement("textarea");
         textField.innerHTML = this.state.code;
 
@@ -190,7 +192,7 @@ class ReactPlayground extends Component {
     }
 
 
-    _resetCode = () => {
+    _resetCode() {
         this.setState({
             codeText: this.props.codeText,
             external: true
@@ -203,13 +205,14 @@ class ReactPlayground extends Component {
         }
     }
     componentDidMount() {
-        this._compileCode();
+        // console.log("componentDidMount");.
+        // this._compileCode();
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
             codeText: nextProps.codeText,
             external: true
-        });
+        }, this._compileCode());
     }
 }
 
