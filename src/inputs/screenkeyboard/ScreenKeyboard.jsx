@@ -57,7 +57,7 @@ export default class ScreenKeyboard extends ShallowComponent {
         /**
          * Display configuration on mobile devices
          */
-        showOnMobile: React.PropTypes.any
+        showOnMobile: React.PropTypes.bool
     };
 
     /**
@@ -68,7 +68,8 @@ export default class ScreenKeyboard extends ShallowComponent {
         language: "en_US",
         defaultShow: true,
         changeValueAutomatically: false,
-        decimalSeperator: ","
+        decimalSeperator: ",",
+        showOnMobile: false
     };
 
     x_pos = 0;
