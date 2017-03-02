@@ -20,6 +20,7 @@ export default class SliderSample extends ShallowComponent {
                                minLabel="0 °C"
                                maxLabel="100 °C"
                                unit="°C"
+                               onAfterChange={this.handleAfterChange}
                                onChange={this.handleChange}/>
                    </Col>
                    <Col style={{paddingBottom:50}}>
@@ -59,7 +60,7 @@ export default class SliderSample extends ShallowComponent {
                        <Slider range
                                defaultValue={[40,90]}
                                minValue={20}
-                               maxValue={120} 
+                               maxValue={120}
                                onChange={this.handleChange}/>
                    </Col>
                    <Col style={{paddingBottom:50}}>
@@ -68,7 +69,8 @@ export default class SliderSample extends ShallowComponent {
                        </ControlLabel>
                        <Slider range 
                                defaultValue={[0,100]}
-                               step={10} 
+                               step={10}
+                               onAfterChange={this.handleAfterChange}
                                onChange={this.handleChange}/>
                    </Col>
                     <Col style={{paddingBottom:50}}>
@@ -95,8 +97,12 @@ export default class SliderSample extends ShallowComponent {
         );
     }
 
-    handleChange(e) {
-        console.log(e.target.value);
+    handleChange(e: Object) {
+        console.log("onChange:", e.target.value);
     };
+
+    handleAfterChange(e: Object) {
+        console.log("onAfterChange:", e.target.value);
+    }
 
 }

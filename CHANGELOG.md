@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.26 -- Developing...
+* New prop "onAfterChange" added to Slider component.
 
 ## 1.1.25
 * New prop "unit" added to Slider component.
