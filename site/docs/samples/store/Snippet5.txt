@@ -1,9 +1,0 @@
-/**
- *
- * @param successCallBack
- * @param errorCallback
- * @param queryParams
- */
-read(successCallBack: Function, errorCallback: Function, queryParams: Object){
-    ...
-}

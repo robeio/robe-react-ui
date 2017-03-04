@@ -1,6 +1,0 @@
-read(
-    queryParams : Object,
-    successCallBack : Function,
-    errorCallback : Function) {
-    ...
-}

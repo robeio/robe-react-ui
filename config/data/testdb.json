@@ -1,28 +1,8 @@
 {
-  "users": [
+  "posts": [
     {
       "id": 1,
-      "name": "Hasan",
-      "surname": "Mümin",
-      "email": "hasanmuminn@gmail.com",
-      "gender": "male",
-      "smoker": true
-    },
-    {
-      "id": 2,
-      "name": "Seray",
-      "surname": "Uzgur",
-      "email": "serayuzgur@gmail.com",
-      "gender": "male",
-      "smoker": true
-    },
-    {
-      "id": 3,
-      "name": "Kamil",
-      "surname": "Büküm",
-      "email": "kamilbukum@gmail.com",
-      "gender": "male",
-      "smoker": false
+      "title": "Post1"
     }
   ]
 }

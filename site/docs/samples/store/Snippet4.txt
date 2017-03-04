@@ -1,9 +1,0 @@
-/**
- *
- * @param item
- * @param successCallback
- * @param errorCallback
- */
-create(item: Map, successCallback: Function, errorCallback: Function): boolean {
-    ...
-}

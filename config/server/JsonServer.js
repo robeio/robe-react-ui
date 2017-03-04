@@ -1,46 +1,28 @@
-const jsonServer = require("robe-json-server");
+const Utility =  require("../util/Utility");
 const path = require("path");
-const multerImpl = require("./MultierImpl");
-const Utility = require("../util/Utility");
-const projectDir = Utility.projectDir;
+const jsonServer = require("robe-json-server");
 
-function Server(port, appPath) {
-    this.projectDir = projectDir;
+const  config = {};
+
+config.createJsonServer = (port,routePath, done) => {
+    // server.js
+
     const server = jsonServer.create();
-    server.use(jsonServer.defaults());
-    const routes = [];
+    const router = jsonServer.router(path.join(Utility.projectDir, routePath));
+    const middlewares = jsonServer.defaults();
 
-    this.route = (routePath) => {
-        routes.push(jsonServer.router(path.resolve(projectDir, routePath)));
-        return this;
-    };
+    server.use(middlewares);
+    // In this example, returned resources will be wrapped in a body property
+    server.use((req, res, next) => {
+        res.setHeader("X-Total-Count", 5);
+        next();
+    })
+    server.use(router);
 
-    this.upload = (requestPath, tempFolder, fieldName) => {
-        tempFolder = path.resolve(projectDir, tempFolder);
-        multerImpl(server, requestPath, tempFolder, fieldName);
-        return this;
-    };
+    server.listen(port, () => {
+        console.log("JSON Server is running on " + port);
+    });
+};
 
 
-    this.start = () => {
-        if (appPath) {
-            server.get(appPath, (req, res) => {
-                res.status(200).json({
-                    userPath: process.env.HOME || process.env.USERPROFILE,
-                    applicationPath: projectDir
-                });
-            });
-        }
-
-        var key;
-        for (key in routes) {
-            server.use(routes[key]);
-        }
-        /* eslint-disable prefer-template */
-        server.listen(port, () => {
-            console.log("Server is running on " + port + " port");
-        });
-    };
-}
-
-module.exports = Server;
+module.exports = config;

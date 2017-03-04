@@ -1,0 +1,18 @@
+{
+  "automock": false,
+  "bail": true,
+  "watch": true,
+  "testRegex": "/__test__/.*\\.spec\\.jsx?$",
+  "setupTestFrameworkScriptFile": "<rootDir>/config/jest.setup.jasmine.js",
+  "modulePaths": [
+    "src"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "bower_components"
+  ]
+}
