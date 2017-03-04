@@ -1,0 +1,8 @@
+call(
+    data: Object,
+    queryParams: Object,
+    success: Function,
+    error: Function,
+    pathParams: Array<string>) => {
+    ...
+}

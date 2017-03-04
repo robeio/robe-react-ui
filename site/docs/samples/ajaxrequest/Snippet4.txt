@@ -1,0 +1,25 @@
+    makeRequest(){
+        let path = "users";
+        let type = "POST";
+        let data = [{name:"A..",surname:"B.."}];
+        let queryParams = undefined;
+        let success = this.__success;
+        let error = this.__error;
+        let pathParams = undefined;
+
+        let ajaxRequest = new AjaxRequest({
+            url: path,
+            type: type
+        });
+
+        ajaxRequest.call(data,queryParams,success,error,pathParams);
+
+    };
+
+    __error(xhr, type, statusText){
+        ...
+    }
+
+     __success(response){
+        ...
+    };

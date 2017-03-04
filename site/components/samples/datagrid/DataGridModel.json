@@ -1,0 +1,69 @@
+{
+  "name": "DataGridModel",
+  "fields": [
+    {
+      "label": "id",
+      "type": "number",
+      "name": "id",
+      "tooltip": "id",
+      "visible": false,
+      "filter": true,
+      "range": true,
+      "sort": "asc"
+    },
+    {
+      "label": "Name",
+      "type": "string",
+      "name": "name",
+      "tooltip": "Name",
+      "filter": true,
+      "sort": "asc",
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "label": "Surname",
+      "type": "string",
+      "name": "surname",
+      "tooltip": "Surname",
+      "sort": "desc"
+    },
+    {
+      "label": "E-Mail",
+      "type": "string",
+      "name": "email",
+      "tooltip": "E-Mail",
+      "filter": true,
+      "sort": "asc"
+    },
+    {
+      "label": "Password",
+      "type": "password",
+      "name": "password",
+      "tooltip": "Password"
+    },
+    {
+      "label": "Birthdate",
+      "type": "date",
+      "name": "birthdate",
+      "tooltip": "birthdate",
+      "filter": true,
+      "range": true
+    },
+    {
+      "label": "Job Title",
+      "type": "select",
+      "name": "job",
+      "tooltip": "Job Title",
+      "filter": true
+    },
+    {
+      "label": "Gender",
+      "type": "radio",
+      "name": "gender",
+      "tooltip": "Gender",
+      "filter": true
+    }
+  ]
+}

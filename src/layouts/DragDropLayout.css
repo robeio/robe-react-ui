@@ -1,0 +1,31 @@
+.rb-drag-drop-box {
+    font-size: large;
+    text-align: center;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    min-height: 136px;
+    cursor: pointer;
+    padding: 6px 12px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    width: 100%;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+}
+
+.rb-drag-drop-box.rb-dragged,
+.rb-drag-drop-box .rb-dragged {
+    background-color: #f5f6f7;
+    cursor: progress;
+    opacity: 1;
+    filter: alpha(opacity=50);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}

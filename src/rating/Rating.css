@@ -1,0 +1,12 @@
+.iconsInterval {
+    padding-right: 1px;
+    cursor: pointer;
+}
+
+.iconsIntervalDisabled {
+    padding-right: 1px;
+}
+
+.selectedStar {
+    color: #efef03;
+}

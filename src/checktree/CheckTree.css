@@ -1,0 +1,23 @@
+.selected {
+    color: #8bb8e8;
+}
+.checkboxtree-scroll {
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    margin-bottom: 15px;
+}
+
+.checkboxtree {
+    list-style-type: none;
+}
+.checkboxtree ul li{
+    margin-left: -20px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+}

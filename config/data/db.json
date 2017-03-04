@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Hasan",
+      "surname": "Mumin",
+      "email": "hasanmuminn@gmail.com",
+      "birthdate": 1473282000000,
+      "job": "sd",
+      "gender": "male"
+    },
+    {
+      "id": 2,
+      "name": "Seray",
+      "surname": "Uzgu",
+      "email": "serayuzgur@gmail.com",
+      "birthdate": 1473368400000,
+      "job": "sd",
+      "gender": "male"
+    },
+    {
+      "id": 3,
+      "name": "Kamil",
+      "surname": "Bükü",
+      "email": "kamilbukum@gmail.com",
+      "birthdate": 1473454800000,
+      "job": "sa",
+      "gender": "female"
+    }
+  ]
+}

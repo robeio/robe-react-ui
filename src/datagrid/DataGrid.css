@@ -1,0 +1,96 @@
+
+.datagrid {
+    margin: 20px 1px 20px 1px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    background: white;
+}
+
+.datagrid tbody tr td {
+    vertical-align: middle;
+}
+
+.datagrid-header-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.datagrid-header-col {
+    text-align: left;
+    padding-left: 6px;
+    padding-right: 0;
+}
+
+.datagrid-body-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid whitesmoke 1px;
+    margin-left: 0;
+    margin-right: 0;
+    height: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.datagrid-body-row:hover {
+    background: #ebf6ff !important;
+    border-bottom: solid #ebf6ff 1px;
+}
+
+.datagrid-body-row-selected {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid #cee8ff 1px;
+    margin-left: 0;
+    margin-right: 0;
+    height: 30px;
+    background: #cee8ff !important;
+    transition: .3s;
+    cursor: pointer;
+    color: black;
+}
+
+.datagrid-body-col {
+    text-align: left;
+    padding-left: 6px;
+    padding-right: 0;
+
+}
+
+.datagrid-pagination-row {
+    padding-left: 5px;
+    padding-top: 5px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+}
+
+.datagrid-table > tbody > tr > td {
+    border: none;
+    line-height: 1;
+}
+
+.datagrid-table {
+    margin-bottom: 0 !important;
+}
+
+.datagrid-table th {
+    color: #444;
+}
+
+@media screen and (max-width: 767px) {
+    .datagrid > .table-responsive {
+        margin-bottom: 0 !important;
+    }
+}
+
+.datagrid-table > thead > tr > td, .datagrid-table > thead > tr > th {
+    border-bottom-width: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    font-weight: 400;
+}

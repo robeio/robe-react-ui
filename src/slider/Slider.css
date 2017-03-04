@@ -1,0 +1,131 @@
+.sliderContainer {
+    position: relative;
+    width: 100%;
+}
+
+.sliderLayer {
+    width: 100%;
+    position: absolute;
+    height: 6px;
+    background: #ebeff3;
+    z-index: 1;
+    left: 0;
+    cursor: pointer;
+}
+
+.sliderLayerDisabled {
+    width: 100%;
+    position: absolute;
+    height: 6px;
+    background: #ebeff3;
+    z-index: 1;
+    left: 0;
+    cursor: no-drop;
+}
+
+.sliderButtonMax {
+    position: absolute;
+    margin-left: -3px;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #b4b4f9;
+    background-color: white;
+    z-index: 3;
+    transition: transform .3s;
+}
+
+.sliderButtonMax:hover,
+.sliderButtonMax:focus,
+.sliderButtonMax:active {
+    transform: scale(1.2);
+}
+
+.sliderButtonMin {
+    position: absolute;
+    margin-left: -3px;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #b4b4f9;
+    background-color: white;
+    z-index: 2;
+    transition: transform .3s;
+}
+
+.sliderButtonMin:hover,
+.sliderButtonMin:focus,
+.sliderButtonMin:active {
+    transform: scale(1.2);
+}
+
+.sliderButtonMaxDisabled {
+    position: absolute;
+    margin-left: -3px;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    cursor: no-drop;
+    border-radius: 50%;
+    border: 2px solid #c7d1ce;
+    background-color: white;
+    z-index: 3;
+}
+
+.sliderButtonMinDisabled {
+    position: absolute;
+    margin-left: -3px;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    cursor: no-drop;
+    border-radius: 50%;
+    border: 2px solid #c7d1ce;
+    background-color: white;
+    z-index: 2;
+}
+
+.sliderSelectedArea {
+    visibility: visible;
+    position: absolute;
+    height: 6px;
+    border-radius: 4px;
+    background-color: #b4b4f9;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.sliderSelectedAreaDisabled {
+    visibility: visible;
+    position: absolute;
+    height: 6px;
+    border-radius: 4px;
+    background-color: #c7d1ce;
+    z-index: 2;
+    cursor: no-drop;
+}
+
+#sliderPopover {
+    top: -43px !important;
+    left: -3px !important;
+    white-space: nowrap;
+}
+
+#sliderPopover .tooltip-inner {
+    background-color: #504a4a;
+    color: white;
+    user-select: none;
+}
+
+#sliderPopover .tooltip-arrow {
+    border-top-color: #504a4a;
+}
+
+.sliderLabel {
+    margin-top: 10px;
+    opacity: 0.6;
+}

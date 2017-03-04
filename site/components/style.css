@@ -1,0 +1,41 @@
+.side-menu .list-group-item {
+    border: none !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+    color: #444;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.side-menu .list-group-item:hover {
+    color: #444;
+}
+
+.side-menu .collapsing > .list-group-item.active,
+.side-menu .collapse > .list-group-item.active,
+.side-menu .collapse.in > .list-group-item.active {
+    color: #f39c12;
+}
+
+.side-menu .collapsing > .list-group-item,
+.side-menu .collapse > .list-group-item,
+.side-menu .collapse.in > .list-group-item {
+    margin-left: 27px;
+    font-weight: inherit;
+    padding: 6px 15px;
+}
+
+.side-menu > :focus {
+    outline: none;
+}
+
+.side-menu .list-group-item.active,
+.side-menu .list-group-item.active:focus,
+.side-menu .list-group-item.active:hover {
+    color: #2980b9;
+    border: none !important;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border-bottom-color: #ddd;
+}

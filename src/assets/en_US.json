@@ -1,0 +1,109 @@
+{
+  "datafilter.DataFilter": {
+    "operators": {
+      "=": "equal",
+      "!=": "not equal",
+      "<": "less",
+      "<=": "less or equal",
+      ">": "greater",
+      ">=": "greater or equal",
+      "~=": "like",
+      "|=": "in (use | to seperate)"
+    }
+  },
+  "datagrid.DataGrid": {
+    "toolbar": {
+      "create": "New",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "modalConfirm": {
+      "header": "Are you sure ?",
+      "message": "The selected entry will be deleted. This can not be undone.",
+      "ok": "Yes",
+      "cancel": "No"
+    },
+    "deleteClick": {
+      "hasSelected": "You must make a selection before deleting."
+    },
+    "filter": {
+      "clear": "Clear",
+      "clearAll": "Clear All"
+    },
+    "pagination": {
+      "empty": "No data to display.",
+      "display": "Showing ${start} to ${end} of ${total} entries."
+    },
+    "search": "Search"
+  },
+  "form.ModalConfirm": {
+    "ok": "Yes",
+    "cancel": "No"
+  },
+  "form.ModalDataForm": {
+    "header": "Details",
+    "invalidField": "Please check all necessary fields are valid.",
+    "ok": "Save",
+    "cancel": "Cancel"
+  },
+  "googlemap.SearchBox": {
+    "placeholder": "Search"
+  },
+  "googlemap.GoogleMap": {
+    "language": "en"
+  },
+  "recaptcha.ReCaptcha": {
+    "language": "en"
+  },
+  "inputs.upload.FileUploadInput": {
+    "placeholder": "Drag and drop files here."
+  },
+  "inputs.DateInput": {
+    "locale": "en"
+  },
+  "inputs.SelectInput": {
+    "placeholder": "Please Select",
+    "noResult": "No Result"
+  },
+  "notification.Notification": {
+    "title": "Notifications",
+    "detailsText": "See All",
+    "noContent": "You don't have any notification."
+  },
+  "validation.InputValidations": {
+    "required": "This field is required.",
+    "minValue": "Value must be greater or equal to ${minValue}",
+    "maxValue": "Value must be less or equal to ${maxValue}",
+    "minLength": "Input cannot be less than ${min} characters.",
+    "maxLength": "Input cannot be more than ${max} characters.",
+    "regex": "Input must match '${regex}'"
+  },
+  "wizard.Wizard": {
+    "next": "Next",
+    "previous": "Previous",
+    "complete": "Complete"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "Worst",
+      "1": "Bad",
+      "2": "Weak",
+      "3": "Good",
+      "4": "Strong"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "Days"
+    },
+    "hours": {
+      "label": "Hours"
+    },
+    "minutes": {
+      "label": "Mins"
+    },
+    "seconds": {
+      "label": "Secs"
+    }
+  }
+}

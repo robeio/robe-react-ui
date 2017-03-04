@@ -1,0 +1,5 @@
+Toast.success(message, title, timeOut, onClick);
+Toast.info(message, title, timeOut, onClick);
+Toast.warning(message, title, timeOut, onClick);
+Toast.error(message, title, timeOut, onClick);
+

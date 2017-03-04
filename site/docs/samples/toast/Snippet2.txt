@@ -1,0 +1,2 @@
+Toast.configure({maxVisible: 5});
+

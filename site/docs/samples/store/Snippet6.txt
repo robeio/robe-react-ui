@@ -1,0 +1,9 @@
+/**
+ *
+ * @param newItem
+ * @param successCallback
+ * @param errorCallback
+ */
+update(newItem: Map, successCallback: Function, errorCallback: Function){
+    ...
+}

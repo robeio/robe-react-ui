@@ -1,0 +1,49 @@
+.DatePicker-day {
+    cursor: pointer;
+    text-align: center;
+    background: #ffffff;
+    transition: all .3s;
+    font-weight: 500;
+}
+
+.DatePicker-day:hover {
+    border-radius: 4px;
+    background: #499bea;
+    color: white;
+}
+
+.DatePicker-day-disabled {
+    text-align: center;
+    color: #bbb;
+
+}
+
+.DatePicker-day-selected {
+    cursor: pointer;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    background: #606c88; /* Old browsers */
+    border-color: #606c88;
+    border-radius: 4px;
+}
+
+.DatePicker-table {
+    margin-bottom: 0;
+    border: 1px solid #dddddd;
+}
+
+.DatePicker-table > thead:first-child > tr:first-child > th {
+    border-top: 1px solid #dadada;
+    border-bottom-width: 0;
+}
+
+.DatePicker-table > tbody > tr > td,
+.DatePicker-table > tbody > tr > th,
+.DatePicker-table > tfoot > tr > td,
+.DatePicker-table > tfoot > tr > th,
+.DatePicker-table > thead > tr > td,
+.DatePicker-table > thead > tr > th {
+    padding: 6px;
+    border: none;
+}

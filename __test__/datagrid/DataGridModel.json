@@ -1,0 +1,73 @@
+{
+  "name": "DataGridModel",
+  "fields": [
+    {
+      "label": "id",
+      "type": "string",
+      "name": "id",
+      "visible": false
+    },
+    {
+      "label": "Name",
+      "type": "string",
+      "name": "name"
+    },
+    {
+      "label": "Surname",
+      "type": "string",
+      "name": "surname"
+    },
+    {
+      "label": "E-Mail",
+      "type": "string",
+      "name": "email"
+    },
+    {
+      "label": "Password",
+      "type": "password",
+      "name": "password"
+    },
+    {
+      "label": "Birthdate",
+      "type": "date",
+      "name": "birthdate",
+      "filter": true
+    },
+    {
+      "label": "Job Title",
+      "type": "select",
+      "name": "job"
+    },
+    {
+      "label": "Avatar",
+      "type": "file",
+      "name": "avatar",
+      "remote": {
+        "requestId": "c4e1677e-7f02-11e6-ae22-56b6b6499611",
+        "url": "http://localhost:3001/files",
+        "upload": {
+          "type": "PUT"
+        },
+        "load": {
+          "type": "POST"
+        },
+        "preview": {
+          "type": "GET"
+        },
+        "delete": {
+          "type": "DELETE"
+        }
+      }
+    },
+    {
+      "label": "Smoker",
+      "type": "check",
+      "name": "smoker"
+    },
+    {
+      "label": "Gender",
+      "type": "radio",
+      "name": "gender"
+    }
+  ]
+}

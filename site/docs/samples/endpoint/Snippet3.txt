@@ -1,0 +1,6 @@
+create(
+    item : Map,
+    successCallback : Function,
+    errorCallback : Function) {
+    ...
+}

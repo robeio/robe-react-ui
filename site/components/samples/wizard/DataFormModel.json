@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Name",
+    "name": "name",
+    "type": "string",
+    "validations": {
+      "required": true
+    }
+  },
+  {
+    "label": "Gender",
+    "name": "gender",
+    "type": "radio",
+    "horizontal": false,
+    "validations": {
+      "required": true
+    },
+    "items": [
+      {
+        "value": "male",
+        "text": "Male"
+      },
+      {
+        "value": "female",
+        "text": "Female"
+      }
+    ]
+  }
+]

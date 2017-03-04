@@ -1,0 +1,53 @@
+{
+  "name": "DataFilterModel",
+  "fields": [
+    {
+      "label": "Id",
+      "type": "number",
+      "name": "id",
+      "filter": true
+    },
+    {
+      "label": "Name",
+      "type": "string",
+      "name": "name",
+      "filter": true
+    },
+    {
+      "label": "Surname",
+      "type": "string",
+      "name": "surname",
+      "filter": true
+    },
+    {
+      "label": "E-Mail",
+      "type": "string",
+      "name": "email",
+      "filter": true
+    },
+    {
+      "label": "Password",
+      "type": "password",
+      "name": "password",
+      "filter": false
+    },
+    {
+      "label": "Birthdate",
+      "type": "date",
+      "name": "birthdate",
+      "filter": true
+    },
+    {
+      "label": "Job Title",
+      "type": "select",
+      "name": "job",
+      "filter": true
+    },
+    {
+      "label": "Gender",
+      "type": "radio",
+      "name": "gender",
+      "filter": true
+    }
+  ]
+}

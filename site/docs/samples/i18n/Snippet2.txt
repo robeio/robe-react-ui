@@ -1,0 +1,10 @@
+// Import the Application and language asset from ui.
+import en from "robe-react-ui/lib/assets/en_US.json";
+import Application from "robe-react-ui/lib/Application";
+
+// Wrap your outmost component.
+ <Application language={en}>
+   <h1>Todo Application</h1>
+   <Todo />
+</Application>
+

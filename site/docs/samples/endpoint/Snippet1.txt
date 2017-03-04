@@ -1,0 +1,5 @@
+let endPoint = new RemoteEndPoint({
+    url: "http://..",
+    dataType: "json"
+    ...
+});

@@ -1,0 +1,109 @@
+{
+  "datafilter.DataFilter": {
+    "operators": {
+      "=": "eşit",
+      "!=": "eşit değil",
+      "<": "küçük",
+      "<=": "küçük veya eşit",
+      ">": "büyük",
+      ">=": "büyük veya eşit",
+      "~=": "benzer",
+      "|=": "içerir (ayraç \"|\")"
+    }
+  },
+  "datagrid.DataGrid": {
+    "toolbar": {
+      "create": "Yeni",
+      "edit": "Değiştir",
+      "delete": "Sil"
+    },
+    "modalConfirm": {
+      "header": "Emin misiniz ?",
+      "message": "Seçili kayıt silinecek. Bu geri alınamaz bir işlem.",
+      "ok": "Evet",
+      "cancel": "Hayır"
+    },
+    "deleteClick": {
+      "hasSelected": "Silme işlemi için önce seçim yapmalısınız."
+    },
+    "filter": {
+      "clear": "Sil",
+      "clearAll": "Hepsini Sil"
+    },
+    "pagination": {
+      "empty": "Veri yok.",
+      "display": "Gösterilen: ${start} - ${end} Toplam: ${total}"
+    },
+    "search": "Ara"
+  },
+  "form.ModalConfirm": {
+    "ok": "Evet",
+    "cancel": "Hayır"
+  },
+  "form.ModalDataForm": {
+    "header": "Detaylar",
+    "invalidField": "Lütfen bütün gerekli alanların geçerliliğini kontrol edin.",
+    "ok": "Kaydet",
+    "cancel": "İptal"
+  },
+  "googlemap.SearchBox": {
+    "placeholder": "Ara"
+  },
+  "googlemap.GoogleMap": {
+    "language": "tr"
+  },
+  "recaptcha.ReCaptcha": {
+    "language": "tr"
+  },
+  "inputs.upload.FileUploadInput": {
+    "placeholder": "Dosyaları buraya sürükleyip bırakın."
+  },
+  "inputs.DateInput": {
+    "locale": "tr"
+  },
+  "inputs.SelectInput": {
+    "placeholder": "Seçiniz",
+    "noResult": "Kayıt Yok"
+  },
+  "notification.Notification": {
+    "title": "Bildirimler",
+    "detailsText": "Hepsini Gör",
+    "noContent": "Bildiriminiz yok."
+  },
+  "validation.InputValidations": {
+    "required": "Bu alan zorunlu.",
+    "minValue": "En küçük değer ${minValue} olabilir",
+    "maxValue": "En büyük değer ${maxValue} olabilir",
+    "minLength": "En az ${min} karakter olabilir.",
+    "maxLength": "En çok ${max} karakter olabilir.",
+    "regex": "'Değer ${regex}' kuralı ile uyuşmalı."
+  },
+  "wizard.Wizard": {
+    "next": "İleri",
+    "previous": "Geri",
+    "complete": "Tamamla"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "Çok Kötü",
+      "1": "Kötü",
+      "2": "Zayıf",
+      "3": "İyi",
+      "4": "Güçlü"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "Gün"
+    },
+    "hours": {
+      "label": "Saat"
+    },
+    "minutes": {
+      "label": "Dk"
+    },
+    "seconds": {
+      "label": "Sn"
+    }
+  }
+}

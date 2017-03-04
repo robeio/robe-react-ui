@@ -1,0 +1,35 @@
+<TextInput
+    label="Example 1 (Block Display)"
+    value={this.state.example1}
+    onChange={this.__handleChangeEx1}
+    validations={{
+        required: {
+            message: "This a custom required message."
+        },
+        minLength: {
+            args: [3]
+        },
+        please: {
+            func: (value: String): String => {
+                if (value.indexOf("please") === -1 && value.indexOf("Please") === -1) {
+                    return "\"Please\" use the magic word.";
+                }
+                return undefined;
+            }
+        }
+    }}
+/>
+<TextInput
+    label="Example 2 (Overlay Display)"
+    value={this.state.example1}
+    onChange={this.__handleChangeEx1}
+    validationDisplay="overlay"
+    validations={{
+        required: {
+            message: "This a custom required message."
+        },
+        minLength: {
+            args: [3]
+        }
+    }}
+/>

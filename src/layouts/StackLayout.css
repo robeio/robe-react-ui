@@ -1,0 +1,32 @@
+.Stacklayout-thumbnail{
+    overflow: hidden;
+    text-align:center;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.Stacklayout-list{
+    margin-top: 0px;  /* Broken in Firefox */
+    filter: alpha(opacity=80);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=80);
+    -moz-opacity: 0.80;
+    opacity: 0.8;
+    zoom: 1;
+    cursor: pointer;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}

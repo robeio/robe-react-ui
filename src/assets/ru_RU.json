@@ -1,0 +1,109 @@
+{
+  "datafilter.DataFilter": {
+    "operators": {
+      "=": "Равные",
+      "!=": "Не равно",
+      "<": "Меньше",
+      "<=": "Меньше или равно",
+      ">": "Большой",
+      ">=": "Больше или равно",
+      "~=": "как",
+      "|=": "в (использование | отделить)"
+    }
+  },
+  "datagrid.DataGrid": {
+    "toolbar": {
+      "create": "новый",
+      "edit": "редактировать",
+      "delete": "Удалить"
+    },
+    "modalConfirm": {
+      "header": "Ты уверен ?",
+      "message": "Выбранная запись будет удалена. Это не может быть отменено.",
+      "ok": "да",
+      "cancel": "Нет"
+    },
+    "deleteClick": {
+      "hasSelected": "Вы должны сделать выбор перед удалением."
+    },
+    "filter": {
+      "clear": "Clear",
+      "clearAll": "Очистить все"
+    },
+    "pagination": {
+      "empty": "Нет данных для отображения.",
+      "display": "Отображение ${start} до ${end}  в размере полных записей."
+    },
+    "search": "поиск"
+  },
+  "form.ModalConfirm": {
+    "ok": "да",
+    "cancel": "Нет"
+  },
+  "form.ModalDataForm": {
+    "header": "Детали",
+    "invalidField": "Пожалуйста, проверьте все необходимые поля действительны.",
+    "ok": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "googlemap.SearchBox": {
+    "placeholder": "Поиск"
+  },
+  "googlemap.GoogleMap": {
+    "language": "en"
+  },
+  "recaptcha.ReCaptcha": {
+    "language": "en"
+  },
+  "inputs.upload.FileUploadInput": {
+    "placeholder": "Drag and drop files here."
+  },
+  "inputs.DateInput": {
+    "locale": "en"
+  },
+  "inputs.SelectInput": {
+    "placeholder": "Пожалуйста выберите",
+    "noResult": "Безрезультатно"
+  },
+  "notification.Notification": {
+    "title": "Уведомления",
+    "detailsText": "Увидеть все",
+    "noContent": "У вас нет никакого уведомления."
+  },
+  "validation.InputValidations": {
+    "required": "Это поле обязательно к заполнению.",
+    "minValue": "Значение должно быть больше или равна ${minValue}",
+    "maxValue": "Значение должно быть меньше или равна ${maxValue}",
+    "minLength": "Вход не может быть меньше, чем ${min} мин символов.",
+    "maxLength": "Вход не может быть больше, чем ${max} Максимальное количество символов",
+    "regex": "Ввод должен соответствовать '${regex}'"
+  },
+  "wizard.Wizard": {
+    "next": "следующий",
+    "previous": "предыдущий",
+    "complete": "полный"
+  },
+  "inputs.PasswordInput": {
+    "strength": {
+      "0": "ужасный",
+      "1": "плохой",
+      "2": "слабый",
+      "3": "хорошо",
+      "4": "сильный"
+    }
+  },
+  "countdown.Countdown": {
+    "days": {
+      "label": "день"
+    },
+    "hours": {
+      "label": "час"
+    },
+    "minutes": {
+      "label": "минут"
+    },
+    "seconds": {
+      "label": "второй"
+    }
+  }
+}

@@ -1,0 +1,169 @@
+.rb-upload-input {
+    display: block;
+    width: 80px;
+    font-size: 12px;
+}
+
+.rb-upload-check {
+    float: left;
+    cursor: pointer;
+}
+
+.rb-upload-image {
+    position: relative;
+    vertical-align: middle;
+    display: block;
+    margin: auto;
+    height: 43px;
+    width: 60px;
+}
+
+.rb-upload-image i {
+    font-size: 4em !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.rb-upload-extension {
+    position: absolute;
+    display: block;
+    margin: auto;
+    top: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden
+}
+
+.rb-upload-icon {
+    position: relative;
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+.rb-upload-name {
+    padding-top: 5px;
+    margin-top: 20px;
+    border-top: 1px solid #eaeaea;
+}
+
+.rb-upload-name div {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rb-upload-toolbar {
+    display: inline-block;
+    width: 100%;
+    height: 18px;
+    font-size: 14px;
+    color: #555;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.rb-upload-toolbar > * {
+    cursor: pointer;
+    margin: 0;
+}
+
+.toolbar-chekbox {
+    margin-top: -4px;
+}
+
+.rb-drag-drop-box .rb-thumbnail-box {
+    margin-top: -8px;
+}
+
+.rb-upload-toolbar > *:hover {
+    color: #295880;
+    font-weight: 500;
+}
+
+.rb-upload-toolbar.rb-radius-bottom {
+    border-radius: 0px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius: 0px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top: 0px;
+}
+
+.rb-upload-toolbar.rb-radius-top {
+    border-radius: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    -moz-border-radius: 0px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-bottom: 0px;
+}
+
+.rb-upload-item-tooltip .tooltip-inner {
+    background-color: #e2e2e2;
+    color: #333;
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
+
+.remove {
+    background-color: #d95757;
+    border: 1px solid #c14d4d;
+    color: white;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+
+.upload {
+    background-color: #34a853;
+    border: 1px solid #298642;
+    color: white;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+
+.download {
+    background-color: #295880;
+    border: 1px solid #295880;
+    color: white;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+
+.select {
+    background-color: transparent;
+    color: #346fa1;
+    width: 96%;
+    opacity: 0.8;
+    margin-top: -2px;
+    top: 0;
+    text-align: right;
+    padding-right: 4px;
+}
+
+.remove:hover,
+.select:hover,
+.download:hover,
+.upload:hover {
+    opacity: 1;
+}
+
+.rb-drag-drop-box .rb-thumbnail-box:empty:after {
+    content: attr(placeholder);
+}
+
+.rb-drag-drop-box .rb-thumbnail-box:empty {
+    height: 74px;
+    width: 100%;
+    opacity: 0.6;
+    transition: .3s;
+    margin-top: 24px;
+}

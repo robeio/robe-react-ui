@@ -1,0 +1,74 @@
+.SideMenu-wrapper {
+    margin-top: 20px;
+    z-index: 1000;
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.SideMenu-wrapper ul {
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+.SideMenu-wrapper div {
+    color: black;
+    margin-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    display: block;
+
+}
+
+.SideMenu-wrapper i {
+    margin-right: 5px;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.SideMenu-wrapper li {
+    list-style-type: none;
+    display: block;
+    text-decoration: none;
+}
+
+.SideMenu-wrapper li :hover {
+    background: transparent;
+    text-decoration: none;
+}
+
+.SideMenu-menu-content {
+    padding-left: 20px;
+}
+
+.SideMenu-item {
+    list-style-type: none;
+    margin-top: 5px;
+    display: block;
+    margin-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SideMenu-item :hover {
+    background: #eee;
+}
+
+.SideMenu-item-active {
+    border-bottom: #eeeeee solid 1px;
+}
+
+.SideMenu-subitem-active {
+    background: lightgrey;
+}
+
+.SideMenu-subitem-active div {
+    background: #eee;
+}
+
+.SideMenu-subitem-active div:hover {
+    background: #eee;
+}

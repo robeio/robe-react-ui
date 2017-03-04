@@ -1,0 +1,25 @@
+.side-panel-left {
+    position: fixed;
+    height: 100%;
+    z-index: 998;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.5s;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.side-panel-right {
+    position: fixed;
+    height: 100%;
+    z-index: 998;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.5s;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}

@@ -1,0 +1,7 @@
+let options = {
+    url: "docs",
+    type: "GET",
+    ...
+}
+
+let ajaxRequest = new AjaxRequest(options);

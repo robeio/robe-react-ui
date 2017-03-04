@@ -1,0 +1,22 @@
+[
+  {
+    "label": "String Input",
+    "name": "username",
+    "type": "string"
+  },
+  {
+    "label": "Password Input",
+    "name": "password",
+    "type": "password"
+  },
+  {
+    "label": "Number Input",
+    "name": "age",
+    "type": "number",
+    "validations": {
+      "required": {
+        "message": "This is a custom required message."
+      }
+    }
+  }
+]

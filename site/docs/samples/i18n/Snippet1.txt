@@ -1,0 +1,16 @@
+// Import the Application from commons.
+import { Application } from "robe-react-commons";
+
+//Import to use template texts with parametes
+import template from "es6-template-strings";
+
+// Load your i18n json.
+Application.loadI18n(validationMessages);
+
+// Use it.
+console.log(Application.i18n(undefined, "validation", "required");
+
+//Use it with parameters.
+console.log( template(Application.i18n(undefined, "validation", "minValue"), { minValue: 3 } );
+
+

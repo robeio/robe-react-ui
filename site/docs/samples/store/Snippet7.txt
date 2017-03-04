@@ -1,0 +1,9 @@
+/**
+ *
+ * @param item
+ * @param successCallback
+ * @param errorCallback
+ */
+delete(item: Map, successCallback: Function, errorCallback: Function){
+    ...
+}

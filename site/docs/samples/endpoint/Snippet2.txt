@@ -1,0 +1,18 @@
+options = {
+    url: "http://..",
+    dataType: "json"
+    read: {
+        type: "GET",
+        url: "../all",
+        dataType: "text"
+        ...
+    },
+    create: {
+        type: "POST",
+        url: "../create",
+        ...
+    },
+    ...
+};
+
+let endPoint = new RemoteEndPoint(options);

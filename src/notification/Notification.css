@@ -1,0 +1,105 @@
+/* Notification css */
+
+@media (max-width: 480px) {
+    #notify.dropdown-menu {
+        min-width: 0;
+        width: 280px;
+        left:-230px;
+    }
+}
+
+@media (max-width: 769px) and (min-width: 480px) {
+    #notify.dropdown-menu {
+        min-width: 0;
+        width: 300px;
+        left: -270px;
+    }
+}
+
+@media (min-width: 769px) {
+    #notify.dropdown-menu.notifications {
+        right: 0 !important;
+        left: auto;
+    }
+    #notify.dropdown-menu {
+        min-width: 0;
+        width: 420px;
+    }
+}
+
+.notifications-wrapper {
+    overflow: auto;
+    max-height: 250px;
+    font-size: 13px;
+}
+
+.menu-title {
+    margin-left: 10px;
+    color: #337ab7;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.glyphicon-circle-arrow-right {
+    margin-left: 10px;
+}
+
+.notification-heading, .notification-footer {
+    padding: 2px 10px;
+}
+
+.item-title {
+    font-size: 1.3rem;
+    color: #000;
+}
+
+.notification-item {
+    padding: 0;
+    margin: 10px;
+    background: #FBFBFB;
+    border-radius: 4px;
+}
+
+#notify.btn{
+    padding: 0;
+}
+.btn-header-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.btn-header-button:hover {
+    background-color: #337ab7;
+    border: none;
+    color: white;
+}
+
+.btn-header-button:focus {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.btn-header:focus {
+    outline: #342E2B;
+}
+
+.btn-header-button > .badge {
+    background-color: #337ab7;
+}
+
+#notify.divider {
+    display: block!important;
+    border-bottom: 1px solid lightgray;
+}
+
+.dropdown-menu .divider {
+    margin: 3px 0;
+}
+
+.notifications a.content {
+    text-decoration: none;
+    background: #ccc;
+}

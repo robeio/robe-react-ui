@@ -1,0 +1,141 @@
+[
+  {
+    "label": "String Input (With regex validation)",
+    "name": "username",
+    "type": "string",
+    "validations": {
+      "regex": {
+        "message": "Only letter",
+        "args": [
+          "^[a-zA-Z\\s\\ç\\Ç\\ö\\Ö\\ş\\Ş\\ı\\İ\\ğ\\Ğ\\ü\\Ü]+$"
+        ]
+      },
+      "required": true
+    }
+  },
+  {
+    "label": "Password Input",
+    "name": "password",
+    "type": "password",
+    "value": "",
+    "validations": {
+      "required": true
+    }
+  },
+  {
+    "label": "Number Input",
+    "name": "age",
+    "type": "number",
+    "validations": {
+      "required": {
+        "message": "This is a custom required message."
+      },
+      "minValue": {
+        "args": [
+          5
+        ]
+      }
+    }
+  },
+  {
+    "label": "Decimal Input",
+    "name": "rate",
+    "type": "decimal",
+    "validations": {
+      "required": true
+    }
+  },
+  {
+    "label": "Money Input",
+    "name": "price",
+    "type": "money",
+    "validations": {
+      "required": true
+    }
+  },
+  {
+    "label": "Date Input",
+    "name": "birthDay",
+    "type": "date",
+    "validations": {
+      "required": true
+    }
+  },
+  {
+    "label": "Radio Input",
+    "name": "gender",
+    "type": "radio",
+    "horizontal": true,
+    "validations": {
+      "required": true
+    },
+    "items": [
+      {
+        "value": "MALE",
+        "text": "Bay"
+      },
+      {
+        "value": "FEMALE",
+        "text": "Bayan"
+      }
+    ]
+  },
+  {
+    "label": "CheckInput Input",
+    "name": "lang",
+    "type": "check",
+    "value": [
+      "en",
+      "tr"
+    ],
+    "validations": {
+      "required": true
+    },
+    "multi": true,
+    "items": [
+      {
+        "value": "tr",
+        "text": "Turkish"
+      },
+      {
+        "value": "en",
+        "text": "English"
+      },
+      {
+        "value": "kurdish",
+        "text": "Kurdish"
+      }
+    ]
+  },
+  {
+    "label": "SelectInput",
+    "name": "il",
+    "type": "select",
+    "validations": {
+      "required": true
+    },
+    "items": [
+      {
+        "value": "34",
+        "text": "Istanbul"
+      },
+      {
+        "value": "21",
+        "text": "Diyarbakır"
+      },
+      {
+        "value": "6",
+        "text": "Ankara"
+      }
+    ]
+  },
+  {
+    "label": "SelectInput Cascading From SelectInput",
+    "name": "ilce",
+    "type": "select",
+    "validations": {
+      "required": true
+    },
+    "items": []
+  }
+]
