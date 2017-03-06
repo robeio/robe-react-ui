@@ -2,6 +2,7 @@
 
 ## 1.1.26 -- Developing...
 * New prop "onAfterChange" added to Slider component.
+* Rating style problem fixed at setState.
 
 ## 1.1.25
 * New prop "unit" added to Slider component.

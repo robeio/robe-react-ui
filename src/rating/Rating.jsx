@@ -188,9 +188,10 @@ export default class Rating extends ShallowComponent {
     };
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            selectedKey: nextProps.currentValue,
-            hoveredKey: nextProps.currentValue
-        });
+        if (nextProps.currentValue && nextProps.disabled)
+            this.setState({
+                selectedKey: nextProps.currentValue,
+                hoveredKey: nextProps.currentValue
+            });
     };
 }
