@@ -3,7 +3,7 @@ import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commo
 import "./LineChart.css";
 import Legend from "./Legend";
 
-export default class AreaChart extends ShallowComponent {
+export default class LineChart extends ShallowComponent {
 
     static propTypes: Map = {
         /**
