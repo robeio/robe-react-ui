@@ -2,7 +2,6 @@ import React from "react";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import "./PieChart.css";
 import Legend from "./Legend";
-import FaIcon from "../faicon/FaIcon";
 
 export default class PieChart extends ShallowComponent {
 
@@ -14,7 +13,11 @@ export default class PieChart extends ShallowComponent {
         /**
          * Size of chart as px
          */
-        size: React.PropTypes.number
+        size: React.PropTypes.number,
+        /**
+         * width the Legend
+         */
+        legendWidth: React.PropTypes.number
     };
 
     static defaultProps = {
@@ -54,15 +57,15 @@ export default class PieChart extends ShallowComponent {
 
         return (
             <div className="rb-pie-chart" style={{width: this.props.size, height: this.props.size}}>
-                <div className="rb-pie-chart-back-tool" style={{display: this.state.clicked ? "inherit" : "none"}}>
-                    <FaIcon code="fa-undo" onClick={this.__onClickReset}/>
-                </div>
                 <svg className="rb-pie-chart-svg">
                     {this.__renderPies(data, 360, 0, depth, depth - 1)}
                     {root}
                 </svg>
                 <div className="tooltip" id="tooltip"></div>
-                <Legend data={this.legends} width={this.props.size}/>
+                <div className="rb-pie-chart-back-tool" style={{display: this.state.clicked ? "inherit" : "none"}}>
+                    <a onClick={this.__onClickReset}>reset</a>
+                </div>
+                <Legend data={this.legends} width={this.props.legendWidth || this.props.size}/>
             </div>
         )
     }

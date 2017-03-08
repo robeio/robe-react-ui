@@ -40,15 +40,11 @@
     transition: .3s;
     color: #777777;
     cursor: pointer;
-    border: 1px solid #eeeeee;
     padding: 2px;
-    right: 0;
 }
 
 .rb-pie-chart-back-tool:hover {
     color: #333333;
-    background-color: #eee;
-    border: 1px solid #dddddd;
 }
 
 .rb-pie-chart .tooltip {

@@ -21,7 +21,11 @@ export default class BarChart extends ShallowComponent {
         /**
          * Change to be made for the given data
          */
-        meta: React.PropTypes.array
+        meta: React.PropTypes.array,
+        /**
+         * width the Legend
+         */
+        legendWidth: React.PropTypes.number
     };
 
     static defaultProps = {
@@ -53,7 +57,7 @@ export default class BarChart extends ShallowComponent {
                         {this.__renderXAxis()}
                     </div>
                 </div>
-                <Legend data={this.legends} width={this.props.width}/>
+                <Legend data={this.legends} width={this.props.legendWidth || this.props.width}/>
             </div>
         )
     }
