@@ -1,6 +1,7 @@
 import React from "react";
 import {ShallowComponent} from "robe-react-commons";
 import PieChart from "robe-react-ui/lib/charts/PieChart";
+import Col from "react-bootstrap/lib/Col";
 
 let data1 = [
     {
@@ -111,8 +112,12 @@ export default class PieChartSample extends ShallowComponent {
         return (
             <div>
                 <div className="form-group">
-                    <PieChart size={200} data={data1}/>
-                    <PieChart size={200} data={data2}/>
+                    <Col xs={12} md={6}>
+                        <PieChart size={200} data={data1}/>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <PieChart size={200} data={data2}/>
+                    </Col>
                 </div>
             </div>
         );

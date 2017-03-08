@@ -41,6 +41,7 @@
     color: #777777;
     cursor: pointer;
     padding: 2px;
+    left: 40%;
 }
 
 .rb-pie-chart-back-tool:hover {
