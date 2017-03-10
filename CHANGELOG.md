@@ -1,6 +1,10 @@
 # Change Log
 
-## 1.1.28 -- Developing...
+## 1.1.29 -- Developing...
+
+## 1.1.28
+* charts bug fixed
+* toast bug fixed
 
 ## 1.1.27
 * Bug fixed the Legend for Chart's components
