@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import ClassName from "../util/css/ClassName";
-import "./Toast.css"
+import "./Toast.css";
 
 const TIMEOUTS = {
     REMOVE: 500,
@@ -89,22 +89,41 @@ class Toast extends ShallowComponent {
                     key={item.id}
                     id={item.id}
                     className={"toast-item toast-item-open " + item.type}
-                    style={{ zIndex: item.zIndex }}
+                    style={{zIndex: item.zIndex}}
                     onClick={item.onClick}>
-                    <div
-                        className="toast-item-title"
-                        style={{ padding: item.message ? "12px 12px 6px 12px" : "20px" }}>
-                        {item.title}
+                    <div>
+                        <img src={this.__getIcon(item)} width={36} height={36}/>
+                        <div
+                            className="toast-item-title"
+                            style={{padding: item.message ? "12px 12px 6px 12px" : "20px"}}>
+                            {item.title}
+                        </div>
                     </div>
                     <div
                         className="toast-item-content"
-                        style={{ padding: item.title ? "0px 12px 12px 12px" : "20px" }}>
+                        style={{padding: item.title ? "0px 12px 12px 12px" : "20px"}}>
                         {item.message}
                     </div>
                 </div>)
         }
         return arr;
     }
+
+    __getIcon(item) {
+        switch (item.type) {
+            case Constants.INFO:
+                return require('./images/info.png');
+            case Constants.ERROR:
+                return require('./images/error.png');
+            case Constants.SUCCESS:
+                return require('./images/success.png');
+            case Constants.WARNING:
+                return require('./images/warning.png');
+            default:
+                return require('./images/success.png');
+        }
+
+    };
 
     __addQueue(toast) {
         if (this.state.listToast.length >= this.props.maxVisible || (this.__queueList[0] && this.__queueList[0].id != toast.id)) {
@@ -240,7 +259,7 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    error(message:string, title:string, timeOut:number, onClick:func) {
+    error(message: string, title: string, timeOut: number, onClick: func) {
         this.__addQueue({
             id: this.__getTime(),
             type: Constants.ERROR,
