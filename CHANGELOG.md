@@ -1,7 +1,10 @@
 # Change Log
 
-## 1.1.27 -- Developing...
+## 1.1.28 -- Developing...
+
+## 1.1.27
 * Bug fixed the Legend for Chart's components
+* Toast added icon and changed fonts
 
 ## 1.1.26
 * New prop "onAfterChange" added to Slider component.
