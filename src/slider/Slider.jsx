@@ -164,7 +164,7 @@ export default class Slider extends ShallowComponent {
 
         if (!this.props.step) {
             if (calculatedPosition >= 0 && calculatedPosition <= layer.offsetWidth)
-                afterChangeValue = this.__changeStyles(e, calculatedPosition, selected, circle, layer);
+                afterChangeValue = this.__changeStylesWithoutRange(e, calculatedPosition, selected, circle, layer);
         }
         else {
             if (calculatedPosition >= 0 && calculatedPosition <= layer.offsetWidth) {
@@ -174,9 +174,9 @@ export default class Slider extends ShallowComponent {
                     let halfOfStep = i + halfOfSteps;
                     if (calculatedPosition >= i && calculatedPosition <= i + steps) {
                         if (calculatedPosition < halfOfStep)
-                            afterChangeValue = this.__changeStyles(e, i, selected, circle, layer);
+                            afterChangeValue = this.__changeStylesWithoutRange(e, i, selected, circle, layer);
                         else if (calculatedPosition > halfOfStep)
-                            afterChangeValue = this.__changeStyles(e, i + steps, selected, circle, layer);
+                            afterChangeValue = this.__changeStylesWithoutRange(e, i + steps, selected, circle, layer);
                     }
                 }
             }
@@ -273,14 +273,10 @@ export default class Slider extends ShallowComponent {
                     let halfOfStep = i + halfOfSteps;
                     if (this.currentClassName.startsWith("sliderButtonMin")) {
                         if (calculatedPosition >= i && calculatedPosition <= i + steps) {
-                            if (calculatedPosition < halfOfStep) {
-                                circleMin.style.left = i + 'px';
-                                onAfterChangeValue = this.__changeStylesWithRange(e, selected, layer, circleMin, circleMax, i, "min");
-                            }
-                            else if (calculatedPosition > halfOfStep) {
-                                circleMin.style.left = (i + steps) + 'px';
-                                onAfterChangeValue = this.__changeStylesWithRange(e, selected, layer, circleMin, circleMax, i + steps, "min");
-                            }
+                            if (calculatedPosition < halfOfStep)
+                                onAfterChangeValue = this.__changeStylesWithRangeAndStep(e, selected, layer, circleMin, circleMax, i, "min");
+                            else if (calculatedPosition > halfOfStep)
+                                onAfterChangeValue = this.__changeStylesWithRangeAndStep(e, selected, layer, circleMin, circleMax, i + steps, "min");
 
                             if (parseInt(circleMin.style.left) >= parseInt(circleMax.style.left)) {
                                 selected.style.left = parseFloat(circleMax.style.left) + 'px';
@@ -290,14 +286,10 @@ export default class Slider extends ShallowComponent {
                     }
                     if (this.currentClassName.startsWith("sliderButtonMax")) {
                         if (calculatedPosition >= i && calculatedPosition <= i + steps) {
-                            if (calculatedPosition < halfOfStep) {
-                                circleMax.style.left = i + 'px';
-                                onAfterChangeValue = this.__changeStylesWithRange(e, selected, layer, circleMin, circleMax, i, "max");
-                            }
-                            else if (calculatedPosition > halfOfStep) {
-                                circleMax.style.left = (i + steps) + 'px';
-                                onAfterChangeValue = this.__changeStylesWithRange(e, selected, layer, circleMin, circleMax, i + steps, "max");
-                            }
+                            if (calculatedPosition < halfOfStep)
+                                onAfterChangeValue = this.__changeStylesWithRangeAndStep(e, selected, layer, circleMin, circleMax, i, "max");
+                            else if (calculatedPosition > halfOfStep)
+                                onAfterChangeValue = this.__changeStylesWithRangeAndStep(e, selected, layer, circleMin, circleMax, i + steps, "max");
 
                             if (parseInt(circleMin.style.left) >= parseInt(circleMax.style.left)) {
                                 selected.style.left = parseFloat(circleMax.style.left) + 'px';
@@ -311,10 +303,21 @@ export default class Slider extends ShallowComponent {
         }
     };
 
-    __changeStylesWithRange(e, selected, layer, circleMin, circleMax, step, state) {
-        let decideState = state === "min" ? "valueMin" : "valueMax";
+    __changeStylesWithRangeAndStep(e, selected, layer, circleMin, circleMax, step, state) {
+        let decideState;
+
+        if (state === "min") {
+            circleMin.style.left = step + 'px';
+            decideState = "valueMin";
+        }
+        else {
+            circleMax.style.left = step + 'px';
+            decideState = "valueMax";
+        }
+
         selected.style.width = (parseFloat(circleMax.style.left) - parseFloat(circleMin.style.left)) + 'px';
         selected.style.left = parseFloat(circleMin.style.left) + 'px';
+
         let calculateValue = layer.offsetWidth / (this.props.maxValue - this.props.minValue);
         let newValue = step / calculateValue;
         let lastValue = this.props.step && this.__isFloat(this.props.step) ? parseFloat(this.props.minValue + newValue).toFixed((this.props.step).toString().split(".")[1].length) : Math.round(this.props.minValue + newValue);
@@ -339,7 +342,7 @@ export default class Slider extends ShallowComponent {
         return e.target.value;
     };
 
-    __changeStyles(e, calculatedPosition, selected, circle, layer) {
+    __changeStylesWithoutRange(e, calculatedPosition, selected, circle, layer) {
         selected.style.width = calculatedPosition + 'px';
         circle.style.left = calculatedPosition + 'px';
         let calculateValue = layer.offsetWidth / (this.props.maxValue - this.props.minValue);
@@ -371,10 +374,10 @@ export default class Slider extends ShallowComponent {
         e.preventDefault();
         this.click = true;
         let onAfterChangeValue;
-        if (!this.props.range){
+        if (!this.props.range) {
             onAfterChangeValue = this.__calculateStyles(e);
 
-            if(this.props.onAfterChange){
+            if (this.props.onAfterChange) {
                 e.target.value = onAfterChangeValue;
                 e.target.parsedValue = onAfterChangeValue;
                 this.props.onAfterChange(e);
@@ -383,7 +386,7 @@ export default class Slider extends ShallowComponent {
         else if (this.props.range) {
             onAfterChangeValue = this.__calculateStylesWithRange(e);
 
-            if(this.props.onAfterChange){
+            if (this.props.onAfterChange) {
                 e.target.value = onAfterChangeValue;
                 e.target.parsedValue = onAfterChangeValue;
                 this.props.onAfterChange(e);
@@ -511,5 +514,7 @@ export default class Slider extends ShallowComponent {
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.__resize, true);
+        document.removeEventListener(this.downEvent, this.__mouseDown, true);
+        document.removeEventListener(this.upEvent, this.__mouseUp, true);
     };
 }
