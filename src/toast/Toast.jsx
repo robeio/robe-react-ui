@@ -92,7 +92,7 @@ class Toast extends ShallowComponent {
                     style={{zIndex: item.zIndex}}
                     onClick={item.onClick}>
                     <div>
-                        <img src={this.__getIcon(item)} width={36} height={36}/>
+                        <div className="rb-image"/>
                         <div
                             className="toast-item-title"
                             style={{padding: item.message ? "12px 12px 6px 12px" : "20px"}}>
@@ -108,22 +108,6 @@ class Toast extends ShallowComponent {
         }
         return arr;
     }
-
-    __getIcon(item) {
-        switch (item.type) {
-            case Constants.INFO:
-                return require('./images/info.png');
-            case Constants.ERROR:
-                return require('./images/error.png');
-            case Constants.SUCCESS:
-                return require('./images/success.png');
-            case Constants.WARNING:
-                return require('./images/warning.png');
-            default:
-                return require('./images/success.png');
-        }
-
-    };
 
     __addQueue(toast) {
         if (this.state.listToast.length >= this.props.maxVisible || (this.__queueList[0] && this.__queueList[0].id != toast.id)) {
