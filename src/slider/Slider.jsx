@@ -136,12 +136,14 @@ export default class Slider extends ShallowComponent {
                  onClick={!this.state.disabled ? this.__layerClick : null}/>
             <Col ref={this.circleDivMaxRef} className={classNameCircle}
                  style={{left: parseFloat(this.state.defaultMaxPx)}}
-                 onMouseOver={()=> this.setState({openMaxDesc: true, openMinDesc: false})}>
+                 onMouseOver={()=> this.setState({openMaxDesc: true, openMinDesc: false})}
+                 onMouseLeave={this.__closeLabelOnMouseLeave}>
             </Col>
                 {this.props.range ?
                     <Col ref={this.circleDivMinRef} className={classNameCircleMin}
                          style={{left: this.state.defaultMinPx}}
-                         onMouseOver={()=> this.setState({openMinDesc: true, openMaxDesc: false})}>
+                         onMouseOver={()=> this.setState({openMinDesc: true, openMaxDesc: false})}
+                         onMouseLeave={this.__closeLabelOnMouseLeave}>
                     </Col> : null}
                 {!this.props.closeLabel ?
                     <span>
@@ -405,6 +407,12 @@ export default class Slider extends ShallowComponent {
             this.__calculateStyles(e);
         else if (this.props.range)
             this.__calculateStylesWithRange(e);
+    };
+
+    __closeLabelOnMouseLeave() {
+        if ((this.tempRefMax === null || this.tempRefMax === undefined) || (this.tempRefMin === null || this.tempRefMin === undefined))
+            this.setState({openMaxDesc: false, openMinDesc: false});
+        else return null;
     };
 
     __isFloat(n:number):boolean {

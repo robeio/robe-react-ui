@@ -1,14 +1,16 @@
 # Change Log
 
 ## 1.1.29 -- Developing...
+* Listeners removed at Slider component when component unmounted.
+* An error that caused the label to remain on the Slider component has been fixed.
 
 ## 1.1.28
-* charts bug fixed
-* toast bug fixed
+* charts bug fixed.
+* toast bug fixed.
 
 ## 1.1.27
-* Bug fixed the Legend for Chart's components
-* Toast added icon and changed fonts
+* Bug fixed the Legend for Chart's components.
+* Toast added icon and changed fonts.
 
 ## 1.1.26
 * New prop "onAfterChange" added to Slider component.
@@ -18,15 +20,15 @@
 * New prop "unit" added to Slider component.
 * Slider "resize" problem fixed.
 * Slider now returns "event" in the onChange function.
-* In PieChart, if the depth is greater than 1, the center round is added
+* In PieChart, if the depth is greater than 1, the center round is added.
 
 ## 1.1.24
-* Updating the datagrid when the props are updated
+* Updating the datagrid when the props are updated.
 * Slider component added.
 
 ## 1.1.23
 * Rating component added.
-* Changed test tools as mocha & electron-mocha
+* Changed test tools as mocha & electron-mocha.
 
 ## 1.1.22
 * Wizard and Step bug fixed.
@@ -40,7 +42,7 @@
 * Wizard bug fixed.
 
 ## 1.1.20
-* Chart and Toast components test rewrited, Charts props updated
+* Chart and Toast components test rewrited, Charts props updated.
 * Chart bug fixed.
 * [#51](https://github.com/robeio/robe-react-ui/issues/51) fixed.
 * [#57](https://github.com/robeio/robe-react-ui/issues/57) fixed.
