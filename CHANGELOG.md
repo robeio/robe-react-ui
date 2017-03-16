@@ -3,6 +3,7 @@
 ## 1.1.29 -- Developing...
 * Listeners removed at Slider component when component unmounted.
 * An error that caused the label to remain on the Slider component has been fixed.
+* Menu tree support provided
 
 ## 1.1.28
 * charts bug fixed.

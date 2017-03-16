@@ -10,7 +10,10 @@ export default class SideMenuSample extends ShallowComponent {
     constructor(props: Object) {
         super(props);
         this.state = {
-
+            selectedItem: {
+                "text": "Users",
+                "path": "app/modules/User"
+            }
         };
     }
 
@@ -20,17 +23,23 @@ export default class SideMenuSample extends ShallowComponent {
                 <SideMenu
                     items={MenuData}
                     onChange={this.handleChange}
-                    selectedItem="app/modules/Parameters"
+                    selectedItem={this.state.selectedItem.path}
                 />
-                <span>Selected Item: <b>{this.state.selectedItem}</b></span>
+
+                <SideMenu
+                    items={MenuData}
+                    selectedItem={"app/modules/User"}
+                />
             </div>
         );
     }
 
     handleChange = (item: Object) => {
         this.setState({
-            selectedItem: item.text
+            selectedItem: item
         });
+
+        return false;
     };
 
     shouldComponentUpdate(): boolean {

@@ -1,16 +1,13 @@
 import React from "react";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
-import SideMenuItem from "./SideMenuItem";
+import Arrays from "robe-react-commons/lib/utils/Arrays";
+import FaIcon from "../faicon/FaIcon";
+import {Collapse, ListGroup, ListGroupItem} from "react-bootstrap";
 import "./SideMenu.css";
 
-/**
- * SideMenu is a collapsable accordion component.
- * Currently it supports 2 level of items.
- * @export
- * @class SideMenu
- * @extends {ShallowComponent}
- */
+
 export default class SideMenu extends ShallowComponent {
+
 
     /**
      * Properties of the component
@@ -25,63 +22,118 @@ export default class SideMenu extends ShallowComponent {
         /**
          * Items of the menu. Must be a valid json map with a root element.
          */
-        items: React.PropTypes.object.isRequired,
+        items: React.PropTypes.array.isRequired,
         /**
          * Change event of the sidemenu.
          * It is triggered if the selected sub-item changes, not collapsed menu.
          */
-        onChange: React.PropTypes.func
+        onChange: React.PropTypes.func,
+        /**
+         * key of given map array `items`
+         */
+        valueField: React.PropTypes.any,
+        /**
+         * presented text of give map array `items`
+         */
+        textField: React.PropTypes.string,
     };
 
     static defaultProps = {
-        selectedItem: ""
+        selectedItem: "",
+        textField: "text",
+        valueField: "path",
     };
 
-    /**
-     * Holds the selected child of the menu
-     *
-     * @type {Object}
-     */
-    __selectedItem: undefined;
+    constructor(props) {
+        super(props);
+        this.componentWillReceiveProps(props)
+    }
 
-    render(): Object {
+    componentWillReceiveProps(nextProps) {
+        this.state = {
+            selectedItem: nextProps.selectedItem
+        }
+    }
+
+    __selectModule = [];
+
+    render() {
+        this.__selectModule = this.__findModule(this.props.items, this.state.selectedItem);
         return (
-            <div className="SideMenu-wrapper">
-
-                <ul className="SideMenu-menu-content">
-                    {this.__renderMenuItems() }
-                </ul>
-            </div>
-
-        );
+            <ListGroup className="side-menu">
+                {this.renderItems(this.props.items)}
+            </ListGroup>)
     }
 
-    __renderMenuItems(): Object {
-        let itemComps = [];
-        let children = this.props.items.items;
 
-        for (let i = 0; i < children.length; i++) {
-            let child = children[i];
-            itemComps.push(<SideMenuItem
-                key={i}
-                item={child}
-                onChange={this.__onChange}
-                selectedItem={this.props.selectedItem}
-            />);
+    renderItems(menu) {
+        let itemArr = [];
+        if (!menu || menu.length <= 0) {
+            return itemArr;
         }
-        return itemComps;
+        let children = [];
+
+        for (let i = 0; i < menu.length; i++) {
+            let item = menu[i];
+            if (item.items) {
+                children = this.renderItems(item.items);
+            }
+            let isActive = this.__isActiveModule(item[this.props.valueField]);
+            itemArr.push(
+                <div style={{marginLeft: 27}} key={item[this.props.textField]}>
+                    <ListGroupItem
+                        active={isActive}
+                        onClick={this.__onChange.bind(undefined, item)}>
+                        <FaIcon code={item.icon} fixed={true}/>&nbsp;&nbsp;
+                        {item[this.props.textField]}
+                    </ListGroupItem>
+                    <Collapse in={isActive}>
+                        <div>
+                            {children}
+                        </div>
+                    </Collapse>
+                </div>);
+        }
+        return itemArr
     }
 
-    __onChange(e: Object, menuItem: Object, subMenuItem: Object) {
-        if (subMenuItem === undefined && this.__selectedItem && this.__selectedItem !== menuItem) {
-            this.__selectedItem.setState({
-                active: false
-            });
-            this.__selectedItem.clearSelection();
+    __onChange(item) {
+        if (this.props.onChange) {
+            let result = this.props.onChange(item);
+            if (result !== false) {
+                this.setState({selectedItem: item[this.props.valueField]});
+            }
         }
-        this.__selectedItem = menuItem;
-        if (this.props.onChange && subMenuItem !== undefined) {
-            this.props.onChange(subMenuItem.props.item);
+        else {
+            this.setState({selectedItem: item[this.props.valueField]});
         }
     }
+
+    __findModule(items, value) {
+        let arr = [];
+        if (!items || items.length <= 0) {
+            return arr;
+        }
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            if (item[this.props.valueField] === value) {
+                arr.push(value);
+                return arr;
+            }
+            if (item.items) {
+                arr = this.__findModule(item.items, value);
+                if (arr.length > 0) {
+                    arr.push(item[this.props.valueField]);
+                    return arr;
+                }
+            }
+        }
+        return arr;
+    }
+
+    __isActiveModule(value) {
+        let index = Arrays.indexOf(this.__selectModule, value);
+        return index !== -1;
+    }
+
 }

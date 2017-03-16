@@ -1,68 +1,63 @@
-{
-    "text": "Menu",
-    "path": "root",
-    "module": "Root",
-    "icon": null,
+[
+  {
+    "text": "Manager",
+    "path": "Manager",
+    "module": "Manager",
+    "icon": "fa-cogs",
     "items": [
-        {
-            "text": "Manager",
-            "path": "Manager",
-            "module": "Manager",
-            "icon": "fa-cogs",
-            "items": [
-                {
-                    "text": "Dashboard",
-                    "path": "app/modules/Dashboard",
-                    "module": "Dashboard",
-                    "icon": "fa-tachometer"
-                },
-                {
-                    "text": "Mail Templates",
-                    "path": "app/modules/MailTemplate",
-                    "module": "MailTemplate",
-                    "icon": "fa-envelope"
-                },
-                {
-                    "text": "Quartz Jobs",
-                    "path": "app/modules/QuartzJob",
-                    "module": "QuartzJob",
-                    "icon": "fa-bell"
-                },
-                {
-                    "text": "Parameters",
-                    "path": "app/modules/Parameters",
-                    "module": "Parameters",
-                    "icon": "fa-steam"
-                },
-                {
-                    "text": "Users",
-                    "path": "app/modules/User",
-                    "index": 1,
-                    "module": "User",
-                    "icon": "fa-users"
-                }
-            ]
-        },
-        {
-            "text": "Guest",
-            "path": "Guest",
-            "index": 1,
-            "module": "Guest",
-            "icon": "fa-cogs",
-            "items": [
-                {
-                    "text": "Documents",
-                    "path": "app/modules/Documents",
-                    "module": "Documents",
-                    "icon": "fa-file-text-o"
-                },
-                {
-                    "text": "Tasks",
-                    "path": "app/modules/Tasks",
-                    "module": "Tasks",
-                    "icon": "fa-check-square-o"
-                }
-            ]
-        }
+      {
+        "text": "Dashboard",
+        "path": "app/modules/Dashboard",
+        "module": "Dashboard",
+        "icon": "fa-tachometer"
+      },
+      {
+        "text": "Mail Templates",
+        "path": "app/modules/MailTemplate",
+        "module": "MailTemplate",
+        "icon": "fa-envelope"
+      },
+      {
+        "text": "Users",
+        "path": "app/modules/User",
+        "module": "User",
+        "icon": "fa-users",
+        "items": [
+          {
+            "text": "Documents",
+            "path": "app/modules/Documentss",
+            "module": "Documents",
+            "icon": "fa-file-text-o"
+          },
+          {
+            "text": "Tasks",
+            "path": "app/modules/Taskss",
+            "module": "Tasks",
+            "icon": "fa-check-square-o"
+          }
+        ]
+      }
     ]
-}
+  },
+  {
+    "text": "Guest",
+    "path": "Guest",
+    "index": 1,
+    "module": "Guest",
+    "icon": "fa-cogs",
+    "items": [
+      {
+        "text": "Documents",
+        "path": "app/modules/Documents",
+        "module": "Documents",
+        "icon": "fa-file-text-o"
+      },
+      {
+        "text": "Tasks",
+        "path": "app/modules/Tasks",
+        "module": "Tasks",
+        "icon": "fa-check-square-o"
+      }
+    ]
+  }
+]

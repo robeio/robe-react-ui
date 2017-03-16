@@ -1,74 +1,43 @@
-.SideMenu-wrapper {
-    margin-top: 20px;
-    z-index: 1000;
-    position: relative;
-    height: 100%;
-    overflow-y: auto;
-    background: #FFF;
+.side-menu .list-group-item {
+    border: none !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+    padding: 5px 15px;
+    color: #444;
+    font-weight: 500;
+    transition: .3s;
     cursor: pointer;
+    outline: none;
 }
 
-.SideMenu-wrapper ul {
-    list-style-type: none;
-    margin-left: -20px;
+.side-menu .list-group-item:hover {
+    color: #2980b9;
 }
 
-.SideMenu-wrapper div {
-    color: black;
-    margin-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    cursor: pointer;
-    display: block;
-
+.side-menu .collapsing > .list-group-item.active,
+.side-menu .collapse > .list-group-item.active,
+.side-menu .collapse.in > .list-group-item.active {
+    color: #f39c12;
 }
 
-.SideMenu-wrapper i {
-    margin-right: 5px;
-    margin-left: 5px;
-    text-decoration: none;
+.side-menu .collapsing > .list-group-item,
+.side-menu .collapse > .list-group-item,
+.side-menu .collapse.in > .list-group-item {
+    font-weight: inherit;
+    padding: 5px 15px;
 }
 
-.SideMenu-wrapper li {
-    list-style-type: none;
-    display: block;
-    text-decoration: none;
+.side-menu > :focus {
+    outline: none;
 }
 
-.SideMenu-wrapper li :hover {
-    background: transparent;
-    text-decoration: none;
+.side-menu .list-group-item.active,
+.side-menu .list-group-item.active:focus,
+.side-menu .list-group-item.active:hover {
+    color: #2980b9;
+    border: none !important;
 }
 
-.SideMenu-menu-content {
-    padding-left: 20px;
-}
-
-.SideMenu-item {
-    list-style-type: none;
-    margin-top: 5px;
-    display: block;
-    margin-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.SideMenu-item :hover {
-    background: #eee;
-}
-
-.SideMenu-item-active {
-    border-bottom: #eeeeee solid 1px;
-}
-
-.SideMenu-subitem-active {
-    background: lightgrey;
-}
-
-.SideMenu-subitem-active div {
-    background: #eee;
-}
-
-.SideMenu-subitem-active div:hover {
-    background: #eee;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border-bottom-color: #ddd;
 }
