@@ -7,7 +7,7 @@ import MenuData from "./MenuData.json";
 export default class SideMenuSample extends ShallowComponent {
 
 
-    constructor(props: Object) {
+    constructor(props) {
         super(props);
         this.state = {
             selectedItem: {
@@ -17,7 +17,7 @@ export default class SideMenuSample extends ShallowComponent {
         };
     }
 
-    render(): Object {
+    render() {
         return (
             <div>
                 <SideMenu
@@ -25,24 +25,19 @@ export default class SideMenuSample extends ShallowComponent {
                     onChange={this.handleChange}
                     selectedItem={this.state.selectedItem.path}
                 />
-
-                <SideMenu
-                    items={MenuData}
-                    selectedItem={"app/modules/User"}
-                />
             </div>
         );
     }
 
-    handleChange = (item: Object) => {
+    handleChange = (item) => {
         this.setState({
             selectedItem: item
         });
-
+        //If the selectedItem is to be updated in props, it must be given false, otherwise you do not need to return
         return false;
     };
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate() {
         return true;
     }
 }
