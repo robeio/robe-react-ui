@@ -109,7 +109,7 @@ class Toast extends ShallowComponent {
         return arr;
     }
 
-    __addQueue(toast) {
+    __addQueue(toast: Object) {
         if (this.state.listToast.length >= this.props.maxVisible || (this.__queueList[0] && this.__queueList[0].id != toast.id)) {
             if (!Arrays.isExistByKey(this.__queueList, "id", toast)) {
                 this.__queueList.push(toast);
@@ -124,7 +124,7 @@ class Toast extends ShallowComponent {
 
     }
 
-    __addToast(toast) {
+    __addToast(toast: Object) {
         let list = this.state.listToast.slice(0);
         let item = this.state.listToast[this.state.listToast.length - 1];
         toast.zIndex = item ? item.zIndex - 1 : this.props.maxVisible;
@@ -139,7 +139,7 @@ class Toast extends ShallowComponent {
         }, this.__removeToast.bind(undefined, toast));
     }
 
-    __removeToast(toast) {
+    __removeToast(toast: Object) {
         let element = document.getElementById(toast.id);
         if (element === undefined) {
             return;
@@ -164,7 +164,7 @@ class Toast extends ShallowComponent {
         }, toast.timeOut);
     }
 
-    __closeOnClick(e) {
+    __closeOnClick(e: element) {
         let id = e.target.getAttribute("id");
         let element = e.target;
         if (!id) {
@@ -189,7 +189,7 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    info(message, title, timeOut, onClick) {
+    info(message: string, title: string, timeOut: number, onClick: func) {
         this.__addQueue({
             id: this.__getTime(),
             type: Constants.INFO,
@@ -207,7 +207,7 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    success(message, title, timeOut, onClick) {
+    success(message: string, title: string, timeOut: number, onClick: func) {
         this.__addQueue({
             id: this.__getTime(),
             type: Constants.SUCCESS,
@@ -225,7 +225,7 @@ class Toast extends ShallowComponent {
      * @param timeOut
      * @param onClick
      */
-    warning(message, title, timeOut, onClick) {
+    warning(message: string, title: string, timeOut: number, onClick: func) {
         this.__addQueue({
             id: this.__getTime(),
             type: Constants.WARNING,
@@ -258,7 +258,7 @@ class Toast extends ShallowComponent {
      * Toast.configuration({maxVisible:5,position:"top-right"})
      * @param props
      */
-    static configuration(props) {
+    static configuration(props: Object) {
         ReactDOM.render(<Toast {...props} />, this.containerNode);
 
     }
