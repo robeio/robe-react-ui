@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.31 -- Developing...
+## 1.1.32 -- Developing...
+
+## 1.1.31
 * Fixed bug in SideMenu
 * Comment added to methods in Toast
 
