@@ -2,7 +2,7 @@
     border: none !important;
     background-color: transparent !important;
     text-decoration: none !important;
-    padding: 5px 15px;
+    padding: 5px 0;
     color: #444;
     font-weight: 500;
     transition: .3s;
@@ -14,17 +14,11 @@
     color: #2980b9;
 }
 
-.side-menu .collapsing > .list-group-item.active,
-.side-menu .collapse > .list-group-item.active,
-.side-menu .collapse.in > .list-group-item.active {
-    color: #f39c12;
-}
-
 .side-menu .collapsing > .list-group-item,
 .side-menu .collapse > .list-group-item,
 .side-menu .collapse.in > .list-group-item {
     font-weight: inherit;
-    padding: 5px 15px;
+    padding: 5px 0;
 }
 
 .side-menu > :focus {

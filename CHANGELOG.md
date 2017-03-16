@@ -5,6 +5,7 @@
 ## 1.1.30
 * removed retainless value from .babelrc
 * added DisplayAsText to the field model of DataGrid.
+* Fixed bug in SideMenu
 
 ## 1.1.29
 * Listeners removed at Slider component when component unmounted.

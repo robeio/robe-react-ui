@@ -61,12 +61,12 @@ export default class SideMenu extends ShallowComponent {
         this.__selectModule = this.__findModule(this.props.items, this.state.selectedItem);
         return (
             <ListGroup className="side-menu">
-                {this.renderItems(this.props.items)}
+                {this.renderItems(this.props.items, true)}
             </ListGroup>)
     }
 
 
-    renderItems(menu) {
+    renderItems(menu, isRoot) {
         let itemArr = [];
         if (!menu || menu.length <= 0) {
             return itemArr;
@@ -76,11 +76,11 @@ export default class SideMenu extends ShallowComponent {
         for (let i = 0; i < menu.length; i++) {
             let item = menu[i];
             if (item.items) {
-                children = this.renderItems(item.items);
+                children = this.renderItems(item.items, false);
             }
             let isActive = this.__isActiveModule(item[this.props.valueField]);
             itemArr.push(
-                <div style={{marginLeft: 27}} key={item[this.props.textField]}>
+                <div style={{marginLeft: isRoot ? 0 : 20}} key={item[this.props.textField]}>
                     <ListGroupItem
                         active={isActive}
                         onClick={this.__onChange.bind(undefined, item)}>
