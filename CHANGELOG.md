@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.29 -- Developing...
+## 1.1.30 -- Developing...
+
+## 1.1.29
 * Listeners removed at Slider component when component unmounted.
 * An error that caused the label to remain on the Slider component has been fixed.
 * Menu tree support provided
