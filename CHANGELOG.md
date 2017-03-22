@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.32 -- Developing...
+* searchbox listener removed at SearchBox component when component unmounted.
 
 ## 1.1.31
 * Fixed bug in SideMenu

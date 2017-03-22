@@ -13,7 +13,6 @@ describe("googlemap/SearchBox", () => {
         let props = {};
         let wrapper = TestUtils.mount(props, SearchBox, props);
         chai.assert.equal(wrapper.find(SearchBox).length, 1);
-        wrapper.unmount();
     });
     it("handleChange", (done) => {
         let props = {
