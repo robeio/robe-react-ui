@@ -22,7 +22,7 @@
         if (0 === r[e])return Promise.resolve();
         if (r[e])return r[e][2];
         var n = document.getElementsByTagName("head")[0], i = document.createElement("script");
-        i.type = "text/javascript", i.charset = "utf-8", i.async = !0, i.timeout = 12e4, t.nc && i.setAttribute("nonce", t.nc), i.src = t.p + "" + e + ".bundle.eed3558b6e8058aa1670.js";
+        i.type = "text/javascript", i.charset = "utf-8", i.async = !0, i.timeout = 12e4, t.nc && i.setAttribute("nonce", t.nc), i.src = t.p + "" + e + ".bundle.4f7866854869a86fcee3.js";
         var o = setTimeout(a, 12e4);
         i.onerror = i.onload = a;
         var s = new Promise(function (t, a) {
@@ -10170,9 +10170,10 @@
                     value: "placeholder"
                 }, this.props.placeholder));
                 for (var a = 0; a < e.length; a++) {
-                    var n = e[a];
+                    var n = e[a], r = h.Arrays.indexOf(this.props.disabledValues, n[this.props.valueField]), i = r !== -1 || !!n.disabled && n.disabled;
                     t.push(u.default.createElement("option", {
                         key: n[this.props.valueField],
+                        disabled: i,
                         value: n[this.props.valueField]
                     }, n[this.props.textField]))
                 }
@@ -10232,11 +10233,12 @@
             key: "__renderMultiItems", value: function (e) {
                 var t = [];
                 for (var a in e) {
-                    var n = e[a];
+                    var n = e[a], r = h.Arrays.indexOf(this.props.disabledValues, n[this.props.valueField]), i = r !== -1 ? void 0 : !!n.disabled && n.disabled ? void 0 : this.__onSelectMultiItem;
                     t.push(u.default.createElement("div", {
                         key: n[this.props.valueField],
                         id: n[this.props.valueField],
-                        onClick: this.__onSelectMultiItem
+                        style: {opacity: void 0 === i ? .7 : 1},
+                        onClick: i
                     }, n[this.props.textField]))
                 }
                 return t
@@ -10333,7 +10335,8 @@
         searchable: u.default.PropTypes.bool,
         disabled: u.default.PropTypes.bool,
         hidden: u.default.PropTypes.bool,
-        validationDisplay: u.default.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: u.default.PropTypes.oneOf(["overlay", "block"]),
+        disabledValues: u.default.PropTypes.array
     }, v.defaultProps = {
         items: [],
         placeholder: h.Application.i18n(v, "inputs.SelectInput", "placeholder"),
@@ -10345,7 +10348,8 @@
         disabled: !1,
         readOnly: !1,
         hidden: !1,
-        validationDisplay: "block"
+        validationDisplay: "block",
+        disabledValues: []
     }, t.default = v
 }, function (e, t, a) {
     "use strict";
@@ -11120,8 +11124,7 @@
                 var t = this, a = [];
                 return m.Maps.forEach(e, function (e, n) {
                     var r = m.Arrays.isExistByKey(t.state.selectedFiles, "key", e), i = e.isUploaded ? d.default.createElement(S.default, {
-                            code: "fa-download",
-                            size: "fa-sm",
+                            code: "fa-download", size: "fa-sm",
                             onClick: t.downloadFile.bind(void 0, e)
                         }) : null, o = e.isUploaded ? null : d.default.createElement(S.default, {
                             code: "fa-upload",
@@ -11132,7 +11135,9 @@
                     var l = e.isUploaded ? !e.isUploaded : e.uploading;
                     a.push(d.default.createElement(C.default, {
                         focused: !e.isUploaded,
-                        selected: r, loading: l, key: e.key
+                        selected: r,
+                        loading: l,
+                        key: e.key
                     }, d.default.createElement("div", {className: "rb-thumbnail-toolbar"}, d.default.createElement("div", {className: "rb-thumbnail-toolbar-item select"}, d.default.createElement(S.default, {
                         code: r ? "fa-check-square-o" : "fa-square-o",
                         size: "fa-sm",
@@ -12338,7 +12343,7 @@
                 yy: r("y")
             },
             preparse: function (e) {
-                return e.replace(/\u200f/g, "").replace(/،/g, ",");
+                return e.replace(/\u200f/g, "").replace(/،/g, ",")
             },
             postformat: function (e) {
                 return e.replace(/\d/g, function (e) {
@@ -18267,7 +18272,7 @@
                 return 12 === e && (e = 0), "రాత్రి" === t ? e < 4 ? e : e + 12 : "ఉదయం" === t ? e : "మధ్యాహ్నం" === t ? e >= 10 ? e : e + 12 : "సాయంత్రం" === t ? e + 12 : void 0
             },
             meridiem: function (e, t, a) {
-                return e < 4 ? "రాత్రి" : e < 10 ? "ఉదయం" : e < 17 ? "మధ్యాహ్నం" : e < 20 ? "సాయంత్రం" : "రాత్రి"
+                return e < 4 ? "రాత్రి" : e < 10 ? "ఉదయం" : e < 17 ? "మధ్యాహ్నం" : e < 20 ? "సాయంత్రం" : "రాత్రి";
             },
             week: {dow: 0, doy: 6}
         });
@@ -19563,7 +19568,9 @@
     w.propTypes = v, w.defaultProps = k, w.contextTypes = _, t.a = a.i(b.bsClass)("modal-header", w)
 }, function (e, t, a) {
     "use strict";
-    var n = a(3), r = a.n(n), i = a(6), o = a.n(i), s = a(2), l = a.n(s), c = a(5), u = a.n(c), d = a(4), p = a.n(d), m = a(7), h = a.n(m), f = a(0), g = a.n(f), b = a(15), y = a.n(b), v = a(9), k = {componentClass: y.a}, _ = {componentClass: "h4"}, w = function (e) {
+    var n = a(3), r = a.n(n), i = a(6), o = a.n(i), s = a(2), l = a.n(s), c = a(5), u = a.n(c), d = a(4), p = a.n(d), m = a(7), h = a.n(m), f = a(0), g = a.n(f), b = a(15), y = a.n(b), v = a(9), k = {
+        componentClass: y.a
+    }, _ = {componentClass: "h4"}, w = function (e) {
         function t() {
             return l()(this, t), u()(this, e.apply(this, arguments))
         }
@@ -20562,7 +20569,7 @@
                 }
             } else if ("object" === p) {
                 var x = "", E = String(e);
-                o("31", "[object Object]" === E ? "object with keys {" + Object.keys(e).join(", ") + "}" : E, x)
+                o("31", "[object Object]" === E ? "object with keys {" + Object.keys(e).join(", ") + "}" : E, x);
             }
         }
         return f
@@ -22679,9 +22686,7 @@
                         onClick: this.__toogleCode
                     }, (this.state.showCode ? "Hide" : "Show") + " Code")) : void 0;
                 return c.default.createElement("div", null, c.default.createElement("h3", {style: {marginTop: 0}}, this.props.header), c.default.createElement("p", null, c.default.createElement("code", null, "<" + this.props.header + ">"), " ", this.props.desc), c.default.createElement("br", null), c.default.createElement(u.Tabs, {
-                    defaultActiveKey: "sample",
-                    activeKey: this.state.activeTab,
-                    onSelect: this.__onTabSelect
+                    defaultActiveKey: "sample", activeKey: this.state.activeTab, onSelect: this.__onTabSelect
                 }, c.default.createElement(u.Tab, {
                     title: d.Application.i18n(t, "components.Renderer", "example"),
                     eventKey: "sample"
@@ -23832,8 +23837,7 @@
                     style: t.blStyle
                 }), c.default.createElement("hr", null), c.default.createElement("p", null, "Please visit ", c.default.createElement("a", {
                     href: "http://fontawesome.io/icons/",
-                    target: "_blank",
-                    rel: "noopener noreferrer"
+                    target: "_blank", rel: "noopener noreferrer"
                 }, "fontawesome.io"), " for more."))
             }
         }]), t
@@ -25051,14 +25055,15 @@
         function t(e) {
             r(this, t);
             var a = i(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this, e));
-            return a.state = {screenKeyboardValue: "", screenKeyboardValueWithNumeric: "", screenKeyboardDefault: ""}, a
+            return a.state = {
+                screenKeyboardValue: "",
+                screenKeyboardValueWithNumeric: "", screenKeyboardDefault: ""
+            }, a
         }
 
         return o(t, e), s(t, [{
             key: "render", value: function () {
-                return c.default.createElement("span", null, c.default.createElement("div", {
-                    style: {marginBottom: 230}
-                }, c.default.createElement(g.ControlLabel, null, b.Application.i18n(t, "inputs.ScreenKeyboardSample", "keyboardOne")), c.default.createElement(d.default, {
+                return c.default.createElement("span", null, c.default.createElement("div", {style: {marginBottom: 230}}, c.default.createElement(g.ControlLabel, null, b.Application.i18n(t, "inputs.ScreenKeyboardSample", "keyboardOne")), c.default.createElement(d.default, {
                     id: "screenKeyboardSample",
                     name: "screenKeyboardValue",
                     value: this.state.screenKeyboardValue,
@@ -25144,7 +25149,8 @@
         }
     }(), l = a(0), c = n(l), u = a(11), d = n(u), p = a(166), m = n(p), h = [{key: "en", value: "English"}, {
         key: "tr",
-        value: "Turkish"
+        value: "Turkish",
+        disabled: !0
     }, {key: "kr", value: "Kurdish"}], f = function (e) {
         function t(e) {
             r(this, t);
@@ -25168,6 +25174,7 @@
                     name: "MultiSelect",
                     multi: !0,
                     items: h,
+                    disabledValues: ["kr"],
                     value: this.state.MultiSelect,
                     textField: "value",
                     valueField: "key",
@@ -26153,7 +26160,7 @@
                 writable: !0,
                 configurable: !0
             }
-        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t)
     }
 
     Object.defineProperty(t, "__esModule", {value: !0});
@@ -26959,10 +26966,10 @@
                     bsStyle: "info",
                     onClick: this.toastMessage("info")
                 }, u.Application.i18n(t, "toast.ToastSample", "info")), c.default.createElement(m.Button, {
-                    bsStyle: "warning",
-                    onClick: this.toastMessage("warning")
+                    bsStyle: "warning", onClick: this.toastMessage("warning")
                 }, u.Application.i18n(t, "toast.ToastSample", "warning")), c.default.createElement(m.Button, {
-                    bsStyle: "danger", onClick: this.toastMessage("error")
+                    bsStyle: "danger",
+                    onClick: this.toastMessage("error")
                 }, u.Application.i18n(t, "toast.ToastSample", "error"))), c.default.createElement("br", null), c.default.createElement("br", null), c.default.createElement("p", null, u.Application.i18n(t, "toast.ToastSample", "paragraphTwo")), c.default.createElement(v.default, {className: "javascript"}, x.default), c.default.createElement(b.default, {
                     label: u.Application.i18n(t, "toast.ToastSample", "numericLabel"),
                     name: "numMaxVisible",
@@ -28853,7 +28860,7 @@
             key: "__cellRenderer", value: function (e, t, a) {
                 var n = t[e];
                 if (n.visible !== !1) {
-                    var r = a[n.name], i = h.default.getDisplayAsText(n.type, n, r);
+                    var r = a[n.name], i = n.displayAsText ? n.displayAsText(n.type, n, r, a) : h.default.getDisplayAsText(n.type, n, r, a);
                     return c.default.createElement("td", {key: n.name}, i)
                 }
             }
@@ -29189,13 +29196,13 @@
                     case"decimal":
                     case"date":
                     case"money":
-                        void 0 !== r[0] && "" !== r[0] && s.push([a.name, ">=", r[0]]), void 0 !== r[1] && "" !== r[1] && s.push([a.name, "<=", r[1]]);
+                        void 0 !== r[0] && "" !== r[0] && s.push([a.name, ">=", r[0]]),
+                        void 0 !== r[1] && "" !== r[1] && s.push([a.name, "<=", r[1]]);
                         break;
                     default:
                         return !0
                 }
-                return this.__propsOnChange(a.name, r, s),
-                    !0
+                return this.__propsOnChange(a.name, r, s), !0
             }
         }, {
             key: "__propsOnChange", value: function (e, t, a) {
@@ -29893,6 +29900,10 @@
                     var e = document.getElementById("searchBoxInput");
                     this.searchBox = new this.props.apiParams.maps.places.SearchBox(e), this.searchBox.addListener("places_changed", this.onPlacesChanged)
                 } else console.warn("Please be sure that apiParams prop is a not undefined")
+            }
+        }, {
+            key: "componentWillUnmount", value: function () {
+                this.props.apiParams.maps.event.clearInstanceListeners(this.searchBox)
             }
         }]), t
     }(u.ShallowComponent);
@@ -30762,28 +30773,28 @@
             }
         }, {
             key: "render", value: function () {
-                return this.__selectModule = this.__findModule(this.props.items, this.state.selectedItem), c.default.createElement(g.ListGroup, {className: "side-menu"}, this.renderItems(this.props.items))
+                return this.__selectModule = this.__findModule(this.props.items, this.state.selectedItem), c.default.createElement(g.ListGroup, {className: "side-menu"}, this.renderItems(this.props.items, !0))
             }
         }, {
-            key: "renderItems", value: function (e) {
-                var t = [];
-                if (!e || e.length <= 0)return t;
-                for (var a = [], n = 0; n < e.length; n++) {
-                    var r = e[n];
-                    r.items && (a = this.renderItems(r.items));
-                    var i = this.__isActiveModule(r[this.props.valueField]);
-                    t.push(c.default.createElement("div", {
-                        style: {marginLeft: 27},
-                        key: r[this.props.textField]
+            key: "renderItems", value: function (e, t) {
+                var a = [];
+                if (!e || e.length <= 0)return a;
+                for (var n = [], r = 0; r < e.length; r++) {
+                    var i = e[r];
+                    i.items && (n = this.renderItems(i.items, !1));
+                    var o = this.__isActiveModule(i[this.props.valueField]);
+                    a.push(c.default.createElement("div", {
+                        style: {marginLeft: t ? 0 : 20},
+                        key: i[this.props.textField]
                     }, c.default.createElement(g.ListGroupItem, {
-                        active: i,
-                        onClick: this.__onChange.bind(void 0, r)
+                        active: o,
+                        onClick: this.__onChange.bind(void 0, i)
                     }, c.default.createElement(f.default, {
-                        code: r.icon,
+                        code: i.icon,
                         fixed: !0
-                    }), "  ", r[this.props.textField]), c.default.createElement(g.Collapse, {in: i}, c.default.createElement("div", null, a))))
+                    }), "  ", i[this.props.textField]), c.default.createElement(g.Collapse, {in: o}, c.default.createElement("div", null, n))))
                 }
-                return t
+                return a
             }
         }, {
             key: "__onChange", value: function (e) {
@@ -31156,7 +31167,7 @@
     }
 
     function r(e, t) {
-        if (!(e instanceof t))throw new TypeError("Cannot call a class as a function")
+        if (!(e instanceof t))throw new TypeError("Cannot call a class as a function");
     }
 
     function i(e, t) {
@@ -32106,7 +32117,7 @@
 }, function (e, t, a) {
     t = e.exports = a(12)(), t.push([e.i, ".iconsInterval {\n    padding-right: 1px;\n    cursor: pointer;\n}\n\n.iconsIntervalDisabled {\n    padding-right: 1px;\n}\n\n.selectedStar {\n    color: #efef03;\n}", ""])
 }, function (e, t, a) {
-    t = e.exports = a(12)(), t.push([e.i, ".side-menu .list-group-item {\n    border: none !important;\n    background-color: transparent !important;\n    text-decoration: none !important;\n    padding: 5px 15px;\n    color: #444;\n    font-weight: 500;\n    transition: .3s;\n    cursor: pointer;\n    outline: none;\n}\n\n.side-menu .list-group-item:hover {\n    color: #2980b9;\n}\n\n.side-menu .collapsing > .list-group-item.active,\n.side-menu .collapse > .list-group-item.active,\n.side-menu .collapse.in > .list-group-item.active {\n    color: #f39c12;\n}\n\n.side-menu .collapsing > .list-group-item,\n.side-menu .collapse > .list-group-item,\n.side-menu .collapse.in > .list-group-item {\n    font-weight: inherit;\n    padding: 5px 15px;\n}\n\n.side-menu > :focus {\n    outline: none;\n}\n\n.side-menu .list-group-item.active,\n.side-menu .list-group-item.active:focus,\n.side-menu .list-group-item.active:hover {\n    color: #2980b9;\n    border: none !important;\n}\n\n.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {\n    border-bottom-color: #ddd;\n}", ""])
+    t = e.exports = a(12)(), t.push([e.i, ".side-menu .list-group-item {\n    border: none !important;\n    background-color: transparent !important;\n    text-decoration: none !important;\n    padding: 5px 0;\n    color: #444;\n    font-weight: 500;\n    transition: .3s;\n    cursor: pointer;\n    outline: none;\n}\n\n.side-menu .list-group-item:hover {\n    color: #2980b9;\n}\n\n.side-menu .collapsing > .list-group-item,\n.side-menu .collapse > .list-group-item,\n.side-menu .collapse.in > .list-group-item {\n    font-weight: inherit;\n    padding: 5px 0;\n}\n\n.side-menu > :focus {\n    outline: none;\n}\n\n.side-menu .list-group-item.active,\n.side-menu .list-group-item.active:focus,\n.side-menu .list-group-item.active:hover {\n    color: #2980b9;\n    border: none !important;\n}\n\n.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {\n    border-bottom-color: #ddd;\n}", ""])
 }, function (e, t, a) {
     t = e.exports = a(12)(), t.push([e.i, ".side-panel-left {\n    position: fixed;\n    height: 100%;\n    z-index: 998;\n    top: 0;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    transition: 0.5s;\n    background-color: white;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    padding: 10px;\n}\n\n.side-panel-right {\n    position: fixed;\n    height: 100%;\n    z-index: 998;\n    top: 0;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    transition: 0.5s;\n    background-color: white;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    padding: 10px;\n}", ""])
 }, function (e, t, a) {
@@ -43885,7 +43896,7 @@
 }, function (e, t) {
     e.exports = 'import React from "react";\nimport TextInput from "robe-react-ui/lib/inputs/TextInput";\nimport NumericInput from "robe-react-ui/lib/inputs/NumericInput";\nimport ScreenKeyboard from "robe-react-ui/lib/inputs/screenkeyboard/ScreenKeyboard";\nimport { ControlLabel } from "react-bootstrap";\nimport {Application, ShallowComponent} from "robe-react-commons";\n\nexport default class ScreenKeyboardSample extends ShallowComponent {\n    constructor(props:Object) {\n        super(props);\n        this.state = {\n            screenKeyboardValue: "",\n            screenKeyboardValueWithNumeric: "",\n            screenKeyboardDefault: ""\n        };\n    }\n\n    render():Object {\n        return (\n            <span>\n                <div style={{marginBottom:230}}>\n                    <ControlLabel>{Application.i18n(ScreenKeyboardSample, "inputs.ScreenKeyboardSample", "keyboardOne")}</ControlLabel>\n                    <TextInput\n                        id="screenKeyboardSample" // id -> required\n                        name="screenKeyboardValue"\n                        value={this.state.screenKeyboardValue}\n                        onChange={this.__handleChange}\n                    />\n                    <ScreenKeyboard inputId="screenKeyboardSample"\n                                    language="tr_TR"\n                                    showOnMobile\n                                    languageText="Türkçe Q"\n                                    onChange={this.__onChangeTextKeyboard}\n                    />\n                </div>\n\n                <div style={{marginBottom:200}}>\n                    <ControlLabel>{Application.i18n(ScreenKeyboardSample, "inputs.ScreenKeyboardSample", "keyboardTwo")}</ControlLabel>\n                    <NumericInput\n                        id="screenKeyboardSample1" // id -> required\n                        name="screenKeyboardValueWithNumeric"\n                        value={this.state.screenKeyboardValueWithNumeric}\n                        onChange={this.__handleChange}\n                    />\n                    <ScreenKeyboard inputId="screenKeyboardSample1"\n                                    language="numeric"\n                                    onChange={this.__onChangeNumericKeyboard}\n                    />\n                </div>\n\n                <div style={{marginBottom:230}}>\n                    <ControlLabel>{Application.i18n(ScreenKeyboardSample, "inputs.ScreenKeyboardSample", "keyboardThree")}</ControlLabel><br/>\n                    <span>{Application.i18n(ScreenKeyboardSample, "inputs.ScreenKeyboardSample", "clickedKey")}</span>\n                    <ControlLabel>{this.state.screenKeyboardDefault}</ControlLabel>\n                   <ScreenKeyboard onChange={this.__onChangeDefaultKeyboard}\n                                   languageText="English -- Draggable Area --"\n                   />\n                </div>\n            </span>\n        );\n    }\n\n    __onChangeTextKeyboard(e:Object, currentValue:string) {\n        this.setState({screenKeyboardValue: currentValue});\n        console.log(e.target.value, currentValue);\n    };\n\n    __onChangeNumericKeyboard(e:Object, currentValue:string) {\n        this.setState({screenKeyboardValueWithNumeric: currentValue});\n        console.log(e.target.value, currentValue);\n    };\n\n    __onChangeDefaultKeyboard(e:Object) {\n        this.setState({screenKeyboardDefault: e.target.value});\n    };\n\n    __handleChange(e:Object) {\n        let state = {};\n        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;\n        state[e.target.name] = value;\n        this.setState(state);\n    }\n}\n'
 }, function (e, t) {
-    e.exports = 'import React from "react";\nimport ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";\nimport SelectInput from "robe-react-ui/lib/inputs/SelectInput";\n\nconst langs = [\n    {\n        key: "en",\n        value: "English"\n    },\n    {\n        key: "tr",\n        value: "Turkish"\n    },\n    {\n        key: "kr",\n        value: "Kurdish"\n    }\n];\nexport default class SelectInputSample extends ShallowComponent {\n\n    constructor(props:Object) {\n        super(props);\n        this.state = {\n            MultiSelect: ["en", "tr"],\n            SingleSelect: "tr"\n        };\n    }\n\n    render():Object {\n        return (\n            <div>\n                <SelectInput\n                    label="Select Input Single"\n                    name="SingleSelect"\n                    items={langs}\n                    textField="value"\n                    valueField="key"\n                    readOnly={true}\n                    value={this.state.SingleSelect}\n                    onChange={this.__handleChange}\n                />\n                <SelectInput\n                    label="Select Input Multi"\n                    name="MultiSelect"\n                    multi={true}\n                    items={langs}\n                    value={this.state.MultiSelect}\n                    textField="value"\n                    valueField="key"\n                    onChange={this.__handleChange}\n                    validations={{\n                        required: true\n                    }}\n                />\n            </div>\n        );\n    }\n\n    __handleChange(e:Object) {\n        let state = {};\n        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;\n        state[e.target.name] = value;\n        this.setState(state);\n    }\n}\n'
+    e.exports = 'import React from "react";\nimport ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";\nimport SelectInput from "robe-react-ui/lib/inputs/SelectInput";\n\nconst langs = [\n    {\n        key: "en",\n        value: "English"\n    },\n    {\n        key: "tr",\n        value: "Turkish",\n        disabled: true\n    },\n    {\n        key: "kr",\n        value: "Kurdish"\n    }\n];\nexport default class SelectInputSample extends ShallowComponent {\n\n    constructor(props: Object) {\n        super(props);\n        this.state = {\n            MultiSelect: ["en", "tr"],\n            SingleSelect: "tr"\n        };\n    }\n\n    render(): Object {\n        return (\n            <div>\n                <SelectInput\n                    label="Select Input Single"\n                    name="SingleSelect"\n                    items={langs}\n                    textField="value"\n                    valueField="key"\n                    readOnly={true}\n                    value={this.state.SingleSelect}\n                    onChange={this.__handleChange}\n                />\n                <SelectInput\n                    label="Select Input Multi"\n                    name="MultiSelect"\n                    multi={true}\n                    items={langs}\n                    value={this.state.MultiSelect}\n                    textField="value"\n                    valueField="key"\n                    onChange={this.__handleChange}\n                    validations={{\n                        required: true\n                    }}\n                />\n            </div>\n        );\n    }\n\n    __handleChange(e: Object) {\n        let state = {};\n        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;\n        state[e.target.name] = value;\n        this.setState(state);\n    }\n}\n'
 }, function (e, t) {
     e.exports = 'import React from "react";\nimport ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";\nimport TextArea from "robe-react-ui/lib/inputs/TextArea";\n\n\nexport default class TextAreaSample extends ShallowComponent {\n    constructor(props: Object) {\n        super(props);\n        this.state = {\n            TextAreaNormal: "Some Text",\n            TextAreaAutoResize: ""\n        };\n    }\n\n    render(): Object {\n        return (\n            <div>\n                <TextArea\n                    label="TextArea"\n                    name="TextAreaNormal"\n                    value={this.state.TextAreaNormal}\n                    onChange={this.__handleChange}\n                />\n                <TextArea\n                    label="With Validations"\n                    name="TextAreaValidations"\n                    value={this.state.TextAreaValidations}\n                    onChange={this.__handleChange}\n                    validations={{\n                        required: true,\n                        minLength: {\n                            args: [3]\n                        }\n                    }}\n                />\n                <TextArea\n                    label="TextArea With AutoResize And MinHeight"\n                    name="TextAreaAutoResize"\n                    autoResize\n                    style={{ minHeight: 100 }}\n                    value={this.state.TextAreaAutoResize}\n                    onChange={this.__handleChange}\n                />\n            </div>\n        );\n    }\n    __handleChange(e: Object) {\n        let state = {};\n        let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;\n        state[e.target.name] = value;\n        this.setState(state);\n    }\n}\n'
 }, function (e, t) {
@@ -55372,6 +55383,12 @@
                 description: "Defines the display style of the Validation message.",
                 defaultValue: {value: '"block"', computed: !1}
             },
+            disabledValues: {
+                type: {name: "array"},
+                required: !1,
+                description: "",
+                defaultValue: {value: "[]", computed: !1}
+            },
             readOnly: {defaultValue: {value: "false", computed: !1}}
         }
     }
@@ -56160,8 +56177,10 @@
             },
             toolbarPosition: {
                 type: {
-                    name: "enum", value: [{value: '"bottom"', computed: !1}, {value: '"top"', computed: !1}, {
-                        value: '"left"', computed: !1
+                    name: "enum",
+                    value: [{value: '"bottom"', computed: !1}, {value: '"top"', computed: !1}, {
+                        value: '"left"',
+                        computed: !1
                     }, {value: '"right"', computed: !1}]
                 }, required: !1, description: "toolbar position", defaultValue: {value: '"bottom"', computed: !1}
             },
@@ -56366,7 +56385,7 @@
             name: "renderItems",
             docblock: null,
             modifiers: [],
-            params: [{name: "menu", type: null}],
+            params: [{name: "menu", type: null}, {name: "isRoot", type: null}],
             returns: null
         }, {
             name: "__onChange",
@@ -56597,57 +56616,69 @@
             name: "__addQueue",
             docblock: null,
             modifiers: [],
-            params: [{name: "toast", type: null}],
+            params: [{name: "toast", type: {name: "Object", alias: "Object"}}],
             returns: null
         }, {
             name: "__addToast",
             docblock: null,
             modifiers: [],
-            params: [{name: "toast", type: null}],
+            params: [{name: "toast", type: {name: "Object", alias: "Object"}}],
             returns: null
         }, {
             name: "__removeToast",
             docblock: null,
             modifiers: [],
-            params: [{name: "toast", type: null}],
+            params: [{name: "toast", type: {name: "Object", alias: "Object"}}],
             returns: null
         }, {
             name: "__closeOnClick",
             docblock: null,
             modifiers: [],
-            params: [{name: "e", type: null}],
+            params: [{name: "e", type: {name: "unknown", alias: "element"}}],
             returns: null
         }, {name: "__getTime", docblock: null, modifiers: [], params: [], returns: null}, {
             name: "info",
             docblock: "Toast.info(message, title, timeOut, callback)\n@param message\n@param title\n@param timeOut\n@param onClick",
             modifiers: [],
-            params: [{name: "message", description: null, type: null}, {
+            params: [{name: "message", description: null, type: {name: "string"}}, {
                 name: "title",
                 description: null,
-                type: null
-            }, {name: "timeOut", description: null, type: null}, {name: "onClick", description: null, type: null}],
+                type: {name: "string"}
+            }, {name: "timeOut", description: null, type: {name: "number"}}, {
+                name: "onClick",
+                description: null,
+                type: {name: "func", alias: "func"}
+            }],
             returns: null,
             description: "Toast.info(message, title, timeOut, callback)"
         }, {
             name: "success",
             docblock: "Toast.success(message, title, timeOut, callback)\n@param message\n@param title\n@param timeOut\n@param onClick",
             modifiers: [],
-            params: [{name: "message", description: null, type: null}, {
+            params: [{name: "message", description: null, type: {name: "string"}}, {
                 name: "title",
                 description: null,
-                type: null
-            }, {name: "timeOut", description: null, type: null}, {name: "onClick", description: null, type: null}],
+                type: {name: "string"}
+            }, {name: "timeOut", description: null, type: {name: "number"}}, {
+                name: "onClick",
+                description: null,
+                type: {name: "func", alias: "func"}
+            }],
             returns: null,
             description: "Toast.success(message, title, timeOut, callback)"
         }, {
             name: "warning",
             docblock: "Toast.warning(message, title, timeOut, callback)\n@param message\n@param title\n@param timeOut\n@param onClick",
             modifiers: [],
-            params: [{name: "message", description: null, type: null}, {
+            params: [{name: "message", description: null, type: {name: "string"}}, {
                 name: "title",
                 description: null,
-                type: null
-            }, {name: "timeOut", description: null, type: null}, {name: "onClick", description: null, type: null}],
+                type: {name: "string"}
+            }, {name: "timeOut", description: null, type: {name: "number"}}, {
+                name: "onClick",
+                description: null,
+                type: {name: "func", alias: "func"}
+            }],
             returns: null,
             description: "Toast.warning(message, title, timeOut, callback)"
         }, {
@@ -56669,7 +56700,7 @@
             name: "configuration",
             docblock: 'Toast.configuration({maxVisible:5,position:"top-right"})\n@param props',
             modifiers: ["static"],
-            params: [{name: "props", description: null, type: null}],
+            params: [{name: "props", description: null, type: {name: "Object", alias: "Object"}}],
             returns: null,
             description: 'Toast.configuration({maxVisible:5,position:"top-right"})'
         }],

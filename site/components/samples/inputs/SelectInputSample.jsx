@@ -45,6 +45,7 @@ export default class SelectInputSample extends ShallowComponent {
                     name="MultiSelect"
                     multi={true}
                     items={langs}
+                    disabledValues={["kr"]}
                     value={this.state.MultiSelect}
                     textField="value"
                     valueField="key"
