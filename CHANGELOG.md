@@ -3,6 +3,7 @@
 ## 1.1.32 -- Developing...
 * searchbox listener removed at SearchBox component when component unmounted.
 * added the disable property in select input
+* added the disable property props in select input
 
 ## 1.1.31
 * Fixed bug in SideMenu

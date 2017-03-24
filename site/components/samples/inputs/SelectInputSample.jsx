@@ -19,7 +19,7 @@ const langs = [
 ];
 export default class SelectInputSample extends ShallowComponent {
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             MultiSelect: ["en", "tr"],
@@ -27,7 +27,7 @@ export default class SelectInputSample extends ShallowComponent {
         };
     }
 
-    render():Object {
+    render(): Object {
         return (
             <div>
                 <SelectInput
@@ -57,7 +57,7 @@ export default class SelectInputSample extends ShallowComponent {
         );
     }
 
-    __handleChange(e:Object) {
+    __handleChange(e: Object) {
         let state = {};
         let value = e.target.parsedValue !== undefined ? e.target.parsedValue : e.target.value;
         state[e.target.name] = value;

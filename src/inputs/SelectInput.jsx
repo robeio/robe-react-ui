@@ -80,7 +80,11 @@ export default class SelectInput extends ValidationComponent {
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        /**
+         *
+         */
+        disabledValues: React.PropTypes.array
     };
 
     static defaultProps = {
@@ -94,7 +98,8 @@ export default class SelectInput extends ValidationComponent {
         disabled: false,
         readOnly: false,
         hidden: false,
-        validationDisplay: "block"
+        validationDisplay: "block",
+        disabledValues: []
     };
 
     __inputRef;
@@ -156,10 +161,12 @@ export default class SelectInput extends ValidationComponent {
             </option>);
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
+            let index = Arrays.indexOf(this.props.disabledValues, item[this.props.valueField]);
+            let disabled = index !== -1 ? true : item.disabled ? item.disabled : false;
             options.push(
                 <option
                     key={item[this.props.valueField]}
-                    disabled={item.disabled ? item.disabled : false}
+                    disabled={disabled}
                     value={item[this.props.valueField]}>
                     {item[this.props.textField]}
                 </option>);
@@ -233,7 +240,8 @@ export default class SelectInput extends ValidationComponent {
         let itemsList = [];
         for (let i in items) {
             let item = items[i];
-            let click = (item.disabled ? item.disabled : false) ? undefined : this.__onSelectMultiItem;
+            let index = Arrays.indexOf(this.props.disabledValues, item[this.props.valueField]);
+            let click = index !== -1 ? undefined : (item.disabled ? item.disabled : false) ? undefined : this.__onSelectMultiItem;
             itemsList.push(
                 <div key={item[this.props.valueField]}
                      id={item[this.props.valueField]}
