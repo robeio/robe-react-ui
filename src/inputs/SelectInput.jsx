@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { FormGroup, FormControl, ControlLabel, Col } from "react-bootstrap";
-import { Application, Arrays } from "robe-react-commons";
+import {FormGroup, FormControl, ControlLabel, Col} from "react-bootstrap";
+import {Application, Arrays} from "robe-react-commons";
 import ValidationComponent from "../validation/ValidationComponent";
 import "./SelectInput.css";
-import FaIcon from "../faicon/FaIcon"
+import FaIcon from "../faicon/FaIcon";
 
 
 /**
@@ -149,7 +149,7 @@ export default class SelectInput extends ValidationComponent {
         let options = [];
         options.push(
             <option
-                style={{ color: "#999" }}
+                style={{color: "#999"}}
                 key="placeholder"
                 value="placeholder">
                 {this.props.placeholder}
@@ -159,6 +159,7 @@ export default class SelectInput extends ValidationComponent {
             options.push(
                 <option
                     key={item[this.props.valueField]}
+                    disabled={item.disabled ? item.disabled : false}
                     value={item[this.props.valueField]}>
                     {item[this.props.textField]}
                 </option>);
@@ -181,19 +182,21 @@ export default class SelectInput extends ValidationComponent {
         return (
             <div>
                 <div className={className}
-                    onClick={this.__onClickMultiSelectLayout}>
+                     onClick={this.__onClickMultiSelectLayout}>
                     <div className="multiple-select-tool">
-                        <FaIcon code="fa-caret-down" fixed={false} />
+                        <FaIcon code="fa-caret-down" fixed={false}/>
                     </div>
                     {this.__renderMultiValues(this.state.value)}
                     <input className="multiple-select-input"
-                        type={this.props.searchable ? "textarea" : "hidden"}
-                        value={this.state.searchValue}
-                        ref={(component: Object) => { this.__inputRef = component }}
-                        onChange={this.__onSearchChange}
-                        onKeyDown={this.__onKeyDown} />
+                           type={this.props.searchable ? "textarea" : "hidden"}
+                           value={this.state.searchValue}
+                           ref={(component: Object) => {
+                               this.__inputRef = component
+                           }}
+                           onChange={this.__onSearchChange}
+                           onKeyDown={this.__onKeyDown}/>
                 </div>
-                <div className="multiple-select-dropdown" style={{ display: this.state.dropdown ? "inherit" : "none" }}>
+                <div className="multiple-select-dropdown" style={{display: this.state.dropdown ? "inherit" : "none"}}>
                     <div id={this.props.noResult} className="multiple-select-dropdown-layout">
                         {this.__renderMultiItems(this.state.searchItems)}
                     </div>
@@ -210,7 +213,7 @@ export default class SelectInput extends ValidationComponent {
                 valueList.push(
                     <div key={item[this.props.valueField]} className="multiple-select-item">
                         <span className="multiple-select-icon" id={item[this.props.valueField]}
-                            onClick={this.__onRemoveMultiValue}>x</span>
+                              onClick={this.__onRemoveMultiValue}>x</span>
                         <span className="multiple-select-label"> {item[this.props.textField]}</span>
                     </div>
                 );
@@ -230,10 +233,12 @@ export default class SelectInput extends ValidationComponent {
         let itemsList = [];
         for (let i in items) {
             let item = items[i];
+            let click = (item.disabled ? item.disabled : false) ? undefined : this.__onSelectMultiItem;
             itemsList.push(
                 <div key={item[this.props.valueField]}
-                    id={item[this.props.valueField]}
-                    onClick={this.__onSelectMultiItem}>
+                     id={item[this.props.valueField]}
+                     style={{opacity: click === undefined ? .7 : 1}}
+                     onClick={click}>
                     {item[this.props.textField]}
                 </div>);
         }
@@ -304,7 +309,7 @@ export default class SelectInput extends ValidationComponent {
      */
     __onClickMultiSelectLayout(e) {
         if (!e.target.id) {
-            this.setState({ dropdown: true });
+            this.setState({dropdown: true});
             let node = ReactDOM.findDOMNode(this.__inputRef);
             node.focus();
         }
@@ -332,7 +337,7 @@ export default class SelectInput extends ValidationComponent {
                 }
             }
         }
-        this.setState({ searchValue: searchValue, searchItems: searchItems, dropdown: true });
+        this.setState({searchValue: searchValue, searchItems: searchItems, dropdown: true});
     }
 
     /**
@@ -411,10 +416,11 @@ export default class SelectInput extends ValidationComponent {
     componentWillUnmount() {
         document.body.removeEventListener('click', this.__handleOutSideClick, false);
     }
+
     __handleOutSideClick(e) {
         if (ReactDOM.findDOMNode(this).contains(e.target))
             return;
 
-        this.setState({ dropdown: false });
+        this.setState({dropdown: false});
     }
 }

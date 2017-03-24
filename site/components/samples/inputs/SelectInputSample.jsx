@@ -9,7 +9,8 @@ const langs = [
     },
     {
         key: "tr",
-        value: "Turkish"
+        value: "Turkish",
+        disabled: true
     },
     {
         key: "kr",

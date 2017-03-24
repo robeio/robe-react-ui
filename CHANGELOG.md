@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.32 -- Developing...
+* added the disable property in select input
 
 ## 1.1.31
 * Fixed bug in SideMenu
