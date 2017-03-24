@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.32 -- Developing...
+## 1.1.33 -- Developing...
+
+## 1.1.32 
 * searchbox listener removed at SearchBox component when component unmounted.
 * added the disable property in select input
 * added the disable property props in select input
