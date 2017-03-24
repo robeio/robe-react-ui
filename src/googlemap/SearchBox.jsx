@@ -36,9 +36,8 @@ export default class SearchBox extends ShallowComponent {
     }
 
     onPlacesChanged(): Object {
-        if (this.props.onPlacesChanged) {
+        if (this.props.onPlacesChanged)
             this.props.onPlacesChanged(this.searchBox.getPlaces());
-        }
     };
 
     __handleChange(e: Object) {
@@ -59,5 +58,9 @@ export default class SearchBox extends ShallowComponent {
         }
         else
             console.warn("Please be sure that apiParams prop is a not undefined")
+    }
+
+    componentWillUnmount() {
+        this.props.apiParams.maps.event.clearInstanceListeners(this.searchBox);
     }
 }
