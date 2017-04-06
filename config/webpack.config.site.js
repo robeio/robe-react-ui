@@ -67,7 +67,7 @@ const fileChanger = new FileChanger({
     }
     ],
     change: [{
-        file: "./docs/index.html",
+        file: "./index.html",
         parameters: {
             "\\$VERSION": package.version,
             "\\$BUILD_TIME": new Date(),
