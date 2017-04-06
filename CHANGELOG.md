@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.33 -- Developing...
+* Package files upgraded
 
 ## 1.1.32 
 * searchbox listener removed at SearchBox component when component unmounted.
