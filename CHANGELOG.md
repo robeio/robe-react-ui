@@ -1,6 +1,8 @@
 # Change Log
 
-## 1.1.33 -- Developing...
+## 1.1.34 -- Developing...
+
+## 1.1.33
 * Package files upgraded
 
 ## 1.1.32 
