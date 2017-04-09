@@ -1,6 +1,11 @@
 # Change Log
 
-## 1.1.35 -- Developing...
+## 1.1.36 -- Developing...
+
+## 1.1.35
+* robe-react-commons version upgraded
+* function type not supported in IE bug fixed
+* function.name not supported in IE bug fixed
 
 ## 1.1.34
 * robe-react-commons version upgraded
