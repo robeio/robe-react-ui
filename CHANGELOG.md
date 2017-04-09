@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.34 -- Developing...
+* robe-react-commons version upgraded
 
 ## 1.1.33
 * Package files upgraded

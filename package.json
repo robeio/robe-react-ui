@@ -102,7 +102,7 @@
     "react-recaptcha": "2.2.6",
     "react-router": "4.0.0",
     "robe-ajax": "1.0.1",
-    "robe-react-commons": "1.0.85",
+    "robe-react-commons": "1.0.87",
     "zxcvbn": "4.4.2"
   }
 }
