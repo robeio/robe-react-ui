@@ -1,13 +1,6 @@
 import React from "react";
-import {
-    ShallowComponent,
-    Maps,
-    Objects,
-    Assertions
-} from "robe-react-commons";
-import {
-    Form, Row, Col
-} from "react-bootstrap";
+import {ShallowComponent, Maps, Objects, Assertions} from "robe-react-commons";
+import {Form, Row, Col} from "react-bootstrap";
 import ComponentManager from "./ComponentManager";
 
 export default class DataForm extends ShallowComponent {
@@ -39,15 +32,15 @@ export default class DataForm extends ShallowComponent {
         defaultExpanded: React.PropTypes.bool,
         /**
          * Form side by side input columns size
-        */
+         */
         columnsSize: React.PropTypes.oneOf([1, 2, 3, 4, 6, 12]),
         /**
          * Map of the default values for the component.
          */
         defaultValues: React.PropTypes.object,
         /**
-       *Defines the display style of the Validation message.
-       */
+         *Defines the display style of the Validation message.
+         */
         validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
     };
 
@@ -88,7 +81,7 @@ export default class DataForm extends ShallowComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.__init(nextProps);
+        this.__init(nextProps, nextProps.defaultValues);
     }
 
     __init(nextProps, defaultValues) {
@@ -110,6 +103,7 @@ export default class DataForm extends ShallowComponent {
             this.__setPropsOfField(name, config, this.state);
         }
     }
+
     render(): Object {
         let form = (
             <Form onKeyPress={this.noenter}>
@@ -168,12 +162,14 @@ export default class DataForm extends ShallowComponent {
         return (
             <Col key={`${name}_key`} md={this.__columnSize}>
                 <Component
-                    ref={(component: Object) => { this.__refMap[`${name}Ref`] = component; } }
+                    ref={(component: Object) => {
+                        this.__refMap[`${name}Ref`] = component;
+                    } }
                     {...props}
                     onChange={this.onChange}
                     value={this.state[name]}
                     validationDisplay={this.props.validationDisplay}
-                    />
+                />
             </Col>
         );
     }

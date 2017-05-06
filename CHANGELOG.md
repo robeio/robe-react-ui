@@ -1,6 +1,7 @@
 # Change Log
 
 ## 1.1.37 -- Developing...
+* DataForm's defaultValues bug fixed 
 
 ## 1.1.36
 * downgraded version of react-router from 4.0.0 to 3.0.0.
