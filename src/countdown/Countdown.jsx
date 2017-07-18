@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Grid, Row, Col} from "react-bootstrap";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Application from "robe-react-commons/lib/application/Application";
@@ -20,58 +21,58 @@ export default class Countdown extends ShallowComponent {
         /**
          * Interval of the counter to tick.
          */
-        interval: React.PropTypes.number,
+        interval: PropTypes.number,
         /**
          *Starting value of the component in MS.
          */
-        value: React.PropTypes.number,
+        value: PropTypes.number,
         /**
          * Will fire when the counter finishes countdown. ( 0 )
          * No parameters.
          */
-        onComplete: React.PropTypes.func,
+        onComplete: PropTypes.func,
         /**
          * Will fire on every change of the value (not onComplete)
          * value as parameter.
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
 
         /**
          * Style of the counter.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
 
         /**
          * Props for days cell.
          */
-        days: React.PropTypes.shape({
-            visible: React.PropTypes.boolean,
-            label: React.PropTypes.string,
-            style: React.PropTypes.object
+        days: PropTypes.shape({
+            visible: PropTypes.boolean,
+            label: PropTypes.string,
+            style: PropTypes.object
         }),
         /**
          * Props for hours cell.
          */
-        hours: React.PropTypes.shape({
-            visible: React.PropTypes.boolean,
-            label: React.PropTypes.string,
-            style: React.PropTypes.object
+        hours: PropTypes.shape({
+            visible: PropTypes.boolean,
+            label: PropTypes.string,
+            style: PropTypes.object
         }),
         /**
          * Props for minutes cell.
          */
-        minutes: React.PropTypes.shape({
-            visible: React.PropTypes.boolean,
-            label: React.PropTypes.string,
-            style: React.PropTypes.object
+        minutes: PropTypes.shape({
+            visible: PropTypes.boolean,
+            label: PropTypes.string,
+            style: PropTypes.object
         }),
         /**
          * Props for seconds cell.
          */
-        seconds: React.PropTypes.shape({
-            visible: React.PropTypes.boolean,
-            label: React.PropTypes.string,
-            style: React.PropTypes.object
+        seconds: PropTypes.shape({
+            visible: PropTypes.boolean,
+            label: PropTypes.string,
+            style: PropTypes.object
         }),
     }
 

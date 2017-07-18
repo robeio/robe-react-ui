@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import {FormGroup, FormControl, ControlLabel, Col} from "react-bootstrap";
 import {Application, Arrays} from "robe-react-commons";
@@ -17,74 +18,74 @@ export default class SelectInput extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * name for the input name
          */
-        code: React.PropTypes.string,
+        code: PropTypes.string,
         /**
          * map array of options to render.
          */
-        items: React.PropTypes.array,
+        items: PropTypes.array,
         /**
          * Selected value or values
          */
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array
         ]),
         /**
          * key of given map array `items`
          */
-        valueField: React.PropTypes.any,
+        valueField: PropTypes.any,
         /**
          * presented text of give map array `items`
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
         /**
          * displayed when there"s no value
          */
-        placeholder: React.PropTypes.string,
+        placeholder: PropTypes.string,
         /**
          * callback function when selected values changed
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
         /**
          * Check List is single or multi
          */
-        multi: React.PropTypes.bool,
+        multi: PropTypes.bool,
         /**
          * presented message if any result not shown.
          */
-        noResult: React.PropTypes.string,
+        noResult: PropTypes.string,
         /**
          *  whether to enable searching feature or not
          */
-        searchable: React.PropTypes.bool,
+        searchable: PropTypes.bool,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        validationDisplay: PropTypes.oneOf(["overlay", "block"]),
         /**
          *
          */
-        disabledValues: React.PropTypes.array
+        disabledValues: PropTypes.array
     };
 
     static defaultProps = {

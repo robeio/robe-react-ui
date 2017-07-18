@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent, Application } from "robe-react-commons";
 import FaIcon from "../faicon/FaIcon";
 
@@ -8,11 +9,11 @@ export default class Iconizer extends ShallowComponent {
         /**
          * Links array
          */
-        links: React.PropTypes.array,
+        links: PropTypes.array,
         /**
          * Icons size
          */
-        size: React.PropTypes.oneOf(["sm", "lg", "2x", "3x", "4x", "5x"])
+        size: PropTypes.oneOf(["sm", "lg", "2x", "3x", "4x", "5x"])
     };
 
     static defaultProps = {

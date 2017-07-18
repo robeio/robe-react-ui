@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Col, Thumbnail, Label} from "react-bootstrap";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import FaIcon from "robe-react-ui/lib/faicon/FaIcon";
@@ -13,15 +14,15 @@ export default class Renderer extends ShallowComponent {
      */
     static propTypes = {
 
-        header: React.PropTypes.string,
+        header: PropTypes.string,
 
-        desc: React.PropTypes.string,
+        desc: PropTypes.string,
 
-        image: React.PropTypes.string,
+        image: PropTypes.string,
 
-        link: React.PropTypes.string,
+        link: PropTypes.string,
 
-        features: React.PropTypes.array
+        features: PropTypes.array
     };
 
     render(): Object {

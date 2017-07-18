@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import TreeItem from "./TreeItem";
 import "./Tree.css";
@@ -21,27 +22,27 @@ export default class Tree extends ShallowComponent {
         /**
          * Data for the tree to view
          */
-        items: React.PropTypes.array.isRequired,
+        items: PropTypes.array.isRequired,
         /**
          * Text field of the data
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
         /**
          * Value field of the data.
          */
-        valueField: React.PropTypes.string,
+        valueField: PropTypes.string,
         /**
          * Children field of the data.
          */
-        childrenField: React.PropTypes.string,
+        childrenField: PropTypes.string,
         /**
          * Checked items array.
          */
-        value: React.PropTypes.array,
+        value: PropTypes.array,
         /**
          * Parent component of the tree item
          */
-        parent: React.PropTypes.object
+        parent: PropTypes.object
 
     };
 

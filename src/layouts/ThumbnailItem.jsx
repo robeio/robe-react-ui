@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Glyphicon} from "react-bootstrap";
 import {ShallowComponent} from "robe-react-commons";
 import ProgressBar from "../progress/ProgressBar"
@@ -11,11 +12,11 @@ export default class ThumbnailItem extends ShallowComponent {
      * @static
      */
     static propTypes:Map = {
-        className: React.PropTypes.string,
-        style: React.PropTypes.object,
-        focused: React.PropTypes.bool,
-        selected: React.PropTypes.bool,
-        loading: React.PropTypes.bool
+        className: PropTypes.string,
+        style: PropTypes.object,
+        focused: PropTypes.bool,
+        selected: PropTypes.bool,
+        loading: PropTypes.bool
     };
 
     /**

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent, Assertions } from "robe-react-commons";
 import { Panel, Row, Col, Glyphicon } from "react-bootstrap";
 import "./StackLayout.css";
@@ -14,59 +15,59 @@ export default class StackLayout extends ShallowComponent {
         /**
          * Presentation mode list or thumbnail.
          */
-        display: React.PropTypes.oneOf(["list", "thumbnail"]),
+        display: PropTypes.oneOf(["list", "thumbnail"]),
         /**
          * Header of Layout
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * Layout Container style
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * will Shown given items which type is an array
          */
-        items: React.PropTypes.array,
+        items: PropTypes.array,
         /**
          * Add Toolbar to layout . Default position is bottom
          */
-        toolbar: React.PropTypes.object,
+        toolbar: PropTypes.object,
         /**
          * toolbar position
          */
-        toolbarPosition: React.PropTypes.oneOf(["bottom", "top", "left", "right"]),
+        toolbarPosition: PropTypes.oneOf(["bottom", "top", "left", "right"]),
         /**
          * render item by class which is using this layout.
          */
-        onItemRender: React.PropTypes.func,
+        onItemRender: PropTypes.func,
         /**
          * if layout container clicked then triggered.
          */
-        onClick: React.PropTypes.func,
+        onClick: PropTypes.func,
         /**
          * if any item selection changed.
          */
-        onItemClick: React.PropTypes.func,
+        onItemClick: PropTypes.func,
         /**
          * when a draggable element is dropped in the layout container element.
          */
-        onDrop: React.PropTypes.func,
+        onDrop: PropTypes.func,
         /**
          * when a draggable element is moved out of the layout container element.
          */
-        onDragLeave: React.PropTypes.func,
+        onDragLeave: PropTypes.func,
         /**
          * when an element is being dragged over the layout container element.
          */
-        onDragOver: React.PropTypes.func,
+        onDragOver: PropTypes.func,
         /**
          * when a draggable element enters the layout container element.
          */
-        onDragEnter: React.PropTypes.func,
+        onDragEnter: PropTypes.func,
         /**
          * when the user starts to drag the layout container element.
          */
-        onDragStart: React.PropTypes.func
+        onDragStart: PropTypes.func
 
     };
 

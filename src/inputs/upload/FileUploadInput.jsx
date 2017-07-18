@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { findDOMNode } from "react-dom";
 import { Generator, Application, Objects, Maps, Arrays } from "robe-react-commons";
 import { FormGroup, FormControl, ControlLabel, Glyphicon, Checkbox, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -38,70 +39,70 @@ export default class FileUploadInput extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * File Id List or File Name
          */
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.arrayOf(React.PropTypes.string)
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.arrayOf(PropTypes.string)
         ]),
         /**
          * onChangeEvent event for the component
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * describe Selection File Multi or Single
          */
-        multiple: React.PropTypes.bool,
+        multiple: PropTypes.bool,
         /**
          * Style map for the component.
          */
-        itemStyle: React.PropTypes.object,
+        itemStyle: PropTypes.object,
         /**
          * Item show renderer
          */
-        itemRenderer: React.PropTypes.func,
+        itemRenderer: PropTypes.func,
         /**
          * File Input Form Control Place Holder
          */
-        placeholder: React.PropTypes.string,
+        placeholder: PropTypes.string,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
          * auto upload is false then file will upload when clicking the upload button.
          */
-        autoUpload: React.PropTypes.bool,
+        autoUpload: PropTypes.bool,
         /**
          *
          */
-        remote: React.PropTypes.object,
+        remote: PropTypes.object,
         /**
          *
          */
-        toolbarPosition: React.PropTypes.string,
+        toolbarPosition: PropTypes.string,
         /**
          * Max Uploaded file
          */
-        maxFileSize: React.PropTypes.number,
+        maxFileSize: PropTypes.number,
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        validationDisplay: PropTypes.oneOf(["overlay", "block"]),
         /**
          * Define file input accept extensions
          */
-        accept: React.PropTypes.string
+        accept: PropTypes.string
     };
 
     static defaultProps = {
@@ -512,4 +513,3 @@ export default class FileUploadInput extends ValidationComponent {
         this.setState(state);
     }
 }
-

@@ -1,10 +1,10 @@
 propTypes = {
-    idField: React.PropTypes.string,
-    importer: React.PropTypes.func,
-    loadProps: React.PropTypes.object,
-    result: React.PropTypes.shape({
-        data: React.PropTypes.array,
-        totalCount: React.PropTypes.number
+    idField: PropTypes.string,
+    importer: PropTypes.func,
+    loadProps: PropTypes.object,
+    result: PropTypes.shape({
+        data: PropTypes.array,
+        totalCount: PropTypes.number
     })
 }
 

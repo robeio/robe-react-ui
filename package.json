@@ -92,6 +92,7 @@
     "js-criteria": "1.0.6",
     "moment": "2.18.1",
     "nprogress": "0.2.0",
+    "prop-types": "^15.5.10",
     "react": "15.5.3",
     "react-addons-css-transition-group": "15.4.2",
     "react-addons-shallow-compare": "15.4.2",

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
 import FaIcon from "../faicon/FaIcon";
@@ -19,66 +20,66 @@ export default class CheckInput extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string,
+        name: PropTypes.string,
         /**
          * Array of items. All items will be rendered as separate checkbox input.
          */
-        items: React.PropTypes.array,
+        items: PropTypes.array,
         /**
          * Item will be rendered checkbox input single.
          */
-        item: React.PropTypes.object,
+        item: PropTypes.object,
         /**
          * Checked value or values
          */
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.bool,
-            React.PropTypes.array
+        value: PropTypes.oneOfType([
+            PropTypes.bool,
+            PropTypes.array
         ]),
         /**
          * Key of map item which is defined in given array `items`
          */
-        valueField: React.PropTypes.any,
+        valueField: PropTypes.any,
         /**
          * label of map item which is defined in given array `items`
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
         /**
          * onChange callback function when selection `item` or `items` changed.
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Validations functions to validate value
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is read-only
          */
-        readOnly: React.PropTypes.bool,
+        readOnly: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        validationDisplay: PropTypes.oneOf(["overlay", "block"]),
         /**
          * Defines class of the check input. (form-control or not)
          */
-        formControl: React.PropTypes.bool
+        formControl: PropTypes.bool
     };
 
 

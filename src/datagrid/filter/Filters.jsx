@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
 import Filter from "./Filter";
@@ -8,27 +9,27 @@ export default class Filters extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        fields: React.PropTypes.array.isRequired,
+        fields: PropTypes.array.isRequired,
 
         /**
          * A map which contains names of the visible popups.
          */
-        visiblePopups: React.PropTypes.object.isRequired,
+        visiblePopups: PropTypes.object.isRequired,
 
         /**
          * Unique Id for the table.
          * It helps to open popups at the correct position in case of multiple table at one screen
          */
-        idCount: React.PropTypes.number.isRequired,
+        idCount: PropTypes.number.isRequired,
 
         /**
          *The event to trigger on every filter value update.
          */
-        onChange: React.PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
         /**
          *Delay between last keystroke and filter request.
          */
-        delay: React.PropTypes.number
+        delay: PropTypes.number
     }
 
 

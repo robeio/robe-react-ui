@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Button from "react-bootstrap/lib/Button";
 import QKeyboard_en_US from "./QKeyboard_en_US.json";
@@ -21,43 +22,43 @@ export default class ScreenKeyboard extends ShallowComponent {
         /**
          * Input component to be worked on (Needs input's ID field)
          */
-        inputId: React.PropTypes.string,
+        inputId: PropTypes.string,
         /**
          * Keyboard buttons language.
          */
-        language: React.PropTypes.oneOf([
+        language: PropTypes.oneOf([
             "en_US", "tr_TR", "ru_RU", "numeric", "decimal"
         ]),
         /**
          * Change event for the component (Returns (e, currentValue))
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Default display of ScreenKeyboard component (works only if has true inputID)
          */
-        defaultShow: React.PropTypes.bool,
+        defaultShow: PropTypes.bool,
         /**
          * Displays your text top of Keyboard component
          */
-        languageText: React.PropTypes.string,
+        languageText: PropTypes.string,
         /**
          * Decimal seperator for DecimalInput (Works only with decimal keyboard)
          */
-        decimalSeperator: React.PropTypes.oneOf([
+        decimalSeperator: PropTypes.oneOf([
             ",", "."
         ]),
         /**
          * Changes inputs value automatically (But it does not reflect the situation)
          */
-        changeValueAutomatically: React.PropTypes.bool,
+        changeValueAutomatically: PropTypes.bool,
         /**
          * Style of Keyboard container
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Display configuration on mobile devices
          */
-        showOnMobile: React.PropTypes.bool
+        showOnMobile: PropTypes.bool
     };
 
     /**

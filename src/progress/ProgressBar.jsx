@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent} from "robe-react-commons";
 import ClassName from "../util/css/ClassName";
 import "./ProgressBar.css"
@@ -12,15 +13,15 @@ export default class ProgressBar extends ShallowComponent {
         /**
          *  Classname for use progress.
          */
-        className: React.PropTypes.string,
+        className: PropTypes.string,
         /**
          * Custom style to the progress.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Specifies status for progress.
          */
-        loading: React.PropTypes.bool
+        loading: PropTypes.bool
     };
 
     /**

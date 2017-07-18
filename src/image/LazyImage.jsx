@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { ShallowComponent } from "robe-react-commons";
 import BImage from "react-bootstrap/lib/Image";
 import "./LazyImage.css";
 /**
  * LazyImage is a component for loading images via ajax with a loading animation.
- * 
+ *
  * @export
  * @class LazyImage
  * @extends {ShallowComponent}
@@ -16,42 +17,42 @@ export default class LazyImage extends ShallowComponent {
         /**
          *Source of the image
          */
-        src: React.PropTypes.string.isRequired,
+        src: PropTypes.string.isRequired,
         /**
          *Height of the image
          */
-        height: React.PropTypes.string.isRequired,
+        height: PropTypes.string.isRequired,
         /**
          * Width of the image
          */
-        width: React.PropTypes.string.isRequired,
+        width: PropTypes.string.isRequired,
 
         /**
          * Applies custom style to the image.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
 
         /**
          *Sets image shape as circle
         */
-        circle: React.PropTypes.bool,
+        circle: PropTypes.bool,
 
         /** Sets image as responsive image */
-        responsive: React.PropTypes.bool,
+        responsive: PropTypes.bool,
 
         /** Sets image shape as rounded */
-        rounded: React.PropTypes.bool,
+        rounded: PropTypes.bool,
 
         /** Sets image shape as thumbnail */
-        thumbnail: React.PropTypes.bool,
+        thumbnail: PropTypes.bool,
 
     };
 
     /**
-     * 
-     * 
+     *
+     *
      * @static
-     * 
+     *
      * @memberOf LazyImage
      */
     static defaultProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Maps from "robe-react-commons/lib/utils/Maps";
 import {
@@ -13,7 +14,7 @@ export default class ActionButtons extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        visible: React.PropTypes.bool
+        visible: PropTypes.bool
     };
     static defaultProps = {
         visible: true,

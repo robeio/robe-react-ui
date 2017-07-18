@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {
     Table,
@@ -14,44 +15,44 @@ export default class DatePicker extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.number,
+        value: PropTypes.number,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string,
+        name: PropTypes.string,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * Change event for the component
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Select event for the component. Triggered at date select.
          */
-        onSelect: React.PropTypes.func,
+        onSelect: PropTypes.func,
 
         /**
          * Minimum date to show at the picker.
          */
-        minDate: React.PropTypes.number,
+        minDate: PropTypes.number,
         /**
          * Maximum date to show at the picker.
          */
-        maxDate: React.PropTypes.number,
+        maxDate: PropTypes.number,
 
         /**
          *  Max width of component
          */
-        maxWidth: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number]),
+        maxWidth: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number]),
 
         /**
          *  Base CSS class and prefix for the component
          */
-        className: React.PropTypes.string
+        className: PropTypes.string
     };
 
     /**

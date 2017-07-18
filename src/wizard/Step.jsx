@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent, Application, Assertions, Maps} from "robe-react-commons";
 
 export default class Step extends ShallowComponent {
@@ -6,15 +7,15 @@ export default class Step extends ShallowComponent {
         /**
          *
          */
-        title: React.PropTypes.string,
+        title: PropTypes.string,
         /**
          *
          */
-        currentKey: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+        currentKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         /**
          *
          */
-        index: React.PropTypes.number
+        index: PropTypes.number
     };
 
     static defaultProps = {

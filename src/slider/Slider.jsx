@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {Popover, Overlay, Tooltip, Col} from "react-bootstrap";
@@ -10,55 +11,55 @@ export default class Slider extends ShallowComponent {
         /**
          * Maximum value of Slider component.
          */
-        maxValue: React.PropTypes.number,
+        maxValue: PropTypes.number,
         /**
          * Minimum value of Slider component.
          */
-        minValue: React.PropTypes.number,
+        minValue: PropTypes.number,
         /**
          * Default value of Slider component (If has range prop defaultValue must array like {[0,100]}).
          */
-        defaultValue: React.PropTypes.number,
+        defaultValue: PropTypes.number,
         /**
          * Increment or decrement of values.
          */
-        step: React.PropTypes.number,
+        step: PropTypes.number,
         /**
          * Disables component.
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * Range support for slider component.
          */
-        range: React.PropTypes.bool,
+        range: PropTypes.bool,
         /**
          * Change event for the component.
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * After Change event for the component.
          */
-        onAfterChange: React.PropTypes.func,
+        onAfterChange: PropTypes.func,
         /**
          * Close of min-max labels.
          */
-        closeLabel: React.PropTypes.bool,
+        closeLabel: PropTypes.bool,
         /**
          * Label of maximum value.
          */
-        maxLabel: React.PropTypes.string,
+        maxLabel: PropTypes.string,
         /**
          * Label of minimum value.
          */
-        minLabel: React.PropTypes.string,
+        minLabel: PropTypes.string,
         /**
          * Unit of popover content.
          */
-        unit: React.PropTypes.string,
+        unit: PropTypes.string,
         /**
          * Tooltip support for component.
          */
-        closeTooltip: React.PropTypes.bool
+        closeTooltip: PropTypes.bool
     };
 
     /**

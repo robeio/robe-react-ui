@@ -2,13 +2,13 @@
 
 #### types - PropTypes
 
-* `number`:  `React.PropTypes.number` refer integer values
-* `boolean`: `React.PropTypes.bool` refer boolean type
-* `string`: `React.PropTypes.string` refer string type 
+* `number`:  `PropTypes.number` refer integer values
+* `boolean`: `PropTypes.bool` refer boolean type
+* `string`: `PropTypes.string` refer string type 
 * `Date` : refer Date type
-* `Map`: `React.PropTypes.object` json or object types which not include any function.
-* `Array`: `React.PropTypes.array` refer Array types
-* `any`: `React.PropTypes.any` // refer all tpyes
+* `Map`: `PropTypes.object` json or object types which not include any function.
+* `Array`: `PropTypes.array` refer Array types
+* `any`: `PropTypes.any` // refer all tpyes
 
 #### fieldNames
 
@@ -19,17 +19,17 @@
 
 #### props 
 
-* `value`: React.PropTypes.any // selected value or values
-* `style`: React.PropTypes.object // Style map for the component.
-* `label`: React.PropTypes.string // Label for the form control.
-* `items`: React.PropTypes.array // map array of options to render.
-* `multi`: React.PropTypes.bool multi select value
-* `valueField`: React.PropTypes.any // key of given map array `items`
-* `textField`: React.PropTypes.string // presented text of give map array `items`
-* `placeHolder`: React.PropTypes.string // displayed when there's no value
-* `onChange`: React.PropTypes.func // callback function when selected values changed
-* `onClick`: React.PropTypes.func // callback function when component clicked
-* `validations`: React.PropTypes.object // Validations for the component
-* `noResultsText`: React.PropTypes.string // presented message if any result not shown.
-* `disabled`: React.PropTypes.bool // disabled
-* `searchable`: React.PropTypes.bool // whether to enable searching feature or not
+* `value`: PropTypes.any // selected value or values
+* `style`: PropTypes.object // Style map for the component.
+* `label`: PropTypes.string // Label for the form control.
+* `items`: PropTypes.array // map array of options to render.
+* `multi`: PropTypes.bool multi select value
+* `valueField`: PropTypes.any // key of given map array `items`
+* `textField`: PropTypes.string // presented text of give map array `items`
+* `placeHolder`: PropTypes.string // displayed when there's no value
+* `onChange`: PropTypes.func // callback function when selected values changed
+* `onClick`: PropTypes.func // callback function when component clicked
+* `validations`: PropTypes.object // Validations for the component
+* `noResultsText`: PropTypes.string // presented message if any result not shown.
+* `disabled`: PropTypes.bool // disabled
+* `searchable`: PropTypes.bool // whether to enable searching feature or not

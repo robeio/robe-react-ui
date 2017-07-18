@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import BButton from "react-bootstrap/lib/Button";
 import { ShallowComponent } from "robe-react-commons";
 import FaIcon from "../faicon/FaIcon";
@@ -20,28 +21,28 @@ export default class Button extends ShallowComponent {
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
 
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
         * Event for synced operations.
         * Any operation will NOT trigger loading indicator and will act as normal button.
         */
-        onClick: React.PropTypes.func,
+        onClick: PropTypes.func,
 
         /**
         * Event for async operations (timeouts, AJAX calls).
         * Operation will trigger loading indicator.
         */
-        onClickAsync: React.PropTypes.func,
+        onClickAsync: PropTypes.func,
 
         /**
          * Loading indicator.
          */
-        loadingIndicator: React.PropTypes.oneOf(["fa-spinner", "fa-circle-o-notch", "fa-refresh", "fa-cog"])
+        loadingIndicator: PropTypes.oneOf(["fa-spinner", "fa-circle-o-notch", "fa-refresh", "fa-cog"])
 
     };
 

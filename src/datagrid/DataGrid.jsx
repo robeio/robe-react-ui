@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import is from "is-js";
 import {Application, Store, StoreComponent, Maps, Assertions} from "robe-react-commons";
 import {Row, Col, Table} from "react-bootstrap";
@@ -24,97 +25,97 @@ export default class DataGrid extends StoreComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        fields: React.PropTypes.array.isRequired,
+        fields: PropTypes.array.isRequired,
         /**
          * Holds extra props of components if need.
          */
-        propsOfFields: React.PropTypes.object,
+        propsOfFields: PropTypes.object,
         /**
          * set one store
          */
-        store: React.PropTypes.object.isRequired,
+        store: PropTypes.object.isRequired,
         /**
          * toolbar for create,edit,delete and custom buttons
          */
-        toolbar: React.PropTypes.array,
+        toolbar: PropTypes.array,
         /**
          * Callback for new button click
          */
-        onNewClick: React.PropTypes.func,
+        onNewClick: PropTypes.func,
         /**
          * Callback for edit button click
          */
-        onEditClick: React.PropTypes.func,
+        onEditClick: PropTypes.func,
         /**
          * Callback for delete button click
          */
-        onDeleteClick: React.PropTypes.func,
+        onDeleteClick: PropTypes.func,
         /**
          * show export data flag
          */
-        exportButton: React.PropTypes.bool,
+        exportButton: PropTypes.bool,
         /**
          * Make DataGrid as readonly
          */
-        editable: React.PropTypes.bool,
+        editable: PropTypes.bool,
         /**
          * ModalConfirm configuration
          */
-        modalConfirm: React.PropTypes.shape({
-            header: React.PropTypes.string,
-            message: React.PropTypes.string,
-            okButtonText: React.PropTypes.string,
-            cancelButtonText: React.PropTypes.string
+        modalConfirm: PropTypes.shape({
+            header: PropTypes.string,
+            message: PropTypes.string,
+            okButtonText: PropTypes.string,
+            cancelButtonText: PropTypes.string
         }),
         /**
          * Callback for row selection
          */
-        onSelection: React.PropTypes.func,
+        onSelection: PropTypes.func,
         /**
          * Enable pageable for DataGrid
          */
-        pageable: React.PropTypes.bool,
+        pageable: PropTypes.bool,
         /**
          * enable/disable searchable
          */
-        searchable: React.PropTypes.bool,
+        searchable: PropTypes.bool,
         /**
          * enable/disable DataFilter
          */
-        datafilter: React.PropTypes.bool,
+        datafilter: PropTypes.bool,
 
         /**
          * show/hide refresh button
          */
-        refreshable: React.PropTypes.bool,
+        refreshable: PropTypes.bool,
 
         /**
          * show/hide Page size buttons
          */
-        pageSizeButtons: React.PropTypes.array,
+        pageSizeButtons: PropTypes.array,
 
         /**
          * Render method for the row. Use for custom row templates
          */
-        rowRenderer: React.PropTypes.func,
+        rowRenderer: PropTypes.func,
 
         /**
          * Render method for the cell. Use for custom cell templates.
          * Default row template will call for every cell render event.
          */
-        cellRenderer: React.PropTypes.func,
+        cellRenderer: PropTypes.func,
 
         /**
          * Filter properties of the grid.
          */
-        filter: React.PropTypes.shape({
-            clearButtonText: React.PropTypes.string,
-            clearAllButtonText: React.PropTypes.string
+        filter: PropTypes.shape({
+            clearButtonText: PropTypes.string,
+            clearAllButtonText: PropTypes.string
         }),
         /**
          *Delay between last keystroke and requests.
          */
-        delay: React.PropTypes.number
+        delay: PropTypes.number
     };
     /**
      * static props

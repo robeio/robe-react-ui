@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import OverlayTrigger from "react-bootstrap/lib/OverlayTrigger";
 import Popover from "react-bootstrap/lib/Popover";
@@ -9,14 +10,14 @@ import "./GoogleMap.css";
 export default class BounceMarker extends ShallowComponent {
 
     static propTypes = {
-        lat: React.PropTypes.number.isRequired,
-        lng: React.PropTypes.number.isRequired,
-        description: React.PropTypes.string,
-        inputType: React.PropTypes.oneOf(["textInput", "textArea", "none"]),
-        inputStyle: React.PropTypes.object,
-        overlay: React.PropTypes.bool,
-        overlayPlacement: React.PropTypes.oneOf(["top", "right", "left", "bottom"]),
-        overlayStyle: React.PropTypes.object
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+        description: PropTypes.string,
+        inputType: PropTypes.oneOf(["textInput", "textArea", "none"]),
+        inputStyle: PropTypes.object,
+        overlay: PropTypes.bool,
+        overlayPlacement: PropTypes.oneOf(["top", "right", "left", "bottom"]),
+        overlayStyle: PropTypes.object
     };
 
     static defaultProps = {

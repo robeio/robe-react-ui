@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent, Application } from "robe-react-commons";
 import Googlemap from "google-map-react";
 import SearchBox from "./SearchBox";
@@ -9,7 +10,7 @@ export default class GoogleMap extends ShallowComponent {
 
     static propTypes: Map = {
         ...Googlemap.PropTypes,
-        searchBox: React.PropTypes.object
+        searchBox: PropTypes.object
     };
 
     static defaultProps = {

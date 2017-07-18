@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 // import FaIcon from "../faicon/FaIcon";
 
@@ -12,21 +13,21 @@ export default class Header extends ShallowComponent {
         /**
          * Name of the column. Must be unique.
          */
-        name: React.PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         /**
         * Field Configuration of the column.
         */
-        field: React.PropTypes.object.isRequired,
+        field: PropTypes.object.isRequired,
 
         /**
          * OnClick event for the filter button.
          * */
-        onFilterClick: React.PropTypes.func.isRequired,
+        onFilterClick: PropTypes.func.isRequired,
 
         /**
          * Filterable or not
          * */
-        filterable: React.PropTypes.bool
+        filterable: PropTypes.bool
 
     }
 

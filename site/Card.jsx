@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent} from "robe-react-commons";
 import {Col, Collapse} from "react-bootstrap";
 import "./Card.css";
@@ -6,15 +7,15 @@ import "./Card.css";
 export default class Card extends ShallowComponent {
 
     static propTypes = {
-        xs: React.PropTypes.number,
-        sm: React.PropTypes.number,
-        md: React.PropTypes.number,
-        lg: React.PropTypes.number,
-        style: React.PropTypes.object,
-        border: React.PropTypes.bool,
-        margin: React.PropTypes.bool,
-        show: React.PropTypes.bool,
-        className: React.PropTypes.string
+        xs: PropTypes.number,
+        sm: PropTypes.number,
+        md: PropTypes.number,
+        lg: PropTypes.number,
+        style: PropTypes.object,
+        border: PropTypes.bool,
+        margin: PropTypes.bool,
+        show: PropTypes.bool,
+        className: PropTypes.string
     };
 
     static defaultProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
     ShallowComponent,
@@ -15,7 +16,7 @@ export default class Application extends ShallowComponent {
      * @static
      */
     static propTypes: Map = {
-        language: React.PropTypes.string
+        language: PropTypes.string
     };
 
     /**
@@ -90,6 +91,3 @@ export default class Application extends ShallowComponent {
         }
     }
 }
-
-
-

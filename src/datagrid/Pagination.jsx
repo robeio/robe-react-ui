@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     Row,
     Col,
@@ -19,15 +20,15 @@ export default class Pagination extends ShallowComponent {
         /**
          * Fields Configurations to show style on view.
          */
-        activePage: React.PropTypes.number,
-        pageSize: React.PropTypes.number,
-        totalCount: React.PropTypes.number,
-        displayText: React.PropTypes.string,
-        emptyText: React.PropTypes.string,
-        onChange: React.PropTypes.func,
-        onPageSizeChange: React.PropTypes.func,
-        onRefresh: React.PropTypes.func,
-        pageSizeButtons: React.PropTypes.array,
+        activePage: PropTypes.number,
+        pageSize: PropTypes.number,
+        totalCount: PropTypes.number,
+        displayText: PropTypes.string,
+        emptyText: PropTypes.string,
+        onChange: PropTypes.func,
+        onPageSizeChange: PropTypes.func,
+        onRefresh: PropTypes.func,
+        pageSizeButtons: PropTypes.array,
 
     };
     static defaultProps = {

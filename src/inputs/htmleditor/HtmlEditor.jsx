@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { findDOMNode } from "react-dom";
 import ReactQuill from "react-quill";
 import { FormGroup, ControlLabel, Col, FormControl } from "react-bootstrap";
@@ -20,53 +21,53 @@ export default class HtmlEditor extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * Value of the component
          */
-        value: React.PropTypes.string,
+        value: PropTypes.string,
         /**
          * handleChange event for the component
          */
-        handleChange: React.PropTypes.func,
+        handleChange: PropTypes.func,
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
         /**
          * Height of the component.
          */
-        height: React.PropTypes.number,
+        height: PropTypes.number,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is read-only
          */
-        readOnly: React.PropTypes.bool,
+        readOnly: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
 
         /**
         * it specifies that an input field height be auto resize
         */
-        autoResize: React.PropTypes.bool,
+        autoResize: PropTypes.bool,
         /**
        *Defines the display style of the Validation message.
        */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        validationDisplay: PropTypes.oneOf(["overlay", "block"]),
 
         /**
          *Defines the view mode of the editor.
          */
-        sourceView: React.PropTypes.bool
+        sourceView: PropTypes.bool
     };
 
     /**

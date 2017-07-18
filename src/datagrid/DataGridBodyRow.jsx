@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import is from "is-js";
 import ComponentManager from "../form/ComponentManager";
@@ -9,22 +10,22 @@ export default class DataTableBodyRow extends ShallowComponent {
      * @type {func}
      */
     static propTypes = {
-        onClick: React.PropTypes.func,
-        resources: React.PropTypes.object,
-        fields: React.PropTypes.array,
-        data: React.PropTypes.object,
-        onSelection: React.PropTypes.func,
+        onClick: PropTypes.func,
+        resources: PropTypes.object,
+        fields: PropTypes.array,
+        data: PropTypes.object,
+        onSelection: PropTypes.func,
 
         /**
          * Render method for the row. Use for custom row templates
          */
-        rowRenderer: React.PropTypes.func,
+        rowRenderer: PropTypes.func,
 
         /**
          * Render method for the cell. Use for custom cell templates.
          * Default row template will call for every cell render event.
          */
-        cellRenderer: React.PropTypes.func
+        cellRenderer: PropTypes.func
     };
 
     constructor(props: Object) {
