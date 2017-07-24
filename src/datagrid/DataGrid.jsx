@@ -468,7 +468,7 @@ export default class DataGrid extends StoreComponent {
         }
         this.selection = undefined;
         this.setState({
-            hasSelection: true
+            hasSelection: false
         });
         if (this.props.onSelection) {
             this.props.onSelection(undefined);
