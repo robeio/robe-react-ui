@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import is from "is-js";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Input from "./BaseInput";
@@ -21,43 +22,43 @@ export default class NumericInput extends ShallowComponent {
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string,
+        name: PropTypes.string,
         /**
          * Value of the component
          */
-        value: React.PropTypes.any,
+        value: PropTypes.any,
         /**
          * onChange event for the component
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is read-only
          */
-        readOnly: React.PropTypes.bool,
+        readOnly: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"]),
+        validationDisplay: PropTypes.oneOf(["overlay", "block"]),
         /**
        * Left Input Addon
        */
-        inputGroupLeft: React.PropTypes.object,
+        inputGroupLeft: PropTypes.object,
         /**
         * Right Input Addon
         */
-        inputGroupRight: React.PropTypes.object
+        inputGroupRight: PropTypes.object
     };
 
     /**

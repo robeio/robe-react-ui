@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import {ShallowComponent, Application} from "robe-react-commons";
 import {Nav, NavItem, InputGroup, Overlay, Popover} from "react-bootstrap";
@@ -13,22 +14,22 @@ export default class DataFilter extends ShallowComponent {
         /**
          * placeholder text
          */
-        placeholder: React.PropTypes.string,
+        placeholder: PropTypes.string,
 
         /**
          * Is component visible or not
          */
-        visible: React.PropTypes.bool,
+        visible: PropTypes.bool,
 
         /**
          * Fired when filter is changed
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
 
         /**
          * Fields to populate selection list
          */
-        fields: React.PropTypes.array
+        fields: PropTypes.array
     };
 
     static defaultProps = {

@@ -1,13 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import "./Legend.css";
 
 export default class Legend extends ShallowComponent {
 
     static propTypes = {
-        className: React.PropTypes.string,
-        width: React.PropTypes.number,
-        data: React.PropTypes.array,
+        className: PropTypes.string,
+        width: PropTypes.number,
+        data: PropTypes.array,
     };
 
     static defaultProps = {

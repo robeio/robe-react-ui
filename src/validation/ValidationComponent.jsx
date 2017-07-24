@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent, Maps, Assertions, Objects } from "robe-react-commons";
 import { Alert, OverlayTrigger, Tooltip } from "react-bootstrap";
 import InputValidations from "./InputValidations";
@@ -12,13 +13,13 @@ export default class ValidationComponent extends ShallowComponent {
         /**
          * Value of the component
          */
-        value: React.PropTypes.any,
+        value: PropTypes.any,
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
 
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: PropTypes.oneOf(["overlay", "block"])
     };
     /**
      * Max length allowed message.

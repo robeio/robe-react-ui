@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent,Application,Maps} from "robe-react-commons";
 import {Nav, NavItem, InputGroup, Overlay, Popover} from "react-bootstrap";
 import "./SidePanel.css";
@@ -9,19 +10,19 @@ export default class SidePanel extends ShallowComponent {
         /**
          * Is component visible or not
          */
-        visible: React.PropTypes.bool,
+        visible: PropTypes.bool,
         /**
          * Position of the component
          */
-        position: React.PropTypes.oneOf(["left","right"]),
+        position: PropTypes.oneOf(["left","right"]),
         /**
          * Styles that you want to change
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Width in pixels
          */
-        width: React.PropTypes.number
+        width: PropTypes.number
     };
 
     static defaultProps = {

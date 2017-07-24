@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Clearfix} from "react-bootstrap";
 import ThumbnailItem from "./ThumbnailItem";
 import {ShallowComponent} from "robe-react-commons";
@@ -11,10 +12,10 @@ export default class ThumbnailGroup extends ShallowComponent {
      * @static
      */
     static propTypes:Map = {
-        id: React.PropTypes.string,
-        style: React.PropTypes.object,
-        className: React.PropTypes.string,
-        placeholder: React.PropTypes.string
+        id: PropTypes.string,
+        style: PropTypes.object,
+        className: PropTypes.string,
+        placeholder: PropTypes.string
     };
 
     constructor(props:Object) {

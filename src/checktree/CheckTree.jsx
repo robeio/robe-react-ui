@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
 import Tree from "../tree/Tree";
@@ -23,27 +24,27 @@ export default class CheckTree extends ShallowComponent {
         /**
          * Data for the tree to view
          */
-        items: React.PropTypes.array.isRequired,
+        items: PropTypes.array.isRequired,
         /**
          * Text field of the data
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
         /**
          * Value field of the data.
          */
-        valueField: React.PropTypes.string,
+        valueField: PropTypes.string,
         /**
          * Children field of the data.
          */
-        childrenField: React.PropTypes.string,
+        childrenField: PropTypes.string,
         /**
          * Checked items array.
          */
-        value: React.PropTypes.array,
+        value: PropTypes.array,
         /**
          * Valuen type
          */
-        valueType: React.PropTypes.oneOf(["number", "string"])
+        valueType: PropTypes.oneOf(["number", "string"])
     };
 
     static defaultProps = {

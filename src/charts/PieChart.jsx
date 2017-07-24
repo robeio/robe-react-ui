@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import "./PieChart.css";
 import Legend from "./Legend";
@@ -9,15 +10,15 @@ export default class PieChart extends ShallowComponent {
         /**
          * Data to be plotted on the chart
          */
-        data: React.PropTypes.array,
+        data: PropTypes.array,
         /**
          * Size of chart as px
          */
-        size: React.PropTypes.number,
+        size: PropTypes.number,
         /**
          * width the Legend
          */
-        legendWidth: React.PropTypes.number
+        legendWidth: PropTypes.number
     };
 
     static defaultProps = {

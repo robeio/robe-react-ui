@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { ShallowComponent, Application } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
@@ -26,15 +27,15 @@ export default class Notification extends ShallowComponent {
          * Click event for the notification details.
          * Footer link will be rendered according to this property.
          */
-        detailsClick: React.PropTypes.func,
+        detailsClick: PropTypes.func,
         /**
          * Text for the notification details link.
          */
-        detailsText: React.PropTypes.string,
+        detailsText: PropTypes.string,
         /**
          * Title for the notification popup.
          */
-        title: React.PropTypes.string,
+        title: PropTypes.string,
     };
 
     static defaultProps = {

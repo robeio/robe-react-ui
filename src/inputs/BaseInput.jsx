@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, InputGroup, ControlLabel, FormControl, OverlayTrigger, Tooltip } from "react-bootstrap";
 import ReactDOM from "react-dom";
 import ValidationComponent from "../validation/ValidationComponent";
@@ -18,55 +19,55 @@ export default class BaseInput extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string,
+        name: PropTypes.string,
         /**
          * Value of the component
          */
-        value: React.PropTypes.any,
+        value: PropTypes.any,
         /**
          * Validations for the component
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
         /**
          * Type of the BaseInput. (text, email, password, file)
          */
-        type: React.PropTypes.string,
+        type: PropTypes.string,
         /**
          * Component class of the BaseInput. (select, textarea)
          */
-        componentClass: React.PropTypes.string,
+        componentClass: PropTypes.string,
         /**
         * Left Input Addon
         */
-        inputGroupLeft: React.PropTypes.any,
+        inputGroupLeft: PropTypes.any,
         /**
         * Right Input Addon
         */
-        inputGroupRight: React.PropTypes.any,
+        inputGroupRight: PropTypes.any,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is read-only
          */
-        readOnly: React.PropTypes.bool,
+        readOnly: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: PropTypes.oneOf(["overlay", "block"])
     };
 
     /**

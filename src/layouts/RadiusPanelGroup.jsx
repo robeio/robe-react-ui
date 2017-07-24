@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import "./RadiusPanelGroup.css";
 
@@ -9,12 +10,12 @@ export default class RadiusPanelGroup extends ShallowComponent {
      * @static
      */
     static propTypes: Map = {
-        label: React.PropTypes.string,
-        style: React.PropTypes.object,
-        itemStyle: React.PropTypes.object,
-        items: React.PropTypes.array,
-        renderItem: React.PropTypes.func,
-        onClose: React.PropTypes.func
+        label: PropTypes.string,
+        style: PropTypes.object,
+        itemStyle: PropTypes.object,
+        items: PropTypes.array,
+        renderItem: PropTypes.func,
+        onClose: PropTypes.func
     };
 
     /**

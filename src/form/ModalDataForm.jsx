@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     ShallowComponent,
     Application
@@ -21,37 +22,37 @@ export default class ModalDataForm extends ShallowComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Header for the form control.
          */
-        header: React.PropTypes.string,
+        header: PropTypes.string,
         /**
          * Hold data in a map
          */
-        defaulValues: React.PropTypes.object,
+        defaulValues: PropTypes.object,
         /**
          * Holds field properties like `name`, `label`, `type`, `visible`, `editable`, `readable`, `label`
          */
-        fields: React.PropTypes.array.isRequired,
+        fields: PropTypes.array.isRequired,
         /**
          * Holds extra props of components if need.
          */
-        propsOfFields: React.PropTypes.object,
+        propsOfFields: PropTypes.object,
         /**
          * Holds Component props and component if need.
          */
-        show: React.PropTypes.bool,
-        onSubmit: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func,
-        cancel: React.PropTypes.string,
-        ok: React.PropTypes.string,
-        showCancelButton: React.PropTypes.bool,
-        showSaveButton: React.PropTypes.bool,
+        show: PropTypes.bool,
+        onSubmit: PropTypes.func.isRequired,
+        onCancel: PropTypes.func,
+        cancel: PropTypes.string,
+        ok: PropTypes.string,
+        showCancelButton: PropTypes.bool,
+        showSaveButton: PropTypes.bool,
         /**
         *Defines the display style of the Validation message.
         */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: PropTypes.oneOf(["overlay", "block"])
     };
 
     /**

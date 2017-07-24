@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {
     ShallowComponent,
     Application
@@ -8,8 +9,8 @@ import TextInput from "../inputs/TextInput";
 export default class SearchBox extends ShallowComponent {
 
     static propTypes = {
-        placeholder: React.PropTypes.string,
-        apiParams: React.PropTypes.object.isRequired
+        placeholder: PropTypes.string,
+        apiParams: PropTypes.object.isRequired
     };
 
     static defaultProps = {

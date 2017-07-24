@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
     ShallowComponent,
     Application
@@ -9,13 +10,13 @@ import Button from "react-bootstrap/lib/Button";
 export default class ModalConfirm extends ShallowComponent {
 
     static propTypes = {
-        onOkClick: React.PropTypes.func,
-        onCancelClick: React.PropTypes.func,
-        header: React.PropTypes.string,
-        message: React.PropTypes.string,
-        show: React.PropTypes.bool,
-        ok: React.PropTypes.string,
-        cancel: React.PropTypes.string,
+        onOkClick: PropTypes.func,
+        onCancelClick: PropTypes.func,
+        header: PropTypes.string,
+        message: PropTypes.string,
+        show: PropTypes.bool,
+        ok: PropTypes.string,
+        cancel: PropTypes.string,
     };
 
 

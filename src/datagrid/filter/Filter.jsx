@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent, Objects } from "robe-react-commons";
 import * as Input from "../../inputs";
 import ComponentManager from "../../form/ComponentManager";
@@ -9,15 +10,15 @@ export default class Filter extends ShallowComponent {
         /**
          * Field properties to filter
          */
-        field: React.PropTypes.object.isRequired,
+        field: PropTypes.object.isRequired,
         /**
          *Value of the filter
          */
-        value: React.PropTypes.any,
+        value: PropTypes.any,
         /**
         *Delay between last keystroke and filter request.
         */
-        delay: React.PropTypes.number
+        delay: PropTypes.number
     }
 
     __refMap = {};

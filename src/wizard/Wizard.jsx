@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent, Application, Arrays} from "robe-react-commons";
 import Pager from "react-bootstrap/lib/Pager";
 import Toast from "../toast/Toast";
@@ -16,31 +17,31 @@ export default class Wizard extends ShallowComponent {
         /**
          * Current page index to render.
          */
-        currentKey: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+        currentKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         /**
          * provides to wizard change own state.
          */
-        changeState: React.PropTypes.bool,
+        changeState: PropTypes.bool,
         /**
          * Text for the next button.
          */
-        next: React.PropTypes.string,
+        next: PropTypes.string,
         /**
          * Text for the previous button.
          */
-        previous: React.PropTypes.string,
+        previous: PropTypes.string,
         /**
          * Text for the complete button.
          */
-        complete: React.PropTypes.string,
+        complete: PropTypes.string,
         /**
          *
          */
-        onComplete: React.PropTypes.func,
+        onComplete: PropTypes.func,
         /**
          *
          */
-        onChange: React.PropTypes.func
+        onChange: PropTypes.func
 
     };
 

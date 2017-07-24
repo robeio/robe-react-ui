@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Button, Panel, Table} from "react-bootstrap";
 import {Maps} from "robe-react-commons";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
@@ -15,27 +16,27 @@ export default class Renderer extends ShallowComponent {
         /**
          * Component name
          */
-        header: React.PropTypes.string,
+        header: PropTypes.string,
         /**
          * Component description
          */
-        desc: React.PropTypes.string,
+        desc: PropTypes.string,
         /**
          *
          */
-        alternatives: React.PropTypes.object,
+        alternatives: PropTypes.object,
         /**
          * Component Props Json
          */
-        json: React.PropTypes.object,
+        json: PropTypes.object,
         /**
          * Component Sample Code Object
          */
-        sample: React.PropTypes.object,
+        sample: PropTypes.object,
         /**
          * Component Sample Code string
          */
-        code: React.PropTypes.string
+        code: PropTypes.string
     };
 
     static defaultProps = {

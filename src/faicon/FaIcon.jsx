@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import "font-awesome/css/font-awesome.min.css";
 
@@ -13,21 +14,21 @@ export default class FaIcon extends ShallowComponent {
          * Classname for use icon.
          * More information : http://fontawesome.io/icons/
          */
-        code: React.PropTypes.string.isRequired,
+        code: PropTypes.string.isRequired,
         /**
          * Size code of the icon. Use fa-sm, fa-lg (33% increase), fa-2x, fa-3x, fa-4x, or fa-5x classes.
          * More information : http://fontawesome.io/examples/#larger
          */
-        size: React.PropTypes.oneOf(["fa-sm", "fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x"]),
+        size: PropTypes.oneOf(["fa-sm", "fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x"]),
         /**
          * applies custom style to the icon.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Specifies to use fa-fw class or not for fixed icon width and height.
          * More information : http://fontawesome.io/examples/#fixed-width
          */
-        fixed: React.PropTypes.bool
+        fixed: PropTypes.bool
     };
 
     static defaultProps = {

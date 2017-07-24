@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import {ControlLabel} from "react-bootstrap";
 import "./Rating.css";
@@ -9,45 +10,45 @@ export default class Rating extends ShallowComponent {
         /**
          * Size of Rating icons
          */
-        size: React.PropTypes.oneOf([
+        size: PropTypes.oneOf([
             0, 1, 2, 3, 4
         ]),
         /**
          * Direct selected value
          */
-        currentValue: React.PropTypes.number,
+        currentValue: PropTypes.number,
         /**
          * Count of icons
          */
-        iconCount: React.PropTypes.number,
+        iconCount: PropTypes.number,
         /**
          * Initial icon type (Works with font-awesome icons like "fa-star-o")
          */
-        initialIcon: React.PropTypes.string,
+        initialIcon: PropTypes.string,
         /**
          * Selected icon type (Works with font-awesome icons like "fa-star")
          */
-        selectedIcon: React.PropTypes.string,
+        selectedIcon: PropTypes.string,
         /**
          * Disable icons
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * Change event for the component (Returns (clickedKey))
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * MouseOver event for the component (Returns (hoveredKey))
          */
-        onMouseOver: React.PropTypes.func,
+        onMouseOver: PropTypes.func,
         /**
          * Style of Rating icons
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for Rating component
          */
-        label: React.PropTypes.string
+        label: PropTypes.string
     };
 
     /**

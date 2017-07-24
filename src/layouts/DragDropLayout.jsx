@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import {findDOMNode} from "react-dom";
 import { Generator } from "robe-react-commons";
@@ -21,19 +22,19 @@ export default class DragDropLayout extends ShallowComponent {
         /**
          * Used to change current styles of DragDropLayout.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * if layout container clicked then triggered.
          */
-        onClick: React.PropTypes.func,
+        onClick: PropTypes.func,
         /**
          * when a draggable element is dropped in the layout container element.
          */
-        onDrop: React.PropTypes.func,
+        onDrop: PropTypes.func,
         /**
          * Used to change the styles of the DragDropLayout  when anything dragged  on.
          */
-        draggedStyle: React.PropTypes.object,
+        draggedStyle: PropTypes.object,
     };
 
     __componentId;

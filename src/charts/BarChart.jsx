@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent, Generator, Class, Arrays, Maps} from "robe-react-commons";
 import "./BarChart.css";
 import Legend from "./Legend";
@@ -9,23 +10,23 @@ export default class BarChart extends ShallowComponent {
         /**
          * Width for chart as px
          */
-        width: React.PropTypes.number,
+        width: PropTypes.number,
         /**
          * Height for chart as px
          */
-        height: React.PropTypes.number,
+        height: PropTypes.number,
         /**
          * Data to be plotted on the chart
          */
-        data: React.PropTypes.array,
+        data: PropTypes.array,
         /**
          * Change to be made for the given data
          */
-        meta: React.PropTypes.array,
+        meta: PropTypes.array,
         /**
          * width the Legend
          */
-        legendWidth: React.PropTypes.number
+        legendWidth: PropTypes.number
     };
 
     static defaultProps = {

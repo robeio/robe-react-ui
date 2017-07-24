@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Assertions} from "robe-react-commons";
 import {FormGroup, ControlLabel} from "react-bootstrap";
 import ValidationComponent from "../validation/ValidationComponent";
@@ -19,61 +20,61 @@ export default class RadioInput extends ValidationComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Label for the form control.
          */
-        label: React.PropTypes.string,
+        label: PropTypes.string,
         /**
          * name use as input field name
          */
-        name: React.PropTypes.string,
+        name: PropTypes.string,
         /**
          * Items will be rendered as radio input.
          */
-        items: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.array]),
+        items: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.array]),
         /**
          * Checked value or values
          */
-        value: React.PropTypes.string,
+        value: PropTypes.string,
         /**
          * Key of map item which is defined in given array `items`
          */
-        valueField: React.PropTypes.any,
+        valueField: PropTypes.any,
         /**
          * label of map item which is defined in given array `items`
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
         /**
          * Is a callback function when selection `item` or `items` changed.
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * Validations functions to validate value
          */
-        validations: React.PropTypes.object,
+        validations: PropTypes.object,
         /**
          * Disable input
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         /**
          * it specifies that an input field is read-only
          */
-        readOnly: React.PropTypes.bool,
+        readOnly: PropTypes.bool,
         /**
          * it specifies that an input field is hidden or visible
          */
-        hidden: React.PropTypes.bool,
+        hidden: PropTypes.bool,
         /**
          * it specifies that an radios will be horizontal or not.
          */
-        horizontal: React.PropTypes.bool,
+        horizontal: PropTypes.bool,
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: PropTypes.oneOf(["overlay", "block"])
     };
 
     /**

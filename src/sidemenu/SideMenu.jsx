@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import Arrays from "robe-react-commons/lib/utils/Arrays";
 import FaIcon from "../faicon/FaIcon";
@@ -18,24 +19,24 @@ export default class SideMenu extends ShallowComponent {
         /**
          * Path of the selected item
          */
-        selectedItem: React.PropTypes.string,
+        selectedItem: PropTypes.string,
         /**
          * Items of the menu. Must be a valid json map with a root element.
          */
-        items: React.PropTypes.array.isRequired,
+        items: PropTypes.array.isRequired,
         /**
          * Change event of the sidemenu.
          * It is triggered if the selected sub-item changes, not collapsed menu.
          */
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
         /**
          * key of given map array `items`
          */
-        valueField: React.PropTypes.any,
+        valueField: PropTypes.any,
         /**
          * presented text of give map array `items`
          */
-        textField: React.PropTypes.string,
+        textField: PropTypes.string,
     };
 
     static defaultProps = {

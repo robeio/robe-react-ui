@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {ShallowComponent, Maps, Objects, Assertions} from "robe-react-commons";
 import {Form, Row, Col} from "react-bootstrap";
 import ComponentManager from "./ComponentManager";
@@ -13,35 +14,35 @@ export default class DataForm extends ShallowComponent {
         /**
          * Style map for the component.
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
         /**
          * Holds field properties like `name`, `label`, `type`, `visible`, `editable`, `readable`, `label`
          */
-        fields: React.PropTypes.array.isRequired,
+        fields: PropTypes.array.isRequired,
         /**
          * Holds extra props of components if need.
          */
-        propsOfFields: React.PropTypes.object,
+        propsOfFields: PropTypes.object,
         /**
          * Form is collapsible or not
          */
-        collapsible: React.PropTypes.bool,
+        collapsible: PropTypes.bool,
         /**
          * Form is defaultExpanded or not
          */
-        defaultExpanded: React.PropTypes.bool,
+        defaultExpanded: PropTypes.bool,
         /**
          * Form side by side input columns size
          */
-        columnsSize: React.PropTypes.oneOf([1, 2, 3, 4, 6, 12]),
+        columnsSize: PropTypes.oneOf([1, 2, 3, 4, 6, 12]),
         /**
          * Map of the default values for the component.
          */
-        defaultValues: React.PropTypes.object,
+        defaultValues: PropTypes.object,
         /**
          *Defines the display style of the Validation message.
          */
-        validationDisplay: React.PropTypes.oneOf(["overlay", "block"])
+        validationDisplay: PropTypes.oneOf(["overlay", "block"])
     };
 
     /**

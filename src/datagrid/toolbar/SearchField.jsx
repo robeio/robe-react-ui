@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ShallowComponent from "robe-react-commons/lib/components/ShallowComponent";
 import InputGroup from "react-bootstrap/lib/InputGroup";
 import TextInput from "../../inputs/TextInput";
@@ -11,17 +12,17 @@ export default class SearchField extends ShallowComponent {
         /**
          *Value for the search
          */
-        value: React.PropTypes.string,
+        value: PropTypes.string,
 
         /**
-         * placeholder text 
+         * placeholder text
          */
-        placeholder: React.PropTypes.string,
+        placeholder: PropTypes.string,
 
         /**
          *Delay between last keystroke and search request.
          */
-        delay: React.PropTypes.number
+        delay: PropTypes.number
 
     };
     static defaultProps = {

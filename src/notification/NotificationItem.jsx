@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ShallowComponent } from "robe-react-commons";
 import Col from "react-bootstrap/lib/Col";
 import moment from "moment";
@@ -6,7 +7,7 @@ import moment from "moment";
 export default class NotificationItem extends ShallowComponent {
 
     static propTypes = {
-        item: React.PropTypes.object.isRequired
+        item: PropTypes.object.isRequired
     };
 
     render(): Object {
